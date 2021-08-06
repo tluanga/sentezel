@@ -1,0 +1,4 @@
+enum DirectIndirect {
+  direct,
+  indirect,
+}

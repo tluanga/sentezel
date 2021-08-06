@@ -1,0 +1,15 @@
+enum SumChetvelDanType {
+  lei,
+  hralh,
+  lakluh,
+  pekchhuah,
+  debtRepaymentByDebtor,
+  debtRepaymentToCreditor,
+  bankToCash,
+  cashToBank,
+  purchaseReturn,
+  saleReturn,
+  capitalInjection,
+  openingBalanceCash,
+  openingBalanceBank,
+}
