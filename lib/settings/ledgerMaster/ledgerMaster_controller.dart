@@ -23,4 +23,12 @@ class LedgerMasterListController extends StateNotifier<List<LedgerMaster>> {
       print(e);
     }
   }
+
+  updateLedgerMaster(LedgerMaster payload) {
+    try {
+      _read(ledgerMasterRepositoryProvider).update(payload: payload);
+    } catch (e) {
+      print(e);
+    }
+  }
 }

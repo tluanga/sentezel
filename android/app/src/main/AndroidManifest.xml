@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sentezel">
+    package="com.rics.sentezel">
    <application
         android:label="sentezel"
         android:icon="@mipmap/ic_launcher">

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "594960675300",
+    "project_id": "sentezel-b6ada",
+    "storage_bucket": "sentezel-b6ada.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:594960675300:android:a1e6ef22abe0298e3417f1",
+        "android_client_info": {
+          "package_name": "com.rics.sentezel"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "594960675300-slkagl3ejh8knbd1ufh5hmv17dg6i2it.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAxI_qq2bVTmc400P78GvG5_wdKBXHQMhY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "594960675300-slkagl3ejh8knbd1ufh5hmv17dg6i2it.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

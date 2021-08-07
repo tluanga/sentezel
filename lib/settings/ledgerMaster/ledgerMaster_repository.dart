@@ -29,6 +29,11 @@ class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
 
   @override
   void update({required payload}) {
-    ledgerMasterData.firstWhere((element) => element.id == payload.id);
+    int index =
+        ledgerMasterData.indexWhere((element) => element.name == payload.name);
+    print('index $index');
+    ledgerMasterData[index] = payload.copyWith(status: payload.status);
+
+    print('After update ${ledgerMasterData[index]}');
   }
 }

@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/widget/settingsEllipse_widget.dart';
 
 class TopBarWidget extends StatelessWidget {
@@ -26,7 +25,7 @@ class TopBarWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pushReplacementNamed(context, RouteConstant.home);
+            Navigator.pop(context);
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

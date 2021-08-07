@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 
 import 'package:sentezel/common/enums/ledgerMasterType_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarNewItem_widget.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMaster_controller.dart';
 
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
-import 'package:switcher_button/switcher_button.dart';
-import 'package:toggle_switch/toggle_switch.dart';
-
-final _type = useState(LedgerMasterType.direct);
 
 class NewLedgerMasterScreen extends HookConsumerWidget {
   final LedgerMaster? ledgerMaster;
@@ -36,12 +34,15 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                 title: 'New Ledger Master',
                 onSave: () {
                   print('value of name is');
-                  // useProvider(ledgerMasterListControllerProvider).add(
-                  //   LedgerMaster(
-                  //     name: _name.value,
-                  //     type: _type.value,
-                  //   ),
-                  // );
+                  ref
+                      .read(ledgerMasterListControllerProvider.notifier)
+                      .updateLedgerMaster(
+                        LedgerMaster(
+                          name: _name.value,
+                          type: _type.value,
+                          status: _status.value,
+                        ),
+                      );
                 },
               ),
               TextFormField(
