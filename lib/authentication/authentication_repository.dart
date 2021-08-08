@@ -56,6 +56,7 @@ class AuthRepository implements BaseAuthRepository {
 
   @override
   getCurrentUser() {
+    print('--WARNING---GET USER IN THE AUTH REPOSITORY IS CALLED--');
     // returns the current user
     try {
       _read(firebaseAuthProvider).currentUser;

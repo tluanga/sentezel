@@ -1,20 +1,39 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:riverpod/riverpod.dart';
+import 'package:sentezel/authentication/authentication_controller.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
+import 'package:sentezel/common/providers/fireBase_provider.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_data.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
 
-final ledgerMasterRepositoryProvider =
-    Provider<LedgerMasterRepository>((ref) => LedgerMasterRepository());
+final ledgerMasterRepositoryProvider = Provider<LedgerMasterRepository>(
+  (ref) => LedgerMasterRepository(ref.read),
+);
 
 class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
+  final Reader _read;
+
+  const LedgerMasterRepository(this._read);
+
   @override
   void add({required LedgerMaster payload}) {
-    ledgerMasterData.add(payload);
+    print('adding a new document in firebase');
+    print('payload is $payload');
+    // final userId = _read(authControllerProvider)!.uid;
+    try {
+      final docRef = _read(firebaseFirestoreProvider)
+          .collection('sentezel')
+          .doc('thanga')
+          .collection('ledgerMaster')
+          .add(payload.toJson());
+    } on FirebaseException catch (e) {
+      print(e);
+    }
   }
 
   @override
   getItem({required int id}) {
-    return ledgerMasterData.firstWhere((element) => element.id == id);
+    return ledgerMasterData.firstWhere((element) => element.id == 0);
   }
 
   @override

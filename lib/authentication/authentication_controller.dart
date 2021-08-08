@@ -27,6 +27,7 @@ class AuthController extends StateNotifier<User?> {
 //can either be null when the user is not logged in
   //Auth controller takes in a reader and
   final Reader _read;
+  late User authenticatedUser;
 
   //nullable stream subscription of typenullable type user
   //called _authStateSubscription
@@ -62,6 +63,7 @@ class AuthController extends StateNotifier<User?> {
     final user = _read(authRepositoryProvider).getCurrentUser();
     if (user == null) {
       await _read(authRepositoryProvider).signinAnonymously();
+      
     }
   }
 

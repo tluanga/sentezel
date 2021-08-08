@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:uuid/uuid.dart';
 
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 
@@ -34,15 +35,31 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                 title: 'New Ledger Master',
                 onSave: () {
                   print('value of name is');
-                  ref
-                      .read(ledgerMasterListControllerProvider.notifier)
-                      .updateLedgerMaster(
-                        LedgerMaster(
-                          name: _name.value,
-                          type: _type.value,
-                          status: _status.value,
-                        ),
-                      );
+                  if (ledgerMaster != null)
+                    ref
+                        .read(ledgerMasterListControllerProvider.notifier)
+                        .updateLedgerMaster(
+                          LedgerMaster(
+                            id: Uuid().v4(),
+                            name: _name.value,
+                            description: '',
+                            type: _type.value,
+                            status: _status.value,
+                          ),
+                        );
+                  else {
+                    ref
+                        .read(ledgerMasterListControllerProvider.notifier)
+                        .addLedgerMaster(
+                          LedgerMaster(
+                            id: Uuid().v4(),
+                            name: _name.value,
+                            description: '',
+                            type: _type.value,
+                            status: _status.value,
+                          ),
+                        );
+                  }
                 },
               ),
               TextFormField(

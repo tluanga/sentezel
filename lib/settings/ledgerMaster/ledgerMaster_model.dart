@@ -4,6 +4,7 @@ import 'package:sentezel/common/enums/ledgerMasterType_enum.dart';
 
 // part 'ledgerMaster_model.g.dart';
 part 'ledgerMaster_model.freezed.dart';
+part 'ledgerMaster_model.g.dart';
 
 @freezed
 abstract class LedgerMaster with _$LedgerMaster {
@@ -21,4 +22,7 @@ abstract class LedgerMaster with _$LedgerMaster {
   String getInitialLetter() {
     return this.name[0].toUpperCase();
   }
+
+  factory LedgerMaster.fromJson(Map<String, dynamic> json) =>
+      _$LedgerMasterFromJson(json);
 }

@@ -12,6 +12,10 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
+LedgerMaster _$LedgerMasterFromJson(Map<String, dynamic> json) {
+  return _LedgerMaster.fromJson(json);
+}
+
 /// @nodoc
 class _$LedgerMasterTearOff {
   const _$LedgerMasterTearOff();
@@ -30,6 +34,10 @@ class _$LedgerMasterTearOff {
       status: status,
     );
   }
+
+  LedgerMaster fromJson(Map<String, Object> json) {
+    return LedgerMaster.fromJson(json);
+  }
 }
 
 /// @nodoc
@@ -43,6 +51,7 @@ mixin _$LedgerMaster {
   LedgerMasterType get type => throw _privateConstructorUsedError;
   ActiveInActive get status => throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $LedgerMasterCopyWith<LedgerMaster> get copyWith =>
       throw _privateConstructorUsedError;
@@ -161,7 +170,7 @@ class __$LedgerMasterCopyWithImpl<$Res> extends _$LedgerMasterCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$_LedgerMaster extends _LedgerMaster {
   const _$_LedgerMaster(
       {this.id,
@@ -170,6 +179,9 @@ class _$_LedgerMaster extends _LedgerMaster {
       required this.type,
       this.status = ActiveInActive.active})
       : super._();
+
+  factory _$_LedgerMaster.fromJson(Map<String, dynamic> json) =>
+      _$_$_LedgerMasterFromJson(json);
 
   @override
   final String? id;
@@ -218,6 +230,11 @@ class _$_LedgerMaster extends _LedgerMaster {
   @override
   _$LedgerMasterCopyWith<_LedgerMaster> get copyWith =>
       __$LedgerMasterCopyWithImpl<_LedgerMaster>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$_$_LedgerMasterToJson(this);
+  }
 }
 
 abstract class _LedgerMaster extends LedgerMaster {
@@ -228,6 +245,9 @@ abstract class _LedgerMaster extends LedgerMaster {
       required LedgerMasterType type,
       ActiveInActive status}) = _$_LedgerMaster;
   const _LedgerMaster._() : super._();
+
+  factory _LedgerMaster.fromJson(Map<String, dynamic> json) =
+      _$_LedgerMaster.fromJson;
 
   @override
   String? get id => throw _privateConstructorUsedError;
