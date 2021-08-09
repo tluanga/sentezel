@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
+import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAsset_screen.dart';
+
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 
 class NewTranscationCenterScreen extends StatelessWidget {
@@ -26,8 +27,12 @@ class NewTranscationCenterScreen extends StatelessWidget {
                     label: 'Purchase of Asset',
                     icon: CupertinoIcons.cube,
                     onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, RouteConstant.books);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AssetPurchaseScreen(),
+                        ),
+                      );
                     },
                   ),
                 ),

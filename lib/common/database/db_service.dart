@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:sentezel/settings/ledgerMaster/data/injectLedgerMaster_data.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_config.dart';
+
 
 import 'package:sqflite/sqflite.dart';
 

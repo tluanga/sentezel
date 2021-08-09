@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:sentezel/analytics/analyticsPeriodSelectionBar_widget.dart';
+import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 
 class AnalyticsScreen extends StatelessWidget {
   const AnalyticsScreen({Key? key}) : super(key: key);
@@ -6,13 +8,17 @@ class AnalyticsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Analytics'),
-        elevation: 0,
-        backgroundColor: Colors.amber,
-      ),
-      body: Container(
-        child: Text('Analytics Screen'),
+      body: SafeArea(
+        child: Container(
+          child: Column(
+            children: [
+              TopBarWidget(
+                title: 'Analytics',
+              ),
+              AnalyticsPeriodSelectionBar(),
+            ],
+          ),
+        ),
       ),
     );
   }
