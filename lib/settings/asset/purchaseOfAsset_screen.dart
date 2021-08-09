@@ -1,6 +1,10 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarNewItem_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
+import 'package:sentezel/settings/asset/asset_model.dart';
 
 class AssetPurchaseScreen extends StatelessWidget {
   const AssetPurchaseScreen({Key? key}) : super(key: key);
@@ -75,9 +79,20 @@ class AssetPurchaseScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                Container(child: ListView.builder(itemCount: 10,itemBuilder: (context,index){
-                  return()
-                },),)
+                Container(
+                  child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (context, index) {
+                      return (_assetItem(
+                        context,
+                        Asset(
+                          name: 'Dawnkan',
+                          description: 'arsa channa tur',
+                        ),
+                      ));
+                    },
+                  ),
+                )
               ],
             ),
           ),
@@ -85,34 +100,20 @@ class AssetPurchaseScreen extends StatelessWidget {
       ),
     );
   }
-  _assetItem(BuildContext context, LedgerMaster ledgerMaster) {
+
+  _assetItem(BuildContext context, Asset asset) {
     Color _color;
 
-    switch (ledgerMaster.type) {
-      case LedgerMasterType.direct:
-        _color = UiConstant.color1;
-
-        break;
-      case LedgerMasterType.indirect:
-        _color = UiConstant.color2;
-        break;
-      case LedgerMasterType.party:
-        _color = UiConstant.color3;
-        break;
-      default:
-        _color = UiConstant.color4;
-        break;
-    }
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NewLedgerMasterScreen(
-              ledgerMaster: ledgerMaster,
-            ),
-          ),
-        );
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(
+        //     builder: (context) => NewLedgerMasterScreen(
+        //       ledgerMaster: ledgerMaster,
+        //     ),
+        //   ),
+        // );
       },
       child: Container(
         margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
@@ -140,7 +141,7 @@ class AssetPurchaseScreen extends StatelessWidget {
               height: MediaQuery.of(context).size.height * 0.1,
               width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
-                color: _color,
+                color: Colors.amber,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
@@ -148,7 +149,7 @@ class AssetPurchaseScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  ledgerMaster.getInitialLetter(),
+                  asset.getInitialLetter(),
                   style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
@@ -158,7 +159,7 @@ class AssetPurchaseScreen extends StatelessWidget {
               ),
             ),
             Column(
-              mainAxisAlignment: ledgerMaster.description != null
+              mainAxisAlignment: asset.description != null
                   ? MainAxisAlignment.spaceAround
                   : MainAxisAlignment.spaceEvenly,
               children: [
@@ -166,7 +167,7 @@ class AssetPurchaseScreen extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Center(
                     child: Text(
-                      ledgerMaster.name,
+                      asset.name,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -179,9 +180,9 @@ class AssetPurchaseScreen extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.03,
                   child: Center(
                     child: Text(
-                      ledgerMaster.description != null
-                          ? ledgerMaster.description != ledgerMaster.name
-                              ? ledgerMaster.description!
+                      asset.description != null
+                          ? asset.description != asset.name
+                              ? asset.description!
                               : ''
                           : '',
                       style: TextStyle(
@@ -196,15 +197,15 @@ class AssetPurchaseScreen extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      // Container(
+                      //   child: Text(
+                      //     toBeginningOfSentenceCase(
+                      //       EnumToString.convertToString(ledgerMaster.type),
+                      //     )!,
+                      //   ),
+                      // ),
                       Container(
-                        child: Text(
-                          toBeginningOfSentenceCase(
-                            EnumToString.convertToString(ledgerMaster.type),
-                          )!,
-                        ),
-                      ),
-                      Container(
-                        child: ledgerMaster.status == ActiveInActive.active
+                        child: asset.status == ActiveInActive.active
                             ? Text(
                                 'Active',
                                 style: TextStyle(

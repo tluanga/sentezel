@@ -1,8 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
-import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAsset_screen.dart';
-
+import 'package:sentezel/settings/asset/purchaseOfAsset_screen.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 
 class NewTranscationCenterScreen extends StatelessWidget {
