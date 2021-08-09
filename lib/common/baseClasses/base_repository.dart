@@ -1,9 +1,9 @@
 abstract class BaseRepository<T> {
   //Get List-- Getting all the items in the list
-  List<T> getList();
+  Future<List<T>> getList();
 
   //-----For Getting Single Item, id will be provided
-  T getItem({required int id});
+  Future<T> getItem({required int id});
 
   //------Adding a single Item-----------
   void add({required T payload});

@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:sentezel/settings/ledgerMaster/data/injectLedgerMaster_data.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMaster_config.dart';
 
 import 'package:sqflite/sqflite.dart';
 
@@ -33,7 +35,7 @@ class DatabaseService {
   static const String ledgerMasterTable = 'ledgerMaster_table';
   String ledgerMasterId = 'id';
   String ledgerMasterName = 'name';
-  String ledgerMasterDescription = 'address';
+  String ledgerMasterDescription = 'description';
   String ledgerMasterType = 'type';
   String ledgerMasterStatus = 'status';
 
@@ -82,22 +84,14 @@ class DatabaseService {
             $businessName TEXT,
             $businessAddress TEXT,           
             $businessContactNo INT,
-            $businessType String,
+            $businessType String
              )''',
     );
 
     // Table 3- Ledger Master Table
-    await db.execute(
-      '''
-      CREATE TABLE 
-        $businessProfileTable(
-            $businessProfileId INTEGER PRIMARY KEY AUTOINCREMENT,
-            $businessName TEXT,
-            $businessAddress TEXT,           
-            $businessContactNo INT,
-            $businessType String,
-             )''',
-    );
-  }
-  injectLedgerMasterData();
+    
+    injectLedgerMaster(db);
+    print('completed');
+    }
+  
 }

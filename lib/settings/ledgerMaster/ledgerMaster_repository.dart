@@ -1,9 +1,12 @@
 
 import 'package:riverpod/riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
+import 'package:sentezel/common/database/db_service.dart';
 
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_data.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMaster_config.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
+import 'package:sqflite_common/sqlite_api.dart';
 
 final ledgerMasterRepositoryProvider = Provider<LedgerMasterRepository>(
   (ref) => LedgerMasterRepository(ref.read),
@@ -13,6 +16,7 @@ class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
   final Reader _read;
 
   const LedgerMasterRepository(this._read);
+  
 
   @override
   void add({required LedgerMaster payload}) {
@@ -23,13 +27,23 @@ class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
   }
 
   @override
-  getItem({required int id}) {
+  getItem({required int id})async {
+    
+
     return ledgerMasterData.firstWhere((element) => element.id == 0);
   }
 
   @override
-  List<LedgerMaster> getList() {
-    return ledgerMasterData.toList();
+  Future<List<LedgerMaster>> getList()async {
+    Database db=await DatabaseService.instance.db;
+    final list=await db.query(LedgerMasterConfig.ledgerMasterTable);
+    print(list);
+    List<LedgerMaster>result=[];
+   
+    list.forEach((element) { 
+      result.add(LedgerMaster.fromJson(element));
+    });
+    return result;
   }
 
   @override

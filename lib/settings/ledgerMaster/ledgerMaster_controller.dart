@@ -12,8 +12,9 @@ class LedgerMasterListController extends StateNotifier<List<LedgerMaster>> {
 
   LedgerMasterListController(this._read) : super([]);
 
-  loadData() {
-    state = _read(ledgerMasterRepositoryProvider).getList();
+  loadData()async {
+    print('load data');
+    state =await  _read(ledgerMasterRepositoryProvider).getList();
   }
 
   addLedgerMaster(LedgerMaster payload) {

@@ -16,6 +16,7 @@ class SettingsEllipseWidget extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
+              
               showCupertinoModalBottomSheet(
                 expand: true,
                 context: context,

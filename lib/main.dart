@@ -7,23 +7,23 @@ import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/ui/screens/controlCenter_screen.dart';
 import 'package:sentezel/home/ui/home_screen.dart';
+import 'package:sentezel/intializeApp.dart';
 import 'package:sentezel/newTransaction/newTransaction_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  initializeApp();  
   runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    
+  Widget build(BuildContext context, WidgetRef ref) {    
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: 'Sentezel',
       theme: ThemeData(
         canvasColor: UiConstant.background,
         primarySwatch: Colors.grey,
