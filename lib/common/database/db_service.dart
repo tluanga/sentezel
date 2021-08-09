@@ -1,3 +1,9 @@
+import 'dart:io';
+
+import 'package:path_provider/path_provider.dart';
+
+import 'package:sqflite/sqflite.dart';
+
 class DatabaseService {
   static final DatabaseService instance = DatabaseService._instance();
   static Database? _db;
@@ -12,27 +18,24 @@ class DatabaseService {
   static const String userTable = 'user_table';
   String userId = 'id';
   String userFullName = 'fullName';
-  String userEmail = 'email';  
+  String userEmail = 'email';
   String userPin = 'pin';
 
-
   //-------TABLE -2---BUSINESS PROFILE--
-  String businessName='name';
-  String businessAddress='address';
-  String businessContactNo='contactNo';
+  static const String businessProfileTable = 'businessProfile_table';
+  String businessProfileId = 'id';
+  String businessName = 'name';
+  String businessAddress = 'address';
+  String businessContactNo = 'contactNo';
+  String businessType = 'type';
 
-  // // -----TABLE -2 SETTINGS TABLE----------
-  // static const String settingsTable = 'settings_table';
-  // String settingsId = 'id';
-  // String settingsTaxRate = 'taxRate';
-  // String settingsfirstDayOfWeek = 'firstDayOfWeek';
-  // String settingsFirstPayPeriod = 'firstPayPeriod';
-  // String settingsDefaultShiftStartTime = 'defaultShiftStartTime';
-  // String settingsDefaultShiftEndTime = 'defaultShiftEndTime';
-  // String settingsDefaultPayRate = 'defaultPayRate';
-  // String settingsDefaultBreakDuration = 'defaultBreakDuration';
-
-  
+  //-------TABLE -3---LEDGER MASTER TABLE--
+  static const String ledgerMasterTable = 'ledgerMaster_table';
+  String ledgerMasterId = 'id';
+  String ledgerMasterName = 'name';
+  String ledgerMasterDescription = 'address';
+  String ledgerMasterType = 'type';
+  String ledgerMasterStatus = 'status';
 
   Future<Database> get db async {
     if (_db == null) {
@@ -44,9 +47,6 @@ class DatabaseService {
 
   Future<Database> _initDb() async {
     print('Initializing database');
-    // String dbDirectoryPath = SystemConfig.appDbDirectory;
-
-    // String path = dbDirectoryPath + '/lyt_work_shift.db';
 
     //-------Using application-Directory-----------
     Directory dir = await getApplicationDocumentsDirectory();
@@ -69,29 +69,34 @@ class DatabaseService {
         $userTable(
             $userId INTEGER PRIMARY KEY AUTOINCREMENT,
             $userFullName TEXT,
-            $userEmail TEXT,
-            $userUserName TEXT,
-            $userPassword TEXT
+            $userEmail TEXT,           
+            $userPin INT
              )''',
     );
-    // Table 2- SETTINGS TABLE
+    // Table 2- BUSINESS PROFILE TABLE
     await db.execute(
-      '''CREATE TABLE
-       $settingsTable(
-         $settingsId INTEGER PRIMARY KEY AUTOINCREMENT,
-         $settingsTaxRate REAL,
-         $settingsfirstDayOfWeek INT,
-         $settingsFirstPayPeriod INT,
-         $settingsDefaultShiftStartTime TEXT,
-         $settingsDefaultShiftEndTime TEXT,
-         $settingsDefaultPayRate REAL,
-         $settingsDefaultBreakDuration INT         
-         )''',
+      '''
+      CREATE TABLE 
+        $businessProfileTable(
+            $businessProfileId INTEGER PRIMARY KEY AUTOINCREMENT,
+            $businessName TEXT,
+            $businessAddress TEXT,           
+            $businessContactNo INT,
+            $businessType String,
+             )''',
     );
 
-    
-}
-
-
-class Database {
+    // Table 3- Ledger Master Table
+    await db.execute(
+      '''
+      CREATE TABLE 
+        $businessProfileTable(
+            $businessProfileId INTEGER PRIMARY KEY AUTOINCREMENT,
+            $businessName TEXT,
+            $businessAddress TEXT,           
+            $businessContactNo INT,
+            $businessType String,
+             )''',
+    );
+  }
 }
