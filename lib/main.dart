@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_screen.dart';
-import 'package:sentezel/authentication/authentication_controller.dart';
+
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
@@ -19,7 +19,7 @@ class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(authControllerProvider.notifier).appStarted();
+    
 
     return MaterialApp(
       debugShowCheckedModeBanner: false,

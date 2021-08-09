@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sentezel/authentication/authentication_controller.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/enums/ledgerMasterType_enum.dart';
@@ -19,7 +18,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    print('Current user id ${ref.read(authControllerProvider)!.uid}');
+   
     final list = ref.watch(ledgerMasterListControllerProvider);
     return Scaffold(
       body: SafeArea(

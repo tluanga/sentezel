@@ -1,8 +1,7 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:riverpod/riverpod.dart';
-import 'package:sentezel/authentication/authentication_controller.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
-import 'package:sentezel/common/providers/fireBase_provider.dart';
+
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_data.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
 
@@ -20,15 +19,7 @@ class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
     print('adding a new document in firebase');
     print('payload is $payload');
     // final userId = _read(authControllerProvider)!.uid;
-    try {
-      final docRef = _read(firebaseFirestoreProvider)
-          .collection('sentezel')
-          .doc('thanga')
-          .collection('ledgerMaster')
-          .add(payload.toJson());
-    } on FirebaseException catch (e) {
-      print(e);
-    }
+    
   }
 
   @override
