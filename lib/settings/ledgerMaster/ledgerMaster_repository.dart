@@ -3,7 +3,7 @@ import 'package:riverpod/riverpod.dart';
 import 'package:sentezel/authentication/authentication_controller.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/providers/fireBase_provider.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_data.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_data.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
 
 final ledgerMasterRepositoryProvider = Provider<LedgerMasterRepository>(

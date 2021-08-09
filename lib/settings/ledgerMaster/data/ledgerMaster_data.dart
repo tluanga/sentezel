@@ -5,6 +5,7 @@ List<LedgerMaster> ledgerMasterData = [
   // --------Special Ledger------------
   // 1- Bank Ledger
   LedgerMaster(
+      id
       name: 'Bank',
       description: 'All Transaction Involving Bank',
       type: LedgerMasterType.direct),
