@@ -1,7 +1,7 @@
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMasterType_enum.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 
 List<LedgerMaster> ledgerMasterData = [
   // --------Special Ledger------------

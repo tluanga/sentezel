@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 
 //-------------Provider for ledger master list controller----
@@ -12,9 +12,9 @@ class LedgerMasterListController extends StateNotifier<List<LedgerMaster>> {
 
   LedgerMasterListController(this._read) : super([]);
 
-  loadData()async {
+  loadData() async {
     print('load data');
-    state =await  _read(ledgerMasterRepositoryProvider).getList();
+    state = await _read(ledgerMasterRepositoryProvider).getList();
   }
 
   addLedgerMaster(LedgerMaster payload) {

@@ -10,7 +10,7 @@ import 'package:sentezel/settings/ledgerMaster/ledgerMasterType_enum.dart';
 import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_controller.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/ledgerMaster/newLedgerMaster_screen.dart';
 
 class LedgerMasterScreen extends HookConsumerWidget {
@@ -18,7 +18,6 @@ class LedgerMasterScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-   
     final list = ref.watch(ledgerMasterListControllerProvider);
     return Scaffold(
       body: SafeArea(

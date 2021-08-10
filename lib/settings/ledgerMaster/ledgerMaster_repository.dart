@@ -4,7 +4,7 @@ import 'package:sentezel/common/database/db_service.dart';
 
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_data.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_config.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 final ledgerMasterRepositoryProvider = Provider<LedgerMasterRepository>(

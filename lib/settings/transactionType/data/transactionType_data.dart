@@ -2,7 +2,6 @@ import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
-import 'package:sqflite/sqflite.dart';
 
 const transactionTypeData = [
   {

@@ -13,7 +13,7 @@ class TransactionTypeIndex {
   static const int PostageAndTelegram = 12;
   static const int Insurance = 13;
   static const int AudiFees = 14;
-  static const int ElectricBill = 15;
+  static const int Electricity = 15;
   static const int RepairRenewalMaintenance = 16;
   static const int Advertisement = 17;
   static const int Discount = 18;

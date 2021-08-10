@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:uuid/uuid.dart';
 
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 
@@ -9,7 +8,7 @@ import 'package:sentezel/settings/ledgerMaster/ledgerMasterType_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarNewItem_widget.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_controller.dart';
 
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_model.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 
 class NewLedgerMasterScreen extends HookConsumerWidget {
   final LedgerMaster? ledgerMaster;
