@@ -5,7 +5,7 @@ import 'package:uuid/uuid.dart';
 
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 
-import 'package:sentezel/common/enums/ledgerMasterType_enum.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMasterType_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarNewItem_widget.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_controller.dart';
 
@@ -39,8 +39,8 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     ref
                         .read(ledgerMasterListControllerProvider.notifier)
                         .updateLedgerMaster(
-                          LedgerMaster(
-                            id: Uuid().v4(),
+                          LedgerMaster.withId(
+                            id: 1,
                             name: _name.value,
                             description: '',
                             type: _type.value,
@@ -51,8 +51,8 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     ref
                         .read(ledgerMasterListControllerProvider.notifier)
                         .addLedgerMaster(
-                          LedgerMaster(
-                            id: Uuid().v4(),
+                          LedgerMaster.withId(
+                            id: 1,
                             name: _name.value,
                             description: '',
                             type: _type.value,

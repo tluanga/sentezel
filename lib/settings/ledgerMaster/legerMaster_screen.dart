@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
-import 'package:sentezel/common/enums/ledgerMasterType_enum.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMasterType_enum.dart';
 import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_controller.dart';

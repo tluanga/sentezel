@@ -37,7 +37,7 @@ class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
     List<LedgerMaster> result = [];
 
     list.forEach((element) {
-      result.add(LedgerMaster.fromJson(element));
+      result.add(LedgerMaster.fromMap(element));
     });
     return result;
   }
@@ -52,7 +52,6 @@ class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
     int index =
         ledgerMasterData.indexWhere((element) => element.name == payload.name);
     print('index $index');
-    ledgerMasterData[index] = payload.copyWith(status: payload.status);
 
     print('After update ${ledgerMasterData[index]}');
   }
