@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarNewItem_widget.dart';
 import 'package:sentezel/settings/asset/asset_model.dart';
+import 'package:table_calendar/table_calendar.dart';
 
 class AssetPurchaseScreen extends StatelessWidget {
   const AssetPurchaseScreen({Key? key}) : super(key: key);
@@ -16,6 +17,19 @@ class AssetPurchaseScreen extends StatelessWidget {
             child: Column(
               children: [
                 TopBarNewItemWidget(title: 'New Asset Purchase', onSave: () {}),
+                TableCalendar(
+                  focusedDay: DateTime.now(),
+                  lastDay: DateTime.now().add(
+                    Duration(
+                      days: 30,
+                    ),
+                  ),
+                  firstDay: DateTime.now().subtract(
+                    Duration(
+                      days: 350,
+                    ),
+                  ),
+                ),
                 Text('DateSelection,'),
                 TextFormField(
                   decoration: InputDecoration(
