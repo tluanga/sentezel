@@ -1,10 +1,12 @@
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
+import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
 import 'package:sqflite/sqflite.dart';
 
 const transactionTypeData = [
   {
+    'id': TransactionTypeIndex.PurchaseOfRawMaterial,
     'name': 'Purchase of Material',
     'description': 'Purchase of Material for Resell or for Production',
     'sumChetVelDanType': SumChetvelDanType.lei,
@@ -13,6 +15,7 @@ const transactionTypeData = [
     'active': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.PurchaseOfAssets,
     'name': 'Purchase of Assets',
     'description':
         'Purchase of Material for Business, not for Resell or Raw Material',
@@ -22,6 +25,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.SaleOfGoods,
     'name': 'Sale of Goods',
     'description': 'Sales of Goods which are not manufactured',
     'sumChetVelDanType': SumChetvelDanType.hralh,
@@ -30,6 +34,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.Wages,
     'name': 'Wages',
     'description': 'Hnathawkte hlawh',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -38,6 +43,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.CarriageExpenses,
     'name': 'Carriage expenses',
     'description': 'Bungraw phur kualnaa sum hman',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -46,6 +52,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.ManufacturingExpenses,
     'name': 'Manufacturing expenses',
     'description': 'bungraw lakkhawmna',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -54,6 +61,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.PackingExpense,
     'name': 'Packing expenses',
     'description': 'bungraw pack na',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -62,6 +70,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.Salaries,
     'name': 'Salaries ',
     'description': 'hnathawkate thla tin hlawh',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -70,14 +79,16 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.OfficeRent,
     'name': 'Office rent',
     'description': 'office luahna man',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
-    'debitSideLedger': LedgerMasterIndex.OFFICE_EXPENSES,
+    'debitSideLedger': LedgerMasterIndex.OfficeExpense,
     'creditSideLedger': LedgerMasterIndex.Cash,
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.PrintingAndStationery,
     'name': 'Printing & Stationery',
     'description': 'Lehkha print na,etc. leh Stationary a sum hman te',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -86,6 +97,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.TelephoneCharges,
     'name': 'Telephone Charges',
     'description': 'bungraw pack na',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -94,6 +106,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.PostageAndTelegram,
     'name': 'Postage and telegram',
     'description': 'postage and telegram',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -102,6 +115,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.Insurance,
     'name': 'Insurance',
     'description': 'Insurance',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -110,6 +124,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.AudiFees,
     'name': 'Audit fees',
     'description': 'audit fee',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -118,6 +133,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.Electricity,
     'name': 'Electricity',
     'description': 'Electric bill leh electric lama sum hmanna te',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -126,6 +142,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.RepairRenewalMaintenance,
     'name': 'Repairs and renewal',
     'description': 'Thil siam thatnaa sum hman te',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -134,6 +151,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.Advertisement,
     'name': 'Advertisement',
     'description': 'advertisement',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -142,6 +160,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.Discount,
     'name': 'Discount',
     'description': 'Discount kan pek na',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -150,6 +169,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.Depreciation,
     'name': 'Depreciation',
     'description': 'Thil man a ai tlawma kan pekna zat',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -158,15 +178,16 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
-    //-------enfiah ngai
+    'id': TransactionTypeIndex.CarriageOutward,
     'name': 'Carriage outward',
     'description': 'Carriage outward',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
-    'debitSideLedger': LedgerMasterIndex.CarriageExpensesss,
+    'debitSideLedger': LedgerMasterIndex.CarriageExpense,
     'creditSideLedger': LedgerMasterIndex.Cash,
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.BadDebts,
     'name': 'Bad debts',
     'description': 'Ba min pek tawh loh tur te',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -175,6 +196,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.ProvisionForBadDebt,
     'name': 'Provision for bad debts',
     'description': 'bat ral te phuhrukna tur',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -183,6 +205,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.SellInCommission,
     'name': 'Selling commission',
     'description': 'Selling commission',
     'sumChetVelDanType': 3,
@@ -191,6 +214,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.BankCharges,
     'name': 'Bank charges',
     'description': 'Bank charges',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -199,6 +223,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.LossOnSaleOfAsset,
     'name': 'Loss on sale of asset',
     'description': 'bungraw hralhchhawnna a pawisa hloh na',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -207,6 +232,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.DiscountReceived,
     'name': 'Discount Recieved',
     'description': 'thil leina a discount kan dawn zat',
     'sumChetVelDanType': SumChetvelDanType.lakluh,
@@ -215,6 +241,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.CommissionReceived,
     'name': 'Commission recieved',
     'description': 'commission na a hmuh zat',
     'sumChetVelDanType': SumChetvelDanType.lakluh,
@@ -223,6 +250,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.BankInterest,
     'name': 'Bank interest',
     'description': 'Bank interest dawn zat',
     'sumChetVelDanType': SumChetvelDanType.lakluh,
@@ -231,6 +259,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active, // la ngaihtuah tur
   },
   {
+    'id': TransactionTypeIndex.RentReceived,
     'name': 'Rent recieved',
     'description': 'Kan in/dawr luahman atanga sum dawn',
     'sumChetVelDanType': SumChetvelDanType.lakluh,
@@ -239,6 +268,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.ProfitOnSaleOfAssets,
     'name': 'Profit on sale of asset',
     'description': 'Bungraw hralhchhawnna atanga hlawkna',
     'sumChetVelDanType': SumChetvelDanType.lakluh,
@@ -247,6 +277,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.SalesReturn,
     'name': 'Sale Return',
     'description': 'Bungraw hralhchhawn tawh let leh',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,
@@ -255,6 +286,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.PurchaseReturn,
     'name': 'Purchase Return',
     'description': 'Bungraw hralhchhawn tawh let leh',
     'sumChetVelDanType': SumChetvelDanType.lakluh,
@@ -263,7 +295,8 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
-    'name': 'Consumer Debt  Settlement',
+    'id': TransactionTypeIndex.CustomerDebtSettlement,
+    'name': 'Customer Debt  Settlement',
     'description': 'Customer ten an ba an pek',
     'sumChetVelDanType': SumChetvelDanType.debtRepaymentByDebtor,
     'debitSideLedger': LedgerMasterIndex.Cash, //this can also be a Bank
@@ -271,14 +304,16 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.BusinessDebtSettlement,
     'name': 'BusinessProfile Debt Bill Settlement',
-    'description': 'Customer te Bill khat ba pek',
+    'description': 'Sumdawna a ba pek',
     'sumChetVelDanType': SumChetvelDanType.debtRepaymentToCreditor,
     'debitSideLedger': 0, // Party ID a ngaih avangin 0 a dah rih a ni
     'creditSideLedger': LedgerMasterIndex.Cash, //this can also be a Bank
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.BankToCash,
     'name': 'Bank to Cash',
     'description': 'Bank to Cash Transaction',
     'sumChetVelDanType': SumChetvelDanType.bankToCash,
@@ -287,6 +322,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.CashToBank,
     'name': 'Cash to Bank',
     'description': 'Cash to Bank Transaction',
     'sumChetVelDanType': SumChetvelDanType.cashToBank,
@@ -295,6 +331,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.CapitalInjection,
     'name': 'Capital Injection',
     'description': 'Capital Injection into Business',
     'sumChetVelDanType': SumChetvelDanType.capitalInjection,
@@ -303,6 +340,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.OpeningBalanceCash,
     'name': 'Opening Balance Cash',
     'description': 'Opening balance Cash',
     'sumChetVelDanType': SumChetvelDanType.openingBalanceCash,
@@ -311,6 +349,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.OpeningBalanceBank,
     'name': 'Opening Balance Bank',
     'description': 'Opening balance Bank',
     'sumChetVelDanType': SumChetvelDanType.openingBalanceBank,
@@ -319,6 +358,7 @@ const transactionTypeData = [
     'status': ActiveInActive.active,
   },
   {
+    'id': TransactionTypeIndex.CustomDuty,
     'name': 'Custom Duty',
     'description': 'Custom Duty',
     'sumChetVelDanType': SumChetvelDanType.pekchhuah,

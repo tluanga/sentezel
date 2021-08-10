@@ -57,4 +57,5 @@ class LedgerMasterIndex {
   static const CommissionReceived = 56;
   static const ProfitOnSaleOfAssets = 57;
   static const Capital = 58;
+  static const OfficeExpense = 59;
 }
