@@ -1,3 +1,4 @@
+import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/config/constants/transaction_constant.dart';
 import 'package:sentezel/helpers/database/ledgerId.constants.dart';
 import 'package:sentezel/helpers/database/transactionType.constant.dart';
@@ -10,7 +11,7 @@ const transactionTypeData = [
     'sumChetVelDanType': TransactionConstant.lei,
     'debitSideLedger': LedgerID.PURCHASEAC,
     'creditSideLedger': LedgerID.CASHAC,
-    'active': TransactionTypeConstant.active,
+    'active': ActiveInActive.active,
   },
   {
     'name': 'Purchase of Assets',
