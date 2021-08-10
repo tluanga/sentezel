@@ -12,15 +12,14 @@ import 'package:sentezel/newTransaction/newTransaction_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initializeApp();  
+  initializeApp();
   runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends HookConsumerWidget {
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context, WidgetRef ref) {    
-
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Sentezel',
