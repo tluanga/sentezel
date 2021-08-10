@@ -44,52 +44,52 @@ class AssetPurchaseScreen extends StatelessWidget {
                 SizedBox(
                   height: 6,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.black38),
-                  ),
-                  child: Row(
-                    children: [
-                      Container(
-                        width: MediaQuery.of(context).size.width * 0.3,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        decoration: BoxDecoration(
-                          color: Colors.amber,
-                        ),
-                        child: Text('Asset Select'),
-                      ),
-                      Container(
-                        child: Text(
-                          'Stool',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Row(
-                  children: [
-                    TextFormField(
-                      decoration: InputDecoration(labelText: 'Search Asset'),
-                    ),
-                  ],
-                ),
-                Container(
-                  child: ListView.builder(
-                    itemCount: 10,
-                    itemBuilder: (context, index) {
-                      return (_assetItem(
-                        context,
-                        Asset(
-                          name: 'Dawnkan',
-                          description: 'arsa channa tur',
-                        ),
-                      ));
-                    },
-                  ),
-                )
+                // Container(
+                //   decoration: BoxDecoration(
+                //     border: Border.all(color: Colors.black38),
+                //   ),
+                //   child: Row(
+                //     children: [
+                //       Container(
+                //         width: MediaQuery.of(context).size.width * 0.3,
+                //         height: MediaQuery.of(context).size.height * 0.05,
+                //         decoration: BoxDecoration(
+                //           color: Colors.amber,
+                //         ),
+                //         child: Text('Asset Select'),
+                //       ),
+                //       Container(
+                //         child: Text(
+                //           'Stool',
+                //           style: TextStyle(
+                //             fontSize: 16,
+                //           ),
+                //         ),
+                //       )
+                //     ],
+                //   ),
+                // ),
+                // Row(
+                //   children: [
+                //     TextFormField(
+                //       decoration: InputDecoration(labelText: 'Search Asset'),
+                //     ),
+                //   ],
+                // ),
+                // Container(
+                //   child: ListView.builder(
+                //     itemCount: 10,
+                //     itemBuilder: (context, index) {
+                //       return (_assetItem(
+                //         context,
+                //         Asset(
+                //           name: 'Dawnkan',
+                //           description: 'arsa channa tur',
+                //         ),
+                //       ));
+                //     },
+                //   ),
+                // )
               ],
             ),
           ),

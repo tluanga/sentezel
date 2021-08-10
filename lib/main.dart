@@ -8,8 +8,10 @@ import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/ui/screens/controlCenter_screen.dart';
 import 'package:sentezel/home/ui/home_screen.dart';
 import 'package:sentezel/setup/intializeApp.dart';
-import 'package:sentezel/newTransaction/newTransaction_screen.dart';
+
 import 'package:sentezel/setup/splash_screen.dart';
+
+import 'newTransaction/newTransactionCenter_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -33,7 +35,7 @@ class MyApp extends HookConsumerWidget {
         RouteConstant.analytics: (context) => AnalyticsScreen(),
         RouteConstant.books: (context) => BooksScreen(),
         RouteConstant.controlCenter: (context) => ControlCenterScreen(),
-        RouteConstant.newTransaction: (context) => NewTransactionScreen(),
+        RouteConstant.newTransaction: (context) => NewTranscationCenterScreen(),
       },
       home: SplashScreen(),
     );

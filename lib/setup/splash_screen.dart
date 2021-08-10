@@ -51,6 +51,10 @@ class SplashScreen extends HookConsumerWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: Image.asset('assets/images/sentezel_logo.png'),
               ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Image.asset('-assets/images/mzu_inc_logo.png'),
+              ),
             ],
           ),
         ),
