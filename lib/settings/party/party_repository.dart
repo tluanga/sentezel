@@ -1,3 +1,4 @@
+import 'package:riverpod/riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/settings/party/party_config.dart';
@@ -5,7 +6,12 @@ import 'package:sqflite_common/sqlite_api.dart';
 
 import 'data/party_model.dart';
 
+final PartyRepositoryProvider = Provider((ref) => PartyRepository(ref.read));
+
 class PartyRepository implements BaseRepository<Party> {
+  final Reader _read;
+
+  const PartyRepository(this._read);
   //---Add new Party----
   @override
   void add({required payload}) async {
