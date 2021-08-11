@@ -7,12 +7,12 @@ class Party {
   int? id;
   String name;
   String description;
-  ActiveInActive status;
+  ActiveInActive? status = ActiveInActive.active;
   Party({
     this.id,
     required this.name,
     required this.description,
-    required this.status,
+    this.status=ActiveInActive.active,
   });
 
   Party copyWith({
@@ -27,6 +27,10 @@ class Party {
       description: description ?? this.description,
       status: status ?? this.status,
     );
+  }
+
+  String getInitialLetter() {
+    return this.name[0].toUpperCase();
   }
 
   Map<String, dynamic> toMap() {

@@ -31,7 +31,6 @@ class TopBarWithSaveForBottomSheetWidget extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     onSave();
-                    Navigator.pop(context);
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
+import 'package:sentezel/settings/party/party_screen.dart';
 
 class ControlCenterScreen extends StatelessWidget {
   const ControlCenterScreen({Key? key}) : super(key: key);
@@ -91,7 +92,14 @@ class ControlCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Party',
                   icon: CupertinoIcons.app_badge,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PartyScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _item(
                   context: context,
