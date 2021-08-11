@@ -1,5 +1,5 @@
 class LedgerMasterConfig {
-  static const ledgerMasterTable = 'LedgerMaster';
+  static const ledgerMasterTable = 'ledgerMaster';
   static const active = 'Active';
   static const inActive = 'InActive';
   static const direct = 'Direct';

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarNewItem_widget.dart';
+import 'package:sentezel/common/ui/widget/weeklyTableCalendar_widget.dart';
 import 'package:sentezel/settings/asset/asset_model.dart';
-import 'package:table_calendar/table_calendar.dart';
+import 'package:sentezel/settings/party/partySelect_modal.dart';
 
 class AssetPurchaseScreen extends StatelessWidget {
   const AssetPurchaseScreen({Key? key}) : super(key: key);
@@ -11,99 +13,130 @@ class AssetPurchaseScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
+        child: SingleChildScrollView(
           child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
                 TopBarNewItemWidget(title: 'New Asset Purchase', onSave: () {}),
-                TableCalendar(
-                  focusedDay: DateTime.now(),
-                  lastDay: DateTime.now().add(
-                    Duration(
-                      days: 30,
-                    ),
-                  ),
-                  firstDay: DateTime.now().subtract(
-                    Duration(
-                      days: 350,
-                    ),
-                  ),
+                WeeklyTableCalendarWidget(
+                  onDateSelect: (selectedDate) {},
                 ),
-                Text('DateSelection,'),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Amount',
-                  ),
-                ),
-                TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Description',
-                  ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
                 ),
                 Row(
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.3,
+                      width: MediaQuery.of(context).size.width * 0.4,
                       height: MediaQuery.of(context).size.height * 0.05,
-                      child: Text('Ba'),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey,
+                      child: TextFormField(
+                        decoration: InputDecoration(
+                          labelText: 'Amount',
                         ),
+                      ),
+                    ),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.5,
+                      height: MediaQuery.of(context).size.height * 0.05,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          GestureDetector(
+                            onTap: () {
+                              showCupertinoModalBottomSheet(
+                                expand: true,
+                                context: context,
+                                backgroundColor: Colors.transparent,
+                                builder: (context) => PartySelectModal(),
+                              );
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width * 0.2,
+                              height: MediaQuery.of(context).size.height * 0.04,
+                              decoration: BoxDecoration(
+                                color: Colors.amberAccent,
+                                borderRadius: BorderRadius.circular(5),
+                              ),
+                              child: Center(
+                                child: Text('BA'),
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.2,
+                            height: MediaQuery.of(context).size.height * 0.04,
+                            decoration: BoxDecoration(
+                              color: Colors.orangeAccent,
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: Center(
+                              child: Text('BA LO'),
+                            ),
+                          )
+                        ],
                       ),
                     )
                   ],
                 ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text('Ba'),
+                    Text(
+                      'Party: Mrs S/Singson',
+                    )
+                  ],
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      labelText: 'Description',
+                    ),
+                  ),
+                ),
                 SizedBox(
                   height: 6,
                 ),
-                // Container(
-                //   decoration: BoxDecoration(
-                //     border: Border.all(color: Colors.black38),
-                //   ),
-                //   child: Row(
-                //     children: [
-                //       Container(
-                //         width: MediaQuery.of(context).size.width * 0.3,
-                //         height: MediaQuery.of(context).size.height * 0.05,
-                //         decoration: BoxDecoration(
-                //           color: Colors.amber,
-                //         ),
-                //         child: Text('Asset Select'),
-                //       ),
-                //       Container(
-                //         child: Text(
-                //           'Stool',
-                //           style: TextStyle(
-                //             fontSize: 16,
-                //           ),
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ),
-                // Row(
-                //   children: [
-                //     TextFormField(
-                //       decoration: InputDecoration(labelText: 'Search Asset'),
-                //     ),
-                //   ],
-                // ),
-                // Container(
-                //   child: ListView.builder(
-                //     itemCount: 10,
-                //     itemBuilder: (context, index) {
-                //       return (_assetItem(
-                //         context,
-                //         Asset(
-                //           name: 'Dawnkan',
-                //           description: 'arsa channa tur',
-                //         ),
-                //       ));
-                //     },
-                //   ),
-                // )
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  height: MediaQuery.of(context).size.height * 0.51,
+                  decoration: BoxDecoration(color: Colors.white),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.8,
+                            height: MediaQuery.of(context).size.height * 0.05,
+                            child: TextFormField(
+                              decoration:
+                                  InputDecoration(labelText: 'Search Asset'),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                          height: MediaQuery.of(context).size.height * 0.02),
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: 10,
+                            itemBuilder: (context, index) {
+                              return _assetItem(
+                                  context,
+                                  Asset(
+                                      name: 'AA',
+                                      description: 'BB',
+                                      status: ActiveInActive.active));
+                            }),
+                      )
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -191,11 +224,7 @@ class AssetPurchaseScreen extends StatelessWidget {
                   height: MediaQuery.of(context).size.height * 0.03,
                   child: Center(
                     child: Text(
-                      asset.description != null
-                          ? asset.description != asset.name
-                              ? asset.description!
-                              : ''
-                          : '',
+                      asset.description != asset.name ? asset.description : '',
                       style: TextStyle(
                         fontSize: 14,
                       ),

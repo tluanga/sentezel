@@ -3,7 +3,7 @@ abstract class BaseRepository<T> {
   Future<List<T>> getList();
 
   //-----For Getting Single Item, id will be provided
-  Future<T> getItem({required int id});
+  Future<T?> getItem({required int id});
 
   //------Adding a single Item-----------
   void add({required T payload});
