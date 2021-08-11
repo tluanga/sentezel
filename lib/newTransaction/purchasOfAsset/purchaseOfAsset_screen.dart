@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
-import 'package:sentezel/common/ui/widget/topBarNewItem_widget.dart';
+import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/common/ui/widget/weeklyTableCalendar_widget.dart';
 import 'package:sentezel/settings/asset/asset_model.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
@@ -19,7 +19,8 @@ class AssetPurchaseScreen extends StatelessWidget {
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
-                TopBarNewItemWidget(title: 'New Asset Purchase', onSave: () {}),
+                TopBarWithSaveWidget(
+                    title: 'New Asset Purchase', onSave: () {}),
                 WeeklyTableCalendarWidget(
                   onDateSelect: (selectedDate) {},
                 ),

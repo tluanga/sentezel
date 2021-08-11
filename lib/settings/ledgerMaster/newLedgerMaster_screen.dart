@@ -5,7 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 
 import 'package:sentezel/settings/ledgerMaster/ledgerMasterType_enum.dart';
-import 'package:sentezel/common/ui/widget/topBarNewItem_widget.dart';
+import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_controller.dart';
 
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
@@ -30,7 +30,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
           ),
           child: Column(
             children: [
-              TopBarNewItemWidget(
+              TopBarWithSaveWidget(
                 title: 'New Ledger Master',
                 onSave: () {
                   print('value of name is');

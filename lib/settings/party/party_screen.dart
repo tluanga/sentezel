@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
@@ -15,6 +16,7 @@ class PartyScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(partyListControllerProvider);
+    final _searchTextEditingController = useTextEditingController();
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -27,8 +29,9 @@ class PartyScreen extends HookConsumerWidget {
               // based in input
               Container(
                 width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
+                child: TextFormField(
                   decoration: InputDecoration(labelText: 'Search'),
+                  controller: _searchTextEditingController,
                 ),
               ),
               _list(context, list),

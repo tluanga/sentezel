@@ -2,10 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/ui/widget/settingsEllipse_widget.dart';
 
-class TopBarNewItemWidget extends StatelessWidget {
+class TopBarWithSaveWidget extends StatelessWidget {
   final String title;
   final Function onSave;
-  const TopBarNewItemWidget({
+  const TopBarWithSaveWidget({
     Key? key,
     required this.title,
     required this.onSave,

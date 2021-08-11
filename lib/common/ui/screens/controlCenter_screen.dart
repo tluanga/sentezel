@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
+import 'package:sentezel/settings/businessProfile/businessProfile_screen.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 import 'package:sentezel/settings/party/party_screen.dart';
 
@@ -75,7 +76,14 @@ class ControlCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Business Profile',
                   icon: CupertinoIcons.list_bullet_below_rectangle,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BusinessProfileSceen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
