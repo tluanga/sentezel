@@ -36,6 +36,7 @@ class PartyListController extends StateNotifier<List<Party>> {
   deleteParty(int id) {
     try {
       _read(partyRepositoryProvider).remove(id: id);
+      loadData();
     } catch (e) {
       print(e);
     }
@@ -44,6 +45,7 @@ class PartyListController extends StateNotifier<List<Party>> {
   updateParty(Party payload) {
     try {
       _read(partyRepositoryProvider).update(payload: payload);
+      loadData();
     } catch (e) {
       print(e);
     }
