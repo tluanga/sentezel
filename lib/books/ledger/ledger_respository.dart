@@ -3,5 +3,7 @@ import 'package:sentezel/common/baseClasses/base_repository.dart';
 
 class LedgerRepository {
   Future<List<LedgerReport>> getList(
-      {required DateTime startDate, required DateTime endDate}) {}
+      {required DateTime startDate, required DateTime endDate}) {
+        
+      }
 }
