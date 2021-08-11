@@ -1,4 +1,5 @@
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -13,11 +14,12 @@ class PeriodSelectionBarWidget extends HookConsumerWidget {
     return Container(
       child: Row(
         children: [
-          Container(
-            child: Text(
+          Row(children: [
+            Text(
               EnumToString.convertToString(_period.value),
             ),
-          ),
+            Icon(CupertinoIcons.down_arrow)
+          ]),
           Container(
             child: _periodSelection(_period.value),
           ),
@@ -37,7 +39,7 @@ class PeriodSelectionBarWidget extends HookConsumerWidget {
                 child: Row(
                   children: [
                     Container(
-                      child: Text('August,2021'),
+                      child: Text('Current Financial Year'),
                     )
                   ],
                 ),
@@ -46,21 +48,47 @@ class PeriodSelectionBarWidget extends HookConsumerWidget {
           ),
         );
       case PeriodType.month:
+        //To Display Weeks of the month
         return Container(
           child: Row(
-            children: [],
+            children: [
+              Container(
+                child: Text('Available year of the Current Financial Year'),
+              ),
+              Container(
+                child: Text('Available month of the selected year'),
+              ),
+            ],
           ),
         );
       case PeriodType.week:
         return Container(
           child: Row(
-            children: [],
+            children: [
+              Container(
+                child: Text('Available year of the Current Financial Year'),
+              ),
+              Container(
+                child: Text('Available month of the selected year'),
+              ),
+              Container(
+                child:
+                    Text('Display Available week with start date and end date'),
+              ),
+            ],
           ),
         );
       case PeriodType.month:
         return Container(
           child: Row(
-            children: [],
+            children: [
+              Container(
+                child: Text('Display current start Date'),
+              ),
+              Container(
+                child: Text('Display Current End date'),
+              )
+            ],
           ),
         );
     }
