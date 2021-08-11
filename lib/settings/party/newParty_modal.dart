@@ -44,6 +44,7 @@ class NewPartyModal extends HookConsumerWidget {
                         .read(partyListControllerProvider.notifier)
                         .updateParty(
                           Party(
+                            id: payload!.id,
                             name: _nameTextEditingController.text,
                             description: _descriptionTextEditingController.text,
                             status: _status.value,

@@ -73,6 +73,8 @@ class PartyRepository implements BaseRepository<Party> {
       await db.update(
         PartyConfig.partyTable,
         payload.toMap(),
+        where: 'id=?',
+        whereArgs: [payload.id],
       );
     } catch (e) {
       print(e);
