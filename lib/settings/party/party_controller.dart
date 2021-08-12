@@ -11,9 +11,10 @@ class PartyListController extends StateNotifier<List<Party>> {
   final Reader _read;
   PartyListController(this._read) : super([]);
 
-  loadData() async {
+  loadData({String searchString = ''}) async {
     print('Loading Party List');
-    state = await _read(partyRepositoryProvider).getList();
+    state = await _read(partyRepositoryProvider)
+        .getList(searchString: searchString);
   }
 
   addParty(Party payload) {

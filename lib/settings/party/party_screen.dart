@@ -17,6 +17,16 @@ class PartyScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(partyListControllerProvider);
     final _searchTextEditingController = useTextEditingController();
+    _onSearch() async {
+      ref.read(partyListControllerProvider.notifier).loadData(
+            searchString: _searchTextEditingController.text,
+          );
+    }
+
+    useEffect(() {
+      _searchTextEditingController.addListener(_onSearch);
+    });
+
     return Scaffold(
       body: SafeArea(
         child: Container(

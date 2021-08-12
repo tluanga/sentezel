@@ -30,7 +30,7 @@ class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
   }
 
   @override
-  Future<List<LedgerMaster>> getList() async {
+  Future<List<LedgerMaster>> getList({String? searchString}) async {
     Database db = await DatabaseService.instance.db;
     final list = await db.query(LedgerMasterConfig.ledgerMasterTable);
     print(list);

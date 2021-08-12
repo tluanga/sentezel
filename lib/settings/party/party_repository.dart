@@ -41,10 +41,15 @@ class PartyRepository implements BaseRepository<Party> {
 
   //-------Get All item--
   @override
-  Future<List<Party>> getList() async {
+  Future<List<Party>> getList({String searchString = ''}) async {
     try {
       Database db = await DatabaseService.instance.db;
-      final result = await db.query(PartyConfig.partyTable);
+      // final result = await db.query(PartyConfig.partyTable,
+      //     where: 'name=?', whereArgs: [searchString]);
+      final result = await db.rawQuery('''
+      Select * from party
+      WHERE name LIKE '$searchString%'
+      ''');
       List<Party> partyList = [];
       result.forEach((party) {
         partyList.add(Party.fromMap(party));
