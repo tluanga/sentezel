@@ -1,33 +1,25 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sentezel/common/ui/widget/settingsEllipse_widget.dart';
 
-class TopBarWithSaveWidget extends StatelessWidget {
-  final String title;
-  final Function onSave;
-  const TopBarWithSaveWidget({
+class TopBarForConfirmBottomSheetWidget extends StatelessWidget {
+  final String label;
+  final Function onConfirm;
+  const TopBarForConfirmBottomSheetWidget({
     Key? key,
-    required this.title,
-    required this.onSave,
+    required this.label,
+    required this.onConfirm,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        top: 5,
-        bottom: 5,
-        left: 2,
-        right: 2,
-      ),
+    return Container(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          SettingsEllipseWidget(),
           Text(
-            title,
+            label,
             style: TextStyle(
-              fontSize: 18,
+              fontSize: 22,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -38,7 +30,7 @@ class TopBarWithSaveWidget extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    onSave();
+                    onConfirm();
                   },
                   child: Padding(
                     padding: const EdgeInsets.only(),

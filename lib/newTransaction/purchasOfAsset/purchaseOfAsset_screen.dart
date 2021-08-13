@@ -38,9 +38,9 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                     onSave: () {
                       print('save');
                       showModalBottomSheet(
-                        context: context,
-                        builder: (context) => Material(child: Text('hello')),
-                      );
+                          context: context,
+                          builder: (context) =>
+                              purchaseOfAssetConfirmDialog(context));
                     }),
                 WeeklyTableCalendarWidget(
                   onDateSelect: (selectedDate) {

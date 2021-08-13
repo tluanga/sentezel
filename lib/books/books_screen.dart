@@ -24,8 +24,8 @@ class BooksScreen extends StatelessWidget {
                     onTap: () {},
                     child: _item(
                       context: context,
-                      label: 'Transaction',
-                      icon: CupertinoIcons.cube,
+                      label: 'Journal',
+                      icon: CupertinoIcons.grid,
                       onTap: () {
                         Navigator.pushReplacementNamed(
                             context, RouteConstant.books);
@@ -35,7 +35,7 @@ class BooksScreen extends StatelessWidget {
                   _item(
                     context: context,
                     label: 'Ledger',
-                    icon: CupertinoIcons.cube_box,
+                    icon: CupertinoIcons.circle_grid_3x3,
                     onTap: () {},
                   ),
                 ],
@@ -47,8 +47,8 @@ class BooksScreen extends StatelessWidget {
                     onTap: () {},
                     child: _item(
                       context: context,
-                      label: 'Trading Account',
-                      icon: CupertinoIcons.dot_square,
+                      label: 'Trial Balance',
+                      icon: CupertinoIcons.equal_square,
                       onTap: () {
                         Navigator.push(
                           context,
@@ -61,8 +61,8 @@ class BooksScreen extends StatelessWidget {
                   ),
                   _item(
                     context: context,
-                    label: 'Profit & Loss',
-                    icon: CupertinoIcons.hurricane,
+                    label: 'Trading Account',
+                    icon: CupertinoIcons.layers,
                     onTap: () {},
                   ),
                 ],
@@ -75,7 +75,7 @@ class BooksScreen extends StatelessWidget {
                     child: _item(
                       context: context,
                       label: 'Profit & Loss',
-                      icon: CupertinoIcons.dot_square,
+                      icon: CupertinoIcons.rectangle_3_offgrid,
                       onTap: () {
                         Navigator.push(
                           context,
@@ -89,7 +89,7 @@ class BooksScreen extends StatelessWidget {
                   _item(
                     context: context,
                     label: 'Balance Sheet',
-                    icon: CupertinoIcons.hurricane,
+                    icon: CupertinoIcons.layers_alt,
                     onTap: () {},
                   ),
                 ],
