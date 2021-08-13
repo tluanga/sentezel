@@ -9,13 +9,21 @@ final ledgerMasterListControllerProvider =
 
 class LedgerMasterListController extends StateNotifier<List<LedgerMaster>> {
   final Reader _read;
+  bool _isLoading = true;
+  bool getIsLoading() {
+    return _isLoading;
+  }
 
   LedgerMasterListController(this._read) : super([]);
 
-  loadData() async {
+  loadData({String searchString = ''}) async {
     print('load data');
-    state = await _read(ledgerMasterRepositoryProvider).getList();
+    state = await _read(ledgerMasterRepositoryProvider)
+        .getList(searchString: searchString);
+    if (state.isNotEmpty) _isLoading = false;
   }
+
+  //
 
   addLedgerMaster(LedgerMaster payload) {
     try {

@@ -5,13 +5,13 @@ import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/party/party_controller.dart';
 
-import 'data/party_model.dart';
 import 'newParty_modal.dart';
 
 class PartySelectModal extends HookConsumerWidget {
-  final Function(Party) onSelectParty;
+  final Function(LedgerMaster) onSelectParty;
   const PartySelectModal({Key? key, required this.onSelectParty})
       : super(key: key);
 
@@ -62,7 +62,7 @@ class PartySelectModal extends HookConsumerWidget {
     );
   }
 
-  _list(BuildContext context, List<Party> list) {
+  _list(BuildContext context, List<LedgerMaster> list) {
     list.sort((a, b) => a.name.compareTo(b.name));
 
     return Expanded(
@@ -78,11 +78,11 @@ class PartySelectModal extends HookConsumerWidget {
 
   _listItem(
       {required BuildContext context,
-      required Party item,
-      required Function(Party) onSelect}) {
+      required LedgerMaster item,
+      required Function(LedgerMaster) onSelect}) {
     Color _color = UiConstant.color3;
 
-    if (item.id! / 2 == 0) _color = UiConstant.color1;
+    if (item.id / 2 == 0) _color = UiConstant.color1;
 
     return GestureDetector(
       onTap: () {

@@ -3,22 +3,28 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
-import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
-import 'package:sentezel/common/ui/widget/topBar_widget.dart';
+import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
-import 'package:sentezel/settings/party/party_controller.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMasterList_controller.dart';
+import 'package:sentezel/settings/party/newParty_modal.dart';
 
-import 'newParty_modal.dart';
-
-class PartyScreen extends HookConsumerWidget {
-  const PartyScreen({Key? key}) : super(key: key);
+class PartySelectModal extends HookConsumerWidget {
+  final Function(LedgerMaster) onSelectParty;
+  final bool partial;
+  const PartySelectModal({
+    Key? key,
+    required this.onSelectParty,
+    required this.partial,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(partyListControllerProvider);
+    final list = ref.watch(ledgerMasterListControllerProvider);
+    final isLoading =
+        ref.watch(ledgerMasterListControllerProvider.notifier).getIsLoading();
     final _searchTextEditingController = useTextEditingController();
     _onSearch() async {
-      ref.read(partyListControllerProvider.notifier).loadData(
+      ref.read(ledgerMasterListControllerProvider.notifier).loadData(
             searchString: _searchTextEditingController.text,
           );
     }
@@ -32,9 +38,16 @@ class PartyScreen extends HookConsumerWidget {
         child: Container(
           child: Column(
             children: [
-              TopBarWidget(
-                title: 'Ledger Master',
+              TopBarWithNewForBottomSheetWidget(
+                label: 'Party Select',
+                onNew: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => NewPartyModal(),
+                  );
+                },
               ),
+
               //------Searching Ledger Master and filtration will be done
               // based in input
               Container(
@@ -44,46 +57,45 @@ class PartyScreen extends HookConsumerWidget {
                   controller: _searchTextEditingController,
                 ),
               ),
-              _list(context, list),
+              isLoading
+                  ? Center(
+                      child: CircularProgressIndicator(),
+                    )
+                  : _list(context, list),
             ],
           ),
         ),
-      ),
-      floatingActionButton: SentezelFloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            builder: (context) => NewPartyModal(),
-          );
-        },
       ),
     );
   }
 
   _list(BuildContext context, List<LedgerMaster> list) {
+    print(list);
     list.sort((a, b) => a.name.compareTo(b.name));
 
     return Expanded(
       child: ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, index) {
-          return _listItem(context, list[index]);
+          return _listItem(
+              context: context, item: list[index], onSelect: onSelectParty);
         },
       ),
     );
   }
 
-  _listItem(BuildContext context, LedgerMaster item) {
+  _listItem(
+      {required BuildContext context,
+      required LedgerMaster item,
+      required Function(LedgerMaster) onSelect}) {
     Color _color = UiConstant.color3;
 
     if (item.id / 2 == 0) _color = UiConstant.color1;
 
     return GestureDetector(
       onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (context) => NewPartyModal(payload: item),
-        );
+        onSelect(item);
+        Navigator.pop(context);
       },
       child: Container(
         margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),

@@ -1,6 +1,6 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMasterType_enum.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 
 class LedgerMaster {
   int id = 0;

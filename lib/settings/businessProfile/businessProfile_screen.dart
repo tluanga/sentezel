@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:sentezel/settings/businessProfile/businessType_enum.dart';
 
 class BusinessProfileSceen extends HookWidget {

@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSaveForBottomSheet_widget.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sentezel/settings/party/party_controller.dart';
 
-import 'data/party_model.dart';
-
 class NewPartyModal extends HookConsumerWidget {
-  final Party? payload;
+  final LedgerMaster? payload;
   const NewPartyModal({Key? key, this.payload}) : super(key: key);
 
   @override
@@ -20,7 +21,7 @@ class NewPartyModal extends HookConsumerWidget {
       text: payload != null ? payload!.description : '',
     );
     final _status = useState<ActiveInActive>(
-        payload != null ? payload!.status! : ActiveInActive.active);
+        payload != null ? payload!.status : ActiveInActive.active);
 
     return Material(
       child: Padding(
@@ -35,18 +36,20 @@ class NewPartyModal extends HookConsumerWidget {
               onSave: () {
                 payload == null
                     ? ref.read(partyListControllerProvider.notifier).addParty(
-                          Party(
+                          LedgerMaster(
                             name: _nameTextEditingController.text,
                             description: _descriptionTextEditingController.text,
+                            type: LedgerMasterType.party,
                           ),
                         )
                     : ref
                         .read(partyListControllerProvider.notifier)
                         .updateParty(
-                          Party(
+                          LedgerMaster.withId(
                             id: payload!.id,
                             name: _nameTextEditingController.text,
                             description: _descriptionTextEditingController.text,
+                            type: payload!.type,
                             status: _status.value,
                           ),
                         );
