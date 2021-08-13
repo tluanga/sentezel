@@ -5,8 +5,8 @@ import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
 import 'package:sentezel/settings/asset/assetList_controller.dart';
+import 'package:sentezel/settings/asset/newAsset_modal.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
-import 'package:sentezel/settings/party/newParty_modal.dart';
 
 class AssetSelectModal extends HookConsumerWidget {
   final Function(LedgerMaster) onSelect;
@@ -42,7 +42,7 @@ class AssetSelectModal extends HookConsumerWidget {
                 onNew: () {
                   showModalBottomSheet(
                     context: context,
-                    builder: (context) => NewPartyModal(),
+                    builder: (context) => NewAssetModal(),
                   );
                 },
               ),

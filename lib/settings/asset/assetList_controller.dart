@@ -24,12 +24,12 @@ class AssetListController extends StateNotifier<List<LedgerMaster>> {
       searchString: searchString,
       type: _type,
     );
-    if (state != null) _isLoading = false;
+    if (state.isNotEmpty) _isLoading = false;
   }
 
   //
 
-  addLedgerMaster(LedgerMaster payload) {
+  addAsset(LedgerMaster payload) {
     try {
       _read(ledgerMasterRepositoryProvider).add(payload: payload);
     } catch (e) {
@@ -37,7 +37,7 @@ class AssetListController extends StateNotifier<List<LedgerMaster>> {
     }
   }
 
-  updateLedgerMaster(LedgerMaster payload) {
+  updateAsset(LedgerMaster payload) {
     try {
       _read(ledgerMasterRepositoryProvider).update(payload: payload);
     } catch (e) {

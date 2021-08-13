@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
+
 import 'package:sentezel/common/ui/widget/topBarWithSaveForBottomSheet_widget.dart';
+import 'package:sentezel/settings/asset/assetList_controller.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
-import 'package:sentezel/settings/party/party_controller.dart';
 
-class NewPartyModal extends HookConsumerWidget {
+
+class NewAssetModal extends HookConsumerWidget {
   final LedgerMaster? payload;
-  const NewPartyModal({Key? key, this.payload}) : super(key: key);
+  const NewAssetModal({Key? key, this.payload}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,24 +33,24 @@ class NewPartyModal extends HookConsumerWidget {
         child: Column(
           children: [
             TopBarWithSaveForBottomSheetWidget(
-              label: 'New Party',
+              label: 'New Asset',
               onSave: () {
                 payload == null
-                    ? ref.read(partyListControllerProvider.notifier).addParty(
+                    ? ref.read(assetListControllerProvider.notifier).addAsset(
                           LedgerMaster(
                             name: _nameTextEditingController.text,
                             description: _descriptionTextEditingController.text,
-                            type: LedgerMasterType.party,
+                            type: LedgerMasterType.asset,
                           ),
                         )
                     : ref
-                        .read(partyListControllerProvider.notifier)
-                        .updateParty(
+                        .read(assetListControllerProvider.notifier)
+                        .updateAsset(
                           LedgerMaster.withId(
                             id: payload!.id,
                             name: _nameTextEditingController.text,
                             description: _descriptionTextEditingController.text,
-                            type: payload!.type,
+                            type: LedgerMasterType.asset,
                             status: _status.value,
                           ),
                         );

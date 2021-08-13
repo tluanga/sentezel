@@ -60,7 +60,10 @@ class LedgerMasterRepository implements BaseRepository<LedgerMaster> {
       List<LedgerMaster> list = [];
       result.forEach((item) {
         list.add(LedgerMaster.fromMap(item));
+        print('name');
+        print(item['name']);
       });
+
       return list;
     } catch (e) {
       print(e);

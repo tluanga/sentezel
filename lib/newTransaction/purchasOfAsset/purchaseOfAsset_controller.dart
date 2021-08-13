@@ -22,8 +22,16 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
   String getAssetName() => _assetName;
   setAsset(LedgerMaster asset) {
     _assetName = asset.name;
-    state = state.copyWith(assetLedgerId: asset.id);
+    state = state.copyWith(
+      assetLedgerId: asset.id,
+      debitSideLedgerId: asset.id,
+    );
     print(state);
+  }
+
+  setDate(DateTime date) {
+    state = state.copyWith(date: date);
+    print('new Date is ${state.date}');
   }
 
   PurchaseOfAssetController(this._read)

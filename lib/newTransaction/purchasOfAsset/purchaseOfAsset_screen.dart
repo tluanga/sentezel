@@ -7,6 +7,7 @@ import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/common/partySelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
+import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_dialog.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/transactionModeSelect_modal.dart';
 
@@ -33,9 +34,20 @@ class AssetPurchaseScreen extends HookConsumerWidget {
             child: Column(
               children: [
                 TopBarWithSaveWidget(
-                    title: 'New Asset Purchase', onSave: () {}),
+                    title: 'New Asset Purchase',
+                    onSave: () {
+                      print('save');
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => Material(child: Text('hello')),
+                      );
+                    }),
                 WeeklyTableCalendarWidget(
-                  onDateSelect: (selectedDate) {},
+                  onDateSelect: (selectedDate) {
+                    ref
+                        .read(purchaseOfAssetControllerProvider.notifier)
+                        .setDate(selectedDate);
+                  },
                 ),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
@@ -45,7 +57,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                   children: [
                     //--------------Amount ------------
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.3,
+                      width: MediaQuery.of(context).size.width * 0.38,
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: TextFormField(
                         decoration: InputDecoration(
@@ -69,11 +81,11 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                         );
                       },
                       child: Container(
-                        width: MediaQuery.of(context).size.width * 0.6,
+                        width: MediaQuery.of(context).size.width * 0.55,
                         height: MediaQuery.of(context).size.height * 0.05,
                         padding: EdgeInsets.all(10),
                         decoration: BoxDecoration(
-                          color: Colors.grey,
+                          color: Colors.grey.shade300,
                           borderRadius: BorderRadius.circular(3),
                         ),
                         child: Row(
@@ -86,6 +98,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 16,
+                                fontWeight: FontWeight.bold,
                               ),
                             ),
                             Icon(
@@ -109,6 +122,13 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                     ? Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          currentState.mode ==
+                                      TransactionMode.partialPaymentByBank ||
+                                  currentState.mode ==
+                                      TransactionMode.partialPaymentByCash
+                              ? PartialPaymentWidget(
+                                  controller: partialAmountController)
+                              : Container(),
                           GestureDetector(
                             onTap: () {
                               showModalBottomSheet(
@@ -131,7 +151,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                               height: MediaQuery.of(context).size.height * 0.05,
                               padding: EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.grey,
+                                color: Colors.grey.shade300,
                                 borderRadius: BorderRadius.circular(3),
                               ),
                               child: Row(
@@ -145,6 +165,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                   Icon(
@@ -156,13 +177,6 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                               ),
                             ),
                           ),
-                          currentState.mode ==
-                                      TransactionMode.partialPaymentByBank ||
-                                  currentState.mode ==
-                                      TransactionMode.partialPaymentByCash
-                              ? PartialPaymentWidget(
-                                  controller: partialAmountController)
-                              : Container(),
                         ],
                       )
                     : Container(),
@@ -188,7 +202,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                     height: MediaQuery.of(context).size.height * 0.05,
                     padding: EdgeInsets.all(10),
                     decoration: BoxDecoration(
-                      color: Colors.grey,
+                      color: Colors.grey.shade300,
                       borderRadius: BorderRadius.circular(3),
                     ),
                     child: Row(
@@ -199,6 +213,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                         Icon(
