@@ -1,91 +1,93 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
-import 'package:sentezel/settings/asset/asset_model.dart';
-import 'package:sentezel/settings/party/newParty_modal.dart';
+import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
+import 'package:sentezel/common/ui/widget/topBar_widget.dart';
+import 'package:sentezel/settings/party/party_controller.dart';
+
+import 'data/party_model.dart';
+import 'newParty_modal.dart';
 
 class PartySelectModal extends HookConsumerWidget {
-  const PartySelectModal({Key? key}) : super(key: key);
+  final Function(Party) onSelectParty;
+  const PartySelectModal({Key? key, required this.onSelectParty})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Material(
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.7,
-        width: MediaQuery.of(context).size.width,
-        color: UiConstant.background,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Row(
-              children: [
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.05,
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: TextFormField(
-                    decoration:
-                        InputDecoration(labelText: 'Search Party by Name'),
-                  ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return NewPartyModal();
-                      },
-                    );
-                  },
-                  child: Container(
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    width: MediaQuery.of(context).size.width * 0.3,
-                    decoration: BoxDecoration(
-                      color: UiConstant.color2,
-                    ),
-                    child: Text('Add New Party'),
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-            Expanded(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.4,
-                width: MediaQuery.of(context).size.width,
-                child: ListView.builder(
-                  itemCount: 10,
-                  itemBuilder: (context, index) {
-                    return _assetItem(
-                        context,
-                        Asset(
-                          name: 'AA',
-                          description: 'BB',
-                          status: ActiveInActive.active,
-                        ));
-                  },
+    final list = ref.watch(partyListControllerProvider);
+    final _searchTextEditingController = useTextEditingController();
+    _onSearch() async {
+      ref.read(partyListControllerProvider.notifier).loadData(
+            searchString: _searchTextEditingController.text,
+          );
+    }
+
+    useEffect(() {
+      _searchTextEditingController.addListener(_onSearch);
+    });
+
+    return Scaffold(
+      body: SafeArea(
+        child: Container(
+          child: Column(
+            children: [
+              TopBarWidget(
+                title: 'Party Select',
+              ),
+              //------Searching Ledger Master and filtration will be done
+              // based in input
+              Container(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: TextFormField(
+                  decoration: InputDecoration(labelText: 'Search'),
+                  controller: _searchTextEditingController,
                 ),
               ),
-            )
-          ],
+              _list(context, list),
+            ],
+          ),
         ),
+      ),
+      floatingActionButton: SentezelFloatingActionButton(
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            builder: (context) => NewPartyModal(),
+          );
+        },
       ),
     );
   }
 
-  _assetItem(BuildContext context, Asset asset) {
-    Color _color;
+  _list(BuildContext context, List<Party> list) {
+    list.sort((a, b) => a.name.compareTo(b.name));
+
+    return Expanded(
+      child: ListView.builder(
+        itemCount: list.length,
+        itemBuilder: (context, index) {
+          return _listItem(
+              context: context, item: list[index], onSelect: onSelectParty);
+        },
+      ),
+    );
+  }
+
+  _listItem(
+      {required BuildContext context,
+      required Party item,
+      required Function(Party) onSelect}) {
+    Color _color = UiConstant.color3;
+
+    if (item.id! / 2 == 0) _color = UiConstant.color1;
 
     return GestureDetector(
       onTap: () {
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => NewLedgerMasterScreen(
-        //       ledgerMaster: ledgerMaster,
-        //     ),
-        //   ),
-        // );
+        Navigator.pop(context);
+        onSelect(item);
       },
       child: Container(
         margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
@@ -113,7 +115,7 @@ class PartySelectModal extends HookConsumerWidget {
               height: MediaQuery.of(context).size.height * 0.1,
               width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
-                color: Colors.amber,
+                color: _color,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
@@ -121,7 +123,7 @@ class PartySelectModal extends HookConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  asset.getInitialLetter(),
+                  item.getInitialLetter(),
                   style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
@@ -131,7 +133,7 @@ class PartySelectModal extends HookConsumerWidget {
               ),
             ),
             Column(
-              mainAxisAlignment: asset.description != null
+              mainAxisAlignment: item.description != null
                   ? MainAxisAlignment.spaceAround
                   : MainAxisAlignment.spaceEvenly,
               children: [
@@ -139,7 +141,7 @@ class PartySelectModal extends HookConsumerWidget {
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Center(
                     child: Text(
-                      asset.name,
+                      item.name,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -152,11 +154,7 @@ class PartySelectModal extends HookConsumerWidget {
                   height: MediaQuery.of(context).size.height * 0.03,
                   child: Center(
                     child: Text(
-                      asset.description != null
-                          ? asset.description != asset.name
-                              ? asset.description
-                              : ''
-                          : '',
+                      item.description != item.name ? item.description : '',
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -169,15 +167,8 @@ class PartySelectModal extends HookConsumerWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      // Container(
-                      //   child: Text(
-                      //     toBeginningOfSentenceCase(
-                      //       EnumToString.convertToString(ledgerMaster.type),
-                      //     )!,
-                      //   ),
-                      // ),
                       Container(
-                        child: asset.status == ActiveInActive.active
+                        child: item.status == ActiveInActive.active
                             ? Text(
                                 'Active',
                                 style: TextStyle(

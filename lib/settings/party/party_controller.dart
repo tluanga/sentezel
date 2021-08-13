@@ -9,6 +9,7 @@ final partyListControllerProvider =
 
 class PartyListController extends StateNotifier<List<Party>> {
   final Reader _read;
+
   PartyListController(this._read) : super([]);
 
   loadData({String searchString = ''}) async {

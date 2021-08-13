@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/common/ui/widget/weeklyTableCalendar_widget.dart';
+import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/settings/asset/asset_model.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
-class AssetPurchaseScreen extends StatelessWidget {
+class AssetPurchaseScreen extends HookConsumerWidget {
   const AssetPurchaseScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentState = ref.watch(purchaseOfAssetControllerProvider);
+    final partyName =
+        ref.watch(purchaseOfAssetControllerProvider.notifier).getPartyName();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -51,7 +56,15 @@ class AssetPurchaseScreen extends StatelessWidget {
                                 expand: true,
                                 context: context,
                                 backgroundColor: Colors.transparent,
-                                builder: (context) => PartySelectModal(),
+                                builder: (context) => PartySelectModal(
+                                  onSelectParty: (item) {
+                                    print('Selected Item $item');
+                                    ref
+                                        .read(purchaseOfAssetControllerProvider
+                                            .notifier)
+                                        .setParty(item);
+                                  },
+                                ),
                               );
                             },
                             child: Container(
@@ -86,8 +99,9 @@ class AssetPurchaseScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Text('Ba'),
+                    Text(currentState.partyId.toString()),
                     Text(
-                      'Party: Mrs S/Singson',
+                      'Party: $partyName',
                     )
                   ],
                 ),
