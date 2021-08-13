@@ -23,5 +23,9 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
     print(state);
   }
 
+  setMode(TransactionMode mode) {
+    state = state.copyWith(mode: mode);
+  }
+
   String getPartyName() => _partyName;
 }

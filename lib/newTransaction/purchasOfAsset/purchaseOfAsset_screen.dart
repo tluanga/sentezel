@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/common/ui/widget/weeklyTableCalendar_widget.dart';
+import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/settings/asset/asset_model.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
@@ -33,78 +35,114 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      height: MediaQuery.of(context).size.height * 0.05,
+                      width: MediaQuery.of(context).size.width * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.1,
                       child: TextFormField(
                         decoration: InputDecoration(
                           labelText: 'Amount',
                         ),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        keyboardType: TextInputType.number,
                       ),
                     ),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.5,
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              showCupertinoModalBottomSheet(
-                                expand: true,
-                                context: context,
-                                backgroundColor: Colors.transparent,
-                                builder: (context) => PartySelectModal(
-                                  onSelectParty: (item) {
-                                    print('Selected Item $item');
-                                    ref
-                                        .read(purchaseOfAssetControllerProvider
-                                            .notifier)
-                                        .setParty(item);
-                                  },
-                                ),
-                              );
-                            },
-                            child: Container(
-                              width: MediaQuery.of(context).size.width * 0.2,
-                              height: MediaQuery.of(context).size.height * 0.04,
-                              decoration: BoxDecoration(
-                                color: Colors.amberAccent,
-                                borderRadius: BorderRadius.circular(5),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              convertTransactionModeToString(
+                                currentState.mode,
                               ),
-                              child: Center(
-                                child: Text('BA'),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 16,
                               ),
                             ),
-                          ),
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.2,
-                            height: MediaQuery.of(context).size.height * 0.04,
-                            decoration: BoxDecoration(
-                              color: Colors.orangeAccent,
-                              borderRadius: BorderRadius.circular(5),
+                            Icon(
+                              CupertinoIcons.arrowtriangle_down,
+                              color: Colors.black,
+                              size: 20,
                             ),
-                            child: Center(
-                              child: Text('BA LO'),
-                            ),
-                          )
-                        ],
+                          ],
+                        ),
                       ),
-                    )
+                    ),
+                    // Container(
+                    //   width: MediaQuery.of(context).size.width * 0.65,
+                    //   height: MediaQuery.of(context).size.height * 0.05,
+                    //   child: Row(
+                    //     children: [
+                    //       GestureDetector(
+                    //         onTap: () {
+                    //           showCupertinoModalBottomSheet(
+                    //             expand: true,
+                    //             context: context,
+                    //             backgroundColor: Colors.transparent,
+                    //             builder: (context) => PartySelectModal(
+                    //               onSelectParty: (item) {
+                    //                 print('Selected Item $item');
+                    //                 ref
+                    //                     .read(purchaseOfAssetControllerProvider
+                    //                         .notifier)
+                    //                     .setParty(item);
+                    //               },
+                    //             ),
+                    //           );
+                    //         },
+                    //         child: Container(
+                    //           width: MediaQuery.of(context).size.width * 0.2,
+                    //           height: MediaQuery.of(context).size.height * 0.04,
+                    //           decoration: BoxDecoration(
+                    //             color: Colors.amberAccent,
+                    //             borderRadius: BorderRadius.circular(5),
+                    //           ),
+                    //           child: Center(
+                    //             child: currentState.mode ==
+                    //                         TransactionMode.credit ||
+                    //                     currentState.mode ==
+                    //                         TransactionMode
+                    //                             .partialPaymentByBank ||
+                    //                     currentState.mode ==
+                    //                         TransactionMode.partialPaymentByCash
+                    //                 ? Text('Ba')
+                    //                 : Text('Balo'),
+                    //           ),
+                    //         ),
+                    //       ),
+                    //       SizedBox(width: 10),
+                    //       Container(
+                    //         child: Text('Party: $partyName'),
+                    //       ),
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Text('Ba'),
-                    Text(currentState.partyId.toString()),
-                    Text(
-                      'Party: $partyName',
-                    )
-                  ],
-                ),
+                // Row(
+                //   mainAxisAlignment: MainAxisAlignment.spaceAround,
+                //   children: [
+                //     Text('Ba'),
+                //     Text(
+                //       'Party: $partyName',
+                //     )
+                //   ],
+                // ),
                 Container(
                   width: MediaQuery.of(context).size.width * 0.95,
                   height: MediaQuery.of(context).size.height * 0.1,
@@ -139,15 +177,16 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                           height: MediaQuery.of(context).size.height * 0.02),
                       Expanded(
                         child: ListView.builder(
-                            itemCount: 10,
-                            itemBuilder: (context, index) {
-                              return _assetItem(
-                                  context,
-                                  Asset(
-                                      name: 'AA',
-                                      description: 'BB',
-                                      status: ActiveInActive.active));
-                            }),
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return _assetItem(
+                                context,
+                                Asset(
+                                    name: 'AA',
+                                    description: 'BB',
+                                    status: ActiveInActive.active));
+                          },
+                        ),
                       )
                     ],
                   ),
