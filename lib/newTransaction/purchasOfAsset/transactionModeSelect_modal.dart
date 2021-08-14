@@ -28,7 +28,7 @@ class TransactionModeSelectModalBottomSheet extends HookConsumerWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
                   child: Text(
                     'Select Transaction Mode ',
                     style: TextStyle(

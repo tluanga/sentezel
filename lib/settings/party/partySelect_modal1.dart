@@ -14,7 +14,7 @@
 //       child: Container(
 //         height: MediaQuery.of(context).size.height * 0.7,
 //         width: MediaQuery.of(context).size.width,
-//         color: UiConstant.background,
+//         color: Palette.background,
 //         child: Column(
 //           mainAxisAlignment: MainAxisAlignment.spaceAround,
 //           children: [
@@ -41,7 +41,7 @@
 //                     height: MediaQuery.of(context).size.height * 0.05,
 //                     width: MediaQuery.of(context).size.width * 0.3,
 //                     decoration: BoxDecoration(
-//                       color: UiConstant.color2,
+//                       color: Palette.color2,
 //                     ),
 //                     child: Text('Add New Party'),
 //                   ),

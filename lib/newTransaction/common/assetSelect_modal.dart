@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
 import 'package:sentezel/settings/asset/assetList_controller.dart';
 import 'package:sentezel/settings/asset/newAsset_modal.dart';
@@ -87,9 +87,9 @@ class AssetSelectModal extends HookConsumerWidget {
       {required BuildContext context,
       required LedgerMaster item,
       required Function(LedgerMaster) onSelect}) {
-    Color _color = UiConstant.color3;
+    Color _color = Palette.color3;
 
-    if (item.id / 2 == 0) _color = UiConstant.color1;
+    if (item.id / 2 == 0) _color = Palette.color1;
 
     return GestureDetector(
       onTap: () {

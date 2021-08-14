@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
@@ -74,9 +74,9 @@ class PartyScreen extends HookConsumerWidget {
   }
 
   _listItem(BuildContext context, LedgerMaster item) {
-    Color _color = UiConstant.color3;
+    Color _color = Palette.color3;
 
-    if (item.id / 2 == 0) _color = UiConstant.color1;
+    if (item.id / 2 == 0) _color = Palette.color1;
 
     return GestureDetector(
       onTap: () {

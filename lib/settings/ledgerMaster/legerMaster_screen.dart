@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sentezel/common/constants/ui_constant.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
@@ -71,17 +71,17 @@ class LedgerMasterScreen extends HookConsumerWidget {
 
     switch (ledgerMaster.type) {
       case LedgerMasterType.direct:
-        _color = UiConstant.color1;
+        _color = Palette.color1;
 
         break;
       case LedgerMasterType.indirect:
-        _color = UiConstant.color2;
+        _color = Palette.color2;
         break;
       case LedgerMasterType.party:
-        _color = UiConstant.color3;
+        _color = Palette.color3;
         break;
       default:
-        _color = UiConstant.color4;
+        _color = Palette.color4;
         break;
     }
     return GestureDetector(

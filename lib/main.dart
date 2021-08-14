@@ -4,7 +4,7 @@ import 'package:sentezel/analytics/analytics_screen.dart';
 
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
-import 'package:sentezel/common/constants/ui_constant.dart';
+import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/screens/controlCenter_screen.dart';
 import 'package:sentezel/home/ui/home_screen.dart';
 import 'package:sentezel/setup/intializeApp.dart';
@@ -27,7 +27,7 @@ class MyApp extends HookConsumerWidget {
       debugShowCheckedModeBanner: false,
       title: 'Sentezel',
       theme: ThemeData(
-        canvasColor: UiConstant.background,
+        canvasColor: Palette.background,
         primarySwatch: Colors.grey,
       ),
       routes: {

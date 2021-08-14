@@ -1,13 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/common/ui/widget/weeklyTableCalendar_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/common/partySelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_dialog.dart';
+import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/transactionModeSelect_modal.dart';
 
@@ -38,17 +39,16 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                     onSave: () {
                       print('save');
                       showModalBottomSheet(
-                          context: context,
-                          builder: (context) =>
-                              purchaseOfAssetConfirmDialog(context));
+                        context: context,
+                        builder: (context) =>
+                            PurchaseOfAssetConfirmationBottomSheet(
+                          onConfirm: () {},
+                          onCancel: () {},
+                        ),
+                      );
                     }),
-                WeeklyTableCalendarWidget(
-                  onDateSelect: (selectedDate) {
-                    ref
-                        .read(purchaseOfAssetControllerProvider.notifier)
-                        .setDate(selectedDate);
-                  },
-                ),
+                DateSelectTimeLineWidget(),
+
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
                 ),
@@ -97,7 +97,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                               ),
                               style: TextStyle(
                                 color: Colors.black,
-                                fontSize: 16,
+                                fontSize: 15,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -164,7 +164,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                                         : partyName,
                                     style: TextStyle(
                                       color: Colors.black,
-                                      fontSize: 16,
+                                      fontSize: 15,
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
@@ -212,7 +212,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                           assetName.isEmpty ? 'Please Select Asset' : assetName,
                           style: TextStyle(
                             color: Colors.black,
-                            fontSize: 16,
+                            fontSize: 15,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
@@ -230,7 +230,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'Description',
+                      labelText: 'particular',
                     ),
                   ),
                 ),
@@ -244,129 +244,4 @@ class AssetPurchaseScreen extends HookConsumerWidget {
       ),
     );
   }
-
-  // _assetItem(BuildContext context, LedgerMaster asset) {
-  //   Color _color;
-
-  //   return GestureDetector(
-  //     onTap: () {
-  //       // Navigator.push(
-  //       //   context,
-  //       //   MaterialPageRoute(
-  //       //     builder: (context) => NewLedgerMasterScreen(
-  //       //       ledgerMaster: ledgerMaster,
-  //       //     ),
-  //       //   ),
-  //       // );
-  //     },
-  //     child: Container(
-  //       margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
-  //       height: MediaQuery.of(context).size.height * 0.1,
-  //       width: MediaQuery.of(context).size.width * 0.9,
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //         borderRadius: BorderRadius.only(
-  //             topLeft: Radius.circular(10),
-  //             topRight: Radius.circular(10),
-  //             bottomLeft: Radius.circular(10),
-  //             bottomRight: Radius.circular(10)),
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.grey.withOpacity(0.3),
-  //             spreadRadius: 2,
-  //             blurRadius: 7,
-  //             offset: Offset(0, 3), // changes position of shadow
-  //           ),
-  //         ],
-  //       ),
-  //       child: Row(
-  //         children: [
-  //           Container(
-  //             height: MediaQuery.of(context).size.height * 0.1,
-  //             width: MediaQuery.of(context).size.width * 0.2,
-  //             decoration: BoxDecoration(
-  //               color: Colors.amber,
-  //               borderRadius: BorderRadius.only(
-  //                 topLeft: Radius.circular(10),
-  //                 bottomLeft: Radius.circular(10),
-  //               ),
-  //             ),
-  //             child: Center(
-  //               child: Text(
-  //                 asset.getInitialLetter(),
-  //                 style: TextStyle(
-  //                   fontSize: 50,
-  //                   fontWeight: FontWeight.bold,
-  //                   color: Colors.white,
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //           Column(
-  //             mainAxisAlignment: asset.description != null
-  //                 ? MainAxisAlignment.spaceAround
-  //                 : MainAxisAlignment.spaceEvenly,
-  //             children: [
-  //               Container(
-  //                 width: MediaQuery.of(context).size.width * 0.74,
-  //                 child: Center(
-  //                   child: Text(
-  //                     asset.name,
-  //                     style: TextStyle(
-  //                       fontSize: 16,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //               Container(
-  //                 width: MediaQuery.of(context).size.width * 0.74,
-  //                 height: MediaQuery.of(context).size.height * 0.03,
-  //                 child: Center(
-  //                   child: Text(
-  //                     asset.description != asset.name ? asset.description : '',
-  //                     style: TextStyle(
-  //                       fontSize: 14,
-  //                     ),
-  //                     overflow: TextOverflow.ellipsis,
-  //                   ),
-  //                 ),
-  //               ),
-  //               Container(
-  //                 width: MediaQuery.of(context).size.width * 0.74,
-  //                 child: Row(
-  //                   mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //                   children: [
-  //                     // Container(
-  //                     //   child: Text(
-  //                     //     toBeginningOfSentenceCase(
-  //                     //       EnumToString.convertToString(ledgerMaster.type),
-  //                     //     )!,
-  //                     //   ),
-  //                     // ),
-  //                     Container(
-  //                       child: asset.status == ActiveInActive.active
-  //                           ? Text(
-  //                               'Active',
-  //                               style: TextStyle(
-  //                                 color: Colors.green,
-  //                               ),
-  //                             )
-  //                           : Text(
-  //                               'In-Active',
-  //                               style: TextStyle(
-  //                                 color: Colors.red,
-  //                               ),
-  //                             ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
 }

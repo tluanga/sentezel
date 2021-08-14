@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
-import 'package:sentezel/common/constants/ui_constant.dart';
+import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 
 class BooksScreen extends StatelessWidget {
@@ -13,7 +13,7 @@ class BooksScreen extends StatelessWidget {
       child: SafeArea(
         child: Container(
           height: MediaQuery.of(context).size.height * 0.7,
-          color: UiConstant.background,
+          color: Palette.background,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [

@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 
 final purchaseOfAssetControllerProvider =
@@ -44,5 +45,9 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
 
   setMode(TransactionMode mode) {
     state = state.copyWith(mode: mode);
+  }
+
+  setParticular(String particular) {
+    state = state.copyWith(particular: particular);
   }
 }
