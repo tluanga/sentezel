@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sentezel/books/journal/journalReport_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
@@ -27,8 +28,12 @@ class BooksScreen extends StatelessWidget {
                       label: 'Journal',
                       icon: CupertinoIcons.grid,
                       onTap: () {
-                        Navigator.pushReplacementNamed(
-                            context, RouteConstant.books);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => JournalReportScreen(),
+                          ),
+                        );
                       },
                     ),
                   ),

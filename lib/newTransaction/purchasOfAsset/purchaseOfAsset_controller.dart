@@ -4,6 +4,7 @@ import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
+import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
 
 final purchaseOfAssetControllerProvider =
     StateNotifierProvider<PurchaseOfAssetController, Transaction>(
@@ -41,6 +42,7 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
           particular: '',
           mode: TransactionMode.paymentByCash,
           creditSideLedgerId: LedgerMasterIndex.Cash,
+          transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
           date: DateTime.now(),
         ));
 
@@ -85,6 +87,7 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
       amount: 0,
       particular: '',
       mode: TransactionMode.paymentByCash,
+      transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
       date: DateTime.now(),
     );
     _partyName = '';

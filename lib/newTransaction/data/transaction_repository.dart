@@ -55,6 +55,11 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     if (endDate == null) endDate = DateTime.now();
     DateTime paramStartDate =
         DateTime(startDate.year, startDate.month, startDate.day);
+    print('StartDate $startDate');
+
+    print('param startDate ${paramStartDate.microsecondsSinceEpoch}');
+
+    print('Param StartDate $paramStartDate');
 
     DateTime paramEndDate =
         DateTime(endDate.year, endDate.month, endDate.day, 23, 59);
@@ -63,15 +68,18 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       Database db = await DatabaseService.instance.db;
       final result = await db.rawQuery('''
       Select * from $dbName
-      WHERE name LIKE '$searchString%'
-      AND date >=${paramStartDate.microsecondsSinceEpoch}'
-      AND date <=${paramEndDate.microsecondsSinceEpoch}
+      WHERE particular LIKE '$searchString%'
+      AND date>=${paramStartDate.microsecondsSinceEpoch}
+      AND date <=${paramEndDate.microsecondsSinceEpoch}     
       ''');
       List<trans.Transaction> list = [];
+      print('length of result is ${result.length}');
       result.forEach((item) {
         list.add(trans.Transaction.fromMap(item));
         print('name');
         print(item['name']);
+
+        print(item['date']);
       });
 
       return list;

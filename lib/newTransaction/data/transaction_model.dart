@@ -9,12 +9,18 @@ class Transaction {
   String particular;
   TransactionMode mode; //user input--can be credit or Cashdown
   DateTime date; //user input
+
   int? partyId; //user purchase is made by BA
   int? assetLedgerId; //if the purchase is of asset//user input
-  int? transactionTypeId = 0;
+  int transactionTypeId;
   int? debitSideLedgerId; //computed-
   int? creditSideLedgerId;
   int? creditPartialPaymentAmount;
+
+  String getInitialLetter() {
+    return this.particular[0].toUpperCase();
+  }
+
   Transaction({
     this.id,
     required this.amount,
@@ -23,7 +29,7 @@ class Transaction {
     required this.mode,
     this.partyId,
     this.assetLedgerId,
-    this.transactionTypeId,
+    required this.transactionTypeId,
     this.debitSideLedgerId,
     this.creditSideLedgerId,
     this.creditPartialPaymentAmount,
@@ -63,7 +69,7 @@ class Transaction {
       'id': id,
       'amount': amount,
       'particular': particular,
-      'date': date.millisecondsSinceEpoch,
+      'date': date.microsecondsSinceEpoch,
       'mode': EnumToString.convertToString(mode),
       'partyId': partyId,
       'assetLedgerId': assetLedgerId,
@@ -103,7 +109,7 @@ class Transaction {
       amount: map['amount'],
       particular: map['particular'],
       mode: _mode,
-      date: DateTime.fromMillisecondsSinceEpoch(map['date']),
+      date: DateTime.fromMicrosecondsSinceEpoch(map['date']),
       partyId: map['partyId'],
       assetLedgerId: map['assetLedgerId'],
       transactionTypeId: map['transactionTypeId'],
