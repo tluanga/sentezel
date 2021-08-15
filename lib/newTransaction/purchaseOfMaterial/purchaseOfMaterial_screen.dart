@@ -15,6 +15,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
             TopBarWithSaveWidget(
               title: 'Purchase of Material',
               onSave: () {},
+              onCancel: () {},
             ),
             WeeklyTableCalendarWidget(
               onDateSelect: (selectedDate) {},

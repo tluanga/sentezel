@@ -5,10 +5,12 @@ import 'package:sentezel/common/ui/widget/settingsEllipse_widget.dart';
 class TopBarWithSaveWidget extends StatelessWidget {
   final String title;
   final Function onSave;
+  final Function onCancel;
   const TopBarWithSaveWidget({
     Key? key,
     required this.title,
     required this.onSave,
+    required this.onCancel,
   }) : super(key: key);
 
   @override
@@ -37,9 +39,7 @@ class TopBarWithSaveWidget extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    onSave();
-                  },
+                  onTap: onSave(),
                   child: Padding(
                     padding: const EdgeInsets.only(),
                     child: Icon(
@@ -51,8 +51,8 @@ class TopBarWithSaveWidget extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
+                    onCancel();
                     Navigator.pop(context);
-                    // Navigator.pushReplacementNamed(context, RouteConstant.home);
                   },
                   child: Icon(
                     CupertinoIcons.xmark_circle,

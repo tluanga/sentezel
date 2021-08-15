@@ -32,6 +32,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
             children: [
               TopBarWithSaveWidget(
                 title: 'New Ledger Master',
+                onCancel: () {},
                 onSave: () {
                   print('value of name is');
                   if (ledgerMaster != null)

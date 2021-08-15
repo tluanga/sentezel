@@ -16,7 +16,11 @@ class BusinessProfileSceen extends HookWidget {
         child: Container(
           child: Column(
             children: [
-              TopBarWithSaveWidget(title: 'Business Profile', onSave: () {}),
+              TopBarWithSaveWidget(
+                title: 'Business Profile',
+                onSave: () {},
+                onCancel: () {},
+              ),
               TextFormField(
                 decoration: InputDecoration(
                   labelText: 'Business Name',

@@ -46,6 +46,10 @@ class AssetPurchaseScreen extends HookConsumerWidget {
       );
     }
 
+    onCancel() {
+      ref.read(purchaseOfAssetControllerProvider.notifier).reset();
+    }
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -58,11 +62,10 @@ class AssetPurchaseScreen extends HookConsumerWidget {
             child: Column(
               children: [
                 TopBarWithSaveWidget(
-                    title: 'New Asset Purchase',
-                    onSave: () {
-                      print('save');
-                      onSubmit();
-                    }),
+                  title: 'New Asset Purchase',
+                  onSave: onSubmit,
+                  onCancel: onCancel,
+                ),
                 DateSelectTimeLineWidget(
                   initialDate: currentState.date,
                   onDateSelected: (selectedDate) {

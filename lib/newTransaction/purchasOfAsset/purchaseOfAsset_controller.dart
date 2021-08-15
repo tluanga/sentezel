@@ -54,4 +54,13 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
   setState(Transaction transaction) {
     state = transaction;
   }
+
+  reset() {
+    state = new Transaction(
+      amount: 0,
+      particular: '',
+      mode: TransactionMode.paymentByCash,
+      date: DateTime.now(),
+    );
+  }
 }
