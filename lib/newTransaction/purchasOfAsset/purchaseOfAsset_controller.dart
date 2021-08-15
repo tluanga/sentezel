@@ -50,4 +50,8 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
   setParticular(String particular) {
     state = state.copyWith(particular: particular);
   }
+
+  setState(Transaction transaction) {
+    state = transaction;
+  }
 }

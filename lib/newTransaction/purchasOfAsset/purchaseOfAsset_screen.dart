@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
@@ -7,7 +8,6 @@ import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/common/partySelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_dialog.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/transactionModeSelect_modal.dart';
@@ -22,7 +22,19 @@ class AssetPurchaseScreen extends HookConsumerWidget {
         ref.watch(purchaseOfAssetControllerProvider.notifier).getPartyName();
     final assetName =
         ref.watch(purchaseOfAssetControllerProvider.notifier).getAssetName();
+
+    final amountTextEditingController = useTextEditingController();
+
     final partialAmountController = TextEditingController();
+
+    onSubmit() {
+      ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
+            currentState.copyWith(
+              amount: int.parse(amountTextEditingController.text),
+            ),
+          );
+    }
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -38,6 +50,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                     title: 'New Asset Purchase',
                     onSave: () {
                       print('save');
+                      onSubmit();
                       showModalBottomSheet(
                         context: context,
                         builder: (context) =>
@@ -47,7 +60,18 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                         ),
                       );
                     }),
-                DateSelectTimeLineWidget(),
+                DateSelectTimeLineWidget(
+                  initialDate: currentState.date,
+                  onDateSelected: (selectedDate) {
+                    ref
+                        .watch(purchaseOfAssetControllerProvider.notifier)
+                        .setState(
+                          currentState.copyWith(
+                            date: selectedDate,
+                          ),
+                        );
+                  },
+                ),
 
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.01,
@@ -60,6 +84,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                       width: MediaQuery.of(context).size.width * 0.38,
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: TextFormField(
+                        controller: amountTextEditingController,
                         decoration: InputDecoration(
                           labelText: 'Amount',
                         ),
