@@ -45,21 +45,26 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Comment :',
-                    style: TextStyle(
-                      color: Palette.blackGrey,
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    currentState.particular,
-                    style: TextStyle(
-                      color: Palette.blackGrey,
-                      fontSize: 16,
-                    ),
+                  Row(
+                    children: [
+                      Text(
+                        'Comment :',
+                        style: TextStyle(
+                          color: Palette.blackGrey,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        currentState.particular,
+                        style: TextStyle(
+                          color: Palette.blackGrey,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
                   Padding(
                     padding: const EdgeInsets.all(8.0),

@@ -26,13 +26,24 @@ class AssetPurchaseScreen extends HookConsumerWidget {
     final amountTextEditingController = useTextEditingController();
 
     final partialAmountController = TextEditingController();
+    final particularTextEditingController = TextEditingController();
 
     onSubmit() {
+      if (amountTextEditingController.text.isEmpty) return;
+
       ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
             currentState.copyWith(
               amount: int.parse(amountTextEditingController.text),
+              particular: particularTextEditingController.text,
             ),
           );
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => PurchaseOfAssetConfirmationBottomSheet(
+          onConfirm: () {},
+          onCancel: () {},
+        ),
+      );
     }
 
     return Scaffold(
@@ -51,14 +62,6 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                     onSave: () {
                       print('save');
                       onSubmit();
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (context) =>
-                            PurchaseOfAssetConfirmationBottomSheet(
-                          onConfirm: () {},
-                          onCancel: () {},
-                        ),
-                      );
                     }),
                 DateSelectTimeLineWidget(
                   initialDate: currentState.date,
@@ -254,6 +257,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                   width: MediaQuery.of(context).size.width * 0.95,
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: TextFormField(
+                    controller: particularTextEditingController,
                     decoration: InputDecoration(
                       labelText: 'particular',
                     ),
