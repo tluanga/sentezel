@@ -1,27 +1,27 @@
-import 'package:riverpod/riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
+import 'package:sentezel/newTransaction/common/transaction_config.dart';
+import 'package:sentezel/newTransaction/data/transaction_model.dart' as trans;
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_config.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
-final ledgerMasterRepositoryProvider = Provider<LedgerMasterRepository>(
-  (ref) => LedgerMasterRepository(ref.read),
+final transactionRepositoryProvider = Provider<TransactionRepository>(
+  (ref) => TransactionRepository(ref.read),
 );
 
-class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
-  // ignore: unused_field
+class TransactionRepository extends BaseRepository<trans.Transaction> {
+  final String dbName = TransactionConfig.dbName;
   final Reader _read;
-  final String dbName = LedgerMasterConfig.ledgerMasterTable;
 
-  LedgerMasterRepository(this._read) : super();
+  TransactionRepository(this._read);
 
   @override
-  void add({required LedgerMaster payload}) async {
+  void add({required trans.Transaction payload}) async {
     Database db = await DatabaseService.instance.db;
     try {
       var b = await db.insert(dbName, payload.toMap());
+      print('the value return is $b');
     } catch (e) {
       print(e);
     }
@@ -34,7 +34,7 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
     try {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
       if (result.length != 0) {
-        return LedgerMaster.fromMap(result.first);
+        return trans.Transaction.fromMap(result.first);
       } else
         return null;
     } catch (e) {
@@ -44,24 +44,32 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
 
   //-------Get All item--
   @override
-  Future<List<LedgerMaster>> getList({
+  Future<List<trans.Transaction>> getList({
     String searchString = '',
     LedgerMasterType? type,
     DateTime? startDate,
     DateTime? endDate,
   }) async {
-    try {
-      String _type = getLedgerMasterTypeEnumInString(type!);
-      Database db = await DatabaseService.instance.db;
+    //if no date is supplied it will return current date transactions
+    if (startDate == null) startDate = DateTime.now();
+    if (endDate == null) endDate = DateTime.now();
+    DateTime paramStartDate =
+        DateTime(startDate.year, startDate.month, startDate.day);
 
+    DateTime paramEndDate =
+        DateTime(endDate.year, endDate.month, endDate.day, 23, 59);
+
+    try {
+      Database db = await DatabaseService.instance.db;
       final result = await db.rawQuery('''
       Select * from $dbName
       WHERE name LIKE '$searchString%'
-      AND type Like '$_type'
+      AND date >=${paramStartDate.microsecondsSinceEpoch}'
+      AND date <=${paramEndDate.microsecondsSinceEpoch}
       ''');
-      List<LedgerMaster> list = [];
+      List<trans.Transaction> list = [];
       result.forEach((item) {
-        list.add(LedgerMaster.fromMap(item));
+        list.add(trans.Transaction.fromMap(item));
         print('name');
         print(item['name']);
       });

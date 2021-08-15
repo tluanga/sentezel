@@ -1,6 +1,7 @@
 abstract class BaseRepository<T> {
   //Get List-- Getting all the items in the list
-  Future<List<T>> getList({String searchString});
+  Future<List<T>> getList(
+      {String searchString = '', DateTime startDate, DateTime endDate});
 
   //-----For Getting Single Item, id will be provided
   Future<T?> getItem({required int id});

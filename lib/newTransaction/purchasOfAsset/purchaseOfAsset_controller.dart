@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
+import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 
@@ -25,7 +26,6 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
     _assetName = asset.name;
     state = state.copyWith(
       assetLedgerId: asset.id,
-      debitSideLedgerId: asset.id,
     );
     print(state);
   }
@@ -40,19 +40,44 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
           amount: 0,
           particular: '',
           mode: TransactionMode.paymentByCash,
+          creditSideLedgerId: LedgerMasterIndex.Cash,
           date: DateTime.now(),
         ));
 
   setMode(TransactionMode mode) {
-    state = state.copyWith(mode: mode);
+    if (mode == TransactionMode.paymentByCash ||
+        mode == TransactionMode.partialPaymentByCash)
+      state = state.copyWith(
+          mode: mode, creditSideLedgerId: LedgerMasterIndex.Cash);
+
+    if (mode == TransactionMode.partialPaymentByBank ||
+        mode == TransactionMode.partialPaymentByBank)
+      state = state.copyWith(
+          mode: mode, creditSideLedgerId: LedgerMasterIndex.Bank);
   }
 
   setParticular(String particular) {
     state = state.copyWith(particular: particular);
   }
 
+  setup() {
+    switch (state.mode) {
+      case TransactionMode.credit:
+        break;
+      default:
+    }
+  }
+
   setState(Transaction transaction) {
     state = transaction;
+  }
+
+  submit() async {
+    try {
+      _read(transactionRepositoryProvider).add(payload: state);
+    } catch (e) {
+      print(e);
+    }
   }
 
   reset() {
@@ -62,5 +87,7 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
       mode: TransactionMode.paymentByCash,
       date: DateTime.now(),
     );
+    _partyName = '';
+    _assetName = '';
   }
 }

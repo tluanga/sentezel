@@ -22,48 +22,54 @@ class TopBarWithSaveWidget extends StatelessWidget {
         left: 2,
         right: 2,
       ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          SettingsEllipseWidget(),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+      child: SizedBox(
+        height: MediaQuery.of(context).size.height * 0.05,
+        width: MediaQuery.of(context).size.width,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            SettingsEllipseWidget(),
+            Text(
+              title,
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.25,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: onSave(),
-                  child: Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Icon(
-                      CupertinoIcons.checkmark_circle,
-                      size: 45,
-                      color: Colors.green.shade400,
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.25,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  GestureDetector(
+                    onTap: () {
+                      onSave();
+                    },
+                    child: Padding(
+                      padding: const EdgeInsets.only(),
+                      child: Icon(
+                        CupertinoIcons.checkmark_circle,
+                        size: 45,
+                        color: Colors.green.shade400,
+                      ),
                     ),
                   ),
-                ),
-                GestureDetector(
-                  onTap: () {
-                    onCancel();
-                    Navigator.pop(context);
-                  },
-                  child: Icon(
-                    CupertinoIcons.xmark_circle,
-                    size: 45,
-                    color: Colors.red.shade400,
+                  GestureDetector(
+                    onTap: () {
+                      onCancel();
+                      Navigator.pop(context);
+                    },
+                    child: Icon(
+                      CupertinoIcons.xmark_circle,
+                      size: 45,
+                      color: Colors.red.shade400,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

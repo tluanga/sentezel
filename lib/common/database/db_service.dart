@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:sentezel/newTransaction/data/transaction_db.dart';
 import 'package:sentezel/settings/ledgerMaster/data/injectLedgerMaster_data.dart';
 import 'package:sentezel/settings/party/data/party_db.dart';
 
@@ -92,6 +93,7 @@ class DatabaseService {
 
     injectLedgerMaster(db);
     PartyDb.execute(db);
+    TransactionDb.execute(db);
     print('completed');
   }
 }

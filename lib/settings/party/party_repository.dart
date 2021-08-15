@@ -41,7 +41,10 @@ class PartyRepository implements BaseRepository<Party> {
 
   //-------Get All item--
   @override
-  Future<List<Party>> getList({String searchString = ''}) async {
+  Future<List<Party>> getList(
+      {String searchString = '',
+      DateTime? startDate,
+      DateTime? endDate}) async {
     try {
       Database db = await DatabaseService.instance.db;
       // final result = await db.query(PartyConfig.partyTable,

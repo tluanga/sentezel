@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
@@ -23,28 +22,9 @@ class AssetPurchaseScreen extends HookConsumerWidget {
     final assetName =
         ref.watch(purchaseOfAssetControllerProvider.notifier).getAssetName();
 
-    final amountTextEditingController = useTextEditingController();
-
-    final partialAmountController = TextEditingController();
-    final particularTextEditingController = TextEditingController();
-
-    onSubmit() {
-      if (amountTextEditingController.text.isEmpty) return;
-
-      ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
-            currentState.copyWith(
-              amount: int.parse(amountTextEditingController.text),
-              particular: particularTextEditingController.text,
-            ),
-          );
-      showModalBottomSheet(
-        context: context,
-        builder: (context) => PurchaseOfAssetConfirmationBottomSheet(
-          onConfirm: () {},
-          onCancel: () {},
-        ),
-      );
-    }
+    final partialAmountController = TextEditingController(
+      text: '122',
+    );
 
     onCancel() {
       ref.read(purchaseOfAssetControllerProvider.notifier).reset();
@@ -63,7 +43,9 @@ class AssetPurchaseScreen extends HookConsumerWidget {
               children: [
                 TopBarWithSaveWidget(
                   title: 'New Asset Purchase',
-                  onSave: onSubmit,
+                  onSave: () {
+                    onSubmit(ref, context);
+                  },
                   onCancel: onCancel,
                 ),
                 DateSelectTimeLineWidget(
@@ -90,7 +72,16 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                       width: MediaQuery.of(context).size.width * 0.38,
                       height: MediaQuery.of(context).size.height * 0.1,
                       child: TextFormField(
-                        controller: amountTextEditingController,
+                        //
+                        onChanged: (value) {
+                          ref
+                              .watch(purchaseOfAssetControllerProvider.notifier)
+                              .setState(
+                                currentState.copyWith(
+                                  amount: int.parse(value),
+                                ),
+                              );
+                        },
                         decoration: InputDecoration(
                           labelText: 'Amount',
                         ),
@@ -260,7 +251,10 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                   width: MediaQuery.of(context).size.width * 0.95,
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: TextFormField(
-                    controller: particularTextEditingController,
+                    onChanged: (value) {
+                      ref.read(purchaseOfAssetControllerProvider).particular =
+                          value;
+                    },
                     decoration: InputDecoration(
                       labelText: 'particular',
                     ),
@@ -273,6 +267,18 @@ class AssetPurchaseScreen extends HookConsumerWidget {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  onSubmit(WidgetRef ref, context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => PurchaseOfAssetConfirmationBottomSheet(
+        onConfirm: () {
+          ref.watch(purchaseOfAssetControllerProvider.notifier).submit();
+        },
+        onCancel: () {},
       ),
     );
   }
