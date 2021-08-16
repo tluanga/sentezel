@@ -33,9 +33,10 @@ class PartyRepository implements BaseRepository<Party> {
       if (result.length != 0) {
         return Party.fromMap(result.first);
       } else
-        return null;
+        throw ('Error');
     } catch (e) {
       print(e);
+      throw (e);
     }
   }
 

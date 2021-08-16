@@ -36,9 +36,10 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       if (result.length != 0) {
         return trans.Transaction.fromMap(result.first);
       } else
-        return null;
+        throw ('Error');
     } catch (e) {
       print(e);
+      throw (e);
     }
   }
 

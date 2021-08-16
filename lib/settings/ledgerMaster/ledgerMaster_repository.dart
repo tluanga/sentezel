@@ -1,3 +1,4 @@
+import 'package:flutter_test/flutter_test.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
@@ -35,10 +36,10 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
       if (result.length != 0) {
         return LedgerMaster.fromMap(result.first);
-      } else
-        return null;
+      }
+      throw ('Something went wrong!');
     } catch (e) {
-      print(e);
+      throw (e);
     }
   }
 

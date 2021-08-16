@@ -5,7 +5,15 @@ import 'package:sentezel/newTransaction/common/transaction_config.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
-class TransactionTypeRepository extends BaseRepository<TransactionType> {
+final transactionTypeRepositoryProvider =
+    Provider((ref) => TransactionTypeRepository(ref.read));
+
+class TransactionTypeRepository implements BaseRepository<TransactionType> {
+  final String dbName = TransactionConfig.dbName;
+  final Reader _read;
+
+  const TransactionTypeRepository(this._read);
+
   @override
   void add({required payload}) {
     // TODO: implement add
@@ -13,9 +21,6 @@ class TransactionTypeRepository extends BaseRepository<TransactionType> {
 
   @override
   Future<TransactionType> getItem({required int id}) async {
-    final String dbName = TransactionConfig.dbName;
-    final Reader _read;
-
     try {
       Database db = await DatabaseService.instance.db;
       try {
