@@ -25,7 +25,7 @@ class PartyRepository implements BaseRepository<Party> {
 
   ///----Get Single Item
   @override
-  Future<Party?> getItem({required int id}) async {
+  Future<Party> getItem({required int id}) async {
     Database db = await DatabaseService.instance.db;
     try {
       final result = await db
