@@ -49,7 +49,7 @@ class JournalReportScreen extends HookConsumerWidget {
   }
 
   _list(BuildContext context, List<Journal> list) {
-    print(list);
+    print(list.first.particular);
     list.sort((a, b) => a.date.compareTo(b.date));
 
     return Expanded(
@@ -77,6 +77,7 @@ class JournalReportScreen extends HookConsumerWidget {
           context: context,
           builder: (context) => JournalDetailModalBottomSheet(
             data: item,
+            
           ),
         );
       },

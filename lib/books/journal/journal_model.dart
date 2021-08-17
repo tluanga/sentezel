@@ -3,8 +3,8 @@ class Journal {
   int amount;
   DateTime date;
   String transactionType;
-  String creditSideLedgerName;
-  String debitSideLedgerName;
+  String? creditSideLedgerName;
+  String? debitSideLedgerName;
   String? partyLedgerName;
   String? assetLedgerName;
   String mode;
@@ -13,8 +13,8 @@ class Journal {
     required this.amount,
     required this.date,
     required this.transactionType,
-    required this.creditSideLedgerName,
-    required this.debitSideLedgerName,
+    this.creditSideLedgerName,
+    this.debitSideLedgerName,
     this.partyLedgerName,
     this.assetLedgerName,
     required this.mode,

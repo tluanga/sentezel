@@ -17,7 +17,9 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
           children: [
             TopBarForBottomSheetWidget(
               label: 'Journal',
-              onExit: () {},
+              onExit: () {
+                Navigator.pop(context);
+              },
             ),
             Container(
               width: MediaQuery.of(context).size.width,
@@ -35,35 +37,69 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
             SizedBox(
               height: 10,
             ),
-            Container(
-              child: Column(
-                children: [
-                  _field(
-                    context: context,
-                    label: 'Particular',
-                    value: data.particular,
-                  ),
-                  _field(
-                    context: context,
-                    label: 'Date',
-                    value: DateFormat('dd-MM-yyyy hh:mm a').format(data.date),
-                  ),
-                  _field(
-                    context: context,
-                    label: 'Amount',
-                    value: data.amount.toString(),
-                  ),
-                  _field(
-                    context: context,
-                    label: 'Transaction Type',
-                    value: data.transactionType,
-                  ),
-                  _field(
-                    context: context,
-                    label: 'Mode',
-                    value: data.mode,
-                  ),
-                ],
+            Padding(
+              padding: const EdgeInsets.only(
+                left: 10,
+                right: 10,
+              ),
+              child: Container(
+                child: Column(
+                  children: [
+                    _field(
+                      context: context,
+                      label: 'Particular',
+                      value: data.particular,
+                    ),
+                    _field(
+                      context: context,
+                      label: 'Date',
+                      value: DateFormat('dd-MM-yyyy hh:mm a').format(data.date),
+                    ),
+                    _field(
+                      context: context,
+                      label: 'Amount',
+                      value: data.amount.toString(),
+                    ),
+                    _field(
+                      context: context,
+                      label: 'Transaction Type',
+                      value: data.transactionType,
+                    ),
+                    _field(
+                      context: context,
+                      label: 'Mode',
+                      value: data.mode,
+                    ),
+                    data.partyLedgerName!.isNotEmpty
+                        ? _field(
+                            context: context,
+                            label: 'Party',
+                            value: data.partyLedgerName!,
+                          )
+                        : Container(),
+                    data.assetLedgerName!.isNotEmpty
+                        ? _field(
+                            context: context,
+                            label: 'Asset',
+                            value: data.assetLedgerName!,
+                          )
+                        : Container(),
+                    data.creditSideLedgerName!.isNotEmpty
+                        ? _field(
+                            context: context,
+                            label: 'Credit Side',
+                            value: data.creditSideLedgerName!,
+                          )
+                        : Container(),
+                    data.debitSideLedgerName!.isNotEmpty
+                        ? _field(
+                            context: context,
+                            label: 'Debit Side',
+                            value: data.debitSideLedgerName!,
+                          )
+                        : Container()
+                  ],
+                ),
               ),
             )
           ],
@@ -80,7 +116,7 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
       child: Row(
         children: [
           Container(
-            width: MediaQuery.of(context).size.width * 0.3,
+            width: MediaQuery.of(context).size.width * 0.25,
             height: MediaQuery.of(context).size.height * 0.05,
             child: Text(
               label,

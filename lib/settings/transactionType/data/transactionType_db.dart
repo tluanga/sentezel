@@ -4,10 +4,13 @@ import 'package:sqflite_common/sqlite_api.dart';
 
 import '../transactionType_config.dart';
 
-void TransactionTypeDb(Database db) async {
-  await db.execute('''
+class TransactionTypeDb {}
+
+void injectTransactionType(Database db) async {
+  await db.execute(
+    '''
     CREATE TABLE
-      ${TransactionTypeConfig.dbName},
+      ${TransactionTypeConfig.dbName}(
        id INTEGER PRIMARY KEY AUTOINCREMENT,
        name TEXT,      
        description TEXT,
@@ -15,7 +18,8 @@ void TransactionTypeDb(Database db) async {
        debitSideLedger INT,
        creditSideLedger INT,
        status TEXT
-  ''');
+  )''',
+  );
   //--Injecting Data---
   transactionTypeData.asMap().forEach((key, value) async {
     final mapData = TransactionType.withId(

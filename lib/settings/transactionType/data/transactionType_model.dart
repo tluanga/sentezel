@@ -41,7 +41,7 @@ class TransactionType {
     map['sumChetVelDanType'] = EnumToString.convertToString(sumChetVelDanType);
     map['debitSideLedger'] = debitSideLedger;
     map['creditSideLedger'] = creditSideLedger;
-    map['active'] = EnumToString.convertToString(status);
+    map['status'] = EnumToString.convertToString(status);
 
     return map;
   }
