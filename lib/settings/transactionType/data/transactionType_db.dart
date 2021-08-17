@@ -17,7 +17,7 @@ void TransactionTypeDb(Database db) async {
        status TEXT
   ''');
   //--Injecting Data---
-  transactionTypeData.asMap().forEach((key, value) {
+  transactionTypeData.asMap().forEach((key, value) async {
     final mapData = TransactionType.withId(
       id: value.id,
       name: value.name,
@@ -27,6 +27,11 @@ void TransactionTypeDb(Database db) async {
       creditSideLedger: value.creditSideLedger,
       status: value.status,
     ).toMap();
+    print('--The value of json is--');
+    await db.insert(
+      TransactionTypeConfig.dbName,
+      mapData,
+    );
   });
 }
 

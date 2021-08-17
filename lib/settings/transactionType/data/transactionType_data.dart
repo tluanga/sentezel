@@ -3,7 +3,7 @@ import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 
-List<TransactionType> newList = [
+List<TransactionType> transactionTypeData = [
   TransactionType.withId(
     id: TransactionTypeIndex.PurchaseOfRawMaterial,
     name: 'Purchase of Material',

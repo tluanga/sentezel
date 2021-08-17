@@ -98,7 +98,7 @@ class TransactionType {
         _status = ActiveInActive.inActive;
     }
 
-    return TransactionType.widthId(
+    return TransactionType.withId(
       id: map['id'],
       name: map['name'],
       description: map['description'],
