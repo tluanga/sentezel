@@ -2,17 +2,19 @@ import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
+import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 
-const transactionTypeData = [
-  {
-    'id': TransactionTypeIndex.PurchaseOfRawMaterial,
-    'name': 'Purchase of Material',
-    'description': 'Purchase of Material for Resell or for Production',
-    'sumChetVelDanType': SumChetvelDanType.lei,
-    'debitSideLedger': LedgerMasterIndex.Purchase,
-    'creditSideLedger': LedgerMasterIndex.Cash,
-    'active': ActiveInActive.active,
-  },
+
+List<TransactionType> newList=[
+  TransactionType.withId(id:TransactionTypeIndex.PurchaseOfRawMaterial, name: 'Purchase of Material',
+   description: 'Purchase of Material for Resell or for Production',
+    sumChetVelDanType: SumChetvelDanType.lei, debitSideLedger: LedgerMasterIndex.Purchase, creditSideLedger: LedgerMasterIndex.Cash),
+
+];
+
+
+
+
   {
     'id': TransactionTypeIndex.PurchaseOfAssets,
     'name': 'Purchase of Assets',

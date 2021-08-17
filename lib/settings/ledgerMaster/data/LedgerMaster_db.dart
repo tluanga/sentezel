@@ -16,7 +16,7 @@ void injectLedgerMaster(Database db) async {
             status TEXT
              )''',
   );
-  print('Inject Transaction Type');
+  print('Inject LedgerMaster Type');
   ledgerMasterData.asMap().forEach(
     (key, value) async {
       print('status is ${value.status}');

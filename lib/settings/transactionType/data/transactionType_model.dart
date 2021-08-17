@@ -20,7 +20,7 @@ class TransactionType {
     required this.debitSideLedger,
     required this.creditSideLedger,
   });
-  TransactionType.widthId({
+  TransactionType.withId({
     required this.id,
     required this.name,
     required this.description,
