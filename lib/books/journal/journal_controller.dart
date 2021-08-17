@@ -7,16 +7,16 @@ import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
 
 final journalControllerProvider =
-    StateNotifierProvider<JournalController, List<Journal>>(
+    StateNotifierProvider<JournalController, AsyncValue<List<Journal>>>(
         (ref) => JournalController(ref.read)..loadData());
 
-class JournalController extends StateNotifier<List<Journal>> {
+class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
   Reader _read;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
   String transactionTypeName = '';
   //-----------Get Transcation List-----
-  JournalController(this._read) : super([]);
+  JournalController(this._read) : super(AsyncValue.loading());
 
   loadData() async {
     try {
@@ -24,6 +24,7 @@ class JournalController extends StateNotifier<List<Journal>> {
         startDate: startDate,
         endDate: endDate,
       );
+
       List<Journal> result = [];
       if (data.isNotEmpty) {
         data.forEach((element) async {
@@ -53,8 +54,9 @@ class JournalController extends StateNotifier<List<Journal>> {
             mode: mode,
           ));
         });
+        state = AsyncValue.data(result);
       }
-      state = result;
+
       print(state);
     } catch (e) {
       print(e);

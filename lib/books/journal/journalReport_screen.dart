@@ -13,18 +13,34 @@ class JournalReportScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(journalControllerProvider);
-    return Material(
-      child: SafeArea(
-          child: Container(
-        child: Column(
-          children: [
-            TopBarWidget(title: 'Journal Dashboard'),
-            // PeriodSelectionBarWidget(),
-            _list(context, list),
-          ],
+    return list.when(data: (data) {
+      return Material(
+        child: SafeArea(
+            child: Container(
+          child: Column(
+            children: [
+              TopBarWidget(title: 'Journal Dashboard'),
+              // PeriodSelectionBarWidget(),
+              _list(context, data),
+            ],
+          ),
+        )),
+      );
+    }, loading: () {
+      return Material(
+        child: Center(
+          child: CircularProgressIndicator(),
         ),
-      )),
-    );
+      );
+    }, error: (error, stack) {
+      return Material(
+        child: Center(
+          child: Text(
+            error.toString(),
+          ),
+        ),
+      );
+    });
   }
 
   _list(BuildContext context, List<Journal> list) {
