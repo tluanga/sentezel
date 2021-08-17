@@ -48,14 +48,17 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
 
   setMode(TransactionMode mode) {
     if (mode == TransactionMode.paymentByCash ||
-        mode == TransactionMode.partialPaymentByCash)
+        mode == TransactionMode.partialPaymentByCash) {
       state = state.copyWith(
           mode: mode, creditSideLedgerId: LedgerMasterIndex.Cash);
+    }
 
     if (mode == TransactionMode.partialPaymentByBank ||
         mode == TransactionMode.partialPaymentByBank)
       state = state.copyWith(
           mode: mode, creditSideLedgerId: LedgerMasterIndex.Bank);
+
+    state = state.copyWith(mode: mode);
   }
 
   setParticular(String particular) {

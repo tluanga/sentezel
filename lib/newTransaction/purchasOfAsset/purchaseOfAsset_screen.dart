@@ -5,7 +5,7 @@ import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
-import 'package:sentezel/newTransaction/common/partySelect_modal.dart';
+import 'package:sentezel/newTransaction/common/apartySelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';

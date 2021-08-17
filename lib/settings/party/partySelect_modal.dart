@@ -49,7 +49,12 @@ class PartySelectModal extends HookConsumerWidget {
                   controller: _searchTextEditingController,
                 ),
               ),
-              _list(context, list),
+              list.when(
+                  data: (data) => _list(context, data),
+                  loading: () => Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                  error: (error, stack) => Text(error.toString())),
             ],
           ),
         ),
