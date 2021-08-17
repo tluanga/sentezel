@@ -11,4 +11,7 @@ class LedgerReport {
     required this.creditAmount,
     required this.debitAmount,
   });
+  String getInitialLetter() {
+    return this.name[0].toUpperCase();
+  }
 }

@@ -26,36 +26,38 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
       );
 
       List<Journal> result = [];
-      if (data.isNotEmpty) {
-        data.forEach((element) async {
-          String transactionTypeName =
-              await _read(transactionTypeRepositoryProvider)
-                  .getTransactionTypeName(element.id!);
-          String creditSideLedgerName =
-              await _read(ledgerMasterRepositoryProvider)
-                  .getLedgerMasterName(element.creditSideLedgerId!);
-          String debitSideLedgerName =
-              await _read(ledgerMasterRepositoryProvider)
-                  .getLedgerMasterName(element.debitSideLedgerId!);
-          String assetName = await _read(ledgerMasterRepositoryProvider)
-              .getLedgerMasterName(element.debitSideLedgerId!);
-          String partyName = await _read(ledgerMasterRepositoryProvider)
-              .getLedgerMasterName(element.debitSideLedgerId!);
-          String mode = convertTransactionModeToString(element.mode);
-          result.add(Journal(
-            date: element.date,
-            amount: element.amount,
-            particular: element.particular,
-            transactionType: transactionTypeName,
-            creditSideLedgerName: creditSideLedgerName,
-            debitSideLedgerName: debitSideLedgerName,
-            partyLedgerName: partyName,
-            assetLedgerName: assetName,
-            mode: mode,
-          ));
-        });
-        state = AsyncValue.data(result);
-      }
+
+      data.forEach((element) async {
+        Journal journal = new Journal(
+          date: element.date,
+          amount: element.amount,
+          particular: element.particular,
+          transactionType: await _read(transactionTypeRepositoryProvider)
+              .getTransactionTypeName(element.id!),
+          creditSideLedgerName: element.creditSideLedgerId != null
+              ? await _read(ledgerMasterRepositoryProvider)
+                  .getLedgerMasterName(element.creditSideLedgerId!)
+              : '',
+          debitSideLedgerName: element.debitSideLedgerId != null
+              ? await _read(ledgerMasterRepositoryProvider)
+                  .getLedgerMasterName(element.debitSideLedgerId!)
+              : '',
+          partyLedgerName: element.partyId != null
+              ? await _read(ledgerMasterRepositoryProvider)
+                  .getLedgerMasterName(element.debitSideLedgerId!)
+              : '',
+          assetLedgerName: element.assetLedgerId != null
+              ? await _read(ledgerMasterRepositoryProvider)
+                  .getLedgerMasterName(element.assetLedgerId!)
+              : '',
+          mode: convertTransactionModeToString(element.mode),
+        );
+
+        result.add(journal);
+      });
+      data.length > 0 && result.length > 0
+          ? state = AsyncValue.data(result)
+          : state = AsyncValue.data([]);
 
       print(state);
     } catch (e) {

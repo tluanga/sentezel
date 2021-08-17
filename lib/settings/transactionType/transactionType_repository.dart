@@ -40,10 +40,7 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
       Database db = await DatabaseService.instance.db;
 
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
-      if (result.length != 0) {
-        return TransactionType.fromMap(result.first).name;
-      }
-      throw ('Something went wrong!');
+      return TransactionType.fromMap(result.first).name;
     } catch (e) {
       print(e);
       return 'Error';

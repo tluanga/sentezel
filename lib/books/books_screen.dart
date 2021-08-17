@@ -1,8 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sentezel/books/balanceSheet/balanceSheetReport_screen.dart';
 import 'package:sentezel/books/journal/journalReport_screen.dart';
+import 'package:sentezel/books/ledger/ledgerReport_screen.dart';
+import 'package:sentezel/books/profitAndLossReport/profitAndLossReport_screen.dart';
+import 'package:sentezel/books/tradingAccount/tradingAccountReport_screen.dart';
+import 'package:sentezel/books/trialBalance/trialBalanceReport_screen.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 
 class BooksScreen extends StatelessWidget {
   const BooksScreen({Key? key}) : super(key: key);
@@ -40,7 +44,14 @@ class BooksScreen extends StatelessWidget {
                     context: context,
                     label: 'Ledger',
                     icon: CupertinoIcons.circle_grid_3x3,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => LedgerReportScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -57,7 +68,7 @@ class BooksScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LedgerMasterScreen(),
+                            builder: (context) => TrialBalanceReportScreen(),
                           ),
                         );
                       },
@@ -67,7 +78,14 @@ class BooksScreen extends StatelessWidget {
                     context: context,
                     label: 'Trading Account',
                     icon: CupertinoIcons.layers,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TradingAccountReportScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -84,7 +102,7 @@ class BooksScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => LedgerMasterScreen(),
+                            builder: (context) => ProfitAndLossReportScreen(),
                           ),
                         );
                       },
@@ -94,7 +112,14 @@ class BooksScreen extends StatelessWidget {
                     context: context,
                     label: 'Balance Sheet',
                     icon: CupertinoIcons.layers_alt,
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => BalanceSheetReportScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
