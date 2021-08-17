@@ -4,11 +4,10 @@ import 'package:sentezel/common/ui/widget/settingsEllipse_widget.dart';
 
 class TopBarWidget extends StatelessWidget {
   final String title;
+  final Function onClose;
 
-  const TopBarWidget({
-    Key? key,
-    required this.title,
-  }) : super(key: key);
+  const TopBarWidget({Key? key, required this.title, required this.onClose})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,7 @@ class TopBarWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            Navigator.pop(context);
+            this.onClose();
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

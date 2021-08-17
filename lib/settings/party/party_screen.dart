@@ -34,6 +34,9 @@ class PartyScreen extends HookConsumerWidget {
             children: [
               TopBarWidget(
                 title: 'Ledger Master',
+                onClose: () {
+                  Navigator.pop(context);
+                },
               ),
               //------Searching Ledger Master and filtration will be done
               // based in input

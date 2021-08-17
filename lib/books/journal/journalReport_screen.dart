@@ -19,7 +19,12 @@ class JournalReportScreen extends HookConsumerWidget {
             child: Container(
           child: Column(
             children: [
-              TopBarWidget(title: 'Journal Dashboard'),
+              TopBarWidget(
+                title: 'Journal Dashboard',
+                onClose: () {
+                  Navigator.pop(context);
+                },
+              ),
               // PeriodSelectionBarWidget(),
               _list(context, data),
             ],
@@ -133,42 +138,6 @@ class JournalReportScreen extends HookConsumerWidget {
                     ),
                   ),
                 ),
-                // Container(
-                //   width: MediaQuery.of(context).size.width * 0.74,
-                //   height: MediaQuery.of(context).size.height * 0.03,
-                //   child: Center(
-                //     child: Text(
-                //       item.particular != item.name ? item.description : '',
-                //       style: TextStyle(
-                //         fontSize: 14,
-                //       ),
-                //       overflow: TextOverflow.ellipsis,
-                //     ),
-                //   ),
-                // ),
-                // Container(
-                //   width: MediaQuery.of(context).size.width * 0.74,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.spaceAround,
-                //     children: [
-                //       Container(
-                //         child: item.status == ActiveInActive.active
-                //             ? Text(
-                //                 'Active',
-                //                 style: TextStyle(
-                //                   color: Colors.green,
-                //                 ),
-                //               )
-                //             : Text(
-                //                 'In-Active',
-                //                 style: TextStyle(
-                //                   color: Colors.red,
-                //                 ),
-                //               ),
-                //       ),
-                //     ],
-                //   ),
-                // ),
               ],
             ),
           ],

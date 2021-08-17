@@ -3,13 +3,14 @@ import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/newTransaction/common/transaction_config.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
+import 'package:sentezel/settings/transactionType/transactionType_config.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 final transactionTypeRepositoryProvider =
     Provider((ref) => TransactionTypeRepository(ref.read));
 
 class TransactionTypeRepository implements BaseRepository<TransactionType> {
-  final String dbName = TransactionConfig.dbName;
+  final String dbName = TransactionTypeConfig.dbName;
   final Reader _read;
 
   const TransactionTypeRepository(this._read);

@@ -14,7 +14,7 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
   Reader _read;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
-  String transactionTypeName = '';
+
   //-----------Get Transcation List-----
   JournalController(this._read) : super(AsyncValue.loading());
 
@@ -64,5 +64,9 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
     } catch (e) {
       print(e);
     }
+  }
+
+  clear() {
+    state = AsyncLoading();
   }
 }

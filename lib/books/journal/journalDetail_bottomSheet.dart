@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
-import 'package:sentezel/common/ui/widget/topBarForConfirmBottomSheet_widget.dart';
+import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
 
 class JournalDetailModalBottomSheet extends StatelessWidget {
   final Journal data;
@@ -10,12 +10,15 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(data.transactionType);
     return Material(
       child: SafeArea(
         child: Column(
           children: [
-            TopBarForConfirmBottomSheetWidget(
-                label: 'Journal', onConfirm: () {}),
+            TopBarForBottomSheetWidget(
+              label: 'Journal',
+              onExit: () {},
+            ),
             Container(
               width: MediaQuery.of(context).size.width,
               height: 30,

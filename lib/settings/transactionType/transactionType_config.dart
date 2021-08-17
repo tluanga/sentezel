@@ -1,3 +1,3 @@
 class TransactionTypeConfig {
-  static const transactionTypeTable = 'transactionType';
+  static const dbName = 'transactionType';
 }

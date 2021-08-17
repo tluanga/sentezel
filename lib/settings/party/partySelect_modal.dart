@@ -36,6 +36,9 @@ class PartySelectModal extends HookConsumerWidget {
             children: [
               TopBarWidget(
                 title: 'Party Select',
+                onClose: () {
+                  Navigator.pop(context);
+                },
               ),
               //------Searching Ledger Master and filtration will be done
               // based in input

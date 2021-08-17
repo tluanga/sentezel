@@ -14,6 +14,9 @@ class AnalyticsScreen extends StatelessWidget {
             children: [
               TopBarWidget(
                 title: 'Analytics',
+                onClose: () {
+                  Navigator.pop(context);
+                },
               ),
               AnalyticsPeriodSelectionBar(),
             ],
