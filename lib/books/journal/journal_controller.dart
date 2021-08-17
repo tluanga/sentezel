@@ -27,7 +27,8 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
 
       List<Journal> result = [];
 
-      data.forEach((element) async {
+      for (int i = 0; i < data.length; i++) {
+        final element = data[i];
         Journal journal = new Journal(
           date: element.date,
           amount: element.amount,
@@ -52,9 +53,9 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
               : '',
           mode: convertTransactionModeToString(element.mode),
         );
-
         result.add(journal);
-      });
+      }
+
       data.length > 0 && result.length > 0
           ? state = AsyncValue.data(result)
           : state = AsyncValue.data([]);
