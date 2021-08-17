@@ -129,9 +129,7 @@ class PartyScreen extends HookConsumerWidget {
               ),
             ),
             Column(
-              mainAxisAlignment: item.description != null
-                  ? MainAxisAlignment.spaceAround
-                  : MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.74,

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/journal/journalDetail_bottomSheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
+import 'package:sentezel/books/journal/journal_model.dart';
 
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
-import 'package:sentezel/newTransaction/data/transaction_model.dart';
 
 class JournalReportScreen extends HookConsumerWidget {
   const JournalReportScreen({Key? key}) : super(key: key);
@@ -27,7 +27,7 @@ class JournalReportScreen extends HookConsumerWidget {
     );
   }
 
-  _list(BuildContext context, List<Transaction> list) {
+  _list(BuildContext context, List<Journal> list) {
     print(list);
     list.sort((a, b) => a.date.compareTo(b.date));
 
@@ -44,11 +44,11 @@ class JournalReportScreen extends HookConsumerWidget {
 
   _listItem(
       {required BuildContext context,
-      required Transaction item,
-      required Function(Transaction) onSelect}) {
+      required Journal item,
+      required Function(Journal) onSelect}) {
     Color _color = Palette.color3;
 
-    if (item.id! / 2 == 0) _color = Palette.color1;
+    _color = Palette.color1;
 
     return GestureDetector(
       onTap: () {
@@ -103,9 +103,7 @@ class JournalReportScreen extends HookConsumerWidget {
               ),
             ),
             Column(
-              mainAxisAlignment: item.particular != null
-                  ? MainAxisAlignment.spaceAround
-                  : MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
                   width: MediaQuery.of(context).size.width * 0.74,

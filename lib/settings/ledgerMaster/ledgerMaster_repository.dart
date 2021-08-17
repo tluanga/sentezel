@@ -22,7 +22,7 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
   void add({required LedgerMaster payload}) async {
     Database db = await DatabaseService.instance.db;
     try {
-      var b = await db.insert(dbName, payload.toMap());
+      await db.insert(dbName, payload.toMap());
     } catch (e) {
       print(e);
     }
@@ -71,6 +71,21 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
     } catch (e) {
       print(e);
       return [];
+    }
+  }
+
+  Future<String> getLedgerMasterName(int id) async {
+    try {
+      Database db = await DatabaseService.instance.db;
+
+      final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
+      if (result.length != 0) {
+        return LedgerMaster.fromMap(result.first).name;
+      }
+      throw ('Something went wrong!');
+    } catch (e) {
+      print(e);
+      return 'Error';
     }
   }
 

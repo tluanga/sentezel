@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/ui/widget/topBarForConfirmBottomSheet_widget.dart';
-import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
 
 purchaseOfAssetConfirmDialog(BuildContext context) {
   return Material(

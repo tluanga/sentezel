@@ -18,7 +18,7 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentState = ref.watch(purchaseOfAssetControllerProvider);
-    final DateFormat formatter = DateFormat('dd-MM-yyyy');
+    // final DateFormat formatter = DateFormat('dd-MM-yyyy');
     final double itemFontSize = 16;
     return Material(
       child: SafeArea(

@@ -1,12 +1,10 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sentezel/books/journal/journal_model.dart';
 import 'package:sentezel/common/ui/widget/topBarForConfirmBottomSheet_widget.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/data/transaction_model.dart';
 
 class JournalDetailModalBottomSheet extends StatelessWidget {
-  final Transaction data;
+  final Journal data;
   const JournalDetailModalBottomSheet({Key? key, required this.data})
       : super(key: key);
 
@@ -55,12 +53,12 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
                   _field(
                     context: context,
                     label: 'Transaction Type',
-                    value: data.transactionTypeId.toString(),
+                    value: data.transactionType,
                   ),
                   _field(
                     context: context,
                     label: 'Mode',
-                    value: EnumToString.convertToString(data.mode),
+                    value: data.mode,
                   ),
                 ],
               ),

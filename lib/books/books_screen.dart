@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/books/journal/journalReport_screen.dart';
-import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 

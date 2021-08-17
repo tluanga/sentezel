@@ -23,18 +23,49 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
   Future<TransactionType> getItem({required int id}) async {
     try {
       Database db = await DatabaseService.instance.db;
-      try {
-        final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
 
+      final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
+      if (result.isNotEmpty) {
         return TransactionType.fromMap(result.first);
-      } catch (e) {
-        print(e);
       }
+      throw Exception('Transaction Type Not Present');
     } catch (e) {
       print(e);
+      throw e;
     }
-    throw UnimplementedError();
   }
+
+  Future<String> getTransactionTypeName(int id) async {
+    try {
+      Database db = await DatabaseService.instance.db;
+
+      final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
+      if (result.length != 0) {
+        return TransactionType.fromMap(result.first).name;
+      }
+      throw ('Something went wrong!');
+    } catch (e) {
+      print(e);
+      return 'Error';
+    }
+  }
+
+  //  Future<Note> readNote(int id) async {
+  //   final db = await instance.database;
+
+  //   final maps = await db.query(
+  //     tableNotes,
+  //     columns: NoteFields.values,
+  //     where: '${NoteFields.id} = ?',
+  //     whereArgs: [id],
+  //   );
+
+  //   if (maps.isNotEmpty) {
+  //     return Note.fromJson(maps.first);
+  //   } else {
+  //     throw Exception('ID $id not found');
+  //   }
+  // }
 
   @override
   Future<List<TransactionType>> getList(
