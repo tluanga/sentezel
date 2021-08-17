@@ -5,26 +5,30 @@ import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 
 //-------------Provider for ledger master list controller----
 final assetListControllerProvider =
-    StateNotifierProvider<AssetListController, List<LedgerMaster>>(
+    StateNotifierProvider<AssetListController, AsyncValue<List<LedgerMaster>>>(
         (ref) => AssetListController(ref.read)..loadData());
 
-class AssetListController extends StateNotifier<List<LedgerMaster>> {
+class AssetListController
+    extends StateNotifier<AsyncValue<List<LedgerMaster>>> {
   final Reader _read;
-  bool _isLoading = true;
-  LedgerMasterType _type = LedgerMasterType.asset;
-  bool getIsLoading() {
-    return _isLoading;
-  }
 
-  AssetListController(this._read) : super([]);
+  LedgerMasterType _type = LedgerMasterType.asset;
+
+  AssetListController(this._read) : super(AsyncValue.loading());
 
   loadData({String searchString = ''}) async {
     print('load data');
-    state = await _read(ledgerMasterRepositoryProvider).getList(
-      searchString: searchString,
-      type: _type,
-    );
-    if (state.isNotEmpty) _isLoading = false;
+    try {
+      final result = await _read(ledgerMasterRepositoryProvider).getList(
+        searchString: searchString,
+        type: _type,
+      );
+      if (mounted) {
+        state = AsyncValue.data(result);
+      }
+    } on Exception catch (e) {
+      return e;
+    }
   }
 
   //
@@ -32,6 +36,7 @@ class AssetListController extends StateNotifier<List<LedgerMaster>> {
   addAsset(LedgerMaster payload) {
     try {
       _read(ledgerMasterRepositoryProvider).add(payload: payload);
+      loadData();
     } catch (e) {
       print(e);
     }

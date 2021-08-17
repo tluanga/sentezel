@@ -19,8 +19,7 @@ class AssetSelectModal extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(assetListControllerProvider);
-    final isLoading =
-        ref.watch(assetListControllerProvider.notifier).getIsLoading();
+
     final _searchTextEditingController = useTextEditingController();
     _onSearch() async {
       ref.read(assetListControllerProvider.notifier).loadData(
@@ -56,11 +55,16 @@ class AssetSelectModal extends HookConsumerWidget {
                   controller: _searchTextEditingController,
                 ),
               ),
-              isLoading
-                  ? Center(
-                      child: CircularProgressIndicator(),
-                    )
-                  : _list(context, list),
+              list.when(
+                  data: (data) => _list(context, data),
+                  loading: () => Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                  error: (error, statck) {
+                    return Container(
+                      child: Text(error.toString()),
+                    );
+                  })
             ],
           ),
         ),
