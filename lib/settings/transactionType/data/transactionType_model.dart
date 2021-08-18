@@ -9,6 +9,7 @@ class TransactionType {
   SumChetvelDanType sumChetVelDanType; // 0--for buy 1-- sell
   int debitSideLedger;
   int creditSideLedger;
+
   ActiveInActive? status = ActiveInActive.active;
 
   // 0 - when Incomplete and 1- when Complete

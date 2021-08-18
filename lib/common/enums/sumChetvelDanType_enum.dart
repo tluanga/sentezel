@@ -44,3 +44,34 @@ String convertSumChetvelDanTypeToString(SumChetvelDanType type) {
       return 'Lei';
   }
 }
+
+SumChetvelDanType sumChetvelDanTypeFromString(String value) {
+  switch (value) {
+    case 'lei':
+      return SumChetvelDanType.lei;
+    case 'hralh':
+      return SumChetvelDanType.hralh;
+    case 'lakluh':
+      return SumChetvelDanType.lakluh;
+    case 'pekchhuah':
+      return SumChetvelDanType.pekchhuah;
+    case 'debtRepaymentByDebtor':
+      return SumChetvelDanType.debtRepaymentByDebtor;
+    case 'debtRepaymentToCreditor':
+      return SumChetvelDanType.debtRepaymentToCreditor;
+    case 'bankToCash':
+      return SumChetvelDanType.cashToBank;
+    case 'cashToBank':
+      return SumChetvelDanType.bankToCash;
+    case 'purchaseReturn':
+      return SumChetvelDanType.purchaseReturn;
+    case 'capitalInjection':
+      return SumChetvelDanType.capitalInjection;
+    case 'openingBalanceCash':
+      return SumChetvelDanType.openingBalanceCash;
+    case 'openingBalanceBank':
+      return SumChetvelDanType.openingBalanceBank;
+    default:
+      return SumChetvelDanType.lei;
+  }
+}

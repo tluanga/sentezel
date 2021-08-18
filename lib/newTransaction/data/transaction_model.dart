@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:enum_to_string/enum_to_string.dart';
+import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 
 class Transaction {
@@ -9,7 +10,7 @@ class Transaction {
   String particular;
   TransactionMode mode; //user input--can be credit or Cashdown
   DateTime date; //user input
-
+  SumChetvelDanType sumChetVelDanType;
   int? partyId; //user purchase is made by BA
   int? assetLedgerId; //if the purchase is of asset//user input
   int transactionTypeId;
@@ -27,6 +28,7 @@ class Transaction {
     required this.particular,
     required this.date,
     required this.mode,
+    required this.sumChetVelDanType,
     this.partyId,
     this.assetLedgerId,
     required this.transactionTypeId,
@@ -41,6 +43,7 @@ class Transaction {
     String? particular,
     DateTime? date,
     TransactionMode? mode,
+    SumChetvelDanType? sumChetVelDanType,
     int? partyId,
     int? assetLedgerId,
     int? transactionTypeId,
@@ -54,6 +57,7 @@ class Transaction {
       particular: particular ?? this.particular,
       date: date ?? this.date,
       mode: mode ?? this.mode,
+      sumChetVelDanType: sumChetVelDanType ?? this.sumChetVelDanType,
       partyId: partyId ?? this.partyId,
       assetLedgerId: assetLedgerId ?? this.assetLedgerId,
       transactionTypeId: transactionTypeId ?? this.transactionTypeId,
