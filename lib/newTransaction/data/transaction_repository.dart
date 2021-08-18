@@ -58,12 +58,13 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
         DateTime(startDate.year, startDate.month, startDate.day);
     print('StartDate $startDate');
 
-    print('param startDate ${paramStartDate.microsecondsSinceEpoch}');
-
-    print('Param StartDate $paramStartDate');
+    print(
+        'param startDate:$paramStartDate microseconds:${paramStartDate.microsecondsSinceEpoch}');
 
     DateTime paramEndDate =
         DateTime(endDate.year, endDate.month, endDate.day, 23, 59);
+    print(
+        'param EndDate:$paramEndDate  microseconds:${paramEndDate.microsecondsSinceEpoch}');
 
     try {
       Database db = await DatabaseService.instance.db;

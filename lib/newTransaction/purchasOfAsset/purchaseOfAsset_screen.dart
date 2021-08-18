@@ -5,11 +5,11 @@ import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
-import 'package:sentezel/newTransaction/common/apartySelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/transactionModeSelect_modal.dart';
+import 'package:sentezel/settings/party/partySelect_modal.dart';
 
 class AssetPurchaseScreen extends HookConsumerWidget {
   const AssetPurchaseScreen({Key? key}) : super(key: key);
@@ -162,7 +162,6 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                                             .notifier)
                                         .setParty(party);
                                   },
-                                  partial: false,
                                 ),
                               );
                             },

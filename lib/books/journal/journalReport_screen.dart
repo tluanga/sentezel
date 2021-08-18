@@ -26,7 +26,7 @@ class JournalReportScreen extends HookConsumerWidget {
                 },
               ),
               // PeriodSelectionBarWidget(),
-              _list(context, data),
+              data.length > 0 ? _list(context, data) : Container(),
             ],
           ),
         )),
@@ -77,7 +77,6 @@ class JournalReportScreen extends HookConsumerWidget {
           context: context,
           builder: (context) => JournalDetailModalBottomSheet(
             data: item,
-            
           ),
         );
       },

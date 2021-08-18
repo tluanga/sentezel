@@ -65,14 +65,6 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
     state = state.copyWith(particular: particular);
   }
 
-  setup() {
-    switch (state.mode) {
-      case TransactionMode.credit:
-        break;
-      default:
-    }
-  }
-
   setState(Transaction transaction) {
     state = transaction;
   }

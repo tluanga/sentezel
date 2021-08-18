@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
+import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/party/party_controller.dart';
@@ -34,12 +35,16 @@ class PartySelectModal extends HookConsumerWidget {
         child: Container(
           child: Column(
             children: [
-              TopBarWidget(
-                title: 'Party Select',
-                onClose: () {
-                  Navigator.pop(context);
+              TopBarWithNewForBottomSheetWidget(
+                label: 'Party Select Select',
+                onNew: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => NewPartyModal(),
+                  );
                 },
               ),
+
               //------Searching Ledger Master and filtration will be done
               // based in input
               Container(
