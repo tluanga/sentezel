@@ -113,6 +113,7 @@ class Transaction {
       amount: map['amount'],
       particular: map['particular'],
       mode: _mode,
+      sumChetVelDanType: sumChetvelDanTypeFromString(map['sumChetVelDanType']),
       date: DateTime.fromMicrosecondsSinceEpoch(map['date']),
       partyId: map['partyId'],
       assetLedgerId: map['assetLedgerId'],
