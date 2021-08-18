@@ -1,38 +1,242 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/common/ui/widget/weeklyTableCalendar_widget.dart';
+import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
+import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
+import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
+import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_modal.dart';
+import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
+import 'package:sentezel/newTransaction/purchasOfAsset/transactionModeSelect_modal.dart';
+import 'package:sentezel/settings/party/partySelect_modal.dart';
 
-class PurchaseOfMaterialScreen extends HookConsumerWidget {
-  const PurchaseOfMaterialScreen({Key? key}) : super(key: key);
+class MaterialPurchaseScreen extends HookConsumerWidget {
+  const MaterialPurchaseScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentState = ref.watch(purchaseOfAssetControllerProvider);
+    final partyName =
+        ref.watch(purchaseOfAssetControllerProvider.notifier).getPartyName();
+    final assetName =
+        ref.watch(purchaseOfAssetControllerProvider.notifier).getAssetName();
+
+    final partialAmountController = TextEditingController(
+      text: '122',
+    );
+
+    onCancel() {
+      ref.read(purchaseOfAssetControllerProvider.notifier).reset();
+    }
+
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            TopBarWithSaveWidget(
-              title: 'Purchase of Material',
-              onSave: () {},
-              onCancel: () {},
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 5,
             ),
-            WeeklyTableCalendarWidget(
-              onDateSelect: (selectedDate) {},
-            ),
-            //----BA Or Ba Lo
-            Row(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: Column(
               children: [
+                TopBarWithSaveWidget(
+                  title: 'New Material Purchase',
+                  onSave: () {
+                    onSubmit(ref, context);
+                  },
+                  onCancel: onCancel,
+                ),
+                DateSelectTimeLineWidget(
+                  initialDate: currentState.date,
+                  onDateSelected: (selectedDate) {
+                    ref
+                        .watch(purchaseOfAssetControllerProvider.notifier)
+                        .setState(
+                          currentState.copyWith(
+                            date: selectedDate,
+                          ),
+                        );
+                  },
+                ),
+
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.01,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    //--------------Amount ------------
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.38,
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: TextFormField(
+                        //
+                        onChanged: (value) {
+                          ref
+                              .watch(purchaseOfAssetControllerProvider.notifier)
+                              .setState(
+                                currentState.copyWith(
+                                  amount: int.parse(value),
+                                ),
+                              );
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Amount',
+                        ),
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        keyboardType: TextInputType.number,
+                      ),
+                    ),
+                    SizedBox(width: MediaQuery.of(context).size.width * 0.02),
+                    //------------Transaction Mode----
+                    GestureDetector(
+                      onTap: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (context) =>
+                              TransactionModeSelectModalBottomSheet(),
+                        );
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width * 0.55,
+                        height: MediaQuery.of(context).size.height * 0.05,
+                        padding: EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade300,
+                          borderRadius: BorderRadius.circular(3),
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              convertTransactionModeToString(
+                                currentState.mode,
+                              ),
+                              style: TextStyle(
+                                color: Colors.black,
+                                fontSize: 15,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Icon(
+                              CupertinoIcons.arrowtriangle_down,
+                              color: Colors.black,
+                              size: 20,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                //------------Party Selection and Partial Amount Entry----
+                currentState.mode == TransactionMode.credit ||
+                        currentState.mode ==
+                            TransactionMode.partialPaymentByBank ||
+                        currentState.mode ==
+                            TransactionMode.partialPaymentByCash
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          currentState.mode ==
+                                      TransactionMode.partialPaymentByBank ||
+                                  currentState.mode ==
+                                      TransactionMode.partialPaymentByCash
+                              ? PartialPaymentWidget(
+                                  controller: partialAmountController)
+                              : Container(),
+                          GestureDetector(
+                            onTap: () {
+                              showModalBottomSheet(
+                                context: context,
+                                builder: (context) => PartySelectModal(
+                                  onSelectParty: (party) {
+                                    ref
+                                        .watch(purchaseOfAssetControllerProvider
+                                            .notifier)
+                                        .setParty(party);
+                                  },
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: currentState.mode == TransactionMode.credit
+                                  ? MediaQuery.of(context).size.width * 0.97
+                                  : MediaQuery.of(context).size.width * 0.55,
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              padding: EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.grey.shade300,
+                                borderRadius: BorderRadius.circular(3),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    partyName.isEmpty
+                                        ? 'Please Select Pary'
+                                        : partyName,
+                                    style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Icon(
+                                    CupertinoIcons.arrowtriangle_down,
+                                    color: Colors.black,
+                                    size: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : Container(),
+                SizedBox(
+                  height: 10,
+                ),
+
                 Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
+                  width: MediaQuery.of(context).size.width * 0.95,
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: TextFormField(
+                    onChanged: (value) {
+                      ref.read(purchaseOfAssetControllerProvider).particular =
+                          value;
+                    },
+                    decoration: InputDecoration(
+                      labelText: 'particular',
+                    ),
                   ),
-                  child: Text('BA'),
+                ),
+                SizedBox(
+                  height: 6,
                 ),
               ],
             ),
-          ],
+          ),
         ),
+      ),
+    );
+  }
+
+  onSubmit(WidgetRef ref, context) {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => PurchaseOfAssetConfirmationBottomSheet(
+        onConfirm: () {
+          ref.watch(purchaseOfAssetControllerProvider.notifier).submit();
+        },
+        onCancel: () {},
       ),
     );
   }

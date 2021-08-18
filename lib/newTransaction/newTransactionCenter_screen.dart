@@ -44,7 +44,7 @@ class NewTranscationCenterScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PurchaseOfMaterialScreen(),
+                        builder: (context) => MaterialPurchaseScreen(),
                       ),
                     );
                   },
