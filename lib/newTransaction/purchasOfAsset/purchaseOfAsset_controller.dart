@@ -26,6 +26,7 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
     state = AsyncValue.data(
       data.copyWith(partyId: party.id),
     );
+
     if (data.mode == TransactionMode.credit)
       state = AsyncValue.data(
         data.copyWith(
@@ -42,7 +43,10 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
     _assetName = asset.name;
     final data = state.data!.value;
     state = AsyncValue.data(
-      data.copyWith(partyId: asset.id),
+      data.copyWith(
+        partyId: asset.id,
+        particular: data.particular + '-' + asset.name,
+      ),
     );
     print(state);
   }

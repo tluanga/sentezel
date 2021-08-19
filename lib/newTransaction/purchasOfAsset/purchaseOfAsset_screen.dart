@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
@@ -20,10 +19,6 @@ class AssetPurchaseScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<Transaction> currentState =
         ref.watch(purchaseOfAssetControllerProvider);
-    final partyName =
-        ref.watch(purchaseOfAssetControllerProvider.notifier).getPartyName();
-    final assetName =
-        ref.watch(purchaseOfAssetControllerProvider.notifier).getAssetName();
 
     onCancel() {
       ref.read(purchaseOfAssetControllerProvider.notifier).reset();
@@ -189,9 +184,13 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Text(
-                                          partyName.isEmpty
+                                          data.partyId == null
                                               ? 'Please Select Party'
-                                              : partyName,
+                                              : ref
+                                                  .watch(
+                                                      purchaseOfAssetControllerProvider
+                                                          .notifier)
+                                                  .getPartyName(),
                                           style: TextStyle(
                                             color: Colors.black,
                                             fontSize: 15,
@@ -240,9 +239,12 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                assetName.isEmpty
+                                data.assetLedgerId == null
                                     ? 'Please Select Asset'
-                                    : assetName,
+                                    : ref
+                                        .watch(purchaseOfAssetControllerProvider
+                                            .notifier)
+                                        .getAssetName(),
                                 style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 15,
