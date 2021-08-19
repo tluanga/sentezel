@@ -9,7 +9,7 @@ import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
-import 'package:sentezel/newTransaction/purchasOfAsset/transactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetTransactionModeSelect_modal.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
 class AssetPurchaseScreen extends HookConsumerWidget {
@@ -89,7 +89,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                               showModalBottomSheet(
                                 context: context,
                                 builder: (context) =>
-                                    TransactionModeSelectModalBottomSheet(),
+                                    PurchaseOfAssetTransactionModeSelectModalBottomSheet(),
                               );
                             },
                             child: Container(
