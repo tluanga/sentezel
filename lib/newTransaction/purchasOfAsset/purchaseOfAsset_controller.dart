@@ -61,6 +61,7 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
       sumChetVelDanType: SumChetvelDanType.lei,
       creditSideLedgerId: LedgerMasterIndex.Cash,
       transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
+      partyId: null,
       date: DateTime.now(),
     );
 

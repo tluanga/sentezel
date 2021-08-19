@@ -177,9 +177,13 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                                         0.05,
                                     padding: EdgeInsets.all(10),
                                     decoration: BoxDecoration(
-                                      color: Colors.grey.shade300,
-                                      borderRadius: BorderRadius.circular(3),
-                                    ),
+                                        color: Colors.grey.shade300,
+                                        borderRadius: BorderRadius.circular(3),
+                                        border: Border.all(
+                                          color: data.partyId != 0
+                                              ? Colors.grey.shade300
+                                              : Colors.red.shade300,
+                                        )),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
