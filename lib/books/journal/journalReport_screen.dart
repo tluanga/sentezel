@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/journal/journalDetail_bottomSheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
+import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.dart';
 
 import 'package:sentezel/books/widgets/reportTopBar_widget.dart';
 
@@ -28,6 +29,7 @@ class JournalReportScreen extends HookConsumerWidget {
                   Navigator.pop(context);
                 },
               ),
+              DateSelectionBar(),
               data.length > 0 ? _list(context, data) : Container(),
             ],
           ),
