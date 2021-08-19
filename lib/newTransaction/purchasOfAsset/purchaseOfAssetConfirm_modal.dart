@@ -166,7 +166,7 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                'debit Side ledger',
+                                ,
                                 // model.debitSideLedgerName,
                                 style: TextStyle(
                                   color: Palette.textColor,
