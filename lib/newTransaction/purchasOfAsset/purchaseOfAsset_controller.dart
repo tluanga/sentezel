@@ -50,7 +50,9 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
             transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
             date: DateTime.now(),
           ),
-        );
+        ) {
+    init();
+  }
 
   init() async {
     initialState = Transaction(
