@@ -4,8 +4,9 @@ import 'package:sentezel/books/journal/journalDetail_bottomSheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
 
+import 'package:sentezel/books/widgets/reportTopBar_widget.dart';
+
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 
 class JournalReportScreen extends HookConsumerWidget {
   const JournalReportScreen({Key? key}) : super(key: key);
@@ -19,13 +20,14 @@ class JournalReportScreen extends HookConsumerWidget {
             child: Container(
           child: Column(
             children: [
-              TopBarWidget(
+              ReportTopBarWidget(
                 title: 'Journal Dashboard',
+                onGenerateExcel: () {},
+                onGeneratePdf: () {},
                 onClose: () {
                   Navigator.pop(context);
                 },
               ),
-              // PeriodSelectionBarWidget(),
               data.length > 0 ? _list(context, data) : Container(),
             ],
           ),
