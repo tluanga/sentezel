@@ -42,68 +42,68 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
                       ),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 3,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Row(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Comment :',
-                                style: TextStyle(
-                                  color: Palette.blackGrey,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Text(
-                                data.particular,
-                                style: TextStyle(
-                                  color: Palette.blackGrey,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.05,
                             child: Row(
                               children: [
                                 Text(
-                                  'Date',
+                                  'Comment :',
                                   style: TextStyle(
-                                    color: Palette.textColor,
+                                    color: Palette.blackGrey,
                                     fontSize: 16,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                SizedBox(
-                                  width: 5,
-                                ),
                                 Text(
-                                  ':',
+                                  data.particular,
                                   style: TextStyle(
-                                    color: Palette.textColor,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  DateFormat('dd-EE-yyyy').format(data.date),
-
-                                  // formatter.format(model.transaction.date),
-                                  style: TextStyle(
-                                    color: Palette.textColor,
+                                    color: Palette.blackGrey,
                                     fontSize: 16,
                                   ),
                                 ),
                               ],
                             ),
+                          ),
+                          Row(
+                            children: [
+                              Text(
+                                'Date',
+                                style: TextStyle(
+                                  color: Palette.textColor,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                ':',
+                                style: TextStyle(
+                                  color: Palette.textColor,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                DateFormat('dd-EE-yyyy').format(data.date),
+
+                                // formatter.format(model.transaction.date),
+                                style: TextStyle(
+                                  color: Palette.textColor,
+                                  fontSize: 16,
+                                ),
+                              ),
+                            ],
                           ),
                         ],
                       ),

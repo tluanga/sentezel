@@ -44,7 +44,7 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
     final data = state.data!.value;
     state = AsyncValue.data(
       data.copyWith(
-        partyId: asset.id,
+        assetLedgerId: asset.id,
         particular: data.particular + '-' + asset.name,
       ),
     );
