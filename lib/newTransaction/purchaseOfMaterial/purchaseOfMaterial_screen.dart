@@ -155,7 +155,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                                       builder: (context) => PartySelectModal(
                                         onSelectParty: (party) {
                                           ref
-                                              .watch(
+                                              .read(
                                                   purchaseOfMaterialControllerProvider
                                                       .notifier)
                                               .setParty(party);

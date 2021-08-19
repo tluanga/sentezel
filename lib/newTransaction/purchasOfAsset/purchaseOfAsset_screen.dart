@@ -212,7 +212,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      //Asset Selection
+                      //-----ASSET SELECTION----------------------
                       GestureDetector(
                         onTap: () {
                           showModalBottomSheet(
