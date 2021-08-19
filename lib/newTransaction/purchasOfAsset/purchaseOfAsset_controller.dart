@@ -1,18 +1,20 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+
 import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
 import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
 
 final purchaseOfAssetControllerProvider =
-    StateNotifierProvider<PurchaseOfAssetController, Transaction>(
-        (ref) => PurchaseOfAssetController(ref.read));
+    StateNotifierProvider<PurchaseOfAssetController, AsyncValue<Transaction>>(
+        (ref) => PurchaseOfAssetController(ref.read)..init());
 
-class PurchaseOfAssetController extends StateNotifier<Transaction> {
+class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
   final Reader _read;
   late Transaction initialState;
 
@@ -20,7 +22,17 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
   String getPartyName() => _partyName;
   setParty(LedgerMaster party) {
     _partyName = party.name;
-    state = state.copyWith(partyId: party.id);
+    final data = state.data!.value;
+    state = AsyncValue.data(
+      data.copyWith(partyId: party.id),
+    );
+    if (data.mode == TransactionMode.credit)
+      state = AsyncValue.data(
+        data.copyWith(
+          creditSideLedgerId: null,
+        ),
+      );
+
     print(state);
   }
 
@@ -28,31 +40,17 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
   String getAssetName() => _assetName;
   setAsset(LedgerMaster asset) {
     _assetName = asset.name;
-    state = state.copyWith(
-      assetLedgerId: asset.id,
+    final data = state.data!.value;
+    state = AsyncValue.data(
+      data.copyWith(partyId: asset.id),
     );
     print(state);
   }
 
-  setDate(DateTime date) {
-    state = state.copyWith(date: date);
-    print('new Date is ${state.date}');
-  }
+  String _creditSideName = '';
+  String getCreditSideName() => _creditSideName;
 
-  PurchaseOfAssetController(this._read)
-      : super(
-          Transaction(
-            amount: 0,
-            particular: '',
-            mode: TransactionMode.paymentByCash,
-            sumChetVelDanType: SumChetvelDanType.lei,
-            creditSideLedgerId: LedgerMasterIndex.Cash,
-            transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
-            date: DateTime.now(),
-          ),
-        ) {
-    init();
-  }
+  PurchaseOfAssetController(this._read) : super(AsyncValue.loading());
 
   init() async {
     initialState = Transaction(
@@ -65,42 +63,92 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
       transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
       date: DateTime.now(),
     );
-    state = initialState;
+
+    _creditSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(initialState.creditSideLedgerId!);
+
+    state = AsyncValue.data(
+      initialState,
+    );
+    print(_creditSideName);
   }
 
-  setMode(TransactionMode mode) {
+  setMode(TransactionMode mode) async {
     if (mode == TransactionMode.paymentByCash ||
         mode == TransactionMode.partialPaymentByCash) {
-      state = state.copyWith(
-          mode: mode, creditSideLedgerId: LedgerMasterIndex.Cash);
+      final data = state.data!.value;
+      state = AsyncValue.data(
+        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Cash),
+      );
+      _creditSideName = await _read(ledgerMasterRepositoryProvider)
+          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
     }
 
     if (mode == TransactionMode.partialPaymentByBank ||
-        mode == TransactionMode.partialPaymentByBank)
-      state = state.copyWith(
-          mode: mode, creditSideLedgerId: LedgerMasterIndex.Bank);
+        mode == TransactionMode.paymentByBank) {
+      final data = state.data!.value;
+      state = AsyncValue.data(
+        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Bank),
+      );
+      _creditSideName = await _read(ledgerMasterRepositoryProvider)
+          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
+    }
+    if (mode == TransactionMode.credit) {
+      final data = state.data!.value;
+      state = AsyncValue.data(
+        data.copyWith(creditSideLedgerId: null),
+      );
+      _creditSideName = '';
+    }
 
-    state = state.copyWith(mode: mode);
+    final data = state.data!.value;
+    state = AsyncValue.data(
+      data.copyWith(mode: mode),
+    );
   }
 
   setParticular(String particular) {
-    state = state.copyWith(particular: particular);
+    final data = state.data!.value;
+    state = AsyncValue.data(
+      data.copyWith(particular: particular),
+    );
   }
 
-  setState(Transaction transaction) {
-    state = transaction;
+  setDate(DateTime date) {
+    final data = state.data!.value;
+    state = AsyncValue.data(
+      data.copyWith(date: date),
+    );
+  }
+
+  setAmount(int amount) {
+    final data = state.data!.value;
+    state = AsyncValue.data(
+      data.copyWith(amount: amount),
+    );
+  }
+
+  setPartialPaymentAmount(int partialAmount) {
+    print('Setting partial amount $partialAmount');
+    final data = state.data!.value;
+    state = AsyncValue.data(
+      data.copyWith(creditPartialPaymentAmount: partialAmount),
+    );
   }
 
   submit() async {
     try {
-      _read(transactionRepositoryProvider).add(payload: state);
+      _read(transactionRepositoryProvider).add(payload: state.data!.value);
     } catch (e) {
       print(e);
     }
   }
 
   reset() {
-    state = initialState;
+    state = AsyncValue.data(
+      initialState,
+    );
+
     _partyName = '';
     _assetName = '';
   }

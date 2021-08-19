@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 class PartialPaymentWidget extends HookWidget {
-  final TextEditingController controller;
+  final Function(int) onChange;
   const PartialPaymentWidget({
     Key? key,
-    required this.controller,
+    required this.onChange,
   }) : super(key: key);
 
   @override
@@ -15,6 +15,9 @@ class PartialPaymentWidget extends HookWidget {
       height: MediaQuery.of(context).size.height * 0.08,
       width: MediaQuery.of(context).size.width * 0.38,
       child: TextFormField(
+        onChanged: (value) {
+          onChange(int.parse(value));
+        },
         decoration: InputDecoration(
             labelText: 'Partial Payment Amount',
             labelStyle: TextStyle(
