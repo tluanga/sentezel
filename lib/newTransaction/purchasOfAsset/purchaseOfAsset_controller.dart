@@ -1,10 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
+import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
 
 final purchaseOfAssetControllerProvider =
     StateNotifierProvider<PurchaseOfAssetController, Transaction>(
@@ -12,6 +14,7 @@ final purchaseOfAssetControllerProvider =
 
 class PurchaseOfAssetController extends StateNotifier<Transaction> {
   final Reader _read;
+  late Transaction initialState;
 
   String _partyName = '';
   String getPartyName() => _partyName;
@@ -37,14 +40,31 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
   }
 
   PurchaseOfAssetController(this._read)
-      : super(Transaction(
-          amount: 0,
-          particular: '',
-          mode: TransactionMode.paymentByCash,
-          creditSideLedgerId: LedgerMasterIndex.Cash,
-          transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
-          date: DateTime.now(),
-        ));
+      : super(
+          Transaction(
+            amount: 0,
+            particular: '',
+            mode: TransactionMode.paymentByCash,
+            sumChetVelDanType: SumChetvelDanType.lei,
+            creditSideLedgerId: LedgerMasterIndex.Cash,
+            transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
+            date: DateTime.now(),
+          ),
+        );
+
+  init() async {
+    initialState = Transaction(
+      amount: 0,
+      particular: await _read(transactionTypeRepositoryProvider)
+          .getTransactionTypeName(TransactionTypeIndex.PurchaseOfAssets),
+      mode: TransactionMode.paymentByCash,
+      sumChetVelDanType: SumChetvelDanType.lei,
+      creditSideLedgerId: LedgerMasterIndex.Cash,
+      transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
+      date: DateTime.now(),
+    );
+    state = initialState;
+  }
 
   setMode(TransactionMode mode) {
     if (mode == TransactionMode.paymentByCash ||
@@ -78,13 +98,7 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
   }
 
   reset() {
-    state = new Transaction(
-      amount: 0,
-      particular: '',
-      mode: TransactionMode.paymentByCash,
-      transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
-      date: DateTime.now(),
-    );
+    state = initialState;
     _partyName = '';
     _assetName = '';
   }

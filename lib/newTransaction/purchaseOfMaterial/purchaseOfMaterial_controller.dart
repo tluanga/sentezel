@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
@@ -41,6 +42,7 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
           amount: 0,
           particular: '',
           mode: TransactionMode.paymentByCash,
+          sumChetVelDanType: SumChetvelDanType.lei,
           creditSideLedgerId: LedgerMasterIndex.Cash,
           transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
           date: DateTime.now(),
@@ -82,6 +84,7 @@ class PurchaseOfAssetController extends StateNotifier<Transaction> {
       amount: 0,
       particular: '',
       mode: TransactionMode.paymentByCash,
+      sumChetVelDanType: SumChetvelDanType.lei,
       transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
       date: DateTime.now(),
     );

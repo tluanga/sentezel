@@ -21,6 +21,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     Database db = await DatabaseService.instance.db;
     try {
       var b = await db.insert(dbName, payload.toMap());
+      final a = await getItem(id: b);
       print('the value return is $b');
     } catch (e) {
       print(e);
@@ -30,6 +31,21 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
 
   @override
   getItem({required int id}) async {
+    Database db = await DatabaseService.instance.db;
+    try {
+      final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
+      if (result.length != 0) {
+        return trans.Transaction.fromMap(result.first);
+      } else
+        throw ('Error');
+    } catch (e) {
+      print(e);
+      throw (e);
+    }
+  }
+
+  @override
+  getTransactionType({required int id}) async {
     Database db = await DatabaseService.instance.db;
     try {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);

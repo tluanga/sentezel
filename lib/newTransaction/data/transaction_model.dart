@@ -69,19 +69,22 @@ class Transaction {
   }
 
   Map<String, dynamic> toMap() {
-    return {
+    final a = {
       'id': id,
       'amount': amount,
       'particular': particular,
       'date': date.microsecondsSinceEpoch,
       'mode': EnumToString.convertToString(mode),
       'partyId': partyId,
+      'sumChetVelDanType': convertSumChetvelDanTypeToString(sumChetVelDanType),
       'assetLedgerId': assetLedgerId,
       'transactionTypeId': transactionTypeId,
       'debitSideLedgerId': debitSideLedgerId,
       'creditSideLedgerId': creditSideLedgerId,
       'creditPartialPaymentAmount': creditPartialPaymentAmount,
     };
+
+    return a;
   }
 
   factory Transaction.fromMap(Map<String, dynamic> map) {
@@ -108,7 +111,7 @@ class Transaction {
       default:
         _mode = TransactionMode.partialPaymentByCash;
     }
-    return Transaction(
+    final b = Transaction(
       id: map['id'],
       amount: map['amount'],
       particular: map['particular'],
@@ -122,6 +125,10 @@ class Transaction {
       creditSideLedgerId: map['creditSideLedgerId'],
       creditPartialPaymentAmount: map['creditPartialPaymentAmount'],
     );
+
+    
+
+    return b;
   }
 
   String toJson() => json.encode(toMap());

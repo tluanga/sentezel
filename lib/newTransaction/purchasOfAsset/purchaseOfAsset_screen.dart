@@ -16,6 +16,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(purchaseOfAssetControllerProvider.notifier).init();
     final currentState = ref.watch(purchaseOfAssetControllerProvider);
     final partyName =
         ref.watch(purchaseOfAssetControllerProvider.notifier).getPartyName();
@@ -250,6 +251,7 @@ class AssetPurchaseScreen extends HookConsumerWidget {
                   width: MediaQuery.of(context).size.width * 0.95,
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: TextFormField(
+                    initialValue: currentState.particular,
                     onChanged: (value) {
                       ref.read(purchaseOfAssetControllerProvider).particular =
                           value;

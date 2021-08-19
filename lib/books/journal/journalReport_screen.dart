@@ -12,7 +12,7 @@ class JournalReportScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(journalControllerProvider);
+    AsyncValue<List<Journal>> list = ref.watch(journalControllerProvider);
     return list.when(data: (data) {
       return Material(
         child: SafeArea(
@@ -49,13 +49,14 @@ class JournalReportScreen extends HookConsumerWidget {
   }
 
   _list(BuildContext context, List<Journal> list) {
-    print(list.first.particular);
     list.sort((a, b) => a.date.compareTo(b.date));
 
     return Expanded(
       child: ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, index) {
+          print('index');
+
           return _listItem(
               context: context, item: list[index], onSelect: (item) {});
         },

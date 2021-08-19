@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
@@ -82,6 +83,7 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
       if (result.length != 0) {
         return LedgerMaster.fromMap(result.first).name;
       }
+      Assert('Error');
       throw ('Something went wrong!');
     } catch (e) {
       print(e);

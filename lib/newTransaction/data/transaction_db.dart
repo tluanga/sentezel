@@ -14,6 +14,7 @@ class TransactionDb {
             date INT,
             partyId INT,
             assetLedgerId INT,
+            sumChetVelDanType String,
             transactionTypeId INT,
             debitSideLedgerId INT,
             creditSideLedgerId INT,
