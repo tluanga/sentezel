@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_screen.dart';
+import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAsset_screen.dart';
 
 import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
@@ -31,7 +31,7 @@ class NewTranscationCenterScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => AssetPurchaseScreen(),
+                          builder: (context) => PurchaseOfAssetScreen(),
                         ),
                       );
                     },

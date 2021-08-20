@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
 
 class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {

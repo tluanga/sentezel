@@ -48,6 +48,7 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
         particular: data.particular + '-' + asset.name,
       ),
     );
+
     print(state);
   }
 

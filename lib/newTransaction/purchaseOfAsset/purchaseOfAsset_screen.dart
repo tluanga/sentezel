@@ -7,13 +7,14 @@ import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetConfirm_modal.dart';
-import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAsset_controller.dart';
-import 'package:sentezel/newTransaction/purchasOfAsset/purchaseOfAssetTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAssetConfirm_modal.dart';
+import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAssetTransactionModeSelect_modal.dart';
+
+import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
-class AssetPurchaseScreen extends HookConsumerWidget {
-  const AssetPurchaseScreen({Key? key}) : super(key: key);
+class PurchaseOfAssetScreen extends HookConsumerWidget {
+  const PurchaseOfAssetScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -49,6 +49,7 @@ class PurchaseOfMaterialController
         particular: data.particular + '-' + asset.name,
       ),
     );
+
     print(state);
   }
 
@@ -65,7 +66,7 @@ class PurchaseOfMaterialController
       mode: TransactionMode.paymentByCash,
       sumChetVelDanType: SumChetvelDanType.lei,
       creditSideLedgerId: LedgerMasterIndex.Cash,
-      transactionTypeId: TransactionTypeIndex.PurchaseOfAssets,
+      transactionTypeId: TransactionTypeIndex.PurchaseOfRawMaterial,
       partyId: null,
       date: DateTime.now(),
     );

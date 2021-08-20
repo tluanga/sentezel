@@ -4,11 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
+import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
+import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterialTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterialtransactionModeSelect_modal.dart';
 
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
@@ -38,7 +39,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                   child: Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'New Material Purchase',
+                        title: 'Purchase of Material',
                         onSave: () {
                           onSubmit(ref, context);
                         },
@@ -155,7 +156,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                                       builder: (context) => PartySelectModal(
                                         onSelectParty: (party) {
                                           ref
-                                              .read(
+                                              .watch(
                                                   purchaseOfMaterialControllerProvider
                                                       .notifier)
                                               .setParty(party);
@@ -213,7 +214,6 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      //Asset Selection
 
                       Container(
                         width: MediaQuery.of(context).size.width * 0.95,
