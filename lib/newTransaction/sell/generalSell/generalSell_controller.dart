@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
@@ -8,14 +7,14 @@ import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
+import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
 
-final purchaseOfMaterialControllerProvider = StateNotifierProvider<
-        PurchaseOfMaterialController, AsyncValue<Transaction>>(
-    (ref) => PurchaseOfMaterialController(ref.read)..init());
+final generalSellControllerProvider =
+    StateNotifierProvider<GeneralSellController, AsyncValue<Transaction>>(
+        (ref) => GeneralSellController(ref.read)..init());
 
-class PurchaseOfMaterialController
-    extends StateNotifier<AsyncValue<Transaction>> {
+class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
   final Reader _read;
   late Transaction initialState;
 
@@ -38,35 +37,25 @@ class PurchaseOfMaterialController
     print(state);
   }
 
-  String _assetName = '';
-  String getAssetName() => _assetName;
-  setAsset(LedgerMaster asset) {
-    _assetName = asset.name;
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(
-        assetLedgerId: asset.id,
-        particular: data.particular + '-' + asset.name,
-      ),
-    );
-
-    print(state);
-  }
-
   String _creditSideName = '';
   String getCreditSideName() => _creditSideName;
 
-  PurchaseOfMaterialController(this._read) : super(AsyncValue.loading());
+  GeneralSellController(this._read) : super(AsyncValue.loading());
 
+  //------------For Initialization--------
+  final int _transactionTypeId = TransactionTypeIndex.SaleOfGoods;
   init() async {
+    TransactionType _transactionType =
+        await _read(transactionTypeRepositoryProvider)
+            .getItem(id: _transactionTypeId);
     initialState = Transaction(
       amount: 0,
-      particular: await _read(transactionTypeRepositoryProvider)
-          .getTransactionTypeName(TransactionTypeIndex.PurchaseOfRawMaterial),
+      particular: _transactionType.name,
       mode: TransactionMode.paymentByCash,
-      sumChetVelDanType: SumChetvelDanType.lei,
-      creditSideLedgerId: LedgerMasterIndex.Cash,
-      transactionTypeId: TransactionTypeIndex.PurchaseOfRawMaterial,
+      sumChetVelDanType: _transactionType.sumChetVelDanType,
+      creditSideLedgerId: _transactionType.debitSideLedger,
+      debitSideLedgerId: _transactionType.creditSideLedger,
+      transactionTypeId: _transactionType.id,
       partyId: null,
       date: DateTime.now(),
     );
@@ -157,6 +146,5 @@ class PurchaseOfMaterialController
     );
 
     _partyName = '';
-    _assetName = '';
   }
 }

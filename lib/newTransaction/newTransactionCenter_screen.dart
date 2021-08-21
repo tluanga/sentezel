@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAsset_screen.dart';
-
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_screen.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_screen.dart';
+import 'package:sentezel/newTransaction/sell/generalSell/generalSell_screen.dart';
+import 'package:sentezel/newTransaction/sell/sellReturn/sellReturn_screen.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 
 class NewTranscationCenterScreen extends StatelessWidget {
@@ -54,7 +56,14 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Purchase Return',
                   icon: CupertinoIcons.selection_pin_in_out,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PurchaseReturnScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
@@ -71,7 +80,7 @@ class NewTranscationCenterScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LedgerMasterScreen(),
+                          builder: (context) => GeneralSellScreen(),
                         ),
                       );
                     },
@@ -81,7 +90,14 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Sell Return',
                   icon: CupertinoIcons.hurricane,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SellReturnScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _item(
                   context: context,

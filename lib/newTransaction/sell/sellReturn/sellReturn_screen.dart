@@ -4,25 +4,24 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
-import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterialTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/sell/sellReturn/sellReturnConfirm_modal.dart';
+import 'package:sentezel/newTransaction/sell/sellReturn/sellReturnTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/sell/sellReturn/sellReturn_controller.dart';
 
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
-class PurchaseOfMaterialScreen extends HookConsumerWidget {
-  const PurchaseOfMaterialScreen({Key? key}) : super(key: key);
+class SellReturnScreen extends HookConsumerWidget {
+  const SellReturnScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<Transaction> currentState =
-        ref.watch(purchaseOfMaterialControllerProvider);
+        ref.watch(sellReturnControllerProvider);
 
     onCancel() {
-      ref.read(purchaseOfMaterialControllerProvider.notifier).reset();
+      ref.read(sellReturnControllerProvider.notifier).reset();
     }
 
     return currentState.when(
@@ -39,7 +38,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                   child: Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'Purchase of Material',
+                        title: 'Sell Return',
                         onSave: () {
                           onSubmit(ref, context);
                         },
@@ -49,8 +48,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                         initialDate: data.date,
                         onDateSelected: (selectedDate) {
                           ref
-                              .watch(
-                                  purchaseOfMaterialControllerProvider.notifier)
+                              .watch(sellReturnControllerProvider.notifier)
                               .setDate(selectedDate);
                         },
                       ),
@@ -69,8 +67,8 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                               //
                               onChanged: (value) {
                                 ref
-                                    .watch(purchaseOfMaterialControllerProvider
-                                        .notifier)
+                                    .watch(
+                                        sellReturnControllerProvider.notifier)
                                     .setAmount(int.parse(value));
                               },
                               decoration: InputDecoration(
@@ -91,7 +89,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                               showModalBottomSheet(
                                 context: context,
                                 builder: (context) =>
-                                    PurchaseOfMaterialTransactionModeSelectModalBottomSheet(),
+                                    SellReturnTransactionModeSelectModalBottomSheet(),
                               );
                             },
                             child: Container(
@@ -143,9 +141,8 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                                             TransactionMode.partialPaymentByCash
                                     ? PartialPaymentWidget(onChange: (amount) {
                                         ref
-                                            .watch(
-                                                purchaseOfMaterialControllerProvider
-                                                    .notifier)
+                                            .watch(sellReturnControllerProvider
+                                                .notifier)
                                             .setPartialPaymentAmount(amount);
                                       })
                                     : Container(),
@@ -157,7 +154,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                                         onSelectParty: (party) {
                                           ref
                                               .watch(
-                                                  purchaseOfMaterialControllerProvider
+                                                  sellReturnControllerProvider
                                                       .notifier)
                                               .setParty(party);
                                         },
@@ -190,7 +187,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                                               ? 'Please Select Party'
                                               : ref
                                                   .watch(
-                                                      purchaseOfMaterialControllerProvider
+                                                      sellReturnControllerProvider
                                                           .notifier)
                                                   .getPartyName(),
                                           style: TextStyle(
@@ -247,9 +244,9 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
   onSubmit(WidgetRef ref, context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => PurchaseOfMaterialConfirmationBottomSheet(
+      builder: (context) => SellReturnConfirmationBottomSheet(
         onConfirm: () {
-          ref.watch(purchaseOfMaterialControllerProvider.notifier).submit();
+          ref.watch(sellReturnControllerProvider.notifier).submit();
         },
         onCancel: () {},
       ),

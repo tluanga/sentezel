@@ -126,8 +126,6 @@ class Transaction {
       creditPartialPaymentAmount: map['creditPartialPaymentAmount'],
     );
 
-    
-
     return b;
   }
 

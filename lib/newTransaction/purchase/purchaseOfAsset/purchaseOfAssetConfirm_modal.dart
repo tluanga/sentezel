@@ -4,12 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_controller.dart';
 
-class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
+class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
   final Function onCancel;
-  const PurchaseOfMaterialConfirmationBottomSheet({
+  const PurchaseOfAssetConfirmationBottomSheet({
     Key? key,
     required this.onConfirm,
     required this.onCancel,
@@ -17,7 +17,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentState = ref.watch(purchaseOfMaterialControllerProvider);
+    final currentState = ref.watch(purchaseOfAssetControllerProvider);
     // final DateFormat formatter = DateFormat('dd-MM-yyyy');
     final double itemFontSize = 16;
 
@@ -171,7 +171,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                                       Text(
                                         ref
                                             .watch(
-                                                purchaseOfMaterialControllerProvider
+                                                purchaseOfAssetControllerProvider
                                                     .notifier)
                                             .getAssetName(),
                                         // model.debitSideLedgerName,
@@ -242,12 +242,12 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                                                       .partialPaymentByCash
                                           ? ref
                                               .watch(
-                                                  purchaseOfMaterialControllerProvider
+                                                  purchaseOfAssetControllerProvider
                                                       .notifier)
                                               .getPartyName()
                                           : ref
                                               .watch(
-                                                  purchaseOfMaterialControllerProvider
+                                                  purchaseOfAssetControllerProvider
                                                       .notifier)
                                               .getCreditSideName(),
                                       // model.creditSideLedgerName,

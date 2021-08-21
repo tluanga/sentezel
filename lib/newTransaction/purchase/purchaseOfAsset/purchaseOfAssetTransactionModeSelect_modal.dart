@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_controller.dart';
 
-class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
+class PurchaseOfAssetTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
-  const PurchaseOfMaterialTransactionModeSelectModalBottomSheet({
+  const PurchaseOfAssetTransactionModeSelectModalBottomSheet({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final setState = ref.read(purchaseOfMaterialControllerProvider.notifier);
-    final state = ref.read(purchaseOfMaterialControllerProvider);
+    final setState = ref.read(purchaseOfAssetControllerProvider.notifier);
+    final state = ref.read(purchaseOfAssetControllerProvider);
     return state.when(
       data: (data) {
         return Container(

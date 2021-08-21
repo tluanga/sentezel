@@ -4,25 +4,24 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
-import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAssetConfirm_modal.dart';
-import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAssetTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturnTransactionModeSelect_modal.dart';
 
-import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAsset_controller.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
-class PurchaseOfAssetScreen extends HookConsumerWidget {
-  const PurchaseOfAssetScreen({Key? key}) : super(key: key);
+class PurchaseReturnScreen extends HookConsumerWidget {
+  const PurchaseReturnScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<Transaction> currentState =
-        ref.watch(purchaseOfAssetControllerProvider);
+        ref.watch(purchaseOfMaterialControllerProvider);
 
     onCancel() {
-      ref.read(purchaseOfAssetControllerProvider.notifier).reset();
+      ref.read(purchaseOfMaterialControllerProvider.notifier).reset();
     }
 
     return currentState.when(
@@ -39,7 +38,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                   child: Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'New Asset Purchase',
+                        title: 'Purchase Return',
                         onSave: () {
                           onSubmit(ref, context);
                         },
@@ -49,7 +48,8 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                         initialDate: data.date,
                         onDateSelected: (selectedDate) {
                           ref
-                              .watch(purchaseOfAssetControllerProvider.notifier)
+                              .watch(
+                                  purchaseOfMaterialControllerProvider.notifier)
                               .setDate(selectedDate);
                         },
                       ),
@@ -68,7 +68,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                               //
                               onChanged: (value) {
                                 ref
-                                    .watch(purchaseOfAssetControllerProvider
+                                    .watch(purchaseOfMaterialControllerProvider
                                         .notifier)
                                     .setAmount(int.parse(value));
                               },
@@ -90,7 +90,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                               showModalBottomSheet(
                                 context: context,
                                 builder: (context) =>
-                                    PurchaseOfAssetTransactionModeSelectModalBottomSheet(),
+                                    PurchaseReturnTransactionModeSelectModalBottomSheet(),
                               );
                             },
                             child: Container(
@@ -143,7 +143,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                                     ? PartialPaymentWidget(onChange: (amount) {
                                         ref
                                             .watch(
-                                                purchaseOfAssetControllerProvider
+                                                purchaseOfMaterialControllerProvider
                                                     .notifier)
                                             .setPartialPaymentAmount(amount);
                                       })
@@ -156,7 +156,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                                         onSelectParty: (party) {
                                           ref
                                               .watch(
-                                                  purchaseOfAssetControllerProvider
+                                                  purchaseOfMaterialControllerProvider
                                                       .notifier)
                                               .setParty(party);
                                         },
@@ -189,7 +189,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                                               ? 'Please Select Party'
                                               : ref
                                                   .watch(
-                                                      purchaseOfAssetControllerProvider
+                                                      purchaseOfMaterialControllerProvider
                                                           .notifier)
                                                   .getPartyName(),
                                           style: TextStyle(
@@ -213,54 +213,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                       SizedBox(
                         height: 10,
                       ),
-                      //-----ASSET SELECTION----------------------
-                      GestureDetector(
-                        onTap: () {
-                          showModalBottomSheet(
-                            context: context,
-                            builder: (context) => AssetSelectModal(
-                              onSelect: (asset) {
-                                ref
-                                    .watch(purchaseOfAssetControllerProvider
-                                        .notifier)
-                                    .setAsset(asset);
-                              },
-                            ),
-                          );
-                        },
-                        child: Container(
-                          width: MediaQuery.of(context).size.width * 0.97,
-                          height: MediaQuery.of(context).size.height * 0.05,
-                          padding: EdgeInsets.all(10),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.shade300,
-                            borderRadius: BorderRadius.circular(3),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                data.assetLedgerId == null
-                                    ? 'Please Select Asset'
-                                    : ref
-                                        .watch(purchaseOfAssetControllerProvider
-                                            .notifier)
-                                        .getAssetName(),
-                                style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              Icon(
-                                CupertinoIcons.arrowtriangle_down,
-                                color: Colors.black,
-                                size: 20,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+
                       Container(
                         width: MediaQuery.of(context).size.width * 0.95,
                         height: MediaQuery.of(context).size.height * 0.1,
@@ -293,9 +246,9 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
   onSubmit(WidgetRef ref, context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => PurchaseOfAssetConfirmationBottomSheet(
+      builder: (context) => PurchaseOfMaterialConfirmationBottomSheet(
         onConfirm: () {
-          ref.watch(purchaseOfAssetControllerProvider.notifier).submit();
+          ref.watch(purchaseOfMaterialControllerProvider.notifier).submit();
         },
         onCancel: () {},
       ),

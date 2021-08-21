@@ -4,12 +4,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
-import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterialTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
 
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 

@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
 
-class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
+class PurchaseReturnTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
-  const PurchaseOfMaterialTransactionModeSelectModalBottomSheet({
+  const PurchaseReturnTransactionModeSelectModalBottomSheet({
     Key? key,
   }) : super(key: key);
 

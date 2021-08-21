@@ -4,12 +4,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/purchaseOfAsset/purchaseOfAsset_controller.dart';
+import 'package:sentezel/newTransaction/receipts/receipts_controller.dart';
 
-class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
+class ReceiptsConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
   final Function onCancel;
-  const PurchaseOfAssetConfirmationBottomSheet({
+  const ReceiptsConfirmationBottomSheet({
     Key? key,
     required this.onConfirm,
     required this.onCancel,
@@ -17,7 +17,7 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentState = ref.watch(purchaseOfAssetControllerProvider);
+    final currentState = ref.watch(receiptsControllerProvider);
     // final DateFormat formatter = DateFormat('dd-MM-yyyy');
     final double itemFontSize = 16;
 
@@ -169,12 +169,12 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
-                                        ref
-                                            .watch(
-                                                purchaseOfAssetControllerProvider
-                                                    .notifier)
-                                            .getAssetName(),
-                                        // model.debitSideLedgerName,
+                                        // ref
+                                        //     .watch(
+                                        //         generalSellControllerProvider
+                                        //             .notifier)
+                                        //     .getAssetName(),
+                                        'debitSideLedgerName',
                                         style: TextStyle(
                                           color: Palette.textColor,
                                           fontSize: itemFontSize,
@@ -241,14 +241,12 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
                                                   TransactionMode
                                                       .partialPaymentByCash
                                           ? ref
-                                              .watch(
-                                                  purchaseOfAssetControllerProvider
-                                                      .notifier)
+                                              .watch(receiptsControllerProvider
+                                                  .notifier)
                                               .getPartyName()
                                           : ref
-                                              .watch(
-                                                  purchaseOfAssetControllerProvider
-                                                      .notifier)
+                                              .watch(receiptsControllerProvider
+                                                  .notifier)
                                               .getCreditSideName(),
                                       // model.creditSideLedgerName,
                                       style: TextStyle(

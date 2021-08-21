@@ -8,14 +8,14 @@ import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
+import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
 
-final purchaseOfMaterialControllerProvider = StateNotifierProvider<
-        PurchaseOfMaterialController, AsyncValue<Transaction>>(
-    (ref) => PurchaseOfMaterialController(ref.read)..init());
+final purchaseOfAssetControllerProvider =
+    StateNotifierProvider<PurchaseOfAssetController, AsyncValue<Transaction>>(
+        (ref) => PurchaseOfAssetController(ref.read)..init());
 
-class PurchaseOfMaterialController
-    extends StateNotifier<AsyncValue<Transaction>> {
+class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
   final Reader _read;
   late Transaction initialState;
 
@@ -56,17 +56,21 @@ class PurchaseOfMaterialController
   String _creditSideName = '';
   String getCreditSideName() => _creditSideName;
 
-  PurchaseOfMaterialController(this._read) : super(AsyncValue.loading());
+  PurchaseOfAssetController(this._read) : super(AsyncValue.loading());
 
+  final int _transactionTypeId = TransactionTypeIndex.PurchaseOfAssets;
   init() async {
+    TransactionType _transactionType =
+        await _read(transactionTypeRepositoryProvider)
+            .getItem(id: _transactionTypeId);
     initialState = Transaction(
       amount: 0,
-      particular: await _read(transactionTypeRepositoryProvider)
-          .getTransactionTypeName(TransactionTypeIndex.PurchaseOfRawMaterial),
+      particular: _transactionType.name,
       mode: TransactionMode.paymentByCash,
-      sumChetVelDanType: SumChetvelDanType.lei,
-      creditSideLedgerId: LedgerMasterIndex.Cash,
-      transactionTypeId: TransactionTypeIndex.PurchaseOfRawMaterial,
+      sumChetVelDanType: _transactionType.sumChetVelDanType,
+      creditSideLedgerId: _transactionType.debitSideLedger,
+      debitSideLedgerId: _transactionType.creditSideLedger,
+      transactionTypeId: _transactionType.id,
       partyId: null,
       date: DateTime.now(),
     );
