@@ -6,7 +6,6 @@ import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMa
 import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_screen.dart';
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_screen.dart';
 import 'package:sentezel/newTransaction/sell/sellReturn/sellReturn_screen.dart';
-import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 
 class NewTranscationCenterScreen extends StatelessWidget {
   const NewTranscationCenterScreen({Key? key}) : super(key: key);
