@@ -6,22 +6,22 @@ import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/generalSellConfirm_modal.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/generalSellTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
+import 'package:sentezel/newTransaction/receipts/receiptsConfirm_modal.dart';
+import 'package:sentezel/newTransaction/receipts/receiptsTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/receipts/receipts_controller.dart';
 
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
-class GeneralSellScreen extends HookConsumerWidget {
-  const GeneralSellScreen({Key? key}) : super(key: key);
+class ReceiptsScreen extends HookConsumerWidget {
+  const ReceiptsScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<Transaction> currentState =
-        ref.watch(generalSellControllerProvider);
+        ref.watch(receiptsControllerProvider);
 
     onCancel() {
-      ref.read(generalSellControllerProvider.notifier).reset();
+      ref.read(receiptsControllerProvider.notifier).reset();
     }
 
     return currentState.when(
@@ -48,7 +48,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                         initialDate: data.date,
                         onDateSelected: (selectedDate) {
                           ref
-                              .watch(generalSellControllerProvider.notifier)
+                              .watch(receiptsControllerProvider.notifier)
                               .setDate(selectedDate);
                         },
                       ),
@@ -67,8 +67,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                               //
                               onChanged: (value) {
                                 ref
-                                    .watch(
-                                        generalSellControllerProvider.notifier)
+                                    .watch(receiptsControllerProvider.notifier)
                                     .setAmount(int.parse(value));
                               },
                               decoration: InputDecoration(
@@ -89,7 +88,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                               showModalBottomSheet(
                                 context: context,
                                 builder: (context) =>
-                                    GeneralSellTransactionModeSelectModalBottomSheet(),
+                                    ReceiptsTransactionModeSelectModalBottomSheet(),
                               );
                             },
                             child: Container(
@@ -141,7 +140,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                                             TransactionMode.partialPaymentByCash
                                     ? PartialPaymentWidget(onChange: (amount) {
                                         ref
-                                            .watch(generalSellControllerProvider
+                                            .watch(receiptsControllerProvider
                                                 .notifier)
                                             .setPartialPaymentAmount(amount);
                                       })
@@ -153,9 +152,8 @@ class GeneralSellScreen extends HookConsumerWidget {
                                       builder: (context) => PartySelectModal(
                                         onSelectParty: (party) {
                                           ref
-                                              .watch(
-                                                  generalSellControllerProvider
-                                                      .notifier)
+                                              .watch(receiptsControllerProvider
+                                                  .notifier)
                                               .setParty(party);
                                         },
                                       ),
@@ -187,7 +185,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                                               ? 'Please Select Party'
                                               : ref
                                                   .watch(
-                                                      generalSellControllerProvider
+                                                      receiptsControllerProvider
                                                           .notifier)
                                                   .getPartyName(),
                                           style: TextStyle(
@@ -244,9 +242,9 @@ class GeneralSellScreen extends HookConsumerWidget {
   onSubmit(WidgetRef ref, context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => GeneralSellConfirmationBottomSheet(
+      builder: (context) => ReceiptsConfirmationBottomSheet(
         onConfirm: () {
-          ref.watch(generalSellControllerProvider.notifier).submit();
+          ref.watch(receiptsControllerProvider.notifier).submit();
         },
         onCancel: () {},
       ),

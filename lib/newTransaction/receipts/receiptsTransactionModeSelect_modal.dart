@@ -4,9 +4,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
 
-class GeneralSellTransactionModeSelectModalBottomSheet
-    extends HookConsumerWidget {
-  const GeneralSellTransactionModeSelectModalBottomSheet({
+class ReceiptsTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
+  const ReceiptsTransactionModeSelectModalBottomSheet({
     Key? key,
   }) : super(key: key);
 

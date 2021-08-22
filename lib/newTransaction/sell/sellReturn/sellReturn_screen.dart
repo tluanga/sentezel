@@ -7,7 +7,6 @@ import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/sell/sellReturn/sellReturnConfirm_modal.dart';
-import 'package:sentezel/newTransaction/sell/sellReturn/sellReturnTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/sell/sellReturn/sellReturn_controller.dart';
 
 import 'package:sentezel/settings/party/partySelect_modal.dart';

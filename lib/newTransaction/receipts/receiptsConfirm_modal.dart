@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/receipts/receipts_controller.dart';
+import 'package:sentezel/newTransaction/sell/sellReturn/sellReturn_controller.dart';
 
 class ReceiptsConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
@@ -17,7 +17,7 @@ class ReceiptsConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentState = ref.watch(receiptsControllerProvider);
+    final currentState = ref.watch(sellReturnControllerProvider);
     // final DateFormat formatter = DateFormat('dd-MM-yyyy');
     final double itemFontSize = 16;
 
@@ -171,10 +171,11 @@ class ReceiptsConfirmationBottomSheet extends HookConsumerWidget {
                                       Text(
                                         // ref
                                         //     .watch(
-                                        //         generalSellControllerProvider
+                                        //         purchaseOfMaterialControllerProvider
                                         //             .notifier)
                                         //     .getAssetName(),
-                                        'debitSideLedgerName',
+                                        'Debit Side',
+                                        // model.debitSideLedgerName,
                                         style: TextStyle(
                                           color: Palette.textColor,
                                           fontSize: itemFontSize,
@@ -241,12 +242,14 @@ class ReceiptsConfirmationBottomSheet extends HookConsumerWidget {
                                                   TransactionMode
                                                       .partialPaymentByCash
                                           ? ref
-                                              .watch(receiptsControllerProvider
-                                                  .notifier)
+                                              .watch(
+                                                  sellReturnControllerProvider
+                                                      .notifier)
                                               .getPartyName()
                                           : ref
-                                              .watch(receiptsControllerProvider
-                                                  .notifier)
+                                              .watch(
+                                                  sellReturnControllerProvider
+                                                      .notifier)
                                               .getCreditSideName(),
                                       // model.creditSideLedgerName,
                                       style: TextStyle(
