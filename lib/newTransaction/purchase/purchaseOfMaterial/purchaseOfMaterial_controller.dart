@@ -56,6 +56,9 @@ class PurchaseOfMaterialController
   String _creditSideName = '';
   String getCreditSideName() => _creditSideName;
 
+  String _debitSideName = '';
+  String getDebitSideName() => _debitSideName;
+
   PurchaseOfMaterialController(this._read) : super(AsyncValue.loading());
 
   //-------------Initializing the State------------
@@ -78,6 +81,9 @@ class PurchaseOfMaterialController
 
     _creditSideName = await _read(ledgerMasterRepositoryProvider)
         .getLedgerMasterName(initialState.creditSideLedgerId!);
+
+    _debitSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(initialState.debitSideLedgerId!);
 
     state = AsyncValue.data(
       initialState,

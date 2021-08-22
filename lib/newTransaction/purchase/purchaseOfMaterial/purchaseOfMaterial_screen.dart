@@ -186,7 +186,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                                       children: [
                                         Text(
                                           data.partyId == null
-                                              ? 'Please Select Party'
+                                              ? 'Please Select Party ${data.partyId}'
                                               : ref
                                                   .watch(
                                                       purchaseOfMaterialControllerProvider

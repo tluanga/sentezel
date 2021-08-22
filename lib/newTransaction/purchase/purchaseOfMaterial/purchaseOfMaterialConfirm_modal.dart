@@ -173,7 +173,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                                             .watch(
                                                 purchaseOfMaterialControllerProvider
                                                     .notifier)
-                                            .getAssetName(),
+                                            .getDebitSideName(),
                                         // model.debitSideLedgerName,
                                         style: TextStyle(
                                           color: Palette.textColor,

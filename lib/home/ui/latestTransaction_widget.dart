@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
@@ -9,6 +10,9 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    useEffect(() {
+      ref.read(journalControllerProvider.notifier).loadData();
+    }, []);
     AsyncValue<List<Journal>> state = ref.watch(journalControllerProvider);
     return state.when(
         data: (data) {
