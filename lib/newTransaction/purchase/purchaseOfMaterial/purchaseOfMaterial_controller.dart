@@ -24,16 +24,12 @@ class PurchaseOfMaterialController
   setParty(LedgerMaster party) {
     _partyName = party.name;
     final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(partyId: party.id),
-    );
-
-    if (data.mode == TransactionMode.credit)
-      state = AsyncValue.data(
-        data.copyWith(
-          creditSideLedgerId: null,
-        ),
-      );
+    state = data.mode == TransactionMode.credit
+        ? AsyncData(data.copyWith(
+            partyId: party.id,
+            creditSideLedgerId: null,
+          ))
+        : AsyncData(data.copyWith(partyId: party.id));
 
     print(state);
   }
@@ -43,6 +39,7 @@ class PurchaseOfMaterialController
   setAsset(LedgerMaster asset) {
     _assetName = asset.name;
     final data = state.data!.value;
+
     state = AsyncValue.data(
       data.copyWith(
         assetLedgerId: asset.id,

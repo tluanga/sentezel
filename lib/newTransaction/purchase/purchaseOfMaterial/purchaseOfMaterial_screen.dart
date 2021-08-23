@@ -155,7 +155,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                                       builder: (context) => PartySelectModal(
                                         onSelectParty: (party) {
                                           ref
-                                              .watch(
+                                              .read(
                                                   purchaseOfMaterialControllerProvider
                                                       .notifier)
                                               .setParty(party);
@@ -186,7 +186,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                                       children: [
                                         Text(
                                           data.partyId == null
-                                              ? 'Please Select Party ${data.partyId}'
+                                              ? 'Please Select Party ${currentState.data!.value.id}'
                                               : ref
                                                   .watch(
                                                       purchaseOfMaterialControllerProvider
