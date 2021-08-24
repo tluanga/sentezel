@@ -8,6 +8,7 @@ import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/receipts/receiptsConfirm_modal.dart';
 import 'package:sentezel/newTransaction/receipts/receiptsTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/receipts/receiptsTransactionTypeSelect_modal.dart';
 import 'package:sentezel/newTransaction/receipts/receipts_controller.dart';
 
 import 'package:sentezel/settings/party/partySelect_modal.dart';
@@ -38,7 +39,7 @@ class ReceiptsScreen extends HookConsumerWidget {
                   child: Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'General Sell',
+                        title: 'Receipts',
                         onSave: () {
                           onSubmit(ref, context);
                         },
@@ -52,7 +53,7 @@ class ReceiptsScreen extends HookConsumerWidget {
                               .setDate(selectedDate);
                         },
                       ),
-
+                      ReceiptsTransactionTypeSelectModalBottomSheet(),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),

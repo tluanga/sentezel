@@ -4,6 +4,7 @@ import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_screen.dart';
+import 'package:sentezel/newTransaction/receipts/receipts_screen.dart';
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_screen.dart';
 import 'package:sentezel/newTransaction/sell/sellReturn/sellReturn_screen.dart';
 
@@ -102,7 +103,14 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Receipt',
                   icon: CupertinoIcons.list_bullet_below_rectangle,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ReceiptsScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
