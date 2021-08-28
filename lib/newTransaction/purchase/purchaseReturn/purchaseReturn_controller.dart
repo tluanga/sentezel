@@ -38,7 +38,10 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
   }
 
   String _creditSideName = '';
-  String getCreditSideName() => _creditSideName;
+  String get CreditSideName => _creditSideName;
+
+  String _debitSideName = '';
+  String get DebitSideName => _debitSideName;
 
   PurchaseReturnController(this._read) : super(AsyncValue.loading());
 
@@ -59,13 +62,12 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
       partyId: null,
       date: DateTime.now(),
     );
-
-    _creditSideName = await _read(ledgerMasterRepositoryProvider)
-        .getLedgerMasterName(initialState.creditSideLedgerId!);
-
     state = AsyncValue.data(
       initialState,
     );
+    _setCreditSideName();
+    _setDebitSideName();
+
     print(_creditSideName);
   }
 
@@ -76,8 +78,7 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
       state = AsyncValue.data(
         data.copyWith(creditSideLedgerId: LedgerMasterIndex.Cash),
       );
-      _creditSideName = await _read(ledgerMasterRepositoryProvider)
-          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
+      _setCreditSideName();
     }
 
     if (mode == TransactionMode.partialPaymentByBank ||
@@ -86,8 +87,7 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
       state = AsyncValue.data(
         data.copyWith(creditSideLedgerId: LedgerMasterIndex.Bank),
       );
-      _creditSideName = await _read(ledgerMasterRepositoryProvider)
-          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
+      _setCreditSideName();
     }
     if (mode == TransactionMode.credit) {
       final data = state.data!.value;
@@ -124,12 +124,15 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
     );
   }
 
-  setPartialPaymentAmount(int partialAmount) {
-    print('Setting partial amount $partialAmount');
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(creditPartialPaymentAmount: partialAmount),
-    );
+  //---------Private helper function
+  _setCreditSideName() async {
+    _creditSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
+  }
+
+  _setDebitSideName() async {
+    _debitSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(initialState.debitSideLedgerId!);
   }
 
   submit() async {

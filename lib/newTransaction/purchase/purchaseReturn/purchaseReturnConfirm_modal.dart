@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+
+import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_controller.dart';
 
 class PurchaseReturnConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
   final Function onCancel;
+  final double itemFontSize = 16;
   const PurchaseReturnConfirmationBottomSheet({
     Key? key,
     required this.onConfirm,
@@ -17,9 +18,8 @@ class PurchaseReturnConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentState = ref.watch(purchaseOfMaterialControllerProvider);
+    final currentState = ref.watch(purchaseReturnControllerProvider);
     // final DateFormat formatter = DateFormat('dd-MM-yyyy');
-    final double itemFontSize = 16;
 
     return currentState.when(
         data: (data) => Material(
@@ -118,237 +118,23 @@ class PurchaseReturnConfirmationBottomSheet extends HookConsumerWidget {
                           2: FractionColumnWidth(.2),
                         },
                         children: [
-                          TableRow(
-                            children: [
-                              Container(
-                                height: 25,
-                                child: Center(
-                                  child: Text(
-                                    'Particulars',
-                                    style: TextStyle(
-                                      fontSize: itemFontSize,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: 25,
-                                child: Center(
-                                  child: Text(
-                                    'Debit',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container(
-                                height: 28,
-                                child: Center(
-                                  child: Text(
-                                    'Credit',
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  height: 25,
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        ref
-                                            .watch(
-                                                purchaseOfMaterialControllerProvider
-                                                    .notifier)
-                                            .getAssetName(),
-                                        // model.debitSideLedgerName,
-                                        style: TextStyle(
-                                          color: Palette.textColor,
-                                          fontSize: itemFontSize,
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            const EdgeInsets.only(right: 10),
-                                        child: Text(
-                                          'Dr.',
-                                          style: TextStyle(
-                                            color: Palette.textColor,
-                                            fontSize: itemFontSize,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                  child: Center(
-                                    child: Text(
-                                      data.amount.toString(),
-                                      style: TextStyle(
-                                        color: Palette.textColor,
-                                        fontSize: itemFontSize,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Container()
-                            ],
-                          ),
+                          _tableHeader(),
+                          //---------------DEBIT SIDE-----------
 
-                          TableRow(
-                            children: [
-                              Container(
-                                height: 40,
-                                child: Row(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Text(
-                                        'To',
-                                        style: TextStyle(
-                                          color: Palette.textColor,
-                                          fontSize: itemFontSize,
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width: 5,
-                                    ),
-                                    Text(
-                                      data.mode == TransactionMode.credit ||
-                                              data.mode ==
-                                                  TransactionMode
-                                                      .partialPaymentByBank ||
-                                              data.mode ==
-                                                  TransactionMode
-                                                      .partialPaymentByCash
-                                          ? ref
-                                              .watch(
-                                                  purchaseOfMaterialControllerProvider
-                                                      .notifier)
-                                              .getPartyName()
-                                          : ref
-                                              .watch(
-                                                  purchaseOfMaterialControllerProvider
-                                                      .notifier)
-                                              .getCreditSideName(),
-                                      // model.creditSideLedgerName,
-                                      style: TextStyle(
-                                        color: Palette.textColor,
-                                        fontSize: itemFontSize,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              Container(),
-                              Container(
-                                child: Center(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Text(
-                                      data.mode ==
-                                                  TransactionMode
-                                                      .partialPaymentByBank ||
-                                              data.mode ==
-                                                  TransactionMode
-                                                      .partialPaymentByCash
-                                          ? (data.amount -
-                                                  data.creditPartialPaymentAmount!)
-                                              .toString()
-                                          : data.amount.toString(),
-                                      style: TextStyle(
-                                        color: Palette.textColor,
-                                        fontSize: itemFontSize,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              )
-                            ],
+                          _debitSide(
+                            debitSideLedgerName: ref
+                                .watch(
+                                    purchaseReturnControllerProvider.notifier)
+                                .DebitSideName,
+                            amount: data.amount,
                           ),
-                          //---------Credit Partial Payment----------------
-                          data.mode == TransactionMode.partialPaymentByBank ||
-                                  data.mode ==
-                                      TransactionMode.partialPaymentByCash
-                              ? TableRow(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        height: 25,
-                                        child: Row(
-                                          children: [
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.all(1.0),
-                                              child: Text(
-                                                'To',
-                                                style: TextStyle(
-                                                  color: Palette.textColor,
-                                                  fontSize: itemFontSize,
-                                                ),
-                                              ),
-                                            ),
-                                            SizedBox(
-                                              width: 10,
-                                            ),
-                                            Text(
-                                              data.mode ==
-                                                      TransactionMode
-                                                          .partialPaymentByBank
-                                                  ? 'Bank'
-                                                  : 'Cash',
-                                              style: TextStyle(
-                                                color: Palette.textColor,
-                                                fontSize: itemFontSize,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Container(),
-                                    Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Container(
-                                        child: Center(
-                                          child: Text(
-                                            data.creditPartialPaymentAmount
-                                                .toString(),
-                                            style: TextStyle(
-                                              color: Palette.textColor,
-                                              fontSize: itemFontSize,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                              : TableRow(children: [
-                                  Container(),
-                                  Container(),
-                                  Container(),
-                                ]),
+                          _creditSide(
+                            creditSideLedgerName: ref
+                                .watch(
+                                    purchaseReturnControllerProvider.notifier)
+                                .CreditSideName,
+                            amount: data.amount,
+                          ),
                         ],
                       ),
                     ),
@@ -423,5 +209,150 @@ class PurchaseReturnConfirmationBottomSheet extends HookConsumerWidget {
               child: CircularProgressIndicator(),
             ),
         error: (error, stack) => Text(error.toString()));
+  }
+
+  _tableHeader() {
+    return TableRow(
+      children: [
+        Container(
+          height: 25,
+          child: Center(
+            child: Text(
+              'Particulars',
+              style: TextStyle(
+                fontSize: itemFontSize,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          height: 25,
+          child: Center(
+            child: Text(
+              'Debit',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          height: 28,
+          child: Center(
+            child: Text(
+              'Credit',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  //---------------Debit Side------------
+  _debitSide({required String debitSideLedgerName, required int amount}) {
+    return TableRow(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            height: 25,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  debitSideLedgerName,
+                  style: TextStyle(
+                    color: Palette.textColor,
+                    fontSize: itemFontSize,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(right: 10),
+                  child: Text(
+                    'Dr.',
+                    style: TextStyle(
+                      color: Palette.textColor,
+                      fontSize: itemFontSize,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: Center(
+              child: Text(
+                amount.toString(),
+                style: TextStyle(
+                  color: Palette.textColor,
+                  fontSize: itemFontSize,
+                ),
+              ),
+            ),
+          ),
+        ),
+        Container()
+      ],
+    );
+  }
+
+  //------------------CREDIT SIDE ------------------
+  _creditSide({required String creditSideLedgerName, required int amount}) {
+    return //-----------------Credit Side-----------------
+        TableRow(
+      children: [
+        Container(
+          height: 40,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  'To',
+                  style: TextStyle(
+                    color: Palette.textColor,
+                    fontSize: itemFontSize,
+                  ),
+                ),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                creditSideLedgerName,
+                style: TextStyle(
+                  color: Palette.textColor,
+                  fontSize: itemFontSize,
+                ),
+              ),
+            ],
+          ),
+        ),
+        Container(),
+        Container(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                amount.toString(),
+                style: TextStyle(
+                  color: Palette.textColor,
+                  fontSize: itemFontSize,
+                ),
+              ),
+            ),
+          ),
+        )
+      ],
+    );
   }
 }

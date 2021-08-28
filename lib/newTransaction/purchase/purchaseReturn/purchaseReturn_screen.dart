@@ -9,6 +9,7 @@ import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturnTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_controller.dart';
 
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
@@ -18,10 +19,10 @@ class PurchaseReturnScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     AsyncValue<Transaction> currentState =
-        ref.watch(purchaseOfMaterialControllerProvider);
+        ref.watch(purchaseReturnControllerProvider);
 
     onCancel() {
-      ref.read(purchaseOfMaterialControllerProvider.notifier).reset();
+      ref.read(purchaseReturnControllerProvider.notifier).reset();
     }
 
     return currentState.when(
