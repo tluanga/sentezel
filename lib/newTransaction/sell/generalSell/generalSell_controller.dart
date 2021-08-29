@@ -40,6 +40,9 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
   String _creditSideName = '';
   String getCreditSideName() => _creditSideName;
 
+  String _debitSideName = '';
+  String getDebitSideName() => _debitSideName;
+
   GeneralSellController(this._read) : super(AsyncValue.loading());
 
   //------------For Initialization--------
@@ -70,36 +73,30 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
   }
 
   setMode(TransactionMode mode) async {
+    int _debitSideLedgerId = 0;
+    _creditSideName = '';
     if (mode == TransactionMode.paymentByCash ||
-        mode == TransactionMode.partialPaymentByCash) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Cash),
-      );
-      _creditSideName = await _read(ledgerMasterRepositoryProvider)
-          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
-    }
+        mode == TransactionMode.partialPaymentByCash)
+      _debitSideLedgerId = LedgerMasterIndex.Cash;
 
     if (mode == TransactionMode.partialPaymentByBank ||
-        mode == TransactionMode.paymentByBank) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Bank),
-      );
-      _creditSideName = await _read(ledgerMasterRepositoryProvider)
-          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
-    }
-    if (mode == TransactionMode.credit) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: null),
-      );
-      _creditSideName = '';
-    }
+        mode == TransactionMode.paymentByBank)
+      _debitSideLedgerId = LedgerMasterIndex.Bank;
+
+    state = AsyncValue.data(
+      state.data!.value.copyWith(
+        creditSideLedgerId: _debitSideLedgerId,
+        mode: mode,
+      ),
+    );
+    if (state.data!.value.creditSideLedgerId != 0) _setDebitSideName()();
 
     final data = state.data!.value;
     state = AsyncValue.data(
-      data.copyWith(mode: mode),
+      data.copyWith(
+        mode: mode,
+        debitSideLedgerId: _debitSideLedgerId,
+      ),
     );
   }
 
@@ -138,6 +135,12 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     } catch (e) {
       print(e);
     }
+  }
+
+  //---------Private helper function
+  _setDebitSideName() async {
+    _debitSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(state.data!.value.debitSideLedgerId!);
   }
 
   reset() {
