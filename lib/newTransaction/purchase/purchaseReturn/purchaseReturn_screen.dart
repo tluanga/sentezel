@@ -8,6 +8,7 @@ import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturnConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturnTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_controller.dart';
 
@@ -43,7 +44,9 @@ class PurchaseReturnScreen extends HookConsumerWidget {
                         onSave: () {
                           onSubmit(ref, context);
                         },
-                        onCancel: onCancel,
+                        onCancel: () {
+                          onCancel();
+                        },
                       ),
                       DateSelectTimeLineWidget(
                         initialDate: data.date,
@@ -247,7 +250,7 @@ class PurchaseReturnScreen extends HookConsumerWidget {
   onSubmit(WidgetRef ref, context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => PurchaseOfMaterialConfirmationBottomSheet(
+      builder: (context) => PurchaseReturnConfirmationBottomSheet(
         onConfirm: () {
           ref.watch(purchaseOfMaterialControllerProvider.notifier).submit();
         },

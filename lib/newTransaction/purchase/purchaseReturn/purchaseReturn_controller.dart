@@ -56,8 +56,8 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
       particular: _transactionType.name,
       mode: TransactionMode.paymentByCash,
       sumChetVelDanType: _transactionType.sumChetVelDanType,
-      creditSideLedgerId: _transactionType.debitSideLedger,
-      debitSideLedgerId: _transactionType.creditSideLedger,
+      creditSideLedgerId: _transactionType.creditSideLedger,
+      debitSideLedgerId: _transactionType.debitSideLedger,
       transactionTypeId: _transactionType.id,
       partyId: null,
       date: DateTime.now(),
@@ -72,35 +72,17 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
   }
 
   setMode(TransactionMode mode) async {
-    if (mode == TransactionMode.paymentByCash ||
-        mode == TransactionMode.partialPaymentByCash) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Cash),
-      );
-      _setCreditSideName();
-    }
-
-    if (mode == TransactionMode.partialPaymentByBank ||
-        mode == TransactionMode.paymentByBank) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Bank),
-      );
-      _setCreditSideName();
-    }
-    if (mode == TransactionMode.credit) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: null),
-      );
-      _creditSideName = '';
-    }
-
-    final data = state.data!.value;
+    int _debitSideid;
+    mode == TransactionMode.paymentByCash
+        ? _debitSideid = LedgerMasterIndex.Cash
+        : _debitSideid = LedgerMasterIndex.Bank;
     state = AsyncValue.data(
-      data.copyWith(mode: mode),
+      state.data!.value.copyWith(
+        mode: mode,
+        debitSideLedgerId: _debitSideid,
+      ),
     );
+    _setDebitSideName();
   }
 
   setParticular(String particular) {
@@ -132,7 +114,7 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
 
   _setDebitSideName() async {
     _debitSideName = await _read(ledgerMasterRepositoryProvider)
-        .getLedgerMasterName(initialState.debitSideLedgerId!);
+        .getLedgerMasterName(state.data!.value.debitSideLedgerId!);
   }
 
   submit() async {
@@ -149,5 +131,6 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
     );
 
     _partyName = '';
+    print('Reset is called');
   }
 }

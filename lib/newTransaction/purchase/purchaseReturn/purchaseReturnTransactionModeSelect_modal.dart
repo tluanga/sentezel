@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_controller.dart';
 
 class PurchaseReturnTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
@@ -12,8 +12,8 @@ class PurchaseReturnTransactionModeSelectModalBottomSheet
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final setState = ref.read(purchaseOfMaterialControllerProvider.notifier);
-    final state = ref.read(purchaseOfMaterialControllerProvider);
+    final setState = ref.read(purchaseReturnControllerProvider.notifier);
+    final state = ref.read(purchaseReturnControllerProvider);
     return state.when(
       data: (data) {
         return Container(

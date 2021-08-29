@@ -56,6 +56,7 @@ class TopBarWithSaveWidget extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
+                      print('on calncel');
                       onCancel();
                       Navigator.pop(context);
                     },
