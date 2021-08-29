@@ -69,8 +69,8 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
       particular: _transactionType.name,
       mode: TransactionMode.paymentByCash,
       sumChetVelDanType: _transactionType.sumChetVelDanType,
-      creditSideLedgerId: _transactionType.debitSideLedger,
-      debitSideLedgerId: _transactionType.creditSideLedger,
+      creditSideLedgerId: _transactionType.creditSideLedger,
+      debitSideLedgerId: _transactionType.debitSideLedger,
       transactionTypeId: _transactionType.id,
       partyId: null,
       date: DateTime.now(),
@@ -89,24 +89,20 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
     int _crediSideLedgerId = 0;
     _creditSideName = '';
     if (mode == TransactionMode.paymentByCash ||
-        mode == TransactionMode.partialPaymentByCash) {
+        mode == TransactionMode.partialPaymentByCash)
       _crediSideLedgerId = LedgerMasterIndex.Cash;
-      _setCreditSideName();
-    }
 
     if (mode == TransactionMode.partialPaymentByBank ||
-        mode == TransactionMode.paymentByBank) {
+        mode == TransactionMode.paymentByBank)
       _crediSideLedgerId = LedgerMasterIndex.Bank;
-      _setCreditSideName();
-    }
 
-    if (mode == TransactionMode.credit)
-      state = AsyncValue.data(
-        state.data!.value.copyWith(
-          creditSideLedgerId: _crediSideLedgerId,
-          mode: mode,
-        ),
-      );
+    state = AsyncValue.data(
+      state.data!.value.copyWith(
+        creditSideLedgerId: _crediSideLedgerId,
+        mode: mode,
+      ),
+    );
+    if (state.data!.value.creditSideLedgerId != 0) _setCreditSideName();
   }
 
   setParticular(String particular) {
