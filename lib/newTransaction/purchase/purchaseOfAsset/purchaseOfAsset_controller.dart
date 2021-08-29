@@ -58,6 +58,8 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
   PurchaseOfAssetController(this._read) : super(AsyncValue.loading());
 
   final int _transactionTypeId = TransactionTypeIndex.PurchaseOfAssets;
+
+  //----------------Initialization----------------
   init() async {
     TransactionType _transactionType =
         await _read(transactionTypeRepositoryProvider)
@@ -84,37 +86,27 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
   }
 
   setMode(TransactionMode mode) async {
+    int _crediSideLedgerId = 0;
+    _creditSideName = '';
     if (mode == TransactionMode.paymentByCash ||
         mode == TransactionMode.partialPaymentByCash) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Cash),
-      );
-      _creditSideName = await _read(ledgerMasterRepositoryProvider)
-          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
+      _crediSideLedgerId = LedgerMasterIndex.Cash;
+      _setCreditSideName();
     }
 
     if (mode == TransactionMode.partialPaymentByBank ||
         mode == TransactionMode.paymentByBank) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Bank),
-      );
-      _creditSideName = await _read(ledgerMasterRepositoryProvider)
-          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
-    }
-    if (mode == TransactionMode.credit) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: null),
-      );
-      _creditSideName = '';
+      _crediSideLedgerId = LedgerMasterIndex.Bank;
+      _setCreditSideName();
     }
 
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(mode: mode),
-    );
+    if (mode == TransactionMode.credit)
+      state = AsyncValue.data(
+        state.data!.value.copyWith(
+          creditSideLedgerId: _crediSideLedgerId,
+          mode: mode,
+        ),
+      );
   }
 
   setParticular(String particular) {
@@ -144,6 +136,12 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
     state = AsyncValue.data(
       data.copyWith(creditPartialPaymentAmount: partialAmount),
     );
+  }
+
+  //---------Private helper function
+  _setCreditSideName() async {
+    _creditSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
   }
 
   submit() async {

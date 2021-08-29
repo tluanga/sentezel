@@ -1,4 +1,5 @@
 class LedgerMasterIndex {
+  static const Blank = 0;
   static const Bank = 1;
   static const Cash = 2;
   static const Purchase = 3;
