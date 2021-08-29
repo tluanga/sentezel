@@ -9,7 +9,6 @@ import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/sell/generalSell/generalSellConfirm_modal.dart';
 import 'package:sentezel/newTransaction/sell/generalSell/generalSellTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
-
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
 class GeneralSellScreen extends HookConsumerWidget {
@@ -38,7 +37,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                   child: Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'General Sell',
+                        title: 'New Asset Purchase',
                         onSave: () {
                           onSubmit(ref, context);
                         },
