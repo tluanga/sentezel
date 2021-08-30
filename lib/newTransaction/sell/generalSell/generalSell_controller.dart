@@ -37,24 +37,6 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     print(state);
   }
 
-  setAmount(int amount) {
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(amount: amount),
-    );
-    _setDebitAmount();
-  }
-
-  setPartialPaymentAmount(int partialAmount) {
-    print('Setting partial amount $partialAmount');
-    final data = state.data!.value;
-
-    state = AsyncValue.data(
-      data.copyWith(partialPaymentAmount: partialAmount),
-    );
-    _setDebitAmount();
-  }
-
   String _creditSideName = '';
   String get CreditSideName => _creditSideName;
   _setCreditSideName() async {
@@ -105,9 +87,6 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     state = AsyncValue.data(
       initialState,
     );
-    _setCreditSideName();
-    _setDebitSideName();
-    _setDebitAmount();
 
     print(_creditSideName);
   }
@@ -129,22 +108,10 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     _setDebitSideName();
   }
 
-  setParticular(String particular) {
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(particular: particular),
-    );
-  }
-
-  setDate(DateTime date) {
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(date: date),
-    );
-  }
-
   setup() {
     _setDebitAmount();
+    _setCreditSideName();
+    _setDebitSideName();
   }
 
   submit() async {

@@ -46,9 +46,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                       DateSelectTimeLineWidget(
                         initialDate: data.date,
                         onDateSelected: (selectedDate) {
-                          ref
-                              .watch(generalSellControllerProvider.notifier)
-                              .setDate(selectedDate);
+                          data.date = selectedDate;
                         },
                       ),
 
@@ -65,10 +63,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                             child: TextFormField(
                               //
                               onChanged: (value) {
-                                ref
-                                    .watch(
-                                        generalSellControllerProvider.notifier)
-                                    .setAmount(int.parse(value));
+                                data.amount = int.parse(value);
                               },
                               decoration: InputDecoration(
                                 labelText: 'Amount',
@@ -139,10 +134,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                                         TransactionMode.partialPaymentByCash)
                                   PartialPaymentWidget(
                                     onChange: (amount) {
-                                      ref
-                                          .watch(generalSellControllerProvider
-                                              .notifier)
-                                          .setPartialPaymentAmount(amount);
+                                      data.partialPaymentAmount = amount;
                                     },
                                     defaultValue: data.partialPaymentAmount!,
                                   ),
