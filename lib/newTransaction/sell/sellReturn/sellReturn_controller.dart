@@ -38,7 +38,10 @@ class SellReturnController extends StateNotifier<AsyncValue<Transaction>> {
   }
 
   String _creditSideName = '';
-  String getCreditSideName() => _creditSideName;
+  String get CreditSideName => _creditSideName;
+
+  String _debitSideName = '';
+  String get DebitSideName => _debitSideName;
 
   SellReturnController(this._read) : super(AsyncValue.loading());
 
@@ -53,83 +56,44 @@ class SellReturnController extends StateNotifier<AsyncValue<Transaction>> {
       particular: _transactionType.name,
       mode: TransactionMode.paymentByCash,
       sumChetVelDanType: _transactionType.sumChetVelDanType,
-      creditSideLedgerId: _transactionType.debitSideLedger,
-      debitSideLedgerId: _transactionType.creditSideLedger,
+      creditSideLedgerId: _transactionType.creditSideLedger,
+      debitSideLedgerId: _transactionType.debitSideLedger,
       transactionTypeId: _transactionType.id,
       partyId: null,
       date: DateTime.now(),
     );
-
-    _creditSideName = await _read(ledgerMasterRepositoryProvider)
-        .getLedgerMasterName(initialState.creditSideLedgerId!);
-
     state = AsyncValue.data(
       initialState,
     );
+    _setCreditSideName();
+    _setDebitSideName();
+
     print(_creditSideName);
   }
 
   setMode(TransactionMode mode) async {
-    if (mode == TransactionMode.paymentByCash ||
-        mode == TransactionMode.partialPaymentByCash) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Cash),
-      );
-      _creditSideName = await _read(ledgerMasterRepositoryProvider)
-          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
-    }
-
-    if (mode == TransactionMode.partialPaymentByBank ||
-        mode == TransactionMode.paymentByBank) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: LedgerMasterIndex.Bank),
-      );
-      _creditSideName = await _read(ledgerMasterRepositoryProvider)
-          .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
-    }
-    if (mode == TransactionMode.credit) {
-      final data = state.data!.value;
-      state = AsyncValue.data(
-        data.copyWith(creditSideLedgerId: null),
-      );
-      _creditSideName = '';
-    }
-
-    final data = state.data!.value;
+    int _debitSideid;
+    mode == TransactionMode.paymentByCash
+        ? _debitSideid = LedgerMasterIndex.Cash
+        : _debitSideid = LedgerMasterIndex.Bank;
     state = AsyncValue.data(
-      data.copyWith(mode: mode),
+      state.data!.value.copyWith(
+        mode: mode,
+        debitSideLedgerId: _debitSideid,
+      ),
     );
+    _setDebitSideName();
   }
 
-  setParticular(String particular) {
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(particular: particular),
-    );
+  //---------Private helper function
+  _setCreditSideName() async {
+    _creditSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
   }
 
-  setDate(DateTime date) {
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(date: date),
-    );
-  }
-
-  setAmount(int amount) {
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(amount: amount),
-    );
-  }
-
-  setPartialPaymentAmount(int partialAmount) {
-    print('Setting partial amount $partialAmount');
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(partialPaymentAmount: partialAmount),
-    );
+  _setDebitSideName() async {
+    _debitSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(state.data!.value.debitSideLedgerId!);
   }
 
   submit() async {
@@ -146,5 +110,6 @@ class SellReturnController extends StateNotifier<AsyncValue<Transaction>> {
     );
 
     _partyName = '';
+    print('Reset is called');
   }
 }

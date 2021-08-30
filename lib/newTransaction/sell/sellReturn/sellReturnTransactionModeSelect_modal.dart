@@ -17,7 +17,7 @@ class SellReturnTransactionModeSelectModalBottomSheet
     return state.when(
       data: (data) {
         return Container(
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: MediaQuery.of(context).size.height * 0.2,
           child: Column(
             children: [
               Container(
@@ -84,74 +84,6 @@ class SellReturnTransactionModeSelectModalBottomSheet
                       ),
                     ),
                     //--------------
-                    Container(
-                      margin: EdgeInsets.all(0),
-                      child: ListTile(
-                        title: Text(
-                          'Full Credit',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        trailing: Radio(
-                          value: TransactionMode.credit,
-                          onChanged: (value) {
-                            setState.setMode(TransactionMode.credit);
-
-                            Navigator.pop(context);
-                          },
-                          groupValue: data.mode,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(0),
-                      child: ListTile(
-                        title: Text(
-                          'Credit with Partial Payment by Bank',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        trailing: Radio(
-                          value: TransactionMode.partialPaymentByBank,
-                          onChanged: (value) {
-                            setState
-                                .setMode(TransactionMode.partialPaymentByBank);
-
-                            Navigator.pop(context);
-                          },
-                          groupValue: data.mode,
-                        ),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(0),
-                      child: ListTile(
-                        title: Text(
-                          'Credit with Partial Payment by Cash',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        trailing: Radio(
-                          value: TransactionMode.partialPaymentByCash,
-                          onChanged: (value) {
-                            setState
-                                .setMode(TransactionMode.partialPaymentByCash);
-
-                            Navigator.pop(context);
-                          },
-                          groupValue: data.mode,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
