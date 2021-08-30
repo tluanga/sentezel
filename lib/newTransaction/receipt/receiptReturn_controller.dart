@@ -46,7 +46,11 @@ class ReceiptController extends StateNotifier<AsyncValue<Transaction>> {
   ReceiptController(this._read) : super(AsyncValue.loading());
 
   //------------For Initialization--------
-  final int _transactionTypeId = TransactionTypeIndex.PurchaseReturn;
+  int _transactionTypeId = TransactionTypeIndex.RentReceived;
+  set transactionTypeId(id) {
+    _transactionTypeId = id;
+  }
+
   init() async {
     TransactionType _transactionType =
         await _read(transactionTypeRepositoryProvider)

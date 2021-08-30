@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
+import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 import 'package:sentezel/settings/transactionType/transactionType_config.dart';
 import 'package:sqflite_common/sqlite_api.dart';
@@ -44,6 +45,20 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
     } catch (e) {
       print(e);
       return 'Error';
+    }
+  }
+
+  Future<List<TransactionType>> getTransactionTypeListBySumChetvelDanType(
+      SumChetvelDanType type) async {
+    try {
+      Database db = await DatabaseService.instance.db;
+
+      final result = await db
+          .query(dbName, where: 'sumChetVelDanType=?', whereArgs: [type]);
+      return result.map((e) => TransactionType.fromMap(e)).toList();
+    } catch (e) {
+      print(e);
+      throw e;
     }
   }
 

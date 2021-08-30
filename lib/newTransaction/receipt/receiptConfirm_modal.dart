@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-
-import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_controller.dart';
+import 'package:sentezel/newTransaction/receipt/receiptReturn_controller.dart';
 
 class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
@@ -18,8 +17,7 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentState = ref.watch(purchaseReturnControllerProvider);
-    // final DateFormat formatter = DateFormat('dd-MM-yyyy');
+    final currentState = ref.watch(receiptControllerProvider);
 
     return currentState.when(
         data: (data) => Material(
@@ -123,15 +121,13 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
 
                           _debitSide(
                             debitSideLedgerName: ref
-                                .watch(
-                                    purchaseReturnControllerProvider.notifier)
+                                .watch(receiptControllerProvider.notifier)
                                 .DebitSideName,
                             amount: data.amount,
                           ),
                           _creditSide(
                             creditSideLedgerName: ref
-                                .watch(
-                                    purchaseReturnControllerProvider.notifier)
+                                .watch(receiptControllerProvider.notifier)
                                 .CreditSideName,
                             amount: data.amount,
                           ),
