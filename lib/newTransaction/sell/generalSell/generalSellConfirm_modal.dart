@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
 
@@ -117,15 +118,37 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
                           2: FractionColumnWidth(.2),
                         },
                         children: [
-                          _tableHeader(),
                           //---------------DEBIT SIDE-----------
-
+                          _tableHeader(),
                           _debitSide(
-                            debitSideLedgerName: ref
+                            debitSideLedgerName: data.mode ==
+                                        TransactionMode.credit ||
+                                    data.mode ==
+                                        TransactionMode.partialPaymentByBank ||
+                                    data.mode ==
+                                        TransactionMode.partialPaymentByCash
+                                ? ref
+                                    .watch(
+                                        generalSellControllerProvider.notifier)
+                                    .getPartyName()
+                                : ref
+                                    .watch(
+                                        generalSellControllerProvider.notifier)
+                                    .DebitSideName,
+                            amount: ref
                                 .watch(generalSellControllerProvider.notifier)
-                                .DebitSideName,
-                            amount: data.amount,
+                                .debitAmount,
                           ),
+
+                          if (data.partialPaymentAmount != 0)
+                            _debitSide(
+                              debitSideLedgerName: ref
+                                  .watch(generalSellControllerProvider.notifier)
+                                  .DebitSideName,
+                              amount: data.partialPaymentAmount!,
+                            ),
+
+                          //------------------CREDIT SIDE--------------
                           _creditSide(
                             creditSideLedgerName: ref
                                 .watch(generalSellControllerProvider.notifier)

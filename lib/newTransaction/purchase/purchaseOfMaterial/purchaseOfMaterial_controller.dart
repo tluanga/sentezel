@@ -147,7 +147,7 @@ class PurchaseOfMaterialController
     print('Setting partial amount $partialAmount');
     final data = state.data!.value;
     state = AsyncValue.data(
-      data.copyWith(creditPartialPaymentAmount: partialAmount),
+      data.copyWith(partialPaymentAmount: partialAmount),
     );
   }
 

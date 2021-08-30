@@ -130,7 +130,7 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
     print('Setting partial amount $partialAmount');
     final data = state.data!.value;
     state = AsyncValue.data(
-      data.copyWith(creditPartialPaymentAmount: partialAmount),
+      data.copyWith(partialPaymentAmount: partialAmount),
     );
   }
 

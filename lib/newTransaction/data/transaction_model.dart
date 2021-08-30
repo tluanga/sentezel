@@ -16,7 +16,7 @@ class Transaction {
   int transactionTypeId;
   int? debitSideLedgerId; //computed-
   int? creditSideLedgerId;
-  int? creditPartialPaymentAmount;
+  int? partialPaymentAmount;
 
   String getInitialLetter() {
     return this.particular[0].toUpperCase();
@@ -34,7 +34,7 @@ class Transaction {
     required this.transactionTypeId,
     this.debitSideLedgerId,
     this.creditSideLedgerId,
-    this.creditPartialPaymentAmount,
+    this.partialPaymentAmount = 0,
   });
 
   Transaction copyWith({
@@ -49,7 +49,7 @@ class Transaction {
     int? transactionTypeId,
     int? debitSideLedgerId,
     int? creditSideLedgerId,
-    int? creditPartialPaymentAmount,
+    int? partialPaymentAmount = 0,
   }) {
     return Transaction(
       id: id ?? this.id,
@@ -63,8 +63,7 @@ class Transaction {
       transactionTypeId: transactionTypeId ?? this.transactionTypeId,
       debitSideLedgerId: debitSideLedgerId ?? this.debitSideLedgerId,
       creditSideLedgerId: creditSideLedgerId ?? this.creditSideLedgerId,
-      creditPartialPaymentAmount:
-          creditPartialPaymentAmount ?? this.creditPartialPaymentAmount,
+      partialPaymentAmount: partialPaymentAmount ?? this.partialPaymentAmount,
     );
   }
 
@@ -81,7 +80,7 @@ class Transaction {
       'transactionTypeId': transactionTypeId,
       'debitSideLedgerId': debitSideLedgerId,
       'creditSideLedgerId': creditSideLedgerId,
-      'creditPartialPaymentAmount': creditPartialPaymentAmount,
+      'partialPaymentAmount': partialPaymentAmount,
     };
 
     return a;
@@ -123,7 +122,7 @@ class Transaction {
       transactionTypeId: map['transactionTypeId'],
       debitSideLedgerId: map['debitSideLedgerId'],
       creditSideLedgerId: map['creditSideLedgerId'],
-      creditPartialPaymentAmount: map['creditPartialPaymentAmount'],
+      partialPaymentAmount: map['partialPaymentAmount'],
     );
 
     return b;
@@ -137,7 +136,7 @@ class Transaction {
   @override
   String toString() {
     String _mode = EnumToString.convertToString(mode);
-    return 'Transaction(id: $id, amount: $amount,mode:$_mode, particular: $particular, date: $date, partyId: $partyId, assetLedgerId: $assetLedgerId, transactionTypeId: $transactionTypeId, debitSideLedgerId: $debitSideLedgerId, creditSideLedgerId: $creditSideLedgerId, creditPartialPaymentAmount: $creditPartialPaymentAmount)';
+    return 'Transaction(id: $id, amount: $amount,mode:$_mode, particular: $particular, date: $date, partyId: $partyId, assetLedgerId: $assetLedgerId, transactionTypeId: $transactionTypeId, debitSideLedgerId: $debitSideLedgerId, creditSideLedgerId: $creditSideLedgerId, partialPaymentAmount: $partialPaymentAmount)';
   }
 
   @override
@@ -154,7 +153,7 @@ class Transaction {
         other.transactionTypeId == transactionTypeId &&
         other.debitSideLedgerId == debitSideLedgerId &&
         other.creditSideLedgerId == creditSideLedgerId &&
-        other.creditPartialPaymentAmount == creditPartialPaymentAmount;
+        other.partialPaymentAmount == partialPaymentAmount;
   }
 
   @override
@@ -168,6 +167,6 @@ class Transaction {
         transactionTypeId.hashCode ^
         debitSideLedgerId.hashCode ^
         creditSideLedgerId.hashCode ^
-        creditPartialPaymentAmount.hashCode;
+        partialPaymentAmount.hashCode;
   }
 }

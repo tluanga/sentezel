@@ -135,19 +135,20 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                data.mode ==
-                                            TransactionMode
-                                                .partialPaymentByBank ||
-                                        data.mode ==
-                                            TransactionMode.partialPaymentByCash
-                                    ? PartialPaymentWidget(onChange: (amount) {
-                                        ref
-                                            .watch(
-                                                purchaseOfMaterialControllerProvider
-                                                    .notifier)
-                                            .setPartialPaymentAmount(amount);
-                                      })
-                                    : Container(),
+                                if (data.mode ==
+                                        TransactionMode.partialPaymentByBank ||
+                                    data.mode ==
+                                        TransactionMode.partialPaymentByCash)
+                                  PartialPaymentWidget(
+                                    onChange: (amount) {
+                                      ref
+                                          .watch(
+                                              purchaseOfMaterialControllerProvider
+                                                  .notifier)
+                                          .setPartialPaymentAmount(amount);
+                                    },
+                                    defaultValue: data.partialPaymentAmount!,
+                                  ),
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(

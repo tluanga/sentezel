@@ -37,19 +37,51 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     print(state);
   }
 
+  setAmount(int amount) {
+    final data = state.data!.value;
+    state = AsyncValue.data(
+      data.copyWith(amount: amount),
+    );
+    _setDebitAmount();
+  }
+
   setPartialPaymentAmount(int partialAmount) {
     print('Setting partial amount $partialAmount');
     final data = state.data!.value;
+
     state = AsyncValue.data(
-      data.copyWith(creditPartialPaymentAmount: partialAmount),
+      data.copyWith(partialPaymentAmount: partialAmount),
     );
+    _setDebitAmount();
   }
 
   String _creditSideName = '';
   String get CreditSideName => _creditSideName;
+  _setCreditSideName() async {
+    _creditSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
+  }
 
   String _debitSideName = '';
   String get DebitSideName => _debitSideName;
+  _setDebitSideName() async {
+    _debitSideName = await _read(ledgerMasterRepositoryProvider)
+        .getLedgerMasterName(state.data!.value.debitSideLedgerId!);
+  }
+
+  //------------This credit amount is for display purpose only----
+  //----And it will not be saved in the database
+  int _debitAmount = 0;
+  int get debitAmount => _debitAmount;
+  _setDebitAmount() {
+    if (state.data!.value.mode == TransactionMode.partialPaymentByBank ||
+        state.data!.value.mode == TransactionMode.partialPaymentByCash) {
+      _debitAmount =
+          state.data!.value.amount - state.data!.value.partialPaymentAmount!;
+    } else
+      _debitAmount = state.data!.value.amount;
+    print('debit amount is $_debitAmount');
+  }
 
   GeneralSellController(this._read) : super(AsyncValue.loading());
 
@@ -75,6 +107,7 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     );
     _setCreditSideName();
     _setDebitSideName();
+    _setDebitAmount();
 
     print(_creditSideName);
   }
@@ -84,10 +117,13 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     mode == TransactionMode.paymentByCash
         ? _debitSideid = LedgerMasterIndex.Cash
         : _debitSideid = LedgerMasterIndex.Bank;
+    //We have to reset the partial payment amount if a partial payment is not selected
+
     state = AsyncValue.data(
       state.data!.value.copyWith(
         mode: mode,
         debitSideLedgerId: _debitSideid,
+        partialPaymentAmount: 0,
       ),
     );
     _setDebitSideName();
@@ -107,22 +143,8 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     );
   }
 
-  setAmount(int amount) {
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(amount: amount),
-    );
-  }
-
-  //---------Private helper function
-  _setCreditSideName() async {
-    _creditSideName = await _read(ledgerMasterRepositoryProvider)
-        .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
-  }
-
-  _setDebitSideName() async {
-    _debitSideName = await _read(ledgerMasterRepositoryProvider)
-        .getLedgerMasterName(state.data!.value.debitSideLedgerId!);
+  setup() {
+    _setDebitAmount();
   }
 
   submit() async {

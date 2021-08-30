@@ -134,19 +134,20 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                data.mode ==
-                                            TransactionMode
-                                                .partialPaymentByBank ||
-                                        data.mode ==
-                                            TransactionMode.partialPaymentByCash
-                                    ? PartialPaymentWidget(onChange: (amount) {
-                                        ref
-                                            .watch(
-                                                purchaseOfAssetControllerProvider
-                                                    .notifier)
-                                            .setPartialPaymentAmount(amount);
-                                      })
-                                    : Container(),
+                                if (data.mode ==
+                                        TransactionMode.partialPaymentByBank ||
+                                    data.mode ==
+                                        TransactionMode.partialPaymentByCash)
+                                  PartialPaymentWidget(
+                                    onChange: (amount) {
+                                      ref
+                                          .watch(
+                                              purchaseOfAssetControllerProvider
+                                                  .notifier)
+                                          .setPartialPaymentAmount(amount);
+                                    },
+                                    defaultValue: data.partialPaymentAmount!,
+                                  ),
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(

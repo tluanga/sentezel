@@ -273,7 +273,7 @@ class SellReturnConfirmationBottomSheet extends HookConsumerWidget {
                                                   TransactionMode
                                                       .partialPaymentByCash
                                           ? (data.amount -
-                                                  data.creditPartialPaymentAmount!)
+                                                  data.partialPaymentAmount!)
                                               .toString()
                                           : data.amount.toString(),
                                       style: TextStyle(
@@ -333,7 +333,7 @@ class SellReturnConfirmationBottomSheet extends HookConsumerWidget {
                                       child: Container(
                                         child: Center(
                                           child: Text(
-                                            data.creditPartialPaymentAmount
+                                            data.partialPaymentAmount
                                                 .toString(),
                                             style: TextStyle(
                                               color: Palette.textColor,

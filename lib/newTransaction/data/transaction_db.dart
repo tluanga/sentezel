@@ -18,7 +18,7 @@ class TransactionDb {
             transactionTypeId INT,
             debitSideLedgerId INT,
             creditSideLedgerId INT,
-            creditPartialPaymentAmount INT
+            partialPaymentAmount INT
             
              )''',
     );

@@ -37,7 +37,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                   child: Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'New Asset Purchase',
+                        title: 'General Sell',
                         onSave: () {
                           onSubmit(ref, context);
                         },
@@ -133,18 +133,19 @@ class GeneralSellScreen extends HookConsumerWidget {
                           ? Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                data.mode ==
-                                            TransactionMode
-                                                .partialPaymentByBank ||
-                                        data.mode ==
-                                            TransactionMode.partialPaymentByCash
-                                    ? PartialPaymentWidget(onChange: (amount) {
-                                        ref
-                                            .watch(generalSellControllerProvider
-                                                .notifier)
-                                            .setPartialPaymentAmount(amount);
-                                      })
-                                    : Container(),
+                                if (data.mode ==
+                                        TransactionMode.partialPaymentByBank ||
+                                    data.mode ==
+                                        TransactionMode.partialPaymentByCash)
+                                  PartialPaymentWidget(
+                                    onChange: (amount) {
+                                      ref
+                                          .watch(generalSellControllerProvider
+                                              .notifier)
+                                          .setPartialPaymentAmount(amount);
+                                    },
+                                    defaultValue: data.partialPaymentAmount!,
+                                  ),
                                 GestureDetector(
                                   onTap: () {
                                     showModalBottomSheet(
@@ -241,6 +242,7 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   onSubmit(WidgetRef ref, context) {
+    ref.watch(generalSellControllerProvider.notifier).setup();
     showModalBottomSheet(
       context: context,
       builder: (context) => GeneralSellConfirmationBottomSheet(
