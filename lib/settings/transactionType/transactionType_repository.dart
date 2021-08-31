@@ -55,7 +55,7 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
 
       final result = await db
           .query(dbName, where: 'sumChetVelDanType=?', whereArgs: [_type]);
-      print(result);
+
       return result.map((e) => TransactionType.fromMap(e)).toList();
     } catch (e) {
       print(e);
