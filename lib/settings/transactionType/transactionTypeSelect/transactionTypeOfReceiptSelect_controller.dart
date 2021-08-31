@@ -17,6 +17,19 @@ class TransactionTypeSelectController
     state = AsyncValue.data(data);
   }
 
+  loadData({String searchString = ''}) async {
+    print('Loading Receipt Type List');
+    try {
+      final result = await _read(transactionTypeRepositoryProvider).getList(
+        searchString: searchString,
+        type: SumChetvelDanType.lakluh,
+      );
+      if (mounted) state = AsyncValue.data(result);
+    } on Exception catch (e) {
+      return e;
+    }
+  }
+
   search({String searchParam = ''}) async {
     final data = state.data!.value;
     print(data);

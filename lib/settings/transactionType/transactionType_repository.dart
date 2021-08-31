@@ -63,28 +63,35 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
     }
   }
 
-  //  Future<Note> readNote(int id) async {
-  //   final db = await instance.database;
-
-  //   final maps = await db.query(
-  //     tableNotes,
-  //     columns: NoteFields.values,
-  //     where: '${NoteFields.id} = ?',
-  //     whereArgs: [id],
-  //   );
-
-  //   if (maps.isNotEmpty) {
-  //     return Note.fromJson(maps.first);
-  //   } else {
-  //     throw Exception('ID $id not found');
-  //   }
-  // }
-
+  //-------Get All item--
   @override
-  Future<List<TransactionType>> getList(
-      {String searchString = '', DateTime? startDate, DateTime? endDate}) {
-    // TODO: implement getList
-    throw UnimplementedError();
+  Future<List<TransactionType>> getList({
+    String searchString = '',
+    SumChetvelDanType? type,
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async {
+    try {
+      String _type = EnumToString.convertToString(type);
+      Database db = await DatabaseService.instance.db;
+
+      final result = await db.rawQuery('''
+      Select * from $dbName
+      WHERE name LIKE '$searchString%'
+      AND sumChetvelDanType Like '$_type'
+      ''');
+      List<TransactionType> list = [];
+      result.forEach((item) {
+        list.add(TransactionType.fromMap(item));
+        print('name');
+        print(item['name']);
+      });
+
+      return list;
+    } catch (e) {
+      print(e);
+      return [];
+    }
   }
 
   @override

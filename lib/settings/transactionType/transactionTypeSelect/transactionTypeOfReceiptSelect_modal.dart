@@ -4,9 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
-import 'package:sentezel/newTransaction/common/transactionTypeSelect/transactionTypeSelect_constroller.dart';
 import 'package:sentezel/settings/asset/newAsset_modal.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
+import 'package:sentezel/settings/transactionType/transactionTypeSelect/transactionTypeOfReceiptSelect_controller.dart';
 
 class TransactionTypeOfReceiptSelectModal extends HookConsumerWidget {
   final Function(TransactionType) onSelect;
@@ -22,14 +22,14 @@ class TransactionTypeOfReceiptSelectModal extends HookConsumerWidget {
 
     final _searchTextEditingController = useTextEditingController();
     _onSearch() async {
-      ref.read(transactionTypeOfReceiptControllerProvider.notifier).search(
-            searchParam: _searchTextEditingController.text,
+      ref.read(transactionTypeOfReceiptControllerProvider.notifier).loadData(
+            searchString: _searchTextEditingController.text,
           );
     }
 
     useEffect(() {
       _searchTextEditingController.addListener(_onSearch);
-    });
+    }, []);
 
     return Scaffold(
       body: SafeArea(
