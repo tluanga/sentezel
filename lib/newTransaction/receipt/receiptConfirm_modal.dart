@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/receipt/receiptReturn_controller.dart';
+import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
 
 class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;

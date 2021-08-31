@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
@@ -16,9 +17,7 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
   const TransactionTypeRepository(this._read);
 
   @override
-  void add({required payload}) {
-    // TODO: implement add
-  }
+  void add({required payload}) {}
 
   @override
   Future<TransactionType> getItem({required int id}) async {
@@ -50,11 +49,13 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
 
   Future<List<TransactionType>> getTransactionTypeListBySumChetvelDanType(
       SumChetvelDanType type) async {
+    final _type = EnumToString.convertToString(type);
     try {
       Database db = await DatabaseService.instance.db;
 
       final result = await db
-          .query(dbName, where: 'sumChetVelDanType=?', whereArgs: [type]);
+          .query(dbName, where: 'sumChetVelDanType=?', whereArgs: [_type]);
+      print(result);
       return result.map((e) => TransactionType.fromMap(e)).toList();
     } catch (e) {
       print(e);

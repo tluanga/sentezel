@@ -12,6 +12,10 @@ class TransactionType {
 
   ActiveInActive? status = ActiveInActive.active;
 
+  String getInitialLetter() {
+    return this.name[0].toUpperCase();
+  }
+
   // 0 - when Incomplete and 1- when Complete
 
   TransactionType({

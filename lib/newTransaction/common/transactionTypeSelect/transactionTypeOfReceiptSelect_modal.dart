@@ -4,26 +4,26 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
-import 'package:sentezel/settings/asset/assetList_controller.dart';
+import 'package:sentezel/newTransaction/common/transactionTypeSelect/transactionTypeSelect_constroller.dart';
 import 'package:sentezel/settings/asset/newAsset_modal.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
+import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 
-class TransactionTypeSelectModal extends HookConsumerWidget {
-  final Function(LedgerMaster) onSelect;
+class TransactionTypeOfReceiptSelectModal extends HookConsumerWidget {
+  final Function(TransactionType) onSelect;
 
-  const TransactionTypeSelectModal({
+  const TransactionTypeOfReceiptSelectModal({
     Key? key,
     required this.onSelect,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(assetListControllerProvider);
+    final list = ref.watch(transactionTypeOfReceiptControllerProvider);
 
     final _searchTextEditingController = useTextEditingController();
     _onSearch() async {
-      ref.read(assetListControllerProvider.notifier).loadData(
-            searchString: _searchTextEditingController.text,
+      ref.read(transactionTypeOfReceiptControllerProvider.notifier).search(
+            searchParam: _searchTextEditingController.text,
           );
     }
 
@@ -37,7 +37,7 @@ class TransactionTypeSelectModal extends HookConsumerWidget {
           child: Column(
             children: [
               TopBarWithNewForBottomSheetWidget(
-                label: 'Asset Select',
+                label: 'Receipt Select',
                 onNew: () {
                   showModalBottomSheet(
                     context: context,
@@ -72,7 +72,7 @@ class TransactionTypeSelectModal extends HookConsumerWidget {
     );
   }
 
-  _list(BuildContext context, List<LedgerMaster> list) {
+  _list(BuildContext context, List<TransactionType> list) {
     print(list);
     list.sort((a, b) => a.name.compareTo(b.name));
 
@@ -89,8 +89,8 @@ class TransactionTypeSelectModal extends HookConsumerWidget {
 
   _listItem(
       {required BuildContext context,
-      required LedgerMaster item,
-      required Function(LedgerMaster) onSelect}) {
+      required TransactionType item,
+      required Function(TransactionType) onSelect}) {
     Color _color = Palette.color3;
 
     if (item.id / 2 == 0) _color = Palette.color1;
