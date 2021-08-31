@@ -20,16 +20,12 @@ class TransactionTypeOfReceiptSelectModal extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final list = ref.watch(transactionTypeOfReceiptControllerProvider);
 
-    final _searchTextEditingController = useTextEditingController();
-    _onSearch() async {
-      ref.read(transactionTypeOfReceiptControllerProvider.notifier).loadData(
-            searchString: _searchTextEditingController.text,
-          );
-    }
+    // final _searchTextEditingController = useTextEditingController();
+    // _onSearch() async {}
 
-    useEffect(() {
-      _searchTextEditingController.addListener(_onSearch);
-    }, []);
+    // useEffect(() {
+    //   _searchTextEditingController.addListener(_onSearch);
+    // }, []);
 
     return Scaffold(
       body: SafeArea(
@@ -52,7 +48,14 @@ class TransactionTypeOfReceiptSelectModal extends HookConsumerWidget {
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: TextFormField(
                   decoration: InputDecoration(labelText: 'Search'),
-                  controller: _searchTextEditingController,
+                  onChanged: (value) {
+                    ref
+                        .read(
+                            transactionTypeOfReceiptControllerProvider.notifier)
+                        .loadData(
+                          searchString: value,
+                        );
+                  },
                 ),
               ),
               list.when(
