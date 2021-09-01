@@ -5,10 +5,10 @@ import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/receipt/receiptConfirm_modal.dart';
+import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/transactionTypeOfReceiptSelect_modal.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
 import 'package:sentezel/newTransaction/receipt/receiptTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_model.dart';
-import 'package:sentezel/settings/transactionType/transactionTypeSelect/transactionTypeOfReceiptSelect_modal.dart';
 
 class ReceiptScreen extends HookConsumerWidget {
   const ReceiptScreen({Key? key}) : super(key: key);
@@ -120,7 +120,9 @@ class ReceiptScreen extends HookConsumerWidget {
                       context: context,
                       builder: (context) => TransactionTypeOfReceiptSelectModal(
                         onSelect: (receipt) {
-                          currentState.receiptTransactionType = receipt;
+                          ref
+                              .read(receiptControllerProvider.notifier)
+                              .setReceiptTransactionType(receipt);
                         },
                       ),
                     );

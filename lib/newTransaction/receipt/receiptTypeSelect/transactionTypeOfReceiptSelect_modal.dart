@@ -4,9 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
+import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/transactionTypeOfReceiptSelect_controller.dart';
 import 'package:sentezel/settings/asset/newAsset_modal.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
-import 'package:sentezel/settings/transactionType/transactionTypeSelect/transactionTypeOfReceiptSelect_controller.dart';
 
 class TransactionTypeOfReceiptSelectModal extends HookConsumerWidget {
   final Function(TransactionType) onSelect;
