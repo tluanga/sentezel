@@ -89,7 +89,7 @@ class GeneralSellController extends StateNotifier<AsyncValue<Transaction>> {
     );
 
     print(_creditSideName);
-  }
+}
 
   setMode(TransactionMode mode) async {
     int _debitSideid;

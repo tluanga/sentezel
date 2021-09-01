@@ -1,119 +1,67 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/newTransaction/receipt/receipt_model.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
-import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
-import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
 
 final receiptControllerProvider =
-    StateNotifierProvider<ReceiptController, AsyncValue<Transaction>>(
-        (ref) => ReceiptController(ref.read)..init());
+    StateNotifierProvider<ReceiptController, Receipt>(
+        (ref) => ReceiptController(ref.read));
 
-class ReceiptController extends StateNotifier<AsyncValue<Transaction>> {
+class ReceiptController extends StateNotifier<Receipt> {
   final Reader _read;
-  late Transaction initialState;
 
-  String _partyName = '';
-  String getPartyName() => _partyName;
-  setParty(LedgerMaster party) {
-    _partyName = party.name;
-    final data = state.data!.value;
-    state = AsyncValue.data(
-      data.copyWith(partyId: party.id),
+  ReceiptController(this._read)
+      : super(
+          Receipt(
+            amount: 0,
+            particular: '',
+            date: DateTime.now(),
+            mode: TransactionMode.paymentByCash,
+          ),
+        );
+
+  setReceiptTransactionType(TransactionType type) async {
+    final debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: type.debitSideLedger);
+    state = state.copyWith(
+      receiptTransactionType: type,
+      debitSideLedger: debitSideLedger,
     );
-
-    if (data.mode == TransactionMode.credit)
-      state = AsyncValue.data(
-        data.copyWith(
-          creditSideLedgerId: null,
-        ),
-      );
-
-    print(state);
-  }
-
-  String _creditSideName = '';
-  String get CreditSideName => _creditSideName;
-
-  String _debitSideName = '';
-  String get DebitSideName => _debitSideName;
-
-  ReceiptController(this._read) : super(AsyncValue.loading());
-
-  //------------For Initialization--------
-  int _transactionTypeOfReceiptId = TransactionTypeIndex.RentReceived;
-  set transactionTypeOfReceiptId(id) {
-    _transactionTypeOfReceiptId = id;
-  }
-
-  init() async {
-    TransactionType _transactionType =
-        await _read(transactionTypeRepositoryProvider)
-            .getItem(id: _transactionTypeOfReceiptId);
-    initialState = Transaction(
-      amount: 0,
-      particular: _transactionType.name,
-      mode: TransactionMode.paymentByCash,
-      sumChetVelDanType: _transactionType.sumChetVelDanType,
-      creditSideLedgerId: _transactionType.creditSideLedger,
-      debitSideLedgerId: _transactionType.debitSideLedger,
-      transactionTypeId: _transactionType.id,
-      partyId: null,
-      date: DateTime.now(),
-    );
-    state = AsyncValue.data(
-      initialState,
-    );
-    _setCreditSideName();
-    _setDebitSideName();
-
-    print(_creditSideName);
   }
 
   setMode(TransactionMode mode) async {
-    int _debitSideid;
+    int _creditSideid;
     mode == TransactionMode.paymentByCash
-        ? _debitSideid = LedgerMasterIndex.Cash
-        : _debitSideid = LedgerMasterIndex.Bank;
-    state = AsyncValue.data(
-      state.data!.value.copyWith(
-        mode: mode,
-        debitSideLedgerId: _debitSideid,
-      ),
+        ? _creditSideid = LedgerMasterIndex.Cash
+        : _creditSideid = LedgerMasterIndex.Bank;
+    final _creditSide =
+        await _read(ledgerMasterRepositoryProvider).getItem(id: _creditSideid);
+    state = state.copyWith(
+      creditSideLedger: _creditSide,
+      mode: mode,
     );
-    _setDebitSideName();
-  }
-
-  //---------Private helper function
-  _setCreditSideName() async {
-    _creditSideName = await _read(ledgerMasterRepositoryProvider)
-        .getLedgerMasterName(state.data!.value.creditSideLedgerId!);
-  }
-
-  _setDebitSideName() async {
-    _debitSideName = await _read(ledgerMasterRepositoryProvider)
-        .getLedgerMasterName(state.data!.value.debitSideLedgerId!);
   }
 
   submit() async {
     try {
-      _read(transactionRepositoryProvider).add(payload: state.data!.value);
+      _read(transactionRepositoryProvider).add(
+          payload: Transaction(
+        amount: state.amount,
+        particular: state.particular,
+        date: state.date,
+        mode: state.mode,
+        sumChetVelDanType: SumChetvelDanType.lakluh,
+        transactionTypeId: state.receiptTransactionType!.id,
+        debitSideLedgerId: state.debitSideLedger!.id,
+        creditSideLedgerId: state.creditSideLedger!.id,
+      ));
     } catch (e) {
       print(e);
     }
-  }
-
-  reset() {
-    state = AsyncValue.data(
-      initialState,
-    );
-
-    _partyName = '';
-    print('Reset is called');
   }
 }
