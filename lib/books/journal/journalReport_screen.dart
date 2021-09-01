@@ -17,7 +17,7 @@ class JournalReportScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     useEffect(() {
       ref.read(journalControllerProvider.notifier).loadData();
-    });
+    }, []);
     AsyncValue<List<Journal>> list = ref.watch(journalControllerProvider);
     return list.when(data: (data) {
       return Material(

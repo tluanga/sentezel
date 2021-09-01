@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
+import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
@@ -30,19 +31,12 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
 
       for (int i = 0; i < data.length; i++) {
         final element = data[i];
-
-        String _creditSideLedgerName = element.creditSideLedgerId != null
-            ? await _read(ledgerMasterRepositoryProvider)
-                .getLedgerMasterName(element.creditSideLedgerId!)
-            : '';
+        String _creditSideLedgerName = '';
+        String _debitSideLedgerName = '';
 
         String _transactionType = await _read(transactionTypeRepositoryProvider)
             .getTransactionTypeName(element.transactionTypeId);
 
-        String _debitSideLedgerName = element.debitSideLedgerId != null
-            ? await _read(ledgerMasterRepositoryProvider)
-                .getLedgerMasterName(element.debitSideLedgerId!)
-            : '';
         String _partyLedgerName = element.partyId != null
             ? await _read(ledgerMasterRepositoryProvider)
                 .getLedgerMasterName(element.partyId!)
@@ -51,6 +45,35 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
             ? await _read(ledgerMasterRepositoryProvider)
                 .getLedgerMasterName(element.assetLedgerId!)
             : '';
+
+        //----------------------DEBIT SIDE-----------------
+        //----------For Purchase of Asset----------
+        if (element.assetLedgerId != null) {
+          _debitSideLedgerName = await _read(ledgerMasterRepositoryProvider)
+              .getLedgerMasterName(element.assetLedgerId!);
+        } else {
+          _debitSideLedgerName = await _read(ledgerMasterRepositoryProvider)
+              .getLedgerMasterName(element.debitSideLedgerId!);
+        }
+        //-------For Selling of Goods by Credit-----
+        if (element.sumChetVelDanType == SumChetvelDanType.hralh &&
+            element.mode == TransactionMode.credit) {
+          _debitSideLedgerName = await _read(ledgerMasterRepositoryProvider)
+              .getLedgerMasterName(element.partyId!);
+        }
+        //----------For Others Selling and purchase Types  -----
+
+        //----------------------CREDIT SIDE-----------------
+
+        //-------For Purchasing of Goods by Credit-----
+        if (element.sumChetVelDanType == SumChetvelDanType.hralh &&
+            element.mode == TransactionMode.credit) {
+          _creditSideLedgerName = await _read(ledgerMasterRepositoryProvider)
+              .getLedgerMasterName(element.partyId!);
+        }
+        //----------For Others Selling and purchase Types  -----
+        _creditSideLedgerName = await _read(ledgerMasterRepositoryProvider)
+            .getLedgerMasterName(element.creditSideLedgerId!);
 
         Journal journal = new Journal(
           date: element.date,
