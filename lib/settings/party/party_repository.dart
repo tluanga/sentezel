@@ -6,12 +6,12 @@ import 'package:sqflite_common/sqlite_api.dart';
 
 import 'data/party_model.dart';
 
-final partyRepositoryProvider = Provider((ref) => PartyRepository(ref.read));
+final partyRepositoryProvider = Provider((ref) => PartyRepository());
 
 class PartyRepository implements BaseRepository<Party> {
-  final Reader _read;
+  // final Reader _read;
 
-  const PartyRepository(this._read);
+  const PartyRepository();
   //---Add new Party----
   @override
   void add({required payload}) async {

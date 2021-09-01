@@ -8,13 +8,12 @@ import 'package:sentezel/settings/transactionType/transactionType_config.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 final transactionTypeRepositoryProvider =
-    Provider((ref) => TransactionTypeRepository(ref.read));
+    Provider((ref) => TransactionTypeRepository());
 
 class TransactionTypeRepository implements BaseRepository<TransactionType> {
   final String dbName = TransactionTypeConfig.dbName;
-  final Reader _read;
 
-  const TransactionTypeRepository(this._read);
+  const TransactionTypeRepository();
 
   @override
   void add({required payload}) {}

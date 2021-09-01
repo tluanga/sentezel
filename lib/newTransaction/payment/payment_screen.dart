@@ -4,18 +4,20 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/receipt/receiptConfirm_modal.dart';
+import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
+import 'package:sentezel/newTransaction/payment/payment_controller.dart';
+import 'package:sentezel/newTransaction/payment/payment_model.dart';
 import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/transactionTypeOfReceiptSelect_modal.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
-import 'package:sentezel/newTransaction/receipt/receiptTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_model.dart';
 
-class ReceiptScreen extends HookConsumerWidget {
-  const ReceiptScreen({Key? key}) : super(key: key);
+import 'package:sentezel/newTransaction/receipt/receiptTransactionModeSelect_modal.dart';
+
+class PaymentScreen extends HookConsumerWidget {
+  const PaymentScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Receipt currentState = ref.watch(receiptControllerProvider);
+    Payment currentState = ref.watch(paymentControllerProvider);
+    final setState = ref.watch(paymentControllerProvider.notifier);
     onCancel() {
       // ref.read(receiptControllerProvider.notifier).reset();
     }
@@ -32,7 +34,7 @@ class ReceiptScreen extends HookConsumerWidget {
             child: Column(
               children: [
                 TopBarWithSaveWidget(
-                  title: 'Receipt',
+                  title: 'Payment',
                   onSave: () {
                     onSubmit(ref, context);
                   },
@@ -118,11 +120,8 @@ class ReceiptScreen extends HookConsumerWidget {
                     showModalBottomSheet(
                       context: context,
                       builder: (context) => TransactionTypeOfReceiptSelectModal(
-                        onSelect: (receipt) {
-                          ref
-                              .read(receiptControllerProvider.notifier)
-                              .setReceiptTransactionType(receipt);
-                        },
+                        onSelect: (payment) =>
+                            setState.setPaymentTransactionType(payment),
                       ),
                     );
                   },
@@ -143,9 +142,9 @@ class ReceiptScreen extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          currentState.receiptTransactionType == null
+                          currentState.paymentTransactionType == null
                               ? 'Please Select Receipt Head of Account'
-                              : currentState.receiptTransactionType!.name,
+                              : currentState.paymentTransactionType!.name,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,
@@ -191,9 +190,9 @@ class ReceiptScreen extends HookConsumerWidget {
   onSubmit(WidgetRef ref, context) {
     showModalBottomSheet(
       context: context,
-      builder: (context) => ReceiptConfirmationBottomSheet(
+      builder: (context) => PaymentConfirmationBottomSheet(
         onConfirm: () {
-          ref.watch(receiptControllerProvider.notifier).submit();
+          ref.watch(paymentControllerProvider.notifier).submit();
         },
         onCancel: () {},
       ),

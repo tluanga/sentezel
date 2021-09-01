@@ -1,102 +1,107 @@
-import 'package:enum_to_string/enum_to_string.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
-import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
-import 'package:sentezel/common/ui/widget/topBar_widget.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMasterList_controller.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
-import 'package:sentezel/settings/ledgerMaster/newLedgerMaster_screen.dart';
+import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
+import 'package:sentezel/newTransaction/payment/paymentTypeSelect/transactionTypeOfPaymentSelect_controller.dart';
+import 'package:sentezel/settings/asset/newAsset_modal.dart';
+import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 
-class LedgerMasterScreen extends HookConsumerWidget {
-  const LedgerMasterScreen({Key? key}) : super(key: key);
+class TransactionTypeOfPaymentSelectModal extends HookConsumerWidget {
+  final Function(TransactionType) onSelect;
+
+  const TransactionTypeOfPaymentSelectModal({
+    Key? key,
+    required this.onSelect,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final list = ref.watch(ledgerMasterListControllerProvider);
+    final list = ref.watch(transactionTypeOfPaymentSelectControllerProvider);
+
+    // final _searchTextEditingController = useTextEditingController();
+    // _onSearch() async {}
+
+    // useEffect(() {
+    //   _searchTextEditingController.addListener(_onSearch);
+    // }, []);
+
     return Scaffold(
       body: SafeArea(
         child: Container(
           child: Column(
             children: [
-              TopBarWidget(
-                title: 'Ledger Master',
-                onClose: () {
-                  Navigator.pop(context);
+              TopBarWithNewForBottomSheetWidget(
+                label: 'Receipt Select',
+                onNew: () {
+                  showModalBottomSheet(
+                    context: context,
+                    builder: (context) => NewAssetModal(),
+                  );
                 },
               ),
+
               //------Searching Ledger Master and filtration will be done
               // based in input
               Container(
                 width: MediaQuery.of(context).size.width * 0.8,
-                child: TextField(
+                child: TextFormField(
                   decoration: InputDecoration(labelText: 'Search'),
+                  onChanged: (value) {
+                    ref
+                        .read(transactionTypeOfPaymentSelectControllerProvider
+                            .notifier)
+                        .loadData(
+                          searchString: value,
+                        );
+                  },
                 ),
               ),
-              _list(context, list),
+              list.when(
+                  data: (data) => _list(context, data),
+                  loading: () => Center(
+                        child: CircularProgressIndicator(),
+                      ),
+                  error: (error, statck) {
+                    return Container(
+                      child: Text(error.toString()),
+                    );
+                  })
             ],
           ),
         ),
       ),
-      floatingActionButton: SentezelFloatingActionButton(
-        onPressed: () {
-          showCupertinoModalBottomSheet(
-            expand: true,
-            context: context,
-            backgroundColor: Colors.transparent,
-            builder: (context) => NewLedgerMasterScreen(),
-          );
-        },
-      ),
     );
   }
 
-  _list(BuildContext context, List<LedgerMaster> list) {
+  _list(BuildContext context, List<TransactionType> list) {
+    print(list);
     list.sort((a, b) => a.name.compareTo(b.name));
 
     return Expanded(
       child: ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, index) {
-          return _listItem(context, list[index]);
+          return _listItem(
+              context: context, item: list[index], onSelect: onSelect);
         },
       ),
     );
   }
 
-  _listItem(BuildContext context, LedgerMaster ledgerMaster) {
-    Color _color;
+  _listItem(
+      {required BuildContext context,
+      required TransactionType item,
+      required Function(TransactionType) onSelect}) {
+    Color _color = Palette.color3;
 
-    switch (ledgerMaster.type) {
-      case LedgerMasterType.direct:
-        _color = Palette.color1;
+    if (item.id / 2 == 0) _color = Palette.color1;
 
-        break;
-      case LedgerMasterType.indirect:
-        _color = Palette.color2;
-        break;
-      case LedgerMasterType.party:
-        _color = Palette.color3;
-        break;
-      default:
-        _color = Palette.color4;
-        break;
-    }
     return GestureDetector(
       onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => NewLedgerMasterScreen(
-              ledgerMaster: ledgerMaster,
-            ),
-          ),
-        );
+        onSelect(item);
+        Navigator.pop(context);
       },
       child: Container(
         margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
@@ -132,7 +137,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  ledgerMaster.getInitialLetter(),
+                  item.getInitialLetter(),
                   style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
@@ -148,7 +153,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Center(
                     child: Text(
-                      ledgerMaster.name,
+                      item.name,
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -161,9 +166,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
                   height: MediaQuery.of(context).size.height * 0.03,
                   child: Center(
                     child: Text(
-                      ledgerMaster.description != ledgerMaster.name
-                          ? ledgerMaster.description
-                          : '',
+                      item.description != item.name ? item.description : '',
                       style: TextStyle(
                         fontSize: 14,
                       ),
@@ -177,14 +180,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
-                        child: Text(
-                          toBeginningOfSentenceCase(
-                            EnumToString.convertToString(ledgerMaster.type),
-                          )!,
-                        ),
-                      ),
-                      Container(
-                        child: ledgerMaster.status == ActiveInActive.active
+                        child: item.status == ActiveInActive.active
                             ? Text(
                                 'Active',
                                 style: TextStyle(
