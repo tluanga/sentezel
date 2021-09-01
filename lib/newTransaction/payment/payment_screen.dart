@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
+import 'package:sentezel/newTransaction/payment/paymentTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/payment/paymentTypeSelect/transactionTypeOfPaymentSelect_modal.dart';
 import 'package:sentezel/newTransaction/payment/payment_controller.dart';
 import 'package:sentezel/newTransaction/payment/payment_model.dart';
-import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/transactionTypeOfReceiptSelect_modal.dart';
-
-import 'package:sentezel/newTransaction/receipt/receiptTransactionModeSelect_modal.dart';
 
 class PaymentScreen extends HookConsumerWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -21,6 +21,9 @@ class PaymentScreen extends HookConsumerWidget {
     onCancel() {
       // ref.read(receiptControllerProvider.notifier).reset();
     }
+    useEffect(() {
+      setState.init();
+    }, []);
 
     return Scaffold(
       body: SafeArea(
@@ -80,7 +83,7 @@ class PaymentScreen extends HookConsumerWidget {
                         showModalBottomSheet(
                           context: context,
                           builder: (context) =>
-                              ReceiptTransactionModeSelectModalBottomSheet(),
+                              PaymentTransactionModeSelectModalBottomSheet(),
                         );
                       },
                       child: Container(
@@ -119,7 +122,7 @@ class PaymentScreen extends HookConsumerWidget {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
-                      builder: (context) => TransactionTypeOfReceiptSelectModal(
+                      builder: (context) => TransactionTypeOfPaymentSelectModal(
                         onSelect: (payment) =>
                             setState.setPaymentTransactionType(payment),
                       ),

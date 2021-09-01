@@ -33,7 +33,7 @@ class TransactionTypeOfPaymentSelectModal extends HookConsumerWidget {
           child: Column(
             children: [
               TopBarWithNewForBottomSheetWidget(
-                label: 'Receipt Select',
+                label: 'Payment Type Select',
                 onNew: () {
                   showModalBottomSheet(
                     context: context,

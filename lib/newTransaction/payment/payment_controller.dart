@@ -10,7 +10,7 @@ import 'package:sentezel/settings/transactionType/data/transactionType_model.dar
 
 final paymentControllerProvider =
     StateNotifierProvider<PaymentController, Payment>(
-        (ref) => PaymentController(ref.read));
+        (ref) => PaymentController(ref.read)..init());
 
 class PaymentController extends StateNotifier<Payment> {
   final Reader _read;
@@ -24,13 +24,18 @@ class PaymentController extends StateNotifier<Payment> {
             mode: TransactionMode.paymentByCash,
           ),
         );
+  init() async {
+    final _paymentSide = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: LedgerMasterIndex.Cash);
+    state = state.copyWith(creditSideLedger: _paymentSide);
+  }
 
   setPaymentTransactionType(TransactionType type) async {
-    final creditSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: type.creditSideLedger);
+    final debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: type.debitSideLedger);
     state = state.copyWith(
       receiptTransactionType: type,
-      creditSideLedger: creditSideLedger,
+      debitSideLedger: debitSideLedger,
     );
   }
 
@@ -42,7 +47,7 @@ class PaymentController extends StateNotifier<Payment> {
     final _paymentSide =
         await _read(ledgerMasterRepositoryProvider).getItem(id: _paymentSideid);
     state = state.copyWith(
-      debitSideLedger: _paymentSide,
+      creditSideLedger: _paymentSide,
       mode: mode,
     );
   }

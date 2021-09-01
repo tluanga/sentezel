@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
+import 'package:sentezel/newTransaction/payment/payment_controller.dart';
 
-class ReceiptTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
-  const ReceiptTransactionModeSelectModalBottomSheet({
+class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
+  const PaymentTransactionModeSelectModalBottomSheet({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final setState = ref.read(receiptControllerProvider.notifier);
-    final state = ref.read(receiptControllerProvider);
+    final setState = ref.read(paymentControllerProvider.notifier);
+    final state = ref.read(paymentControllerProvider);
     return Container(
       height: MediaQuery.of(context).size.height * 0.2,
       child: Column(

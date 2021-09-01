@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/newTransaction/payment/payment_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_screen.dart';
@@ -122,7 +123,14 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Payment',
                   icon: CupertinoIcons.square_arrow_down_on_square,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PaymentScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _item(
                   context: context,

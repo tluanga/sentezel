@@ -7,21 +7,20 @@ import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 final transactionRepositoryProvider = Provider<TransactionRepository>(
-  (ref) => TransactionRepository(ref.read),
+  (ref) => TransactionRepository(),
 );
 
 class TransactionRepository extends BaseRepository<trans.Transaction> {
   final String dbName = TransactionConfig.dbName;
-  final Reader _read;
 
-  TransactionRepository(this._read);
+  TransactionRepository();
 
   @override
   void add({required trans.Transaction payload}) async {
     Database db = await DatabaseService.instance.db;
     try {
       var b = await db.insert(dbName, payload.toMap());
-      final a = await getItem(id: b);
+      // final a = await getItem(id: b);
       print('the value return is $b');
     } catch (e) {
       print(e);
