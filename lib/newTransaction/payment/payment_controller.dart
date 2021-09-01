@@ -36,6 +36,7 @@ class PaymentController extends StateNotifier<Payment> {
     state = state.copyWith(
       receiptTransactionType: type,
       debitSideLedger: debitSideLedger,
+      particular: debitSideLedger!.name,
     );
   }
 
