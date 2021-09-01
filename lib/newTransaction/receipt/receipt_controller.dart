@@ -25,24 +25,30 @@ class ReceiptController extends StateNotifier<Receipt> {
           ),
         );
 
+  init() async {
+    final debitSide = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: LedgerMasterIndex.Cash);
+    state = state.copyWith(debitSideLedger: debitSide);
+  }
+
   setReceiptTransactionType(TransactionType type) async {
-    final debitSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: type.debitSideLedger);
+    final creditSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: type.creditSideLedger);
     state = state.copyWith(
       receiptTransactionType: type,
-      debitSideLedger: debitSideLedger,
+      creditSideLedger: creditSideLedger,
     );
   }
 
   setMode(TransactionMode mode) async {
-    int _creditSideid;
+    int _debitSideid;
     mode == TransactionMode.paymentByCash
-        ? _creditSideid = LedgerMasterIndex.Cash
-        : _creditSideid = LedgerMasterIndex.Bank;
-    final _creditSide =
-        await _read(ledgerMasterRepositoryProvider).getItem(id: _creditSideid);
+        ? _debitSideid = LedgerMasterIndex.Cash
+        : _debitSideid = LedgerMasterIndex.Bank;
+    final _debitSide =
+        await _read(ledgerMasterRepositoryProvider).getItem(id: _debitSideid);
     state = state.copyWith(
-      creditSideLedger: _creditSide,
+      debitSideLedger: _debitSide,
       mode: mode,
     );
   }
