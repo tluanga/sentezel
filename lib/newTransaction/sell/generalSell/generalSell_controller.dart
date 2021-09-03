@@ -21,7 +21,7 @@ class GeneralSellController extends StateNotifier<GeneralSell> {
       : super(
           GeneralSell(
             amount: 0,
-            particular: '',
+            particular: 'Sell of Goods',
             date: DateTime.now(),
             mode: TransactionMode.paymentByCash,
           ),

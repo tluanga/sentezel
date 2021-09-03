@@ -65,6 +65,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     String searchString = '',
     LedgerMasterType? type,
     TransactionMode? mode,
+    int? ledgerMasterId,
     DateTime? startDate,
     DateTime? endDate,
   }) async {
@@ -89,6 +90,54 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       Select * from $dbName
       WHERE particular LIKE '$searchString%'
       AND mode LIKE '$_mode%'
+      AND date>=${paramStartDate.microsecondsSinceEpoch}
+      AND date <=${paramEndDate.microsecondsSinceEpoch}     
+      ''');
+      List<trans.Transaction> list = [];
+      print('length of result is ${result.length}');
+      result.forEach((item) {
+        list.add(trans.Transaction.fromMap(item));
+        print('name');
+        print(item['name']);
+
+        print(item['date']);
+      });
+
+      return list;
+    } catch (e) {
+      print(e);
+      return [];
+    }
+  }
+
+  //-------Get All item by a ledger--
+
+  Future<List<trans.Transaction>> getTransactionByLedgerMaster({
+    TransactionMode? mode,
+    int? ledgerMasterId,
+    DateTime? startDate,
+    DateTime? endDate,
+  }) async {
+    if (startDate == null) startDate = DateTime.now();
+    if (endDate == null) endDate = DateTime.now();
+    DateTime paramStartDate =
+        DateTime(startDate.year, startDate.month, startDate.day);
+    print('StartDate $startDate');
+
+    print(
+        'param startDate:$paramStartDate microseconds:${paramStartDate.microsecondsSinceEpoch}');
+
+    DateTime paramEndDate =
+        DateTime(endDate.year, endDate.month, endDate.day, 23, 59);
+    print(
+        'param EndDate:$paramEndDate  microseconds:${paramEndDate.microsecondsSinceEpoch}');
+    String _mode = mode != null ? convertTransactionModeToString(mode) : '';
+    try {
+      Database db = await DatabaseService.instance.db;
+      final result = await db.rawQuery('''
+      Select * from $dbName
+      WHERE 
+      mode LIKE '$_mode%'
       AND date>=${paramStartDate.microsecondsSinceEpoch}
       AND date <=${paramEndDate.microsecondsSinceEpoch}     
       ''');

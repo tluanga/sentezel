@@ -53,13 +53,14 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
     DateTime? endDate,
   }) async {
     try {
-      String _type = getLedgerMasterTypeEnumInString(type!);
+      String _type = '';
+      if (type != null) _type = getLedgerMasterTypeEnumInString(type);
       Database db = await DatabaseService.instance.db;
 
       final result = await db.rawQuery('''
       Select * from $dbName
       WHERE name LIKE '$searchString%'
-      AND type Like '$_type'
+      AND type LIKE '$_type%'
       ''');
       List<LedgerMaster> list = [];
       result.forEach((item) {
