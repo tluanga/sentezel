@@ -20,11 +20,14 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
       final ledgerMasterDataList =
           await _read(ledgerMasterRepositoryProvider).getList();
       print(ledgerMasterDataList.length);
-      // for (int i = 0; i < ledgerMasterDataList.length; i++) {
-      //   final _transactionList = await _read(transactionRepositoryProvider)
-      //       .getTransactionByLedgerMaster(
-      //           ledgerMasterId: ledgerMasterDataList[i].id);
-      // }
+      for (int i = 0; i < ledgerMasterDataList.length; i++) {
+        final _transactionList = await _read(transactionRepositoryProvider)
+            .getTransactionByLedgerMaster(
+                ledgerMasterId: ledgerMasterDataList[i].id);
+        for (int i = 0; i < _transactionList.length; i++) {
+          print(_transactionList[i].amount);
+        }
+      }
     } catch (e) {
       print(e.toString());
     }
