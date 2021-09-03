@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/newTransaction/debtRepayment/debtorList_screen.dart';
 import 'package:sentezel/newTransaction/payment/payment_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
@@ -136,7 +137,14 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Debt Repayment',
                   icon: CupertinoIcons.square_on_circle,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => DebtorListScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _item(
                   context: context,

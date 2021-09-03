@@ -4,7 +4,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
 
 class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
@@ -19,216 +18,194 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentState = ref.watch(generalSellControllerProvider);
+    final state = ref.watch(generalSellControllerProvider);
 
-    return currentState.when(
-        data: (data) => Material(
-              child: SafeArea(
-                top: false,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width,
-                      height: 30,
-                      decoration: BoxDecoration(color: Colors.redAccent[100]),
-                      child: Center(
-                        child: Text(
-                          'Please Confirm Transaction Summary before Submit',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: 3,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            child: Row(
-                              children: [
-                                Text(
-                                  'Comment :',
-                                  style: TextStyle(
-                                    color: Palette.blackGrey,
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  data.particular,
-                                  style: TextStyle(
-                                    color: Palette.blackGrey,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Row(
-                            children: [
-                              Text(
-                                'Date',
-                                style: TextStyle(
-                                  color: Palette.textColor,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                ':',
-                                style: TextStyle(
-                                  color: Palette.textColor,
-                                  fontSize: 16,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text(
-                                DateFormat('dd-EE-yyyy').format(data.date),
-
-                                // formatter.format(model.transaction.date),
-                                style: TextStyle(
-                                  color: Palette.textColor,
-                                  fontSize: 16,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Table(
-                        border: TableBorder.all(color: Palette.textColor),
-                        columnWidths: {
-                          0: FractionColumnWidth(.6),
-                          1: FractionColumnWidth(.2),
-                          2: FractionColumnWidth(.2),
-                        },
-                        children: [
-                          //---------------DEBIT SIDE-----------
-                          _tableHeader(),
-                          _debitSide(
-                            debitSideLedgerName: data.mode ==
-                                        TransactionMode.credit ||
-                                    data.mode ==
-                                        TransactionMode.partialPaymentByBank ||
-                                    data.mode ==
-                                        TransactionMode.partialPaymentByCash
-                                ? ref
-                                    .watch(
-                                        generalSellControllerProvider.notifier)
-                                    .getPartyName()
-                                : ref
-                                    .watch(
-                                        generalSellControllerProvider.notifier)
-                                    .DebitSideName,
-                            amount: ref
-                                .watch(generalSellControllerProvider.notifier)
-                                .debitAmount,
-                          ),
-
-                          if (data.partialPaymentAmount != 0)
-                            _debitSide(
-                              debitSideLedgerName: ref
-                                  .watch(generalSellControllerProvider.notifier)
-                                  .DebitSideName,
-                              amount: data.partialPaymentAmount!,
-                            ),
-
-                          //------------------CREDIT SIDE--------------
-                          _creditSide(
-                            creditSideLedgerName: ref
-                                .watch(generalSellControllerProvider.notifier)
-                                .CreditSideName,
-                            amount: data.amount,
-                          ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.blue.shade400),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset(0, 2),
-                              blurRadius: 6.0,
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            'Confirm',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Palette.textColor,
-                            ),
-                          ),
-                          leading: Icon(CupertinoIcons.checkmark_alt),
-                          onTap: () {
-                            this.onConfirm();
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.white,
-                          border: Border.all(color: Colors.red.shade400),
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Colors.black26,
-                              offset: Offset(0, 2),
-                              blurRadius: 6.0,
-                            ),
-                          ],
-                        ),
-                        child: ListTile(
-                          title: Text(
-                            'Cancel',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: Palette.textColor,
-                            ),
-                          ),
-                          leading: Icon(CupertinoIcons.nosign),
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                        ),
-                      ),
-                    ),
-                  ],
+    return Material(
+      child: SafeArea(
+        top: false,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width,
+              height: 30,
+              decoration: BoxDecoration(color: Colors.redAccent[100]),
+              child: Center(
+                child: Text(
+                  'Please Confirm Transaction Summary before Submit',
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
-        loading: () => Center(
-              child: CircularProgressIndicator(),
+            SizedBox(
+              height: 3,
             ),
-        error: (error, stack) => Text(error.toString()));
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    height: MediaQuery.of(context).size.height * 0.05,
+                    child: Row(
+                      children: [
+                        Text(
+                          'Comment :',
+                          style: TextStyle(
+                            color: Palette.blackGrey,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          state.particular,
+                          style: TextStyle(
+                            color: Palette.blackGrey,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        'Date',
+                        style: TextStyle(
+                          color: Palette.textColor,
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        ':',
+                        style: TextStyle(
+                          color: Palette.textColor,
+                          fontSize: 16,
+                        ),
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        DateFormat('dd-EE-yyyy').format(state.date),
+
+                        // formatter.format(model.transaction.date),
+                        style: TextStyle(
+                          color: Palette.textColor,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Table(
+                border: TableBorder.all(color: Palette.textColor),
+                columnWidths: {
+                  0: FractionColumnWidth(.6),
+                  1: FractionColumnWidth(.2),
+                  2: FractionColumnWidth(.2),
+                },
+                children: [
+                  //---------------DEBIT SIDE-----------
+                  _tableHeader(),
+                  _debitSide(
+                    debitSideLedgerName: state.debitSideLedger!.name,
+                    amount: state.debitAmount,
+                  ),
+
+                  //------------------CREDIT SIDE--------------
+                  _creditSide(
+                    creditSideLedgerName: state.party != null
+                        ? state.party!.name
+                        : state.creditSideLedger!.name,
+                    amount: state.creditAmount,
+                  ),
+
+                  if (state.partialPaymentAmount != 0)
+                    _debitSide(
+                      debitSideLedgerName: state.creditSideLedger!.name,
+                      amount: state.partialPaymentAmount,
+                    ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.blue.shade400),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0, 2),
+                      blurRadius: 6.0,
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  title: Text(
+                    'Confirm',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Palette.textColor,
+                    ),
+                  ),
+                  leading: Icon(CupertinoIcons.checkmark_alt),
+                  onTap: () {
+                    this.onConfirm();
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  border: Border.all(color: Colors.red.shade400),
+                  borderRadius: BorderRadius.circular(10),
+                  boxShadow: const [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0, 2),
+                      blurRadius: 6.0,
+                    ),
+                  ],
+                ),
+                child: ListTile(
+                  title: Text(
+                    'Cancel',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Palette.textColor,
+                    ),
+                  ),
+                  leading: Icon(CupertinoIcons.nosign),
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   _tableHeader() {

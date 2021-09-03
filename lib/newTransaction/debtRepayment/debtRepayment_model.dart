@@ -3,7 +3,7 @@ import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 
-class DebtRePayment {
+class DebtRepayment {
   int amount;
   String particular;
   LedgerMaster? debitSideLedger;
@@ -12,7 +12,7 @@ class DebtRePayment {
   TransactionMode mode;
   List<Transaction>? debtList = [];
 
-  DebtRePayment({
+  DebtRepayment({
     required this.amount,
     required this.particular,
     this.debitSideLedger,
@@ -22,7 +22,7 @@ class DebtRePayment {
     this.debtList,
   });
 
-  DebtRePayment copyWith({
+  DebtRepayment copyWith({
     int? amount,
     String? particular,
     LedgerMaster? debitSideLedger,
@@ -31,7 +31,7 @@ class DebtRePayment {
     TransactionMode? mode,
     TransactionType? receiptTransactionType,
   }) {
-    return DebtRePayment(
+    return DebtRepayment(
         amount: amount ?? this.amount,
         particular: particular ?? this.particular,
         debitSideLedger: debitSideLedger ?? this.debitSideLedger,

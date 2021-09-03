@@ -5,19 +5,19 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
+import 'package:sentezel/newTransaction/debtRepayment/debtRepayment_controller.dart';
+import 'package:sentezel/newTransaction/debtRepayment/debtRepayment_model.dart';
 import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentTypeSelect/transactionTypeOfPaymentSelect_modal.dart';
-import 'package:sentezel/newTransaction/payment/payment_controller.dart';
-import 'package:sentezel/newTransaction/payment/payment_model.dart';
 
-class PaymentScreen extends HookConsumerWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+class DebtRePaymentScreen1 extends HookConsumerWidget {
+  const DebtRePaymentScreen1({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Payment currentState = ref.watch(paymentControllerProvider);
-    final setState = ref.watch(paymentControllerProvider.notifier);
+    DebtRepayment currentState = ref.watch(debtRepaymentControllerProvider);
+    final setState = ref.watch(debtRepaymentControllerProvider.notifier);
     onCancel() {
       // ref.read(receiptControllerProvider.notifier).reset();
     }
@@ -37,7 +37,7 @@ class PaymentScreen extends HookConsumerWidget {
             child: Column(
               children: [
                 TopBarWithSaveWidget(
-                  title: 'Payment',
+                  title: 'Debt RePayment',
                   onSave: () {
                     onSubmit(ref, context);
                   },
@@ -118,51 +118,6 @@ class PaymentScreen extends HookConsumerWidget {
                     ),
                   ],
                 ),
-                GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) => TransactionTypeOfPaymentSelectModal(
-                        onSelect: (payment) =>
-                            setState.setPaymentTransactionType(payment),
-                      ),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.97,
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(3),
-                      // border: Border.all(
-                      //   color: data.partyId != 0
-                      //       ? Colors.grey.shade300
-                      //       : Colors.red.shade300,
-                      // ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          currentState.paymentTransactionType == null
-                              ? 'Please Select Receipt Head of Account'
-                              : currentState.paymentTransactionType!.name,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(
-                          CupertinoIcons.arrowtriangle_down,
-                          color: Colors.black,
-                          size: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -195,7 +150,7 @@ class PaymentScreen extends HookConsumerWidget {
       context: context,
       builder: (context) => PaymentConfirmationBottomSheet(
         onConfirm: () {
-          ref.watch(paymentControllerProvider.notifier).submit();
+          ref.watch(debtRepaymentControllerProvider.notifier).submit();
         },
         onCancel: () {},
       ),

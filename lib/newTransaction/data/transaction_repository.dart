@@ -2,6 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/newTransaction/common/transaction_config.dart';
+import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart' as trans;
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sqflite_common/sqlite_api.dart';
@@ -63,6 +64,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
   Future<List<trans.Transaction>> getList({
     String searchString = '',
     LedgerMasterType? type,
+    TransactionMode? mode,
     DateTime? startDate,
     DateTime? endDate,
   }) async {
@@ -80,12 +82,13 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
         DateTime(endDate.year, endDate.month, endDate.day, 23, 59);
     print(
         'param EndDate:$paramEndDate  microseconds:${paramEndDate.microsecondsSinceEpoch}');
-
+    String _mode = mode != null ? convertTransactionModeToString(mode) : '';
     try {
       Database db = await DatabaseService.instance.db;
       final result = await db.rawQuery('''
       Select * from $dbName
       WHERE particular LIKE '$searchString%'
+      AND mode LIKE '$_mode%'
       AND date>=${paramStartDate.microsecondsSinceEpoch}
       AND date <=${paramEndDate.microsecondsSinceEpoch}     
       ''');
