@@ -59,11 +59,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                       child: TextFormField(
                         //
                         onChanged: (value) {
-                          ref
-                              .read(generalSellControllerProvider.notifier)
-                              .setAmount(
-                                int.parse(value),
-                              );
+                          state.amount = int.parse(value);
                         },
                         decoration: InputDecoration(
                           labelText: 'Amount',
@@ -215,6 +211,7 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   onSubmit(WidgetRef ref, context) {
+    ref.read(generalSellControllerProvider.notifier).setup();
     showModalBottomSheet(
       context: context,
       builder: (context) => GeneralSellConfirmationBottomSheet(

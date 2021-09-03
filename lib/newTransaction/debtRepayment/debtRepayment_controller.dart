@@ -6,7 +6,6 @@ import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
-import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 
 import 'debtRepayment_model.dart';
 

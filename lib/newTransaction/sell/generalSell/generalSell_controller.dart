@@ -6,7 +6,7 @@ import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_model.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
+
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_index.dart';
 
@@ -20,8 +20,7 @@ class GeneralSellController extends StateNotifier<GeneralSell> {
   GeneralSellController(this._read)
       : super(
           GeneralSell(
-            creditAmount: 0,
-            debitAmount: 0,
+            amount: 0,
             particular: '',
             date: DateTime.now(),
             mode: TransactionMode.paymentByCash,
@@ -30,45 +29,32 @@ class GeneralSellController extends StateNotifier<GeneralSell> {
   init() async {
     final _paymentSide = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: LedgerMasterIndex.Cash);
-    final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+    final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: LedgerMasterIndex.Sales);
     state = state.copyWith(
-      creditSideLedger: _paymentSide,
+      creditSideLedger: _creditSideLedger,
+      debitSideLedger: _paymentSide,
+    );
+  }
+
+  setup() async {
+    print('setting up');
+    var _debitSideLedger;
+    if (state.mode == TransactionMode.paymentByCash ||
+        state.mode == TransactionMode.partialPaymentByCash) {
+      _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+          .getItem(id: LedgerMasterIndex.Cash);
+    }
+    if (state.mode == TransactionMode.paymentByCash ||
+        state.mode == TransactionMode.partialPaymentByCash) {
+      _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+          .getItem(id: LedgerMasterIndex.Bank);
+    }
+
+    state = state.copyWith(
+      creditAmount: state.amount,
+      debitAmount: state.amount - state.partialPaymentAmount,
       debitSideLedger: _debitSideLedger,
-    );
-  }
-
-  setAmount(int amount) {
-    print(amount);
-    state = state.copyWith(
-      creditAmount: amount,
-      debitAmount: amount - state.partialPaymentAmount,
-    );
-  }
-
-  setMode(TransactionMode mode) async {
-    int _paymentSideid;
-    LedgerMaster _paymentSide;
-    if (mode == TransactionMode.paymentByCash) {
-      _paymentSideid = LedgerMasterIndex.Cash;
-      _paymentSide = await _read(ledgerMasterRepositoryProvider)
-          .getItem(id: _paymentSideid)!;
-      state = state.copyWith(
-        creditSideLedger: _paymentSide,
-        mode: mode,
-      );
-    }
-    if (mode == TransactionMode.paymentByCash) {
-      _paymentSideid = LedgerMasterIndex.Bank;
-      _paymentSide = await _read(ledgerMasterRepositoryProvider)
-          .getItem(id: _paymentSideid)!;
-      state = state.copyWith(
-        creditSideLedger: _paymentSide,
-        mode: mode,
-      );
-    }
-    state = state.copyWith(
-      mode: mode,
     );
   }
 

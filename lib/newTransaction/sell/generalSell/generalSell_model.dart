@@ -2,6 +2,7 @@ import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 
 class GeneralSell {
+  int amount;
   int creditAmount;
   int debitAmount;
   int partialPaymentAmount;
@@ -12,8 +13,9 @@ class GeneralSell {
   DateTime date;
   TransactionMode mode;
   GeneralSell({
-    required this.creditAmount,
-    required this.debitAmount,
+    required this.amount,
+    this.creditAmount = 0,
+    this.debitAmount = 0,
     this.partialPaymentAmount = 0,
     required this.particular,
     this.debitSideLedger,
@@ -24,6 +26,7 @@ class GeneralSell {
   });
 
   GeneralSell copyWith({
+    int? amount,
     int? creditAmount,
     int? debitAmount,
     int? partialPaymentAmount,
@@ -35,6 +38,7 @@ class GeneralSell {
     TransactionMode? mode,
   }) {
     return GeneralSell(
+      amount: amount ?? this.amount,
       creditAmount: creditAmount ?? this.creditAmount,
       debitAmount: debitAmount ?? this.debitAmount,
       partialPaymentAmount: partialPaymentAmount ?? this.partialPaymentAmount,

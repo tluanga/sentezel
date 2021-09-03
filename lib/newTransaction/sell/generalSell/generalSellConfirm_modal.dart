@@ -119,16 +119,13 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
                   //---------------DEBIT SIDE-----------
                   _tableHeader(),
                   _debitSide(
-                    debitSideLedgerName: state.debitSideLedger!.name,
-                    amount: state.debitAmount,
-                  ),
-
-                  //------------------CREDIT SIDE--------------
-                  _creditSide(
-                    creditSideLedgerName: state.party != null
+                    debitSideLedgerName: state.mode == TransactionMode.credit ||
+                            state.mode ==
+                                TransactionMode.partialPaymentByBank ||
+                            state.mode == TransactionMode.partialPaymentByCash
                         ? state.party!.name
-                        : state.creditSideLedger!.name,
-                    amount: state.creditAmount,
+                        : state.debitSideLedger!.name,
+                    amount: state.debitAmount,
                   ),
 
                   if (state.partialPaymentAmount != 0)
@@ -136,6 +133,12 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
                       debitSideLedgerName: state.creditSideLedger!.name,
                       amount: state.partialPaymentAmount,
                     ),
+
+                  //------------------CREDIT SIDE--------------
+                  _creditSide(
+                    creditSideLedgerName: state.creditSideLedger!.name,
+                    amount: state.creditAmount,
+                  ),
                 ],
               ),
             ),

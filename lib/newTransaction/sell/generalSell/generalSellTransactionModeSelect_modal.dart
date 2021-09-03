@@ -12,7 +12,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final setState = ref.read(generalSellControllerProvider.notifier);
+    // final setState = ref.read(generalSellControllerProvider.notifier);
     final state = ref.read(generalSellControllerProvider);
     return Container(
       height: MediaQuery.of(context).size.height * 0.4,
@@ -53,7 +53,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                   trailing: Radio(
                     value: TransactionMode.paymentByCash,
                     onChanged: (value) {
-                      setState.setMode(TransactionMode.paymentByCash);
+                      state.mode = TransactionMode.paymentByCash;
                       Navigator.pop(context);
                     },
                     groupValue: state.mode,
@@ -74,7 +74,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                     trailing: Radio(
                       value: TransactionMode.paymentByBank,
                       onChanged: (value) {
-                        setState.setMode(TransactionMode.paymentByBank);
+                        state.mode = TransactionMode.paymentByBank;
                         Navigator.pop(context);
                       },
                       groupValue: state.mode,
@@ -96,7 +96,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                     trailing: Radio(
                       value: TransactionMode.credit,
                       onChanged: (value) {
-                        setState.setMode(TransactionMode.credit);
+                        state.mode = TransactionMode.credit;
 
                         Navigator.pop(context);
                       },
@@ -118,8 +118,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                     trailing: Radio(
                       value: TransactionMode.partialPaymentByBank,
                       onChanged: (value) {
-                        setState.setMode(TransactionMode.partialPaymentByBank);
-
+                        state.mode = TransactionMode.partialPaymentByBank;
                         Navigator.pop(context);
                       },
                       groupValue: state.mode,
@@ -140,7 +139,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                     trailing: Radio(
                       value: TransactionMode.partialPaymentByCash,
                       onChanged: (value) {
-                        setState.setMode(TransactionMode.partialPaymentByCash);
+                        state.mode = TransactionMode.partialPaymentByCash;
 
                         Navigator.pop(context);
                       },
