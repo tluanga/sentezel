@@ -66,7 +66,7 @@ class GeneralSellController extends StateNotifier<GeneralSell> {
               particular: state.particular,
               date: state.date,
               mode: state.mode,
-              sumChetVelDanType: TransactionType.lakluh,
+              transactionType: TransactionType.lakluh,
               transactionTypeId: TransactionCategoryIndex.SaleOfGoods,
               debitSideLedgerId: state.debitSideLedger != null
                   ? state.debitSideLedger!.id

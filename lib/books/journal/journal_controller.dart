@@ -57,7 +57,7 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
               .getLedgerMasterName(element.debitSideLedgerId!);
         }
         //-------For Selling of Goods by Credit-----
-        if (element.sumChetVelDanType == TransactionType.hralh &&
+        if (element.transactionType == TransactionType.hralh &&
             element.mode == TransactionMode.credit) {
           _debitSideLedgerName = await _read(ledgerMasterRepositoryProvider)
               .getLedgerMasterName(element.partyId!);
@@ -67,7 +67,7 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
         //----------------------CREDIT SIDE-----------------
 
         //-------For Purchasing of Goods by Credit-----
-        if (element.sumChetVelDanType == TransactionType.hralh &&
+        if (element.transactionType == TransactionType.hralh &&
             element.mode == TransactionMode.credit) {
           _creditSideLedgerName = await _read(ledgerMasterRepositoryProvider)
               .getLedgerMasterName(element.partyId!);

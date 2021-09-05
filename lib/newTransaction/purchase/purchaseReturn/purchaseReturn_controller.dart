@@ -55,7 +55,7 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
       amount: 0,
       particular: _transactionType.name,
       mode: TransactionMode.paymentByCash,
-      sumChetVelDanType: _transactionType.sumChetVelDanType,
+      transactionType: _transactionType.transactionType,
       creditSideLedgerId: _transactionType.creditSideLedger,
       debitSideLedgerId: _transactionType.debitSideLedger,
       transactionTypeId: _transactionType.id,

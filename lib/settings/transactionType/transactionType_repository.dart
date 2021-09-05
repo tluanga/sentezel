@@ -55,7 +55,7 @@ class TransactionCategoryRepository
       Database db = await DatabaseService.instance.db;
 
       final result = await db
-          .query(dbName, where: 'sumChetVelDanType=?', whereArgs: [_type]);
+          .query(dbName, where: 'transactionType=?', whereArgs: [_type]);
 
       return result.map((e) => TransactionCategory.fromMap(e)).toList();
     } catch (e) {

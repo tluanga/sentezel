@@ -68,7 +68,7 @@ class PurchaseOfMaterialController
       amount: 0,
       particular: _transactionType.name,
       mode: TransactionMode.paymentByCash,
-      sumChetVelDanType: _transactionType.sumChetVelDanType,
+      transactionType: _transactionType.transactionType,
       creditSideLedgerId: _transactionType.debitSideLedger,
       debitSideLedgerId: _transactionType.creditSideLedger,
       transactionTypeId: _transactionType.id,

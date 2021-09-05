@@ -6,7 +6,7 @@ class TransactionCategory {
   int id = 0;
   String name;
   String description;
-  TransactionType sumChetVelDanType; // 0--for buy 1-- sell
+  TransactionType transactionType; // 0--for buy 1-- sell
   int debitSideLedger;
   int creditSideLedger;
 
@@ -21,7 +21,7 @@ class TransactionCategory {
   TransactionCategory({
     required this.name,
     required this.description,
-    required this.sumChetVelDanType,
+    required this.transactionType,
     required this.debitSideLedger,
     required this.creditSideLedger,
   });
@@ -29,7 +29,7 @@ class TransactionCategory {
     required this.id,
     required this.name,
     required this.description,
-    required this.sumChetVelDanType,
+    required this.transactionType,
     required this.debitSideLedger,
     required this.creditSideLedger,
     this.status = ActiveInActive.active,
@@ -43,7 +43,7 @@ class TransactionCategory {
     }
     map['name'] = name;
     map['description'] = description;
-    map['sumChetVelDanType'] = EnumToString.convertToString(sumChetVelDanType);
+    map['transactionType'] = EnumToString.convertToString(transactionType);
     map['debitSideLedger'] = debitSideLedger;
     map['creditSideLedger'] = creditSideLedger;
     map['status'] = EnumToString.convertToString(status);
@@ -52,46 +52,46 @@ class TransactionCategory {
   }
 
   factory TransactionCategory.fromMap(Map<String, dynamic> map) {
-    TransactionType _sumChetVelDanType;
-    switch (map['_sumChetVelDanType']) {
+    TransactionType _transactionType;
+    switch (map['_transactionType']) {
       case 'lei':
-        _sumChetVelDanType = TransactionType.lei;
+        _transactionType = TransactionType.lei;
         break;
       case 'hralh':
-        _sumChetVelDanType = TransactionType.hralh;
+        _transactionType = TransactionType.hralh;
         break;
       case 'lakluh':
-        _sumChetVelDanType = TransactionType.lakluh;
+        _transactionType = TransactionType.lakluh;
         break;
       case 'pekchhuah':
-        _sumChetVelDanType = TransactionType.pekchhuah;
+        _transactionType = TransactionType.pekchhuah;
         break;
       case 'debtRepaymentByDebtor':
-        _sumChetVelDanType = TransactionType.debtRepaymentByDebtor;
+        _transactionType = TransactionType.debtRepaymentByDebtor;
         break;
       case 'debtRepaymentByCreditor':
-        _sumChetVelDanType = TransactionType.debtRepaymentToCreditor;
+        _transactionType = TransactionType.debtRepaymentToCreditor;
         break;
       case 'bankToCash':
-        _sumChetVelDanType = TransactionType.bankToCash;
+        _transactionType = TransactionType.bankToCash;
         break;
       case 'cashToBank':
-        _sumChetVelDanType = TransactionType.cashToBank;
+        _transactionType = TransactionType.cashToBank;
         break;
       case 'purchaseReturn':
-        _sumChetVelDanType = TransactionType.purchaseReturn;
+        _transactionType = TransactionType.purchaseReturn;
         break;
       case 'saleReturn':
-        _sumChetVelDanType = TransactionType.saleReturn;
+        _transactionType = TransactionType.saleReturn;
         break;
       case 'capitalInjection':
-        _sumChetVelDanType = TransactionType.capitalInjection;
+        _transactionType = TransactionType.capitalInjection;
         break;
       case 'openingBalanceCash':
-        _sumChetVelDanType = TransactionType.openingBalanceCash;
+        _transactionType = TransactionType.openingBalanceCash;
         break;
       default:
-        _sumChetVelDanType = TransactionType.openingBalanceBank;
+        _transactionType = TransactionType.openingBalanceBank;
         break;
     }
     ActiveInActive _status;
@@ -107,7 +107,7 @@ class TransactionCategory {
       id: map['id'],
       name: map['name'],
       description: map['description'],
-      sumChetVelDanType: _sumChetVelDanType,
+      transactionType: _transactionType,
       debitSideLedger: map['debitSideLedger'],
       creditSideLedger: map['creditSideLedger'],
       status: _status,

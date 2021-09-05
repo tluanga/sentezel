@@ -61,7 +61,7 @@ class ReceiptController extends StateNotifier<Receipt> {
         particular: state.particular,
         date: state.date,
         mode: state.mode,
-        sumChetVelDanType: TransactionType.lakluh,
+        transactionType: TransactionType.lakluh,
         transactionTypeId: state.receiptTransactionCategory!.id,
         debitSideLedgerId: state.debitSideLedger!.id,
         creditSideLedgerId: state.creditSideLedger!.id,

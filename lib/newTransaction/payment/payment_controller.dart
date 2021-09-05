@@ -62,7 +62,7 @@ class PaymentController extends StateNotifier<Payment> {
         particular: state.particular,
         date: state.date,
         mode: state.mode,
-        sumChetVelDanType: TransactionType.lakluh,
+        transactionType: TransactionType.lakluh,
         transactionTypeId: state.paymentTransactionCategory!.id,
         debitSideLedgerId: state.debitSideLedger!.id,
         creditSideLedgerId: state.creditSideLedger!.id,

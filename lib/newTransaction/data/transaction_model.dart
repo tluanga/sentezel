@@ -10,7 +10,7 @@ class Transaction {
   String particular;
   TransactionMode mode; //user input--can be credit or Cashdown
   DateTime date; //user input
-  TransactionType sumChetVelDanType;
+  TransactionType transactionType;
   int? partyId; //user purchase is made by BA
   int? assetLedgerId; //if the purchase is of asset//user input
   int transactionTypeId;
@@ -28,7 +28,7 @@ class Transaction {
     required this.particular,
     required this.date,
     required this.mode,
-    required this.sumChetVelDanType,
+    required this.transactionType,
     this.partyId,
     this.assetLedgerId,
     required this.transactionTypeId,
@@ -43,7 +43,7 @@ class Transaction {
     String? particular,
     DateTime? date,
     TransactionMode? mode,
-    TransactionType? sumChetVelDanType,
+    TransactionType? transactionType,
     int? partyId,
     int? assetLedgerId,
     int? transactionTypeId,
@@ -57,7 +57,7 @@ class Transaction {
       particular: particular ?? this.particular,
       date: date ?? this.date,
       mode: mode ?? this.mode,
-      sumChetVelDanType: sumChetVelDanType ?? this.sumChetVelDanType,
+      transactionType: transactionType ?? this.transactionType,
       partyId: partyId ?? this.partyId,
       assetLedgerId: assetLedgerId ?? this.assetLedgerId,
       transactionTypeId: transactionTypeId ?? this.transactionTypeId,
@@ -75,7 +75,7 @@ class Transaction {
       'date': date.microsecondsSinceEpoch,
       'mode': EnumToString.convertToString(mode),
       'partyId': partyId,
-      'sumChetVelDanType': convertTransactionTypeToString(sumChetVelDanType),
+      'transactionType': convertTransactionTypeToString(transactionType),
       'assetLedgerId': assetLedgerId,
       'transactionTypeId': transactionTypeId,
       'debitSideLedgerId': debitSideLedgerId,
@@ -115,7 +115,7 @@ class Transaction {
       amount: map['amount'],
       particular: map['particular'],
       mode: _mode,
-      sumChetVelDanType: transactionTypeFromString(map['sumChetVelDanType']),
+      transactionType: transactionTypeFromString(map['transactionType']),
       date: DateTime.fromMicrosecondsSinceEpoch(map['date']),
       partyId: map['partyId'],
       assetLedgerId: map['assetLedgerId'],
