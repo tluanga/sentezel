@@ -5,12 +5,10 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/debtRepayment/debtRepayment_controller.dart';
 import 'package:sentezel/newTransaction/debtRepayment/debtRepayment_model.dart';
 import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/payment/paymentTypeSelect/transactionTypeOfPaymentSelect_modal.dart';
 
 class DebtRePaymentScreen1 extends HookConsumerWidget {
   const DebtRePaymentScreen1({Key? key}) : super(key: key);

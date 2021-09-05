@@ -147,7 +147,6 @@ class PurchaseOfAssetTransactionModeSelectModalBottomSheet
                       onChanged: (value) {
                         state = state.copyWith(
                             mode: TransactionMode.partialPaymentByCash);
-
                         Navigator.pop(context);
                       },
                       groupValue: state.mode,

@@ -1,7 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
-import 'package:sentezel/newTransaction/data/transactionElement_model.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 
 part 'transaction_model.freezed.dart';

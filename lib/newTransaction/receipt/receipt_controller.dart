@@ -1,8 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_model.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
@@ -54,19 +51,7 @@ class ReceiptController extends StateNotifier<Receipt> {
   }
 
   submit() async {
-    try {
-      _read(transactionRepositoryProvider).add(
-          payload: Transaction(
-        amount: state.amount,
-        particular: state.particular,
-        date: state.date,
-        mode: state.mode,
-        transactionType: TransactionType.lakluh,
-        transactionCategoryId: state.receiptTransactionCategory!.id,
-        debitSideLedgerId: state.debitSideLedger!.id,
-        creditSideLedgerId: state.creditSideLedger!.id,
-      ));
-    } catch (e) {
+    try {} catch (e) {
       print(e);
     }
   }

@@ -4,12 +4,9 @@ import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/debtRepayment/debtorList_screen.dart';
 import 'package:sentezel/newTransaction/payment/payment_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_screen.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_screen.dart';
 
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_screen.dart';
-import 'package:sentezel/newTransaction/sell/sellReturn/sellReturn_screen.dart';
 
 class NewTranscationCenterScreen extends StatelessWidget {
   const NewTranscationCenterScreen({Key? key}) : super(key: key);
@@ -47,12 +44,12 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   label: 'Purchase of Material',
                   icon: CupertinoIcons.cube_box,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PurchaseOfMaterialScreen(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => PurchaseOfMaterialScreen(),
+                    //   ),
+                    // );
                   },
                 ),
                 _item(
@@ -60,12 +57,12 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   label: 'Purchase Return',
                   icon: CupertinoIcons.selection_pin_in_out,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => PurchaseReturnScreen(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => PurchaseReturnScreen(),
+                    //   ),
+                    // );
                   },
                 ),
               ],
@@ -94,12 +91,12 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   label: 'Sell Return',
                   icon: CupertinoIcons.hurricane,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SellReturnScreen(),
-                      ),
-                    );
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (context) => SellReturnScreen(),
+                    //   ),
+                    // );
                   },
                 ),
                 _item(

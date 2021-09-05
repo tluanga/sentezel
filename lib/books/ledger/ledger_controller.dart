@@ -35,8 +35,7 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
           //--Asset----
           if (_transactionList[j].mode == TransactionMode.credit) {
             //Full Credit
-            if (_transactionList[j].debitSideLedgerId ==
-                ledgerMasterDataList[i].id) {}
+
           }
         }
       }

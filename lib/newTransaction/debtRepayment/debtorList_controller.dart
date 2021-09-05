@@ -21,14 +21,14 @@ class DebtorListController extends StateNotifier<AsyncValue<List<Debtor>>> {
     print(list);
 
     List<Debtor> _deborList = [];
-    list.forEach((element) {
-      _deborList.add(
-        Debtor(
-          amount: element.amount,
-          debtorName: element.partyId.toString(),
-        ),
-      );
-    });
+    // list.forEach((element) {
+    //   _deborList.add(
+    //     Debtor(
+    //       amount: element.amount,
+    //       debtorName: element.partyId.toString(),
+    //     ),
+    //   );
+    // });
     state = AsyncData(_deborList);
     //from transaction
   }

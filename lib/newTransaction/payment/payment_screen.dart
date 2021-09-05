@@ -1,10 +1,10 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentTypeSelect/transactionTypeOfPaymentSelect_modal.dart';
@@ -16,7 +16,7 @@ class PaymentScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Payment currentState = ref.watch(paymentControllerProvider);
+    Payment state = ref.watch(paymentControllerProvider);
     final setState = ref.watch(paymentControllerProvider.notifier);
     onCancel() {
       // ref.read(receiptControllerProvider.notifier).reset();
@@ -46,9 +46,9 @@ class PaymentScreen extends HookConsumerWidget {
                   },
                 ),
                 DateSelectTimeLineWidget(
-                  initialDate: currentState.date,
+                  initialDate: state.date,
                   onDateSelected: (selectedDate) {
-                    currentState.date = selectedDate;
+                    state.date = selectedDate;
                   },
                 ),
                 SizedBox(
@@ -64,7 +64,7 @@ class PaymentScreen extends HookConsumerWidget {
                       child: TextFormField(
                         //
                         onChanged: (value) {
-                          currentState.amount = int.parse(value);
+                          state.amount = int.parse(value);
                         },
                         decoration: InputDecoration(
                           labelText: 'Amount',
@@ -98,9 +98,7 @@ class PaymentScreen extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              convertTransactionModeToString(
-                                currentState.mode,
-                              ),
+                              EnumToString.convertToString(state.mode),
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 15,
@@ -146,9 +144,9 @@ class PaymentScreen extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          currentState.paymentTransactionCategory == null
+                          state.paymentTransactionCategory == null
                               ? 'Please Select Receipt Head of Account'
-                              : currentState.paymentTransactionCategory!.name,
+                              : state.paymentTransactionCategory!.name,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,
@@ -171,9 +169,9 @@ class PaymentScreen extends HookConsumerWidget {
                   width: MediaQuery.of(context).size.width * 0.95,
                   height: MediaQuery.of(context).size.height * 0.1,
                   child: TextFormField(
-                    initialValue: currentState.particular,
+                    initialValue: state.particular,
                     onChanged: (value) {
-                      currentState.particular = value;
+                      state.particular = value;
                     },
                     decoration: InputDecoration(
                       labelText: 'particular',

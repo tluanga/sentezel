@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
@@ -96,9 +97,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              convertTransactionModeToString(
-                                state.mode,
-                              ),
+                              EnumToString.convertToString(state.mode),
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 15,
