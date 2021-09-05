@@ -14,7 +14,7 @@ class PurchaseOfAsset with _$PurchaseOfAsset {
     @Default(0) int partialPaymentAmount,
     String? particular,
     required DateTime date,
-    TransactionMode? mode,
+    @Default(TransactionMode.paymentByCash) TransactionMode? mode,
     TransactionCategory? category,
     LedgerMaster? debitSideLedger,
     LedgerMaster? creditSideLedger,

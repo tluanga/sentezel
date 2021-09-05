@@ -23,7 +23,7 @@ class _$PurchaseOfAssetTearOff {
       int partialPaymentAmount = 0,
       String? particular,
       required DateTime date,
-      TransactionMode? mode,
+      TransactionMode? mode = TransactionMode.paymentByCash,
       TransactionCategory? category,
       LedgerMaster? debitSideLedger,
       LedgerMaster? creditSideLedger,
@@ -277,7 +277,7 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
       this.partialPaymentAmount = 0,
       this.particular,
       required this.date,
-      this.mode,
+      this.mode = TransactionMode.paymentByCash,
       this.category,
       this.debitSideLedger,
       this.creditSideLedger,
@@ -300,6 +300,7 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
   final String? particular;
   @override
   final DateTime date;
+  @JsonKey(defaultValue: TransactionMode.paymentByCash)
   @override
   final TransactionMode? mode;
   @override

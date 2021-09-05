@@ -125,8 +125,13 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                                   TransactionMode.partialPaymentByCash)
                             PartialPaymentWidget(
                               onChange: (amount) {
-                                state = state.copyWith(
-                                    partialPaymentAmount: amount);
+                                ref
+                                    .watch(purchaseOfAssetControllerProvider
+                                        .notifier)
+                                    .setState(
+                                      state.copyWith(
+                                          partialPaymentAmount: amount),
+                                    );
                               },
                               defaultValue: state.partialPaymentAmount,
                             ),
@@ -136,7 +141,12 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                                 context: context,
                                 builder: (context) => PartySelectModal(
                                   onSelectParty: (party) {
-                                    state = state.copyWith(partyLedger: party);
+                                    ref
+                                        .watch(purchaseOfAssetControllerProvider
+                                            .notifier)
+                                        .setState(
+                                          state.copyWith(partyLedger: party),
+                                        );
                                   },
                                 ),
                               );
@@ -191,7 +201,11 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                       context: context,
                       builder: (context) => AssetSelectModal(
                         onSelect: (asset) {
-                          state = state.copyWith(assetLedger: asset);
+                          ref
+                              .watch(purchaseOfAssetControllerProvider.notifier)
+                              .setState(
+                                state.copyWith(assetLedger: asset),
+                              );
                         },
                       ),
                     );
@@ -232,7 +246,11 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                   child: TextFormField(
                     initialValue: state.particular,
                     onChanged: (value) {
-                      state = state.copyWith(particular: value);
+                      ref
+                          .watch(purchaseOfAssetControllerProvider.notifier)
+                          .setState(
+                            state.copyWith(particular: value),
+                          );
                     },
                     decoration: InputDecoration(
                       labelText: 'particular',
@@ -251,6 +269,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
   }
 
   onSubmit(WidgetRef ref, context) {
+    ref.watch(purchaseOfAssetControllerProvider.notifier).setup();
     showModalBottomSheet(
       context: context,
       builder: (context) => PurchaseOfAssetConfirmationBottomSheet(

@@ -12,6 +12,10 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
       : super(PurchaseOfAsset(
           date: DateTime.now(),
         ));
+  setState(payload) {
+    state = payload;
+  }
+
   setup() {
     state = state.copyWith(
       creditAmount: state.amount - state.partialPaymentAmount,

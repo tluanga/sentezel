@@ -53,8 +53,11 @@ class PurchaseOfAssetTransactionModeSelectModalBottomSheet
                   trailing: Radio(
                     value: TransactionMode.paymentByCash,
                     onChanged: (value) {
-                      state =
-                          state.copyWith(mode: TransactionMode.paymentByCash);
+                      ref
+                          .watch(purchaseOfAssetControllerProvider.notifier)
+                          .setState(
+                            state.copyWith(mode: TransactionMode.paymentByCash),
+                          );
 
                       Navigator.pop(context);
                     },
@@ -76,8 +79,11 @@ class PurchaseOfAssetTransactionModeSelectModalBottomSheet
                     trailing: Radio(
                       value: TransactionMode.paymentByBank,
                       onChanged: (value) {
-                        state =
-                            state.copyWith(mode: TransactionMode.paymentByBank);
+                        ref
+                            .watch(purchaseOfAssetControllerProvider.notifier)
+                            .setState(state.copyWith(
+                              mode: TransactionMode.paymentByBank,
+                            ));
 
                         Navigator.pop(context);
                       },
@@ -100,7 +106,11 @@ class PurchaseOfAssetTransactionModeSelectModalBottomSheet
                     trailing: Radio(
                       value: TransactionMode.credit,
                       onChanged: (value) {
-                        state = state.copyWith(mode: TransactionMode.credit);
+                        ref
+                            .watch(purchaseOfAssetControllerProvider.notifier)
+                            .setState(
+                              state.copyWith(mode: TransactionMode.credit),
+                            );
 
                         Navigator.pop(context);
                       },
@@ -122,8 +132,12 @@ class PurchaseOfAssetTransactionModeSelectModalBottomSheet
                     trailing: Radio(
                       value: TransactionMode.partialPaymentByBank,
                       onChanged: (value) {
-                        state = state.copyWith(
-                            mode: TransactionMode.partialPaymentByBank);
+                        ref
+                            .watch(purchaseOfAssetControllerProvider.notifier)
+                            .setState(
+                              state.copyWith(
+                                  mode: TransactionMode.partialPaymentByBank),
+                            );
 
                         Navigator.pop(context);
                       },
@@ -145,8 +159,13 @@ class PurchaseOfAssetTransactionModeSelectModalBottomSheet
                     trailing: Radio(
                       value: TransactionMode.partialPaymentByCash,
                       onChanged: (value) {
-                        state = state.copyWith(
-                            mode: TransactionMode.partialPaymentByCash);
+                        ref
+                            .watch(purchaseOfAssetControllerProvider.notifier)
+                            .setState(
+                              state.copyWith(
+                                  mode: TransactionMode.partialPaymentByCash),
+                            );
+
                         Navigator.pop(context);
                       },
                       groupValue: state.mode,
