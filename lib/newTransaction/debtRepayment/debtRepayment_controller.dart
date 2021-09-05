@@ -46,17 +46,7 @@ class DebtRepaymentController extends StateNotifier<DebtRepayment> {
 
   submit() async {
     try {
-      _read(transactionRepositoryProvider).add(
-          payload: Transaction(
-        amount: state.amount,
-        particular: state.particular,
-        date: state.date,
-        mode: state.mode,
-        transactionType: TransactionType.debtRepaymentByDebtor,
-        transactionTypeId: TransactionCategoryIndex.BusinessDebtSettlement,
-        debitSideLedgerId: state.debitSideLedger!.id,
-        creditSideLedgerId: state.creditSideLedger!.id,
-      ));
+      // _read(transactionRepositoryProvider).add(payload: Transaction());
     } catch (e) {
       print(e);
     }

@@ -12,7 +12,7 @@ enum TransactionMode {
   contra,
 }
 
-String convertTransactionModeToString(TransactionMode mode) {
+String transactionModeToString(TransactionMode mode) {
   if (mode == TransactionMode.credit) return 'Credit';
   if (mode == TransactionMode.paymentByCash) return 'Payment by Cash';
   if (mode == TransactionMode.paymentByBank) return 'Payment by Bank';

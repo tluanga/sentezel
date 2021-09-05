@@ -36,7 +36,7 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
         String _debitSideLedgerName = '';
 
         String _transactionType = await _read(transactionTypeRepositoryProvider)
-            .getTransactionCategoryName(element.transactionTypeId);
+            .getTransactionCategoryName(element.transactionCategoryId);
 
         String _partyLedgerName = element.partyId != null
             ? await _read(ledgerMasterRepositoryProvider)

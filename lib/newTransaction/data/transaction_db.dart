@@ -15,7 +15,7 @@ class TransactionDb {
             partyId INT,
             assetLedgerId INT,
             transactionType String,
-            transactionTypeId INT,
+            transactionCategoryId INT,
             debitSideLedgerId INT,
             creditSideLedgerId INT,
             partialPaymentAmount INT

@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -99,9 +100,7 @@ class SellReturnScreen extends HookConsumerWidget {
                                     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Text(
-                                    convertTransactionModeToString(
-                                      data.mode,
-                                    ),
+                                    EnumToString.convertToString(data.mode),
                                     style: TextStyle(
                                       color: Colors.black,
                                       fontSize: 15,

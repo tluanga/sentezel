@@ -46,11 +46,11 @@ class SellReturnController extends StateNotifier<AsyncValue<Transaction>> {
   SellReturnController(this._read) : super(AsyncValue.loading());
 
   //------------For Initialization--------
-  final int _transactionTypeId = TransactionCategoryIndex.SalesReturn;
+  final int _transactionCategoryId = TransactionCategoryIndex.SalesReturn;
   init() async {
     TransactionCategory _transactionType =
         await _read(transactionTypeRepositoryProvider)
-            .getItem(id: _transactionTypeId);
+            .getItem(id: _transactionCategoryId);
     initialState = Transaction(
       amount: 0,
       particular: _transactionType.name,
@@ -58,7 +58,7 @@ class SellReturnController extends StateNotifier<AsyncValue<Transaction>> {
       transactionType: _transactionType.transactionType,
       creditSideLedgerId: _transactionType.creditSideLedger,
       debitSideLedgerId: _transactionType.debitSideLedger,
-      transactionTypeId: _transactionType.id,
+      transactionCategoryId: _transactionType.id,
       partyId: null,
       date: DateTime.now(),
     );

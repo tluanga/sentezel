@@ -59,11 +59,12 @@ class PurchaseOfMaterialController
   PurchaseOfMaterialController(this._read) : super(AsyncValue.loading());
 
   //-------------Initializing the State------------
-  final int _transactionTypeId = TransactionCategoryIndex.PurchaseOfRawMaterial;
+  final int _transactionCategoryId =
+      TransactionCategoryIndex.PurchaseOfRawMaterial;
   init() async {
     TransactionCategory _transactionType =
         await _read(transactionTypeRepositoryProvider)
-            .getItem(id: _transactionTypeId);
+            .getItem(id: _transactionCategoryId);
     initialState = Transaction(
       amount: 0,
       particular: _transactionType.name,
@@ -71,7 +72,7 @@ class PurchaseOfMaterialController
       transactionType: _transactionType.transactionType,
       creditSideLedgerId: _transactionType.debitSideLedger,
       debitSideLedgerId: _transactionType.creditSideLedger,
-      transactionTypeId: _transactionType.id,
+      transactionCategoryId: _transactionType.id,
       partyId: null,
       date: DateTime.now(),
     );

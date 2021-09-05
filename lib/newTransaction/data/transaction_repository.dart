@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
@@ -20,7 +21,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
   void add({required trans.Transaction payload}) async {
     Database db = await DatabaseService.instance.db;
     try {
-      var b = await db.insert(dbName, payload.toMap());
+      var b = await db.insert(dbName, payload.toJson());
       // final a = await getItem(id: b);
       print('the value return is $b');
     } catch (e) {
@@ -35,7 +36,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     try {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
       if (result.length != 0) {
-        return trans.Transaction.fromMap(result.first);
+        return trans.Transaction.fromJson(result.first);
       } else
         throw ('Error');
     } catch (e) {
@@ -44,13 +45,12 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     }
   }
 
-  @override
   getTransactionCategory({required int id}) async {
     Database db = await DatabaseService.instance.db;
     try {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
       if (result.length != 0) {
-        return trans.Transaction.fromMap(result.first);
+        return trans.Transaction.fromJson(result.first);
       } else
         throw ('Error');
     } catch (e) {
@@ -74,16 +74,11 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     if (endDate == null) endDate = DateTime.now();
     DateTime paramStartDate =
         DateTime(startDate.year, startDate.month, startDate.day);
-    print('StartDate $startDate');
-
-    print(
-        'param startDate:$paramStartDate microseconds:${paramStartDate.microsecondsSinceEpoch}');
 
     DateTime paramEndDate =
         DateTime(endDate.year, endDate.month, endDate.day, 23, 59);
-    print(
-        'param EndDate:$paramEndDate  microseconds:${paramEndDate.microsecondsSinceEpoch}');
-    String _mode = mode != null ? convertTransactionModeToString(mode) : '';
+
+    String _mode = mode != null ? EnumToString.convertToString(mode) : '';
     try {
       Database db = await DatabaseService.instance.db;
       final result = await db.rawQuery('''
@@ -94,13 +89,9 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       AND date <=${paramEndDate.microsecondsSinceEpoch}     
       ''');
       List<trans.Transaction> list = [];
-      print('length of result is ${result.length}');
-      result.forEach((item) {
-        list.add(trans.Transaction.fromMap(item));
-        print('name');
-        print(item['name']);
 
-        print(item['date']);
+      result.forEach((item) {
+        list.add(trans.Transaction.fromJson(item));
       });
 
       return list;
@@ -122,16 +113,16 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     if (endDate == null) endDate = DateTime.now();
     DateTime paramStartDate =
         DateTime(startDate.year, startDate.month, startDate.day);
-    print('StartDate $startDate');
+    // print('StartDate $startDate');
 
-    print(
-        'param startDate:$paramStartDate microseconds:${paramStartDate.microsecondsSinceEpoch}');
+    // print(
+    //     'param startDate:$paramStartDate microseconds:${paramStartDate.microsecondsSinceEpoch}');
 
     DateTime paramEndDate =
         DateTime(endDate.year, endDate.month, endDate.day, 23, 59);
-    print(
-        'param EndDate:$paramEndDate  microseconds:${paramEndDate.microsecondsSinceEpoch}');
-    String _mode = mode != null ? convertTransactionModeToString(mode) : '';
+    // print(
+    //     'param EndDate:$paramEndDate  microseconds:${paramEndDate.microsecondsSinceEpoch}');
+    String _mode = mode != null ? EnumToString.convertToString(mode) : '';
     try {
       Database db = await DatabaseService.instance.db;
       final result = await db.rawQuery('''
@@ -142,13 +133,9 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       AND date <=${paramEndDate.microsecondsSinceEpoch}     
       ''');
       List<trans.Transaction> list = [];
-      print('length of result is ${result.length}');
-      result.forEach((item) {
-        list.add(trans.Transaction.fromMap(item));
-        print('name');
-        print(item['name']);
 
-        print(item['date']);
+      result.forEach((item) {
+        list.add(trans.Transaction.fromJson(item));
       });
 
       return list;
@@ -174,7 +161,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       Database db = await DatabaseService.instance.db;
       await db.update(
         dbName,
-        payload.toMap(),
+        payload.toJson(),
         where: 'id=?',
         whereArgs: [payload.id],
       );
