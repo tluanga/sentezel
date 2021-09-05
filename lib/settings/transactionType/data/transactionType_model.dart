@@ -2,11 +2,11 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:sentezel/common/enums/activeInActive_enum.dart';
 import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 
-class TransactionType {
+class TransactionCategory {
   int id = 0;
   String name;
   String description;
-  SumChetvelDanType sumChetVelDanType; // 0--for buy 1-- sell
+  TransactionType sumChetVelDanType; // 0--for buy 1-- sell
   int debitSideLedger;
   int creditSideLedger;
 
@@ -18,14 +18,14 @@ class TransactionType {
 
   // 0 - when Incomplete and 1- when Complete
 
-  TransactionType({
+  TransactionCategory({
     required this.name,
     required this.description,
     required this.sumChetVelDanType,
     required this.debitSideLedger,
     required this.creditSideLedger,
   });
-  TransactionType.withId({
+  TransactionCategory.withId({
     required this.id,
     required this.name,
     required this.description,
@@ -51,47 +51,47 @@ class TransactionType {
     return map;
   }
 
-  factory TransactionType.fromMap(Map<String, dynamic> map) {
-    SumChetvelDanType _sumChetVelDanType;
+  factory TransactionCategory.fromMap(Map<String, dynamic> map) {
+    TransactionType _sumChetVelDanType;
     switch (map['_sumChetVelDanType']) {
       case 'lei':
-        _sumChetVelDanType = SumChetvelDanType.lei;
+        _sumChetVelDanType = TransactionType.lei;
         break;
       case 'hralh':
-        _sumChetVelDanType = SumChetvelDanType.hralh;
+        _sumChetVelDanType = TransactionType.hralh;
         break;
       case 'lakluh':
-        _sumChetVelDanType = SumChetvelDanType.lakluh;
+        _sumChetVelDanType = TransactionType.lakluh;
         break;
       case 'pekchhuah':
-        _sumChetVelDanType = SumChetvelDanType.pekchhuah;
+        _sumChetVelDanType = TransactionType.pekchhuah;
         break;
       case 'debtRepaymentByDebtor':
-        _sumChetVelDanType = SumChetvelDanType.debtRepaymentByDebtor;
+        _sumChetVelDanType = TransactionType.debtRepaymentByDebtor;
         break;
       case 'debtRepaymentByCreditor':
-        _sumChetVelDanType = SumChetvelDanType.debtRepaymentToCreditor;
+        _sumChetVelDanType = TransactionType.debtRepaymentToCreditor;
         break;
       case 'bankToCash':
-        _sumChetVelDanType = SumChetvelDanType.bankToCash;
+        _sumChetVelDanType = TransactionType.bankToCash;
         break;
       case 'cashToBank':
-        _sumChetVelDanType = SumChetvelDanType.cashToBank;
+        _sumChetVelDanType = TransactionType.cashToBank;
         break;
       case 'purchaseReturn':
-        _sumChetVelDanType = SumChetvelDanType.purchaseReturn;
+        _sumChetVelDanType = TransactionType.purchaseReturn;
         break;
       case 'saleReturn':
-        _sumChetVelDanType = SumChetvelDanType.saleReturn;
+        _sumChetVelDanType = TransactionType.saleReturn;
         break;
       case 'capitalInjection':
-        _sumChetVelDanType = SumChetvelDanType.capitalInjection;
+        _sumChetVelDanType = TransactionType.capitalInjection;
         break;
       case 'openingBalanceCash':
-        _sumChetVelDanType = SumChetvelDanType.openingBalanceCash;
+        _sumChetVelDanType = TransactionType.openingBalanceCash;
         break;
       default:
-        _sumChetVelDanType = SumChetvelDanType.openingBalanceBank;
+        _sumChetVelDanType = TransactionType.openingBalanceBank;
         break;
     }
     ActiveInActive _status;
@@ -103,7 +103,7 @@ class TransactionType {
         _status = ActiveInActive.inActive;
     }
 
-    return TransactionType.withId(
+    return TransactionCategory.withId(
       id: map['id'],
       name: map['name'],
       description: map['description'],

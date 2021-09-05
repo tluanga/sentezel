@@ -122,9 +122,10 @@ class PaymentScreen extends HookConsumerWidget {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
-                      builder: (context) => TransactionTypeOfPaymentSelectModal(
+                      builder: (context) =>
+                          TransactionCategoryOfPaymentSelectModal(
                         onSelect: (payment) =>
-                            setState.setPaymentTransactionType(payment),
+                            setState.setPaymentTransactionCategory(payment),
                       ),
                     );
                   },
@@ -145,9 +146,9 @@ class PaymentScreen extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          currentState.paymentTransactionType == null
+                          currentState.paymentTransactionCategory == null
                               ? 'Please Select Receipt Head of Account'
-                              : currentState.paymentTransactionType!.name,
+                              : currentState.paymentTransactionCategory!.name,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,

@@ -1,4 +1,4 @@
-class TransactionTypeIndex {
+class TransactionCategoryIndex {
   static const int PurchaseOfRawMaterial = 1;
   static const int PurchaseOfAssets = 2;
   static const int SaleOfGoods = 3;

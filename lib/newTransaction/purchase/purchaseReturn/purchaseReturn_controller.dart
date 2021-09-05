@@ -46,9 +46,9 @@ class PurchaseReturnController extends StateNotifier<AsyncValue<Transaction>> {
   PurchaseReturnController(this._read) : super(AsyncValue.loading());
 
   //------------For Initialization--------
-  final int _transactionTypeId = TransactionTypeIndex.PurchaseReturn;
+  final int _transactionTypeId = TransactionCategoryIndex.PurchaseReturn;
   init() async {
-    TransactionType _transactionType =
+    TransactionCategory _transactionType =
         await _read(transactionTypeRepositoryProvider)
             .getItem(id: _transactionTypeId);
     initialState = Transaction(

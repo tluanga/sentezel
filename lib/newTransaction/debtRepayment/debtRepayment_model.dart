@@ -29,7 +29,7 @@ class DebtRepayment {
     LedgerMaster? creditSideLedger,
     DateTime? date,
     TransactionMode? mode,
-    TransactionType? receiptTransactionType,
+    TransactionCategory? receiptTransactionCategory,
   }) {
     return DebtRepayment(
         amount: amount ?? this.amount,

@@ -45,7 +45,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
   }
 
   @override
-  getTransactionType({required int id}) async {
+  getTransactionCategory({required int id}) async {
     Database db = await DatabaseService.instance.db;
     try {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);

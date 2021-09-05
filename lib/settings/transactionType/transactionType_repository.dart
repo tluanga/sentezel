@@ -3,29 +3,31 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
+
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 import 'package:sentezel/settings/transactionType/transactionType_config.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 final transactionTypeRepositoryProvider =
-    Provider((ref) => TransactionTypeRepository());
+    Provider((ref) => TransactionCategoryRepository());
 
-class TransactionTypeRepository implements BaseRepository<TransactionType> {
-  final String dbName = TransactionTypeConfig.dbName;
+class TransactionCategoryRepository
+    implements BaseRepository<TransactionCategory> {
+  final String dbName = TransactionCategoryConfig.dbName;
 
-  const TransactionTypeRepository();
+  const TransactionCategoryRepository();
 
   @override
   void add({required payload}) {}
 
   @override
-  Future<TransactionType> getItem({required int id}) async {
+  Future<TransactionCategory> getItem({required int id}) async {
     try {
       Database db = await DatabaseService.instance.db;
 
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
       if (result.isNotEmpty) {
-        return TransactionType.fromMap(result.first);
+        return TransactionCategory.fromMap(result.first);
       }
       throw Exception('Transaction Type Not Present');
     } catch (e) {
@@ -34,20 +36,20 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
     }
   }
 
-  Future<String> getTransactionTypeName(int id) async {
+  Future<String> getTransactionCategoryName(int id) async {
     try {
       Database db = await DatabaseService.instance.db;
 
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
-      return TransactionType.fromMap(result.first).name;
+      return TransactionCategory.fromMap(result.first).name;
     } catch (e) {
       print(e);
       return 'Error';
     }
   }
 
-  Future<List<TransactionType>> getTransactionTypeListBySumChetvelDanType(
-      SumChetvelDanType type) async {
+  Future<List<TransactionCategory>> getTransactionCategoryListByTransactionType(
+      TransactionType type) async {
     final _type = EnumToString.convertToString(type);
     try {
       Database db = await DatabaseService.instance.db;
@@ -55,7 +57,7 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
       final result = await db
           .query(dbName, where: 'sumChetVelDanType=?', whereArgs: [_type]);
 
-      return result.map((e) => TransactionType.fromMap(e)).toList();
+      return result.map((e) => TransactionCategory.fromMap(e)).toList();
     } catch (e) {
       print(e);
       throw e;
@@ -64,9 +66,9 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
 
   //-------Get All item--
   @override
-  Future<List<TransactionType>> getList({
+  Future<List<TransactionCategory>> getList({
     String searchString = '',
-    SumChetvelDanType? type,
+    TransactionType? type,
     DateTime? startDate,
     DateTime? endDate,
   }) async {
@@ -77,11 +79,11 @@ class TransactionTypeRepository implements BaseRepository<TransactionType> {
       final result = await db.rawQuery('''
       Select * from $dbName
       WHERE name LIKE '$searchString%'
-      AND sumChetvelDanType Like '$_type'
+      AND transactionType Like '$_type'
       ''');
-      List<TransactionType> list = [];
+      List<TransactionCategory> list = [];
       result.forEach((item) {
-        list.add(TransactionType.fromMap(item));
+        list.add(TransactionCategory.fromMap(item));
         print('name');
         print(item['name']);
       });

@@ -4,17 +4,17 @@ import 'package:sqflite_common/sqlite_api.dart';
 
 import '../transactionType_config.dart';
 
-class TransactionTypeDb {}
+class TransactionCategoryDb {}
 
-void injectTransactionType(Database db) async {
+void injectTransactionCategory(Database db) async {
   await db.execute(
     '''
     CREATE TABLE
-      ${TransactionTypeConfig.dbName}(
+      ${TransactionCategoryConfig.dbName}(
        id INTEGER PRIMARY KEY AUTOINCREMENT,
        name TEXT,      
        description TEXT,
-       sumChetvelDanType TEXT,
+       transactionType TEXT,
        debitSideLedger INT,
        creditSideLedger INT,
        status TEXT
@@ -22,7 +22,7 @@ void injectTransactionType(Database db) async {
   );
   //--Injecting Data---
   transactionTypeData.asMap().forEach((key, value) async {
-    final mapData = TransactionType.withId(
+    final mapData = TransactionCategory.withId(
       id: value.id,
       name: value.name,
       description: value.description,
@@ -33,7 +33,7 @@ void injectTransactionType(Database db) async {
     ).toMap();
     print('--The value of json is--');
     await db.insert(
-      TransactionTypeConfig.dbName,
+      TransactionCategoryConfig.dbName,
       mapData,
     );
   });
@@ -42,7 +42,7 @@ void injectTransactionType(Database db) async {
 
 //  transactionTypeData.asMap().forEach((key, value) async {
 //     print('status is ${value.status}');
-//     final mapData = TransactionType.withId(
+//     final mapData = TransactionCategory.withId(
 //       id: value.id,
 //       name: value.name,
 //       description: value.description,
@@ -53,7 +53,7 @@ void injectTransactionType(Database db) async {
 //     ).toMap();
 //     print('--The value of json is--');
 //     await db.insert(
-//       TransactionTypeConfig.dbName,
+//       TransactionCategoryConfig.dbName,
 //       mapData,
 //     );
 //   });

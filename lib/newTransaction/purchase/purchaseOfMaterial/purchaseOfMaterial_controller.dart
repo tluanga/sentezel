@@ -59,9 +59,9 @@ class PurchaseOfMaterialController
   PurchaseOfMaterialController(this._read) : super(AsyncValue.loading());
 
   //-------------Initializing the State------------
-  final int _transactionTypeId = TransactionTypeIndex.PurchaseOfRawMaterial;
+  final int _transactionTypeId = TransactionCategoryIndex.PurchaseOfRawMaterial;
   init() async {
-    TransactionType _transactionType =
+    TransactionCategory _transactionType =
         await _read(transactionTypeRepositoryProvider)
             .getItem(id: _transactionTypeId);
     initialState = Transaction(

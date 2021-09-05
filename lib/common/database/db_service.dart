@@ -93,7 +93,7 @@ class DatabaseService {
     // Table 3- Ledger Master Table
 
     injectLedgerMaster(db);
-    injectTransactionType(db);
+    injectTransactionCategory(db);
     PartyDb.execute(db);
     TransactionDb.execute(db);
 

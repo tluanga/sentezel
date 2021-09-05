@@ -9,7 +9,7 @@ class Payment {
   LedgerMaster? creditSideLedger;
   DateTime date;
   TransactionMode mode;
-  TransactionType? paymentTransactionType;
+  TransactionCategory? paymentTransactionCategory;
   Payment({
     required this.amount,
     required this.particular,
@@ -17,7 +17,7 @@ class Payment {
     this.creditSideLedger,
     required this.date,
     required this.mode,
-    this.paymentTransactionType,
+    this.paymentTransactionCategory,
   });
 
   Payment copyWith({
@@ -27,7 +27,7 @@ class Payment {
     LedgerMaster? creditSideLedger,
     DateTime? date,
     TransactionMode? mode,
-    TransactionType? receiptTransactionType,
+    TransactionCategory? receiptTransactionCategory,
   }) {
     return Payment(
       amount: amount ?? this.amount,
@@ -36,8 +36,8 @@ class Payment {
       creditSideLedger: creditSideLedger ?? this.creditSideLedger,
       date: date ?? this.date,
       mode: mode ?? this.mode,
-      paymentTransactionType:
-          receiptTransactionType ?? this.paymentTransactionType,
+      paymentTransactionCategory:
+          receiptTransactionCategory ?? this.paymentTransactionCategory,
     );
   }
 }

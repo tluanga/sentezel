@@ -4,18 +4,18 @@ import 'package:sentezel/settings/transactionType/data/transactionType_model.dar
 import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
 
 final transactionTypeOfPaymentSelectControllerProvider = StateNotifierProvider<
-        TransactionTypeOfPaymentSelectController,
-        AsyncValue<List<TransactionType>>>(
-    (ref) => TransactionTypeOfPaymentSelectController(ref.read)..init());
+        TransactionCategoryOfPaymentSelectController,
+        AsyncValue<List<TransactionCategory>>>(
+    (ref) => TransactionCategoryOfPaymentSelectController(ref.read)..init());
 
-class TransactionTypeOfPaymentSelectController
-    extends StateNotifier<AsyncValue<List<TransactionType>>> {
+class TransactionCategoryOfPaymentSelectController
+    extends StateNotifier<AsyncValue<List<TransactionCategory>>> {
   final Reader _read;
-  TransactionTypeOfPaymentSelectController(this._read)
+  TransactionCategoryOfPaymentSelectController(this._read)
       : super(AsyncValue.loading());
   init() async {
     final data = await _read(transactionTypeRepositoryProvider)
-        .getTransactionTypeListBySumChetvelDanType(SumChetvelDanType.pekchhuah);
+        .getTransactionCategoryListByTransactionType(TransactionType.pekchhuah);
     state = AsyncValue.data(data);
   }
 
@@ -24,7 +24,7 @@ class TransactionTypeOfPaymentSelectController
     try {
       final result = await _read(transactionTypeRepositoryProvider).getList(
         searchString: searchString,
-        type: SumChetvelDanType.pekchhuah,
+        type: TransactionType.pekchhuah,
       );
       if (mounted) state = AsyncValue.data(result);
     } on Exception catch (e) {
@@ -35,7 +35,7 @@ class TransactionTypeOfPaymentSelectController
   search({String searchParam = ''}) async {
     final data = state.data!.value;
     print(data);
-    List<TransactionType> filteredData = state.data!.value
+    List<TransactionCategory> filteredData = state.data!.value
         .where((element) => element.name.contains(searchParam))
         .toList();
     state = AsyncValue.data(filteredData);

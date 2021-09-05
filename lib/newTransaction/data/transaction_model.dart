@@ -10,7 +10,7 @@ class Transaction {
   String particular;
   TransactionMode mode; //user input--can be credit or Cashdown
   DateTime date; //user input
-  SumChetvelDanType sumChetVelDanType;
+  TransactionType sumChetVelDanType;
   int? partyId; //user purchase is made by BA
   int? assetLedgerId; //if the purchase is of asset//user input
   int transactionTypeId;
@@ -43,7 +43,7 @@ class Transaction {
     String? particular,
     DateTime? date,
     TransactionMode? mode,
-    SumChetvelDanType? sumChetVelDanType,
+    TransactionType? sumChetVelDanType,
     int? partyId,
     int? assetLedgerId,
     int? transactionTypeId,
@@ -75,7 +75,7 @@ class Transaction {
       'date': date.microsecondsSinceEpoch,
       'mode': EnumToString.convertToString(mode),
       'partyId': partyId,
-      'sumChetVelDanType': convertSumChetvelDanTypeToString(sumChetVelDanType),
+      'sumChetVelDanType': convertTransactionTypeToString(sumChetVelDanType),
       'assetLedgerId': assetLedgerId,
       'transactionTypeId': transactionTypeId,
       'debitSideLedgerId': debitSideLedgerId,
@@ -115,7 +115,7 @@ class Transaction {
       amount: map['amount'],
       particular: map['particular'],
       mode: _mode,
-      sumChetVelDanType: sumChetvelDanTypeFromString(map['sumChetVelDanType']),
+      sumChetVelDanType: transactionTypeFromString(map['sumChetVelDanType']),
       date: DateTime.fromMicrosecondsSinceEpoch(map['date']),
       partyId: map['partyId'],
       assetLedgerId: map['assetLedgerId'],

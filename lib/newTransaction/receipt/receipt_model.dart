@@ -9,7 +9,7 @@ class Receipt {
   LedgerMaster? creditSideLedger;
   DateTime date;
   TransactionMode mode;
-  TransactionType? receiptTransactionType;
+  TransactionCategory? receiptTransactionCategory;
   Receipt({
     required this.amount,
     required this.particular,
@@ -17,7 +17,7 @@ class Receipt {
     this.creditSideLedger,
     required this.date,
     required this.mode,
-    this.receiptTransactionType,
+    this.receiptTransactionCategory,
   });
 
   Receipt copyWith({
@@ -27,7 +27,7 @@ class Receipt {
     LedgerMaster? creditSideLedger,
     DateTime? date,
     TransactionMode? mode,
-    TransactionType? receiptTransactionType,
+    TransactionCategory? receiptTransactionCategory,
   }) {
     return Receipt(
       amount: amount ?? this.amount,
@@ -36,8 +36,8 @@ class Receipt {
       creditSideLedger: creditSideLedger ?? this.creditSideLedger,
       date: date ?? this.date,
       mode: mode ?? this.mode,
-      receiptTransactionType:
-          receiptTransactionType ?? this.receiptTransactionType,
+      receiptTransactionCategory:
+          receiptTransactionCategory ?? this.receiptTransactionCategory,
     );
   }
 }

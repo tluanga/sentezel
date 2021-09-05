@@ -31,11 +31,11 @@ class ReceiptController extends StateNotifier<Receipt> {
     state = state.copyWith(debitSideLedger: debitSide);
   }
 
-  setReceiptTransactionType(TransactionType type) async {
+  setReceiptTransactionCategory(TransactionCategory type) async {
     final creditSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: type.creditSideLedger);
     state = state.copyWith(
-      receiptTransactionType: type,
+      receiptTransactionCategory: type,
       creditSideLedger: creditSideLedger,
     );
   }
@@ -61,8 +61,8 @@ class ReceiptController extends StateNotifier<Receipt> {
         particular: state.particular,
         date: state.date,
         mode: state.mode,
-        sumChetVelDanType: SumChetvelDanType.lakluh,
-        transactionTypeId: state.receiptTransactionType!.id,
+        sumChetVelDanType: TransactionType.lakluh,
+        transactionTypeId: state.receiptTransactionCategory!.id,
         debitSideLedgerId: state.debitSideLedger!.id,
         creditSideLedgerId: state.creditSideLedger!.id,
       ));

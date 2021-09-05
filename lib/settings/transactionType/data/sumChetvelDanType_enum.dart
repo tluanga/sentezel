@@ -1,4 +1,4 @@
-enum TransactionTypeEnum {
+enum TransactionCategoryEnum {
   lei,
   hralh,
   lakluh,

@@ -4,16 +4,17 @@ import 'package:sentezel/settings/transactionType/data/transactionType_model.dar
 import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
 
 final transactionTypeOfReceiptControllerProvider = StateNotifierProvider<
-        TransactionTypeSelectController, AsyncValue<List<TransactionType>>>(
-    (ref) => TransactionTypeSelectController(ref.read)..init());
+        TransactionCategorySelectController,
+        AsyncValue<List<TransactionCategory>>>(
+    (ref) => TransactionCategorySelectController(ref.read)..init());
 
-class TransactionTypeSelectController
-    extends StateNotifier<AsyncValue<List<TransactionType>>> {
+class TransactionCategorySelectController
+    extends StateNotifier<AsyncValue<List<TransactionCategory>>> {
   final Reader _read;
-  TransactionTypeSelectController(this._read) : super(AsyncValue.loading());
+  TransactionCategorySelectController(this._read) : super(AsyncValue.loading());
   init() async {
     final data = await _read(transactionTypeRepositoryProvider)
-        .getTransactionTypeListBySumChetvelDanType(SumChetvelDanType.lakluh);
+        .getTransactionCategoryListByTransactionType(TransactionType.lakluh);
     state = AsyncValue.data(data);
   }
 
@@ -22,7 +23,7 @@ class TransactionTypeSelectController
     try {
       final result = await _read(transactionTypeRepositoryProvider).getList(
         searchString: searchString,
-        type: SumChetvelDanType.lakluh,
+        type: TransactionType.lakluh,
       );
       if (mounted) state = AsyncValue.data(result);
     } on Exception catch (e) {
@@ -33,7 +34,7 @@ class TransactionTypeSelectController
   search({String searchParam = ''}) async {
     final data = state.data!.value;
     print(data);
-    List<TransactionType> filteredData = state.data!.value
+    List<TransactionCategory> filteredData = state.data!.value
         .where((element) => element.name.contains(searchParam))
         .toList();
     state = AsyncValue.data(filteredData);

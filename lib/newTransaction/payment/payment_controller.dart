@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
+
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
@@ -30,11 +31,11 @@ class PaymentController extends StateNotifier<Payment> {
     state = state.copyWith(creditSideLedger: _paymentSide);
   }
 
-  setPaymentTransactionType(TransactionType type) async {
+  setPaymentTransactionCategory(TransactionCategory type) async {
     final debitSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: type.debitSideLedger);
     state = state.copyWith(
-      receiptTransactionType: type,
+      receiptTransactionCategory: type,
       debitSideLedger: debitSideLedger,
       particular: debitSideLedger!.name,
     );
@@ -61,8 +62,8 @@ class PaymentController extends StateNotifier<Payment> {
         particular: state.particular,
         date: state.date,
         mode: state.mode,
-        sumChetVelDanType: SumChetvelDanType.lakluh,
-        transactionTypeId: state.paymentTransactionType!.id,
+        sumChetVelDanType: TransactionType.lakluh,
+        transactionTypeId: state.paymentTransactionCategory!.id,
         debitSideLedgerId: state.debitSideLedger!.id,
         creditSideLedgerId: state.creditSideLedger!.id,
       ));

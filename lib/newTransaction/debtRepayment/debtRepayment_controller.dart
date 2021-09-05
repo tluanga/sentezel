@@ -52,8 +52,8 @@ class DebtRepaymentController extends StateNotifier<DebtRepayment> {
         particular: state.particular,
         date: state.date,
         mode: state.mode,
-        sumChetVelDanType: SumChetvelDanType.debtRepaymentByDebtor,
-        transactionTypeId: TransactionTypeIndex.BusinessDebtSettlement,
+        sumChetVelDanType: TransactionType.debtRepaymentByDebtor,
+        transactionTypeId: TransactionCategoryIndex.BusinessDebtSettlement,
         debitSideLedgerId: state.debitSideLedger!.id,
         creditSideLedgerId: state.creditSideLedger!.id,
       ));

@@ -121,11 +121,12 @@ class ReceiptScreen extends HookConsumerWidget {
                   onTap: () {
                     showModalBottomSheet(
                       context: context,
-                      builder: (context) => TransactionTypeOfReceiptSelectModal(
+                      builder: (context) =>
+                          TransactionCategoryOfReceiptSelectModal(
                         onSelect: (receipt) {
                           ref
                               .read(receiptControllerProvider.notifier)
-                              .setReceiptTransactionType(receipt);
+                              .setReceiptTransactionCategory(receipt);
                         },
                       ),
                     );
@@ -147,9 +148,9 @@ class ReceiptScreen extends HookConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          currentState.receiptTransactionType == null
+                          currentState.receiptTransactionCategory == null
                               ? 'Please Select Receipt Head of Account'
-                              : currentState.receiptTransactionType!.name,
+                              : currentState.receiptTransactionCategory!.name,
                           style: TextStyle(
                             color: Colors.black,
                             fontSize: 15,

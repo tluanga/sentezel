@@ -57,11 +57,11 @@ class PurchaseOfAssetController extends StateNotifier<AsyncValue<Transaction>> {
 
   PurchaseOfAssetController(this._read) : super(AsyncValue.loading());
 
-  final int _transactionTypeId = TransactionTypeIndex.PurchaseOfAssets;
+  final int _transactionTypeId = TransactionCategoryIndex.PurchaseOfAssets;
 
   //----------------Initialization----------------
   init() async {
-    TransactionType _transactionType =
+    TransactionCategory _transactionType =
         await _read(transactionTypeRepositoryProvider)
             .getItem(id: _transactionTypeId);
     initialState = Transaction(

@@ -1,4 +1,4 @@
-enum SumChetvelDanType {
+enum TransactionType {
   lei,
   hralh,
   lakluh,
@@ -14,64 +14,64 @@ enum SumChetvelDanType {
   openingBalanceBank,
 }
 
-String convertSumChetvelDanTypeToString(SumChetvelDanType type) {
+String convertTransactionTypeToString(TransactionType type) {
   switch (type) {
-    case SumChetvelDanType.lei:
+    case TransactionType.lei:
       return 'Lei';
-    case SumChetvelDanType.hralh:
+    case TransactionType.hralh:
       return 'Hralh';
-    case SumChetvelDanType.lakluh:
+    case TransactionType.lakluh:
       return 'Lakluh';
-    case SumChetvelDanType.pekchhuah:
+    case TransactionType.pekchhuah:
       return 'Pekchhuah';
-    case SumChetvelDanType.debtRepaymentByDebtor:
+    case TransactionType.debtRepaymentByDebtor:
       return 'Debt Repayment By Debtor';
-    case SumChetvelDanType.debtRepaymentToCreditor:
+    case TransactionType.debtRepaymentToCreditor:
       return 'Debt Repayment To Creditor';
-    case SumChetvelDanType.bankToCash:
+    case TransactionType.bankToCash:
       return 'Bank To Cash';
-    case SumChetvelDanType.purchaseReturn:
+    case TransactionType.purchaseReturn:
       return 'Purchase Return';
-    case SumChetvelDanType.saleReturn:
+    case TransactionType.saleReturn:
       return 'Sale Return';
-    case SumChetvelDanType.capitalInjection:
+    case TransactionType.capitalInjection:
       return 'Capital Injection';
-    case SumChetvelDanType.openingBalanceCash:
+    case TransactionType.openingBalanceCash:
       return 'Opening Balance Cash';
-    case SumChetvelDanType.openingBalanceBank:
+    case TransactionType.openingBalanceBank:
       return 'Opening Balance Bank';
     default:
       return 'Lei';
   }
 }
 
-SumChetvelDanType sumChetvelDanTypeFromString(String value) {
+TransactionType transactionTypeFromString(String value) {
   switch (value) {
     case 'lei':
-      return SumChetvelDanType.lei;
+      return TransactionType.lei;
     case 'hralh':
-      return SumChetvelDanType.hralh;
+      return TransactionType.hralh;
     case 'lakluh':
-      return SumChetvelDanType.lakluh;
+      return TransactionType.lakluh;
     case 'pekchhuah':
-      return SumChetvelDanType.pekchhuah;
+      return TransactionType.pekchhuah;
     case 'debtRepaymentByDebtor':
-      return SumChetvelDanType.debtRepaymentByDebtor;
+      return TransactionType.debtRepaymentByDebtor;
     case 'debtRepaymentToCreditor':
-      return SumChetvelDanType.debtRepaymentToCreditor;
+      return TransactionType.debtRepaymentToCreditor;
     case 'bankToCash':
-      return SumChetvelDanType.cashToBank;
+      return TransactionType.cashToBank;
     case 'cashToBank':
-      return SumChetvelDanType.bankToCash;
+      return TransactionType.bankToCash;
     case 'purchaseReturn':
-      return SumChetvelDanType.purchaseReturn;
+      return TransactionType.purchaseReturn;
     case 'capitalInjection':
-      return SumChetvelDanType.capitalInjection;
+      return TransactionType.capitalInjection;
     case 'openingBalanceCash':
-      return SumChetvelDanType.openingBalanceCash;
+      return TransactionType.openingBalanceCash;
     case 'openingBalanceBank':
-      return SumChetvelDanType.openingBalanceBank;
+      return TransactionType.openingBalanceBank;
     default:
-      return SumChetvelDanType.lei;
+      return TransactionType.lei;
   }
 }

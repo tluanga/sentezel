@@ -8,10 +8,10 @@ import 'package:sentezel/newTransaction/payment/paymentTypeSelect/transactionTyp
 import 'package:sentezel/settings/asset/newAsset_modal.dart';
 import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
 
-class TransactionTypeOfPaymentSelectModal extends HookConsumerWidget {
-  final Function(TransactionType) onSelect;
+class TransactionCategoryOfPaymentSelectModal extends HookConsumerWidget {
+  final Function(TransactionCategory) onSelect;
 
-  const TransactionTypeOfPaymentSelectModal({
+  const TransactionCategoryOfPaymentSelectModal({
     Key? key,
     required this.onSelect,
   }) : super(key: key);
@@ -75,7 +75,7 @@ class TransactionTypeOfPaymentSelectModal extends HookConsumerWidget {
     );
   }
 
-  _list(BuildContext context, List<TransactionType> list) {
+  _list(BuildContext context, List<TransactionCategory> list) {
     print(list);
     list.sort((a, b) => a.name.compareTo(b.name));
 
@@ -92,8 +92,8 @@ class TransactionTypeOfPaymentSelectModal extends HookConsumerWidget {
 
   _listItem(
       {required BuildContext context,
-      required TransactionType item,
-      required Function(TransactionType) onSelect}) {
+      required TransactionCategory item,
+      required Function(TransactionCategory) onSelect}) {
     Color _color = Palette.color3;
 
     if (item.id / 2 == 0) _color = Palette.color1;
