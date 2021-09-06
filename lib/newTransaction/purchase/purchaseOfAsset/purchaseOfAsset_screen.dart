@@ -93,7 +93,8 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              EnumToString.convertToString(state.mode),
+                              EnumToString.convertToString(state.mode,
+                                  camelCase: true),
                               style: TextStyle(
                                 color: Colors.black,
                                 fontSize: 15,

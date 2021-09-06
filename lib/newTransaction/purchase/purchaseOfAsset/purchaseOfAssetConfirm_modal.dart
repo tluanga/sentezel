@@ -122,10 +122,10 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
                     debitSideLedgerName: state.assetLedger!.name,
                     amount: state.amount,
                   ),
-                  // _creditSide(
-                  //   creditSideLedgerName: state.creditSideLedger!.name,
-                  //   amount: state.amount,
-                  // ),
+                  _creditSide(
+                    creditSideLedgerName: state.creditSideLedger!.name,
+                    amount: state.amount,
+                  ),
                 ],
               ),
             ),
