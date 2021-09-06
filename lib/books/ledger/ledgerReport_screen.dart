@@ -26,8 +26,18 @@ class LedgerReportScreen extends HookConsumerWidget {
                 onClose: () {
                   Navigator.pop(context);
                 }),
-            TextFormField(
-              decoration: InputDecoration(labelText: 'Search Ledger'),
+            Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: TextFormField(
+                decoration: InputDecoration(labelText: 'Search Ledger'),
+                onChanged: (value) {
+                  ref.watch(ledgerControllerProvider.notifier).loadData(
+                        ledgerName: value,
+                      );
+                },
+              ),
             ),
             state.when(data: (data) {
               return _list(context, data);

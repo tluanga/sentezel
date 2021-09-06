@@ -11,7 +11,7 @@ import 'package:sentezel/settings/transactionCategory/transactionCategory_reposi
 
 final ledgerControllerProvider =
     StateNotifierProvider<LedgerController, AsyncValue<List<LedgerReport>>>(
-  (ref) => LedgerController(ref.read)..loadData(),
+  (ref) => LedgerController(ref.read)..loadData(ledgerName: ''),
 );
 
 class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
@@ -19,12 +19,12 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
 
   LedgerController(this._read) : super(AsyncValue.loading());
 
-  loadData() async {
+  loadData({String ledgerName = ''}) async {
     print('Load data');
     try {
       List<LedgerReport> _ledgerReportList = [];
-      final ledgerMasterDataList =
-          await _read(ledgerMasterRepositoryProvider).getList();
+      final ledgerMasterDataList = await _read(ledgerMasterRepositoryProvider)
+          .getList(searchString: ledgerName);
       print(ledgerMasterDataList.length);
 
       //---------Iterate Ledger Master List-------------
