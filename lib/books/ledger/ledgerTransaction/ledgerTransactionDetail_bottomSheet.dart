@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:path/path.dart';
-import 'package:sentezel/books/ledger/ledgerTransaction_model.dart';
+import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
 
 class LedgerTransactionDetailBottomSheet extends HookConsumerWidget {
   final LedgerTransaction ledgerTransaction;
@@ -34,7 +33,7 @@ class LedgerTransactionDetailBottomSheet extends HookConsumerWidget {
                   child: Text(
                     DateFormat(
                       'dd MMMM yyyy hh:mm',
-                    ).format(ledgerTransaction.transaction.date),
+                    ).format(ledgerTransaction.transaction!.date),
                     style: TextStyle(
                       fontSize: 14,
                     ),

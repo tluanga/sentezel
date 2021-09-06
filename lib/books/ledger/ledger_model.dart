@@ -1,4 +1,4 @@
-import 'package:sentezel/books/ledger/ledgerTransaction_model.dart';
+import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
 
 class LedgerReport {
   int ledgerId;

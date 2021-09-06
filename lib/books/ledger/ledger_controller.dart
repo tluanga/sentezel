@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/books/ledger/ledgerTransaction_model.dart';
+import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
@@ -105,5 +105,15 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
     } catch (e) {
       print(e.toString());
     }
+  }
+
+  LedgerReport getLedgerDetail(int ledgerid) {
+    var result;
+    state.whenData(
+      (value) {
+        result = value.firstWhere((element) => element.ledgerId == ledgerid);
+      },
+    );
+    return result;
   }
 }

@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/books/ledger/ledgerTransactionDetail_bottomSheet.dart';
-import 'package:sentezel/books/ledger/ledgerTransaction_model.dart';
+import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_controller.dart';
+import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransactionDetail_bottomSheet.dart';
+import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
-import 'package:sentezel/books/ledger/transactionDeleteConfirm_bottomSheet.dart';
+import 'package:sentezel/books/ledger/ledgerTransaction/transactionDeleteConfirm_bottomSheet.dart';
 import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 
-import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -18,6 +19,12 @@ class LedgerDetailScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(ledgerDetailControllerProvider);
+    useEffect(() {
+      ref
+          .read(ledgerDetailControllerProvider.notifier)
+          .loadData(id: this.ledgerReport.ledgerId);
+    }, []);
     return Material(
       child: SafeArea(
         child: Container(
@@ -30,7 +37,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                   }),
               DateSelectionBar(),
               _listHeader(context),
-              _list(context: context),
+              _list(context: context, ledgerReportData: state),
               _report(),
             ],
           ),
@@ -80,7 +87,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
     );
   }
 
-  _list({required BuildContext context}) {
+  _list(
+      {required BuildContext context, required LedgerReport ledgerReportData}) {
     Size size = MediaQuery.of(context).size;
     return Container(
       height: size.height * 0.72,
@@ -91,7 +99,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
         itemBuilder: (context, index) {
           return _listItem(
             context,
-            this.ledgerReport.ledgerTransaction![index],
+            ledgerReportData.ledgerTransaction![index],
           );
         },
       ),
@@ -127,8 +135,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
             showModalBottomSheet(
               context: context,
               builder: (context) => TransactionDeleteConfirmBottomSheet(
-                transactionId: data.transaction.id!,
-              ),
+                  transactionId: data.transaction!.id!,
+                  ledgerId: this.ledgerReport.ledgerId),
             )
           },
         )
@@ -148,7 +156,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         width: size.width * 0.50,
                         child: Text(
-                          data.transaction.particular,
+                          data.transaction!.particular,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),

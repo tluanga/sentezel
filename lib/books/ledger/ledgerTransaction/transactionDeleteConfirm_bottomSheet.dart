@@ -1,13 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_controller.dart';
+import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 
 class TransactionDeleteConfirmBottomSheet extends HookConsumerWidget {
+  final int ledgerId;
   final int transactionId;
-  const TransactionDeleteConfirmBottomSheet(
-      {Key? key, required this.transactionId})
-      : super(key: key);
+  const TransactionDeleteConfirmBottomSheet({
+    Key? key,
+    required this.transactionId,
+    required this.ledgerId,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -31,6 +36,11 @@ class TransactionDeleteConfirmBottomSheet extends HookConsumerWidget {
                 ref
                     .read(transactionRepositoryProvider)
                     .remove(id: transactionId);
+                ref.read(ledgerControllerProvider.notifier).loadData();
+                ref
+                    .read(ledgerDetailControllerProvider.notifier)
+                    .loadData(id: ledgerId);
+                Navigator.pop(context);
               },
               child: Container(
                 width: MediaQuery.of(context).size.width * 0.7,

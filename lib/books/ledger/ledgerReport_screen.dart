@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/books/ledger/ledgerDetail_screen.dart';
+import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_screen.dart';
 import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
