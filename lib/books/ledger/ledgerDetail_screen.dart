@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/books/ledger/ledgerTransactionDetail_bottomSheet.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.dart';
 import 'package:sentezel/books/widgets/periodSeletionBar_widget.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class LedgerDetailScreen extends HookConsumerWidget {
   final LedgerReport ledgerReport;
@@ -12,7 +15,6 @@ class LedgerDetailScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Size size = MediaQuery.of(context).size;
     return Material(
       child: SafeArea(
         child: Container(
@@ -23,7 +25,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                   onClose: () {
                     Navigator.pop(context);
                   }),
-              PeriodSelectionBarWidget(),
+              DateSelectionBar(),
               _listHeader(context),
               _list(context: context),
               _report(),
@@ -78,25 +80,52 @@ class LedgerDetailScreen extends HookConsumerWidget {
   _list({required BuildContext context}) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.78,
+      height: size.height * 0.76,
       child: Column(
         children: [
           //----List Item----
+          _listItem(context),
+          _listItem(context),
+          _listItem(context),
+          _listItem(context),
           _listItem(context),
         ],
       ),
     );
   }
 
+//       child:
+
   _listItem(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      secondaryActions: [
+        IconSlideAction(
+          caption: 'View Detail',
+          color: Colors.blue,
+          icon: Icons.wrap_text,
+          onTap: () => {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => LedgerTransactionDetailBottomSheet(),
+            )
+          },
+        ),
+        IconSlideAction(
+          caption: 'Delete',
+          color: Colors.red.shade300,
+          icon: Icons.delete,
+          onTap: () => () {},
+        )
+      ],
       child: Row(
         children: [
           Column(
             children: [
               Container(
-                  padding: EdgeInsets.only(top: 8),
+                  height: size.height * 0.05,
                   decoration: BoxDecoration(
                     color: Colors.white,
                   ),
