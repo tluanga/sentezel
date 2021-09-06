@@ -132,6 +132,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                                 state.partialPaymentAmount = amount;
                               },
                               defaultValue: state.partialPaymentAmount,
+                              maxAmount: state.amount,
                             ),
                           GestureDetector(
                             onTap: () {

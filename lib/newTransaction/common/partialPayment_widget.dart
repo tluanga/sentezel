@@ -3,11 +3,13 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 
 class PartialPaymentWidget extends HookWidget {
   final int defaultValue;
+  final int maxAmount;
   final Function(int) onChange;
   const PartialPaymentWidget({
     Key? key,
     required this.onChange,
     required this.defaultValue,
+    required this.maxAmount,
   }) : super(key: key);
 
   @override
@@ -31,6 +33,11 @@ class PartialPaymentWidget extends HookWidget {
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
+        validator: (value) {
+          if (int.parse(value!) >= this.maxAmount) {
+            print('Cannot be large or equal to the max amount');
+          }
+        },
       ),
     );
   }

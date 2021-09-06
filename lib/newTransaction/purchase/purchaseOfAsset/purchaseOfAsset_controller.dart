@@ -40,4 +40,8 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
       print(e);
     }
   }
+
+  reset() async {
+    state = PurchaseOfAsset(date: DateTime.now());
+  }
 }

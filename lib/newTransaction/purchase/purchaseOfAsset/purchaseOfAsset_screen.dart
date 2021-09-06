@@ -19,7 +19,10 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.watch(purchaseOfAssetControllerProvider);
 
-    onCancel() {}
+    onCancel() {
+      print('cancel is called');
+      ref.read(purchaseOfAssetControllerProvider.notifier).reset();
+    }
 
     return Scaffold(
       body: SafeArea(
@@ -135,6 +138,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                                     );
                               },
                               defaultValue: state.partialPaymentAmount,
+                              maxAmount: state.amount,
                             ),
                           GestureDetector(
                             onTap: () {
