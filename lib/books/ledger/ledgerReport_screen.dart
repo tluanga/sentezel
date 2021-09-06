@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sentezel/books/ledger/ledgerDetail_screen.dart';
 import 'package:sentezel/books/ledger/ledger_controller.dart';
+import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 
 class LedgerReportScreen extends HookConsumerWidget {
@@ -26,7 +30,7 @@ class LedgerReportScreen extends HookConsumerWidget {
               decoration: InputDecoration(labelText: 'Search Ledger'),
             ),
             state.when(data: (data) {
-              return Text('data');
+              return _list(context, data);
             }, loading: () {
               return Center(
                 child: CircularProgressIndicator(),
@@ -42,95 +46,97 @@ class LedgerReportScreen extends HookConsumerWidget {
     );
   }
 
-  // _list(context) {
-  //   return ListView.builder(
-  //     itemCount: 10,
-  //     itemBuilder: (context, index) {
-  //       return
-  //     },
-  //   );
-  // }
+  _list(context, data) {
+    return Expanded(
+      child: ListView.builder(
+        itemCount: data.length,
+        itemBuilder: (context, index) {
+          return _listItem(
+            context: context,
+            item: data[index],
+          );
+        },
+      ),
+    );
+  }
 
-  // _listItem(
-  //     {required BuildContext context,
-  //     required LedgerReport item,
-  //     required Function(LedgerReport) onSelect}) {
-  //   Color _color = Palette.color3;
+  _listItem({required BuildContext context, required LedgerReport item}) {
+    Color _color = Palette.color3;
 
-  //   _color = Palette.color1;
+    _color = Palette.color1;
 
-  //   return GestureDetector(
-  //     onTap: () {
-  //       showModalBottomSheet(
-  //         context: context,
-  //         builder: (context) => LedgerDetailScreen(
-  //           ledgerReport: item,
-  //         ),
-  //       );
-  //     },
-  //     child: Container(
-  //       margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
-  //       height: MediaQuery.of(context).size.height * 0.1,
-  //       width: MediaQuery.of(context).size.width * 0.9,
-  //       decoration: BoxDecoration(
-  //         color: Colors.white,
-  //         borderRadius: BorderRadius.only(
-  //             topLeft: Radius.circular(10),
-  //             topRight: Radius.circular(10),
-  //             bottomLeft: Radius.circular(10),
-  //             bottomRight: Radius.circular(10)),
-  //         boxShadow: [
-  //           BoxShadow(
-  //             color: Colors.grey.withOpacity(0.3),
-  //             spreadRadius: 2,
-  //             blurRadius: 7,
-  //             offset: Offset(0, 3), // changes position of shadow
-  //           ),
-  //         ],
-  //       ),
-  //       child: Row(
-  //         children: [
-  //           Container(
-  //             height: MediaQuery.of(context).size.height * 0.1,
-  //             width: MediaQuery.of(context).size.width * 0.2,
-  //             decoration: BoxDecoration(
-  //               color: _color,
-  //               borderRadius: BorderRadius.only(
-  //                 topLeft: Radius.circular(10),
-  //                 bottomLeft: Radius.circular(10),
-  //               ),
-  //             ),
-  //             child: Center(
-  //               child: Text(
-  //                 item.getInitialLetter(),
-  //                 style: TextStyle(
-  //                   fontSize: 50,
-  //                   fontWeight: FontWeight.bold,
-  //                   color: Colors.white,
-  //                 ),
-  //               ),
-  //             ),
-  //           ),
-  //           Column(
-  //             mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //             children: [
-  //               Container(
-  //                 width: MediaQuery.of(context).size.width * 0.74,
-  //                 child: Center(
-  //                   child: Text(
-  //                     item.name,
-  //                     style: TextStyle(
-  //                       fontSize: 16,
-  //                       fontWeight: FontWeight.bold,
-  //                     ),
-  //                   ),
-  //                 ),
-  //               ),
-  //             ],
-  //           ),
-  //         ],
-  //       ),
-  //     ),
-  //   );
-  // }
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => LedgerDetailScreen(ledgerReport: item)));
+      },
+      child: Container(
+        margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+        height: MediaQuery.of(context).size.height * 0.1,
+        width: MediaQuery.of(context).size.width * 0.9,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+              bottomLeft: Radius.circular(10),
+              bottomRight: Radius.circular(10)),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.3),
+              spreadRadius: 2,
+              blurRadius: 7,
+              offset: Offset(0, 3), // changes position of shadow
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            Container(
+              height: MediaQuery.of(context).size.height * 0.1,
+              width: MediaQuery.of(context).size.width * 0.2,
+              decoration: BoxDecoration(
+                color: _color,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10),
+                  bottomLeft: Radius.circular(10),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  item.getInitialLetter(),
+                  style: TextStyle(
+                    fontSize: 50,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+            Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.74,
+                  child: Center(
+                    child: Text(
+                      item.name,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                Text(item.creditAmount.toString()),
+                Text(item.debitAmount.toString()),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
-import 'package:sentezel/settings/transactionCategory/transactionType_repository.dart';
+import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
 
 final transactionTypeOfReceiptControllerProvider = StateNotifierProvider<
         TransactionCategorySelectController,
@@ -13,7 +13,7 @@ class TransactionCategorySelectController
   final Reader _read;
   TransactionCategorySelectController(this._read) : super(AsyncValue.loading());
   init() async {
-    final data = await _read(transactionTypeRepositoryProvider)
+    final data = await _read(transactionCategoryRepositoryProvider)
         .getTransactionCategoryListByTransactionType(TransactionType.lakluh);
     state = AsyncValue.data(data);
   }
@@ -21,7 +21,7 @@ class TransactionCategorySelectController
   loadData({String searchString = ''}) async {
     print('Loading Receipt Type List');
     try {
-      final result = await _read(transactionTypeRepositoryProvider).getList(
+      final result = await _read(transactionCategoryRepositoryProvider).getList(
         searchString: searchString,
         type: TransactionType.lakluh,
       );

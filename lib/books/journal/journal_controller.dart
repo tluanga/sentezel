@@ -4,7 +4,7 @@ import 'package:sentezel/books/journal/journal_model.dart';
 
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
-import 'package:sentezel/settings/transactionCategory/transactionType_repository.dart';
+import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
 
 final journalControllerProvider =
     StateNotifierProvider<JournalController, AsyncValue<List<Journal>>>(
@@ -32,8 +32,9 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
         String _creditSideLedgerName = '';
         String _debitSideLedgerName = '';
 
-        String _transactionType = await _read(transactionTypeRepositoryProvider)
-            .getTransactionCategoryName(element.transactionCategoryId);
+        String _transactionType =
+            await _read(transactionCategoryRepositoryProvider)
+                .getTransactionCategoryName(element.transactionCategoryId);
 
         String _partyLedgerName = element.partyLedgerId != null
             ? await _read(ledgerMasterRepositoryProvider)

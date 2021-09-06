@@ -130,6 +130,10 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       Select * from $dbName
       WHERE 
       mode LIKE '$_mode%'
+      AND ${TransactionConfig.assetLedgerId}=$ledgerMasterId
+      OR ${TransactionConfig.creditSideLedger}=$ledgerMasterId
+      OR ${TransactionConfig.debitSideLedger}=$ledgerMasterId
+      OR ${TransactionConfig.partyLedgerId}=$ledgerMasterId
       AND date>=${paramStartDate.microsecondsSinceEpoch}
       AND date <=${paramEndDate.microsecondsSinceEpoch}     
       ''');

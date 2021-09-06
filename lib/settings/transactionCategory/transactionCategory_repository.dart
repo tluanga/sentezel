@@ -8,7 +8,7 @@ import 'package:sentezel/settings/transactionCategory/transactionCategory_config
 
 import 'package:sqflite_common/sqlite_api.dart';
 
-final transactionTypeRepositoryProvider =
+final transactionCategoryRepositoryProvider =
     Provider((ref) => TransactionCategoryRepository());
 
 class TransactionCategoryRepository
