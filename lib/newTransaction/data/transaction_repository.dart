@@ -79,21 +79,22 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
         DateTime(endDate.year, endDate.month, endDate.day, 23, 59);
 
     String _mode = mode != null ? EnumToString.convertToString(mode) : '';
+    Database db = await DatabaseService.instance.db;
     try {
-      Database db = await DatabaseService.instance.db;
       final result = await db.rawQuery('''
       Select * from $dbName
       WHERE particular LIKE '$searchString%'
       AND mode LIKE '$_mode%'
       AND date>=${paramStartDate.microsecondsSinceEpoch}
-      AND date <=${paramEndDate.microsecondsSinceEpoch}     
+      AND date <=${paramEndDate.microsecondsSinceEpoch}
       ''');
+
       List<trans.Transaction> list = [];
 
       result.forEach((item) {
         list.add(trans.Transaction.fromJson(item));
       });
-
+      print(list);
       return list;
     } catch (e) {
       print(e);

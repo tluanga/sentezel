@@ -87,7 +87,7 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
             ),
             child: Center(
               child: Text(
-                item.getInitialLetter(),
+                'B',
                 style: TextStyle(
                   fontSize: 50,
                   fontWeight: FontWeight.bold,

@@ -10,7 +10,6 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(data.transactionType);
     return Material(
       child: SafeArea(
         child: Column(
@@ -63,7 +62,7 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
                     _field(
                       context: context,
                       label: 'Transaction Type',
-                      value: data.transactionType,
+                      value: data.transactionCategory,
                     ),
                     _field(
                       context: context,

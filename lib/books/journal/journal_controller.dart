@@ -1,7 +1,9 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
 
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/transactionType_repository.dart';
 
 final journalControllerProvider =
@@ -33,56 +35,27 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
         String _transactionType = await _read(transactionTypeRepositoryProvider)
             .getTransactionCategoryName(element.transactionCategoryId);
 
-        // String _partyLedgerName = element.partyId != null
-        //     ? await _read(ledgerMasterRepositoryProvider)
-        //         .getLedgerMasterName(element.partyId!)
-        //     : '';
-        // String _assetLedgerName = element.assetLedgerId != null
-        //     ? await _read(ledgerMasterRepositoryProvider)
-        //         .getLedgerMasterName(element.assetLedgerId!)
-        //     : '';
+        String _partyLedgerName = element.partyLedgerId != null
+            ? await _read(ledgerMasterRepositoryProvider)
+                .getLedgerMasterName(element.partyLedgerId!)
+            : '';
+        String _assetLedgerName = element.assetLedgerId != null
+            ? await _read(ledgerMasterRepositoryProvider)
+                .getLedgerMasterName(element.assetLedgerId!)
+            : '';
 
-        //----------------------DEBIT SIDE-----------------
-        //----------For Purchase of Asset----------
-        // if (element.assetLedgerId != null) {
-        //   _debitSideLedgerName = await _read(ledgerMasterRepositoryProvider)
-        //       .getLedgerMasterName(element.assetLedgerId!);
-        // } else {
-        //   _debitSideLedgerName = await _read(ledgerMasterRepositoryProvider)
-        //       .getLedgerMasterName(element.debitSideLedgerId!);
-        // }
-        //-------For Selling of Goods by Credit-----
-        // if (element.transactionType == TransactionType.hralh &&
-        //     element.mode == TransactionMode.credit) {
-        //   _debitSideLedgerName = await _read(ledgerMasterRepositoryProvider)
-        //       .getLedgerMasterName(element.partyId!);
-        // }
-        //----------For Others Selling and purchase Types  -----
-
-        //----------------------CREDIT SIDE-----------------
-
-        //-------For Purchasing of Goods by Credit-----
-        // if (element.transactionType == TransactionType.hralh &&
-        //     element.mode == TransactionMode.credit) {
-        //   _creditSideLedgerName = await _read(ledgerMasterRepositoryProvider)
-        //       .getLedgerMasterName(element.partyId!);
-        // }
-        // //----------For Others Selling and purchase Types  -----
-        // _creditSideLedgerName = await _read(ledgerMasterRepositoryProvider)
-        //     .getLedgerMasterName(element.creditSideLedgerId!);
-
-        // Journal journal = new Journal(
-        //   date: element.date,
-        //   amount: element.amount,
-        //   particular: element.particular,
-        //   transactionType: _transactionType,
-        //   creditSideLedgerName: _creditSideLedgerName,
-        //   debitSideLedgerName: _debitSideLedgerName,
-        //   partyLedgerName: _partyLedgerName,
-        //   assetLedgerName: _assetLedgerName,
-        //   mode: convertTransactionModeToString(element.mode),
-        // );
-        // result.add(journal);
+        Journal journal = new Journal(
+          date: element.date,
+          amount: element.debitAmount,
+          particular: element.particular,
+          transactionCategory: _transactionType,
+          creditSideLedgerName: _creditSideLedgerName,
+          debitSideLedgerName: _debitSideLedgerName,
+          partyLedgerName: _partyLedgerName,
+          assetLedgerName: _assetLedgerName,
+          mode: EnumToString.convertToString(element.mode, camelCase: true),
+        );
+        result.add(journal);
       }
       state = AsyncValue.data(result);
 

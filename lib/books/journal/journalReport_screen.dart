@@ -123,7 +123,7 @@ class JournalReportScreen extends HookConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  item.getInitialLetter(),
+                  'A',
                   style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,

@@ -8,18 +8,17 @@ class TransactionDb {
       CREATE TABLE 
         ${TransactionConfig.dbName}(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
-            debitAmount INT,
-            creditAmount INT,
-            partialPaymentAmount INT,
-            particular TEXT,
-            mode TEXT,
-            date INT,
-            partyId INT,
-            assetLedgerId INT,
-            transactionType TEXT,
-            transactionCategoryId INT,
-            debitSideLedgerId INT,
-            creditSideLedgerId INT            
+            ${TransactionConfig.debitAmount} INT,
+            ${TransactionConfig.creditAmount} INT,
+            ${TransactionConfig.partialPaymentAmount} INT,
+            ${TransactionConfig.particular} TEXT,
+            ${TransactionConfig.mode} TEXT,
+            ${TransactionConfig.date} INT,
+            ${TransactionConfig.partyLedgerId} INT,
+            ${TransactionConfig.assetLedgerId} INT,          
+            ${TransactionConfig.transactionCategoryId} INT,
+            ${TransactionConfig.debitSideLedger} INT,
+            ${TransactionConfig.creditSideLedger} INT            
              )''',
     );
     print('Transaction table creation completed');
