@@ -123,6 +123,8 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
                     debitSideLedgerName: state.assetLedger!.name,
                     amount: state.debitAmount,
                   ),
+
+                  //--------------CREDIT SIDE-----
                   if (state.mode == TransactionMode.credit ||
                       state.mode == TransactionMode.partialPaymentByCash ||
                       state.mode == TransactionMode.partialPaymentByBank)
@@ -130,10 +132,20 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
                       creditSideLedgerName: state.partyLedger!.name,
                       amount: state.creditAmount,
                     ),
-                  if (state.mode != TransactionMode.credit)
+                  //--Normal Payment -- Non Credit- Non Partial
+                  if (state.mode == TransactionMode.paymentByCash ||
+                      state.mode == TransactionMode.paymentByBank)
                     _creditSide(
                         creditSideLedgerName: state.creditSideLedger!.name,
                         amount: state.creditAmount),
+
+                  //---Partial Payment
+                  if (state.mode == TransactionMode.partialPaymentByCash ||
+                      state.mode == TransactionMode.partialPaymentByBank)
+                    _creditSide(
+                      creditSideLedgerName: state.creditSideLedger!.name,
+                      amount: state.partialPaymentAmount,
+                    ),
                 ],
               ),
             ),
