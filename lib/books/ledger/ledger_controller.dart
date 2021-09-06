@@ -1,6 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_index.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
@@ -62,7 +64,18 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
 
           //Party--
           //We have to check for debit or Credit
-
+          if (_transactionList[j].partyLedgerId == ledgerMasterDataList[i].id) {
+            if (_transactionCategory.debitSideLedger ==
+                    LedgerMasterIndex.Bank ||
+                _transactionCategory.debitSideLedger ==
+                    LedgerMasterIndex.Cash) {
+              //----Party is in the debit side-
+              //Because BAnk/Cash when in credit replaced by party
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+            } else {
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+            }
+          }
         }
         _ledgerReportList.add(_ledgerReport);
       }

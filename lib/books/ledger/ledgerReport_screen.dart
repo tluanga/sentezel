@@ -4,6 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledgerDetail_screen.dart';
 import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 
@@ -129,8 +130,70 @@ class LedgerReportScreen extends HookConsumerWidget {
                     ),
                   ),
                 ),
-                Text(item.creditAmount.toString()),
-                Text(item.debitAmount.toString()),
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      decoration: BoxDecoration(
+                        color: Colors.green.shade200,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            child: Text('Debit'),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(':'),
+                          SizedBox(
+                            width: 22,
+                          ),
+                          Container(
+                            child: Text(
+                              currencySeperatorStringFormatterHelper(
+                                  item.debitAmount),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Container(
+                      width: MediaQuery.of(context).size.width * 0.45,
+                      decoration: BoxDecoration(
+                        color: Palette.color2,
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            child: Text('Credit'),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(':'),
+                          SizedBox(
+                            width: 22,
+                          ),
+                          Container(
+                            child: Text(
+                              currencySeperatorStringFormatterHelper(
+                                  item.creditAmount),
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ],
             ),
           ],
