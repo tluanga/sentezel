@@ -45,6 +45,4 @@ class DebtorListScreen extends HookConsumerWidget {
       ),
     ));
   }
-
-  _list() {}
 }
