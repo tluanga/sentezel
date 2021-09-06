@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_controller.dart';
 
 class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
@@ -120,12 +121,19 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
 
                   _debitSide(
                     debitSideLedgerName: state.assetLedger!.name,
-                    amount: state.amount,
+                    amount: state.debitAmount,
                   ),
-                  _creditSide(
-                    creditSideLedgerName: state.creditSideLedger!.name,
-                    amount: state.amount,
-                  ),
+                  if (state.mode == TransactionMode.credit ||
+                      state.mode == TransactionMode.partialPaymentByCash ||
+                      state.mode == TransactionMode.partialPaymentByBank)
+                    _creditSide(
+                      creditSideLedgerName: state.partyLedger!.name,
+                      amount: state.creditAmount,
+                    ),
+                  if (state.mode != TransactionMode.credit)
+                    _creditSide(
+                        creditSideLedgerName: state.creditSideLedger!.name,
+                        amount: state.creditAmount),
                 ],
               ),
             ),
