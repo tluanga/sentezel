@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledgerTransactionDetail_bottomSheet.dart';
 import 'package:sentezel/books/ledger/ledgerTransaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/books/ledger/transactionDeleteConfirm_bottomSheet.dart';
 import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 
@@ -122,7 +123,14 @@ class LedgerDetailScreen extends HookConsumerWidget {
           caption: 'Delete',
           color: Colors.red.shade300,
           icon: Icons.delete,
-          onTap: () => () {},
+          onTap: () => {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => TransactionDeleteConfirmBottomSheet(
+                transactionId: data.transaction.id!,
+              ),
+            )
+          },
         )
       ],
       child: Row(
