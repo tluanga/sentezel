@@ -61,16 +61,19 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
           if (_transactionCategory.creditSideLedger ==
               ledgerMasterDataList[i].id) {
             _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+            _ledgerTransaction.amount = _transactionList[j].creditAmount;
           }
 
           if (_transactionCategory.debitSideLedger ==
               ledgerMasterDataList[i].id) {
             _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+            _ledgerTransaction.amount = _transactionList[j].debitAmount;
           }
 
           //--Asset----
           if (_transactionList[j].assetLedgerId == ledgerMasterDataList[i].id) {
             _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+            _ledgerTransaction.amount = _transactionList[j].debitAmount;
           }
 
           //Party--
@@ -83,8 +86,10 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
               //----Party is in the debit side-
               //Because BAnk/Cash when in credit replaced by party
               _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
             } else {
               _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
             }
           }
           _ledgerTransactionList.add(_ledgerTransaction);

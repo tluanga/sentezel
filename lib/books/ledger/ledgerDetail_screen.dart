@@ -4,6 +4,7 @@ import 'package:sentezel/books/ledger/ledgerTransactionDetail_bottomSheet.dart';
 import 'package:sentezel/books/ledger/ledgerTransaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.dart';
+import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
@@ -137,7 +138,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         width: size.width * 0.50,
                         child: Text(
-                          'Particular',
+                          data.particular,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -145,14 +146,18 @@ class LedgerDetailScreen extends HookConsumerWidget {
                         alignment: Alignment.center,
                         width: size.width * 0.24,
                         child: Text(
-                          '1000',
+                          data.debitOrCredit == DebitOrCredit.debit
+                              ? data.amount.toString()
+                              : '',
                         ),
                       ),
                       Container(
                         alignment: Alignment.center,
                         width: size.width * 0.24,
                         child: Text(
-                          100.00.abs().toString(),
+                          data.debitOrCredit == DebitOrCredit.credit
+                              ? data.amount.toString()
+                              : '',
                         ),
                       ),
                     ],
