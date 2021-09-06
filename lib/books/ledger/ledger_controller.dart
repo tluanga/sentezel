@@ -1,5 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/books/ledger/ledgerTransaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_index.dart';
@@ -39,8 +41,15 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
           creditAmount: _creditAmount,
           debitAmount: _debitAmount,
         );
-
+        List<LedgerTransaction> _ledgerTransactionList = [];
         for (int j = 0; j < _transactionList.length; j++) {
+          LedgerTransaction _ledgerTransaction = LedgerTransaction(
+            particular: _transactionList[j].particular,
+            amount: 0,
+            debitOrCredit: DebitOrCredit.credit,
+            date: _transactionList[j].date,
+          );
+
           //calculate credit and debit amount
           //determin debit or credit
           TransactionCategory _transactionCategory =
@@ -76,6 +85,7 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
               _ledgerReport.creditAmount += _transactionList[j].creditAmount;
             }
           }
+          _ledgerTransactionList.add(_ledgerTransaction);
         }
         _ledgerReportList.add(_ledgerReport);
       }
