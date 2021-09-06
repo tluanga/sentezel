@@ -41,6 +41,9 @@ class LedgerDetailScreen extends HookConsumerWidget {
               Container(
                 child: Text('Particular'),
               ),
+              Container(
+                child: Text('Amount'),
+              ),
             ],
           ),
         ],
