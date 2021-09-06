@@ -1,14 +1,13 @@
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
+import 'package:sentezel/newTransaction/data/transaction_model.dart';
 
 class LedgerTransaction {
-  String particular;
   int amount;
   DebitOrCredit debitOrCredit;
-  DateTime date;
+  Transaction transaction;
   LedgerTransaction({
-    required this.particular,
     required this.amount,
     required this.debitOrCredit,
-    required this.date,
+    required this.transaction,
   });
 }

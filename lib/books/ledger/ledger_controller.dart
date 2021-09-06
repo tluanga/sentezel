@@ -46,10 +46,9 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
 
         for (int j = 0; j < _transactionList.length; j++) {
           LedgerTransaction _ledgerTransaction = LedgerTransaction(
-            particular: _transactionList[j].particular,
             amount: 0,
             debitOrCredit: DebitOrCredit.credit,
-            date: _transactionList[j].date,
+            transaction: _transactionList[j],
           );
 
           //calculate credit and debit amount

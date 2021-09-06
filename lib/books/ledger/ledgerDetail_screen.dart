@@ -82,7 +82,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
   _list({required BuildContext context}) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.76,
+      height: size.height * 0.72,
       child: ListView.builder(
         itemCount: this.ledgerReport.ledgerTransaction != null
             ? this.ledgerReport.ledgerTransaction!.length
@@ -112,7 +112,9 @@ class LedgerDetailScreen extends HookConsumerWidget {
           onTap: () => {
             showModalBottomSheet(
               context: context,
-              builder: (context) => LedgerTransactionDetailBottomSheet(),
+              builder: (context) => LedgerTransactionDetailBottomSheet(
+                ledgerTransaction: data,
+              ),
             )
           },
         ),
@@ -138,7 +140,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                         padding: EdgeInsets.symmetric(horizontal: 8),
                         width: size.width * 0.50,
                         child: Text(
-                          data.particular,
+                          data.transaction.particular,
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
@@ -173,16 +175,17 @@ class LedgerDetailScreen extends HookConsumerWidget {
   _report() {
     return Container(
       decoration: BoxDecoration(
-        color: Palette.color2,
+        color: Colors.grey.shade200,
       ),
       // this is mock data for total
-      height: 40,
+      height: 70,
       child: Column(
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
+                decoration: BoxDecoration(color: Colors.green.shade200),
                 child: Row(
                   children: [
                     Text('Debit:'),
@@ -191,13 +194,14 @@ class LedgerDetailScreen extends HookConsumerWidget {
                     ),
                     Container(
                         child: Text(
-                          'a1122',
+                          this.ledgerReport.debitAmount.toString(),
                         ),
                         alignment: Alignment.centerRight),
                   ],
                 ),
               ),
               Container(
+                decoration: BoxDecoration(color: Colors.red.shade200),
                 child: Row(
                   children: [
                     Text('Credit:'),
@@ -206,22 +210,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                     ),
                     Container(
                         child: Text(
-                          'cerdit1111',
-                        ),
-                        alignment: Alignment.centerRight),
-                  ],
-                ),
-              ),
-              Container(
-                child: Row(
-                  children: [
-                    Text('Total:'),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Container(
-                        child: Text(
-                          '10000',
+                          this.ledgerReport.creditAmount.toString(),
                         ),
                         alignment: Alignment.centerRight),
                   ],
@@ -237,15 +226,19 @@ class LedgerDetailScreen extends HookConsumerWidget {
                     Container(
                         width: 50,
                         height: 20,
-                        // decoration: BoxDecoration(
-                        //   color: (model.debit - model.credit >= 0)
-                        //       ? Colors.green.shade300
-                        //       : Colors.red.shade300,
-                        //   borderRadius: BorderRadius.circular(5),
-                        // ),
+                        decoration: BoxDecoration(
+                          color: (this.ledgerReport.debitAmount -
+                                      this.ledgerReport.creditAmount >=
+                                  0)
+                              ? Colors.green.shade200
+                              : Colors.red.shade200,
+                          borderRadius: BorderRadius.circular(5),
+                        ),
                         child: Center(
                           child: Text(
-                            111.toString(),
+                            (this.ledgerReport.debitAmount -
+                                    this.ledgerReport.creditAmount)
+                                .toString(),
                             // (model.debit - model.credit).toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -258,16 +251,22 @@ class LedgerDetailScreen extends HookConsumerWidget {
               ),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Container(
-                child: Text('Generate Pdf'),
-              ),
-              Container(
-                child: Text('Generate Excel Sheet'),
-              )
-            ],
+          Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: 20,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Container(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text('Generate PDF'),
+                  ),
+                ),
+                ElevatedButton(onPressed: () {}, child: Text('Generate EXCEL')),
+              ],
+            ),
           ),
         ],
       ),
