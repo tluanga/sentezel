@@ -34,14 +34,16 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
                 ledgerMasterId: ledgerMasterDataList[i].id);
         int _creditAmount = 0;
         int _debitAmount = 0;
+        List<LedgerTransaction> _ledgerTransactionList = [];
         LedgerReport _ledgerReport = LedgerReport(
           ledgerId: ledgerMasterDataList[i].id,
           name: ledgerMasterDataList[i].name,
           description: ledgerMasterDataList[i].description,
           creditAmount: _creditAmount,
           debitAmount: _debitAmount,
+          ledgerTransaction: _ledgerTransactionList,
         );
-        List<LedgerTransaction> _ledgerTransactionList = [];
+
         for (int j = 0; j < _transactionList.length; j++) {
           LedgerTransaction _ledgerTransaction = LedgerTransaction(
             particular: _transactionList[j].particular,
