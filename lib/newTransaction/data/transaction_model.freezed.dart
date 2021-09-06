@@ -21,31 +21,31 @@ class _$TransactionTearOff {
   const _$TransactionTearOff();
 
   _Transaction call(
-      int? id,
-      int amount,
-      int debitAmount,
-      int creditAmount,
-      String particular,
-      TransactionMode mode,
-      DateTime date,
-      int transactionCategoryId,
+      {int? id,
+      required int debitAmount,
+      required int creditAmount,
+      required int partialPaymentAmount,
+      required String particular,
+      required TransactionMode mode,
+      required DateTime date,
+      required int transactionCategoryId,
       int? partyLedgerId,
       int? assetLedgerId,
       int? debitSideLedger,
-      int? creditSideLedger) {
+      int? creditSideLedger}) {
     return _Transaction(
-      id,
-      amount,
-      debitAmount,
-      creditAmount,
-      particular,
-      mode,
-      date,
-      transactionCategoryId,
-      partyLedgerId,
-      assetLedgerId,
-      debitSideLedger,
-      creditSideLedger,
+      id: id,
+      debitAmount: debitAmount,
+      creditAmount: creditAmount,
+      partialPaymentAmount: partialPaymentAmount,
+      particular: particular,
+      mode: mode,
+      date: date,
+      transactionCategoryId: transactionCategoryId,
+      partyLedgerId: partyLedgerId,
+      assetLedgerId: assetLedgerId,
+      debitSideLedger: debitSideLedger,
+      creditSideLedger: creditSideLedger,
     );
   }
 
@@ -60,9 +60,9 @@ const $Transaction = _$TransactionTearOff();
 /// @nodoc
 mixin _$Transaction {
   int? get id => throw _privateConstructorUsedError;
-  int get amount => throw _privateConstructorUsedError;
   int get debitAmount => throw _privateConstructorUsedError;
   int get creditAmount => throw _privateConstructorUsedError;
+  int get partialPaymentAmount => throw _privateConstructorUsedError;
   String get particular => throw _privateConstructorUsedError;
   TransactionMode get mode =>
       throw _privateConstructorUsedError; //user input--can be credit or Cashdown
@@ -86,9 +86,9 @@ abstract class $TransactionCopyWith<$Res> {
       _$TransactionCopyWithImpl<$Res>;
   $Res call(
       {int? id,
-      int amount,
       int debitAmount,
       int creditAmount,
+      int partialPaymentAmount,
       String particular,
       TransactionMode mode,
       DateTime date,
@@ -110,9 +110,9 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
   @override
   $Res call({
     Object? id = freezed,
-    Object? amount = freezed,
     Object? debitAmount = freezed,
     Object? creditAmount = freezed,
+    Object? partialPaymentAmount = freezed,
     Object? particular = freezed,
     Object? mode = freezed,
     Object? date = freezed,
@@ -127,10 +127,6 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      amount: amount == freezed
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int,
       debitAmount: debitAmount == freezed
           ? _value.debitAmount
           : debitAmount // ignore: cast_nullable_to_non_nullable
@@ -138,6 +134,10 @@ class _$TransactionCopyWithImpl<$Res> implements $TransactionCopyWith<$Res> {
       creditAmount: creditAmount == freezed
           ? _value.creditAmount
           : creditAmount // ignore: cast_nullable_to_non_nullable
+              as int,
+      partialPaymentAmount: partialPaymentAmount == freezed
+          ? _value.partialPaymentAmount
+          : partialPaymentAmount // ignore: cast_nullable_to_non_nullable
               as int,
       particular: particular == freezed
           ? _value.particular
@@ -184,9 +184,9 @@ abstract class _$TransactionCopyWith<$Res>
   @override
   $Res call(
       {int? id,
-      int amount,
       int debitAmount,
       int creditAmount,
+      int partialPaymentAmount,
       String particular,
       TransactionMode mode,
       DateTime date,
@@ -210,9 +210,9 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? amount = freezed,
     Object? debitAmount = freezed,
     Object? creditAmount = freezed,
+    Object? partialPaymentAmount = freezed,
     Object? particular = freezed,
     Object? mode = freezed,
     Object? date = freezed,
@@ -223,51 +223,51 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
     Object? creditSideLedger = freezed,
   }) {
     return _then(_Transaction(
-      id == freezed
+      id: id == freezed
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      amount == freezed
-          ? _value.amount
-          : amount // ignore: cast_nullable_to_non_nullable
-              as int,
-      debitAmount == freezed
+      debitAmount: debitAmount == freezed
           ? _value.debitAmount
           : debitAmount // ignore: cast_nullable_to_non_nullable
               as int,
-      creditAmount == freezed
+      creditAmount: creditAmount == freezed
           ? _value.creditAmount
           : creditAmount // ignore: cast_nullable_to_non_nullable
               as int,
-      particular == freezed
+      partialPaymentAmount: partialPaymentAmount == freezed
+          ? _value.partialPaymentAmount
+          : partialPaymentAmount // ignore: cast_nullable_to_non_nullable
+              as int,
+      particular: particular == freezed
           ? _value.particular
           : particular // ignore: cast_nullable_to_non_nullable
               as String,
-      mode == freezed
+      mode: mode == freezed
           ? _value.mode
           : mode // ignore: cast_nullable_to_non_nullable
               as TransactionMode,
-      date == freezed
+      date: date == freezed
           ? _value.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      transactionCategoryId == freezed
+      transactionCategoryId: transactionCategoryId == freezed
           ? _value.transactionCategoryId
           : transactionCategoryId // ignore: cast_nullable_to_non_nullable
               as int,
-      partyLedgerId == freezed
+      partyLedgerId: partyLedgerId == freezed
           ? _value.partyLedgerId
           : partyLedgerId // ignore: cast_nullable_to_non_nullable
               as int?,
-      assetLedgerId == freezed
+      assetLedgerId: assetLedgerId == freezed
           ? _value.assetLedgerId
           : assetLedgerId // ignore: cast_nullable_to_non_nullable
               as int?,
-      debitSideLedger == freezed
+      debitSideLedger: debitSideLedger == freezed
           ? _value.debitSideLedger
           : debitSideLedger // ignore: cast_nullable_to_non_nullable
               as int?,
-      creditSideLedger == freezed
+      creditSideLedger: creditSideLedger == freezed
           ? _value.creditSideLedger
           : creditSideLedger // ignore: cast_nullable_to_non_nullable
               as int?,
@@ -279,18 +279,18 @@ class __$TransactionCopyWithImpl<$Res> extends _$TransactionCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_Transaction implements _Transaction {
   _$_Transaction(
-      this.id,
-      this.amount,
-      this.debitAmount,
-      this.creditAmount,
-      this.particular,
-      this.mode,
-      this.date,
-      this.transactionCategoryId,
+      {this.id,
+      required this.debitAmount,
+      required this.creditAmount,
+      required this.partialPaymentAmount,
+      required this.particular,
+      required this.mode,
+      required this.date,
+      required this.transactionCategoryId,
       this.partyLedgerId,
       this.assetLedgerId,
       this.debitSideLedger,
-      this.creditSideLedger);
+      this.creditSideLedger});
 
   factory _$_Transaction.fromJson(Map<String, dynamic> json) =>
       _$_$_TransactionFromJson(json);
@@ -298,11 +298,11 @@ class _$_Transaction implements _Transaction {
   @override
   final int? id;
   @override
-  final int amount;
-  @override
   final int debitAmount;
   @override
   final int creditAmount;
+  @override
+  final int partialPaymentAmount;
   @override
   final String particular;
   @override
@@ -322,7 +322,7 @@ class _$_Transaction implements _Transaction {
 
   @override
   String toString() {
-    return 'Transaction(id: $id, amount: $amount, debitAmount: $debitAmount, creditAmount: $creditAmount, particular: $particular, mode: $mode, date: $date, transactionCategoryId: $transactionCategoryId, partyLedgerId: $partyLedgerId, assetLedgerId: $assetLedgerId, debitSideLedger: $debitSideLedger, creditSideLedger: $creditSideLedger)';
+    return 'Transaction(id: $id, debitAmount: $debitAmount, creditAmount: $creditAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, mode: $mode, date: $date, transactionCategoryId: $transactionCategoryId, partyLedgerId: $partyLedgerId, assetLedgerId: $assetLedgerId, debitSideLedger: $debitSideLedger, creditSideLedger: $creditSideLedger)';
   }
 
   @override
@@ -331,14 +331,15 @@ class _$_Transaction implements _Transaction {
         (other is _Transaction &&
             (identical(other.id, id) ||
                 const DeepCollectionEquality().equals(other.id, id)) &&
-            (identical(other.amount, amount) ||
-                const DeepCollectionEquality().equals(other.amount, amount)) &&
             (identical(other.debitAmount, debitAmount) ||
                 const DeepCollectionEquality()
                     .equals(other.debitAmount, debitAmount)) &&
             (identical(other.creditAmount, creditAmount) ||
                 const DeepCollectionEquality()
                     .equals(other.creditAmount, creditAmount)) &&
+            (identical(other.partialPaymentAmount, partialPaymentAmount) ||
+                const DeepCollectionEquality().equals(
+                    other.partialPaymentAmount, partialPaymentAmount)) &&
             (identical(other.particular, particular) ||
                 const DeepCollectionEquality()
                     .equals(other.particular, particular)) &&
@@ -367,9 +368,9 @@ class _$_Transaction implements _Transaction {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(id) ^
-      const DeepCollectionEquality().hash(amount) ^
       const DeepCollectionEquality().hash(debitAmount) ^
       const DeepCollectionEquality().hash(creditAmount) ^
+      const DeepCollectionEquality().hash(partialPaymentAmount) ^
       const DeepCollectionEquality().hash(particular) ^
       const DeepCollectionEquality().hash(mode) ^
       const DeepCollectionEquality().hash(date) ^
@@ -392,18 +393,18 @@ class _$_Transaction implements _Transaction {
 
 abstract class _Transaction implements Transaction {
   factory _Transaction(
-      int? id,
-      int amount,
-      int debitAmount,
-      int creditAmount,
-      String particular,
-      TransactionMode mode,
-      DateTime date,
-      int transactionCategoryId,
+      {int? id,
+      required int debitAmount,
+      required int creditAmount,
+      required int partialPaymentAmount,
+      required String particular,
+      required TransactionMode mode,
+      required DateTime date,
+      required int transactionCategoryId,
       int? partyLedgerId,
       int? assetLedgerId,
       int? debitSideLedger,
-      int? creditSideLedger) = _$_Transaction;
+      int? creditSideLedger}) = _$_Transaction;
 
   factory _Transaction.fromJson(Map<String, dynamic> json) =
       _$_Transaction.fromJson;
@@ -411,11 +412,11 @@ abstract class _Transaction implements Transaction {
   @override
   int? get id => throw _privateConstructorUsedError;
   @override
-  int get amount => throw _privateConstructorUsedError;
-  @override
   int get debitAmount => throw _privateConstructorUsedError;
   @override
   int get creditAmount => throw _privateConstructorUsedError;
+  @override
+  int get partialPaymentAmount => throw _privateConstructorUsedError;
   @override
   String get particular => throw _privateConstructorUsedError;
   @override

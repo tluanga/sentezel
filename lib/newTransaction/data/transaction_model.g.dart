@@ -8,27 +8,27 @@ part of 'transaction_model.dart';
 
 _$_Transaction _$_$_TransactionFromJson(Map<String, dynamic> json) {
   return _$_Transaction(
-    json['id'] as int?,
-    json['amount'] as int,
-    json['debitAmount'] as int,
-    json['creditAmount'] as int,
-    json['particular'] as String,
-    _$enumDecode(_$TransactionModeEnumMap, json['mode']),
-    DateTime.parse(json['date'] as String),
-    json['transactionCategoryId'] as int,
-    json['partyLedgerId'] as int?,
-    json['assetLedgerId'] as int?,
-    json['debitSideLedger'] as int?,
-    json['creditSideLedger'] as int?,
+    id: json['id'] as int?,
+    debitAmount: json['debitAmount'] as int,
+    creditAmount: json['creditAmount'] as int,
+    partialPaymentAmount: json['partialPaymentAmount'] as int,
+    particular: json['particular'] as String,
+    mode: _$enumDecode(_$TransactionModeEnumMap, json['mode']),
+    date: DateTime.parse(json['date'] as String),
+    transactionCategoryId: json['transactionCategoryId'] as int,
+    partyLedgerId: json['partyLedgerId'] as int?,
+    assetLedgerId: json['assetLedgerId'] as int?,
+    debitSideLedger: json['debitSideLedger'] as int?,
+    creditSideLedger: json['creditSideLedger'] as int?,
   );
 }
 
 Map<String, dynamic> _$_$_TransactionToJson(_$_Transaction instance) =>
     <String, dynamic>{
       'id': instance.id,
-      'amount': instance.amount,
       'debitAmount': instance.debitAmount,
       'creditAmount': instance.creditAmount,
+      'partialPaymentAmount': instance.partialPaymentAmount,
       'particular': instance.particular,
       'mode': _$TransactionModeEnumMap[instance.mode],
       'date': instance.date.toIso8601String(),

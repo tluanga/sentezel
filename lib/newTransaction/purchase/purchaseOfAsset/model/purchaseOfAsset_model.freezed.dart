@@ -25,7 +25,6 @@ class _$PurchaseOfAssetTearOff {
       required DateTime date,
       TransactionMode? mode = TransactionMode.paymentByCash,
       TransactionCategory? category,
-      LedgerMaster? debitSideLedger,
       LedgerMaster? creditSideLedger,
       LedgerMaster? assetLedger,
       LedgerMaster? partyLedger}) {
@@ -38,7 +37,6 @@ class _$PurchaseOfAssetTearOff {
       date: date,
       mode: mode,
       category: category,
-      debitSideLedger: debitSideLedger,
       creditSideLedger: creditSideLedger,
       assetLedger: assetLedger,
       partyLedger: partyLedger,
@@ -59,9 +57,9 @@ mixin _$PurchaseOfAsset {
   DateTime get date => throw _privateConstructorUsedError;
   TransactionMode? get mode => throw _privateConstructorUsedError;
   TransactionCategory? get category => throw _privateConstructorUsedError;
-  LedgerMaster? get debitSideLedger => throw _privateConstructorUsedError;
   LedgerMaster? get creditSideLedger => throw _privateConstructorUsedError;
-  LedgerMaster? get assetLedger => throw _privateConstructorUsedError;
+  LedgerMaster? get assetLedger =>
+      throw _privateConstructorUsedError; //The only debit side leddger
   LedgerMaster? get partyLedger => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -83,7 +81,6 @@ abstract class $PurchaseOfAssetCopyWith<$Res> {
       DateTime date,
       TransactionMode? mode,
       TransactionCategory? category,
-      LedgerMaster? debitSideLedger,
       LedgerMaster? creditSideLedger,
       LedgerMaster? assetLedger,
       LedgerMaster? partyLedger});
@@ -108,7 +105,6 @@ class _$PurchaseOfAssetCopyWithImpl<$Res>
     Object? date = freezed,
     Object? mode = freezed,
     Object? category = freezed,
-    Object? debitSideLedger = freezed,
     Object? creditSideLedger = freezed,
     Object? assetLedger = freezed,
     Object? partyLedger = freezed,
@@ -146,10 +142,6 @@ class _$PurchaseOfAssetCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as TransactionCategory?,
-      debitSideLedger: debitSideLedger == freezed
-          ? _value.debitSideLedger
-          : debitSideLedger // ignore: cast_nullable_to_non_nullable
-              as LedgerMaster?,
       creditSideLedger: creditSideLedger == freezed
           ? _value.creditSideLedger
           : creditSideLedger // ignore: cast_nullable_to_non_nullable
@@ -182,7 +174,6 @@ abstract class _$PurchaseOfAssetCopyWith<$Res>
       DateTime date,
       TransactionMode? mode,
       TransactionCategory? category,
-      LedgerMaster? debitSideLedger,
       LedgerMaster? creditSideLedger,
       LedgerMaster? assetLedger,
       LedgerMaster? partyLedger});
@@ -209,7 +200,6 @@ class __$PurchaseOfAssetCopyWithImpl<$Res>
     Object? date = freezed,
     Object? mode = freezed,
     Object? category = freezed,
-    Object? debitSideLedger = freezed,
     Object? creditSideLedger = freezed,
     Object? assetLedger = freezed,
     Object? partyLedger = freezed,
@@ -247,10 +237,6 @@ class __$PurchaseOfAssetCopyWithImpl<$Res>
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
               as TransactionCategory?,
-      debitSideLedger: debitSideLedger == freezed
-          ? _value.debitSideLedger
-          : debitSideLedger // ignore: cast_nullable_to_non_nullable
-              as LedgerMaster?,
       creditSideLedger: creditSideLedger == freezed
           ? _value.creditSideLedger
           : creditSideLedger // ignore: cast_nullable_to_non_nullable
@@ -279,7 +265,6 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
       required this.date,
       this.mode = TransactionMode.paymentByCash,
       this.category,
-      this.debitSideLedger,
       this.creditSideLedger,
       this.assetLedger,
       this.partyLedger});
@@ -306,17 +291,15 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
   @override
   final TransactionCategory? category;
   @override
-  final LedgerMaster? debitSideLedger;
-  @override
   final LedgerMaster? creditSideLedger;
   @override
   final LedgerMaster? assetLedger;
-  @override
+  @override //The only debit side leddger
   final LedgerMaster? partyLedger;
 
   @override
   String toString() {
-    return 'PurchaseOfAsset(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, date: $date, mode: $mode, category: $category, debitSideLedger: $debitSideLedger, creditSideLedger: $creditSideLedger, assetLedger: $assetLedger, partyLedger: $partyLedger)';
+    return 'PurchaseOfAsset(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, assetLedger: $assetLedger, partyLedger: $partyLedger)';
   }
 
   @override
@@ -344,9 +327,6 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
             (identical(other.category, category) ||
                 const DeepCollectionEquality()
                     .equals(other.category, category)) &&
-            (identical(other.debitSideLedger, debitSideLedger) ||
-                const DeepCollectionEquality()
-                    .equals(other.debitSideLedger, debitSideLedger)) &&
             (identical(other.creditSideLedger, creditSideLedger) ||
                 const DeepCollectionEquality()
                     .equals(other.creditSideLedger, creditSideLedger)) &&
@@ -369,7 +349,6 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
       const DeepCollectionEquality().hash(date) ^
       const DeepCollectionEquality().hash(mode) ^
       const DeepCollectionEquality().hash(category) ^
-      const DeepCollectionEquality().hash(debitSideLedger) ^
       const DeepCollectionEquality().hash(creditSideLedger) ^
       const DeepCollectionEquality().hash(assetLedger) ^
       const DeepCollectionEquality().hash(partyLedger);
@@ -390,7 +369,6 @@ abstract class _PurchaseOfAsset implements PurchaseOfAsset {
       required DateTime date,
       TransactionMode? mode,
       TransactionCategory? category,
-      LedgerMaster? debitSideLedger,
       LedgerMaster? creditSideLedger,
       LedgerMaster? assetLedger,
       LedgerMaster? partyLedger}) = _$_PurchaseOfAsset;
@@ -412,12 +390,10 @@ abstract class _PurchaseOfAsset implements PurchaseOfAsset {
   @override
   TransactionCategory? get category => throw _privateConstructorUsedError;
   @override
-  LedgerMaster? get debitSideLedger => throw _privateConstructorUsedError;
-  @override
   LedgerMaster? get creditSideLedger => throw _privateConstructorUsedError;
   @override
   LedgerMaster? get assetLedger => throw _privateConstructorUsedError;
-  @override
+  @override //The only debit side leddger
   LedgerMaster? get partyLedger => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

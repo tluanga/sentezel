@@ -1,8 +1,8 @@
-import 'package:sentezel/settings/transactionType/data/transactionType_data.dart';
-import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
+import 'package:sentezel/settings/transactionCategory/data/transactionCategory_data.dart';
+import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
-import '../transactionType_config.dart';
+import '../transactionCategory_config.dart';
 
 class TransactionCategoryDb {}
 

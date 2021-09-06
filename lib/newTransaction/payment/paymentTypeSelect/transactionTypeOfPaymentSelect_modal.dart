@@ -6,7 +6,7 @@ import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
 import 'package:sentezel/newTransaction/payment/paymentTypeSelect/transactionTypeOfPaymentSelect_controller.dart';
 import 'package:sentezel/settings/asset/newAsset_modal.dart';
-import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
+import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 
 class TransactionCategoryOfPaymentSelectModal extends HookConsumerWidget {
   final Function(TransactionCategory) onSelect;

@@ -1,6 +1,6 @@
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
-import 'package:sentezel/settings/transactionType/data/transactionType_model.dart';
+import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 
 class Payment {
   int amount;

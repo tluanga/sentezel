@@ -29,7 +29,7 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
         int debitAmount = 0;
 
         for (int j = 0; j < _transactionList.length; j++) {
-          print(_transactionList[i].amount);
+          print(_transactionList[i].debitAmount);
           //calculate credit and debit amount
           //determin debit or credit
           //--Asset----

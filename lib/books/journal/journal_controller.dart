@@ -2,8 +2,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
 
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-
-import 'package:sentezel/settings/transactionType/transactionType_repository.dart';
+import 'package:sentezel/settings/transactionCategory/transactionType_repository.dart';
 
 final journalControllerProvider =
     StateNotifierProvider<JournalController, AsyncValue<List<Journal>>>(

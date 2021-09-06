@@ -1,3 +1,3 @@
 class TransactionConfig {
-  static const dbName = 'transactionDb';
+  static const dbName = 'transactionTable';
 }
