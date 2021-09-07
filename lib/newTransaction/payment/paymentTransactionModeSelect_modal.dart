@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/payment/payment_controller.dart';
+import 'package:sentezel/newTransaction/sales/salesReturn/salesReturn_controller.dart';
 
 class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
   const PaymentTransactionModeSelectModalBottomSheet({
@@ -11,8 +11,8 @@ class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final setState = ref.read(paymentControllerProvider.notifier);
-    final state = ref.read(paymentControllerProvider);
+    var state = ref.read(saleReturnControllerProvider);
+
     return Container(
       height: MediaQuery.of(context).size.height * 0.2,
       child: Column(
@@ -51,11 +51,16 @@ class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
                   ),
                   trailing: Radio(
                     value: TransactionMode.paymentByCash,
+                    activeColor: Colors.green.shade500,
                     onChanged: (value) {
-                      setState.setMode(TransactionMode.paymentByCash);
+                      ref.watch(saleReturnControllerProvider.notifier).setState(
+                            state.data!.value
+                                .copyWith(mode: TransactionMode.paymentByCash),
+                          );
+
                       Navigator.pop(context);
                     },
-                    groupValue: state.mode,
+                    groupValue: state.data!.value.mode,
                   ),
                 ),
                 //----------Payment By Bank---------------
@@ -72,11 +77,17 @@ class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
                     ),
                     trailing: Radio(
                       value: TransactionMode.paymentByBank,
+                      activeColor: Colors.green.shade500,
                       onChanged: (value) {
-                        setState.setMode(TransactionMode.paymentByBank);
+                        ref
+                            .watch(saleReturnControllerProvider.notifier)
+                            .setState(state.data!.value.copyWith(
+                              mode: TransactionMode.paymentByBank,
+                            ));
+
                         Navigator.pop(context);
                       },
-                      groupValue: state.mode,
+                      groupValue: state.data!.value.mode,
                     ),
                   ),
                 ),

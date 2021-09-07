@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/debtRepayment/debtorList_screen.dart';
+
 import 'package:sentezel/newTransaction/payment/payment_screen.dart';
 
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
@@ -138,7 +138,7 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => DebtorListScreen(),
+                        builder: (context) => PaymentScreen(),
                       ),
                     );
                   },

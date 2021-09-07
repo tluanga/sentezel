@@ -1,68 +1,88 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/payment/payment_model.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
+import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_helper.dart';
+import 'package:sentezel/newTransaction/data/transaction_model.dart';
+import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/newTransaction/payment/model/payment_model.dart';
+import 'package:sentezel/newTransaction/receipt/model/receipt_model.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 
 final paymentControllerProvider =
-    StateNotifierProvider<PaymentController, Payment>(
-        (ref) => PaymentController(ref.read)..init());
+    StateNotifierProvider<PaymentController, AsyncValue<Payment>>(
+        (ref) => PaymentController(ref.read)..loadData());
 
-class PaymentController extends StateNotifier<Payment> {
+class PaymentController extends StateNotifier<AsyncValue<Payment>> {
   final Reader _read;
 
-  PaymentController(this._read)
-      : super(
-          Payment(
-            amount: 0,
-            particular: '',
-            date: DateTime.now(),
-            mode: TransactionMode.paymentByCash,
-          ),
-        );
-  init() async {
-    final _paymentSide = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: LedgerMasterIndex.Cash);
-    state = state.copyWith(creditSideLedger: _paymentSide);
+  PaymentController(this._read) : super(AsyncValue.loading());
+
+  loadData() async {
+    state = AsyncData(Payment(
+      errorMessages: [],
+      date: DateTime.now(),
+    ));
+    print(state);
   }
 
-  setPaymentTransactionCategory(TransactionCategory type) async {
-    final debitSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: type.debitSideLedger);
-    state = state.copyWith(
-      receiptTransactionCategory: type,
-      debitSideLedger: debitSideLedger,
-      particular: debitSideLedger!.name,
-    );
+  //--------------SET STATE-------------
+  setState(payload) {
+    Payment _newState = payload;
+    state = AsyncData(_newState);
   }
 
-  setMode(TransactionMode mode) async {
-    int _paymentSideid;
-    mode == TransactionMode.paymentByCash
-        ? _paymentSideid = LedgerMasterIndex.Cash
-        : _paymentSideid = LedgerMasterIndex.Bank;
-    final _paymentSide =
-        await _read(ledgerMasterRepositoryProvider).getItem(id: _paymentSideid);
-    state = state.copyWith(
-      creditSideLedger: _paymentSide,
-      mode: mode,
+  validate() {
+    final stateData = state.data!.value;
+
+    //---------Validation Part-----------
+    List<String> _errorMessage = [];
+
+    if (stateData.amount <= 0) {
+      _errorMessage.add('Amount can not be less than equalto Zero');
+    }
+
+    print('length of error message ${_errorMessage}');
+    state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
+  }
+
+  setup() async {
+    final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: state.data!.value.category!.creditSideLedger);
+
+    //---------------Updating the state-------
+    final stateData = state.data!.value;
+    final finalData = stateData.copyWith(
+      creditAmount: (stateData.amount - stateData.partialPaymentAmount),
+      debitAmount: stateData.amount,
+      creditSideLedger: _creditSideLedger,
+      debitSideLedger: await getTransactionModeLedgerHelper(
+        stateData.mode!,
+        _read,
+      ),
     );
+    state = AsyncData(finalData);
+  }
+
+  reset() async {
+    state = AsyncLoading();
   }
 
   submit() async {
+    final stateData = state.data!.value;
     try {
-      // _read(transactionRepositoryProvider).add(
-      //     payload: Transaction(
-      //   amount: state.amount,
-      //   particular: state.particular,
-      //   date: state.date,
-      //   mode: state.mode,
-      //   transactionType: TransactionType.lakluh,
-      //   transactionCategoryId: state.paymentTransactionCategory!.id,
-      //   debitSideLedgerId: state.debitSideLedger!.id,
-      //   creditSideLedgerId: state.creditSideLedger!.id,
-      // ));
+      _read(transactionRepositoryProvider).add(
+        payload: Transaction(
+          debitAmount: stateData.debitAmount,
+          creditAmount: stateData.creditAmount,
+          partialPaymentAmount: stateData.partialPaymentAmount,
+          particular: stateData.particular!,
+          mode: stateData.mode!,
+          date: stateData.date,
+          transactionCategoryId: stateData.category!.id,
+          debitSideLedger: stateData.debitSideLedger!.id,
+          creditSideLedger: stateData.creditSideLedger != null
+              ? stateData.creditSideLedger!.id
+              : null,
+        ),
+      );
     } catch (e) {
       print(e);
     }
