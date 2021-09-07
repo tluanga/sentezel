@@ -39,7 +39,7 @@ class PurchaseOfAssetValidationErrorBottomSheet extends HookConsumerWidget {
                           height: MediaQuery.of(context).size.height * 0.06,
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: Colors.red.shade200,
+                              color: Colors.grey.shade300,
                               width: 3,
                             ),
                             borderRadius: BorderRadius.circular(7),
@@ -52,6 +52,9 @@ class PurchaseOfAssetValidationErrorBottomSheet extends HookConsumerWidget {
                                   color: Colors.red,
                                   size: 40,
                                 ),
+                              ),
+                              SizedBox(
+                                width: 5,
                               ),
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.8,
