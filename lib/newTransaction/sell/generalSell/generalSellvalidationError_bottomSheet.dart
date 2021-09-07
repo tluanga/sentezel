@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
 
-class GeneralSellValidationErrorBottomSheet extends HookConsumerWidget {
+class PurchaseOfMaterialValidationErrorBottomSheet extends HookConsumerWidget {
   final List<String> validationErrorMessages;
-  const GeneralSellValidationErrorBottomSheet(
+  const PurchaseOfMaterialValidationErrorBottomSheet(
       {Key? key, required this.validationErrorMessages})
       : super(key: key);
 

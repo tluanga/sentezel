@@ -4,13 +4,13 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
 
-class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
+class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
   final Function onCancel;
   final double itemFontSize = 16;
-  const GeneralSellConfirmationBottomSheet({
+  const PurchaseOfMaterialConfirmationBottomSheet({
     Key? key,
     required this.onConfirm,
     required this.onCancel,
@@ -18,7 +18,7 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(generalSellControllerProvider);
+    final state = ref.watch(purchaseOfMaterialControllerProvider);
 
     return Material(
       child: SafeArea(

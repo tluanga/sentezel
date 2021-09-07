@@ -3,11 +3,11 @@ import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_h
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/model/generalSell_model.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/model/purchaseOfMaterial_model.dart';
+import 'package:sentezel/newTransaction/sell/generalSell/model/purchaseOfMaterial_model.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
-import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
 
 final generalSellControllerProvider =
     StateNotifierProvider<GeneralSellController, GeneralSell>(
@@ -66,21 +66,18 @@ class GeneralSellController extends StateNotifier<GeneralSell> {
   }
 
   setup() async {
-    final _category = await _read(transactionCategoryRepositoryProvider)
-        .getItem(id: TransactionCategoryIndex.SaleOfGoods);
     //---------------Updating the state-------
     state = state.copyWith(
-      category: _category,
       creditAmount: state.amount - state.partialPaymentAmount,
       debitAmount: state.amount,
-      debitSideLedger: state.mode != TransactionMode.credit
+      creditSideLedger: state.mode != TransactionMode.credit
           ? await getTransactionModeLedgerHelper(
               state.mode!,
               _read,
             )
           : null,
-      creditSideLedger: await _read(ledgerMasterRepositoryProvider)
-          .getItem(id: _category.creditSideLedger),
+      debitSideLedger: await _read(ledgerMasterRepositoryProvider)
+          .getItem(id: LedgerMasterIndex.Purchase),
     );
     print(state);
   }

@@ -1,4 +1,4 @@
-New General Sell Transaction Transaction
+New Material Purchase Transaction Transaction
 Abiltity
 to purchase assets
 
