@@ -44,7 +44,7 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
 
     if (state.mode == TransactionMode.partialPaymentByBank ||
         state.mode == TransactionMode.partialPaymentByCash) {
-      if (state.mode == TransactionMode.credit) {
+      if (state.partyLedger == null) {
         _errorMessage.add('Please Select Party');
       }
       if (state.amount <= state.partialPaymentAmount) {
@@ -57,6 +57,9 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
       if (state.particular!.length <= 0) {
         _errorMessage.add('Please Enter Particular');
       }
+    }
+    if (state.mode == TransactionMode.credit && state.partyLedger == null) {
+      _errorMessage.add('Please Select Party');
     }
 
     print('length of error message ${_errorMessage}');
