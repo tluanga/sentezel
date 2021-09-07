@@ -14,14 +14,17 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
   final Reader _read;
 
   PurchaseOfAssetController(this._read)
-      : super(PurchaseOfAsset(
-          date: DateTime.now(),
-          particular: '',
-        ));
+      : super(
+          PurchaseOfAsset(
+            date: DateTime.now(),
+            particular: 'Purchase of Asset',
+          ),
+        );
+
+  //--------------SET STATE-------------
   setState(payload) {
-    print('Inside Set State ');
-    print(payload);
-    state = payload;
+    PurchaseOfAsset _newState = payload;
+    state = _newState;
   }
 
   setup() async {

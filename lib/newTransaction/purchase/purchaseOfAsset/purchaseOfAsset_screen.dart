@@ -208,6 +208,11 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(3),
+          border: Border.all(
+            color: state.assetLedger == null
+                ? Colors.red.shade200
+                : Colors.grey.shade300,
+          ),
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -260,7 +265,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
             color: Colors.grey.shade300,
             borderRadius: BorderRadius.circular(3),
             border: Border.all(
-              color: state.partyLedger != 0
+              color: state.partyLedger != null
                   ? Colors.grey.shade300
                   : Colors.red.shade300,
             )),
