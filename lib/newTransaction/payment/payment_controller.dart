@@ -3,7 +3,6 @@ import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_h
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/newTransaction/payment/model/payment_model.dart';
-import 'package:sentezel/newTransaction/receipt/model/receipt_model.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 
 final paymentControllerProvider =
@@ -44,19 +43,19 @@ class PaymentController extends StateNotifier<AsyncValue<Payment>> {
   }
 
   setup() async {
-    final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: state.data!.value.category!.creditSideLedger);
+    final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: state.data!.value.category!.debitSideLedger);
 
     //---------------Updating the state-------
     final stateData = state.data!.value;
     final finalData = stateData.copyWith(
       creditAmount: (stateData.amount - stateData.partialPaymentAmount),
       debitAmount: stateData.amount,
-      creditSideLedger: _creditSideLedger,
-      debitSideLedger: await getTransactionModeLedgerHelper(
+      creditSideLedger: await getTransactionModeLedgerHelper(
         stateData.mode!,
         _read,
       ),
+      debitSideLedger: _debitSideLedger,
     );
     state = AsyncData(finalData);
   }

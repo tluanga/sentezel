@@ -3,7 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
-import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/receiptTypeSelect_controller.dart';
+import 'package:sentezel/newTransaction/payment/paymentTypeSelect/paymentTypeSelect_controller.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 
 class PaymentTypeSelectModal extends HookConsumerWidget {
@@ -13,9 +13,9 @@ class PaymentTypeSelectModal extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(receiptTypeSelectControllerProvider);
+    final state = ref.watch(paymentTypeSelectControllerProvider);
     useEffect(() {
-      ref.watch(receiptTypeSelectControllerProvider.notifier).loadData();
+      ref.watch(paymentTypeSelectControllerProvider.notifier).loadData();
     }, []);
     return Scaffold(
       body: SafeArea(
@@ -34,7 +34,7 @@ class PaymentTypeSelectModal extends HookConsumerWidget {
                 decoration: InputDecoration(labelText: 'Search Ledger'),
                 onChanged: (value) {
                   ref
-                      .watch(receiptTypeSelectControllerProvider.notifier)
+                      .watch(paymentTypeSelectControllerProvider.notifier)
                       .loadData(
                         categoryName: value,
                       );

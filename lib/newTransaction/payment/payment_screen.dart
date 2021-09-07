@@ -10,9 +10,8 @@ import 'package:sentezel/newTransaction/payment/model/payment_model.dart';
 import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentTypeSelect/paymentTypeSelect_modal.dart';
+import 'package:sentezel/newTransaction/payment/paymentValidationError_bottomSheet.dart';
 import 'package:sentezel/newTransaction/payment/payment_controller.dart';
-
-import 'package:sentezel/newTransaction/sales/salesReturn/salesReturnvalidationError_bottomSheet.dart';
 
 class PaymentScreen extends HookConsumerWidget {
   const PaymentScreen({Key? key}) : super(key: key);
@@ -74,7 +73,7 @@ class PaymentScreen extends HookConsumerWidget {
                         height: 10,
                       ),
                       //-----ASSET SELECTION----------------------
-                      _receiptTypeSelect(context: context, ref: ref),
+                      _paymentTypeSelect(context: context, ref: ref),
                       //----PARTICULAR SELECTION----------
                       _particular(context: context, ref: ref),
                       SizedBox(
@@ -117,7 +116,7 @@ class PaymentScreen extends HookConsumerWidget {
     } else {
       showModalBottomSheet(
         context: context,
-        builder: (context) => SalesReturnValidationErrorBottomSheet(
+        builder: (context) => PaymentValidationErrorBottomSheet(
           validationErrorMessages: state.data!.value.errorMessages,
         ),
       );
@@ -191,7 +190,7 @@ class PaymentScreen extends HookConsumerWidget {
     );
   }
 
-  _receiptTypeSelect({required BuildContext context, required WidgetRef ref}) {
+  _paymentTypeSelect({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(paymentControllerProvider).data!.value;
     return GestureDetector(
       onTap: () {
@@ -224,7 +223,7 @@ class PaymentScreen extends HookConsumerWidget {
           children: [
             Text(
               state.category == null
-                  ? 'Please Select Receipt Category'
+                  ? 'Please Select Payment Category'
                   : state.category!.name,
               style: TextStyle(
                 color: Colors.black,

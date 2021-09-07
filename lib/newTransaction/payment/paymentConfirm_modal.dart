@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
+import 'package:sentezel/newTransaction/payment/payment_controller.dart';
 
 class PaymentConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
@@ -17,7 +17,7 @@ class PaymentConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(receiptControllerProvider).data!.value;
+    final state = ref.watch(paymentControllerProvider).data!.value;
 
     return Material(
       child: SafeArea(
