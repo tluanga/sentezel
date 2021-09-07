@@ -38,7 +38,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
               DateSelectionBar(),
               _listHeader(context),
               _list(context: context, ledgerReportData: state),
-              _report(),
+              _report(data: state),
             ],
           ),
         ),
@@ -188,7 +188,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
     );
   }
 
-  _report() {
+  _report({required LedgerReport data}) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey.shade200,
@@ -210,7 +210,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                     ),
                     Container(
                         child: Text(
-                          this.ledgerReport.debitAmount.toString(),
+                          data.debitAmount.toString(),
                         ),
                         alignment: Alignment.centerRight),
                   ],
@@ -243,18 +243,14 @@ class LedgerDetailScreen extends HookConsumerWidget {
                         width: 50,
                         height: 20,
                         decoration: BoxDecoration(
-                          color: (this.ledgerReport.debitAmount -
-                                      this.ledgerReport.creditAmount >=
-                                  0)
+                          color: (data.debitAmount - data.creditAmount >= 0)
                               ? Colors.green.shade200
                               : Colors.red.shade200,
                           borderRadius: BorderRadius.circular(5),
                         ),
                         child: Center(
                           child: Text(
-                            (this.ledgerReport.debitAmount -
-                                    this.ledgerReport.creditAmount)
-                                .toString(),
+                            (data.debitAmount - data.creditAmount).toString(),
                             // (model.debit - model.credit).toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,

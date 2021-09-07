@@ -2,10 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
-import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_controller.dart';
 
 class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
@@ -178,8 +176,6 @@ class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
                   leading: Icon(CupertinoIcons.checkmark_alt),
                   onTap: () {
                     this.onConfirm();
-                    Navigator.popAndPushNamed(
-                        context, RouteConstant.newTransaction);
                   },
                 ),
               ),

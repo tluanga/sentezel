@@ -19,6 +19,8 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
           particular: '',
         ));
   setState(payload) {
+    print('Inside Set State ');
+    print(payload);
     state = payload;
   }
 
@@ -55,7 +57,6 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
               state.partyLedger != null ? state.partyLedger!.id : null,
         ),
       );
-      reset();
     } catch (e) {
       print(e);
     }
