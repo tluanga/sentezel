@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/sales/salesReturn/salesReturn_controller.dart';
+import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
 
 class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
@@ -17,7 +17,7 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(saleReturnControllerProvider).data!.value;
+    final state = ref.watch(receiptControllerProvider).data!.value;
 
     return Material(
       child: SafeArea(
@@ -118,7 +118,7 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
                   _tableHeader(),
                   //---------------DEBIT SIDE-----------
 
-                  //--Normal Payment -- Non Credit- Non Partial
+                  // //--Normal Payment -- Non Credit- Non Partial
 
                   _debitSide(
                       debitSideLedgerName: state.debitSideLedger!.name,

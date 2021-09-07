@@ -47,12 +47,16 @@ class ReceiptController extends StateNotifier<AsyncValue<Receipt>> {
   }
 
   setup() async {
+    final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: state.data!.value.category!.creditSideLedger);
+
     //---------------Updating the state-------
     final stateData = state.data!.value;
     final finalData = stateData.copyWith(
       creditAmount: (stateData.amount - stateData.partialPaymentAmount),
       debitAmount: stateData.amount,
-      creditSideLedger: await getTransactionModeLedgerHelper(
+      creditSideLedger: _creditSideLedger,
+      debitSideLedger: await getTransactionModeLedgerHelper(
         stateData.mode!,
         _read,
       ),

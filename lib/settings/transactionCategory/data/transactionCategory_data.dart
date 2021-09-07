@@ -181,8 +181,8 @@ List<TransactionCategory> transactionTypeData = [
     name: 'Selling commission',
     description: 'Selling commission',
     transactionType: TransactionType.lakluh,
-    debitSideLedger: LedgerMasterIndex.SellingCommision,
-    creditSideLedger: LedgerMasterIndex.Cash,
+    debitSideLedger: LedgerMasterIndex.Cash,
+    creditSideLedger: LedgerMasterIndex.SellingCommision,
   ),
   TransactionCategory.withId(
     id: TransactionCategoryIndex.BankCharges,

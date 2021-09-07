@@ -73,19 +73,17 @@ class TransactionCategoryRepository
     DateTime? endDate,
   }) async {
     try {
-      String _type = EnumToString.convertToString(type);
+      String _type = type != null ? EnumToString.convertToString(type) : '';
       Database db = await DatabaseService.instance.db;
 
       final result = await db.rawQuery('''
       Select * from $dbName
       WHERE name LIKE '$searchString%'
-      AND transactionType Like '$_type'
+      AND transactionType Like '$_type%'
       ''');
       List<TransactionCategory> list = [];
       result.forEach((item) {
         list.add(TransactionCategory.fromMap(item));
-        print('name');
-        print(item['name']);
       });
 
       return list;

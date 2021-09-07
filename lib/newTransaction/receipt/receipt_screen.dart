@@ -198,7 +198,11 @@ class ReceiptScreen extends HookConsumerWidget {
         showModalBottomSheet(
           context: context,
           builder: (context) => ReceiptTypeSelectModal(
-            onSelect: (asset) {},
+            onSelect: (category) {
+              ref.read(receiptControllerProvider.notifier).setState(
+                    state.copyWith(category: category),
+                  );
+            },
           ),
         );
       },

@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_screen.dart';
-
-import 'package:sentezel/books/ledger/ledger_model.dart';
-import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
-import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/receiptTypeSelect_controller.dart';
+import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 
 class ReceiptTypeSelectModal extends HookConsumerWidget {
-  final Function onSelect;
+  final Function(TransactionCategory) onSelect;
   const ReceiptTypeSelectModal({Key? key, required this.onSelect})
       : super(key: key);
 
@@ -40,7 +36,7 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
                   ref
                       .watch(receiptTypeSelectControllerProvider.notifier)
                       .loadData(
-                        ledgerName: value,
+                        categoryName: value,
                       );
                 },
               ),
@@ -76,14 +72,16 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
     );
   }
 
-  _listItem({required BuildContext context, required LedgerReport item}) {
+  _listItem(
+      {required BuildContext context, required TransactionCategory item}) {
     Color _color = Palette.color3;
 
     _color = Palette.color1;
 
     return GestureDetector(
       onTap: () {
-        this.onSelect();
+        this.onSelect(item);
+        Navigator.pop(context);
       },
       child: Container(
         margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
@@ -143,69 +141,11 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
                     ),
                   ),
                 ),
-                Row(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      decoration: BoxDecoration(
-                        color: Colors.green.shade200,
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.15,
-                            child: Text('Debit'),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(':'),
-                          SizedBox(
-                            width: 22,
-                          ),
-                          Container(
-                            child: Text(
-                              currencySeperatorStringFormatterHelper(
-                                  item.debitAmount),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      decoration: BoxDecoration(
-                        color: Palette.color2,
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            width: MediaQuery.of(context).size.width * 0.15,
-                            child: Text('Credit'),
-                          ),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text(':'),
-                          SizedBox(
-                            width: 22,
-                          ),
-                          Container(
-                            child: Text(
-                              currencySeperatorStringFormatterHelper(
-                                  item.creditAmount),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
+                Container(
+                  child: Text(
+                    item.description,
+                    overflow: TextOverflow.ellipsis,
+                  ),
                 ),
               ],
             ),
