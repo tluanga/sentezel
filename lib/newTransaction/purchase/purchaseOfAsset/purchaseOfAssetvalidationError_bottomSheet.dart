@@ -14,7 +14,7 @@ class PurchaseOfAssetValidationErrorBottomSheet extends HookConsumerWidget {
     print(validationErrorMessages.length);
     return Container(
       height: MediaQuery.of(context).size.height *
-          (validationErrorMessages.length / 8.9),
+          (validationErrorMessages.length / 6),
       child: Column(
         children: [
           TopBarForBottomSheetWidget(
@@ -60,8 +60,14 @@ class PurchaseOfAssetValidationErrorBottomSheet extends HookConsumerWidget {
                                 width: MediaQuery.of(context).size.width * 0.8,
                                 height:
                                     MediaQuery.of(context).size.height * 0.05,
-                                child: Text(
-                                  validationErrorMessages[index],
+                                child: Center(
+                                  child: Text(
+                                    validationErrorMessages[index],
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ),
                               )
                             ],

@@ -40,7 +40,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                 TopBarWithSaveWidget(
                   title: 'New Asset Purchase',
                   onSave: () {
-                    onSubmit(context: context, state: state, ref: ref);
+                    onSubmit(context: context, ref: ref);
                   },
                   onCancel: onCancel,
                 ),
@@ -103,11 +103,10 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     );
   }
 
-  onSubmit(
-      {required BuildContext context,
-      required PurchaseOfAsset state,
-      required WidgetRef ref}) {
+  onSubmit({required BuildContext context, required WidgetRef ref}) {
+    ref.watch(purchaseOfAssetControllerProvider.notifier).validate();
     ref.watch(purchaseOfAssetControllerProvider.notifier).setup();
+    final state = ref.watch(purchaseOfAssetControllerProvider);
     if (state.errorMessages.length == 0) {
       showModalBottomSheet(
         context: context,

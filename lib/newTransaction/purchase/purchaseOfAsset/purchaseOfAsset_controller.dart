@@ -19,6 +19,7 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
             date: DateTime.now(),
             particular: 'Purchase of Asset',
             errorMessages: [],
+            amount: 0,
           ),
         );
 
@@ -28,20 +29,41 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
     state = _newState;
   }
 
-  setup() async {
+  validate() {
     print(state.mode);
     //---------Validation Part-----------
     List<String> _errorMessage = [];
-    if (state.amount <= state.partialPaymentAmount)
-      _errorMessage.add('Partial Payment Amount cannot be Larger  than Amount');
+
     if (state.amount <= 0) {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
+
     if (state.assetLedger == null) {
       _errorMessage.add('Please select asset');
     }
-    print('length of error message ${_errorMessage}');
 
+    if (state.mode == TransactionMode.partialPaymentByBank ||
+        state.mode == TransactionMode.partialPaymentByCash) {
+      if (state.mode == TransactionMode.credit) {
+        _errorMessage.add('Please Select Party');
+      }
+      if (state.amount <= state.partialPaymentAmount) {
+        _errorMessage
+            .add('Partial Payment Amount cannot be Larger  than Amount');
+      }
+      if (state.partialPaymentAmount <= 0) {
+        _errorMessage.add('Partial Amount cannot be Zero');
+      }
+      if (state.particular!.length <= 0) {
+        _errorMessage.add('Please Enter Particular');
+      }
+    }
+
+    print('length of error message ${_errorMessage}');
+    state = state.copyWith(errorMessages: _errorMessage);
+  }
+
+  setup() async {
     //---------------Updating the state-------
     state = state.copyWith(
       creditAmount: state.amount - state.partialPaymentAmount,
@@ -52,8 +74,8 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
               _read,
             )
           : null,
-      errorMessages: _errorMessage,
     );
+    print(state);
   }
 
   submit() async {
