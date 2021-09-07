@@ -36,66 +36,80 @@ class GeneralSellScreen extends HookConsumerWidget {
             ),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                TopBarWithSaveWidget(
-                  title: 'New Material Purchase',
-                  onSave: () {
-                    onSubmit(context: context, ref: ref);
-                  },
-                  onCancel: onCancel,
-                ),
-                DateSelectTimeLineWidget(
-                  initialDate: state.date,
-                  onDateSelected: (selectedDate) {
-                    state = state.copyWith(date: selectedDate);
-                  },
-                ),
+            child: state.when(
+                data: (data) {
+                  print(data);
+                  return Column(
+                    children: [
+                      TopBarWithSaveWidget(
+                        title: 'New Material Purchase',
+                        onSave: () {
+                          onSubmit(context: context, ref: ref);
+                        },
+                        onCancel: onCancel,
+                      ),
+                      DateSelectTimeLineWidget(
+                        initialDate: data.date,
+                        onDateSelected: (selectedDate) {
+                          ref
+                              .read(generalSellControllerProvider.notifier)
+                              .setState(
+                                data.copyWith(date: selectedDate),
+                              );
+                        },
+                      ),
 
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    //--------------Amount ------------
-                    _amount(context: context, ref: ref),
-                    SizedBox(width: MediaQuery.of(context).size.width * 0.02),
-                    _transactionMode(context: context, state: state),
-                  ],
-                ),
-
-                //------------Party Selection and Partial Amount Entry----
-                state.mode == TransactionMode.credit ||
-                        state.mode == TransactionMode.partialPaymentByBank ||
-                        state.mode == TransactionMode.partialPaymentByCash
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
-                          if (state.mode ==
-                                  TransactionMode.partialPaymentByBank ||
-                              state.mode ==
-                                  TransactionMode.partialPaymentByCash)
-                            //Partial Payment
-                            _partialPayment(context: context, ref: ref),
-
-                          //---Party Select----
-                          _partySelect(context: context, ref: ref),
+                          //--------------Amount ------------
+                          _amount(context: context, ref: ref),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.02),
+                          _transactionMode(context: context, state: data),
                         ],
-                      )
-                    : Container(),
-                SizedBox(
-                  height: 10,
-                ),
-                //-----ASSET SELECTION----------------------
+                      ),
 
-                //----PARTICULAR SELECTION----------
-                _particular(context: context, ref: ref),
-                SizedBox(
-                  height: 6,
-                ),
-              ],
-            ),
+                      //------------Party Selection and Partial Amount Entry----
+                      data.mode == TransactionMode.credit ||
+                              data.mode ==
+                                  TransactionMode.partialPaymentByBank ||
+                              data.mode == TransactionMode.partialPaymentByCash
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                if (data.mode ==
+                                        TransactionMode.partialPaymentByBank ||
+                                    data.mode ==
+                                        TransactionMode.partialPaymentByCash)
+                                  //Partial Payment
+                                  _partialPayment(context: context, ref: ref),
+
+                                //---Party Select----
+                                _partySelect(context: context, ref: ref),
+                              ],
+                            )
+                          : Container(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      //-----ASSET SELECTION----------------------
+
+                      //----PARTICULAR SELECTION----------
+                      _particular(context: context, ref: ref),
+                      SizedBox(
+                        height: 6,
+                      ),
+                    ],
+                  );
+                },
+                loading: () {
+                  return CircularProgressIndicator();
+                },
+                error: (error, stack) {}),
           ),
         ),
       ),
@@ -106,7 +120,7 @@ class GeneralSellScreen extends HookConsumerWidget {
     ref.watch(generalSellControllerProvider.notifier).validate();
     await ref.watch(generalSellControllerProvider.notifier).setup();
     final state = ref.watch(generalSellControllerProvider);
-    if (state.errorMessages.length == 0) {
+    if (state.data!.value.errorMessages.length == 0) {
       showModalBottomSheet(
         context: context,
         builder: (context) => GeneralSellConfirmationBottomSheet(
@@ -127,7 +141,7 @@ class GeneralSellScreen extends HookConsumerWidget {
       showModalBottomSheet(
         context: context,
         builder: (context) => GeneralSellValidationErrorBottomSheet(
-          validationErrorMessages: state.errorMessages,
+          validationErrorMessages: state.data!.value.errorMessages,
         ),
       );
     }
@@ -144,7 +158,7 @@ class GeneralSellScreen extends HookConsumerWidget {
           var _value = value != '' ? int.parse(value) : 0;
           print(value);
           ref.watch(generalSellControllerProvider.notifier).setState(
-                state.copyWith(
+                state.data!.value.copyWith(
                   amount: _value,
                 ),
               );
@@ -211,14 +225,14 @@ class GeneralSellScreen extends HookConsumerWidget {
           builder: (context) => PartySelectModal(
             onSelectParty: (party) {
               ref.watch(generalSellControllerProvider.notifier).setState(
-                    state.copyWith(partyLedger: party),
+                    state.data!.value.copyWith(partyLedger: party),
                   );
             },
           ),
         );
       },
       child: Container(
-        width: state.mode == TransactionMode.credit
+        width: state.data!.value.mode == TransactionMode.credit
             ? MediaQuery.of(context).size.width * 0.97
             : MediaQuery.of(context).size.width * 0.55,
         height: MediaQuery.of(context).size.height * 0.05,
@@ -227,7 +241,7 @@ class GeneralSellScreen extends HookConsumerWidget {
             color: Colors.grey.shade300,
             borderRadius: BorderRadius.circular(3),
             border: Border.all(
-              color: state.partyLedger != null
+              color: state.data!.value.partyLedger != null
                   ? Colors.grey.shade300
                   : Colors.red.shade300,
             )),
@@ -235,9 +249,9 @@ class GeneralSellScreen extends HookConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              state.partyLedger == null
+              state.data!.value.partyLedger == null
                   ? 'Please Select Party'
-                  : state.partyLedger!.name,
+                  : state.data!.value.partyLedger!.name,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15,
@@ -260,11 +274,11 @@ class GeneralSellScreen extends HookConsumerWidget {
     return PartialPaymentWidget(
       onChange: (amount) {
         ref.watch(generalSellControllerProvider.notifier).setState(
-              state.copyWith(partialPaymentAmount: amount),
+              state.data!.value.copyWith(partialPaymentAmount: amount),
             );
       },
-      defaultValue: state.partialPaymentAmount,
-      maxAmount: state.amount,
+      defaultValue: state.data!.value.partialPaymentAmount,
+      maxAmount: state.data!.value.amount,
     );
   }
 
@@ -274,10 +288,10 @@ class GeneralSellScreen extends HookConsumerWidget {
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
-        initialValue: state.particular,
+        initialValue: state.data!.value.particular,
         onChanged: (value) {
           ref.watch(generalSellControllerProvider.notifier).setState(
-                state.copyWith(particular: value),
+                state.data!.value.copyWith(particular: value),
               );
         },
         decoration: InputDecoration(

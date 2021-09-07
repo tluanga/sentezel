@@ -57,12 +57,13 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                       ref
                           .watch(generalSellControllerProvider.notifier)
                           .setState(
-                            state.copyWith(mode: TransactionMode.paymentByCash),
+                            state.data!.value
+                                .copyWith(mode: TransactionMode.paymentByCash),
                           );
 
                       Navigator.pop(context);
                     },
-                    groupValue: state.mode,
+                    groupValue: state.data!.value.mode,
                   ),
                 ),
                 //----------Payment By Bank---------------
@@ -82,13 +83,13 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                       onChanged: (value) {
                         ref
                             .watch(generalSellControllerProvider.notifier)
-                            .setState(state.copyWith(
+                            .setState(state.data!.value.copyWith(
                               mode: TransactionMode.paymentByBank,
                             ));
 
                         Navigator.pop(context);
                       },
-                      groupValue: state.mode,
+                      groupValue: state.data!.value.mode,
                     ),
                   ),
                 ),
@@ -110,12 +111,13 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                         ref
                             .watch(generalSellControllerProvider.notifier)
                             .setState(
-                              state.copyWith(mode: TransactionMode.credit),
+                              state.data!.value
+                                  .copyWith(mode: TransactionMode.credit),
                             );
 
                         Navigator.pop(context);
                       },
-                      groupValue: state.mode,
+                      groupValue: state.data!.value.mode,
                     ),
                   ),
                 ),
@@ -136,13 +138,13 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                         ref
                             .watch(generalSellControllerProvider.notifier)
                             .setState(
-                              state.copyWith(
+                              state.data!.value.copyWith(
                                   mode: TransactionMode.partialPaymentByBank),
                             );
 
                         Navigator.pop(context);
                       },
-                      groupValue: state.mode,
+                      groupValue: state.data!.value.mode,
                     ),
                   ),
                 ),
@@ -163,13 +165,13 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                         ref
                             .watch(generalSellControllerProvider.notifier)
                             .setState(
-                              state.copyWith(
+                              state.data!.value.copyWith(
                                   mode: TransactionMode.partialPaymentByCash),
                             );
 
                         Navigator.pop(context);
                       },
-                      groupValue: state.mode,
+                      groupValue: state.data!.value.mode,
                     ),
                   ),
                 ),

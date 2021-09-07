@@ -19,7 +19,7 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(generalSellControllerProvider);
+    final state = ref.watch(generalSellControllerProvider).data!.value;
 
     return Material(
       child: SafeArea(
@@ -120,33 +120,34 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
                   _tableHeader(),
                   //---------------DEBIT SIDE-----------
 
-                  _debitSide(
-                    debitSideLedgerName: state.debitSideLedger!.name,
-                    amount: state.debitAmount,
-                  ),
-
-                  //--------------CREDIT SIDE-----
                   if (state.mode == TransactionMode.credit ||
                       state.mode == TransactionMode.partialPaymentByCash ||
                       state.mode == TransactionMode.partialPaymentByBank)
-                    _creditSide(
-                      creditSideLedgerName: state.partyLedger!.name,
-                      amount: state.creditAmount,
+                    _debitSide(
+                      debitSideLedgerName: state.partyLedger!.name,
+                      amount: state.debitAmount,
                     ),
+
                   //--Normal Payment -- Non Credit- Non Partial
                   if (state.mode == TransactionMode.paymentByCash ||
                       state.mode == TransactionMode.paymentByBank)
-                    _creditSide(
-                        creditSideLedgerName: state.creditSideLedger!.name,
-                        amount: state.creditAmount),
+                    _debitSide(
+                        debitSideLedgerName: state.debitSideLedger!.name,
+                        amount: state.debitAmount),
 
                   //---Partial Payment
                   if (state.mode == TransactionMode.partialPaymentByCash ||
                       state.mode == TransactionMode.partialPaymentByBank)
-                    _creditSide(
-                      creditSideLedgerName: state.creditSideLedger!.name,
+                    _debitSide(
+                      debitSideLedgerName: state.debitSideLedger!.name,
                       amount: state.partialPaymentAmount,
                     ),
+
+                  //--------------CREDIT SIDE-----
+
+                  _creditSide(
+                      creditSideLedgerName: state.creditSideLedger!.name,
+                      amount: state.creditAmount),
                 ],
               ),
             ),
