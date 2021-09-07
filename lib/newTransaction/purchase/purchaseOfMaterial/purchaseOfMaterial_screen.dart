@@ -3,30 +3,28 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
-import 'package:sentezel/newTransaction/common/assetSelect_modal.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/model/purchaseOfAsset_model.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAssetConfirm_modal.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAssetTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_controller.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAssetvalidationError_bottomSheet.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/model/purchaseOfMaterial_model.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialvalidationError_bottomSheet.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
-class PurchaseOfAssetScreen extends HookConsumerWidget {
-  const PurchaseOfAssetScreen({Key? key}) : super(key: key);
+class PurchaseOfMaterialScreen extends HookConsumerWidget {
+  const PurchaseOfMaterialScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.watch(purchaseOfAssetControllerProvider);
+    var state = ref.watch(purchaseOfMaterialControllerProvider);
 
     onCancel() {
       print('cancel is called');
-      ref.read(purchaseOfAssetControllerProvider.notifier).reset();
+      ref.read(purchaseOfMaterialControllerProvider.notifier).reset();
     }
 
     return Scaffold(
@@ -41,7 +39,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
             child: Column(
               children: [
                 TopBarWithSaveWidget(
-                  title: 'New Asset Purchase',
+                  title: 'New Material Purchase',
                   onSave: () {
                     onSubmit(context: context, ref: ref);
                   },
@@ -90,7 +88,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                   height: 10,
                 ),
                 //-----ASSET SELECTION----------------------
-                _assetSelect(context: context, ref: ref),
+
                 //----PARTICULAR SELECTION----------
                 _particular(context: context, ref: ref),
                 SizedBox(
@@ -104,16 +102,16 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     );
   }
 
-  onSubmit({required BuildContext context, required WidgetRef ref}) {
-    ref.watch(purchaseOfAssetControllerProvider.notifier).validate();
-    ref.watch(purchaseOfAssetControllerProvider.notifier).setup();
-    final state = ref.watch(purchaseOfAssetControllerProvider);
+  onSubmit({required BuildContext context, required WidgetRef ref}) async {
+    ref.watch(purchaseOfMaterialControllerProvider.notifier).validate();
+    await ref.watch(purchaseOfMaterialControllerProvider.notifier).setup();
+    final state = ref.watch(purchaseOfMaterialControllerProvider);
     if (state.errorMessages.length == 0) {
       showModalBottomSheet(
         context: context,
-        builder: (context) => PurchaseOfAssetConfirmationBottomSheet(
+        builder: (context) => PurchaseOfMaterialConfirmationBottomSheet(
           onConfirm: () {
-            ref.watch(purchaseOfAssetControllerProvider.notifier).submit();
+            ref.watch(purchaseOfMaterialControllerProvider.notifier).submit();
 
             showCupertinoModalBottomSheet(
               expand: true,
@@ -128,7 +126,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     } else {
       showModalBottomSheet(
         context: context,
-        builder: (context) => PurchaseOfAssetValidationErrorBottomSheet(
+        builder: (context) => PurchaseOfMaterialValidationErrorBottomSheet(
           validationErrorMessages: state.errorMessages,
         ),
       );
@@ -136,7 +134,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
   }
 
   _amount({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfAssetControllerProvider);
+    final state = ref.watch(purchaseOfMaterialControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
@@ -145,7 +143,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
           print(value);
-          ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
+          ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
                 state.copyWith(
                   amount: _value,
                 ),
@@ -164,14 +162,14 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
   }
 
   _transactionMode(
-      {required BuildContext context, required PurchaseOfAsset state}) {
+      {required BuildContext context, required PurchaseOfMaterial state}) {
     return //------------Transaction Mode----
         GestureDetector(
       onTap: () {
         showModalBottomSheet(
           context: context,
           builder: (context) =>
-              PurchaseOfAssetTransactionModeSelectModalBottomSheet(),
+              PurchaseOfMaterialTransactionModeSelectModalBottomSheet(),
         );
       },
       child: Container(
@@ -204,67 +202,15 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     );
   }
 
-  _assetSelect({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfAssetControllerProvider);
-    return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (context) => AssetSelectModal(
-            onSelect: (asset) {
-              ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
-                    state.copyWith(assetLedger: asset),
-                  );
-            },
-          ),
-        );
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.97,
-        height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(3),
-          border: Border.all(
-            color: state.assetLedger == null
-                ? Colors.red.shade200
-                : Colors.grey.shade300,
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              state.assetLedger == null
-                  ? 'Please Select Asset'
-                  : state.assetLedger!.name,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Icon(
-              CupertinoIcons.arrowtriangle_down,
-              color: Colors.black,
-              size: 20,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
   _partySelect({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfAssetControllerProvider);
+    final state = ref.watch(purchaseOfMaterialControllerProvider);
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
           context: context,
           builder: (context) => PartySelectModal(
             onSelectParty: (party) {
-              ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
+              ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
                     state.copyWith(partyLedger: party),
                   );
             },
@@ -310,10 +256,10 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
   }
 
   _partialPayment({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfAssetControllerProvider);
+    final state = ref.watch(purchaseOfMaterialControllerProvider);
     return PartialPaymentWidget(
       onChange: (amount) {
-        ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
+        ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
               state.copyWith(partialPaymentAmount: amount),
             );
       },
@@ -323,14 +269,14 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
   }
 
   _particular({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfAssetControllerProvider);
+    final state = ref.watch(purchaseOfMaterialControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
         initialValue: state.particular,
         onChanged: (value) {
-          ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
+          ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
                 state.copyWith(particular: value),
               );
         },

@@ -24,6 +24,7 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
         startDate: startDate,
         endDate: endDate,
       );
+      print(data.length);
 
       List<Journal> result = [];
 

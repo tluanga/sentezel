@@ -3,21 +3,23 @@ import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_h
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/model/purchaseOfAsset_model.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/model/purchaseOfMaterial_model.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
+import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
 
-final purchaseOfAssetControllerProvider =
-    StateNotifierProvider<PurchaseOfAssetController, PurchaseOfAsset>(
-        (ref) => PurchaseOfAssetController(ref.read));
+final purchaseOfMaterialControllerProvider =
+    StateNotifierProvider<PurchaseOfMaterialController, PurchaseOfMaterial>(
+        (ref) => PurchaseOfMaterialController(ref.read));
 
-class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
+class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
   final Reader _read;
 
-  PurchaseOfAssetController(this._read)
+  PurchaseOfMaterialController(this._read)
       : super(
-          PurchaseOfAsset(
+          PurchaseOfMaterial(
             date: DateTime.now(),
-            particular: 'Purchase of Asset',
+            particular: 'Purchase of Material',
             errorMessages: [],
             amount: 0,
           ),
@@ -25,7 +27,7 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
 
   //--------------SET STATE-------------
   setState(payload) {
-    PurchaseOfAsset _newState = payload;
+    PurchaseOfMaterial _newState = payload;
     state = _newState;
   }
 
@@ -36,10 +38,6 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
 
     if (state.amount <= 0) {
       _errorMessage.add('Amount can not be less than equalto Zero');
-    }
-
-    if (state.assetLedger == null) {
-      _errorMessage.add('Please select asset');
     }
 
     if (state.mode == TransactionMode.partialPaymentByBank ||
@@ -77,8 +75,18 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
               _read,
             )
           : null,
+      debitSideLedger: await _read(ledgerMasterRepositoryProvider)
+          .getItem(id: LedgerMasterIndex.Purchase),
     );
     print(state);
+  }
+
+  reset() async {
+    state = PurchaseOfMaterial(
+      date: DateTime.now(),
+      particular: 'Purchase of Material',
+      errorMessages: [],
+    );
   }
 
   submit() async {
@@ -92,7 +100,7 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
           mode: state.mode!,
           date: state.date,
           transactionCategoryId: TransactionCategoryIndex.PurchaseOfAssets,
-          assetLedgerId: state.assetLedger!.id,
+          debitSideLedger: state.debitSideLedger!.id,
           creditSideLedger: state.creditSideLedger != null
               ? state.creditSideLedger!.id
               : null,
@@ -103,13 +111,5 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
     } catch (e) {
       print(e);
     }
-  }
-
-  reset() async {
-    state = PurchaseOfAsset(
-      date: DateTime.now(),
-      particular: 'Purchase of Asset',
-      errorMessages: [],
-    );
   }
 }

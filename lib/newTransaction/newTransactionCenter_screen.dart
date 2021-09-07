@@ -1,18 +1,22 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/debtRepayment/debtorList_screen.dart';
 import 'package:sentezel/newTransaction/payment/payment_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_screen.dart';
+
+import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_screen.dart';
 
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_screen.dart';
 
-class NewTranscationCenterScreen extends StatelessWidget {
+class NewTranscationCenterScreen extends HookConsumerWidget {
   const NewTranscationCenterScreen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Material(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.7,
@@ -30,12 +34,8 @@ class NewTranscationCenterScreen extends StatelessWidget {
                     label: 'Purchase of Asset',
                     icon: CupertinoIcons.cube,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PurchaseOfAssetScreen(),
-                        ),
-                      );
+                      Navigator.pushNamed(
+                          context, RouteConstant.purchaseOfAsset);
                     },
                   ),
                 ),
@@ -44,12 +44,12 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   label: 'Purchase of Material',
                   icon: CupertinoIcons.cube_box,
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => PurchaseOfMaterialScreen(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PurchaseOfMaterialScreen(),
+                      ),
+                    );
                   },
                 ),
                 _item(
@@ -171,7 +171,8 @@ class NewTranscationCenterScreen extends StatelessWidget {
                   label: 'Close ',
                   icon: CupertinoIcons.xmark,
                   onTap: () {
-                    Navigator.pop(context);
+                    Navigator.pushNamedAndRemoveUntil(
+                        context, RouteConstant.home, ModalRoute.withName('/'));
                   },
                 ),
               ],

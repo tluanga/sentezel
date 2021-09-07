@@ -8,6 +8,7 @@ import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/books/ledger/ledgerTransaction/transactionDeleteConfirm_bottomSheet.dart';
 import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
+import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -91,7 +92,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
       {required BuildContext context, required LedgerReport ledgerReportData}) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.72,
+      height: size.height * 0.62,
       child: ListView.builder(
         itemCount: this.ledgerReport.ledgerTransaction != null
             ? this.ledgerReport.ledgerTransaction!.length
@@ -174,7 +175,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
                         width: size.width * 0.24,
                         child: Text(
                           data.debitOrCredit == DebitOrCredit.credit
-                              ? data.amount.toString()
+                              ? currencySeperatorStringFormatterHelper(
+                                  data.amount)
                               : '',
                         ),
                       ),
@@ -210,7 +212,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
                     ),
                     Container(
                         child: Text(
-                          data.debitAmount.toString(),
+                          currencySeperatorStringFormatterHelper(
+                              data.debitAmount),
                         ),
                         alignment: Alignment.centerRight),
                   ],
@@ -226,7 +229,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
                     ),
                     Container(
                         child: Text(
-                          this.ledgerReport.creditAmount.toString(),
+                          currencySeperatorStringFormatterHelper(
+                              data.creditAmount),
                         ),
                         alignment: Alignment.centerRight),
                   ],
@@ -250,7 +254,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
                         ),
                         child: Center(
                           child: Text(
-                            (data.debitAmount - data.creditAmount).toString(),
+                            currencySeperatorStringFormatterHelper(
+                                data.debitAmount - data.creditAmount),
                             // (model.debit - model.credit).toString(),
                             style: TextStyle(
                               fontWeight: FontWeight.bold,

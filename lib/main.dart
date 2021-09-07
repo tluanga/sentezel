@@ -7,6 +7,7 @@ import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/screens/controlCenter_screen.dart';
 import 'package:sentezel/home/ui/home_screen.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_screen.dart';
 import 'package:sentezel/setup/intializeApp.dart';
 
 import 'package:sentezel/setup/splash_screen.dart';
@@ -36,6 +37,7 @@ class MyApp extends HookConsumerWidget {
         RouteConstant.books: (context) => BooksScreen(),
         RouteConstant.controlCenter: (context) => ControlCenterScreen(),
         RouteConstant.newTransaction: (context) => NewTranscationCenterScreen(),
+        RouteConstant.purchaseOfAsset: (context) => PurchaseOfAssetScreen(),
       },
       home: SplashScreen(),
     );
