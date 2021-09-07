@@ -21,7 +21,8 @@ class PartialPaymentWidget extends HookWidget {
       child: TextFormField(
         initialValue: this.defaultValue.toString(),
         onChanged: (value) {
-          onChange(int.parse(value));
+          var _value = value != '' ? int.parse(value) : 0;
+          onChange(_value);
         },
         decoration: InputDecoration(
           labelText: 'Partial Payment Amount',
