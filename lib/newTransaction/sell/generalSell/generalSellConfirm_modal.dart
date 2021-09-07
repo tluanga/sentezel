@@ -6,11 +6,11 @@ import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
 
-class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
+class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
   final Function onCancel;
   final double itemFontSize = 16;
-  const PurchaseOfMaterialConfirmationBottomSheet({
+  const GeneralSellConfirmationBottomSheet({
     Key? key,
     required this.onConfirm,
     required this.onCancel,

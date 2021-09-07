@@ -3,7 +3,7 @@ import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 
-part 'purchaseOfMaterial_model.freezed.dart';
+part 'generalSell_model.freezed.dart';
 
 @freezed
 class GeneralSell with _$GeneralSell {

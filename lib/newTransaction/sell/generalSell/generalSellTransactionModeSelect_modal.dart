@@ -4,9 +4,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
 
-class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
+class GeneralSellTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
-  const PurchaseOfMaterialTransactionModeSelectModalBottomSheet({
+  const GeneralSellTransactionModeSelectModalBottomSheet({
     Key? key,
   }) : super(key: key);
 

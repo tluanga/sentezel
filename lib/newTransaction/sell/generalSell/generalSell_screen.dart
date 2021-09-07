@@ -8,11 +8,11 @@ import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/model/purchaseOfMaterial_model.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialConfirm_modal.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_controller.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterialvalidationError_bottomSheet.dart';
+import 'package:sentezel/newTransaction/sell/generalSell/generalSellConfirm_modal.dart';
+import 'package:sentezel/newTransaction/sell/generalSell/generalSellTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
+import 'package:sentezel/newTransaction/sell/generalSell/generalSellvalidationError_bottomSheet.dart';
+import 'package:sentezel/newTransaction/sell/generalSell/model/generalSell_model.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
 class GeneralSellScreen extends HookConsumerWidget {
@@ -20,11 +20,11 @@ class GeneralSellScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.watch(purchaseOfMaterialControllerProvider);
+    var state = ref.watch(generalSellControllerProvider);
 
     onCancel() {
       print('cancel is called');
-      ref.read(purchaseOfMaterialControllerProvider.notifier).reset();
+      ref.read(generalSellControllerProvider.notifier).reset();
     }
 
     return Scaffold(
@@ -103,15 +103,15 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   onSubmit({required BuildContext context, required WidgetRef ref}) async {
-    ref.watch(purchaseOfMaterialControllerProvider.notifier).validate();
-    await ref.watch(purchaseOfMaterialControllerProvider.notifier).setup();
-    final state = ref.watch(purchaseOfMaterialControllerProvider);
+    ref.watch(generalSellControllerProvider.notifier).validate();
+    await ref.watch(generalSellControllerProvider.notifier).setup();
+    final state = ref.watch(generalSellControllerProvider);
     if (state.errorMessages.length == 0) {
       showModalBottomSheet(
         context: context,
-        builder: (context) => PurchaseOfMaterialConfirmationBottomSheet(
+        builder: (context) => GeneralSellConfirmationBottomSheet(
           onConfirm: () {
-            ref.watch(purchaseOfMaterialControllerProvider.notifier).submit();
+            ref.watch(generalSellControllerProvider.notifier).submit();
 
             showCupertinoModalBottomSheet(
               expand: true,
@@ -126,7 +126,7 @@ class GeneralSellScreen extends HookConsumerWidget {
     } else {
       showModalBottomSheet(
         context: context,
-        builder: (context) => PurchaseOfMaterialValidationErrorBottomSheet(
+        builder: (context) => GeneralSellValidationErrorBottomSheet(
           validationErrorMessages: state.errorMessages,
         ),
       );
@@ -134,7 +134,7 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _amount({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfMaterialControllerProvider);
+    final state = ref.watch(generalSellControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
@@ -143,7 +143,7 @@ class GeneralSellScreen extends HookConsumerWidget {
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
           print(value);
-          ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
+          ref.watch(generalSellControllerProvider.notifier).setState(
                 state.copyWith(
                   amount: _value,
                 ),
@@ -162,14 +162,14 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _transactionMode(
-      {required BuildContext context, required PurchaseOfMaterial state}) {
+      {required BuildContext context, required GeneralSell state}) {
     return //------------Transaction Mode----
         GestureDetector(
       onTap: () {
         showModalBottomSheet(
           context: context,
           builder: (context) =>
-              PurchaseOfMaterialTransactionModeSelectModalBottomSheet(),
+              GeneralSellTransactionModeSelectModalBottomSheet(),
         );
       },
       child: Container(
@@ -203,14 +203,14 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _partySelect({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfMaterialControllerProvider);
+    final state = ref.watch(generalSellControllerProvider);
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
           context: context,
           builder: (context) => PartySelectModal(
             onSelectParty: (party) {
-              ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
+              ref.watch(generalSellControllerProvider.notifier).setState(
                     state.copyWith(partyLedger: party),
                   );
             },
@@ -256,10 +256,10 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _partialPayment({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfMaterialControllerProvider);
+    final state = ref.watch(generalSellControllerProvider);
     return PartialPaymentWidget(
       onChange: (amount) {
-        ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
+        ref.watch(generalSellControllerProvider.notifier).setState(
               state.copyWith(partialPaymentAmount: amount),
             );
       },
@@ -269,14 +269,14 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _particular({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(purchaseOfMaterialControllerProvider);
+    final state = ref.watch(generalSellControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
         initialValue: state.particular,
         onChanged: (value) {
-          ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
+          ref.watch(generalSellControllerProvider.notifier).setState(
                 state.copyWith(particular: value),
               );
         },
