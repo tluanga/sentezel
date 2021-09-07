@@ -1,57 +1,97 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_model.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
+import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_helper.dart';
+import 'package:sentezel/newTransaction/data/transaction_model.dart';
+import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/newTransaction/receipt/model/receipt_model.dart';
+import 'package:sentezel/newTransaction/sales/salesReturn/model/salesReturn_model.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
+import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
+import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
 
 final receiptControllerProvider =
-    StateNotifierProvider<ReceiptController, Receipt>(
-        (ref) => ReceiptController(ref.read));
+    StateNotifierProvider<ReceiptController, AsyncValue<Receipt>>(
+        (ref) => ReceiptController(ref.read)..loadData());
 
-class ReceiptController extends StateNotifier<Receipt> {
+class ReceiptController extends StateNotifier<AsyncValue<Receipt>> {
   final Reader _read;
 
-  ReceiptController(this._read)
-      : super(
-          Receipt(
-            amount: 0,
-            particular: '',
-            date: DateTime.now(),
-            mode: TransactionMode.paymentByCash,
-          ),
-        );
+  ReceiptController(this._read) : super(AsyncValue.loading());
 
-  init() async {
-    final debitSide = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: LedgerMasterIndex.Cash);
-    state = state.copyWith(debitSideLedger: debitSide);
+  loadData() async {
+    TransactionCategory _category =
+        await _read(transactionCategoryRepositoryProvider)
+            .getItem(id: TransactionCategoryIndex.SalesReturn);
+    final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: _category.debitSideLedger);
+
+    state = AsyncData(Receipt(
+      category: _category,
+      errorMessages: [],
+      date: DateTime.now(),
+      debitSideLedger: _debitSideLedger,
+      particular: _category.name,
+    ));
+    print(state);
   }
 
-  setReceiptTransactionCategory(TransactionCategory type) async {
-    final creditSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: type.creditSideLedger);
-    state = state.copyWith(
-      receiptTransactionCategory: type,
-      creditSideLedger: creditSideLedger,
-    );
+  //--------------SET STATE-------------
+  setState(payload) {
+    Receipt _newState = payload;
+    state = AsyncData(_newState);
   }
 
-  setMode(TransactionMode mode) async {
-    int _debitSideid;
-    mode == TransactionMode.paymentByCash
-        ? _debitSideid = LedgerMasterIndex.Cash
-        : _debitSideid = LedgerMasterIndex.Bank;
-    final _debitSide =
-        await _read(ledgerMasterRepositoryProvider).getItem(id: _debitSideid);
-    state = state.copyWith(
-      debitSideLedger: _debitSide,
-      mode: mode,
+  validate() {
+    final stateData = state.data!.value;
+
+    //---------Validation Part-----------
+    List<String> _errorMessage = [];
+
+    if (stateData.amount <= 0) {
+      _errorMessage.add('Amount can not be less than equalto Zero');
+    }
+
+    print('length of error message ${_errorMessage}');
+    state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
+  }
+
+  setup() async {
+    //---------------Updating the state-------
+    final stateData = state.data!.value;
+    final finalData = stateData.copyWith(
+      creditAmount: (stateData.amount - stateData.partialPaymentAmount),
+      debitAmount: stateData.amount,
+      creditSideLedger: await getTransactionModeLedgerHelper(
+        stateData.mode!,
+        _read,
+      ),
     );
+    state = AsyncData(finalData);
+  }
+
+  reset() async {
+    state = AsyncLoading();
   }
 
   submit() async {
-    try {} catch (e) {
+    final stateData = state.data!.value;
+    try {
+      _read(transactionRepositoryProvider).add(
+        payload: Transaction(
+          debitAmount: stateData.debitAmount,
+          creditAmount: stateData.creditAmount,
+          partialPaymentAmount: stateData.partialPaymentAmount,
+          particular: stateData.particular!,
+          mode: stateData.mode!,
+          date: stateData.date,
+          transactionCategoryId: stateData.category!.id,
+          debitSideLedger: stateData.debitSideLedger!.id,
+          creditSideLedger: stateData.creditSideLedger != null
+              ? stateData.creditSideLedger!.id
+              : null,
+        ),
+      );
+    } catch (e) {
       print(e);
     }
   }

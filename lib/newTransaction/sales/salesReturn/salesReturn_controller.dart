@@ -1,6 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_helper.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/newTransaction/sales/salesReturn/model/salesReturn_model.dart';

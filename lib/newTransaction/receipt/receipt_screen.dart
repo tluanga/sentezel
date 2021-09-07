@@ -1,29 +1,29 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-
+import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
+import 'package:sentezel/newTransaction/receipt/model/receipt_model.dart';
 import 'package:sentezel/newTransaction/receipt/receiptConfirm_modal.dart';
-import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/transactionTypeOfReceiptSelect_modal.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
 import 'package:sentezel/newTransaction/receipt/receiptTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_model.dart';
+import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
+
+import 'package:sentezel/newTransaction/sales/salesReturn/salesReturnvalidationError_bottomSheet.dart';
 
 class ReceiptScreen extends HookConsumerWidget {
   const ReceiptScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    Receipt state = ref.watch(receiptControllerProvider);
+    var state = ref.watch(receiptControllerProvider);
+
     onCancel() {
-      // ref.read(receiptControllerProvider.notifier).reset();
+      print('cancel is called');
+      ref.read(receiptControllerProvider.notifier).reset();
     }
-    useEffect(() {
-      ref.read(receiptControllerProvider.notifier).init();
-    }, []);
 
     return Scaffold(
       body: SafeArea(
@@ -34,172 +34,177 @@ class ReceiptScreen extends HookConsumerWidget {
             ),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
-            child: Column(
-              children: [
-                TopBarWithSaveWidget(
-                  title: 'Receipt',
-                  onSave: () {
-                    onSubmit(ref, context);
-                  },
-                  onCancel: () {
-                    onCancel();
-                  },
-                ),
-                DateSelectTimeLineWidget(
-                  initialDate: state.date,
-                  onDateSelected: (selectedDate) {
-                    state.date = selectedDate;
-                  },
-                ),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.01,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    //--------------Amount ------------
-                    Container(
-                      width: MediaQuery.of(context).size.width * 0.38,
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      child: TextFormField(
-                        //
-                        onChanged: (value) {
-                          state.amount = int.parse(value);
+            child: state.when(
+                data: (data) {
+                  print(data);
+                  return Column(
+                    children: [
+                      TopBarWithSaveWidget(
+                        title: 'Sales Return',
+                        onSave: () {
+                          onSubmit(context: context, ref: ref);
                         },
-                        decoration: InputDecoration(
-                          labelText: 'Amount',
-                        ),
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        keyboardType: TextInputType.number,
+                        onCancel: onCancel,
                       ),
-                    ),
+                      DateSelectTimeLineWidget(
+                        initialDate: data.date,
+                        onDateSelected: (selectedDate) {
+                          ref.read(receiptControllerProvider.notifier).setState(
+                                data.copyWith(date: selectedDate),
+                              );
+                        },
+                      ),
 
-                    //------------Transaction Mode----
-                    GestureDetector(
-                      onTap: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (context) =>
-                              ReceiptTransactionModeSelectModalBottomSheet(),
-                        );
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.55,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        padding: EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Colors.grey.shade300,
-                          borderRadius: BorderRadius.circular(3),
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              EnumToString.convertToString(state.mode),
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 15,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Icon(
-                              CupertinoIcons.arrowtriangle_down,
-                              color: Colors.black,
-                              size: 20,
-                            ),
-                          ],
-                        ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
                       ),
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (context) =>
-                          TransactionCategoryOfReceiptSelectModal(
-                        onSelect: (receipt) {
-                          ref
-                              .read(receiptControllerProvider.notifier)
-                              .setReceiptTransactionCategory(receipt);
-                        },
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          //--------------Amount ------------
+                          _amount(context: context, ref: ref),
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.02),
+                          _transactionMode(context: context, state: data),
+                        ],
                       ),
-                    );
-                  },
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.97,
-                    height: MediaQuery.of(context).size.height * 0.05,
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade300,
-                      borderRadius: BorderRadius.circular(3),
-                      // border: Border.all(
-                      //   color: data.partyId != 0
-                      //       ? Colors.grey.shade300
-                      //       : Colors.red.shade300,
-                      // ),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          state.receiptTransactionCategory == null
-                              ? 'Please Select Receipt Head of Account'
-                              : state.receiptTransactionCategory!.name,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 15,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Icon(
-                          CupertinoIcons.arrowtriangle_down,
-                          color: Colors.black,
-                          size: 20,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  height: MediaQuery.of(context).size.height * 0.1,
-                  child: TextFormField(
-                    initialValue: state.particular,
-                    onChanged: (value) {
-                      state.particular = value;
-                    },
-                    decoration: InputDecoration(
-                      labelText: 'particular',
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 6,
-                ),
-              ],
-            ),
+
+                      SizedBox(
+                        height: 10,
+                      ),
+                      //-----ASSET SELECTION----------------------
+
+                      //----PARTICULAR SELECTION----------
+                      _particular(context: context, ref: ref),
+                      SizedBox(
+                        height: 6,
+                      ),
+                    ],
+                  );
+                },
+                loading: () {
+                  return CircularProgressIndicator();
+                },
+                error: (error, stack) {}),
           ),
         ),
       ),
     );
   }
 
-  onSubmit(WidgetRef ref, context) {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => ReceiptConfirmationBottomSheet(
-        onConfirm: () {
-          ref.watch(receiptControllerProvider.notifier).submit();
+  onSubmit({required BuildContext context, required WidgetRef ref}) async {
+    ref.watch(receiptControllerProvider.notifier).validate();
+    await ref.watch(receiptControllerProvider.notifier).setup();
+    final state = ref.watch(receiptControllerProvider);
+    if (state.data!.value.errorMessages.length == 0) {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => ReceiptConfirmationBottomSheet(
+          onConfirm: () {
+            ref.watch(receiptControllerProvider.notifier).submit();
+
+            showCupertinoModalBottomSheet(
+              expand: true,
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (context) => NewTranscationCenterScreen(),
+            );
+          },
+          onCancel: () {},
+        ),
+      );
+    } else {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => SalesReturnValidationErrorBottomSheet(
+          validationErrorMessages: state.data!.value.errorMessages,
+        ),
+      );
+    }
+  }
+
+  _amount({required BuildContext context, required WidgetRef ref}) {
+    final state = ref.watch(receiptControllerProvider);
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.38,
+      height: MediaQuery.of(context).size.height * 0.1,
+      child: TextFormField(
+        //
+        onChanged: (value) {
+          var _value = value != '' ? int.parse(value) : 0;
+          print(value);
+          ref.watch(receiptControllerProvider.notifier).setState(
+                state.data!.value.copyWith(
+                  amount: _value,
+                ),
+              );
         },
-        onCancel: () {},
+        decoration: InputDecoration(
+          labelText: 'Amount',
+        ),
+        style: TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+        ),
+        keyboardType: TextInputType.number,
+      ),
+    );
+  }
+
+  _transactionMode({required BuildContext context, required Receipt state}) {
+    return //------------Transaction Mode----
+        GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => ReceiptTransactionModeSelectModalBottomSheet(),
+        );
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.55,
+        height: MediaQuery.of(context).size.height * 0.05,
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(3),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              EnumToString.convertToString(state.mode, camelCase: true),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Icon(
+              CupertinoIcons.arrowtriangle_down,
+              color: Colors.black,
+              size: 20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _particular({required BuildContext context, required WidgetRef ref}) {
+    final state = ref.watch(receiptControllerProvider);
+    return Container(
+      width: MediaQuery.of(context).size.width * 0.95,
+      height: MediaQuery.of(context).size.height * 0.1,
+      child: TextFormField(
+        initialValue: state.data!.value.particular,
+        onChanged: (value) {
+          ref.watch(receiptControllerProvider.notifier).setState(
+                state.data!.value.copyWith(particular: value),
+              );
+        },
+        decoration: InputDecoration(
+          labelText: 'particular',
+        ),
       ),
     );
   }

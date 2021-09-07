@@ -5,17 +5,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
-
-import 'package:sentezel/newTransaction/sales/generalSales/model/generalSales_model.dart';
 import 'package:sentezel/newTransaction/sales/salesReturn/model/salesReturn_model.dart';
 import 'package:sentezel/newTransaction/sales/salesReturn/salesReturnConfirm_modal.dart';
 import 'package:sentezel/newTransaction/sales/salesReturn/salesReturnTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/sales/salesReturn/salesReturn_controller.dart';
 import 'package:sentezel/newTransaction/sales/salesReturn/salesReturnvalidationError_bottomSheet.dart';
-import 'package:sentezel/settings/party/partySelect_modal.dart';
 
 class SalesReturnScreen extends HookConsumerWidget {
   const SalesReturnScreen({Key? key}) : super(key: key);

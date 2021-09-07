@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
+import 'package:sentezel/newTransaction/sales/salesReturn/salesReturn_controller.dart';
 
 class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
@@ -17,7 +17,7 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final currentState = ref.watch(receiptControllerProvider);
+    final state = ref.watch(saleReturnControllerProvider).data!.value;
 
     return Material(
       child: SafeArea(
@@ -59,7 +59,7 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
                           ),
                         ),
                         Text(
-                          currentState.particular,
+                          state.particular!,
                           style: TextStyle(
                             color: Palette.blackGrey,
                             fontSize: 16,
@@ -92,7 +92,7 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
                         width: 5,
                       ),
                       Text(
-                        DateFormat('dd-EE-yyyy').format(currentState.date),
+                        DateFormat('dd-EE-yyyy').format(state.date),
 
                         // formatter.format(model.transaction.date),
                         style: TextStyle(
@@ -118,14 +118,16 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
                   _tableHeader(),
                   //---------------DEBIT SIDE-----------
 
+                  //--Normal Payment -- Non Credit- Non Partial
+
                   _debitSide(
-                    debitSideLedgerName: currentState.debitSideLedger!.name,
-                    amount: currentState.amount,
-                  ),
+                      debitSideLedgerName: state.debitSideLedger!.name,
+                      amount: state.debitAmount),
+
+                  //--------------CREDIT SIDE-----
                   _creditSide(
-                    creditSideLedgerName: currentState.creditSideLedger!.name,
-                    amount: currentState.amount,
-                  ),
+                      creditSideLedgerName: state.creditSideLedger!.name,
+                      amount: state.creditAmount),
                 ],
               ),
             ),
@@ -156,7 +158,6 @@ class ReceiptConfirmationBottomSheet extends HookConsumerWidget {
                   leading: Icon(CupertinoIcons.checkmark_alt),
                   onTap: () {
                     this.onConfirm();
-                    Navigator.pop(context);
                   },
                 ),
               ),
