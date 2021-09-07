@@ -8,6 +8,7 @@ import 'package:sentezel/newTransaction/debtRepayment/debtorList_screen.dart';
 import 'package:sentezel/newTransaction/payment/payment_screen.dart';
 
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_screen.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_screen.dart';
 
 import 'package:sentezel/newTransaction/sell/generalSell/generalSell_screen.dart';
@@ -57,12 +58,12 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                   label: 'Purchase Return',
                   icon: CupertinoIcons.selection_pin_in_out,
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => PurchaseReturnScreen(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => PurchaseReturnScreen(),
+                      ),
+                    );
                   },
                 ),
               ],
