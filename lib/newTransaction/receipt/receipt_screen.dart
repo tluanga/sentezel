@@ -41,7 +41,7 @@ class ReceiptScreen extends HookConsumerWidget {
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'Sales Return',
+                        title: 'Receipts',
                         onSave: () {
                           onSubmit(context: context, ref: ref);
                         },

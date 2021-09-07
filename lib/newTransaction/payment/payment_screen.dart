@@ -40,7 +40,7 @@ class PaymentScreen extends HookConsumerWidget {
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'Sales Return',
+                        title: 'Payments',
                         onSave: () {
                           onSubmit(context: context, ref: ref);
                         },
