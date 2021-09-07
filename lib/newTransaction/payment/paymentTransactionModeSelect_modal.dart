@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/sales/salesReturn/salesReturn_controller.dart';
+import 'package:sentezel/newTransaction/payment/payment_controller.dart';
 
 class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
   const PaymentTransactionModeSelectModalBottomSheet({
@@ -11,7 +11,7 @@ class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.read(saleReturnControllerProvider);
+    var state = ref.read(paymentControllerProvider);
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.2,
@@ -53,7 +53,7 @@ class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
                     value: TransactionMode.paymentByCash,
                     activeColor: Colors.green.shade500,
                     onChanged: (value) {
-                      ref.watch(saleReturnControllerProvider.notifier).setState(
+                      ref.watch(paymentControllerProvider.notifier).setState(
                             state.data!.value
                                 .copyWith(mode: TransactionMode.paymentByCash),
                           );
@@ -80,7 +80,7 @@ class PaymentTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
                       activeColor: Colors.green.shade500,
                       onChanged: (value) {
                         ref
-                            .watch(saleReturnControllerProvider.notifier)
+                            .watch(paymentControllerProvider.notifier)
                             .setState(state.data!.value.copyWith(
                               mode: TransactionMode.paymentByBank,
                             ));
