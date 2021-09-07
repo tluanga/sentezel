@@ -19,5 +19,6 @@ class PurchaseOfAsset with _$PurchaseOfAsset {
     LedgerMaster? creditSideLedger,
     LedgerMaster? assetLedger, //The only debit side leddger
     LedgerMaster? partyLedger,
+    required List<String> errorMessages,
   }) = _PurchaseOfAsset;
 }

@@ -11,6 +11,7 @@ import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/model/purchaseO
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAssetConfirm_modal.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAssetTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_controller.dart';
+import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAssetvalidationError_bottomSheet.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
 class PurchaseOfAssetScreen extends HookConsumerWidget {
@@ -39,7 +40,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                 TopBarWithSaveWidget(
                   title: 'New Asset Purchase',
                   onSave: () {
-                    onSubmit(ref, context);
+                    onSubmit(context: context, state: state, ref: ref);
                   },
                   onCancel: onCancel,
                 ),
@@ -102,17 +103,28 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     );
   }
 
-  onSubmit(WidgetRef ref, context) {
+  onSubmit(
+      {required BuildContext context,
+      required PurchaseOfAsset state,
+      required WidgetRef ref}) {
     ref.watch(purchaseOfAssetControllerProvider.notifier).setup();
-    showModalBottomSheet(
-      context: context,
-      builder: (context) => PurchaseOfAssetConfirmationBottomSheet(
-        onConfirm: () {
-          ref.watch(purchaseOfAssetControllerProvider.notifier).submit();
-        },
-        onCancel: () {},
-      ),
-    );
+    if (state.errorMessages.length == 0) {
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => PurchaseOfAssetConfirmationBottomSheet(
+          onConfirm: () {
+            ref.watch(purchaseOfAssetControllerProvider.notifier).submit();
+          },
+          onCancel: () {},
+        ),
+      );
+    } else
+      showModalBottomSheet(
+        context: context,
+        builder: (context) => PurchaseOfAssetValidationErrorBottomSheet(
+          validationErrorMessages: state.errorMessages,
+        ),
+      );
   }
 
   _amount(

@@ -27,7 +27,8 @@ class _$PurchaseOfAssetTearOff {
       TransactionCategory? category,
       LedgerMaster? creditSideLedger,
       LedgerMaster? assetLedger,
-      LedgerMaster? partyLedger}) {
+      LedgerMaster? partyLedger,
+      required List<String> errorMessages}) {
     return _PurchaseOfAsset(
       amount: amount,
       creditAmount: creditAmount,
@@ -40,6 +41,7 @@ class _$PurchaseOfAssetTearOff {
       creditSideLedger: creditSideLedger,
       assetLedger: assetLedger,
       partyLedger: partyLedger,
+      errorMessages: errorMessages,
     );
   }
 }
@@ -61,6 +63,7 @@ mixin _$PurchaseOfAsset {
   LedgerMaster? get assetLedger =>
       throw _privateConstructorUsedError; //The only debit side leddger
   LedgerMaster? get partyLedger => throw _privateConstructorUsedError;
+  List<String> get errorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PurchaseOfAssetCopyWith<PurchaseOfAsset> get copyWith =>
@@ -83,7 +86,8 @@ abstract class $PurchaseOfAssetCopyWith<$Res> {
       TransactionCategory? category,
       LedgerMaster? creditSideLedger,
       LedgerMaster? assetLedger,
-      LedgerMaster? partyLedger});
+      LedgerMaster? partyLedger,
+      List<String> errorMessages});
 }
 
 /// @nodoc
@@ -108,6 +112,7 @@ class _$PurchaseOfAssetCopyWithImpl<$Res>
     Object? creditSideLedger = freezed,
     Object? assetLedger = freezed,
     Object? partyLedger = freezed,
+    Object? errorMessages = freezed,
   }) {
     return _then(_value.copyWith(
       amount: amount == freezed
@@ -154,6 +159,10 @@ class _$PurchaseOfAssetCopyWithImpl<$Res>
           ? _value.partyLedger
           : partyLedger // ignore: cast_nullable_to_non_nullable
               as LedgerMaster?,
+      errorMessages: errorMessages == freezed
+          ? _value.errorMessages
+          : errorMessages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -176,7 +185,8 @@ abstract class _$PurchaseOfAssetCopyWith<$Res>
       TransactionCategory? category,
       LedgerMaster? creditSideLedger,
       LedgerMaster? assetLedger,
-      LedgerMaster? partyLedger});
+      LedgerMaster? partyLedger,
+      List<String> errorMessages});
 }
 
 /// @nodoc
@@ -203,6 +213,7 @@ class __$PurchaseOfAssetCopyWithImpl<$Res>
     Object? creditSideLedger = freezed,
     Object? assetLedger = freezed,
     Object? partyLedger = freezed,
+    Object? errorMessages = freezed,
   }) {
     return _then(_PurchaseOfAsset(
       amount: amount == freezed
@@ -249,6 +260,10 @@ class __$PurchaseOfAssetCopyWithImpl<$Res>
           ? _value.partyLedger
           : partyLedger // ignore: cast_nullable_to_non_nullable
               as LedgerMaster?,
+      errorMessages: errorMessages == freezed
+          ? _value.errorMessages
+          : errorMessages // ignore: cast_nullable_to_non_nullable
+              as List<String>,
     ));
   }
 }
@@ -267,7 +282,8 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
       this.category,
       this.creditSideLedger,
       this.assetLedger,
-      this.partyLedger});
+      this.partyLedger,
+      required this.errorMessages});
 
   @JsonKey(defaultValue: 0)
   @override
@@ -296,10 +312,12 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
   final LedgerMaster? assetLedger;
   @override //The only debit side leddger
   final LedgerMaster? partyLedger;
+  @override
+  final List<String> errorMessages;
 
   @override
   String toString() {
-    return 'PurchaseOfAsset(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, assetLedger: $assetLedger, partyLedger: $partyLedger)';
+    return 'PurchaseOfAsset(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, assetLedger: $assetLedger, partyLedger: $partyLedger, errorMessages: $errorMessages)';
   }
 
   @override
@@ -335,7 +353,10 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
                     .equals(other.assetLedger, assetLedger)) &&
             (identical(other.partyLedger, partyLedger) ||
                 const DeepCollectionEquality()
-                    .equals(other.partyLedger, partyLedger)));
+                    .equals(other.partyLedger, partyLedger)) &&
+            (identical(other.errorMessages, errorMessages) ||
+                const DeepCollectionEquality()
+                    .equals(other.errorMessages, errorMessages)));
   }
 
   @override
@@ -351,7 +372,8 @@ class _$_PurchaseOfAsset implements _PurchaseOfAsset {
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(creditSideLedger) ^
       const DeepCollectionEquality().hash(assetLedger) ^
-      const DeepCollectionEquality().hash(partyLedger);
+      const DeepCollectionEquality().hash(partyLedger) ^
+      const DeepCollectionEquality().hash(errorMessages);
 
   @JsonKey(ignore: true)
   @override
@@ -371,7 +393,8 @@ abstract class _PurchaseOfAsset implements PurchaseOfAsset {
       TransactionCategory? category,
       LedgerMaster? creditSideLedger,
       LedgerMaster? assetLedger,
-      LedgerMaster? partyLedger}) = _$_PurchaseOfAsset;
+      LedgerMaster? partyLedger,
+      required List<String> errorMessages}) = _$_PurchaseOfAsset;
 
   @override
   int get amount => throw _privateConstructorUsedError;
@@ -395,6 +418,8 @@ abstract class _PurchaseOfAsset implements PurchaseOfAsset {
   LedgerMaster? get assetLedger => throw _privateConstructorUsedError;
   @override //The only debit side leddger
   LedgerMaster? get partyLedger => throw _privateConstructorUsedError;
+  @override
+  List<String> get errorMessages => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$PurchaseOfAssetCopyWith<_PurchaseOfAsset> get copyWith =>

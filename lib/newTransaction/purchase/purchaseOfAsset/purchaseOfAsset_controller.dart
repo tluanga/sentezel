@@ -18,6 +18,7 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
           PurchaseOfAsset(
             date: DateTime.now(),
             particular: 'Purchase of Asset',
+            errorMessages: [],
           ),
         );
 
@@ -29,6 +30,19 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
 
   setup() async {
     print(state.mode);
+    //---------Validation Part-----------
+    List<String> _errorMessage = [];
+    if (state.amount <= state.partialPaymentAmount)
+      _errorMessage.add('Partial Payment Amount cannot be Larger  than Amount');
+    if (state.amount <= 0) {
+      _errorMessage.add('Amount can not be less than equalto Zero');
+    }
+    if (state.assetLedger == null) {
+      _errorMessage.add('Please select asset');
+    }
+    print('length of error message ${_errorMessage}');
+
+    //---------------Updating the state-------
     state = state.copyWith(
       creditAmount: state.amount - state.partialPaymentAmount,
       debitAmount: state.amount,
@@ -38,6 +52,7 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
               _read,
             )
           : null,
+      errorMessages: _errorMessage,
     );
   }
 
@@ -66,6 +81,9 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
   }
 
   reset() async {
-    state = PurchaseOfAsset(date: DateTime.now());
+    state = PurchaseOfAsset(
+      date: DateTime.now(),
+      errorMessages: [],
+    );
   }
 }
