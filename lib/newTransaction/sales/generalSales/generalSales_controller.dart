@@ -3,22 +3,20 @@ import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_h
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/model/generalSell_model.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
-
+import 'package:sentezel/newTransaction/sales/generalSales/model/generalSales_model.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
 
-final generalSellControllerProvider =
-    StateNotifierProvider<GeneralSellController, AsyncValue<GeneralSell>>(
-        (ref) => GeneralSellController(ref.read)..loadData());
+final generalSalesControllerProvider =
+    StateNotifierProvider<GeneralSalesController, AsyncValue<GeneralSales>>(
+        (ref) => GeneralSalesController(ref.read)..loadData());
 
-class GeneralSellController extends StateNotifier<AsyncValue<GeneralSell>> {
+class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
   final Reader _read;
 
-  GeneralSellController(this._read) : super(AsyncValue.loading());
+  GeneralSalesController(this._read) : super(AsyncValue.loading());
 
   loadData() async {
     TransactionCategory _category =
@@ -27,7 +25,7 @@ class GeneralSellController extends StateNotifier<AsyncValue<GeneralSell>> {
     final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: _category.creditSideLedger);
 
-    state = AsyncData(GeneralSell(
+    state = AsyncData(GeneralSales(
       category: _category,
       errorMessages: [],
       date: DateTime.now(),
@@ -39,7 +37,7 @@ class GeneralSellController extends StateNotifier<AsyncValue<GeneralSell>> {
 
   //--------------SET STATE-------------
   setState(payload) {
-    GeneralSell _newState = payload;
+    GeneralSales _newState = payload;
     state = AsyncData(_newState);
   }
 

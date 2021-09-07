@@ -8,23 +8,23 @@ import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/common/partialPayment_widget.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/generalSellConfirm_modal.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/generalSellTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/generalSellvalidationError_bottomSheet.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/model/generalSell_model.dart';
+import 'package:sentezel/newTransaction/sales/generalSales/generalSalesConfirm_modal.dart';
+import 'package:sentezel/newTransaction/sales/generalSales/generalSalesTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/sales/generalSales/generalSales_controller.dart';
+import 'package:sentezel/newTransaction/sales/generalSales/generalSalesvalidationError_bottomSheet.dart';
+import 'package:sentezel/newTransaction/sales/generalSales/model/generalSales_model.dart';
 import 'package:sentezel/settings/party/partySelect_modal.dart';
 
-class GeneralSellScreen extends HookConsumerWidget {
-  const GeneralSellScreen({Key? key}) : super(key: key);
+class GeneralSalesScreen extends HookConsumerWidget {
+  const GeneralSalesScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.watch(generalSellControllerProvider);
+    var state = ref.watch(generalSalesControllerProvider);
 
     onCancel() {
       print('cancel is called');
-      ref.read(generalSellControllerProvider.notifier).reset();
+      ref.read(generalSalesControllerProvider.notifier).reset();
     }
 
     return Scaffold(
@@ -52,7 +52,7 @@ class GeneralSellScreen extends HookConsumerWidget {
                         initialDate: data.date,
                         onDateSelected: (selectedDate) {
                           ref
-                              .read(generalSellControllerProvider.notifier)
+                              .read(generalSalesControllerProvider.notifier)
                               .setState(
                                 data.copyWith(date: selectedDate),
                               );
@@ -117,15 +117,15 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   onSubmit({required BuildContext context, required WidgetRef ref}) async {
-    ref.watch(generalSellControllerProvider.notifier).validate();
-    await ref.watch(generalSellControllerProvider.notifier).setup();
-    final state = ref.watch(generalSellControllerProvider);
+    ref.watch(generalSalesControllerProvider.notifier).validate();
+    await ref.watch(generalSalesControllerProvider.notifier).setup();
+    final state = ref.watch(generalSalesControllerProvider);
     if (state.data!.value.errorMessages.length == 0) {
       showModalBottomSheet(
         context: context,
-        builder: (context) => GeneralSellConfirmationBottomSheet(
+        builder: (context) => GeneralSalesConfirmationBottomSheet(
           onConfirm: () {
-            ref.watch(generalSellControllerProvider.notifier).submit();
+            ref.watch(generalSalesControllerProvider.notifier).submit();
 
             showCupertinoModalBottomSheet(
               expand: true,
@@ -140,7 +140,7 @@ class GeneralSellScreen extends HookConsumerWidget {
     } else {
       showModalBottomSheet(
         context: context,
-        builder: (context) => GeneralSellValidationErrorBottomSheet(
+        builder: (context) => GeneralSalesValidationErrorBottomSheet(
           validationErrorMessages: state.data!.value.errorMessages,
         ),
       );
@@ -148,7 +148,7 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _amount({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(generalSellControllerProvider);
+    final state = ref.watch(generalSalesControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
@@ -157,7 +157,7 @@ class GeneralSellScreen extends HookConsumerWidget {
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
           print(value);
-          ref.watch(generalSellControllerProvider.notifier).setState(
+          ref.watch(generalSalesControllerProvider.notifier).setState(
                 state.data!.value.copyWith(
                   amount: _value,
                 ),
@@ -176,14 +176,14 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _transactionMode(
-      {required BuildContext context, required GeneralSell state}) {
+      {required BuildContext context, required GeneralSales state}) {
     return //------------Transaction Mode----
         GestureDetector(
       onTap: () {
         showModalBottomSheet(
           context: context,
           builder: (context) =>
-              GeneralSellTransactionModeSelectModalBottomSheet(),
+              GeneralSalesTransactionModeSelectModalBottomSheet(),
         );
       },
       child: Container(
@@ -217,14 +217,14 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _partySelect({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(generalSellControllerProvider);
+    final state = ref.watch(generalSalesControllerProvider);
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
           context: context,
           builder: (context) => PartySelectModal(
             onSelectParty: (party) {
-              ref.watch(generalSellControllerProvider.notifier).setState(
+              ref.watch(generalSalesControllerProvider.notifier).setState(
                     state.data!.value.copyWith(partyLedger: party),
                   );
             },
@@ -270,10 +270,10 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _partialPayment({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(generalSellControllerProvider);
+    final state = ref.watch(generalSalesControllerProvider);
     return PartialPaymentWidget(
       onChange: (amount) {
-        ref.watch(generalSellControllerProvider.notifier).setState(
+        ref.watch(generalSalesControllerProvider.notifier).setState(
               state.data!.value.copyWith(partialPaymentAmount: amount),
             );
       },
@@ -283,14 +283,14 @@ class GeneralSellScreen extends HookConsumerWidget {
   }
 
   _particular({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(generalSellControllerProvider);
+    final state = ref.watch(generalSalesControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
         initialValue: state.data!.value.particular,
         onChanged: (value) {
-          ref.watch(generalSellControllerProvider.notifier).setState(
+          ref.watch(generalSalesControllerProvider.notifier).setState(
                 state.data!.value.copyWith(particular: value),
               );
         },

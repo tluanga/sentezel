@@ -1,7 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides
 
-part of 'generalSell_model.dart';
+part of 'generalSales_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,10 +13,10 @@ final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more informations: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
 /// @nodoc
-class _$GeneralSellTearOff {
-  const _$GeneralSellTearOff();
+class _$GeneralSalesTearOff {
+  const _$GeneralSalesTearOff();
 
-  _GeneralSell call(
+  _GeneralSales call(
       {int amount = 0,
       int creditAmount = 0,
       int debitAmount = 0,
@@ -29,7 +29,7 @@ class _$GeneralSellTearOff {
       LedgerMaster? debitSideLedger,
       LedgerMaster? partyLedger,
       required List<String> errorMessages}) {
-    return _GeneralSell(
+    return _GeneralSales(
       amount: amount,
       creditAmount: creditAmount,
       debitAmount: debitAmount,
@@ -47,10 +47,10 @@ class _$GeneralSellTearOff {
 }
 
 /// @nodoc
-const $GeneralSell = _$GeneralSellTearOff();
+const $GeneralSales = _$GeneralSalesTearOff();
 
 /// @nodoc
-mixin _$GeneralSell {
+mixin _$GeneralSales {
   int get amount => throw _privateConstructorUsedError;
   int get creditAmount => throw _privateConstructorUsedError;
   int get debitAmount => throw _privateConstructorUsedError;
@@ -66,15 +66,15 @@ mixin _$GeneralSell {
   List<String> get errorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
-  $GeneralSellCopyWith<GeneralSell> get copyWith =>
+  $GeneralSalesCopyWith<GeneralSales> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class $GeneralSellCopyWith<$Res> {
-  factory $GeneralSellCopyWith(
-          GeneralSell value, $Res Function(GeneralSell) then) =
-      _$GeneralSellCopyWithImpl<$Res>;
+abstract class $GeneralSalesCopyWith<$Res> {
+  factory $GeneralSalesCopyWith(
+          GeneralSales value, $Res Function(GeneralSales) then) =
+      _$GeneralSalesCopyWithImpl<$Res>;
   $Res call(
       {int amount,
       int creditAmount,
@@ -91,12 +91,12 @@ abstract class $GeneralSellCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$GeneralSellCopyWithImpl<$Res> implements $GeneralSellCopyWith<$Res> {
-  _$GeneralSellCopyWithImpl(this._value, this._then);
+class _$GeneralSalesCopyWithImpl<$Res> implements $GeneralSalesCopyWith<$Res> {
+  _$GeneralSalesCopyWithImpl(this._value, this._then);
 
-  final GeneralSell _value;
+  final GeneralSales _value;
   // ignore: unused_field
-  final $Res Function(GeneralSell) _then;
+  final $Res Function(GeneralSales) _then;
 
   @override
   $Res call({
@@ -167,11 +167,11 @@ class _$GeneralSellCopyWithImpl<$Res> implements $GeneralSellCopyWith<$Res> {
 }
 
 /// @nodoc
-abstract class _$GeneralSellCopyWith<$Res>
-    implements $GeneralSellCopyWith<$Res> {
-  factory _$GeneralSellCopyWith(
-          _GeneralSell value, $Res Function(_GeneralSell) then) =
-      __$GeneralSellCopyWithImpl<$Res>;
+abstract class _$GeneralSalesCopyWith<$Res>
+    implements $GeneralSalesCopyWith<$Res> {
+  factory _$GeneralSalesCopyWith(
+          _GeneralSales value, $Res Function(_GeneralSales) then) =
+      __$GeneralSalesCopyWithImpl<$Res>;
   @override
   $Res call(
       {int amount,
@@ -189,14 +189,14 @@ abstract class _$GeneralSellCopyWith<$Res>
 }
 
 /// @nodoc
-class __$GeneralSellCopyWithImpl<$Res> extends _$GeneralSellCopyWithImpl<$Res>
-    implements _$GeneralSellCopyWith<$Res> {
-  __$GeneralSellCopyWithImpl(
-      _GeneralSell _value, $Res Function(_GeneralSell) _then)
-      : super(_value, (v) => _then(v as _GeneralSell));
+class __$GeneralSalesCopyWithImpl<$Res> extends _$GeneralSalesCopyWithImpl<$Res>
+    implements _$GeneralSalesCopyWith<$Res> {
+  __$GeneralSalesCopyWithImpl(
+      _GeneralSales _value, $Res Function(_GeneralSales) _then)
+      : super(_value, (v) => _then(v as _GeneralSales));
 
   @override
-  _GeneralSell get _value => super._value as _GeneralSell;
+  _GeneralSales get _value => super._value as _GeneralSales;
 
   @override
   $Res call({
@@ -213,7 +213,7 @@ class __$GeneralSellCopyWithImpl<$Res> extends _$GeneralSellCopyWithImpl<$Res>
     Object? partyLedger = freezed,
     Object? errorMessages = freezed,
   }) {
-    return _then(_GeneralSell(
+    return _then(_GeneralSales(
       amount: amount == freezed
           ? _value.amount
           : amount // ignore: cast_nullable_to_non_nullable
@@ -268,8 +268,8 @@ class __$GeneralSellCopyWithImpl<$Res> extends _$GeneralSellCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_GeneralSell implements _GeneralSell {
-  _$_GeneralSell(
+class _$_GeneralSales implements _GeneralSales {
+  _$_GeneralSales(
       {this.amount = 0,
       this.creditAmount = 0,
       this.debitAmount = 0,
@@ -315,13 +315,13 @@ class _$_GeneralSell implements _GeneralSell {
 
   @override
   String toString() {
-    return 'GeneralSell(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, debitSideLedger: $debitSideLedger, partyLedger: $partyLedger, errorMessages: $errorMessages)';
+    return 'GeneralSales(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, debitSideLedger: $debitSideLedger, partyLedger: $partyLedger, errorMessages: $errorMessages)';
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other is _GeneralSell &&
+        (other is _GeneralSales &&
             (identical(other.amount, amount) ||
                 const DeepCollectionEquality().equals(other.amount, amount)) &&
             (identical(other.creditAmount, creditAmount) ||
@@ -375,12 +375,12 @@ class _$_GeneralSell implements _GeneralSell {
 
   @JsonKey(ignore: true)
   @override
-  _$GeneralSellCopyWith<_GeneralSell> get copyWith =>
-      __$GeneralSellCopyWithImpl<_GeneralSell>(this, _$identity);
+  _$GeneralSalesCopyWith<_GeneralSales> get copyWith =>
+      __$GeneralSalesCopyWithImpl<_GeneralSales>(this, _$identity);
 }
 
-abstract class _GeneralSell implements GeneralSell {
-  factory _GeneralSell(
+abstract class _GeneralSales implements GeneralSales {
+  factory _GeneralSales(
       {int amount,
       int creditAmount,
       int debitAmount,
@@ -392,7 +392,7 @@ abstract class _GeneralSell implements GeneralSell {
       LedgerMaster? creditSideLedger,
       LedgerMaster? debitSideLedger,
       LedgerMaster? partyLedger,
-      required List<String> errorMessages}) = _$_GeneralSell;
+      required List<String> errorMessages}) = _$_GeneralSales;
 
   @override
   int get amount => throw _privateConstructorUsedError;
@@ -420,6 +420,6 @@ abstract class _GeneralSell implements GeneralSell {
   List<String> get errorMessages => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
-  _$GeneralSellCopyWith<_GeneralSell> get copyWith =>
+  _$GeneralSalesCopyWith<_GeneralSales> get copyWith =>
       throw _privateConstructorUsedError;
 }

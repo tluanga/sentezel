@@ -9,8 +9,7 @@ import 'package:sentezel/newTransaction/payment/payment_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMaterial_screen.dart';
 import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_screen.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_screen.dart';
-
-import 'package:sentezel/newTransaction/sell/generalSell/generalSell_screen.dart';
+import 'package:sentezel/newTransaction/sales/generalSales/generalSales_screen.dart';
 
 class NewTranscationCenterScreen extends HookConsumerWidget {
   const NewTranscationCenterScreen({Key? key}) : super(key: key);
@@ -80,7 +79,7 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => GeneralSellScreen(),
+                          builder: (context) => GeneralSalesScreen(),
                         ),
                       );
                     },

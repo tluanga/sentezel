@@ -2,18 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
+import 'package:sentezel/newTransaction/sales/generalSales/generalSales_controller.dart';
 
-import 'package:sentezel/newTransaction/sell/generalSell/generalSell_controller.dart';
-
-class GeneralSellTransactionModeSelectModalBottomSheet
+class GeneralSalesTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
-  const GeneralSellTransactionModeSelectModalBottomSheet({
+  const GeneralSalesTransactionModeSelectModalBottomSheet({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.read(generalSellControllerProvider);
+    var state = ref.read(generalSalesControllerProvider);
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.4,
@@ -55,7 +54,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                     value: TransactionMode.paymentByCash,
                     onChanged: (value) {
                       ref
-                          .watch(generalSellControllerProvider.notifier)
+                          .watch(generalSalesControllerProvider.notifier)
                           .setState(
                             state.data!.value
                                 .copyWith(mode: TransactionMode.paymentByCash),
@@ -82,7 +81,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                       value: TransactionMode.paymentByBank,
                       onChanged: (value) {
                         ref
-                            .watch(generalSellControllerProvider.notifier)
+                            .watch(generalSalesControllerProvider.notifier)
                             .setState(state.data!.value.copyWith(
                               mode: TransactionMode.paymentByBank,
                             ));
@@ -109,7 +108,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                       value: TransactionMode.credit,
                       onChanged: (value) {
                         ref
-                            .watch(generalSellControllerProvider.notifier)
+                            .watch(generalSalesControllerProvider.notifier)
                             .setState(
                               state.data!.value
                                   .copyWith(mode: TransactionMode.credit),
@@ -136,7 +135,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                       value: TransactionMode.partialPaymentByBank,
                       onChanged: (value) {
                         ref
-                            .watch(generalSellControllerProvider.notifier)
+                            .watch(generalSalesControllerProvider.notifier)
                             .setState(
                               state.data!.value.copyWith(
                                   mode: TransactionMode.partialPaymentByBank),
@@ -163,7 +162,7 @@ class GeneralSellTransactionModeSelectModalBottomSheet
                       value: TransactionMode.partialPaymentByCash,
                       onChanged: (value) {
                         ref
-                            .watch(generalSellControllerProvider.notifier)
+                            .watch(generalSalesControllerProvider.notifier)
                             .setState(
                               state.data!.value.copyWith(
                                   mode: TransactionMode.partialPaymentByCash),

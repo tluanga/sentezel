@@ -3,11 +3,11 @@ import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 
-part 'generalSell_model.freezed.dart';
+part 'generalSales_model.freezed.dart';
 
 @freezed
-class GeneralSell with _$GeneralSell {
-  factory GeneralSell({
+class GeneralSales with _$GeneralSales {
+  factory GeneralSales({
     @Default(0) int amount,
     @Default(0) int creditAmount,
     @Default(0) int debitAmount,
@@ -20,5 +20,5 @@ class GeneralSell with _$GeneralSell {
     LedgerMaster? debitSideLedger, //The only debit side leddger
     LedgerMaster? partyLedger,
     required List<String> errorMessages,
-  }) = _GeneralSell;
+  }) = _GeneralSales;
 }
