@@ -58,7 +58,7 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     //--------------Amount ------------
-                    _amount(context: context, state: state, ref: ref),
+                    _amount(context: context, ref: ref),
                     SizedBox(width: MediaQuery.of(context).size.width * 0.02),
                     _transactionMode(context: context, state: state),
                   ],
@@ -76,12 +76,10 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                               state.mode ==
                                   TransactionMode.partialPaymentByCash)
                             //Partial Payment
-                            _partialPayment(
-                                context: context, state: state, ref: ref),
+                            _partialPayment(context: context, ref: ref),
 
                           //---Party Select----
-                          _partySelect(
-                              context: context, state: state, ref: ref),
+                          _partySelect(context: context, ref: ref),
                         ],
                       )
                     : Container(),
@@ -89,9 +87,9 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                   height: 10,
                 ),
                 //-----ASSET SELECTION----------------------
-                _assetSelect(context: context, state: state, ref: ref),
+                _assetSelect(context: context, ref: ref),
                 //----PARTICULAR SELECTION----------
-                _particular(context: context, state: state, ref: ref),
+                _particular(context: context, ref: ref),
                 SizedBox(
                   height: 6,
                 ),
@@ -126,16 +124,15 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
       );
   }
 
-  _amount(
-      {required BuildContext context,
-      required PurchaseOfAsset state,
-      required WidgetRef ref}) {
+  _amount({required BuildContext context, required WidgetRef ref}) {
+    final state = ref.watch(purchaseOfAssetControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
         //
         onChanged: (value) {
+          print(value);
           ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
                 state.copyWith(
                   amount: int.parse(value),
@@ -195,10 +192,8 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     );
   }
 
-  _assetSelect(
-      {required BuildContext context,
-      required PurchaseOfAsset state,
-      required WidgetRef ref}) {
+  _assetSelect({required BuildContext context, required WidgetRef ref}) {
+    final state = ref.watch(purchaseOfAssetControllerProvider);
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
@@ -249,10 +244,8 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     );
   }
 
-  _partySelect(
-      {required BuildContext context,
-      required PurchaseOfAsset state,
-      required WidgetRef ref}) {
+  _partySelect({required BuildContext context, required WidgetRef ref}) {
+    final state = ref.watch(purchaseOfAssetControllerProvider);
     return GestureDetector(
       onTap: () {
         showModalBottomSheet(
@@ -304,10 +297,8 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     );
   }
 
-  _partialPayment(
-      {required BuildContext context,
-      required PurchaseOfAsset state,
-      required WidgetRef ref}) {
+  _partialPayment({required BuildContext context, required WidgetRef ref}) {
+    final state = ref.watch(purchaseOfAssetControllerProvider);
     return PartialPaymentWidget(
       onChange: (amount) {
         ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
@@ -319,10 +310,8 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
     );
   }
 
-  _particular(
-      {required BuildContext context,
-      required PurchaseOfAsset state,
-      required WidgetRef ref}) {
+  _particular({required BuildContext context, required WidgetRef ref}) {
+    final state = ref.watch(purchaseOfAssetControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
