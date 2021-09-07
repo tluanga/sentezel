@@ -60,7 +60,7 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
                           ),
                         ),
                         Text(
-                          state.particular,
+                          state.particular!,
                           style: TextStyle(
                             color: Palette.blackGrey,
                             fontSize: 16,
@@ -116,29 +116,36 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
                   2: FractionColumnWidth(.2),
                 },
                 children: [
-                  //---------------DEBIT SIDE-----------
                   _tableHeader(),
+                  //---------------DEBIT SIDE-----------
+
                   _debitSide(
-                    debitSideLedgerName: state.mode == TransactionMode.credit ||
-                            state.mode ==
-                                TransactionMode.partialPaymentByBank ||
-                            state.mode == TransactionMode.partialPaymentByCash
-                        ? state.party!.name
-                        : state.debitSideLedger!.name,
+                    debitSideLedgerName: state.debitSideLedger!.name,
                     amount: state.debitAmount,
                   ),
 
-                  if (state.partialPaymentAmount != 0)
-                    _debitSide(
-                      debitSideLedgerName: state.creditSideLedger!.name,
+                  //--------------CREDIT SIDE-----
+                  if (state.mode == TransactionMode.credit ||
+                      state.mode == TransactionMode.partialPaymentByCash ||
+                      state.mode == TransactionMode.partialPaymentByBank)
+                    _creditSide(
+                      creditSideLedgerName: state.partyLedger!.name,
+                      amount: state.creditAmount,
+                    ),
+                  //--Normal Payment -- Non Credit- Non Partial
+                  if (state.mode == TransactionMode.paymentByCash ||
+                      state.mode == TransactionMode.paymentByBank)
+                    _creditSide(
+                        creditSideLedgerName: state.creditSideLedger!.name,
+                        amount: state.creditAmount),
+
+                  //---Partial Payment
+                  if (state.mode == TransactionMode.partialPaymentByCash ||
+                      state.mode == TransactionMode.partialPaymentByBank)
+                    _creditSide(
+                      creditSideLedgerName: state.creditSideLedger!.name,
                       amount: state.partialPaymentAmount,
                     ),
-
-                  //------------------CREDIT SIDE--------------
-                  _creditSide(
-                    creditSideLedgerName: state.creditSideLedger!.name,
-                    amount: state.creditAmount,
-                  ),
                 ],
               ),
             ),
@@ -169,7 +176,6 @@ class GeneralSellConfirmationBottomSheet extends HookConsumerWidget {
                   leading: Icon(CupertinoIcons.checkmark_alt),
                   onTap: () {
                     this.onConfirm();
-                    Navigator.pop(context);
                   },
                 ),
               ),
