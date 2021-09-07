@@ -132,10 +132,11 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
       child: TextFormField(
         //
         onChanged: (value) {
+          var _value = value != '' ? int.parse(value) : 0;
           print(value);
           ref.watch(purchaseOfAssetControllerProvider.notifier).setState(
                 state.copyWith(
-                  amount: int.parse(value),
+                  amount: _value,
                 ),
               );
         },
