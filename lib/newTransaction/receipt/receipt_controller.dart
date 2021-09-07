@@ -19,18 +19,9 @@ class ReceiptController extends StateNotifier<AsyncValue<Receipt>> {
   ReceiptController(this._read) : super(AsyncValue.loading());
 
   loadData() async {
-    TransactionCategory _category =
-        await _read(transactionCategoryRepositoryProvider)
-            .getItem(id: TransactionCategoryIndex.SalesReturn);
-    final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: _category.debitSideLedger);
-
     state = AsyncData(Receipt(
-      category: _category,
       errorMessages: [],
       date: DateTime.now(),
-      debitSideLedger: _debitSideLedger,
-      particular: _category.name,
     ));
     print(state);
   }

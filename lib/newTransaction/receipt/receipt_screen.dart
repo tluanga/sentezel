@@ -9,6 +9,7 @@ import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
 import 'package:sentezel/newTransaction/receipt/model/receipt_model.dart';
 import 'package:sentezel/newTransaction/receipt/receiptConfirm_modal.dart';
 import 'package:sentezel/newTransaction/receipt/receiptTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/receiptTypeSelect_modal.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
 
 import 'package:sentezel/newTransaction/sales/salesReturn/salesReturnvalidationError_bottomSheet.dart';
@@ -73,7 +74,7 @@ class ReceiptScreen extends HookConsumerWidget {
                         height: 10,
                       ),
                       //-----ASSET SELECTION----------------------
-
+                      _receiptTypeSelect(context: context, ref: ref),
                       //----PARTICULAR SELECTION----------
                       _particular(context: context, ref: ref),
                       SizedBox(
@@ -173,6 +174,54 @@ class ReceiptScreen extends HookConsumerWidget {
           children: [
             Text(
               EnumToString.convertToString(state.mode, camelCase: true),
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            Icon(
+              CupertinoIcons.arrowtriangle_down,
+              color: Colors.black,
+              size: 20,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  _receiptTypeSelect({required BuildContext context, required WidgetRef ref}) {
+    final state = ref.watch(receiptControllerProvider).data!.value;
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (context) => ReceiptTypeSelectModal(
+            onSelect: (asset) {},
+          ),
+        );
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.97,
+        height: MediaQuery.of(context).size.height * 0.05,
+        padding: EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade300,
+          borderRadius: BorderRadius.circular(3),
+          border: Border.all(
+            color: state.category == null
+                ? Colors.red.shade200
+                : Colors.grey.shade300,
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              state.category == null
+                  ? 'Please Select Receipt Category'
+                  : state.category!.name,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15,
