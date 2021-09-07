@@ -119,31 +119,13 @@ class SalesReturnConfirmationBottomSheet extends HookConsumerWidget {
                   _tableHeader(),
                   //---------------DEBIT SIDE-----------
 
-                  if (state.mode == TransactionMode.credit ||
-                      state.mode == TransactionMode.partialPaymentByCash ||
-                      state.mode == TransactionMode.partialPaymentByBank)
-                    _debitSide(
-                      debitSideLedgerName: state.partyLedger!.name,
-                      amount: state.debitAmount,
-                    ),
-
                   //--Normal Payment -- Non Credit- Non Partial
-                  if (state.mode == TransactionMode.paymentByCash ||
-                      state.mode == TransactionMode.paymentByBank)
-                    _debitSide(
-                        debitSideLedgerName: state.debitSideLedger!.name,
-                        amount: state.debitAmount),
 
-                  //---Partial Payment
-                  if (state.mode == TransactionMode.partialPaymentByCash ||
-                      state.mode == TransactionMode.partialPaymentByBank)
-                    _debitSide(
+                  _debitSide(
                       debitSideLedgerName: state.debitSideLedger!.name,
-                      amount: state.partialPaymentAmount,
-                    ),
+                      amount: state.debitAmount),
 
                   //--------------CREDIT SIDE-----
-
                   _creditSide(
                       creditSideLedgerName: state.creditSideLedger!.name,
                       amount: state.creditAmount),

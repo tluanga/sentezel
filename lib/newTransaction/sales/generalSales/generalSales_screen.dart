@@ -42,7 +42,7 @@ class GeneralSalesScreen extends HookConsumerWidget {
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'New Material Purchase',
+                        title: 'General Sales',
                         onSave: () {
                           onSubmit(context: context, ref: ref);
                         },

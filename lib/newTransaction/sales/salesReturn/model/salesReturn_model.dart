@@ -18,7 +18,7 @@ class SalesReturn with _$SalesReturn {
     TransactionCategory? category,
     LedgerMaster? creditSideLedger,
     LedgerMaster? debitSideLedger, //The only debit side leddger
-    LedgerMaster? partyLedger,
+
     required List<String> errorMessages,
   }) = _GeneralSales;
 }

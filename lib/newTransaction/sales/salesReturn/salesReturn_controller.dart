@@ -22,14 +22,14 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
     TransactionCategory _category =
         await _read(transactionCategoryRepositoryProvider)
             .getItem(id: TransactionCategoryIndex.SalesReturn);
-    final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: _category.creditSideLedger);
+    final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: _category.debitSideLedger);
 
     state = AsyncData(SalesReturn(
       category: _category,
       errorMessages: [],
       date: DateTime.now(),
-      creditSideLedger: _creditSideLedger,
+      debitSideLedger: _debitSideLedger,
       particular: _category.name,
     ));
     print(state);
@@ -51,27 +51,6 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
 
-    if (stateData.mode == TransactionMode.partialPaymentByBank ||
-        stateData.mode == TransactionMode.partialPaymentByCash) {
-      if (stateData.partyLedger == null) {
-        _errorMessage.add('Please Select Party');
-      }
-      if (stateData.amount <= stateData.partialPaymentAmount) {
-        _errorMessage
-            .add('Partial Payment Amount cannot be Larger  than Amount');
-      }
-      if (stateData.partialPaymentAmount <= 0) {
-        _errorMessage.add('Partial Amount cannot be Zero');
-      }
-      if (stateData.particular!.length <= 0) {
-        _errorMessage.add('Please Enter Particular');
-      }
-    }
-    if (stateData.mode == TransactionMode.credit &&
-        stateData.partyLedger == null) {
-      _errorMessage.add('Please Select Party');
-    }
-
     print('length of error message ${_errorMessage}');
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
@@ -82,12 +61,10 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
     final finalData = stateData.copyWith(
       creditAmount: (stateData.amount - stateData.partialPaymentAmount),
       debitAmount: stateData.amount,
-      debitSideLedger: stateData.mode != TransactionMode.credit
-          ? await getTransactionModeLedgerHelper(
-              stateData.mode!,
-              _read,
-            )
-          : null,
+      creditSideLedger: await getTransactionModeLedgerHelper(
+        stateData.mode!,
+        _read,
+      ),
     );
     state = AsyncData(finalData);
   }
@@ -107,13 +84,11 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
           particular: stateData.particular!,
           mode: stateData.mode!,
           date: stateData.date,
-          transactionCategoryId: TransactionCategoryIndex.PurchaseOfRawMaterial,
+          transactionCategoryId: stateData.category!.id,
           debitSideLedger: stateData.debitSideLedger!.id,
           creditSideLedger: stateData.creditSideLedger != null
               ? stateData.creditSideLedger!.id
               : null,
-          partyLedgerId:
-              stateData.partyLedger != null ? stateData.partyLedger!.id : null,
         ),
       );
     } catch (e) {

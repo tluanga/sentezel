@@ -27,7 +27,6 @@ class _$SalesReturnTearOff {
       TransactionCategory? category,
       LedgerMaster? creditSideLedger,
       LedgerMaster? debitSideLedger,
-      LedgerMaster? partyLedger,
       required List<String> errorMessages}) {
     return _GeneralSales(
       amount: amount,
@@ -40,7 +39,6 @@ class _$SalesReturnTearOff {
       category: category,
       creditSideLedger: creditSideLedger,
       debitSideLedger: debitSideLedger,
-      partyLedger: partyLedger,
       errorMessages: errorMessages,
     );
   }
@@ -62,7 +60,6 @@ mixin _$SalesReturn {
   LedgerMaster? get creditSideLedger => throw _privateConstructorUsedError;
   LedgerMaster? get debitSideLedger =>
       throw _privateConstructorUsedError; //The only debit side leddger
-  LedgerMaster? get partyLedger => throw _privateConstructorUsedError;
   List<String> get errorMessages => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -86,7 +83,6 @@ abstract class $SalesReturnCopyWith<$Res> {
       TransactionCategory? category,
       LedgerMaster? creditSideLedger,
       LedgerMaster? debitSideLedger,
-      LedgerMaster? partyLedger,
       List<String> errorMessages});
 }
 
@@ -110,7 +106,6 @@ class _$SalesReturnCopyWithImpl<$Res> implements $SalesReturnCopyWith<$Res> {
     Object? category = freezed,
     Object? creditSideLedger = freezed,
     Object? debitSideLedger = freezed,
-    Object? partyLedger = freezed,
     Object? errorMessages = freezed,
   }) {
     return _then(_value.copyWith(
@@ -154,10 +149,6 @@ class _$SalesReturnCopyWithImpl<$Res> implements $SalesReturnCopyWith<$Res> {
           ? _value.debitSideLedger
           : debitSideLedger // ignore: cast_nullable_to_non_nullable
               as LedgerMaster?,
-      partyLedger: partyLedger == freezed
-          ? _value.partyLedger
-          : partyLedger // ignore: cast_nullable_to_non_nullable
-              as LedgerMaster?,
       errorMessages: errorMessages == freezed
           ? _value.errorMessages
           : errorMessages // ignore: cast_nullable_to_non_nullable
@@ -184,7 +175,6 @@ abstract class _$GeneralSalesCopyWith<$Res>
       TransactionCategory? category,
       LedgerMaster? creditSideLedger,
       LedgerMaster? debitSideLedger,
-      LedgerMaster? partyLedger,
       List<String> errorMessages});
 }
 
@@ -210,7 +200,6 @@ class __$GeneralSalesCopyWithImpl<$Res> extends _$SalesReturnCopyWithImpl<$Res>
     Object? category = freezed,
     Object? creditSideLedger = freezed,
     Object? debitSideLedger = freezed,
-    Object? partyLedger = freezed,
     Object? errorMessages = freezed,
   }) {
     return _then(_GeneralSales(
@@ -254,10 +243,6 @@ class __$GeneralSalesCopyWithImpl<$Res> extends _$SalesReturnCopyWithImpl<$Res>
           ? _value.debitSideLedger
           : debitSideLedger // ignore: cast_nullable_to_non_nullable
               as LedgerMaster?,
-      partyLedger: partyLedger == freezed
-          ? _value.partyLedger
-          : partyLedger // ignore: cast_nullable_to_non_nullable
-              as LedgerMaster?,
       errorMessages: errorMessages == freezed
           ? _value.errorMessages
           : errorMessages // ignore: cast_nullable_to_non_nullable
@@ -280,7 +265,6 @@ class _$_GeneralSales implements _GeneralSales {
       this.category,
       this.creditSideLedger,
       this.debitSideLedger,
-      this.partyLedger,
       required this.errorMessages});
 
   @JsonKey(defaultValue: 0)
@@ -309,13 +293,11 @@ class _$_GeneralSales implements _GeneralSales {
   @override
   final LedgerMaster? debitSideLedger;
   @override //The only debit side leddger
-  final LedgerMaster? partyLedger;
-  @override
   final List<String> errorMessages;
 
   @override
   String toString() {
-    return 'SalesReturn(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, debitSideLedger: $debitSideLedger, partyLedger: $partyLedger, errorMessages: $errorMessages)';
+    return 'SalesReturn(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, partialPaymentAmount: $partialPaymentAmount, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, debitSideLedger: $debitSideLedger, errorMessages: $errorMessages)';
   }
 
   @override
@@ -349,9 +331,6 @@ class _$_GeneralSales implements _GeneralSales {
             (identical(other.debitSideLedger, debitSideLedger) ||
                 const DeepCollectionEquality()
                     .equals(other.debitSideLedger, debitSideLedger)) &&
-            (identical(other.partyLedger, partyLedger) ||
-                const DeepCollectionEquality()
-                    .equals(other.partyLedger, partyLedger)) &&
             (identical(other.errorMessages, errorMessages) ||
                 const DeepCollectionEquality()
                     .equals(other.errorMessages, errorMessages)));
@@ -370,7 +349,6 @@ class _$_GeneralSales implements _GeneralSales {
       const DeepCollectionEquality().hash(category) ^
       const DeepCollectionEquality().hash(creditSideLedger) ^
       const DeepCollectionEquality().hash(debitSideLedger) ^
-      const DeepCollectionEquality().hash(partyLedger) ^
       const DeepCollectionEquality().hash(errorMessages);
 
   @JsonKey(ignore: true)
@@ -391,7 +369,6 @@ abstract class _GeneralSales implements SalesReturn {
       TransactionCategory? category,
       LedgerMaster? creditSideLedger,
       LedgerMaster? debitSideLedger,
-      LedgerMaster? partyLedger,
       required List<String> errorMessages}) = _$_GeneralSales;
 
   @override
@@ -415,8 +392,6 @@ abstract class _GeneralSales implements SalesReturn {
   @override
   LedgerMaster? get debitSideLedger => throw _privateConstructorUsedError;
   @override //The only debit side leddger
-  LedgerMaster? get partyLedger => throw _privateConstructorUsedError;
-  @override
   List<String> get errorMessages => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)

@@ -15,7 +15,7 @@ class SalesReturnTransactionModeSelectModalBottomSheet
     var state = ref.read(saleReturnControllerProvider);
 
     return Container(
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height * 0.2,
       child: Column(
         children: [
           Container(
@@ -52,6 +52,7 @@ class SalesReturnTransactionModeSelectModalBottomSheet
                   ),
                   trailing: Radio(
                     value: TransactionMode.paymentByCash,
+                    activeColor: Colors.green.shade500,
                     onChanged: (value) {
                       ref.watch(saleReturnControllerProvider.notifier).setState(
                             state.data!.value
@@ -77,6 +78,7 @@ class SalesReturnTransactionModeSelectModalBottomSheet
                     ),
                     trailing: Radio(
                       value: TransactionMode.paymentByBank,
+                      activeColor: Colors.green.shade500,
                       onChanged: (value) {
                         ref
                             .watch(saleReturnControllerProvider.notifier)
@@ -91,87 +93,6 @@ class SalesReturnTransactionModeSelectModalBottomSheet
                   ),
                 ),
                 //--------------
-                Container(
-                  margin: EdgeInsets.all(0),
-                  child: ListTile(
-                    title: Text(
-                      'Full Credit',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    trailing: Radio(
-                      value: TransactionMode.credit,
-                      onChanged: (value) {
-                        ref
-                            .watch(saleReturnControllerProvider.notifier)
-                            .setState(
-                              state.data!.value
-                                  .copyWith(mode: TransactionMode.credit),
-                            );
-
-                        Navigator.pop(context);
-                      },
-                      groupValue: state.data!.value.mode,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(0),
-                  child: ListTile(
-                    title: Text(
-                      'Credit with Partial Payment by Bank',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    trailing: Radio(
-                      value: TransactionMode.partialPaymentByBank,
-                      onChanged: (value) {
-                        ref
-                            .watch(saleReturnControllerProvider.notifier)
-                            .setState(
-                              state.data!.value.copyWith(
-                                  mode: TransactionMode.partialPaymentByBank),
-                            );
-
-                        Navigator.pop(context);
-                      },
-                      groupValue: state.data!.value.mode,
-                    ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.all(0),
-                  child: ListTile(
-                    title: Text(
-                      'Credit with Partial Payment by Cash',
-                      style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    trailing: Radio(
-                      value: TransactionMode.partialPaymentByCash,
-                      onChanged: (value) {
-                        ref
-                            .watch(saleReturnControllerProvider.notifier)
-                            .setState(
-                              state.data!.value.copyWith(
-                                  mode: TransactionMode.partialPaymentByCash),
-                            );
-
-                        Navigator.pop(context);
-                      },
-                      groupValue: state.data!.value.mode,
-                    ),
-                  ),
-                ),
               ],
             ),
           ),

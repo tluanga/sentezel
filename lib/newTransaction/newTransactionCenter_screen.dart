@@ -10,6 +10,7 @@ import 'package:sentezel/newTransaction/purchase/purchaseOfMaterial/purchaseOfMa
 import 'package:sentezel/newTransaction/purchase/purchaseReturn/purchaseReturn_screen.dart';
 import 'package:sentezel/newTransaction/receipt/receipt_screen.dart';
 import 'package:sentezel/newTransaction/sales/generalSales/generalSales_screen.dart';
+import 'package:sentezel/newTransaction/sales/salesReturn/salesReturn_screen.dart';
 
 class NewTranscationCenterScreen extends HookConsumerWidget {
   const NewTranscationCenterScreen({Key? key}) : super(key: key);
@@ -87,15 +88,15 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                 ),
                 _item(
                   context: context,
-                  label: 'Sell Return',
+                  label: 'Sales Return',
                   icon: CupertinoIcons.hurricane,
                   onTap: () {
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //     builder: (context) => SellReturnScreen(),
-                    //   ),
-                    // );
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => SalesReturnScreen(),
+                      ),
+                    );
                   },
                 ),
                 _item(

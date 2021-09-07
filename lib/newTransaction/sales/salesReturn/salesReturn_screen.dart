@@ -44,7 +44,7 @@ class SalesReturnScreen extends HookConsumerWidget {
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'New Material Purchase',
+                        title: 'Sales Return',
                         onSave: () {
                           onSubmit(context: context, ref: ref);
                         },
@@ -75,26 +75,6 @@ class SalesReturnScreen extends HookConsumerWidget {
                         ],
                       ),
 
-                      //------------Party Selection and Partial Amount Entry----
-                      data.mode == TransactionMode.credit ||
-                              data.mode ==
-                                  TransactionMode.partialPaymentByBank ||
-                              data.mode == TransactionMode.partialPaymentByCash
-                          ? Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                if (data.mode ==
-                                        TransactionMode.partialPaymentByBank ||
-                                    data.mode ==
-                                        TransactionMode.partialPaymentByCash)
-                                  //Partial Payment
-                                  _partialPayment(context: context, ref: ref),
-
-                                //---Party Select----
-                                _partySelect(context: context, ref: ref),
-                              ],
-                            )
-                          : Container(),
                       SizedBox(
                         height: 10,
                       ),
@@ -215,72 +195,6 @@ class SalesReturnScreen extends HookConsumerWidget {
           ],
         ),
       ),
-    );
-  }
-
-  _partySelect({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(saleReturnControllerProvider);
-    return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (context) => PartySelectModal(
-            onSelectParty: (party) {
-              ref.watch(saleReturnControllerProvider.notifier).setState(
-                    state.data!.value.copyWith(partyLedger: party),
-                  );
-            },
-          ),
-        );
-      },
-      child: Container(
-        width: state.data!.value.mode == TransactionMode.credit
-            ? MediaQuery.of(context).size.width * 0.97
-            : MediaQuery.of(context).size.width * 0.55,
-        height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-            color: Colors.grey.shade300,
-            borderRadius: BorderRadius.circular(3),
-            border: Border.all(
-              color: state.data!.value.partyLedger != null
-                  ? Colors.grey.shade300
-                  : Colors.red.shade300,
-            )),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              state.data!.value.partyLedger == null
-                  ? 'Please Select Party'
-                  : state.data!.value.partyLedger!.name,
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Icon(
-              CupertinoIcons.arrowtriangle_down,
-              color: Colors.black,
-              size: 20,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _partialPayment({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(saleReturnControllerProvider);
-    return PartialPaymentWidget(
-      onChange: (amount) {
-        ref.watch(saleReturnControllerProvider.notifier).setState(
-              state.data!.value.copyWith(partialPaymentAmount: amount),
-            );
-      },
-      defaultValue: state.data!.value.partialPaymentAmount,
-      maxAmount: state.data!.value.amount,
     );
   }
 
