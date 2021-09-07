@@ -3,7 +3,7 @@ import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_h
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/sell/generalSell/model/purchaseOfMaterial_model.dart';
+import 'package:sentezel/newTransaction/sell/generalSell/model/generalSell_model.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
