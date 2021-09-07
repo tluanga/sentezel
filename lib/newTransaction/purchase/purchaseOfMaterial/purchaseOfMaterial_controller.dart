@@ -99,7 +99,7 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
           particular: state.particular!,
           mode: state.mode!,
           date: state.date,
-          transactionCategoryId: TransactionCategoryIndex.PurchaseOfAssets,
+          transactionCategoryId: TransactionCategoryIndex.PurchaseOfRawMaterial,
           debitSideLedger: state.debitSideLedger!.id,
           creditSideLedger: state.creditSideLedger != null
               ? state.creditSideLedger!.id

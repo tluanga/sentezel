@@ -86,7 +86,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       WHERE particular LIKE '$searchString%'
       AND mode LIKE '$_mode%'
       AND date>=${paramStartDate.microsecondsSinceEpoch}
-      AND date <=${paramEndDate.microsecondsSinceEpoch}
+      AND date<=${paramEndDate.microsecondsSinceEpoch}
       ''');
 
       List<trans.Transaction> list = [];
