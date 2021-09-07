@@ -107,8 +107,10 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
           particular: stateData.particular!,
           mode: stateData.mode!,
           date: stateData.date,
-          transactionCategoryId: TransactionCategoryIndex.PurchaseOfRawMaterial,
-          debitSideLedger: stateData.debitSideLedger!.id,
+          transactionCategoryId: stateData.category!.id,
+          debitSideLedger: stateData.debitSideLedger != null
+              ? stateData.debitSideLedger!.id
+              : null,
           creditSideLedger: stateData.creditSideLedger != null
               ? stateData.creditSideLedger!.id
               : null,

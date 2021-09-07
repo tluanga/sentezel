@@ -23,6 +23,8 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     try {
       var b = await db.insert(dbName, payload.toJson());
       // final a = await getItem(id: b);
+      var c = await getItem(id: b);
+      print(c);
       print('the value return is $b');
     } catch (e) {
       print(e);

@@ -1,3 +1,4 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:riverpod/riverpod.dart';
@@ -54,7 +55,7 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
   }) async {
     try {
       String _type = '';
-      if (type != null) _type = getLedgerMasterTypeEnumInString(type);
+      if (type != null) _type = EnumToString.convertToString(type);
       Database db = await DatabaseService.instance.db;
 
       final result = await db.rawQuery('''
