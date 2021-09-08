@@ -37,7 +37,9 @@ class DebtorListScreen extends HookConsumerWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => DebtSettlementScreen(),
+                                builder: (context) => DebtSettlementScreen(
+                                  debtor: data[index],
+                                ),
                               ),
                             );
                           },

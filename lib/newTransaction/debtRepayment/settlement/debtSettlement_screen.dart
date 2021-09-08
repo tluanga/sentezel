@@ -22,6 +22,9 @@ class DebtSettlementScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref
+        .read(debtSettlementControllerProvider.notifier)
+        .loadData(debtor: debtor);
     var state = ref.watch(debtSettlementControllerProvider);
 
     onCancel() {
@@ -73,7 +76,8 @@ class DebtSettlementScreen extends HookConsumerWidget {
                                 ),
                               ),
                               Text(
-                                currencySeperatorStringFormatterHelper(121212),
+                                currencySeperatorStringFormatterHelper(
+                                    data.debtTotalAmount),
                                 style: TextStyle(
                                   fontSize: 20,
                                   fontWeight: FontWeight.bold,
