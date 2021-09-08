@@ -3,8 +3,8 @@ import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_h
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/debtRepayment/model/debtor_model.dart';
-import 'package:sentezel/newTransaction/debtRepayment/settlement/debtSettlement_model.dart';
+import 'package:sentezel/newTransaction/debtSettlement/model/debtor_model.dart';
+import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_model.dart';
 
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
@@ -34,7 +34,7 @@ class DebtSettlementController
       date: DateTime.now(),
       creditSideLedger: _creditSideLedger,
       particular: _category.name,
-      debtTotalAmount: debtor.amount,
+      debtor: debtor,
     ));
     print(state);
   }
@@ -53,6 +53,9 @@ class DebtSettlementController
 
     if (stateData.amount <= 0) {
       _errorMessage.add('Amount can not be less than equalto Zero');
+    }
+    if (stateData.amount > state.data!.value.debtor!.amount) {
+      _errorMessage.add('Amount can not larger than the debt amount');
     }
 
     if (stateData.mode == TransactionMode.credit &&

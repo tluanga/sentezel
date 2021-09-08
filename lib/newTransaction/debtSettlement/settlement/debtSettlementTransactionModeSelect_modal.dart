@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/payment/payment_controller.dart';
+import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_controller.dart';
 
-class DebtRepaymentTransactionModeSelectModalBottomSheet
+class DebtSettlementTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
-  const DebtRepaymentTransactionModeSelectModalBottomSheet({
+  const DebtSettlementTransactionModeSelectModalBottomSheet({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.read(paymentControllerProvider);
+    var state = ref.read(debtSettlementControllerProvider);
 
     return Container(
       height: MediaQuery.of(context).size.height * 0.2,
@@ -54,7 +54,9 @@ class DebtRepaymentTransactionModeSelectModalBottomSheet
                     value: TransactionMode.paymentByCash,
                     activeColor: Colors.green.shade500,
                     onChanged: (value) {
-                      ref.watch(paymentControllerProvider.notifier).setState(
+                      ref
+                          .watch(debtSettlementControllerProvider.notifier)
+                          .setState(
                             state.data!.value
                                 .copyWith(mode: TransactionMode.paymentByCash),
                           );
@@ -81,7 +83,7 @@ class DebtRepaymentTransactionModeSelectModalBottomSheet
                       activeColor: Colors.green.shade500,
                       onChanged: (value) {
                         ref
-                            .watch(paymentControllerProvider.notifier)
+                            .watch(debtSettlementControllerProvider.notifier)
                             .setState(state.data!.value.copyWith(
                               mode: TransactionMode.paymentByBank,
                             ));

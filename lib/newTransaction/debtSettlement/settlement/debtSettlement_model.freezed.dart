@@ -20,7 +20,7 @@ class _$DebtSettlementTearOff {
       {int amount = 0,
       int creditAmount = 0,
       int debitAmount = 0,
-      int debtTotalAmount = 0,
+      Debtor? debtor,
       String? particular,
       required DateTime date,
       TransactionMode? mode = TransactionMode.paymentByCash,
@@ -33,7 +33,7 @@ class _$DebtSettlementTearOff {
       amount: amount,
       creditAmount: creditAmount,
       debitAmount: debitAmount,
-      debtTotalAmount: debtTotalAmount,
+      debtor: debtor,
       particular: particular,
       date: date,
       mode: mode,
@@ -54,7 +54,7 @@ mixin _$DebtSettlement {
   int get amount => throw _privateConstructorUsedError;
   int get creditAmount => throw _privateConstructorUsedError;
   int get debitAmount => throw _privateConstructorUsedError;
-  int get debtTotalAmount => throw _privateConstructorUsedError;
+  Debtor? get debtor => throw _privateConstructorUsedError;
   String? get particular => throw _privateConstructorUsedError;
   DateTime get date => throw _privateConstructorUsedError;
   TransactionMode? get mode => throw _privateConstructorUsedError;
@@ -78,7 +78,7 @@ abstract class $DebtSettlementCopyWith<$Res> {
       {int amount,
       int creditAmount,
       int debitAmount,
-      int debtTotalAmount,
+      Debtor? debtor,
       String? particular,
       DateTime date,
       TransactionMode? mode,
@@ -87,6 +87,8 @@ abstract class $DebtSettlementCopyWith<$Res> {
       LedgerMaster? debitSideLedger,
       LedgerMaster? partyLedger,
       List<String> errorMessages});
+
+  $DebtorCopyWith<$Res>? get debtor;
 }
 
 /// @nodoc
@@ -103,7 +105,7 @@ class _$DebtSettlementCopyWithImpl<$Res>
     Object? amount = freezed,
     Object? creditAmount = freezed,
     Object? debitAmount = freezed,
-    Object? debtTotalAmount = freezed,
+    Object? debtor = freezed,
     Object? particular = freezed,
     Object? date = freezed,
     Object? mode = freezed,
@@ -126,10 +128,10 @@ class _$DebtSettlementCopyWithImpl<$Res>
           ? _value.debitAmount
           : debitAmount // ignore: cast_nullable_to_non_nullable
               as int,
-      debtTotalAmount: debtTotalAmount == freezed
-          ? _value.debtTotalAmount
-          : debtTotalAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+      debtor: debtor == freezed
+          ? _value.debtor
+          : debtor // ignore: cast_nullable_to_non_nullable
+              as Debtor?,
       particular: particular == freezed
           ? _value.particular
           : particular // ignore: cast_nullable_to_non_nullable
@@ -164,6 +166,17 @@ class _$DebtSettlementCopyWithImpl<$Res>
               as List<String>,
     ));
   }
+
+  @override
+  $DebtorCopyWith<$Res>? get debtor {
+    if (_value.debtor == null) {
+      return null;
+    }
+
+    return $DebtorCopyWith<$Res>(_value.debtor!, (value) {
+      return _then(_value.copyWith(debtor: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -177,7 +190,7 @@ abstract class _$DebtSettlementCopyWith<$Res>
       {int amount,
       int creditAmount,
       int debitAmount,
-      int debtTotalAmount,
+      Debtor? debtor,
       String? particular,
       DateTime date,
       TransactionMode? mode,
@@ -186,6 +199,9 @@ abstract class _$DebtSettlementCopyWith<$Res>
       LedgerMaster? debitSideLedger,
       LedgerMaster? partyLedger,
       List<String> errorMessages});
+
+  @override
+  $DebtorCopyWith<$Res>? get debtor;
 }
 
 /// @nodoc
@@ -204,7 +220,7 @@ class __$DebtSettlementCopyWithImpl<$Res>
     Object? amount = freezed,
     Object? creditAmount = freezed,
     Object? debitAmount = freezed,
-    Object? debtTotalAmount = freezed,
+    Object? debtor = freezed,
     Object? particular = freezed,
     Object? date = freezed,
     Object? mode = freezed,
@@ -227,10 +243,10 @@ class __$DebtSettlementCopyWithImpl<$Res>
           ? _value.debitAmount
           : debitAmount // ignore: cast_nullable_to_non_nullable
               as int,
-      debtTotalAmount: debtTotalAmount == freezed
-          ? _value.debtTotalAmount
-          : debtTotalAmount // ignore: cast_nullable_to_non_nullable
-              as int,
+      debtor: debtor == freezed
+          ? _value.debtor
+          : debtor // ignore: cast_nullable_to_non_nullable
+              as Debtor?,
       particular: particular == freezed
           ? _value.particular
           : particular // ignore: cast_nullable_to_non_nullable
@@ -274,7 +290,7 @@ class _$_DebtSettlement implements _DebtSettlement {
       {this.amount = 0,
       this.creditAmount = 0,
       this.debitAmount = 0,
-      this.debtTotalAmount = 0,
+      this.debtor,
       this.particular,
       required this.date,
       this.mode = TransactionMode.paymentByCash,
@@ -293,9 +309,8 @@ class _$_DebtSettlement implements _DebtSettlement {
   @JsonKey(defaultValue: 0)
   @override
   final int debitAmount;
-  @JsonKey(defaultValue: 0)
   @override
-  final int debtTotalAmount;
+  final Debtor? debtor;
   @override
   final String? particular;
   @override
@@ -316,7 +331,7 @@ class _$_DebtSettlement implements _DebtSettlement {
 
   @override
   String toString() {
-    return 'DebtSettlement(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, debtTotalAmount: $debtTotalAmount, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, debitSideLedger: $debitSideLedger, partyLedger: $partyLedger, errorMessages: $errorMessages)';
+    return 'DebtSettlement(amount: $amount, creditAmount: $creditAmount, debitAmount: $debitAmount, debtor: $debtor, particular: $particular, date: $date, mode: $mode, category: $category, creditSideLedger: $creditSideLedger, debitSideLedger: $debitSideLedger, partyLedger: $partyLedger, errorMessages: $errorMessages)';
   }
 
   @override
@@ -331,9 +346,8 @@ class _$_DebtSettlement implements _DebtSettlement {
             (identical(other.debitAmount, debitAmount) ||
                 const DeepCollectionEquality()
                     .equals(other.debitAmount, debitAmount)) &&
-            (identical(other.debtTotalAmount, debtTotalAmount) ||
-                const DeepCollectionEquality()
-                    .equals(other.debtTotalAmount, debtTotalAmount)) &&
+            (identical(other.debtor, debtor) ||
+                const DeepCollectionEquality().equals(other.debtor, debtor)) &&
             (identical(other.particular, particular) ||
                 const DeepCollectionEquality()
                     .equals(other.particular, particular)) &&
@@ -364,7 +378,7 @@ class _$_DebtSettlement implements _DebtSettlement {
       const DeepCollectionEquality().hash(amount) ^
       const DeepCollectionEquality().hash(creditAmount) ^
       const DeepCollectionEquality().hash(debitAmount) ^
-      const DeepCollectionEquality().hash(debtTotalAmount) ^
+      const DeepCollectionEquality().hash(debtor) ^
       const DeepCollectionEquality().hash(particular) ^
       const DeepCollectionEquality().hash(date) ^
       const DeepCollectionEquality().hash(mode) ^
@@ -385,7 +399,7 @@ abstract class _DebtSettlement implements DebtSettlement {
       {int amount,
       int creditAmount,
       int debitAmount,
-      int debtTotalAmount,
+      Debtor? debtor,
       String? particular,
       required DateTime date,
       TransactionMode? mode,
@@ -402,7 +416,7 @@ abstract class _DebtSettlement implements DebtSettlement {
   @override
   int get debitAmount => throw _privateConstructorUsedError;
   @override
-  int get debtTotalAmount => throw _privateConstructorUsedError;
+  Debtor? get debtor => throw _privateConstructorUsedError;
   @override
   String? get particular => throw _privateConstructorUsedError;
   @override

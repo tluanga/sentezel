@@ -6,14 +6,13 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/newTransaction/debtRepayment/model/debtor_model.dart';
-import 'package:sentezel/newTransaction/debtRepayment/settlement/debtSettlement_controller.dart';
-import 'package:sentezel/newTransaction/debtRepayment/settlement/debtSettlement_model.dart';
+import 'package:sentezel/newTransaction/debtSettlement/model/debtor_model.dart';
+import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlementConfirm_modal.dart';
+import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlementTransactionModeSelect_modal.dart';
+import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlementValidationError_bottomSheet.dart';
+import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_controller.dart';
+import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_model.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
-import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
-import 'package:sentezel/newTransaction/payment/paymentTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/payment/paymentValidationError_bottomSheet.dart';
-import 'package:sentezel/newTransaction/payment/payment_controller.dart';
 
 class DebtSettlementScreen extends HookConsumerWidget {
   final Debtor debtor;
@@ -46,7 +45,7 @@ class DebtSettlementScreen extends HookConsumerWidget {
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'Payments',
+                        title: 'Debt Settlement ',
                         onSave: () {
                           onSubmit(context: context, ref: ref);
                         },
@@ -55,31 +54,50 @@ class DebtSettlementScreen extends HookConsumerWidget {
                       DateSelectTimeLineWidget(
                         initialDate: data.date,
                         onDateSelected: (selectedDate) {
-                          ref.read(paymentControllerProvider.notifier).setState(
+                          ref
+                              .read(debtSettlementControllerProvider.notifier)
+                              .setState(
                                 data.copyWith(date: selectedDate),
                               );
                         },
                       ),
+                      SizedBox(
+                        height: 10,
+                      ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: MediaQuery.of(context).size.height * 0.07,
                         decoration: BoxDecoration(color: Colors.white),
                         child: Padding(
-                          padding: const EdgeInsets.all(16.0),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 4,
+                          ),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(
-                                'Current Debt Amount',
-                                style: TextStyle(
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                              Column(
+                                children: [
+                                  Text(
+                                    'Current Debt of',
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Text(
+                                    data.debtor!.party!.name,
+                                    style: TextStyle(
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
                               ),
                               Text(
                                 currencySeperatorStringFormatterHelper(
-                                    data.debtTotalAmount),
+                                    data.debtor!.amount),
                                 style: TextStyle(
-                                  fontSize: 20,
+                                  fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               )
@@ -126,15 +144,15 @@ class DebtSettlementScreen extends HookConsumerWidget {
   }
 
   onSubmit({required BuildContext context, required WidgetRef ref}) async {
-    ref.watch(paymentControllerProvider.notifier).validate();
-    await ref.watch(paymentControllerProvider.notifier).setup();
-    final state = ref.watch(paymentControllerProvider);
+    ref.watch(debtSettlementControllerProvider.notifier).validate();
+    await ref.watch(debtSettlementControllerProvider.notifier).setup();
+    final state = ref.watch(debtSettlementControllerProvider);
     if (state.data!.value.errorMessages.length == 0) {
       showModalBottomSheet(
         context: context,
-        builder: (context) => PaymentConfirmationBottomSheet(
+        builder: (context) => DebtSettlementConfirmationBottomSheet(
           onConfirm: () {
-            ref.watch(paymentControllerProvider.notifier).submit();
+            ref.watch(debtSettlementControllerProvider.notifier).submit();
 
             showCupertinoModalBottomSheet(
               expand: true,
@@ -149,7 +167,7 @@ class DebtSettlementScreen extends HookConsumerWidget {
     } else {
       showModalBottomSheet(
         context: context,
-        builder: (context) => PaymentValidationErrorBottomSheet(
+        builder: (context) => DebtSettlementValidationErrorBottomSheet(
           validationErrorMessages: state.data!.value.errorMessages,
         ),
       );
@@ -157,7 +175,7 @@ class DebtSettlementScreen extends HookConsumerWidget {
   }
 
   _amount({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(paymentControllerProvider);
+    final state = ref.watch(debtSettlementControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
@@ -166,7 +184,7 @@ class DebtSettlementScreen extends HookConsumerWidget {
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
           print(value);
-          ref.watch(paymentControllerProvider.notifier).setState(
+          ref.watch(debtSettlementControllerProvider.notifier).setState(
                 state.data!.value.copyWith(
                   amount: _value,
                 ),
@@ -191,7 +209,8 @@ class DebtSettlementScreen extends HookConsumerWidget {
       onTap: () {
         showModalBottomSheet(
           context: context,
-          builder: (context) => PaymentTransactionModeSelectModalBottomSheet(),
+          builder: (context) =>
+              DebtSettlementTransactionModeSelectModalBottomSheet(),
         );
       },
       child: Container(
@@ -225,14 +244,14 @@ class DebtSettlementScreen extends HookConsumerWidget {
   }
 
   _particular({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(paymentControllerProvider);
+    final state = ref.watch(debtSettlementControllerProvider);
     return Container(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
         initialValue: state.data!.value.particular,
         onChanged: (value) {
-          ref.watch(paymentControllerProvider.notifier).setState(
+          ref.watch(debtSettlementControllerProvider.notifier).setState(
                 state.data!.value.copyWith(particular: value),
               );
         },

@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/payment/payment_controller.dart';
+import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_controller.dart';
 
-class DebtRepaymentConfirmationBottomSheet extends HookConsumerWidget {
+class DebtSettlementConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
   final Function onCancel;
   final double itemFontSize = 16;
-  const DebtRepaymentConfirmationBottomSheet({
+  const DebtSettlementConfirmationBottomSheet({
     Key? key,
     required this.onConfirm,
     required this.onCancel,
@@ -17,7 +17,7 @@ class DebtRepaymentConfirmationBottomSheet extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(paymentControllerProvider).data!.value;
+    final state = ref.watch(debtSettlementControllerProvider).data!.value;
 
     return Material(
       child: SafeArea(

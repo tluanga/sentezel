@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
 
-class DebtRepaymentValidationErrorBottomSheet extends HookConsumerWidget {
+class DebtSettlementValidationErrorBottomSheet extends HookConsumerWidget {
   final List<String> validationErrorMessages;
-  const DebtRepaymentValidationErrorBottomSheet(
+  const DebtSettlementValidationErrorBottomSheet(
       {Key? key, required this.validationErrorMessages})
       : super(key: key);
 
