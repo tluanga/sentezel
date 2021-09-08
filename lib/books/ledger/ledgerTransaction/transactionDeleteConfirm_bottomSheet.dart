@@ -6,12 +6,10 @@ import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 
 class TransactionDeleteConfirmBottomSheet extends HookConsumerWidget {
-  final int ledgerId;
   final int transactionId;
   const TransactionDeleteConfirmBottomSheet({
     Key? key,
     required this.transactionId,
-    required this.ledgerId,
   }) : super(key: key);
 
   @override
@@ -33,13 +31,10 @@ class TransactionDeleteConfirmBottomSheet extends HookConsumerWidget {
             ),
             GestureDetector(
               onTap: () {
-                ref
-                    .read(transactionRepositoryProvider)
-                    .remove(id: transactionId);
-                ref.read(ledgerControllerProvider.notifier).loadData();
-                ref
-                    .read(ledgerDetailControllerProvider.notifier)
-                    .loadData(id: ledgerId);
+                ref.read(ledgerDetailControllerProvider.notifier).removeItem(
+                      transactionId: transactionId,
+                    );
+
                 Navigator.pop(context);
               },
               child: Container(

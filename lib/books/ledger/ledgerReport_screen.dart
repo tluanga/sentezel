@@ -89,9 +89,11 @@ class LedgerReportScreen extends HookConsumerWidget {
             .read(ledgerDetailControllerProvider.notifier)
             .loadData(id: item.ledgerId);
         Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => LedgerDetailScreen(ledgerReport: item)));
+          context,
+          MaterialPageRoute(
+            builder: (context) => LedgerDetailScreen(),
+          ),
+        );
       },
       child: Container(
         margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),

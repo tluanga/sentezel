@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_controller.dart';
 import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransactionDetail_bottomSheet.dart';
@@ -14,19 +14,13 @@ import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class LedgerDetailScreen extends HookConsumerWidget {
-  final LedgerReport ledgerReport;
-  const LedgerDetailScreen({Key? key, required this.ledgerReport})
-      : super(key: key);
+  const LedgerDetailScreen({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(ledgerDetailControllerProvider);
-    useEffect(() {
-      ref
-          .read(ledgerDetailControllerProvider.notifier)
-          .loadData(id: this.ledgerReport.ledgerId);
-      print('useffect is running');
-    }, []);
     return Material(
       child: SafeArea(
         child: Container(
@@ -96,8 +90,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
     return Container(
       height: size.height * 0.62,
       child: ListView.builder(
-        itemCount: this.ledgerReport.ledgerTransaction != null
-            ? this.ledgerReport.ledgerTransaction!.length
+        itemCount: ledgerReportData.ledgerTransaction != null
+            ? ledgerReportData.ledgerTransaction!.length
             : 0,
         itemBuilder: (context, index) {
           return _listItem(
@@ -138,8 +132,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
             showModalBottomSheet(
               context: context,
               builder: (context) => TransactionDeleteConfirmBottomSheet(
-                  transactionId: data.transaction!.id!,
-                  ledgerId: this.ledgerReport.ledgerId),
+                transactionId: data.transaction!.id!,
+              ),
             )
           },
         )

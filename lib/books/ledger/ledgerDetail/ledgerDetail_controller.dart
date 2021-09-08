@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 
 final ledgerDetailControllerProvider =
     StateNotifierProvider<LedgerDetailController, LedgerReport>(
@@ -20,6 +21,16 @@ class LedgerDetailController extends StateNotifier<LedgerReport> {
 
   loadData({required int id}) async {
     print('load Data');
-    state = _read(ledgerControllerProvider.notifier).getLedgerDetail(id);
+    state = await _read(ledgerControllerProvider.notifier).getLedgerDetail(id);
+    print(state);
+  }
+
+  removeItem({required int transactionId}) async {
+    _read(transactionRepositoryProvider).remove(id: transactionId);
+    _read(ledgerControllerProvider.notifier).loadData();
+    final _ledgerTransaction = state.ledgerTransaction;
+    _ledgerTransaction!
+        .removeWhere((element) => element.transaction!.id! == transactionId);
+    state = state.copyWith(ledgerTransaction: _ledgerTransaction);
   }
 }
