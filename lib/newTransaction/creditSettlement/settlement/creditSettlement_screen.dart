@@ -82,7 +82,7 @@ class CreditSettlementScreen extends HookConsumerWidget {
                               Column(
                                 children: [
                                   Text(
-                                    'Current Debt of',
+                                    'Current Credit to',
                                     style: TextStyle(
                                       fontSize: 14,
                                       fontWeight: FontWeight.bold,

@@ -125,6 +125,19 @@ class LedgerDetailScreen extends HookConsumerWidget {
           },
         ),
         IconSlideAction(
+          caption: 'Edit',
+          color: Colors.purple,
+          icon: Icons.edit,
+          onTap: () => {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => LedgerTransactionDetailBottomSheet(
+                ledgerTransaction: data,
+              ),
+            )
+          },
+        ),
+        IconSlideAction(
           caption: 'Delete',
           color: Colors.red.shade300,
           icon: Icons.delete,
