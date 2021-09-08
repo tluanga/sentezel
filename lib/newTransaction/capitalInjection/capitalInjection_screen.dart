@@ -8,12 +8,12 @@ import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
 import 'package:sentezel/newTransaction/capitalInjection/capitalInjectionTransactionModeSelect_modal.dart';
 import 'package:sentezel/newTransaction/capitalInjection/capitalInjection_controller.dart';
 import 'package:sentezel/newTransaction/capitalInjection/model/capitalInjection_model.dart';
-import 'package:sentezel/newTransaction/capitalInjection/paymentConfirm_modal.dart';
-import 'package:sentezel/newTransaction/capitalInjection/paymentValidationError_bottomSheet.dart';
+import 'package:sentezel/newTransaction/capitalInjection/capitalInjectionConfirm_modal.dart';
+import 'package:sentezel/newTransaction/capitalInjection/capitalInjectionValidationError_bottomSheet.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
 
-class PaymentScreen extends HookConsumerWidget {
-  const PaymentScreen({Key? key}) : super(key: key);
+class CapitalInjectionScreen extends HookConsumerWidget {
+  const CapitalInjectionScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -39,7 +39,7 @@ class PaymentScreen extends HookConsumerWidget {
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
-                        title: 'Payments',
+                        title: 'Capital Injection',
                         onSave: () {
                           onSubmit(context: context, ref: ref);
                         },

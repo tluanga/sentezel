@@ -3,7 +3,7 @@ import 'package:sentezel/newTransaction/capitalInjection/model/capitalInjection_
 import 'package:sentezel/newTransaction/common/helper/getTransactionModeLedger_helper.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/payment/model/payment_model.dart';
+
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
 import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
@@ -21,11 +21,14 @@ class CapitalInjectionController
   loadData() async {
     final _category = await _read(transactionCategoryRepositoryProvider)
         .getItem(id: TransactionCategoryIndex.CapitalInjection);
+    final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
+        .getItem(id: _category.creditSideLedger!);
     state = AsyncData(
       CapitalInjection(
         errorMessages: [],
         date: DateTime.now(),
         category: _category,
+        creditSideLedger: _creditSideLedger,
       ),
     );
     print(state);
@@ -60,11 +63,10 @@ class CapitalInjectionController
     final finalData = stateData.copyWith(
       creditAmount: stateData.amount,
       debitAmount: stateData.amount,
-      creditSideLedger: await getTransactionModeLedgerHelper(
+      debitSideLedger: await getTransactionModeLedgerHelper(
         stateData.mode!,
         _read,
       ),
-      debitSideLedger: _debitSideLedger,
     );
     state = AsyncData(finalData);
   }

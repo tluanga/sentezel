@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/newTransaction/capitalInjection/capitalInjection_screen.dart';
 import 'package:sentezel/newTransaction/contra/contra_screen.dart';
 import 'package:sentezel/newTransaction/creditSettlement/creditorList_screen.dart';
 import 'package:sentezel/newTransaction/debtSettlement/debtorList_screen.dart';
@@ -181,7 +182,14 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                   context: context,
                   label: 'Capital Injection',
                   icon: CupertinoIcons.square_stack_3d_down_dottedline,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CapitalInjectionScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _close(
                   context: context,
