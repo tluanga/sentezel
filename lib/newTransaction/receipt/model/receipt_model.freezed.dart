@@ -82,6 +82,8 @@ abstract class $ReceiptCopyWith<$Res> {
       LedgerMaster? creditSideLedger,
       LedgerMaster? debitSideLedger,
       List<String> errorMessages});
+
+  $TransactionCategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -153,6 +155,17 @@ class _$ReceiptCopyWithImpl<$Res> implements $ReceiptCopyWith<$Res> {
               as List<String>,
     ));
   }
+
+  @override
+  $TransactionCategoryCopyWith<$Res>? get category {
+    if (_value.category == null) {
+      return null;
+    }
+
+    return $TransactionCategoryCopyWith<$Res>(_value.category!, (value) {
+      return _then(_value.copyWith(category: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -172,6 +185,9 @@ abstract class _$ReceiptCopyWith<$Res> implements $ReceiptCopyWith<$Res> {
       LedgerMaster? creditSideLedger,
       LedgerMaster? debitSideLedger,
       List<String> errorMessages});
+
+  @override
+  $TransactionCategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc

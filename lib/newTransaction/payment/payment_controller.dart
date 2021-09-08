@@ -44,7 +44,7 @@ class PaymentController extends StateNotifier<AsyncValue<Payment>> {
 
   setup() async {
     final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: state.data!.value.category!.debitSideLedger);
+        .getItem(id: state.data!.value.category!.debitSideLedger!);
 
     //---------------Updating the state-------
     final stateData = state.data!.value;
@@ -75,7 +75,7 @@ class PaymentController extends StateNotifier<AsyncValue<Payment>> {
           particular: stateData.particular!,
           mode: stateData.mode!,
           date: stateData.date,
-          transactionCategoryId: stateData.category!.id,
+          transactionCategoryId: stateData.category!.id!,
           debitSideLedger: stateData.debitSideLedger!.id,
           creditSideLedger: stateData.creditSideLedger != null
               ? stateData.creditSideLedger!.id

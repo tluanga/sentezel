@@ -22,7 +22,7 @@ void injectTransactionCategory(Database db) async {
   );
   //--Injecting Data---
   transactionTypeData.asMap().forEach((key, value) async {
-    final mapData = TransactionCategory.withId(
+    final mapData = TransactionCategory(
       id: value.id,
       name: value.name,
       description: value.description,
@@ -30,7 +30,7 @@ void injectTransactionCategory(Database db) async {
       debitSideLedger: value.debitSideLedger,
       creditSideLedger: value.creditSideLedger,
       status: value.status,
-    ).toMap();
+    ).toJson();
     print('--The value of json is--');
     await db.insert(
       TransactionCategoryConfig.dbName,
@@ -42,7 +42,7 @@ void injectTransactionCategory(Database db) async {
 
 //  transactionTypeData.asMap().forEach((key, value) async {
 //     print('status is ${value.status}');
-//     final mapData = TransactionCategory.withId(
+//     final mapData = TransactionCategory(
 //       id: value.id,
 //       name: value.name,
 //       description: value.description,

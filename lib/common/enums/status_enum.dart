@@ -1,5 +1,4 @@
-enum ActiveInActive {
+enum Status {
   active,
   inActive,
 }
-

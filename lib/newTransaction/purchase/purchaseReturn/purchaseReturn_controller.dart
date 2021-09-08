@@ -55,7 +55,7 @@ class PurchaseReturnController extends StateNotifier<PurchaseReturn> {
         _read,
       ),
       creditSideLedger: await _read(ledgerMasterRepositoryProvider)
-          .getItem(id: _category.creditSideLedger),
+          .getItem(id: _category.creditSideLedger!),
     );
     print(state);
   }
@@ -78,7 +78,7 @@ class PurchaseReturnController extends StateNotifier<PurchaseReturn> {
           particular: state.particular!,
           mode: state.mode!,
           date: state.date,
-          transactionCategoryId: state.category!.id,
+          transactionCategoryId: state.category!.id!,
           debitSideLedger: state.debitSideLedger!.id,
           creditSideLedger: state.creditSideLedger != null
               ? state.creditSideLedger!.id

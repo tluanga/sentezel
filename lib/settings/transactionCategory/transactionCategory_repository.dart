@@ -2,7 +2,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
-import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
+import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 import 'package:sentezel/settings/transactionCategory/transactionCategory_config.dart';
 
@@ -27,7 +27,7 @@ class TransactionCategoryRepository
 
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
       if (result.isNotEmpty) {
-        return TransactionCategory.fromMap(result.first);
+        return TransactionCategory.fromJson(result.first);
       }
       throw Exception('Transaction Type Not Present');
     } catch (e) {
@@ -41,7 +41,7 @@ class TransactionCategoryRepository
       Database db = await DatabaseService.instance.db;
 
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
-      return TransactionCategory.fromMap(result.first).name;
+      return TransactionCategory.fromJson(result.first).name;
     } catch (e) {
       print(e);
       return 'Error';
@@ -57,7 +57,7 @@ class TransactionCategoryRepository
       final result = await db
           .query(dbName, where: 'transactionType=?', whereArgs: [_type]);
 
-      return result.map((e) => TransactionCategory.fromMap(e)).toList();
+      return result.map((e) => TransactionCategory.fromJson(e)).toList();
     } catch (e) {
       print(e);
       throw e;
@@ -83,7 +83,7 @@ class TransactionCategoryRepository
       ''');
       List<TransactionCategory> list = [];
       result.forEach((item) {
-        list.add(TransactionCategory.fromMap(item));
+        list.add(TransactionCategory.fromJson(item));
       });
 
       return list;

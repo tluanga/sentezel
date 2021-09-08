@@ -89,6 +89,7 @@ abstract class $DebtSettlementCopyWith<$Res> {
       List<String> errorMessages});
 
   $DebtorCopyWith<$Res>? get debtor;
+  $TransactionCategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc
@@ -177,6 +178,17 @@ class _$DebtSettlementCopyWithImpl<$Res>
       return _then(_value.copyWith(debtor: value));
     });
   }
+
+  @override
+  $TransactionCategoryCopyWith<$Res>? get category {
+    if (_value.category == null) {
+      return null;
+    }
+
+    return $TransactionCategoryCopyWith<$Res>(_value.category!, (value) {
+      return _then(_value.copyWith(category: value));
+    });
+  }
 }
 
 /// @nodoc
@@ -202,6 +214,8 @@ abstract class _$DebtSettlementCopyWith<$Res>
 
   @override
   $DebtorCopyWith<$Res>? get debtor;
+  @override
+  $TransactionCategoryCopyWith<$Res>? get category;
 }
 
 /// @nodoc

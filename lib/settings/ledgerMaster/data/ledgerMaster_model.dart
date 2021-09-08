@@ -1,5 +1,5 @@
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 
 class LedgerMaster {
@@ -7,7 +7,7 @@ class LedgerMaster {
   String name;
   String description;
   LedgerMasterType type;
-  ActiveInActive status = ActiveInActive.active;
+  Status status = Status.active;
   LedgerMaster({
     required this.name,
     required this.description,
@@ -57,13 +57,13 @@ class LedgerMaster {
       default:
         _type = LedgerMasterType.direct;
     }
-    ActiveInActive _status;
+    Status _status;
     switch (map['status']) {
       case 'active':
-        _status = ActiveInActive.active;
+        _status = Status.active;
         break;
       default:
-        _status = ActiveInActive.inActive;
+        _status = Status.inActive;
     }
     return LedgerMaster.withId(
       id: map['id'],

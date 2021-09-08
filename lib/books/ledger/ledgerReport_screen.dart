@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_controller.dart';
 import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_screen.dart';
 import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
@@ -40,7 +41,7 @@ class LedgerReportScreen extends HookConsumerWidget {
               ),
             ),
             state.when(data: (data) {
-              return _list(context, data);
+              return _list(context: context, data: data, ref: ref);
             }, loading: () {
               return Center(
                 child: CircularProgressIndicator(),
@@ -56,7 +57,10 @@ class LedgerReportScreen extends HookConsumerWidget {
     );
   }
 
-  _list(context, data) {
+  _list(
+      {required BuildContext context,
+      required List<LedgerReport> data,
+      required WidgetRef ref}) {
     return Expanded(
       child: ListView.builder(
         itemCount: data.length,
@@ -64,19 +68,26 @@ class LedgerReportScreen extends HookConsumerWidget {
           return _listItem(
             context: context,
             item: data[index],
+            ref: ref,
           );
         },
       ),
     );
   }
 
-  _listItem({required BuildContext context, required LedgerReport item}) {
+  _listItem(
+      {required BuildContext context,
+      required LedgerReport item,
+      required WidgetRef ref}) {
     Color _color = Palette.color3;
 
     _color = Palette.color1;
 
     return GestureDetector(
       onTap: () {
+        ref
+            .read(ledgerDetailControllerProvider.notifier)
+            .loadData(id: item.ledgerId);
         Navigator.push(
             context,
             MaterialPageRoute(

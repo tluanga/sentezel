@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/enums/status_enum.dart';
 
 import 'package:sentezel/common/ui/widget/topBarWithSaveForBottomSheet_widget.dart';
 import 'package:sentezel/settings/asset/assetList_controller.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
-
 
 class NewAssetModal extends HookConsumerWidget {
   final LedgerMaster? payload;
@@ -21,8 +20,8 @@ class NewAssetModal extends HookConsumerWidget {
     final _descriptionTextEditingController = useTextEditingController(
       text: payload != null ? payload!.description : '',
     );
-    final _status = useState<ActiveInActive>(
-        payload != null ? payload!.status : ActiveInActive.active);
+    final _status =
+        useState<Status>(payload != null ? payload!.status : Status.active);
 
     return Material(
       child: Padding(
@@ -82,13 +81,10 @@ class NewAssetModal extends HookConsumerWidget {
                         activeTrackColor: Colors.green.shade400,
                         activeColor: Colors.white,
                         inactiveThumbColor: Colors.white,
-                        value: _status.value == ActiveInActive.active
-                            ? true
-                            : false,
+                        value: _status.value == Status.active ? true : false,
                         onChanged: (value) {
-                          _status.value = value == true
-                              ? ActiveInActive.active
-                              : ActiveInActive.inActive;
+                          _status.value =
+                              value == true ? Status.active : Status.inActive;
                         },
                       ),
                     ),

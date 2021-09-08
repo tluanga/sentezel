@@ -2,8 +2,9 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
+import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_index.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
@@ -22,8 +23,11 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
     print('Load data');
     try {
       List<LedgerReport> _ledgerReportList = [];
-      final ledgerMasterDataList = await _read(ledgerMasterRepositoryProvider)
-          .getList(searchString: ledgerName);
+      final ledgerMasterDataList =
+          await _read(ledgerMasterRepositoryProvider).getList(
+        searchString: ledgerName,
+        type: LedgerMasterType.party,
+      );
       print(ledgerMasterDataList.length);
 
       //---------Iterate Ledger Master List-------------
@@ -56,43 +60,21 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
               await _read(transactionCategoryRepositoryProvider)
                   .getItem(id: _transactionList[j].transactionCategoryId);
 
-          if (_transactionCategory.creditSideLedger ==
-              ledgerMasterDataList[i].id) {
+          //We have to check for debit or Credit
+
+          if (_transactionCategory.transactionType == TransactionType.hralh ||
+              _transactionCategory.transactionType == TransactionType.lakluh) {
+            //----------If Party---
+            _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+            _ledgerTransaction.amount = _transactionList[j].debitAmount;
+            _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+            print('_ledgerTransaction.debitOrCredit');
+          } else {
             _ledgerReport.creditAmount += _transactionList[j].creditAmount;
             _ledgerTransaction.amount = _transactionList[j].creditAmount;
             _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
-          } else if (_transactionCategory.debitSideLedger ==
-              ledgerMasterDataList[i].id) {
-            _ledgerReport.debitAmount += _transactionList[j].debitAmount;
-            _ledgerTransaction.amount = _transactionList[j].debitAmount;
-            _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
-          } else
-
-          //--Asset----
-          if (_transactionList[j].assetLedgerId == ledgerMasterDataList[i].id) {
-            _ledgerReport.debitAmount += _transactionList[j].debitAmount;
-            _ledgerTransaction.amount = _transactionList[j].debitAmount;
-            _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
-          } else
-
-          //Party--
-          //We have to check for debit or Credit
-          if (_transactionList[j].partyLedgerId == ledgerMasterDataList[i].id) {
-            if (_transactionCategory.debitSideLedger ==
-                    LedgerMasterIndex.Bank ||
-                _transactionCategory.debitSideLedger ==
-                    LedgerMasterIndex.Cash) {
-              //----Party is in the debit side-
-              //Because BAnk/Cash when in credit replaced by party
-              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
-              _ledgerTransaction.amount = _transactionList[j].debitAmount;
-              ;
-            } else {
-              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
-              _ledgerTransaction.amount = _transactionList[j].creditAmount;
-              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
-            }
           }
+
           _ledgerTransactionList.add(_ledgerTransaction);
         }
         _ledgerReportList.add(_ledgerReport);
@@ -107,12 +89,8 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
   }
 
   LedgerReport getLedgerDetail(int ledgerid) {
-    var result;
-    state.whenData(
-      (value) {
-        result = value.firstWhere((element) => element.ledgerId == ledgerid);
-      },
-    );
-    return result;
+    var data =
+        state.data!.value.firstWhere((element) => element.ledgerId == ledgerid);
+    return data;
   }
 }

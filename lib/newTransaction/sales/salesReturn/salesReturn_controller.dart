@@ -22,7 +22,7 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
         await _read(transactionCategoryRepositoryProvider)
             .getItem(id: TransactionCategoryIndex.SalesReturn);
     final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: _category.debitSideLedger);
+        .getItem(id: _category.debitSideLedger!);
 
     state = AsyncData(SalesReturn(
       category: _category,
@@ -83,7 +83,7 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
           particular: stateData.particular!,
           mode: stateData.mode!,
           date: stateData.date,
-          transactionCategoryId: stateData.category!.id,
+          transactionCategoryId: stateData.category!.id!,
           debitSideLedger: stateData.debitSideLedger!.id,
           creditSideLedger: stateData.creditSideLedger != null
               ? stateData.creditSideLedger!.id

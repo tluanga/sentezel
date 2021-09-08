@@ -1,4 +1,4 @@
-import 'package:sentezel/common/enums/sumChetvelDanType_enum.dart';
+import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
@@ -7,7 +7,7 @@ import 'package:sentezel/settings/transactionCategory/data/transactionCategory_m
 // Blank are to be filled at runtime
 
 List<TransactionCategory> transactionTypeData = [
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.PurchaseOfRawMaterial,
     name: 'Purchase of Material',
     description: 'Purchase of Material for Resell or for Production',
@@ -15,7 +15,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Purchase,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.PurchaseOfAssets,
     name: 'Purchase of Assets',
     description:
@@ -24,7 +24,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Blank,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.SaleOfGoods,
     name: 'Sale of Goods',
     description: 'Sales of Goods which are not manufactured',
@@ -32,7 +32,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: LedgerMasterIndex.Goods,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.Wages,
     name: 'Wages',
     description: 'Hnathawkte hlawh',
@@ -40,7 +40,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Wages,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.CarriageExpenses,
     name: 'Carriage expenses',
     description: 'Bungraw phur kualnaa sum hman',
@@ -48,7 +48,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.CarriageExpense,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.ManufacturingExpenses,
     name: 'Manufacturing expenses',
     description: 'bungraw lakkhawmna',
@@ -56,7 +56,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.ManufacturingExpenses,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.PackingExpense,
     name: 'Packing expenses',
     description: 'bungraw pack na',
@@ -64,7 +64,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.PackingExpense,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.Salaries,
     name: 'Salaries ',
     description: 'hnathawkate thla tin hlawh',
@@ -72,7 +72,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Salaries,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.OfficeRent,
     name: 'Office rent',
     description: 'office luahna man',
@@ -80,7 +80,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.OfficeExpense,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.PrintingAndStationery,
     name: 'Printing & Stationery',
     description: 'Lehkha print na,etc. leh Stationary a sum hman te',
@@ -88,7 +88,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.PrintingAndStationery,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.TelephoneCharges,
     name: 'Telephone Charges',
     description: 'Telephone Charge',
@@ -96,7 +96,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.TelephoneCharges,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.PostageAndTelegram,
     name: 'Postage and telegram',
     description: 'postage and telegram',
@@ -104,7 +104,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.PrintingAndStationery,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.Insurance,
     name: 'Insurance',
     description: 'Insurance',
@@ -112,7 +112,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Insurance,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.Electricity,
     name: 'Electricity',
     description: 'Electric bill leh electric lama sum hmanna te',
@@ -120,7 +120,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.ElectricBill,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.RepairRenewalMaintenance,
     name: 'Repairs and renewal',
     description: 'Thil siam thatnaa sum hman te',
@@ -128,7 +128,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.RepairRenewalMaintenance,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.Advertisement,
     name: 'Advertisement',
     description: 'advertisement',
@@ -136,7 +136,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Advertisement,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.Discount,
     name: 'Discount',
     description: 'Discount kan pek na',
@@ -144,7 +144,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Discount,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.Depreciation,
     name: 'Depreciation',
     description: 'Thil man a ai tlawma kan pekna zat',
@@ -152,7 +152,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Depreciation,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.CarriageOutward,
     name: 'Carriage outward',
     description: 'Carriage outward',
@@ -160,7 +160,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.CarriageExpense,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.BadDebts,
     name: 'Bad debts',
     description: 'Ba min pek tawh loh tur te',
@@ -168,7 +168,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.BadDebts,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.ProvisionForBadDebt,
     name: 'Provision for bad debts',
     description: 'bat ral te phuhrukna tur',
@@ -176,7 +176,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.ProvisionForBadDebts,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.SellInCommission,
     name: 'Selling commission',
     description: 'Selling commission',
@@ -184,7 +184,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: LedgerMasterIndex.SellingCommision,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.BankCharges,
     name: 'Bank charges',
     description: 'Bank charges',
@@ -192,7 +192,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.BankCharges,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.LossOnSaleOfAsset,
     name: 'Loss on sale of asset',
     description: 'bungraw hralhchhawnna a pawisa hloh na',
@@ -200,7 +200,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.LossOnSaleOfAssets,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.DiscountReceived,
     name: 'Discount Recieved',
     description: 'thil leina a discount kan dawn zat',
@@ -208,7 +208,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: LedgerMasterIndex.DiscountReceived,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.CommissionReceived,
     name: 'Commission recieved',
     description: 'commission na a hmuh zat',
@@ -216,7 +216,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: LedgerMasterIndex.CommissionReceived,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.BankInterest,
     name: 'Bank interest',
     description: 'Bank interest dawn zat',
@@ -224,7 +224,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Bank,
     creditSideLedger: LedgerMasterIndex.BankInterestReceived,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.RentReceived,
     name: 'Rent recieved',
     description: 'Kan in/dawr luahman atanga sum dawn',
@@ -232,7 +232,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: LedgerMasterIndex.RentReceived,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.ProfitOnSaleOfAssets,
     name: 'Profit on sale of asset',
     description: 'Bungraw hralhchhawnna atanga hlawkna',
@@ -240,7 +240,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: LedgerMasterIndex.ProfitOnSaleOfAssets,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.SalesReturn,
     name: 'Sale Return',
     description: 'Bungraw hralhchhawn tawh let leh',
@@ -248,7 +248,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.SalesReturn,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.PurchaseReturn,
     name: 'Purchase Return',
     description: 'Bungraw hralhchhawn tawh let leh',
@@ -256,7 +256,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: LedgerMasterIndex.PurchaseReturn,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.CustomerDebtSettlement,
     name: 'Customer Debt  Settlement',
     description: 'Customer ten an ba an pek',
@@ -264,7 +264,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: 0,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.BusinessDebtSettlement,
     name: 'BusinessProfile Debt Bill Settlement',
     description: 'Sumdawna a ba pek',
@@ -272,7 +272,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: 0,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.BankToCash,
     name: 'Bank to Cash',
     description: 'Bank to Cash',
@@ -280,7 +280,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Cash,
     creditSideLedger: LedgerMasterIndex.Bank,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.CashToBank,
     name: 'Cash to Bank',
     description: 'Cash to Bank Transaction',
@@ -288,7 +288,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Bank,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.CapitalInjection,
     name: 'Capital Injection',
     description: 'Capital Injection into Business',
@@ -296,7 +296,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Bank,
     creditSideLedger: LedgerMasterIndex.Capital,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.OpeningBalanceCash,
     name: 'Opening Balance Cash',
     description: 'Opening balance Cash',
@@ -304,7 +304,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Capital,
     creditSideLedger: LedgerMasterIndex.Cash,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.OpeningBalanceBank,
     name: 'Opening Balance Bank',
     description: 'Opening balance Bank',
@@ -312,7 +312,7 @@ List<TransactionCategory> transactionTypeData = [
     debitSideLedger: LedgerMasterIndex.Capital,
     creditSideLedger: LedgerMasterIndex.Bank,
   ),
-  TransactionCategory.withId(
+  TransactionCategory(
     id: TransactionCategoryIndex.CustomDuty,
     name: 'Custom Duty',
     description: 'Custom Duty',

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
-import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/enums/status_enum.dart';
 
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
@@ -19,8 +19,8 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
     final _name = useState(ledgerMaster != null ? ledgerMaster!.name : '');
     final _type = useState(
         ledgerMaster != null ? ledgerMaster!.type : LedgerMasterType.direct);
-    final _status = useState<ActiveInActive>(
-        ledgerMaster != null ? ledgerMaster!.status : ActiveInActive.active);
+    final _status = useState<Status>(
+        ledgerMaster != null ? ledgerMaster!.status : Status.active);
 
     return Scaffold(
       body: SafeArea(
@@ -148,12 +148,10 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     activeTrackColor: Colors.green.shade400,
                     activeColor: Colors.white,
                     inactiveThumbColor: Colors.white,
-                    value:
-                        _status.value == ActiveInActive.active ? true : false,
+                    value: _status.value == Status.active ? true : false,
                     onChanged: (value) {
-                      _status.value = value == true
-                          ? ActiveInActive.active
-                          : ActiveInActive.inActive;
+                      _status.value =
+                          value == true ? Status.active : Status.inActive;
                     },
                   ),
                 ),

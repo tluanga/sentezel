@@ -1,25 +1,25 @@
 import 'dart:convert';
 
 import 'package:enum_to_string/enum_to_string.dart';
-import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/enums/status_enum.dart';
 
 class Party {
   int? id;
   String name;
   String description;
-  ActiveInActive? status = ActiveInActive.active;
+  Status? status = Status.active;
   Party({
     this.id,
     required this.name,
     required this.description,
-    this.status=ActiveInActive.active,
+    this.status = Status.active,
   });
 
   Party copyWith({
     int? id,
     String? name,
     String? description,
-    ActiveInActive? status,
+    Status? status,
   }) {
     return Party(
       id: id ?? this.id,
@@ -43,13 +43,13 @@ class Party {
   }
 
   factory Party.fromMap(Map<String, dynamic> map) {
-    ActiveInActive _status;
+    Status _status;
     switch (map['status']) {
       case 'active':
-        _status = ActiveInActive.active;
+        _status = Status.active;
         break;
       default:
-        _status = ActiveInActive.inActive;
+        _status = Status.inActive;
     }
     return Party(
       id: map['id'],

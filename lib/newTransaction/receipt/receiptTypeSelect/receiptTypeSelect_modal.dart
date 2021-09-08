@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/common/helpers/getInitialLetter_helper.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
 import 'package:sentezel/newTransaction/receipt/receiptTypeSelect/receiptTypeSelect_controller.dart';
@@ -117,7 +118,7 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
               ),
               child: Center(
                 child: Text(
-                  item.getInitialLetter(),
+                  getInitialLetter(item.name),
                   style: TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,

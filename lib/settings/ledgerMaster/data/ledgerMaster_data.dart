@@ -1,4 +1,4 @@
-import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
@@ -11,7 +11,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Bank',
     description: 'All Transaction Involving Bank',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //2-Cash
   LedgerMaster.withId(
@@ -19,7 +19,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Cash',
     description: 'All Transaction Involving Cash',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //3-Purchase
@@ -29,7 +29,7 @@ List<LedgerMaster> ledgerMasterData = [
     description:
         'All Transaction Involving Purchase of Item for resell or raw material',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //4-Discount Account
@@ -38,7 +38,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Discount',
     description: 'All Transaction with Discount',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //5-Goods
   LedgerMaster.withId(
@@ -46,7 +46,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Goods',
     description: 'Goods',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //----------Direct Expenses------------
@@ -56,7 +56,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Wages',
     description: 'Wages of Employees',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //7-Payment
@@ -65,7 +65,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Payment',
     description: 'Payment',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //8-Receipt
@@ -74,7 +74,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Receipt',
     description: 'Receipt',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //9-Carriage Expenses
@@ -83,7 +83,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Carriage Expenses',
     description: '',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //10-Custom Duty
@@ -92,7 +92,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Custom duty',
     description: 'Custom duty',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //11-Fuel
@@ -101,7 +101,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Fuel',
     description: 'Fuel',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //12-Electric Bill
@@ -110,7 +110,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Electric Bill',
     description: 'Electric Bill',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //13-Consumable
@@ -119,7 +119,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Consumable',
     description: 'Consumable',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //14-Packing Expense
@@ -128,7 +128,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Packing Expense',
     description: 'Packing Expense',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //15-Royalty
@@ -137,7 +137,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Royalty',
     description: '',
     type: LedgerMasterType.direct,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //------------Indirect Expenses----------
@@ -148,7 +148,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Salaries',
     description: 'Salaries of Employees',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 
   //17-Rent
@@ -157,7 +157,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Rent',
     description: 'Rent Paid',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //18-Furniture
   LedgerMaster.withId(
@@ -165,7 +165,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Furniture',
     description: 'Transactions made for the purchase of Furnitures',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //19-Water Bill
   LedgerMaster.withId(
@@ -173,7 +173,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Water Bill',
     description: 'Water Bill',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //20-Tax
   LedgerMaster.withId(
@@ -181,7 +181,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Tax',
     description: 'Tax payment',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //21-Sundry Expenses
   LedgerMaster.withId(
@@ -189,7 +189,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Sundry Expenses',
     description: 'Sundry Expenses',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //22-Printing & Stationery
   LedgerMaster.withId(
@@ -197,7 +197,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Printing & Stationery',
     description: 'Printing & Stationery',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //23-Telephone Charges
   LedgerMaster.withId(
@@ -205,7 +205,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Telephone Charges',
     description: 'Telephone Charges',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //24-Staff welfare expenses
   LedgerMaster.withId(
@@ -213,7 +213,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Staff welfare expenses',
     description: 'Staff welfare expenses',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //25-Establishment Expenses
   LedgerMaster.withId(
@@ -221,7 +221,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Establishment Expenses',
     description: 'Establishment Expenses',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //26-Internet Bill
   LedgerMaster.withId(
@@ -229,7 +229,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Internet Bill',
     description: 'Internet Bill',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //27-Courier Charge
   LedgerMaster.withId(
@@ -237,7 +237,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Courier Charge',
     description: 'Courier Charge',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //28-Distribution Expenses
   LedgerMaster.withId(
@@ -245,7 +245,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Distribution Expenses',
     description: 'Distribution Expenses',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //29-Travelling Expenses
   LedgerMaster.withId(
@@ -253,7 +253,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Travelling Expenses',
     description: 'Travelling Expenses',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //30-Freight Outward
   LedgerMaster.withId(
@@ -261,7 +261,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Freight Outward',
     description: 'Freight Outward',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //31-Audit Fee
   LedgerMaster.withId(
@@ -269,7 +269,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Audit Fee',
     description: 'Audit Fee',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //32-Bad Debts
   LedgerMaster.withId(
@@ -277,7 +277,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Bad Debts',
     description: 'Debts which are estimated to be uncollectible',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //33-Provision for bad debts
   LedgerMaster.withId(
@@ -285,7 +285,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Provision for Bad Debts',
     description: 'Account to make solution for bad debts',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //34-Advertisement
   LedgerMaster.withId(
@@ -293,7 +293,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Advertisement',
     description: 'Money Use for Advertisement',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //35-Charity/Donation
   LedgerMaster.withId(
@@ -301,7 +301,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Charity/Donation',
     description: 'Transactions made for Charity and/or Donations',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //36-Depreciation
   LedgerMaster.withId(
@@ -309,7 +309,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Depreciation',
     description: 'Depreciation',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //37-Bank Charges
   LedgerMaster.withId(
@@ -317,7 +317,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Bank Charges',
     description: 'Charges made by the bank to us',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //38-Administrative Expenses
   LedgerMaster.withId(
@@ -325,7 +325,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Administrative Expenses',
     description: 'Expenses for the cause of Administrations',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //39-Selling Commission
   LedgerMaster.withId(
@@ -333,7 +333,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Selling Commission',
     description: 'Selling Commission',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //40-Sample Expenses
   LedgerMaster.withId(
@@ -341,7 +341,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Sample Expenses',
     description: 'Sample Expenses',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //41-Liscense Fee
   LedgerMaster.withId(
@@ -349,7 +349,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Liscense Fee',
     description: 'Fees paid for license',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //42-Delivery Charges
   LedgerMaster.withId(
@@ -357,7 +357,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Delivery Charges',
     description: 'Delivery Charges',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //43-Sales tax paid
   LedgerMaster.withId(
@@ -365,7 +365,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Sales tax paid',
     description: 'Sales tax paid',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //44-Loss on sale of assets
   LedgerMaster.withId(
@@ -373,7 +373,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Loss on sale of assets',
     description: 'Loss on sale of assets',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //45-Loss by Fire/Theft
   LedgerMaster.withId(
@@ -381,7 +381,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Loss by Fire/Theft',
     description: '',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //46-Repair/Renewal/Maintenance
   LedgerMaster.withId(
@@ -389,7 +389,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Repair/Renewal/Maintenance',
     description: 'Account for repair, renewal and maintenance',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //47-Legal Charges
   LedgerMaster.withId(
@@ -397,7 +397,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Legal Charges',
     description: 'Legal Charges',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //48-Insurance
   LedgerMaster.withId(
@@ -405,7 +405,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Insurance',
     description: 'Insurance',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //49-Sales
   LedgerMaster.withId(
@@ -413,7 +413,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Sales',
     description: 'Sales account excluding sale returns',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //50-Sales Return
   LedgerMaster.withId(
@@ -421,7 +421,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Sales Return',
     description: 'Sales Return',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //51-Purchase Return
   LedgerMaster.withId(
@@ -429,7 +429,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Purchase Return',
     description: 'Purchase Return',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //52-Manufacturing Expenses
   LedgerMaster.withId(
@@ -437,7 +437,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Manufacturing Expenses',
     description: 'Manufacturing Expenses',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //53-Bank Interest Received
   LedgerMaster.withId(
@@ -445,7 +445,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Bank Interest Received',
     description: 'Bank Interest Received',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //54-Discount Received
   LedgerMaster.withId(
@@ -453,7 +453,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Discount Received',
     description: 'Discount Received',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //55-Rent Received
   LedgerMaster.withId(
@@ -461,7 +461,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Rent Received',
     description: 'Rent Received',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //56-Commission Received
   LedgerMaster.withId(
@@ -469,7 +469,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Commission Received',
     description: 'Commission Received',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //57-Profit on sale of Asset
   LedgerMaster.withId(
@@ -477,7 +477,7 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Profit on sale of Asset',
     description: 'Profit on sale of Asset',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
   //58-Capital
   LedgerMaster.withId(
@@ -485,6 +485,6 @@ List<LedgerMaster> ledgerMasterData = [
     name: 'Capital',
     description: 'Capital',
     type: LedgerMasterType.indirect,
-    status: ActiveInActive.active,
+    status: Status.active,
   ),
 ];

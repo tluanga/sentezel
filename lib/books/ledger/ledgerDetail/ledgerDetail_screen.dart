@@ -25,6 +25,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
       ref
           .read(ledgerDetailControllerProvider.notifier)
           .loadData(id: this.ledgerReport.ledgerId);
+      print('useffect is running');
     }, []);
     return Material(
       child: SafeArea(
@@ -32,10 +33,11 @@ class LedgerDetailScreen extends HookConsumerWidget {
           child: Column(
             children: [
               TopBarWidget(
-                  title: 'Ledger-${ledgerReport.name}',
-                  onClose: () {
-                    Navigator.pop(context);
-                  }),
+                title: 'Ledger-${state.name}',
+                onClose: () {
+                  Navigator.pop(context);
+                },
+              ),
               DateSelectionBar(),
               _listHeader(context),
               _list(context: context, ledgerReportData: state),

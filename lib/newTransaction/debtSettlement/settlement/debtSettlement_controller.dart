@@ -99,7 +99,7 @@ class DebtSettlementController
           particular: stateData.particular!,
           mode: stateData.mode!,
           date: stateData.date,
-          transactionCategoryId: stateData.category!.id,
+          transactionCategoryId: stateData.category!.id!,
           debitSideLedger: stateData.debitSideLedger != null
               ? stateData.debitSideLedger!.id
               : null,

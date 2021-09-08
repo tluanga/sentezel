@@ -23,7 +23,7 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
         await _read(transactionCategoryRepositoryProvider)
             .getItem(id: TransactionCategoryIndex.SaleOfGoods);
     final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: _category.creditSideLedger);
+        .getItem(id: _category.creditSideLedger!);
 
     state = AsyncData(GeneralSales(
       category: _category,
@@ -80,8 +80,8 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
     //---------------Updating the state-------
     final stateData = state.data!.value;
     final finalData = stateData.copyWith(
-      creditAmount: (stateData.amount - stateData.partialPaymentAmount),
-      debitAmount: stateData.amount,
+      creditAmount: stateData.amount,
+      debitAmount: (stateData.amount - stateData.partialPaymentAmount),
       debitSideLedger: stateData.mode != TransactionMode.credit
           ? await getTransactionModeLedgerHelper(
               stateData.mode!,
@@ -107,7 +107,7 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
           particular: stateData.particular!,
           mode: stateData.mode!,
           date: stateData.date,
-          transactionCategoryId: stateData.category!.id,
+          transactionCategoryId: stateData.category!.id!,
           debitSideLedger: stateData.debitSideLedger != null
               ? stateData.debitSideLedger!.id
               : null,

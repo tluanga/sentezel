@@ -19,6 +19,7 @@ class LedgerDetailController extends StateNotifier<LedgerReport> {
         );
 
   loadData({required int id}) async {
+    print('load Data');
     state = _read(ledgerControllerProvider.notifier).getLedgerDetail(id);
   }
 }

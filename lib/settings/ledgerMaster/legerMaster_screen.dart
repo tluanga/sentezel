@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sentezel/common/enums/activeInActive_enum.dart';
+import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
@@ -184,7 +184,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
                         ),
                       ),
                       Container(
-                        child: ledgerMaster.status == ActiveInActive.active
+                        child: ledgerMaster.status == Status.active
                             ? Text(
                                 'Active',
                                 style: TextStyle(
