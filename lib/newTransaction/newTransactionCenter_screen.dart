@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/newTransaction/contra/contra_screen.dart';
 import 'package:sentezel/newTransaction/creditSettlement/creditorList_screen.dart';
 import 'package:sentezel/newTransaction/debtSettlement/debtorList_screen.dart';
 
@@ -167,7 +168,14 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                   context: context,
                   label: 'Contra',
                   icon: CupertinoIcons.square_line_vertical_square_fill,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ContraScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _item(
                   context: context,

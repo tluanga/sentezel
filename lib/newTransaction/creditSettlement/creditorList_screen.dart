@@ -5,7 +5,6 @@ import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper
 import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
 import 'package:sentezel/newTransaction/creditSettlement/creditorList_controller.dart';
 import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlement_screen.dart';
-import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_screen.dart';
 
 class CreditorListScreen extends HookConsumerWidget {
   const CreditorListScreen({Key? key}) : super(key: key);

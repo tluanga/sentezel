@@ -4,7 +4,7 @@ import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
+
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
@@ -26,7 +26,6 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
       final ledgerMasterDataList =
           await _read(ledgerMasterRepositoryProvider).getList(
         searchString: ledgerName,
-        type: LedgerMasterType.party,
       );
       print(ledgerMasterDataList.length);
 
@@ -68,7 +67,6 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
             _ledgerReport.debitAmount += _transactionList[j].debitAmount;
             _ledgerTransaction.amount = _transactionList[j].debitAmount;
             _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
-            print('_ledgerTransaction.debitOrCredit');
           } else {
             _ledgerReport.creditAmount += _transactionList[j].creditAmount;
             _ledgerTransaction.amount = _transactionList[j].creditAmount;

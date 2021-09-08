@@ -2,8 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_controller.dart';
-import 'package:sentezel/books/ledger/ledger_controller.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 
 class TransactionDeleteConfirmBottomSheet extends HookConsumerWidget {
   final int transactionId;

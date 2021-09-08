@@ -5,8 +5,6 @@ import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettle
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/debtSettlement/model/debtor_model.dart';
-import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_model.dart';
 
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
