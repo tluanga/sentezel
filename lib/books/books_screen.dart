@@ -6,6 +6,7 @@ import 'package:sentezel/books/ledger/ledgerReport_screen.dart';
 import 'package:sentezel/books/profitAndLossReport/profitAndLossReport_screen.dart';
 import 'package:sentezel/books/tradingAccount/tradingAccountReport_screen.dart';
 import 'package:sentezel/books/trialBalance/trialBalanceReport_screen.dart';
+import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 
 class BooksScreen extends StatelessWidget {
@@ -131,7 +132,8 @@ class BooksScreen extends StatelessWidget {
                     label: 'Close ',
                     icon: CupertinoIcons.xmark,
                     onTap: () {
-                      Navigator.pop(context);
+                      Navigator.pushNamedAndRemoveUntil(context,
+                          RouteConstant.home, ModalRoute.withName('/'));
                     },
                   ),
                 ],

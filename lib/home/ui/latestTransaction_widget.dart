@@ -15,16 +15,17 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
     }, []);
     AsyncValue<List<Journal>> state = ref.watch(journalControllerProvider);
     return state.when(
-        data: (data) {
-          print(data);
-          return _list(context, data);
-        },
-        loading: () => Center(
-              child: CircularProgressIndicator(),
-            ),
-        error: (error, stack) => Container(
-              child: Text(error.toString()),
-            ));
+      data: (data) {
+        print(data);
+        return _list(context, data);
+      },
+      loading: () => Center(
+        child: CircularProgressIndicator(),
+      ),
+      error: (error, stack) => Container(
+        child: Text(error.toString()),
+      ),
+    );
   }
 
   _list(BuildContext context, List<Journal> list) {
