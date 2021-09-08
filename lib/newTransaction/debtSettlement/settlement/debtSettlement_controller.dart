@@ -33,7 +33,7 @@ class DebtSettlementController
       errorMessages: [],
       date: DateTime.now(),
       creditSideLedger: _creditSideLedger,
-      particular: _category.name,
+      particular: _category.name + '-' + debtor.party!.name,
       debtor: debtor,
     ));
     print(state);
@@ -43,6 +43,7 @@ class DebtSettlementController
   setState(payload) {
     DebtSettlement _newState = payload;
     state = AsyncData(_newState);
+    print(state.data!.value);
   }
 
   validate() {

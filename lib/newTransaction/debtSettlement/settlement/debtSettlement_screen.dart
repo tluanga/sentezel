@@ -1,6 +1,7 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
@@ -21,10 +22,13 @@ class DebtSettlementScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref
-        .read(debtSettlementControllerProvider.notifier)
-        .loadData(debtor: debtor);
     var state = ref.watch(debtSettlementControllerProvider);
+
+    useEffect(() {
+      ref
+          .read(debtSettlementControllerProvider.notifier)
+          .loadData(debtor: debtor);
+    }, []);
 
     onCancel() {
       print('cancel is called');

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/debtRepayment/debtorList_screen.dart';
+import 'package:sentezel/newTransaction/debtSettlement/debtorList_screen.dart';
 
 import 'package:sentezel/newTransaction/payment/payment_screen.dart';
 
