@@ -3,22 +3,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
+import 'package:sentezel/newTransaction/debtRepayment/model/debtor_model.dart';
+import 'package:sentezel/newTransaction/debtRepayment/settlement/debtSettlement_controller.dart';
+import 'package:sentezel/newTransaction/debtRepayment/settlement/debtSettlement_model.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
-import 'package:sentezel/newTransaction/payment/model/payment_model.dart';
 import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/payment/paymentTypeSelect/paymentTypeSelect_modal.dart';
 import 'package:sentezel/newTransaction/payment/paymentValidationError_bottomSheet.dart';
 import 'package:sentezel/newTransaction/payment/payment_controller.dart';
 
 class DebtSettlementScreen extends HookConsumerWidget {
-  const DebtSettlementScreen({Key? key}) : super(key: key);
+  final Debtor debtor;
+  const DebtSettlementScreen({Key? key, required this.debtor})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.watch(paymentControllerProvider);
+    var state = ref.watch(debtSettlementControllerProvider);
 
     onCancel() {
       print('cancel is called');
@@ -53,6 +57,32 @@ class DebtSettlementScreen extends HookConsumerWidget {
                               );
                         },
                       ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.08,
+                        decoration: BoxDecoration(color: Colors.white),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                'Current Debt Amount',
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              Text(
+                                currencySeperatorStringFormatterHelper(121212),
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
 
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
@@ -72,7 +102,7 @@ class DebtSettlementScreen extends HookConsumerWidget {
                         height: 10,
                       ),
                       //-----ASSET SELECTION----------------------
-                      _paymentTypeSelect(context: context, ref: ref),
+
                       //----PARTICULAR SELECTION----------
                       _particular(context: context, ref: ref),
                       SizedBox(
@@ -150,7 +180,8 @@ class DebtSettlementScreen extends HookConsumerWidget {
     );
   }
 
-  _transactionMode({required BuildContext context, required Payment state}) {
+  _transactionMode(
+      {required BuildContext context, required DebtSettlement state}) {
     return //------------Transaction Mode----
         GestureDetector(
       onTap: () {
@@ -172,58 +203,6 @@ class DebtSettlementScreen extends HookConsumerWidget {
           children: [
             Text(
               EnumToString.convertToString(state.mode, camelCase: true),
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 15,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            Icon(
-              CupertinoIcons.arrowtriangle_down,
-              color: Colors.black,
-              size: 20,
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  _paymentTypeSelect({required BuildContext context, required WidgetRef ref}) {
-    final state = ref.watch(paymentControllerProvider).data!.value;
-    return GestureDetector(
-      onTap: () {
-        showModalBottomSheet(
-          context: context,
-          builder: (context) => PaymentTypeSelectModal(
-            onSelect: (category) {
-              ref.read(paymentControllerProvider.notifier).setState(
-                    state.copyWith(category: category),
-                  );
-            },
-          ),
-        );
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width * 0.97,
-        height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade300,
-          borderRadius: BorderRadius.circular(3),
-          border: Border.all(
-            color: state.category == null
-                ? Colors.red.shade200
-                : Colors.grey.shade300,
-          ),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              state.category == null
-                  ? 'Please Select Payment Category'
-                  : state.category!.name,
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 15,
