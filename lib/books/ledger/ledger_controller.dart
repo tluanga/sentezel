@@ -73,6 +73,8 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
             _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
           }
 
+          //-----------Contra---------------
+
           _ledgerTransactionList.add(_ledgerTransaction);
         }
         _ledgerReportList.add(_ledgerReport);

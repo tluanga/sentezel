@@ -1,5 +1,4 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'package:sentezel/newTransaction/contra/contraMode_enum.dart';
 import 'package:sentezel/newTransaction/contra/model/contra_model.dart';
 import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
@@ -68,7 +67,7 @@ class ContraController extends StateNotifier<AsyncValue<Contra>> {
       debitSideLedger:
           stateData.mode == ContraMode.bankToCash ? _cashAc : _bankAc,
       creditSideLedger:
-          stateData.mode == ContraMode.cashToBank ? _bankAc : _cashAc,
+          stateData.mode == ContraMode.cashToBank ? _cashAc : _bankAc,
     );
     state = AsyncData(finalData);
   }
