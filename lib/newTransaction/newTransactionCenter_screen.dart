@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/newTransaction/creditSettlement/creditorList_screen.dart';
 import 'package:sentezel/newTransaction/debtSettlement/debtorList_screen.dart';
 
 import 'package:sentezel/newTransaction/payment/payment_screen.dart';
@@ -133,7 +134,7 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                 ),
                 _item(
                   context: context,
-                  label: 'Debt Repayment',
+                  label: 'Debt Settlement',
                   icon: CupertinoIcons.square_on_circle,
                   onTap: () {
                     Navigator.push(
@@ -146,9 +147,16 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                 ),
                 _item(
                   context: context,
-                  label: 'Credit Repayment',
+                  label: 'Credit Settlement',
                   icon: CupertinoIcons.square_stack,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CreditorListScreen(),
+                      ),
+                    );
+                  },
                 ),
               ],
             ),
