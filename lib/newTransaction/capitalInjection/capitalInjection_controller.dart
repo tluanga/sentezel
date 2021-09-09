@@ -29,6 +29,7 @@ class CapitalInjectionController
         date: DateTime.now(),
         category: _category,
         creditSideLedger: _creditSideLedger,
+        particular: _category.name,
       ),
     );
     print(state);

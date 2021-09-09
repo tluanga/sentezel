@@ -120,9 +120,9 @@ class CapitalInjectionConfirmationBottomSheet extends HookConsumerWidget {
 
                   // //--Normal Payment -- Non Credit- Non Partial
 
-                  _debitSide(
-                      debitSideLedgerName: state.debitSideLedger!.name,
-                      amount: state.debitAmount),
+                  // _debitSide(
+                  //     debitSideLedgerName: state.debitSideLedger!.name,
+                  //     amount: state.debitAmount),
 
                   //--------------CREDIT SIDE-----
                   _creditSide(
