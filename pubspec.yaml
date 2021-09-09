@@ -45,6 +45,7 @@ dependencies:
   table_calendar: ^3.0.1
   flutter_otp_text_field: ^1.0.0
   flutter_slidable: ^0.6.0
+  fl_chart: ^0.40.0
 
 dev_dependencies:
   flutter_test:
