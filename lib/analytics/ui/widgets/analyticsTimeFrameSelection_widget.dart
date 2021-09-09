@@ -42,20 +42,29 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                   );
                 },
                 child: Container(
-                  child: Row(
-                    children: [
-                      Text(
-                        'Select Period',
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
+                  height: MediaQuery.of(context).size.height * 0.04,
+                  width: MediaQuery.of(context).size.width * 0.29,
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey.shade700),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 4),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Select Period',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
-                      ),
-                      Icon(
-                        CupertinoIcons.chevron_down,
-                        size: 18,
-                      )
-                    ],
+                        Icon(
+                          CupertinoIcons.chevron_down,
+                          size: 18,
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),

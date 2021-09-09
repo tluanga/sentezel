@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection_widget.dart';
 import 'package:sentezel/books/journal/journalDetail_bottomSheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
@@ -9,6 +10,7 @@ import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.
 import 'package:sentezel/books/widgets/reportTopBar_widget.dart';
 
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 
 class JournalReportScreen extends HookConsumerWidget {
   const JournalReportScreen({Key? key}) : super(key: key);
@@ -25,15 +27,12 @@ class JournalReportScreen extends HookConsumerWidget {
             child: Container(
           child: Column(
             children: [
-              ReportTopBarWidget(
-                title: 'Journal Dashboard',
-                onGenerateExcel: () {},
-                onGeneratePdf: () {},
-                onClose: () {
-                  Navigator.pop(context);
-                },
-              ),
-              DateSelectionBar(),
+              TopBarWidget(
+                  title: 'Journal',
+                  onClose: () {
+                    Navigator.pop(context);
+                  }),
+              AnalyticsTimeFrameSelection(),
               data.length > 0 ? _list(context, data) : Container(),
             ],
           ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection_widget.dart';
 import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_controller.dart';
 import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransactionDetail_bottomSheet.dart';
 import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
@@ -32,7 +33,10 @@ class LedgerDetailScreen extends HookConsumerWidget {
                   Navigator.pop(context);
                 },
               ),
-              DateSelectionBar(),
+              AnalyticsTimeFrameSelection(),
+              SizedBox(
+                height: 10,
+              ),
               _listHeader(context),
               _list(context: context, ledgerReportData: state),
               _report(data: state),
@@ -88,7 +92,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
       {required BuildContext context, required LedgerReport ledgerReportData}) {
     Size size = MediaQuery.of(context).size;
     return Container(
-      height: size.height * 0.62,
+      height: size.height * 0.575,
       child: ListView.builder(
         itemCount: ledgerReportData.ledgerTransaction != null
             ? ledgerReportData.ledgerTransaction!.length
