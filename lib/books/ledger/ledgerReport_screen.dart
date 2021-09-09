@@ -100,7 +100,7 @@ class LedgerReportScreen extends HookConsumerWidget {
         height: MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Palette.blackGrey,
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
@@ -149,6 +149,7 @@ class LedgerReportScreen extends HookConsumerWidget {
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
+                        color: Colors.white,
                       ),
                     ),
                   ),
@@ -157,27 +158,47 @@ class LedgerReportScreen extends HookConsumerWidget {
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width * 0.45,
-                      decoration: BoxDecoration(
-                        color: Colors.green.shade200,
-                      ),
+                      // decoration: BoxDecoration(
+                      //   color: Colors.green.shade200,
+                      // ),
                       child: Row(
                         children: [
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
-                            child: Text('Debit'),
+                            child: Text(
+                              'Debit',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green.shade700,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             width: 5,
                           ),
-                          Text(':'),
+                          Text(
+                            ':',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.green.shade700,
+                            ),
+                          ),
                           SizedBox(
                             width: 22,
                           ),
                           Container(
                             child: Text(
                               currencySeperatorStringFormatterHelper(
-                                  item.debitAmount),
+                                item.debitAmount,
+                              ),
                               overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.green.shade700,
+                              ),
                             ),
                           ),
                         ],
@@ -189,19 +210,30 @@ class LedgerReportScreen extends HookConsumerWidget {
                   children: [
                     Container(
                       width: MediaQuery.of(context).size.width * 0.45,
-                      decoration: BoxDecoration(
-                        color: Palette.color2,
-                      ),
                       child: Row(
                         children: [
                           Container(
                             width: MediaQuery.of(context).size.width * 0.15,
-                            child: Text('Credit'),
+                            child: Text(
+                              'Credit',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                              ),
+                            ),
                           ),
                           SizedBox(
                             width: 5,
                           ),
-                          Text(':'),
+                          Text(
+                            ':',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red,
+                            ),
+                          ),
                           SizedBox(
                             width: 22,
                           ),
@@ -210,6 +242,11 @@ class LedgerReportScreen extends HookConsumerWidget {
                               currencySeperatorStringFormatterHelper(
                                   item.creditAmount),
                               overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.red,
+                              ),
                             ),
                           ),
                         ],
