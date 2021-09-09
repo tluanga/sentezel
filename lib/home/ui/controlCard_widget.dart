@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/widget/elevatedCard_widget.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
@@ -18,7 +19,13 @@ class HomeControlCard extends StatelessWidget {
           //Books
           GestureDetector(
             onTap: () {
-              Navigator.pushNamed(context, RouteConstant.books);
+              showCupertinoModalBottomSheet(
+                isDismissible: true,
+                expand: true,
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => BooksScreen(),
+              );
             },
             child: Stack(
               children: [

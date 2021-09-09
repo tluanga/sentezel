@@ -1,7 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
 import 'package:sentezel/settings/businessProfile/businessProfile_screen.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 import 'package:sentezel/settings/party/party_screen.dart';
@@ -28,8 +31,12 @@ class ControlCenterScreen extends StatelessWidget {
                     label: 'Books',
                     icon: CupertinoIcons.book,
                     onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, RouteConstant.books);
+                      showCupertinoModalBottomSheet(
+                        expand: true,
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => BooksScreen(),
+                      );
                     },
                   ),
                 ),
@@ -43,7 +50,14 @@ class ControlCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'New Transaction',
                   icon: CupertinoIcons.selection_pin_in_out,
-                  onTap: () {},
+                  onTap: () {
+                    showCupertinoModalBottomSheet(
+                      expand: true,
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => NewTranscationCenterScreen(),
+                    );
+                  },
                 ),
               ],
             ),

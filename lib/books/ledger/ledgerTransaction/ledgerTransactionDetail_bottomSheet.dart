@@ -54,6 +54,19 @@ class LedgerTransactionDetailBottomSheet extends HookConsumerWidget {
                 ),
               ],
             ),
+            Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.3,
+                  child: Text('Amount'),
+                ),
+                Container(
+                  child: Text(
+                    ledgerTransaction.amount.toString(),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

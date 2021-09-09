@@ -67,7 +67,16 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
             _ledgerReport.debitAmount += _transactionList[j].debitAmount;
             _ledgerTransaction.amount = _transactionList[j].debitAmount;
             _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
-          } else {
+          } else if (_transactionCategory.transactionType ==
+                  TransactionType.lei ||
+              _transactionCategory.transactionType ==
+                  TransactionType.pekchhuah) {
+            if (_transactionList[j].assetLedgerId == _ledgerReport.ledgerId) {
+              //purcahse of Asset-----
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+            }
             _ledgerReport.creditAmount += _transactionList[j].creditAmount;
             _ledgerTransaction.amount = _transactionList[j].creditAmount;
             _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
