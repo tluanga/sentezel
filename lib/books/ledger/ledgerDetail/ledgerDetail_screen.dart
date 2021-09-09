@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/common/ui/widget/excelExportButton_widget.dart';
+import 'package:sentezel/common/ui/widget/pdfExportButton_widget.dart';
 import 'package:sentezel/common/ui/widget/timeframeSelection/timeFrameSelection_widget.dart';
 import 'package:sentezel/books/ledger/ledgerDetail/ledgerDetail_controller.dart';
 import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransactionDetail_bottomSheet.dart';
@@ -288,13 +290,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Container(
-                  child: ElevatedButton(
-                    onPressed: () {},
-                    child: Text('Generate PDF'),
-                  ),
-                ),
-                ElevatedButton(onPressed: () {}, child: Text('Generate EXCEL')),
+                PDFExportButton(),
+                ExcelExportButton(),
               ],
             ),
           ),
