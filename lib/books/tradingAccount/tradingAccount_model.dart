@@ -1,4 +1,10 @@
 class TradingAccount {
-  int a;
-  TradingAccount({required this.a});
+  String ledgerName;
+  int creditAmount;
+  int debitAmount;
+  TradingAccount({
+    required this.ledgerName,
+    required this.creditAmount,
+    required this.debitAmount,
+  });
 }
