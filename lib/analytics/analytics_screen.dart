@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:sentezel/analytics/analyticsPeriodSelectionBar_widget.dart';
 
 import 'package:sentezel/analytics/ui/bar_chart.dart';
+import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection_widget.dart';
+import 'package:sentezel/analytics/ui/widgets/periodSelection_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 
 class AnalyticsScreen extends StatelessWidget {
@@ -19,7 +22,8 @@ class AnalyticsScreen extends StatelessWidget {
                   Navigator.pop(context);
                 },
               ),
-              BarChartSample3(),
+              AnalyticsTimeFrameSelection(),
+              BarChartSample2(),
             ],
           ),
         ),
