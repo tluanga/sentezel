@@ -86,7 +86,6 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       final result = await db.rawQuery('''
       Select * from $dbName
       WHERE particular LIKE '$searchString%'
-      AND type=$type
       AND mode LIKE '$_mode%'
       AND date>=${paramStartDate.microsecondsSinceEpoch}
       AND date<=${paramEndDate.microsecondsSinceEpoch}
