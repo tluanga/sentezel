@@ -40,7 +40,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
               ),
               _listHeader(context),
               _list(context: context, ledgerReportData: state),
-              _report(data: state),
+              _report(data: state, context: context),
             ],
           ),
         ),
@@ -205,19 +205,22 @@ class LedgerDetailScreen extends HookConsumerWidget {
     );
   }
 
-  _report({required LedgerReport data}) {
+  _report({required LedgerReport data, required BuildContext context}) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade200,
+        color: Colors.grey.shade300,
       ),
       // this is mock data for total
-      height: 70,
+      height: MediaQuery.of(context).size.height * 0.1,
+
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
+                width: MediaQuery.of(context).size.width * 0.25,
                 decoration: BoxDecoration(color: Colors.green.shade200),
                 child: Row(
                   children: [
@@ -235,6 +238,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                 ),
               ),
               Container(
+                width: MediaQuery.of(context).size.width * 0.25,
                 decoration: BoxDecoration(color: Colors.red.shade200),
                 child: Row(
                   children: [
@@ -259,7 +263,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                       width: 5,
                     ),
                     Container(
-                        width: 50,
+                        width: MediaQuery.of(context).size.width * 0.25,
                         height: 20,
                         decoration: BoxDecoration(
                           color: (data.debitAmount - data.creditAmount >= 0)
