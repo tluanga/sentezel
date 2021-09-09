@@ -119,13 +119,13 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
     AnalyticsPeriod _period = AnalyticsPeriod.daily;
     return Material(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.25,
+        height: MediaQuery.of(context).size.height * 0.3,
         child: Column(
           children: [
             Container(
               child: ListTile(
                 title: Text(
-                  'Daily Report',
+                  'Day',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -147,7 +147,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
             Container(
               child: ListTile(
                 title: Text(
-                  'Weekly Report',
+                  'Week ',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
@@ -169,7 +169,29 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
             Container(
               child: ListTile(
                 title: Text(
-                  'Monthly Report',
+                  'Month',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                trailing: Radio(
+                  value: AnalyticsPeriod.monthly,
+                  activeColor: Colors.green.shade500,
+                  onChanged: (value) {
+                    onSelect(AnalyticsPeriod.monthly);
+                    _period = AnalyticsPeriod.monthly;
+                    Navigator.pop(context);
+                  },
+                  groupValue: _period,
+                ),
+              ),
+            ),
+            Container(
+              child: ListTile(
+                title: Text(
+                  'Current Financial Year',
                   style: TextStyle(
                     color: Colors.black,
                     fontSize: 16,
