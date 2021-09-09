@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
 import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection_widget.dart';
 import 'package:sentezel/books/journal/journalDetail_bottomSheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
@@ -8,6 +9,7 @@ import 'package:sentezel/books/journal/journal_model.dart';
 import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.dart';
 
 import 'package:sentezel/books/widgets/reportTopBar_widget.dart';
+import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
@@ -131,19 +133,87 @@ class JournalReportScreen extends HookConsumerWidget {
                 ),
               ),
             ),
+            SizedBox(
+              width: 10,
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
-                  width: MediaQuery.of(context).size.width * 0.74,
-                  child: Center(
-                    child: Text(
-                      item.particular,
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
+                  width: MediaQuery.of(context).size.width * 0.70,
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.20,
+                            child: Text(
+                              DateFormat('dd-MM-yyyy').format(item.date),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text(
+                            item.particular,
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.15,
+                            child: Text(
+                              'Amount',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.17,
+                            child: Text(
+                              currencySeperatorStringFormatterHelper(
+                                  item.amount),
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.30,
+                            child: Text(
+                              item.mode,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ),
               ],
