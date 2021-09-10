@@ -122,7 +122,7 @@ daySelection({
                       size: 20,
                     ),
                     Text(
-                      DateFormat('d-MM-yyyy').format(DateTime.now()),
+                      DateFormat('d-MM-yyyy').format(endDate.value),
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
