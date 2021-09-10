@@ -4,6 +4,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
+import 'package:sentezel/settings/backup/backup_screen.dart';
 import 'package:sentezel/settings/businessProfile/businessProfile_screen.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 import 'package:sentezel/settings/party/party_screen.dart';
@@ -137,7 +138,14 @@ class ControlCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Backup',
                   icon: CupertinoIcons.tray_arrow_up,
-                  onTap: () {},
+                  onTap: () {
+                    showCupertinoModalBottomSheet(
+                      expand: true,
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => BackupScreen(),
+                    );
+                  },
                 ),
                 _item(
                   context: context,
