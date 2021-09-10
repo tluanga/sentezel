@@ -27,7 +27,7 @@ class _$TransactionTearOff {
       required int partialPaymentAmount,
       required String particular,
       required TransactionMode mode,
-      required DateTime date,
+      @JsonKey(fromJson: _fromJson, toJson: _toJson) required DateTime date,
       required int transactionCategoryId,
       int? partyLedgerId,
       int? assetLedgerId,
@@ -66,6 +66,7 @@ mixin _$Transaction {
   String get particular => throw _privateConstructorUsedError;
   TransactionMode get mode =>
       throw _privateConstructorUsedError; //user input--can be credit or Cashdown
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
   DateTime get date => throw _privateConstructorUsedError; //user input
   int get transactionCategoryId => throw _privateConstructorUsedError;
   int? get partyLedgerId => throw _privateConstructorUsedError;
@@ -91,7 +92,7 @@ abstract class $TransactionCopyWith<$Res> {
       int partialPaymentAmount,
       String particular,
       TransactionMode mode,
-      DateTime date,
+      @JsonKey(fromJson: _fromJson, toJson: _toJson) DateTime date,
       int transactionCategoryId,
       int? partyLedgerId,
       int? assetLedgerId,
@@ -189,7 +190,7 @@ abstract class _$TransactionCopyWith<$Res>
       int partialPaymentAmount,
       String particular,
       TransactionMode mode,
-      DateTime date,
+      @JsonKey(fromJson: _fromJson, toJson: _toJson) DateTime date,
       int transactionCategoryId,
       int? partyLedgerId,
       int? assetLedgerId,
@@ -285,7 +286,7 @@ class _$_Transaction implements _Transaction {
       required this.partialPaymentAmount,
       required this.particular,
       required this.mode,
-      required this.date,
+      @JsonKey(fromJson: _fromJson, toJson: _toJson) required this.date,
       required this.transactionCategoryId,
       this.partyLedgerId,
       this.assetLedgerId,
@@ -308,6 +309,7 @@ class _$_Transaction implements _Transaction {
   @override
   final TransactionMode mode;
   @override //user input--can be credit or Cashdown
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
   final DateTime date;
   @override //user input
   final int transactionCategoryId;
@@ -399,7 +401,7 @@ abstract class _Transaction implements Transaction {
       required int partialPaymentAmount,
       required String particular,
       required TransactionMode mode,
-      required DateTime date,
+      @JsonKey(fromJson: _fromJson, toJson: _toJson) required DateTime date,
       required int transactionCategoryId,
       int? partyLedgerId,
       int? assetLedgerId,
@@ -422,6 +424,7 @@ abstract class _Transaction implements Transaction {
   @override
   TransactionMode get mode => throw _privateConstructorUsedError;
   @override //user input--can be credit or Cashdown
+  @JsonKey(fromJson: _fromJson, toJson: _toJson)
   DateTime get date => throw _privateConstructorUsedError;
   @override //user input
   int get transactionCategoryId => throw _privateConstructorUsedError;

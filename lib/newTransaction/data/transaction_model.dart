@@ -14,7 +14,8 @@ class Transaction with _$Transaction {
     required int partialPaymentAmount,
     required String particular,
     required TransactionMode mode, //user input--can be credit or Cashdown
-    required DateTime date, //user input
+    @JsonKey(fromJson: _fromJson, toJson: _toJson)
+        required DateTime date, //user input
     required int transactionCategoryId,
     int? partyLedgerId,
     int? assetLedgerId,
@@ -23,4 +24,9 @@ class Transaction with _$Transaction {
   }) = _Transaction;
   factory Transaction.fromJson(Map<String, dynamic> json) =>
       _$TransactionFromJson(json);
+
+  //---------For Date Conversion
+  static DateTime _fromJson(int int) =>
+      DateTime.fromMicrosecondsSinceEpoch(int);
+  static int _toJson(DateTime time) => time.microsecondsSinceEpoch;
 }
