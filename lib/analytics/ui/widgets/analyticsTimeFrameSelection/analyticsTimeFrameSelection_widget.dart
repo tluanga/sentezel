@@ -18,8 +18,10 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final mode = useState(AnalyticsPeriod.weekly);
-
+    final mode = useState(AnalyticsPeriod.daily);
+    final startDate = useState(DateTime.now().subtract(Duration(days: 7)));
+    final endDate = useState(DateTime.now());
+    print(startDate.value);
     return Container(
       width: MediaQuery.of(context).size.width * 0.97,
       decoration: BoxDecoration(
@@ -79,6 +81,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
               SizedBox(
                 width: 20,
               ),
+              Text(DateFormat('dd-MM-yy').format(startDate.value)),
               //---Current Selected Period
               Row(
                 children: [
@@ -109,7 +112,13 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
               height: 10,
             ),
             if (mode.value == AnalyticsPeriod.daily)
-              daySelection(context: context),
+              daySelection(
+                context: context,
+                onStartDateSelect: (date) => startDate.value = date,
+                onEndDateSelect: (date) => endDate.value = date,
+                startDate: startDate,
+                endDate: endDate,
+              ),
             if (mode.value == AnalyticsPeriod.weekly)
               weekSelection(context: context),
             if (mode.value == AnalyticsPeriod.monthly)
