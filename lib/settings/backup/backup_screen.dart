@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/ui/widget/iconButton_widget.dart';
 import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
+import 'package:sentezel/settings/backup/backup_button.dart';
 
 class BackupScreen extends HookConsumerWidget {
   const BackupScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class BackupScreen extends HookConsumerWidget {
         child: Column(
           children: [
             TopBarForBottomSheetWidget(
-                label: 'Backup',
+                label: '',
                 onExit: () {
                   Navigator.pop(context);
                 }),
@@ -26,7 +26,27 @@ class BackupScreen extends HookConsumerWidget {
             //     fontWeight: FontWeight.bold,
             //   ),
             // ),
-            STLIconButton(),
+            BackupButton(),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              width: MediaQuery.of(context).size.width * 0.8,
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade500,
+                ),
+              ),
+              child: Text(
+                '''
+              Backup all user generated data and save to local and cloud
+              ''',
+                style: TextStyle(
+                  fontSize: 14,
+                ),
+              ),
+            ),
           ],
         ),
       )),

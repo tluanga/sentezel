@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
-import 'package:sentezel/settings/reset/reset_button.dart';
+import 'package:sentezel/settings/restore/restore_button.dart';
 
 class RestoreScreen extends HookConsumerWidget {
   const RestoreScreen({Key? key}) : super(key: key);
@@ -21,7 +21,7 @@ class RestoreScreen extends HookConsumerWidget {
             SizedBox(
               height: 250,
             ),
-            ResetButton(),
+            RestoreButton(),
           ],
         ),
       ),

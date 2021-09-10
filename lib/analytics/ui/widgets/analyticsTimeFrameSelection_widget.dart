@@ -2,6 +2,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -12,7 +13,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    AnalyticsPeriod mode = AnalyticsPeriod.weekly;
+    final mode = useState(AnalyticsPeriod.weekly);
 
     return Container(
       width: MediaQuery.of(context).size.width * 0.97,
@@ -34,11 +35,13 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                     context: context,
                     backgroundColor: Colors.transparent,
                     builder: (context) => _timeFrame(
-                        context: context,
-                        onSelect: (period) {
-                          print(period);
-                          mode = period;
-                        }),
+                      context: context,
+                      onSelect: (period) {
+                        print(period);
+                        mode.value = period;
+                      },
+                      period: mode,
+                    ),
                   );
                 },
                 child: Container(
@@ -86,7 +89,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                   ),
                   Text(
                     EnumToString.convertToString(
-                      mode,
+                      mode.value,
                       camelCase: true,
                     ),
                     style: TextStyle(
@@ -100,11 +103,11 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
             SizedBox(
               height: 10,
             ),
-            if (mode == AnalyticsPeriod.daily)
+            if (mode.value == AnalyticsPeriod.daily)
               _dayWiseSelection(context: context),
-            if (mode == AnalyticsPeriod.weekly)
+            if (mode.value == AnalyticsPeriod.weekly)
               _weekSelection(context: context),
-            if (mode == AnalyticsPeriod.monthly)
+            if (mode.value == AnalyticsPeriod.monthly)
               _monthSelection(context: context),
             // _yearSelection(context: context),
           ],
@@ -113,9 +116,11 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
     );
   }
 
-  _timeFrame(
-      {required BuildContext context,
-      required Function(AnalyticsPeriod) onSelect}) {
+  _timeFrame({
+    required BuildContext context,
+    required Function(AnalyticsPeriod) onSelect,
+    required var period,
+  }) {
     AnalyticsPeriod _period = AnalyticsPeriod.daily;
     return Material(
       child: Container(
@@ -140,7 +145,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                     _period = AnalyticsPeriod.daily;
                     Navigator.pop(context);
                   },
-                  groupValue: _period,
+                  groupValue: period.value,
                 ),
               ),
             ),
@@ -162,7 +167,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                     _period = AnalyticsPeriod.weekly;
                     Navigator.pop(context);
                   },
-                  groupValue: _period,
+                  groupValue: period.value,
                 ),
               ),
             ),
@@ -184,7 +189,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                     _period = AnalyticsPeriod.monthly;
                     Navigator.pop(context);
                   },
-                  groupValue: _period,
+                  groupValue: period.value,
                 ),
               ),
             ),
@@ -199,14 +204,13 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                   ),
                 ),
                 trailing: Radio(
-                  value: AnalyticsPeriod.monthly,
+                  value: AnalyticsPeriod.financialYear,
                   activeColor: Colors.green.shade500,
                   onChanged: (value) {
-                    onSelect(AnalyticsPeriod.monthly);
-                    _period = AnalyticsPeriod.monthly;
+                    onSelect(AnalyticsPeriod.financialYear);
                     Navigator.pop(context);
                   },
-                  groupValue: _period,
+                  groupValue: period.value,
                 ),
               ),
             ),

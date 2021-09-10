@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class RestoreButton extends StatelessWidget {
-  const RestoreButton({Key? key}) : super(key: key);
+class BackupButton extends StatelessWidget {
+  const BackupButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class RestoreButton extends StatelessWidget {
           children: [
             Container(
               child: Icon(
-                CupertinoIcons.tray_arrow_down,
+                CupertinoIcons.tray_arrow_up,
                 size: 80,
               ),
               // child: Image.asset('assets/icons/pdf.png'),
@@ -29,7 +29,7 @@ class RestoreButton extends StatelessWidget {
               width: 10,
             ),
             Text(
-              'Restore Backup',
+              'Backup',
               style: TextStyle(
                 fontSize: 20,
               ),
