@@ -4,7 +4,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 import 'package:sentezel/analytics/ui/bar_chart.dart';
 import 'package:sentezel/analytics/ui/pie_chart.dart';
-import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection_widget.dart';
+import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection/analyticsTimeFrameSelection_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 
 class AnalyticsScreen extends HookConsumerWidget {
