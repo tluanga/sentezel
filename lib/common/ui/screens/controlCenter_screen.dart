@@ -8,6 +8,8 @@ import 'package:sentezel/settings/backup/backup_screen.dart';
 import 'package:sentezel/settings/businessProfile/businessProfile_screen.dart';
 import 'package:sentezel/settings/ledgerMaster/legerMaster_screen.dart';
 import 'package:sentezel/settings/party/party_screen.dart';
+import 'package:sentezel/settings/reset/reset_screen.dart';
+import 'package:sentezel/settings/restore/restore_screen.dart';
 
 class ControlCenterScreen extends StatelessWidget {
   const ControlCenterScreen({Key? key}) : super(key: key);
@@ -151,13 +153,27 @@ class ControlCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Restore',
                   icon: CupertinoIcons.tray_arrow_down,
-                  onTap: () {},
+                  onTap: () {
+                    showCupertinoModalBottomSheet(
+                      expand: true,
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => RestoreScreen(),
+                    );
+                  },
                 ),
                 _item(
                   context: context,
                   label: 'Reset',
                   icon: CupertinoIcons.gobackward,
-                  onTap: () {},
+                  onTap: () {
+                    showCupertinoModalBottomSheet(
+                      expand: true,
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => ResetScreen(),
+                    );
+                  },
                 ),
               ],
             ),
