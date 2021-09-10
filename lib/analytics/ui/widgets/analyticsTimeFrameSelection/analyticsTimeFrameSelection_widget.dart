@@ -81,7 +81,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
               SizedBox(
                 width: 20,
               ),
-              Text(DateFormat('dd-MM-yy').format(startDate.value)),
+
               //---Current Selected Period
               Row(
                 children: [

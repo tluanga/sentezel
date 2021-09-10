@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sentezel/common/helpers/dateHelper/date_helper.dart';
 
 yearSelection({required BuildContext context}) {
   return Container(
@@ -33,7 +34,8 @@ yearSelection({required BuildContext context}) {
               ),
               Container(
                 child: Text(
-                  DateFormat('dd-mm-yyyy').format(DateTime.now()),
+                  DateFormat('dd-MM-yyyy')
+                      .format(DateHelper.getStartDateOfAccountingYear()),
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
@@ -68,7 +70,8 @@ yearSelection({required BuildContext context}) {
               ),
               Container(
                 child: Text(
-                  DateFormat('dd-mm-yyyy').format(DateTime.now()),
+                  DateFormat('dd-MM-yyyy')
+                      .format(DateHelper.getEndDateOfAccountingYear()),
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
