@@ -12,6 +12,7 @@ import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection/elemen
 import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection/elements/timeFrameSelection_dialog.dart';
 import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection/elements/weekSelection_widget.dart';
 import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection/elements/yearSelection_widget.dart';
+import 'package:sentezel/common/helpers/dateHelper/date_helper.dart';
 
 class AnalyticsTimeFrameSelection extends HookConsumerWidget {
   const AnalyticsTimeFrameSelection({Key? key}) : super(key: key);
@@ -21,7 +22,14 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
     final mode = useState(AnalyticsPeriod.daily);
     final startDate = useState(DateTime.now().subtract(Duration(days: 7)));
     final endDate = useState(DateTime.now());
-    print(startDate.value);
+
+    useEffect(() {
+      if (mode.value == AnalyticsPeriod.financialYear) {
+        print('set days');
+        startDate.value = DateHelper.getStartDateOfAccountingYear();
+        endDate.value = DateHelper.getEndDateOfAccountingYear();
+      }
+    });
     return Container(
       width: MediaQuery.of(context).size.width * 0.97,
       decoration: BoxDecoration(

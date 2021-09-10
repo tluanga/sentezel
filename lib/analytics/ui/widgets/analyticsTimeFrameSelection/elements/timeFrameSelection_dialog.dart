@@ -6,7 +6,6 @@ timeFrame({
   required Function(AnalyticsPeriod) onSelect,
   required var period,
 }) {
-  AnalyticsPeriod _period = AnalyticsPeriod.daily;
   return Material(
     child: Container(
       height: MediaQuery.of(context).size.height * 0.3,
@@ -27,7 +26,7 @@ timeFrame({
                 activeColor: Colors.green.shade500,
                 onChanged: (value) {
                   onSelect(AnalyticsPeriod.daily);
-                  _period = AnalyticsPeriod.daily;
+
                   Navigator.pop(context);
                 },
                 groupValue: period.value,
@@ -49,7 +48,6 @@ timeFrame({
                 activeColor: Colors.green.shade500,
                 onChanged: (value) {
                   onSelect(AnalyticsPeriod.weekly);
-                  _period = AnalyticsPeriod.weekly;
                   Navigator.pop(context);
                 },
                 groupValue: period.value,
@@ -71,7 +69,7 @@ timeFrame({
                 activeColor: Colors.green.shade500,
                 onChanged: (value) {
                   onSelect(AnalyticsPeriod.monthly);
-                  _period = AnalyticsPeriod.monthly;
+
                   Navigator.pop(context);
                 },
                 groupValue: period.value,

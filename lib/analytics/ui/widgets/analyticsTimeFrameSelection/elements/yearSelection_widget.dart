@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/helpers/dateHelper/date_helper.dart';
 
-yearSelection({required BuildContext context}) {
+yearSelection({
+  required BuildContext context,
+}) {
   return Container(
     width: MediaQuery.of(context).size.width * 0.9,
     child: Row(
