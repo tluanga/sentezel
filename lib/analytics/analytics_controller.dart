@@ -8,6 +8,6 @@ class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
 
   loadData() async {
     //----Read all transaction---
-    _read(transactionRepositoryProvider).getList();
+    final data = await _read(transactionRepositoryProvider).getList();
   }
 }

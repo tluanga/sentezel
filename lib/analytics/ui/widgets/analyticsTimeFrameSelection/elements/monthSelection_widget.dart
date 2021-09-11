@@ -2,7 +2,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-monthSelection({required BuildContext context}) {
+monthSelection({
+  required BuildContext context,
+  required var startDate,
+  required var endDate,
+  required Function(DateTime) onStartDateSelect,
+  required Function(DateTime) onEndDateSelect,
+}) {
   return Container(
     width: MediaQuery.of(context).size.width * 0.6,
     child: Row(
