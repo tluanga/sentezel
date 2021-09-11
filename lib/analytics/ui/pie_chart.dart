@@ -55,7 +55,7 @@ class PieChart2State extends State {
               children: const <Widget>[
                 Indicator(
                   color: Color(0xff0293ee),
-                  text: 'First',
+                  text: 'Lei',
                   isSquare: true,
                 ),
                 SizedBox(
@@ -63,7 +63,7 @@ class PieChart2State extends State {
                 ),
                 Indicator(
                   color: Color(0xfff8b250),
-                  text: 'Second',
+                  text: 'Hralh',
                   isSquare: true,
                 ),
                 SizedBox(
@@ -71,7 +71,7 @@ class PieChart2State extends State {
                 ),
                 Indicator(
                   color: Color(0xff845bef),
-                  text: 'Third',
+                  text: 'Lakluh',
                   isSquare: true,
                 ),
                 SizedBox(

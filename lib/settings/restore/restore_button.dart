@@ -1,12 +1,14 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class STLIconButton extends StatelessWidget {
-  const STLIconButton({Key? key}) : super(key: key);
+class RestoreButton extends StatelessWidget {
+  const RestoreButton({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.41,
+      width: MediaQuery.of(context).size.width * 0.8,
+      height: MediaQuery.of(context).size.height * 0.1,
       decoration: BoxDecoration(
           border: Border.all(
             color: Colors.grey.shade500,
@@ -17,14 +19,21 @@ class STLIconButton extends StatelessWidget {
         child: Row(
           children: [
             Container(
-              width: MediaQuery.of(context).size.width * 0.07,
-              child: Icon(Icons.restore),
+              child: Icon(
+                CupertinoIcons.tray_arrow_down,
+                size: 80,
+              ),
               // child: Image.asset('assets/icons/pdf.png'),
             ),
             SizedBox(
-              width: 5,
+              width: 10,
             ),
-            Text('Backup Data')
+            Text(
+              'Restore Backup',
+              style: TextStyle(
+                fontSize: 20,
+              ),
+            )
           ],
         ),
       ),

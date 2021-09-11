@@ -14,6 +14,7 @@ class Transaction with _$Transaction {
     required int partialPaymentAmount,
     required String particular,
     required TransactionMode mode, //user input--can be credit or Cashdown
+
     required DateTime date, //user input
     required int transactionCategoryId,
     int? partyLedgerId,
