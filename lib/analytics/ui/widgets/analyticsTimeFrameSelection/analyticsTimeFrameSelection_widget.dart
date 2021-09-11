@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/analytics/ui/analyticsPeriod_enum.dart';
 import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection/elements/daySelection_widget.dart';
@@ -128,9 +127,21 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                 endDate: endDate,
               ),
             if (mode.value == AnalyticsPeriod.weekly)
-              weekSelection(context: context),
+              weekSelection(
+                context: context,
+                onStartDateSelect: (date) => startDate.value = date,
+                onEndDateSelect: (date) => endDate.value = date,
+                startDate: startDate,
+                endDate: endDate,
+              ),
             if (mode.value == AnalyticsPeriod.monthly)
-              monthSelection(context: context),
+              monthSelection(
+                context: context,
+                onStartDateSelect: (date) => startDate.value = date,
+                onEndDateSelect: (date) => endDate.value = date,
+                startDate: startDate,
+                endDate: endDate,
+              ),
             if (mode.value == AnalyticsPeriod.financialYear)
               yearSelection(context: context),
             // _yearSelection(context: context),

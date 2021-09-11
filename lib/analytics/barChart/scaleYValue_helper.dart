@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 
 double scaleYValue({
-  required int earning,
-  required int highestEarning,
+  required int value,
+  required int highestValue,
 }) {
-  print('highest earning $highestEarning');
-  print('value $earning');
-  double percentage = (earning / highestEarning) * 100;
+  print('highest earning $highestValue');
+  print('value $value');
+  double percentage = (value / highestValue) * 100;
   double result = (percentage / 100) * 5;
   print('pecentage $percentage');
   print('result $result');
