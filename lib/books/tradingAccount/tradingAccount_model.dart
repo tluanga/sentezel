@@ -1,16 +1,30 @@
-import 'package:sentezel/books/tradingAccount/expense_model.dart';
-
 class TradingAccount {
-  String ledgerName;
-  int creditAmount;
-  int debitAmount;
   List<Expense> expense;
   List<Income> income;
   TradingAccount({
-    required this.ledgerName,
-    required this.creditAmount,
-    required this.debitAmount,
     required this.expense,
     required this.income,
+  });
+}
+
+class Expense {
+  int totalCredit;
+  int totalDebit;
+  String ledgerName;
+  Expense({
+    required this.totalCredit,
+    required this.totalDebit,
+    required this.ledgerName,
+  });
+}
+
+class Income {
+  int totalCredit;
+  int totalDebit;
+  String ledgerName;
+  Income({
+    required this.totalCredit,
+    required this.totalDebit,
+    required this.ledgerName,
   });
 }

@@ -4,6 +4,7 @@ import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
 
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
@@ -64,22 +65,53 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
           if (_transactionCategory.transactionType == TransactionType.hralh ||
               _transactionCategory.transactionType == TransactionType.lakluh) {
             //----------If Party---
-            _ledgerReport.debitAmount += _transactionList[j].debitAmount;
-            _ledgerTransaction.amount = _transactionList[j].debitAmount;
-            _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+
+            //Checking for cash/bank or other ledger for correction of debit and credit
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.Bank ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.Cash) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
+            } else {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+            }
+
+            // _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
           } else if (_transactionCategory.transactionType ==
                   TransactionType.lei ||
               _transactionCategory.transactionType ==
                   TransactionType.pekchhuah) {
             if (_transactionList[j].assetLedgerId == _ledgerReport.ledgerId) {
               //purcahse of Asset-----
+
+              //Checking for cash/bank or other ledger for correction of debit and credit
+              if (ledgerMasterDataList[i].id == LedgerMasterIndex.Bank ||
+                  ledgerMasterDataList[i].id == LedgerMasterIndex.Cash) {
+                _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+                _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+                _ledgerTransaction.amount = _transactionList[j].creditAmount;
+              } else {
+                _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+                _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+                _ledgerTransaction.amount = _transactionList[j].debitAmount;
+              }
+              // _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+            }
+
+            //Checking for cash/bank or other ledger for correction of debit and credit
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.Bank ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.Cash) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
               _ledgerReport.creditAmount += _transactionList[j].creditAmount;
               _ledgerTransaction.amount = _transactionList[j].creditAmount;
-              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+            } else {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
             }
-            _ledgerReport.creditAmount += _transactionList[j].creditAmount;
-            _ledgerTransaction.amount = _transactionList[j].creditAmount;
-            _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+            // _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
           }
 
           //-----------Contra---------------

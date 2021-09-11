@@ -16,27 +16,56 @@ class TradingAccountReportScreen extends HookConsumerWidget {
     }, []);
     return Material(
       child: SafeArea(
-        child: Container(
-          child: Column(
+        child: DefaultTabController(
+          length: 2,
+          child: TabBarView(
             children: [
-              ReportTopBarWidget(
-                  title: 'Trading Account',
-                  onGenerateExcel: () {},
-                  onGeneratePdf: () {},
-                  onClose: () {}),
-              state.when(data: (data) {
-                print('when data');
-                return _list(context: context, data: data, ref: ref);
-              }, loading: () {
-                print('inside loading');
-                return Center(
-                  child: CircularProgressIndicator(),
-                );
-              }, error: (error, stack) {
-                return Center(
-                  child: Text('error'),
-                );
-              })
+              // expense side
+              Column(
+                children: [
+                  ReportTopBarWidget(
+                      title: 'Trading Account',
+                      onGenerateExcel: () {},
+                      onGeneratePdf: () {},
+                      onClose: () {}),
+                  state.when(data: (data) {
+                    print('when data');
+                    return _expenselist(context: context, data: data, ref: ref);
+                  }, loading: () {
+                    print('inside loading');
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }, error: (error, stack) {
+                    return Center(
+                      child: Text('error'),
+                    );
+                  })
+                ],
+              ),
+              // Income side
+              Column(
+                children: [
+                  ReportTopBarWidget(
+                      title: 'Trading Account',
+                      onGenerateExcel: () {},
+                      onGeneratePdf: () {},
+                      onClose: () {}),
+                  state.when(data: (data) {
+                    print('when data');
+                    return _list(context: context, data: data, ref: ref);
+                  }, loading: () {
+                    print('inside loading');
+                    return Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }, error: (error, stack) {
+                    return Center(
+                      child: Text('error'),
+                    );
+                  })
+                ],
+              ),
             ],
           ),
         ),
@@ -44,7 +73,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
     );
   }
 
-  _list(
+  _expenselist(
       {required BuildContext context,
       required List<TradingAccount> data,
       required WidgetRef ref}) {
@@ -52,7 +81,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
       child: ListView.builder(
         itemCount: data.length,
         itemBuilder: (context, index) {
-          return _listItem(
+          return _expenselistItem(
             context: context,
             item: data[index],
             ref: ref,
@@ -62,21 +91,14 @@ class TradingAccountReportScreen extends HookConsumerWidget {
     );
   }
 
-  _listItem(
+  _expenselistItem(
       {required BuildContext context,
       required TradingAccount item,
       required WidgetRef ref}) {
     int balance = 0;
-    if (item.creditAmount > item.debitAmount) {
-      balance = item.creditAmount - item.debitAmount;
-    } else if (item.debitAmount > item.creditAmount) {
-      balance = item.debitAmount - item.creditAmount;
-    } else if (item.creditAmount == item.debitAmount) {
-      balance = 0;
-    }
     return Row(
       children: [
-        Text(item.ledgerName),
+        Text(item.expense.ledgerName),
         SizedBox(
           width: 20,
         ),
