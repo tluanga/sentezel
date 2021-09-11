@@ -4,6 +4,7 @@ import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
 import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
+import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
 
 import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
 
