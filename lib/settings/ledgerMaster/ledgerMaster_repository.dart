@@ -69,7 +69,7 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
         print('name');
         print(item['name']);
       });
-
+      print(list);
       return list;
     } catch (e) {
       print(e);

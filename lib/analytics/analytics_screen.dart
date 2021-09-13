@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/analytics/analytics_controller.dart';
 
 import 'package:sentezel/analytics/barChart/bar_chart.dart';
 import 'package:sentezel/analytics/ui/pie_chart.dart';
@@ -12,6 +13,10 @@ class AnalyticsScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    ref.read(analyticsControllerProvider.notifier).loadData();
+    useEffect(() {
+      ref.read(analyticsControllerProvider);
+    }, []);
     final _chartMode = useState(0);
     return Scaffold(
       body: SafeArea(

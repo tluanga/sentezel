@@ -49,7 +49,13 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
                 DateSelectTimeLineWidget(
                   initialDate: state.date,
                   onDateSelected: (selectedDate) {
-                    state = state.copyWith(date: selectedDate);
+                    ref
+                        .watch(purchaseOfAssetControllerProvider.notifier)
+                        .setState(
+                          state.copyWith(
+                            date: selectedDate,
+                          ),
+                        );
                   },
                 ),
 

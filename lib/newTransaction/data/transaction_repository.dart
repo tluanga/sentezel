@@ -92,7 +92,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       ''');
 
       List<trans.Transaction> list = [];
-
+      final result1 = await db.query(dbName);
       result.forEach((item) {
         list.add(trans.Transaction.fromJson(item));
       });

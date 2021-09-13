@@ -80,12 +80,12 @@ class BooksScreen extends StatelessWidget {
                     label: 'Trading Account',
                     icon: CupertinoIcons.layers,
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => TradingAccountReportScreen(),
-                        ),
-                      );
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(
+                      //     builder: (context) => TradingAccountReportScreen(),
+                      //   ),
+                      // );
                     },
                   ),
                 ],
