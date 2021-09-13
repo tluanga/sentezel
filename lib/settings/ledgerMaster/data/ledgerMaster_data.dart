@@ -412,7 +412,7 @@ List<LedgerMaster> ledgerMasterData = [
     id: LedgerMasterIndex.Sales,
     name: 'Sales',
     description: 'Sales account excluding sale returns',
-    type: LedgerMasterType.indirect,
+    type: LedgerMasterType.direct,
     status: Status.active,
   ),
   //50-Sales Return

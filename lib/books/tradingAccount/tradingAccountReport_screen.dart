@@ -29,7 +29,6 @@ class TradingAccountReportScreen extends HookConsumerWidget {
                       onGeneratePdf: () {},
                       onClose: () {}),
                   state.when(data: (data) {
-                    print('when data');
                     return _expenselist(context: context, data: data, ref: ref);
                   }, loading: () {
                     print('inside loading');
@@ -53,7 +52,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
                       onClose: () {}),
                   state.when(data: (data) {
                     print('when data');
-                    return _list(context: context, data: data, ref: ref);
+                    return _incomeList(context: context, data: data, ref: ref);
                   }, loading: () {
                     print('inside loading');
                     return Center(
@@ -77,28 +76,98 @@ class TradingAccountReportScreen extends HookConsumerWidget {
       {required BuildContext context,
       required List<TradingAccount> data,
       required WidgetRef ref}) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: data.length,
-        itemBuilder: (context, index) {
-          return _expenselistItem(
-            context: context,
-            item: data[index],
-            ref: ref,
-          );
-        },
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.8,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: data[0].expense.length,
+              itemBuilder: (context, index) {
+                return _expenselistItem(
+                    context: context, item: data[0].expense[index], ref: ref);
+              },
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text('Gross Profit'),
+              Text(data[0].grossProfit.toString())
+            ],
+          )
+        ],
       ),
     );
   }
 
   _expenselistItem(
       {required BuildContext context,
-      required TradingAccount item,
+      required Expense item,
       required WidgetRef ref}) {
     int balance = 0;
+    if (item.totalCredit > item.totalDebit) {
+      balance = item.totalCredit - item.totalDebit;
+    } else if (item.totalCredit < item.totalDebit) {
+      balance = item.totalDebit - item.totalCredit;
+    } else if (item.totalCredit == item.totalDebit) {
+      balance = 0;
+    }
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(item.ledgerName),
+        SizedBox(
+          width: 20,
+        ),
+        Text(balance.toString()),
+      ],
+    );
+  }
+
+  _incomeList(
+      {required BuildContext context,
+      required List<TradingAccount> data,
+      required WidgetRef ref}) {
+    return Container(
+      height: MediaQuery.of(context).size.height * 0.8,
+      width: MediaQuery.of(context).size.width,
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: data[0].income.length,
+              itemBuilder: (context, index) {
+                return _incomelistItem(
+                    context: context, item: data[0].income[index], ref: ref);
+              },
+            ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [Text('Gross Loss'), Text(data[0].grossLoss.toString())],
+          )
+        ],
+      ),
+    );
+  }
+
+  _incomelistItem(
+      {required BuildContext context,
+      required Income item,
+      required WidgetRef ref}) {
+    int balance = 0;
+    if (item.totalCredit > item.totalDebit) {
+      balance = item.totalCredit - item.totalDebit;
+    } else if (item.totalCredit < item.totalDebit) {
+      balance = item.totalDebit - item.totalCredit;
+    } else if (item.totalCredit == item.totalDebit) {
+      balance = 0;
+    }
     return Row(
       children: [
-        Text(item.expense.ledgerName),
+        Text(item.ledgerName),
         SizedBox(
           width: 20,
         ),
