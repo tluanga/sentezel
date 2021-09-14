@@ -1,5 +1,3 @@
-import 'package:sentezel/analytics/barChart/incomeOrExpense_enum.dart';
-
 class BarChartElement {
   DateTime date;
   int incomeAmount;

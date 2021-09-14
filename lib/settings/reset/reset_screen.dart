@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/ui/widget/iconButton_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
 import 'package:sentezel/settings/reset/reset_button.dart';
 

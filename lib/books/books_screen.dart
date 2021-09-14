@@ -4,7 +4,6 @@ import 'package:sentezel/books/balanceSheet/balanceSheetReport_screen.dart';
 import 'package:sentezel/books/journal/journalReport_screen.dart';
 import 'package:sentezel/books/ledger/ledgerReport_screen.dart';
 import 'package:sentezel/books/profitAndLossReport/profitAndLossReport_screen.dart';
-import 'package:sentezel/books/tradingAccount/tradingAccountReport_screen.dart';
 import 'package:sentezel/books/trialBalance/trialBalanceReport_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';

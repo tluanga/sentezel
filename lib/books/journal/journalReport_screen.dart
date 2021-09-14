@@ -6,9 +6,6 @@ import 'package:sentezel/analytics/ui/widgets/analyticsTimeFrameSelection/analyt
 import 'package:sentezel/books/journal/journalDetail_bottomSheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
-import 'package:sentezel/books/widgets/dateSelectionBar/dateSelectionBar_widget.dart';
-
-import 'package:sentezel/books/widgets/reportTopBar_widget.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 
 import 'package:sentezel/common/ui/pallete.dart';
