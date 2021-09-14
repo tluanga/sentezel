@@ -1,10 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_model.dart';
 import 'package:sentezel/analytics/models/barChartItem_model.dart';
-import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
 
 final analyticsControllerProvider =
     StateNotifierProvider<AnalyticsController, AsyncValue<Analytics>>(
@@ -23,7 +21,10 @@ class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
     );
     data.sort((a, b) => a.date.compareTo(b.date));
 
-    print(data);
+    data.forEach((element) {
+      print(element.date);
+      print(element.id);
+    });
 
     // seperate expense and income
   }

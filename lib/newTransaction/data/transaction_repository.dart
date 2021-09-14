@@ -96,7 +96,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       result.forEach((item) {
         list.add(trans.Transaction.fromJson(item));
       });
-      print(list);
+
       return list;
     } catch (e) {
       print(e);
