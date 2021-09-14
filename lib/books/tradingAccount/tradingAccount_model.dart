@@ -1,32 +1,32 @@
 class TradingAccount {
   int grossProfit;
   int grossLoss;
-  List<Expense> expense;
-  List<Income> income;
+  List<DirectExpense> directExpense;
+  List<DirectIncome> directIncome;
   TradingAccount({
     required this.grossProfit,
     required this.grossLoss,
-    required this.expense,
-    required this.income,
+    required this.directExpense,
+    required this.directIncome,
   });
 }
 
-class Expense {
+class DirectExpense {
   int totalCredit;
   int totalDebit;
   String ledgerName;
-  Expense({
+  DirectExpense({
     required this.totalCredit,
     required this.totalDebit,
     required this.ledgerName,
   });
 }
 
-class Income {
+class DirectIncome {
   int totalCredit;
   int totalDebit;
   String ledgerName;
-  Income({
+  DirectIncome({
     required this.totalCredit,
     required this.totalDebit,
     required this.ledgerName,

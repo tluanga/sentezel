@@ -83,10 +83,12 @@ class TradingAccountReportScreen extends HookConsumerWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: data[0].expense.length,
+              itemCount: data[0].directExpense.length,
               itemBuilder: (context, index) {
                 return _expenselistItem(
-                    context: context, item: data[0].expense[index], ref: ref);
+                    context: context,
+                    item: data[0].directExpense[index],
+                    ref: ref);
               },
             ),
           ),
@@ -104,7 +106,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
 
   _expenselistItem(
       {required BuildContext context,
-      required Expense item,
+      required DirectExpense item,
       required WidgetRef ref}) {
     int balance = 0;
     if (item.totalCredit > item.totalDebit) {
@@ -137,10 +139,12 @@ class TradingAccountReportScreen extends HookConsumerWidget {
         children: [
           Expanded(
             child: ListView.builder(
-              itemCount: data[0].income.length,
+              itemCount: data[0].directIncome.length,
               itemBuilder: (context, index) {
                 return _incomelistItem(
-                    context: context, item: data[0].income[index], ref: ref);
+                    context: context,
+                    item: data[0].directIncome[index],
+                    ref: ref);
               },
             ),
           ),
@@ -155,7 +159,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
 
   _incomelistItem(
       {required BuildContext context,
-      required Income item,
+      required DirectIncome item,
       required WidgetRef ref}) {
     int balance = 0;
     if (item.totalCredit > item.totalDebit) {
