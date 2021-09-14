@@ -1,6 +1,12 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_model.dart';
+import 'package:sentezel/analytics/models/barChartItem_model.dart';
+import 'package:sentezel/newTransaction/data/transaction_model.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+
+final analyticsControllerProvider =
+    StateNotifierProvider<AnalyticsController, AsyncValue<Analytics>>(
+        (ref) => AnalyticsController(ref.read)..loadData());
 
 class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
   Reader _read;
@@ -8,6 +14,33 @@ class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
 
   loadData() async {
     //----Read all transaction---
-    final data = await _read(transactionRepositoryProvider).getList();
+    final data = await _read(transactionRepositoryProvider).getList(
+      startDate: DateTime.now().subtract(
+        Duration(days: 7),
+      ),
+    );
+    data.sort((a, b) => a.date.compareTo(b.date));
+
+    data.forEach((element) {
+      print(element.date);
+      print(element.id);
+    });
+
+    // seperate expense and income
+  }
+
+  generateBarChartDataItem(List<Transaction> data) async {
+    List<BarChartDataItem> _barChartItem = [];
+
+    //Sort each transaction by day
+
+    // for(int i=0;i<data.length;i++){
+    //     BarChartDataItem _barChartDataItem;
+    //   final _category=await _read(transactionCategoryRepositoryProvider).getItem(id: data[i].transactionCategoryId);
+    //   if(_category.transactionType==TransactionType.lei||_category.transactionType==TransactionType.pekchhuah||
+    //   _category.transactionType==TransactionType.debtRepaymentToCreditor){
+    //       _barChartDataItem.expense=
+    //   }
+    // }
   }
 }
