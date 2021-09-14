@@ -1,7 +1,11 @@
 class TradingAccount {
+  int grossProfit;
+  int grossLoss;
   List<Expense> expense;
   List<Income> income;
   TradingAccount({
+    required this.grossProfit,
+    required this.grossLoss,
     required this.expense,
     required this.income,
   });
