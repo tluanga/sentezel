@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/settings/businessProfile/data/businessType_enum.dart';
+import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
 
 class BusinessProfileSetup extends HookConsumerWidget {
   const BusinessProfileSetup({Key? key}) : super(key: key);
@@ -32,8 +32,8 @@ class BusinessProfileSetup extends HookConsumerWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       'Business Type',
                       style: TextStyle(
@@ -43,10 +43,8 @@ class BusinessProfileSetup extends HookConsumerWidget {
                     ),
                   ),
                   ListTile(
-                    leading: Container(
-                      child: Text('Image will be here'),
-                    ),
-                    title: Text('Direct'),
+                    leading: const Text('Image will be here'),
+                    title: const Text('Direct'),
                     trailing: Radio(
                       value: BusinessType.MahniSiamZuar,
                       onChanged: (value) {

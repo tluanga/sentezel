@@ -6,12 +6,8 @@ double scaleYValue({
   required int value,
   required int highestValue,
 }) {
-  print('highest earning $highestValue');
-  print('value $value');
   double percentage = (value / highestValue) * 100;
   double result = (percentage / 100) * 5;
-  print('pecentage $percentage');
-  print('result $result');
   return result > 5 ? result.roundToDouble() : result;
 }
 
@@ -30,7 +26,7 @@ makeGroupData(int x, double y, doubley2) {
           BarChartRodStackItem(3, 4, Colors.orange.shade200),
           BarChartRodStackItem(4, 5, Colors.green.shade200),
         ],
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(0),
           topRight: Radius.circular(0),
           bottomLeft: Radius.circular(0),

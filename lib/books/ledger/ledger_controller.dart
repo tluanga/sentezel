@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
@@ -16,19 +16,17 @@ final ledgerControllerProvider =
 );
 
 class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
-  Reader _read;
+  final Reader _read;
 
-  LedgerController(this._read) : super(AsyncValue.loading());
+  LedgerController(this._read) : super(const AsyncValue.loading());
 
   loadData({String ledgerName = ''}) async {
-    print('Load data');
     try {
       List<LedgerReport> _ledgerReportList = [];
       final ledgerMasterDataList =
           await _read(ledgerMasterRepositoryProvider).getList(
         searchString: ledgerName,
       );
-      print(ledgerMasterDataList.length);
 
       //---------Iterate Ledger Master List-------------
       for (int i = 0; i < ledgerMasterDataList.length; i++) {
@@ -121,12 +119,9 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
         _ledgerReportList.add(_ledgerReport);
       }
 
-      print(_ledgerReportList.length);
       //-----------Assign it to the state----------
       state = AsyncData(_ledgerReportList);
-    } catch (e) {
-      print(e.toString());
-    }
+    } catch (e) {}
   }
 
   LedgerReport getLedgerDetail(int ledgerid) {

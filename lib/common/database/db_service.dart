@@ -1,10 +1,11 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:sentezel/newTransaction/data/transaction_db.dart';
-import 'package:sentezel/settings/ledgerMaster/data/LedgerMaster_db.dart';
+import 'package:sentezel/new_transaction/data/transaction_db.dart';
+import 'package:sentezel/settings/ledger_master/data/Ledger_master_db.dart';
+
 import 'package:sentezel/settings/party/data/party_db.dart';
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_db.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_db.dart';
 
 import 'package:sqflite/sqflite.dart';
 

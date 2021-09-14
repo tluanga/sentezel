@@ -7,13 +7,12 @@ import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/screens/controlCenter_screen.dart';
 import 'package:sentezel/home/ui/home_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchase_of_asset/purchaseOfAsset_screen.dart';
+import 'package:sentezel/new_transaction/new_transaction_Center_screen.dart';
+import 'package:sentezel/new_transaction/purchase/purchase_of_asset/purchase_of_asset_screen.dart';
 
 import 'package:sentezel/setup/intialize_app.dart';
 
 import 'package:sentezel/setup/splash_screen.dart';
-
-import 'newTransaction/new_transaction_center_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

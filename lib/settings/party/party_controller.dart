@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
+import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 
 final partyListControllerProvider =
     StateNotifierProvider<PartyListController, AsyncValue<List<LedgerMaster>>>(

@@ -1,4 +1,4 @@
-import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
+import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
 
 class LedgerReport {
   int ledgerId;
@@ -16,7 +16,7 @@ class LedgerReport {
     this.ledgerTransaction,
   });
   String getInitialLetter() {
-    return this.name[0].toUpperCase();
+    return name[0].toUpperCase();
   }
 
   LedgerReport copyWith({

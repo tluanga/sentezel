@@ -8,7 +8,7 @@ final analyticsControllerProvider =
         (ref) => AnalyticsController(ref.read)..loadData());
 
 class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
-  Reader _read;
+  final Reader _read;
   AnalyticsController(this._read) : super(AsyncLoading());
 
   loadData() async {

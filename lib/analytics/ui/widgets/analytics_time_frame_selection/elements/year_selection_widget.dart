@@ -16,32 +16,26 @@ yearSelection({
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                child: Text(
-                  'Start Date',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
+              const Text(
+                'Start Date',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                child: Text(
-                  '-',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
+              const Text(
+                '-',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              Container(
-                child: Text(
-                  DateFormat('dd-MM-yyyy')
-                      .format(DateHelper.getStartDateOfAccountingYear()),
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
+              Text(
+                DateFormat('dd-MM-yyyy')
+                    .format(DateHelper.getStartDateOfAccountingYear()),
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ],

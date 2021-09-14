@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/books/balanceSheet/balanceSheetReport_screen.dart';
 import 'package:sentezel/books/journal/journalReport_screen.dart';
-import 'package:sentezel/books/ledger/ledgerReport_screen.dart';
-import 'package:sentezel/books/profitAndLossReport/profitAndLossReport_screen.dart';
-import 'package:sentezel/books/trialBalance/trialBalanceReport_screen.dart';
+import 'package:sentezel/books/ledger/ledger_report_screen.dart';
+import 'package:sentezel/books/profit_and_loss/profit_and_loss_report_screen.dart';
+import 'package:sentezel/books/trial_balance/trial_balance_report_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 
@@ -34,7 +34,7 @@ class BooksScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => JournalReportScreen(),
+                            builder: (context) => const JournalReportScreen(),
                           ),
                         );
                       },
@@ -48,7 +48,7 @@ class BooksScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LedgerReportScreen(),
+                          builder: (context) => const LedgerReportScreen(),
                         ),
                       );
                     },
@@ -68,7 +68,8 @@ class BooksScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => TrialBalanceReportScreen(),
+                            builder: (context) =>
+                                const TrialBalanceReportScreen(),
                           ),
                         );
                       },
@@ -102,7 +103,8 @@ class BooksScreen extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ProfitAndLossReportScreen(),
+                            builder: (context) =>
+                                const ProfitAndLossReportScreen(),
                           ),
                         );
                       },
@@ -116,7 +118,8 @@ class BooksScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => BalanceSheetReportScreen(),
+                          builder: (context) =>
+                              const BalanceSheetReportScreen(),
                         ),
                       );
                     },
@@ -156,12 +159,12 @@ class BooksScreen extends StatelessWidget {
         onTap();
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
         height: height,
         width: width,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),

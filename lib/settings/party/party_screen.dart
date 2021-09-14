@@ -5,10 +5,11 @@ import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
 import 'package:sentezel/common/ui/widget/topBar_widget.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
+
 import 'package:sentezel/settings/party/party_controller.dart';
 
-import 'newParty_modal.dart';
+import 'new_party_modal.dart';
 
 class PartyScreen extends HookConsumerWidget {
   const PartyScreen({Key? key}) : super(key: key);
