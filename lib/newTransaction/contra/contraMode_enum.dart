@@ -1,0 +1,4 @@
+enum ContraMode {
+  bankToCash,
+  cashToBank,
+}

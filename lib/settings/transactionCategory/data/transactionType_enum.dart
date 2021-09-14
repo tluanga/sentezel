@@ -1,0 +1,15 @@
+enum TransactionCategoryEnum {
+  lei,
+  hralh,
+  lakluh,
+  pekchhuah,
+  debtRepaymentByDebtor,
+  debtRepaymentByCreditor,
+  bankToCash,
+  cashToBank,
+  purchaseReturn,
+  saleReturn,
+  capitalInjection,
+  openingBalanceCash,
+  openingBalanceBank,
+}

@@ -1,0 +1,4 @@
+enum BusinessType {
+  mahniSiamZuar,
+  midangSiamZuar,
+}

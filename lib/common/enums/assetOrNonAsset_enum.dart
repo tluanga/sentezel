@@ -1,0 +1,4 @@
+enum AssetOrNonAsset {
+  asset,
+  nonAsset,
+}

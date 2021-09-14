@@ -1,0 +1,4 @@
+enum DebitOrCredit {
+  debit,
+  credit,
+}
