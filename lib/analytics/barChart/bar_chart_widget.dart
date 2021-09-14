@@ -1,10 +1,13 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/barChart/barChart_controller.dart';
+import 'package:sentezel/analytics/barChart/generateLeftTitile_helper.dart';
+import 'package:sentezel/analytics/barChart/scaleYValue_helper.dart';
 
-class BarChart extends HookConsumerWidget {
-  const BarChart({Key? key}) : super(key: key);
+class BarChartWidget extends HookConsumerWidget {
+  const BarChartWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,6 +20,12 @@ class BarChart extends HookConsumerWidget {
 
     int touchedGroupIndex = -1;
     final state = ref.watch(barChartControllerProvider);
+
+    useEffect(() {
+      ref.watch(barChartControllerProvider.notifier).loadData();
+      final barGroup1 = makeGroupData(0, 5, 12);
+      showingBarGroups = [barGroup1];
+    }, []);
     return Material(
       child: Container(
         child: state.when(
@@ -76,20 +85,36 @@ class BarChart extends HookConsumerWidget {
                       const SizedBox(
                         height: 38,
                       ),
+                      Expanded(
+                        child: BarChart(
+                          BarChartData(
+                            maxY: 20,
+                            titlesData: FlTitlesData(
+                              show: true,
+                              bottomTitles: _bottomTitles(
+                                generateLeftTitle(highestValue: 1000),
+                              ),
+                            ),
+                            barGroups: showingBarGroups,
+                          ),
+                        ),
+                      ),
                       // Expanded(
                       //   child: BarChart(
                       //     BarChartData(
                       //       maxY: 20,
-                      //       titlesData: FlTitlesData(
-                      //         show: true,
-                      //         rightTitles: SideTitles(showTitles: false),
-                      //         topTitles: SideTitles(showTitles: false),
-                      //         bottomTitles: _bottomTitles(),
-                      //         leftTitles: _leftTitles(),
-                      //       ),
-                      //       borderData: FlBorderData(
-                      //         show: false,
-                      //       ),
+                      //       // titlesData: FlTitlesData(
+                      //       //   show: true,
+                      //       //   rightTitles: SideTitles(showTitles: false),
+                      //       //   topTitles: SideTitles(showTitles: false),
+                      //       //   bottomTitles: _bottomTitles(),
+                      //       //   leftTitles: _leftTitles(
+                      //       //       leftTitles:
+                      //       //           generateLeftTitle(highestValue: 12)),
+                      //       // ),
+                      //       // borderData: FlBorderData(
+                      //       //   show: false,
+                      //       // ),
                       //       barGroups: showingBarGroups,
                       //       gridData: FlGridData(show: false),
                       //     ),

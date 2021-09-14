@@ -15,7 +15,7 @@ double scaleYValue({
   return result > 5 ? result.roundToDouble() : result;
 }
 
-makeGroupData(int x, double y) {
+makeGroupData(int x, double y, doubley2) {
   return BarChartGroupData(
     barsSpace: 4,
     x: x,
