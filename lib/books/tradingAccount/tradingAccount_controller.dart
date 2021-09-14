@@ -21,8 +21,8 @@ class TradingAccountController
   loadData() async {
     try {
       List<TradingAccount> _tradingAccountList = [];
-      List<Income> _incomeList = [];
-      List<Expense> _expenseList = [];
+      List<DirectIncome> _directIncomeList = [];
+      List<DirectExpense> _directExpenseList = [];
       final _ledgerMasterDataList = await _read(ledgerMasterRepositoryProvider)
           .getList(type: LedgerMasterType.direct);
       for (int i = 0; i < _ledgerMasterDataList.length; i++) {
@@ -31,14 +31,14 @@ class TradingAccountController
         // variables for Income
         int _totalIncomeCredit = 0;
         int _totalIncomeDebit = 0;
-        Income _income = Income(
+        DirectIncome _income = DirectIncome(
             ledgerName: _ledgerMasterDataList[i].name,
             totalCredit: _totalIncomeCredit,
             totalDebit: _totalIncomeDebit);
         //variables for Expense
         int _totalExpenseCredit = 0;
         int _totalExpenseDebit = 0;
-        Expense _expense = Expense(
+        DirectExpense _expense = DirectExpense(
           totalCredit: _totalExpenseCredit,
           totalDebit: _totalExpenseDebit,
           ledgerName: _ledgerMasterDataList[i].name,
@@ -86,7 +86,7 @@ class TradingAccountController
           // filter cash and bank account
           if (_ledgerMasterDataList[i].id != LedgerMasterIndex.Cash ||
               _ledgerMasterDataList[i].id != LedgerMasterIndex.Bank) {
-            _incomeList.add(_income);
+            _directIncomeList.add(_income);
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
@@ -96,18 +96,19 @@ class TradingAccountController
           if (_ledgerMasterDataList[i].id != LedgerMasterIndex.Cash ||
               _ledgerMasterDataList[i].id != LedgerMasterIndex.Bank) {
             print('inside if statement');
-            _expenseList.add(_expense);
+            _directExpenseList.add(_expense);
           }
         }
       }
+      // calculation of gross profit and gross loss
       int _directExpenseTotal = 0;
       int _directIncomeTotal = 0;
       int _grossProfit = 0;
       int _grossLoss = 0;
-      _expenseList.forEach((element) {
+      _directExpenseList.forEach((element) {
         _directExpenseTotal += (element.totalCredit - element.totalDebit).abs();
       });
-      _incomeList.forEach((element) {
+      _directIncomeList.forEach((element) {
         _directIncomeTotal += (element.totalCredit - element.totalDebit).abs();
       });
       if (_directIncomeTotal > _directExpenseTotal) {
@@ -116,8 +117,8 @@ class TradingAccountController
         _grossLoss = _directExpenseTotal - _directIncomeTotal;
       }
       TradingAccount _tradingAccount = TradingAccount(
-          expense: _expenseList,
-          income: _incomeList,
+          directExpense: _directExpenseList,
+          directIncome: _directIncomeList,
           grossLoss: _grossLoss,
           grossProfit: _grossProfit);
       _tradingAccountList.add(_tradingAccount);
