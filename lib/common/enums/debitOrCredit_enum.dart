@@ -1,4 +1,0 @@
-enum DebitOrCredit {
-  debit,
-  credit,
-}

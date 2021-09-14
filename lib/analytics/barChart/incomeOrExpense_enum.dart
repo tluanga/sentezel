@@ -1,4 +1,0 @@
-enum IncomeOrExpense {
-  income,
-  expense,
-}

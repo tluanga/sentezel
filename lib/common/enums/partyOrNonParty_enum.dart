@@ -1,4 +1,0 @@
-enum PartyOrNonParty {
-  party,
-  nonParty,
-}

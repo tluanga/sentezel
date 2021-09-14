@@ -1,4 +1,0 @@
-enum State {
-  pristine,
-  modified,
-}
