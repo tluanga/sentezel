@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/analytics/barChart/barChar_model.dart';
+import 'package:sentezel/analytics/barChart/barchart_model.dart';
 
 import 'package:sentezel/newTransaction/data/transaction_repository.dart';
 
@@ -19,6 +19,5 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
 
     //---Sort Transaction Data by Date----------
     transactionData.sort((a, b) => a.date.compareTo(b.date));
-    state = AsyncData(BarChart());
   }
 }
