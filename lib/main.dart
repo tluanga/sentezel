@@ -7,12 +7,13 @@ import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/screens/controlCenter_screen.dart';
 import 'package:sentezel/home/ui/home_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchaseOfAsset/purchaseOfAsset_screen.dart';
-import 'package:sentezel/setup/intializeApp.dart';
+import 'package:sentezel/newTransaction/purchase/purchase_of_asset/purchaseOfAsset_screen.dart';
+
+import 'package:sentezel/setup/intialize_app.dart';
 
 import 'package:sentezel/setup/splash_screen.dart';
 
-import 'newTransaction/newTransactionCenter_screen.dart';
+import 'newTransaction/new_transaction_center_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,12 +33,14 @@ class MyApp extends HookConsumerWidget {
         primarySwatch: Colors.grey,
       ),
       routes: {
-        RouteConstant.home: (context) => HomeScreen(),
-        RouteConstant.analytics: (context) => AnalyticsScreen(),
-        RouteConstant.books: (context) => BooksScreen(),
-        RouteConstant.controlCenter: (context) => ControlCenterScreen(),
-        RouteConstant.newTransaction: (context) => NewTranscationCenterScreen(),
-        RouteConstant.purchaseOfAsset: (context) => PurchaseOfAssetScreen(),
+        RouteConstant.home: (context) => const HomeScreen(),
+        RouteConstant.analytics: (context) => const AnalyticsScreen(),
+        RouteConstant.books: (context) => const BooksScreen(),
+        RouteConstant.controlCenter: (context) => const ControlCenterScreen(),
+        RouteConstant.newTransaction: (context) =>
+            const NewTranscationCenterScreen(),
+        RouteConstant.purchaseOfAsset: (context) =>
+            const PurchaseOfAssetScreen(),
       },
       home: SplashScreen(),
     );

@@ -2,9 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/analytics/barChart/barChart_controller.dart';
-import 'package:sentezel/analytics/barChart/generateLeftTitile_helper.dart';
-import 'package:sentezel/analytics/barChart/scaleYValue_helper.dart';
+import 'package:sentezel/analytics/barChart/barchart_controller.dart';
+import 'package:sentezel/analytics/barChart/generate_left_titile_helper.dart';
+import 'package:sentezel/analytics/barChart/scale_yvalue_helper.dart';
 
 class BarChartWidget extends HookConsumerWidget {
   const BarChartWidget({Key? key}) : super(key: key);
@@ -64,7 +64,7 @@ class BarChartWidget extends HookConsumerWidget {
                             children: [
                               GestureDetector(
                                 onTap: () {},
-                                child: Icon(
+                                child: const Icon(
                                   Icons.arrow_left,
                                   color: Colors.white,
                                   size: 50,
@@ -72,7 +72,7 @@ class BarChartWidget extends HookConsumerWidget {
                               ),
                               GestureDetector(
                                 onTap: () {},
-                                child: Icon(
+                                child: const Icon(
                                   Icons.arrow_right,
                                   color: Colors.white,
                                   size: 50,
@@ -130,7 +130,7 @@ class BarChartWidget extends HookConsumerWidget {
             );
           },
           loading: () {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           },
           error: (error, stack) {},
         ),
