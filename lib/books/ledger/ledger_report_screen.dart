@@ -7,7 +7,7 @@ import 'package:sentezel/books/ledger/ledger_detail/ledger_detail_screen.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/common/ui/widget/topBar_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 
 class LedgerReportScreen extends HookConsumerWidget {
   const LedgerReportScreen({Key? key}) : super(key: key);
