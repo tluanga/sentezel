@@ -162,7 +162,10 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('Net Loss'), Text(data[0].netLoss.toString())],
+            children: [
+              const Text('Net Loss'),
+              Text(data[0].netLoss.toString())
+            ],
           )
         ],
       ),

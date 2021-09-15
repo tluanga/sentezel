@@ -17,7 +17,7 @@ final contraControllerProvider =
 class ContraController extends StateNotifier<AsyncValue<Contra>> {
   final Reader _read;
 
-  ContraController(this._read) : super(AsyncValue.loading());
+  ContraController(this._read) : super(const AsyncValue.loading());
 
   loadData() async {
     state = AsyncData(Contra(

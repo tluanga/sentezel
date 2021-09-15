@@ -5,7 +5,7 @@ import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/books/ledger/ledger_detail/ledger_detail_controller.dart';
 import 'package:sentezel/books/ledger/ledger_detail/ledger_detail_screen.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
-import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
+import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 

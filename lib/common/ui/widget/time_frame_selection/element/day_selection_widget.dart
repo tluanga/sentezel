@@ -81,12 +81,12 @@ class DaySelectionWidget extends HookConsumerWidget {
                   const Duration(days: 1),
                 ),
               ),
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(
+            const Icon(
               CupertinoIcons.chevron_down,
               size: 16,
             )

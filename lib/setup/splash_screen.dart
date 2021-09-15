@@ -6,6 +6,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 
 class SplashScreen extends HookConsumerWidget {
+  const SplashScreen({Key? key}) : super(key: key);
+
   // startTime() async {
   //   var _duration = new Duration(seconds: 2);
   //   return new Timer(_duration, navigationPage);

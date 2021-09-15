@@ -318,8 +318,9 @@ _leftTitles({required List<String> leftTitles}) {
         return leftTitles[3];
       } else if (values <= 4) {
         return leftTitles[4];
-      } else
+      } else {
         return leftTitles[5];
+      }
     },
   );
 }

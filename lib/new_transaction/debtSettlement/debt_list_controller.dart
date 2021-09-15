@@ -41,7 +41,6 @@ class DebtorListController extends StateNotifier<AsyncValue<List<Debtor>>> {
             //----Party is in the debit side-
             //Because BAnk/Cash when in credit replaced by party
             _debitAmount = _transactionList[j].debitAmount;
-            ;
           } else {
             _creditAmount += _transactionList[j].creditAmount;
           }

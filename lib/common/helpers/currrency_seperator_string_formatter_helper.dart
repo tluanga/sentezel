@@ -6,8 +6,9 @@ String currencySeperatorStringFormatterHelper(int? data) {
     converted =
         NumberFormat.currency(symbol: '₹ ', locale: 'Hi', decimalDigits: 0)
             .format(data);
-  } else
+  } else {
     converted = '';
+  }
 
   return converted;
 }

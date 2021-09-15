@@ -9,21 +9,19 @@ class ResetScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Material(
-      child: Container(
-        child: Column(
-          children: [
-            TopBarWidget(
-              title: 'Reset',
-              onClose: () {
-                Navigator.pop(context);
-              },
-            ),
-            const SizedBox(
-              height: 250,
-            ),
-            const ResetButton(),
-          ],
-        ),
+      child: Column(
+        children: [
+          TopBarWidget(
+            title: 'Reset',
+            onClose: () {
+              Navigator.pop(context);
+            },
+          ),
+          const SizedBox(
+            height: 250,
+          ),
+          const ResetButton(),
+        ],
       ),
     );
   }

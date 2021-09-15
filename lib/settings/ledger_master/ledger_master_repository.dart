@@ -65,12 +65,10 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
       AND type LIKE '$_type%'
       ''');
       List<LedgerMaster> list = [];
-      result.forEach((item) {
+      for (var item in result) {
         list.add(LedgerMaster.fromMap(item));
-        print('name');
-        print(item['name']);
-      });
-      print(list);
+      }
+
       return list;
     } catch (e) {
       print(e);

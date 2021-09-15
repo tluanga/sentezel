@@ -7,64 +7,62 @@ class PinSetScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Material(
-      child: Container(
-        child: Column(
-          children: [
-            Text('Please Enter Four Digit Pin'),
-            OtpTextField(
-              numberOfFields: 5,
-              borderColor: Color(0xFF512DA8),
-              //set to true to show as box or false to show as dash
-              showFieldAsBox: true,
-              //runs when a code is typed in
-              onCodeChanged: (String code) {
-                //handle validation or checks here
-              },
-              //runs when every textfield is filled
-              onSubmit: (String verificationCode) {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text("Verification Code"),
-                        content: Text('Code entered is $verificationCode'),
-                      );
-                    });
-              }, // end onSubmit
-            ),
-            OtpTextField(
-              numberOfFields: 5,
-              borderColor: Color(0xFF512DA8),
-              //set to true to show as box or false to show as dash
-              showFieldAsBox: true,
-              //runs when a code is typed in
-              onCodeChanged: (String code) {
-                //handle validation or checks here
-              },
-              //runs when every textfield is filled
-              onSubmit: (String verificationCode) {
-                showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text("Verification Code"),
-                        content: Text('Code entered is $verificationCode'),
-                      );
-                    });
-              }, // end onSubmit
-            ),
-            Row(
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: Container(
-                    child: Text('Forward'),
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
+      child: Column(
+        children: [
+          const Text('Please Enter Four Digit Pin'),
+          OtpTextField(
+            numberOfFields: 5,
+            borderColor: Color(0xFF512DA8),
+            //set to true to show as box or false to show as dash
+            showFieldAsBox: true,
+            //runs when a code is typed in
+            onCodeChanged: (String code) {
+              //handle validation or checks here
+            },
+            //runs when every textfield is filled
+            onSubmit: (String verificationCode) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text("Verification Code"),
+                      content: Text('Code entered is $verificationCode'),
+                    );
+                  });
+            }, // end onSubmit
+          ),
+          OtpTextField(
+            numberOfFields: 5,
+            borderColor: Color(0xFF512DA8),
+            //set to true to show as box or false to show as dash
+            showFieldAsBox: true,
+            //runs when a code is typed in
+            onCodeChanged: (String code) {
+              //handle validation or checks here
+            },
+            //runs when every textfield is filled
+            onSubmit: (String verificationCode) {
+              showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      title: Text("Verification Code"),
+                      content: Text('Code entered is $verificationCode'),
+                    );
+                  });
+            }, // end onSubmit
+          ),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {},
+                child: Container(
+                  child: Text('Forward'),
+                ),
+              )
+            ],
+          ),
+        ],
       ),
     );
   }

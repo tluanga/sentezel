@@ -4,7 +4,7 @@ import 'package:sentezel/common/helpers/dateHelper/financialYear_helper.dart';
 
 class DateSelectionBar extends StatefulWidget {
   final void Function(DateTime startDate, DateTime endDate)? onTap;
-  DateSelectionBar({this.onTap});
+  const DateSelectionBar({Key? key, this.onTap}) : super(key: key);
   @override
   _DateSelectionBarState createState() => _DateSelectionBarState();
 }
@@ -33,7 +33,7 @@ class _DateSelectionBarState extends State<DateSelectionBar> {
       case 2:
         {
           setState(() {
-            startDate = new DateTime(endDate.year, endDate.month, 1);
+            startDate = DateTime(endDate.year, endDate.month, 1);
             endDate = DateTime.now();
           });
         }

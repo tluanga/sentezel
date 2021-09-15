@@ -162,34 +162,32 @@ class LedgerMasterScreen extends HookConsumerWidget {
                       ledgerMaster.description != ledgerMaster.name
                           ? ledgerMaster.description
                           : '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        child: Text(
-                          toBeginningOfSentenceCase(
-                            EnumToString.convertToString(ledgerMaster.type),
-                          )!,
-                        ),
+                      Text(
+                        toBeginningOfSentenceCase(
+                          EnumToString.convertToString(ledgerMaster.type),
+                        )!,
                       ),
                       Container(
                         child: ledgerMaster.status == Status.active
-                            ? Text(
+                            ? const Text(
                                 'Active',
                                 style: TextStyle(
                                   color: Colors.green,
                                 ),
                               )
-                            : Text(
+                            : const Text(
                                 'In-Active',
                                 style: TextStyle(
                                   color: Colors.red,

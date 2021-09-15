@@ -6,7 +6,7 @@ import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/ana
 import 'package:sentezel/books/journal/journal_detail_bottomsheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
-import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
+import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';

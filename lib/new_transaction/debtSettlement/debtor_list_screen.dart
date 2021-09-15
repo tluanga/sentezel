@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
+import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/new_transaction/debtSettlement/debt_list_controller.dart';
 import 'package:sentezel/new_transaction/debtSettlement/settlement/debt_settlement_screen.dart';

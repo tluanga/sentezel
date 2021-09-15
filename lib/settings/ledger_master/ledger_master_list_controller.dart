@@ -17,7 +17,6 @@ class LedgerMasterListController extends StateNotifier<List<LedgerMaster>> {
   LedgerMasterListController(this._read) : super([]);
 
   loadData({String searchString = ''}) async {
-    print('load data');
     state = await _read(ledgerMasterRepositoryProvider)
         .getList(searchString: searchString);
     if (state.isNotEmpty) _isLoading = false;
