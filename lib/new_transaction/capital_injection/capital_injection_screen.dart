@@ -41,7 +41,6 @@ class CapitalInjectionScreen extends HookConsumerWidget {
             height: MediaQuery.of(context).size.height,
             child: state.when(
                 data: (data) {
-                  print(data);
                   return Column(
                     children: [
                       TopBarWithSaveWidget(

@@ -13,62 +13,60 @@ class LedgerTransactionDetailBottomSheet extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Material(
-      child: Container(
-        child: Column(
-          children: [
-            Text(
-              'Ledger Transaction Detail',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+      child: Column(
+        children: [
+          Text(
+            'Ledger Transaction Detail',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          Row(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: Text('Date'),
               ),
-            ),
-            Row(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  child: Text('Date'),
-                ),
-                Container(
-                  child: Text(
-                    DateFormat(
-                      'dd MMMM yyyy hh:mm',
-                    ).format(ledgerTransaction.transaction!.date),
-                    style: TextStyle(
-                      fontSize: 14,
-                    ),
+              Container(
+                child: Text(
+                  DateFormat(
+                    'dd MMMM yyyy hh:mm',
+                  ).format(ledgerTransaction.transaction!.date),
+                  style: TextStyle(
+                    fontSize: 14,
                   ),
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  child: Text('Amount'),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: Text('Amount'),
+              ),
+              Container(
+                child: Text(
+                  ledgerTransaction.amount.toString(),
                 ),
-                Container(
-                  child: Text(
-                    ledgerTransaction.amount.toString(),
-                  ),
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              Container(
+                width: MediaQuery.of(context).size.width * 0.3,
+                child: Text('Amount'),
+              ),
+              Container(
+                child: Text(
+                  ledgerTransaction.amount.toString(),
                 ),
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                  width: MediaQuery.of(context).size.width * 0.3,
-                  child: Text('Amount'),
-                ),
-                Container(
-                  child: Text(
-                    ledgerTransaction.amount.toString(),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

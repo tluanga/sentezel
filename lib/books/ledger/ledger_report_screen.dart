@@ -28,11 +28,11 @@ class LedgerReportScreen extends HookConsumerWidget {
                   Navigator.pop(context);
                 }),
             Container(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 10,
               ),
               child: TextFormField(
-                decoration: InputDecoration(labelText: 'Search Ledger'),
+                decoration: const InputDecoration(labelText: 'Search Ledger'),
                 onChanged: (value) {
                   ref.watch(ledgerControllerProvider.notifier).loadData(
                         ledgerName: value,
@@ -43,11 +43,11 @@ class LedgerReportScreen extends HookConsumerWidget {
             state.when(data: (data) {
               return _list(context: context, data: data, ref: ref);
             }, loading: () {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }, error: (error, stack) {
-              return Center(
+              return const Center(
                 child: Text('Error'),
               );
             }),
