@@ -10,7 +10,7 @@ import 'package:sentezel/new_transaction/payment/model/payment_model.dart';
 import 'package:sentezel/new_transaction/payment/payment_confirm_modal.dart';
 import 'package:sentezel/new_transaction/payment/payment_transaction_mode_select_modal.dart';
 import 'package:sentezel/new_transaction/payment/paymentTypeSelect/payment_type_Select_modal.dart';
-import 'package:sentezel/new_transaction/payment/payment_validation_error_bottomSheet.dart';
+import 'package:sentezel/new_transaction/payment/payment_validation_error_bottomsheet.dart';
 import 'package:sentezel/new_transaction/payment/payment_controller.dart';
 
 class PaymentScreen extends HookConsumerWidget {
@@ -21,7 +21,6 @@ class PaymentScreen extends HookConsumerWidget {
     var state = ref.watch(paymentControllerProvider);
 
     onCancel() {
-      print('cancel is called');
       ref.read(paymentControllerProvider.notifier).reset();
     }
 
@@ -29,14 +28,13 @@ class PaymentScreen extends HookConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 5,
             ),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: state.when(
                 data: (data) {
-                  print(data);
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
@@ -69,7 +67,7 @@ class PaymentScreen extends HookConsumerWidget {
                         ],
                       ),
 
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       //-----ASSET SELECTION----------------------
