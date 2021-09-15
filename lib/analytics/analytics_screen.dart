@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_controller.dart';
-import 'package:sentezel/analytics/barChart/bar_chart_widget.dart';
+import 'package:sentezel/analytics/barChart/barchart_widget.dart';
 
 import 'package:sentezel/analytics/ui/pie_chart.dart';
 
