@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/trading_account/trading_account_controller.dart';
+
 import 'package:sentezel/books/widgets/report_top_bar_widget.dart';
 import 'trading_account_model.dart';
 
@@ -50,13 +51,15 @@ class TradingAccountReportScreen extends HookConsumerWidget {
                       onGeneratePdf: () {},
                       onClose: () {}),
                   state.when(data: (data) {
+                    print('when data');
                     return _incomeList(context: context, data: data, ref: ref);
                   }, loading: () {
-                    return const Center(
+                    print('inside loading');
+                    return Center(
                       child: CircularProgressIndicator(),
                     );
                   }, error: (error, stack) {
-                    return const Center(
+                    return Center(
                       child: Text('error'),
                     );
                   })
@@ -92,7 +95,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              const Text('Gross Profit'),
+              Text('Gross Profit'),
               Text(data[0].grossProfit.toString())
             ],
           )
@@ -169,7 +172,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
     return Row(
       children: [
         Text(item.ledgerName),
-        const SizedBox(
+        SizedBox(
           width: 20,
         ),
         Text(balance.toString()),
