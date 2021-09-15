@@ -26,9 +26,10 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
     Database db = await DatabaseService.instance.db;
     try {
       await db.insert(dbName, payload.toMap());
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
+
     // final userId = _read(authControllerProvider)!.uid;
   }
 
@@ -37,12 +38,12 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
     Database db = await DatabaseService.instance.db;
     try {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
-      if (result.length != 0) {
+      if (result.isNotEmpty) {
         return LedgerMaster.fromMap(result.first);
       }
       throw ('Something went wrong!');
-    } catch (e) {
-      throw (e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -70,9 +71,8 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
       }
 
       return list;
-    } catch (e) {
-      print(e);
-      return [];
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -83,9 +83,8 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
 
       return LedgerMaster.fromMap(result.first).name;
-    } catch (e) {
-      print(e);
-      return 'Error';
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -109,8 +108,8 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
         where: 'id=?',
         whereArgs: [payload.id],
       );
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

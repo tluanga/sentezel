@@ -87,12 +87,12 @@ class MonthSelection extends HookConsumerWidget {
               //   ),
               label,
 
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(
+            const Icon(
               CupertinoIcons.chevron_down,
               size: 16,
             )

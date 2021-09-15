@@ -44,7 +44,7 @@ class MyApp extends HookConsumerWidget {
         RouteConstant.purchaseOfAsset: (context) =>
             const PurchaseOfAssetScreen(),
       },
-      home: SplashScreen(),
+      home: const SplashScreen(),
     );
   }
 }

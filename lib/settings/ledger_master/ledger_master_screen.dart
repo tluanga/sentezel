@@ -31,9 +31,9 @@ class LedgerMasterScreen extends HookConsumerWidget {
             ),
             //------Searching Ledger Master and filtration will be done
             // based in input
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.8,
-              child: TextField(
+              child: const TextField(
                 decoration: InputDecoration(labelText: 'Search'),
               ),
             ),
@@ -97,12 +97,12 @@ class LedgerMasterScreen extends HookConsumerWidget {
         );
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
         height: MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -112,7 +112,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -123,7 +123,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
                 color: _color,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
@@ -131,7 +131,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
               child: Center(
                 child: Text(
                   ledgerMaster.getInitialLetter(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -142,19 +142,19 @@ class LedgerMasterScreen extends HookConsumerWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Center(
                     child: Text(
                       ledgerMaster.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   height: MediaQuery.of(context).size.height * 0.03,
                   child: Center(

@@ -69,6 +69,7 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
         }
       }
     }
+
     state = AsyncValue.data(BarChart(
         leftTitle: [], bottomTitle: [], barchartElement: _barChartElementList));
   }

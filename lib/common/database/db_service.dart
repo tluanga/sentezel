@@ -49,8 +49,6 @@ class DatabaseService {
   }
 
   Future<Database> _initDb() async {
-    print('Initializing database');
-
     //-------Using application-Directory-----------
     Directory dir = await getApplicationDocumentsDirectory();
     String path = dir.path + '/sentezel.db';
@@ -95,7 +93,5 @@ class DatabaseService {
     injectTransactionCategory(db);
     PartyDb.execute(db);
     TransactionDb.execute(db);
-
-    print('completed');
   }
 }

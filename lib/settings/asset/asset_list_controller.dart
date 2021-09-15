@@ -37,16 +37,16 @@ class AssetListController
     try {
       _read(ledgerMasterRepositoryProvider).add(payload: payload);
       loadData();
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
   updateAsset(LedgerMaster payload) {
     try {
       _read(ledgerMasterRepositoryProvider).update(payload: payload);
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

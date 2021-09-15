@@ -26,7 +26,7 @@ class LedgerMaster {
   }
 
   Map<String, dynamic> toMap() {
-    final map = Map<String, dynamic>();
+    final map = <String, dynamic>{};
     if (id != 0) {
       map['id'] = id;
     }

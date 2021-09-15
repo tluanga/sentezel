@@ -234,8 +234,8 @@ class ProfitAndLossController
       _profitAndLossList.add(_profitAndLoss);
 
       state = AsyncData(_profitAndLossList);
-    } catch (e) {
-      print(e.toString());
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

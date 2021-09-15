@@ -33,5 +33,4 @@ void injectLedgerMaster(Database db) async {
       );
     },
   );
-  print('Injetion of ledgerMaster completed');
 }

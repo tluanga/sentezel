@@ -54,7 +54,7 @@ class NewPartyModal extends HookConsumerWidget {
                             status: _status.value,
                           ),
                         );
-                print(_nameTextEditingController.text);
+
                 Navigator.pop(context);
               },
             ),

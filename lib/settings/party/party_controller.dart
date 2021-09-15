@@ -30,16 +30,16 @@ class PartyListController
     try {
       _read(ledgerMasterRepositoryProvider).add(payload: payload);
       loadData();
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
   getParty(int id) {
     try {
       _read(ledgerMasterRepositoryProvider).getItem(id: id);
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -47,8 +47,8 @@ class PartyListController
     try {
       _read(ledgerMasterRepositoryProvider).remove(id: id);
       loadData();
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -56,8 +56,8 @@ class PartyListController
     try {
       _read(ledgerMasterRepositoryProvider).update(payload: payload);
       loadData();
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

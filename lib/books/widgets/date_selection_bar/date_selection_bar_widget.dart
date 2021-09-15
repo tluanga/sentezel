@@ -42,7 +42,6 @@ class _DateSelectionBarState extends State<DateSelectionBar> {
         {
           setState(
             () {
-              print('inside 1');
               startDate = getStartDateOfAccountingYear();
               endDate = getEndDateOfAccountingYear();
             },
