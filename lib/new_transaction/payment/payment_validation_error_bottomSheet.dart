@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 
 class PaymentValidationErrorBottomSheet extends HookConsumerWidget {
   final List<String> validationErrorMessages;
@@ -22,7 +22,7 @@ class PaymentValidationErrorBottomSheet extends HookConsumerWidget {
               onExit: () {
                 Navigator.pop(context);
               }),
-          Container(
+          SizedBox(
             height: MediaQuery.of(context).size.height *
                 (validationErrorMessages.length / 12),
             width: MediaQuery.of(context).size.width,
