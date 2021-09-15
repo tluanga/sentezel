@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sentezel/common/ui/widget/settingsEllipse_widget.dart';
+import 'package:sentezel/common/ui/widget/settings_ellipse_widget.dart';
 
 class TopBarWidget extends StatelessWidget {
   final String title;
@@ -14,17 +14,17 @@ class TopBarWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SettingsEllipseWidget(),
+        const SettingsEllipseWidget(),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
         GestureDetector(
           onTap: () {
-            this.onClose();
+            onClose();
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

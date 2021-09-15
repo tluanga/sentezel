@@ -1,9 +1,7 @@
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_data.dart';
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_data.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_config.dart';
 import 'package:sqflite_common/sqlite_api.dart';
-
-import '../transactionCategory_config.dart';
 
 class TransactionCategoryDb {}
 
@@ -32,7 +30,7 @@ void injectTransactionCategory(Database db) async {
       creditSideLedger: value.creditSideLedger,
       status: value.status,
     ).toJson();
-    print('--The value of json is--');
+
     await db.insert(
       TransactionCategoryConfig.dbName,
       mapData,
