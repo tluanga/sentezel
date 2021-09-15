@@ -1,5 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/enums/transactionType_enum.dart';
+import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
@@ -20,7 +20,7 @@ class ReceiptTypeSelectController
       );
       state = AsyncData(result);
     } catch (e) {
-      throw(e.toString());
+      throw (e.toString());
     }
   }
 }

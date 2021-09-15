@@ -9,7 +9,7 @@ import 'package:sentezel/common/ui/widget/excel_export_button_widget.dart';
 import 'package:sentezel/common/ui/widget/pdf_export_button_widget.dart';
 
 import 'package:sentezel/books/ledger/ledger_model.dart';
-import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
+import 'package:sentezel/common/enums/debit_or_credit_enum.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_widget.dart';
 

@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
-import 'package:sentezel/common/enums/transactionType_enum.dart';
+import 'package:sentezel/common/enums/transaction_type_enum.dart';
 
 part 'transaction_category_model.freezed.dart';
 part 'transaction_category_model.g.dart';

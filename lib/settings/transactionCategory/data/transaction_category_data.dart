@@ -1,4 +1,4 @@
-import 'package:sentezel/common/enums/transactionType_enum.dart';
+import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
 
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_index.dart';

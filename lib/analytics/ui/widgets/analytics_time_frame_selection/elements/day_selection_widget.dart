@@ -48,26 +48,24 @@ daySelection({
 
                 // model.startDate = date!;
               },
-              child: Container(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: 20,
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.calendar_today,
+                    size: 20,
+                  ),
+                  Text(
+                    DateFormat('d-MM-yyyy').format(startDate.value),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Text(
-                      DateFormat('d-MM-yyyy').format(startDate.value),
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Icon(
-                      CupertinoIcons.chevron_down,
-                      size: 16,
-                    )
-                  ],
-                ),
+                  ),
+                  const Icon(
+                    CupertinoIcons.chevron_down,
+                    size: 16,
+                  )
+                ],
               ),
             ),
           ],
@@ -76,22 +74,18 @@ daySelection({
         //--------------------------------------
         Row(
           children: [
-            Container(
-              child: Text(
-                'End Date',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Text(
+              'End Date',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              child: Text(
-                '-',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Text(
+              '-',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
             ),
             GestureDetector(
@@ -103,33 +97,31 @@ daySelection({
                   initialDate: DateTime.now(),
                   firstDate: DateTime(DateTime.now().year),
                   lastDate: DateTime.now().add(
-                    Duration(
+                    const Duration(
                       days: 100,
                     ),
                   ),
                 );
                 onEndDateSelect(date!);
               },
-              child: Container(
-                child: Row(
-                  children: [
-                    Icon(
-                      Icons.calendar_today,
-                      size: 20,
+              child: Row(
+                children: [
+                  const Icon(
+                    Icons.calendar_today,
+                    size: 20,
+                  ),
+                  Text(
+                    DateFormat('d-MM-yyyy').format(endDate.value),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
                     ),
-                    Text(
-                      DateFormat('d-MM-yyyy').format(endDate.value),
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    Icon(
-                      CupertinoIcons.chevron_down,
-                      size: 16,
-                    )
-                  ],
-                ),
+                  ),
+                  const Icon(
+                    CupertinoIcons.chevron_down,
+                    size: 16,
+                  )
+                ],
               ),
             ),
           ],

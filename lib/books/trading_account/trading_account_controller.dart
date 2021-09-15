@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/trading_account/trading_account_model.dart';
-import 'package:sentezel/common/enums/transactionType_enum.dart';
+import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
