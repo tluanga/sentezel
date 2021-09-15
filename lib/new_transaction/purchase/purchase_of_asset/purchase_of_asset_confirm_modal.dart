@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/data/transaction_mode_enum.dart';
-import 'package:sentezel/newTransaction/purchase/purchase_of_asset/purchase_of_asset_controller.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
+import 'package:sentezel/new_transaction/purchase/purchase_of_asset/purchase_of_asset_controller.dart';
 
 class PurchaseOfAssetConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;

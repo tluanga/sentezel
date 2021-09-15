@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
-import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
-import 'package:sentezel/newTransaction/creditSettlement/creditorList_controller.dart';
-import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlement_screen.dart';
+import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
+import 'package:sentezel/new_transaction/creditSettlement/creditor_list_controller.dart';
+import 'package:sentezel/new_transaction/creditSettlement/settlement/credit_settlement_screen.dart';
 
 class CreditorListScreen extends HookConsumerWidget {
   const CreditorListScreen({Key? key}) : super(key: key);

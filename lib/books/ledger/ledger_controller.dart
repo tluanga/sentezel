@@ -3,12 +3,12 @@ import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 import 'package:sentezel/common/enums/transactionType_enum.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterId_index.dart';
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
+import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
-import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
 final ledgerControllerProvider =
     StateNotifierProvider<LedgerController, AsyncValue<List<LedgerReport>>>(

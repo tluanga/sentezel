@@ -1,5 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:sentezel/newTransaction/contra/contra_mode_enum.dart';
+import 'package:sentezel/new_transaction/contra/contra_mode_enum.dart';
+
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';

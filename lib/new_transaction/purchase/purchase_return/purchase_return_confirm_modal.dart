@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/data/transaction_mode_enum.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
 
-import 'package:sentezel/newTransaction/purchase/purchase_return/purchase_return_controller.dart';
+import 'package:sentezel/new_transaction/purchase/purchase_return/purchase_return_controller.dart';
 
 class PurchaseReturnConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;

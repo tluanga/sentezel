@@ -5,15 +5,15 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
-import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
-import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/newTransaction/debtSettlement/model/debtor_model.dart';
-import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlementConfirm_modal.dart';
-import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlementTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlementValidationError_bottomSheet.dart';
-import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_controller.dart';
-import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_model.dart';
-import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
+import 'package:sentezel/common/ui/widget/date_select_time_line_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
+import 'package:sentezel/new_transaction/debtSettlement/model/debtor_model.dart';
+import 'package:sentezel/new_transaction/debtSettlement/settlement/debt_settlement_confirm_modal.dart';
+import 'package:sentezel/new_transaction/debtSettlement/settlement/debt_settlement_transaction_mode_select_modal.dart';
+import 'package:sentezel/new_transaction/debtSettlement/settlement/debt_settlement_validation_error_bottomSheet.dart';
+import 'package:sentezel/new_transaction/debtSettlement/settlement/debt_settlement_controller.dart';
+import 'package:sentezel/new_transaction/debtSettlement/settlement/debt_settlement_model.dart';
+import 'package:sentezel/new_transaction/new_transaction_center_screen.dart';
 
 class DebtSettlementScreen extends HookConsumerWidget {
   final Debtor debtor;

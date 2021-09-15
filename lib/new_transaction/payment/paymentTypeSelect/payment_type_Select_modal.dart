@@ -3,9 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/helpers/getInitialLetter_helper.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
-import 'package:sentezel/newTransaction/payment/paymentTypeSelect/paymentTypeSelect_controller.dart';
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
+import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
+import 'package:sentezel/new_transaction/payment/paymentTypeSelect/payment_type_Select_controller.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 
 class PaymentTypeSelectModal extends HookConsumerWidget {
   final Function(TransactionCategory) onSelect;

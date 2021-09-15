@@ -2,9 +2,10 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
-import 'package:sentezel/newTransaction/common/transaction_config.dart';
-import 'package:sentezel/newTransaction/data/transaction_mode_enum.dart';
-import 'package:sentezel/newTransaction/data/transaction_model.dart' as trans;
+import 'package:sentezel/new_transaction/common/transaction_config.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
+import 'package:sentezel/new_transaction/data/transaction_model.dart' as trans;
+
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 

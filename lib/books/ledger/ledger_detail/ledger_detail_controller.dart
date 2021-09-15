@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 
 final ledgerDetailControllerProvider =
     StateNotifierProvider<LedgerDetailController, LedgerReport>(

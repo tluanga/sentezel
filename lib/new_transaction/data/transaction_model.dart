@@ -1,6 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
 
 part 'transaction_model.freezed.dart';
 part 'transaction_model.g.dart';

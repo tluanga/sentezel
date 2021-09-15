@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_model.dart';
-import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/new_transaction/data/transaction_model.dart';
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 
 final analyticsControllerProvider =
     StateNotifierProvider<AnalyticsController, AsyncValue<Analytics>>(

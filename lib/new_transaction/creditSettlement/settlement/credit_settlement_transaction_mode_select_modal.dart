@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlement_controller.dart';
-
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
+import 'package:sentezel/new_transaction/creditSettlement/settlement/credit_settlement_controller.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
 
 class CreditSettlementTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
@@ -68,9 +67,9 @@ class CreditSettlementTransactionModeSelectModalBottomSheet
                 ),
                 //----------Payment By Bank---------------
                 Container(
-                  margin: EdgeInsets.all(0),
+                  margin: const EdgeInsets.all(0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Payment by Bank',
                       style: TextStyle(
                         color: Colors.black,

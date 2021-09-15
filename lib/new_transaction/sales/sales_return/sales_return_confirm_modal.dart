@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/sales/sales_return/sales_return_controller.dart';
+import 'package:sentezel/new_transaction/sales/sales_return/sales_return_controller.dart';
 
 class SalesReturnConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;

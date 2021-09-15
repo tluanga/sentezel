@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlement_controller.dart';
+import 'package:sentezel/new_transaction/creditSettlement/settlement/credit_settlement_controller.dart';
 
 class CreditSettlementConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
@@ -29,7 +29,7 @@ class CreditSettlementConfirmationBottomSheet extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width,
               height: 30,
               decoration: BoxDecoration(color: Colors.redAccent[100]),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Please Confirm Transaction Summary before Submit',
                   style: TextStyle(

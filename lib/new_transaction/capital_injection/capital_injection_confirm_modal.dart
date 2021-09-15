@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/capital_injection/capital_injection_controller.dart';
+import 'package:sentezel/new_transaction/capital_injection/capital_injection_controller.dart';
 
 class CapitalInjectionConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;
@@ -29,7 +29,7 @@ class CapitalInjectionConfirmationBottomSheet extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width,
               height: 30,
               decoration: BoxDecoration(color: Colors.redAccent[100]),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Please Confirm Transaction Summary before Submit',
                   style: TextStyle(
@@ -38,7 +38,7 @@ class CapitalInjectionConfirmationBottomSheet extends HookConsumerWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
             Padding(
@@ -46,7 +46,7 @@ class CapitalInjectionConfirmationBottomSheet extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                     child: Row(
                       children: [

@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/capital_injection/capital_injection_screen.dart';
-import 'package:sentezel/newTransaction/contra/contra_screen.dart';
-import 'package:sentezel/newTransaction/creditSettlement/creditor_list_screen.dart';
+import 'package:sentezel/new_transaction/capital_injection/capital_injection_screen.dart';
+import 'package:sentezel/new_transaction/contra/contra_screen.dart';
+import 'package:sentezel/new_transaction/creditSettlement/creditor_list_screen.dart';
 
-import 'package:sentezel/newTransaction/payment/payment_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchase_of_material/purchase_of_material_screen.dart';
-import 'package:sentezel/newTransaction/purchase/purchase_return/purchaseReturn_screen.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_screen.dart';
-import 'package:sentezel/newTransaction/sales/general_sales/general_sales_screen.dart';
-import 'package:sentezel/newTransaction/sales/sales_return/sales_return_screen.dart';
+import 'package:sentezel/new_transaction/payment/payment_screen.dart';
+import 'package:sentezel/new_transaction/purchase/purchase_of_material/purchase_of_material_screen.dart';
+import 'package:sentezel/new_transaction/purchase/purchase_return/purchase_return_screen.dart';
+
+import 'package:sentezel/new_transaction/receipt/receipt_screen.dart';
+import 'package:sentezel/new_transaction/sales/general_sales/general_sales_screen.dart';
+import 'package:sentezel/new_transaction/sales/sales_return/sales_return_screen.dart';
 
 import 'debtSettlement/debtor_list_screen.dart';
 

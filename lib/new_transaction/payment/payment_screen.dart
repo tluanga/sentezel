@@ -3,15 +3,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
-import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
-import 'package:sentezel/newTransaction/payment/model/payment_model.dart';
-import 'package:sentezel/newTransaction/payment/paymentConfirm_modal.dart';
-import 'package:sentezel/newTransaction/payment/paymentTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/payment/paymentTypeSelect/paymentTypeSelect_modal.dart';
-import 'package:sentezel/newTransaction/payment/paymentValidationError_bottomSheet.dart';
-import 'package:sentezel/newTransaction/payment/payment_controller.dart';
+import 'package:sentezel/common/ui/widget/date_select_time_line_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
+import 'package:sentezel/new_transaction/new_transaction_center_screen.dart';
+import 'package:sentezel/new_transaction/payment/model/payment_model.dart';
+import 'package:sentezel/new_transaction/payment/payment_confirm_modal.dart';
+import 'package:sentezel/new_transaction/payment/payment_transaction_mode_select_modal.dart';
+import 'package:sentezel/new_transaction/payment/paymentTypeSelect/payment_type_Select_modal.dart';
+import 'package:sentezel/new_transaction/payment/payment_validation_error_bottomSheet.dart';
+import 'package:sentezel/new_transaction/payment/payment_controller.dart';
 
 class PaymentScreen extends HookConsumerWidget {
   const PaymentScreen({Key? key}) : super(key: key);

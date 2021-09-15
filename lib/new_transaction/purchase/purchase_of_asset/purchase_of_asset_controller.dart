@@ -1,10 +1,10 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/newTransaction/common/helper/get_transaction_mode_ledger_helper.dart';
-import 'package:sentezel/newTransaction/data/transaction_mode_enum.dart';
-import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/purchase/purchase_of_asset/model/purchase_of_asset_model.dart';
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_index.dart';
+import 'package:sentezel/new_transaction/common/helper/get_transaction_mode_ledger_helper.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
+import 'package:sentezel/new_transaction/data/transaction_model.dart';
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
+import 'package:sentezel/new_transaction/purchase/purchase_of_asset/model/purchase_of_asset_model.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_index.dart';
 
 final purchaseOfAssetControllerProvider =
     StateNotifierProvider<PurchaseOfAssetController, PurchaseOfAsset>(

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/receipt/receipt_controller.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
+import 'package:sentezel/new_transaction/receipt/receipt_controller.dart';
 
 class ReceiptTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
   const ReceiptTransactionModeSelectModalBottomSheet({

@@ -1,4 +1,4 @@
-import 'package:sentezel/newTransaction/common/transaction_config.dart';
+import 'package:sentezel/new_transaction/common/transaction_config.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 class TransactionDb {

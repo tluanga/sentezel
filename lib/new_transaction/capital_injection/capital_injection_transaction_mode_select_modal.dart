@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
+import 'package:sentezel/new_transaction/payment/payment_controller.dart';
 
 class CapitalInjectionTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
@@ -39,7 +41,7 @@ class CapitalInjectionTransactionModeSelectModalBottomSheet
                 ),
                 //--------------Payment by Cash----
                 ListTile(
-                  title: Text(
+                  title: const Text(
                     'Payment By Cash',
                     style: TextStyle(
                       color: Colors.black,

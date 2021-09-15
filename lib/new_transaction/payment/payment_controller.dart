@@ -1,8 +1,8 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/newTransaction/common/helper/get_transaction_mode_ledger_helper.dart';
-import 'package:sentezel/newTransaction/data/transaction_model.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
-import 'package:sentezel/newTransaction/payment/model/payment_model.dart';
+import 'package:sentezel/new_transaction/common/helper/get_transaction_mode_ledger_helper.dart';
+import 'package:sentezel/new_transaction/data/transaction_model.dart';
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
+import 'package:sentezel/new_transaction/payment/model/payment_model.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 
 final paymentControllerProvider =

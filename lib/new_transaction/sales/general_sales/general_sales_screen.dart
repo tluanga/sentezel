@@ -3,18 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
-import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/newTransaction/common/partial_payment_widget.dart';
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/new_transaction_center_screen.dart';
-import 'package:sentezel/newTransaction/sales/general_sales/general_sales_confirm_modal.dart';
-import 'package:sentezel/newTransaction/sales/general_sales/general_sales_controller.dart';
-import 'package:sentezel/newTransaction/sales/general_sales/general_sales_transactionmode_select_modal.dart';
-import 'package:sentezel/newTransaction/sales/general_sales/general_sales_validation_error_bottomSheet.dart';
-import 'package:sentezel/newTransaction/sales/general_sales/model/general_sales_model.dart';
+import 'package:sentezel/common/ui/widget/date_select_time_line_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
+import 'package:sentezel/new_transaction/common/partial_payment_widget.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
+import 'package:sentezel/new_transaction/new_transaction_center_screen.dart';
+import 'package:sentezel/new_transaction/sales/general_sales/general_sales_confirm_modal.dart';
+import 'package:sentezel/new_transaction/sales/general_sales/general_sales_controller.dart';
+import 'package:sentezel/new_transaction/sales/general_sales/general_sales_transactionmode_select_modal.dart';
+import 'package:sentezel/new_transaction/sales/general_sales/general_sales_validation_error_bottomSheet.dart';
+import 'package:sentezel/new_transaction/sales/general_sales/model/general_sales_model.dart';
 
-import 'package:sentezel/settings/party/partySelect_modal.dart';
+import 'package:sentezel/settings/party/party_select_modal.dart';
 
 class GeneralSalesScreen extends HookConsumerWidget {
   const GeneralSalesScreen({Key? key}) : super(key: key);

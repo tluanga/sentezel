@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/newTransaction/contra/contra_controller.dart';
+import 'package:sentezel/new_transaction/contra/contra_controller.dart';
 
 class ContraConfirmationBottomSheet extends HookConsumerWidget {
   final Function onConfirm;

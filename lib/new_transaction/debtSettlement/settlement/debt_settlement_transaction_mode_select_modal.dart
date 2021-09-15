@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-import 'package:sentezel/newTransaction/data/transactionMode_enum.dart';
-import 'package:sentezel/newTransaction/debtSettlement/settlement/debtSettlement_controller.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
+import 'package:sentezel/new_transaction/debtSettlement/settlement/debt_settlement_controller.dart';
 
 class DebtSettlementTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {

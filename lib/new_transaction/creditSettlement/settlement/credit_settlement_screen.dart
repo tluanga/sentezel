@@ -5,15 +5,16 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
-import 'package:sentezel/common/ui/widget/dateSelectTimeLine_widget.dart';
-import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
-import 'package:sentezel/newTransaction/creditSettlement/model/creditor_model.dart';
-import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlementConfirm_modal.dart';
-import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlementTransactionModeSelect_modal.dart';
-import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlementValidationError_bottomSheet.dart';
-import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlement_controller.dart';
-import 'package:sentezel/newTransaction/creditSettlement/settlement/creditSettlement_model.dart';
-import 'package:sentezel/newTransaction/newTransactionCenter_screen.dart';
+import 'package:sentezel/common/ui/widget/date_select_time_line_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
+
+import 'package:sentezel/new_transaction/creditSettlement/settlement/credit_settlement_transaction_mode_select_modal.dart';
+import 'package:sentezel/new_transaction/creditSettlement/model/creditor_model.dart';
+import 'package:sentezel/new_transaction/creditSettlement/settlement/credit_settlement_confirm_modal.dart';
+import 'package:sentezel/new_transaction/creditSettlement/settlement/credit_settlement_controller.dart';
+import 'package:sentezel/new_transaction/creditSettlement/settlement/credit_settlement_model.dart';
+import 'package:sentezel/new_transaction/creditSettlement/settlement/credit_settlement_validation_error_bottomSheet.dart';
+import 'package:sentezel/new_transaction/new_transaction_Center_screen.dart';
 
 class CreditSettlementScreen extends HookConsumerWidget {
   final Creditor creditor;

@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/newTransaction/creditSettlement/model/creditor_model.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/new_transaction/creditSettlement/model/creditor_model.dart';
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
+
 import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
@@ -15,7 +16,7 @@ final creditorListControllerProvider =
 class CreditorListController extends StateNotifier<AsyncValue<List<Creditor>>> {
   final Reader _read;
 
-  CreditorListController(this._read) : super(AsyncValue.loading());
+  CreditorListController(this._read) : super(const AsyncValue.loading());
 
   loadData({String ledgerName = ''}) async {
     print('Load data');

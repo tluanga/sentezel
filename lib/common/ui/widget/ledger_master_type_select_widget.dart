@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
 
 class LedgerMasterTypeSelectWidget extends StatefulWidget {
   final LedgerMasterType ledgerMasterType;
