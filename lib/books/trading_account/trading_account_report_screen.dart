@@ -51,15 +51,13 @@ class TradingAccountReportScreen extends HookConsumerWidget {
                       onGeneratePdf: () {},
                       onClose: () {}),
                   state.when(data: (data) {
-                    print('when data');
                     return _incomeList(context: context, data: data, ref: ref);
                   }, loading: () {
-                    print('inside loading');
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }, error: (error, stack) {
-                    return Center(
+                    return const Center(
                       child: Text('error'),
                     );
                   })
@@ -76,7 +74,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
       {required BuildContext context,
       required List<TradingAccount> data,
       required WidgetRef ref}) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
       width: MediaQuery.of(context).size.width,
       child: Column(

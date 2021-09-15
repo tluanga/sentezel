@@ -32,7 +32,6 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
                   state.when(data: (data) {
                     return _expenselist(context: context, data: data, ref: ref);
                   }, loading: () {
-                    print('inside loading');
                     return const Center(
                       child: CircularProgressIndicator(),
                     );

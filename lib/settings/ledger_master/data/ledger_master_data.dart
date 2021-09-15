@@ -8,7 +8,7 @@ List<LedgerMaster> ledgerMasterData = [
   // --------Special Ledger------------
   // 1- Bank Ledger
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Bank,
+    id: LedgerMasterIndex.bank,
     name: 'Bank',
     description: 'All Transaction Involving Bank',
     type: LedgerMasterType.direct,
@@ -16,7 +16,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //2-Cash
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Cash,
+    id: LedgerMasterIndex.cash,
     name: 'Cash',
     description: 'All Transaction Involving Cash',
     type: LedgerMasterType.direct,
@@ -25,7 +25,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //3-Purchase
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Purchase,
+    id: LedgerMasterIndex.purchase,
     name: 'Purchase',
     description:
         'All Transaction Involving Purchase of Item for resell or raw material',
@@ -35,7 +35,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //4-Discount Account
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Discount,
+    id: LedgerMasterIndex.discount,
     name: 'Discount',
     description: 'All Transaction with Discount',
     type: LedgerMasterType.indirect,
@@ -43,7 +43,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //5-Goods
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Goods,
+    id: LedgerMasterIndex.goods,
     name: 'Goods',
     description: 'Goods',
     type: LedgerMasterType.direct,
@@ -53,7 +53,7 @@ List<LedgerMaster> ledgerMasterData = [
   //----------Direct Expenses------------
   //6-Wages
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Wages,
+    id: LedgerMasterIndex.wages,
     name: 'Wages',
     description: 'Wages of Employees',
     type: LedgerMasterType.direct,
@@ -62,7 +62,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //7-Payment
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Payment,
+    id: LedgerMasterIndex.payment,
     name: 'Payment',
     description: 'Payment',
     type: LedgerMasterType.direct,
@@ -71,7 +71,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //8-Receipt
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Received,
+    id: LedgerMasterIndex.received,
     name: 'Receipt',
     description: 'Receipt',
     type: LedgerMasterType.direct,
@@ -80,7 +80,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //9-Carriage Expenses
   LedgerMaster.withId(
-    id: LedgerMasterIndex.CarriageExpense,
+    id: LedgerMasterIndex.carriageExpense,
     name: 'Carriage Expenses',
     description: '',
     type: LedgerMasterType.direct,
@@ -89,7 +89,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //10-Custom Duty
   LedgerMaster.withId(
-    id: LedgerMasterIndex.CustomDuty,
+    id: LedgerMasterIndex.customDuty,
     name: 'Custom duty',
     description: 'Custom duty',
     type: LedgerMasterType.direct,
@@ -98,7 +98,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //11-Fuel
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Fuel,
+    id: LedgerMasterIndex.fuel,
     name: 'Fuel',
     description: 'Fuel',
     type: LedgerMasterType.direct,
@@ -107,7 +107,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //12-Electric Bill
   LedgerMaster.withId(
-    id: LedgerMasterIndex.ElectricBill,
+    id: LedgerMasterIndex.electricBill,
     name: 'Electric Bill',
     description: 'Electric Bill',
     type: LedgerMasterType.direct,
@@ -116,7 +116,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //13-Consumable
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Consumable,
+    id: LedgerMasterIndex.consumable,
     name: 'Consumable',
     description: 'Consumable',
     type: LedgerMasterType.direct,
@@ -125,7 +125,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //14-Packing Expense
   LedgerMaster.withId(
-    id: LedgerMasterIndex.PackingExpense,
+    id: LedgerMasterIndex.packingExpense,
     name: 'Packing Expense',
     description: 'Packing Expense',
     type: LedgerMasterType.direct,
@@ -134,7 +134,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //15-Royalty
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Royalty,
+    id: LedgerMasterIndex.royalty,
     name: 'Royalty',
     description: '',
     type: LedgerMasterType.direct,
@@ -145,7 +145,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //16-Salaries
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Salaries,
+    id: LedgerMasterIndex.salaries,
     name: 'Salaries',
     description: 'Salaries of Employees',
     type: LedgerMasterType.indirect,
@@ -154,7 +154,7 @@ List<LedgerMaster> ledgerMasterData = [
 
   //17-Rent
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Rent,
+    id: LedgerMasterIndex.rent,
     name: 'Rent',
     description: 'Rent Paid',
     type: LedgerMasterType.indirect,
@@ -162,7 +162,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //18-Furniture
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Furniture,
+    id: LedgerMasterIndex.furniture,
     name: 'Furniture',
     description: 'Transactions made for the purchase of Furnitures',
     type: LedgerMasterType.indirect,
@@ -170,7 +170,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //19-Water Bill
   LedgerMaster.withId(
-    id: LedgerMasterIndex.WaterBill,
+    id: LedgerMasterIndex.waterBill,
     name: 'Water Bill',
     description: 'Water Bill',
     type: LedgerMasterType.indirect,
@@ -178,7 +178,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //20-Tax
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Tax,
+    id: LedgerMasterIndex.tax,
     name: 'Tax',
     description: 'Tax payment',
     type: LedgerMasterType.indirect,
@@ -322,7 +322,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //38-Administrative Expenses
   LedgerMaster.withId(
-    id: LedgerMasterIndex.AdministrativeExpenses,
+    id: LedgerMasterIndex.administrativeExpenses,
     name: 'Administrative Expenses',
     description: 'Expenses for the cause of Administrations',
     type: LedgerMasterType.indirect,
@@ -330,7 +330,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //39-Selling Commission
   LedgerMaster.withId(
-    id: LedgerMasterIndex.SellingCommision,
+    id: LedgerMasterIndex.sellingCommision,
     name: 'Selling Commission',
     description: 'Selling Commission',
     type: LedgerMasterType.indirect,
@@ -338,7 +338,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //40-Sample Expenses
   LedgerMaster.withId(
-    id: LedgerMasterIndex.SampleExpenses,
+    id: LedgerMasterIndex.sampleExpenses,
     name: 'Sample Expenses',
     description: 'Sample Expenses',
     type: LedgerMasterType.indirect,
@@ -346,7 +346,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //41-Liscense Fee
   LedgerMaster.withId(
-    id: LedgerMasterIndex.LicenseFee,
+    id: LedgerMasterIndex.licenseFee,
     name: 'Liscense Fee',
     description: 'Fees paid for license',
     type: LedgerMasterType.indirect,
@@ -354,7 +354,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //42-Delivery Charges
   LedgerMaster.withId(
-    id: LedgerMasterIndex.DeliveryCharge,
+    id: LedgerMasterIndex.deliveryCharge,
     name: 'Delivery Charges',
     description: 'Delivery Charges',
     type: LedgerMasterType.indirect,
@@ -362,7 +362,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //43-Sales tax paid
   LedgerMaster.withId(
-    id: LedgerMasterIndex.SalesTaxPaid,
+    id: LedgerMasterIndex.salesTaxPaid,
     name: 'Sales tax paid',
     description: 'Sales tax paid',
     type: LedgerMasterType.indirect,
@@ -370,7 +370,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //44-Loss on sale of assets
   LedgerMaster.withId(
-    id: LedgerMasterIndex.LossOnSaleOfAssets,
+    id: LedgerMasterIndex.lossOnSaleOfAssets,
     name: 'Loss on sale of assets',
     description: 'Loss on sale of assets',
     type: LedgerMasterType.indirect,
@@ -378,7 +378,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //45-Loss by Fire/Theft
   LedgerMaster.withId(
-    id: LedgerMasterIndex.LossByFireOrTheft,
+    id: LedgerMasterIndex.lossByFireOrTheft,
     name: 'Loss by Fire/Theft',
     description: '',
     type: LedgerMasterType.indirect,
@@ -386,7 +386,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //46-Repair/Renewal/Maintenance
   LedgerMaster.withId(
-    id: LedgerMasterIndex.RepairRenewalMaintenance,
+    id: LedgerMasterIndex.repairRenewalMaintenance,
     name: 'Repair/Renewal/Maintenance',
     description: 'Account for repair, renewal and maintenance',
     type: LedgerMasterType.indirect,
@@ -394,7 +394,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //47-Legal Charges
   LedgerMaster.withId(
-    id: LedgerMasterIndex.LegalCharge,
+    id: LedgerMasterIndex.legalCharge,
     name: 'Legal Charges',
     description: 'Legal Charges',
     type: LedgerMasterType.indirect,
@@ -402,7 +402,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //48-Insurance
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Insurance,
+    id: LedgerMasterIndex.insurance,
     name: 'Insurance',
     description: 'Insurance',
     type: LedgerMasterType.indirect,
@@ -410,7 +410,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //49-Sales
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Sales,
+    id: LedgerMasterIndex.sales,
     name: 'Sales',
     description: 'Sales account excluding sale returns',
     type: LedgerMasterType.direct,
@@ -418,7 +418,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //50-Sales Return
   LedgerMaster.withId(
-    id: LedgerMasterIndex.SalesReturn,
+    id: LedgerMasterIndex.salesReturn,
     name: 'Sales Return',
     description: 'Sales Return',
     type: LedgerMasterType.indirect,
@@ -426,7 +426,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //51-Purchase Return
   LedgerMaster.withId(
-    id: LedgerMasterIndex.PurchaseReturn,
+    id: LedgerMasterIndex.purchaseReturn,
     name: 'Purchase Return',
     description: 'Purchase Return',
     type: LedgerMasterType.indirect,
@@ -434,7 +434,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //52-Manufacturing Expenses
   LedgerMaster.withId(
-    id: LedgerMasterIndex.ManufacturingExpenses,
+    id: LedgerMasterIndex.manufacturingExpenses,
     name: 'Manufacturing Expenses',
     description: 'Manufacturing Expenses',
     type: LedgerMasterType.indirect,
@@ -442,7 +442,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //53-Bank Interest Received
   LedgerMaster.withId(
-    id: LedgerMasterIndex.BankInterestReceived,
+    id: LedgerMasterIndex.bankInterestReceived,
     name: 'Bank Interest Received',
     description: 'Bank Interest Received',
     type: LedgerMasterType.indirect,
@@ -450,7 +450,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //54-Discount Received
   LedgerMaster.withId(
-    id: LedgerMasterIndex.DiscountReceived,
+    id: LedgerMasterIndex.discountReceived,
     name: 'Discount Received',
     description: 'Discount Received',
     type: LedgerMasterType.indirect,
@@ -458,7 +458,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //55-Rent Received
   LedgerMaster.withId(
-    id: LedgerMasterIndex.RentReceived,
+    id: LedgerMasterIndex.rentReceived,
     name: 'Rent Received',
     description: 'Rent Received',
     type: LedgerMasterType.indirect,
@@ -466,7 +466,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //56-Commission Received
   LedgerMaster.withId(
-    id: LedgerMasterIndex.CommissionReceived,
+    id: LedgerMasterIndex.commissionReceived,
     name: 'Commission Received',
     description: 'Commission Received',
     type: LedgerMasterType.indirect,
@@ -474,7 +474,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //57-Profit on sale of Asset
   LedgerMaster.withId(
-    id: LedgerMasterIndex.ProfitOnSaleOfAssets,
+    id: LedgerMasterIndex.profitOnSaleOfAssets,
     name: 'Profit on sale of Asset',
     description: 'Profit on sale of Asset',
     type: LedgerMasterType.indirect,
@@ -482,7 +482,7 @@ List<LedgerMaster> ledgerMasterData = [
   ),
   //58-Capital
   LedgerMaster.withId(
-    id: LedgerMasterIndex.Capital,
+    id: LedgerMasterIndex.capital,
     name: 'Capital',
     description: 'Capital',
     type: LedgerMasterType.indirect,

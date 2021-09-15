@@ -45,9 +45,7 @@ class BusinessProfileSetup extends HookConsumerWidget {
                       trailing: Radio(
                         value: BusinessType.midangSiamZuar,
                         onChanged: (value) {
-                          print('before change value ${_businessType.value}');
                           _businessType.value = BusinessType.midangSiamZuar;
-                          print('Change value ${_businessType.value}');
                         },
                         groupValue: _businessType.value,
                       ),

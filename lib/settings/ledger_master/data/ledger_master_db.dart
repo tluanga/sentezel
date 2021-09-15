@@ -16,10 +16,9 @@ void injectLedgerMaster(Database db) async {
             status TEXT
              )''',
   );
-  print('Inject LedgerMaster Type');
+
   ledgerMasterData.asMap().forEach(
     (key, value) async {
-      print('status is ${value.status}');
       final mapData = LedgerMaster.withId(
         id: value.id,
         name: value.name,
@@ -27,7 +26,7 @@ void injectLedgerMaster(Database db) async {
         type: value.type,
         status: value.status,
       ).toMap();
-      print('--The value of json is--');
+
       await db.insert(
         LedgerMasterConfig.ledgerMasterTable,
         mapData,
