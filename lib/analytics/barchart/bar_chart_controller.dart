@@ -1,6 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/analytics/barchart/barchart_element_model.dart';
-import 'package:sentezel/analytics/barchart/barchart_model.dart';
+import 'package:sentezel/analytics/barchart/models/barchart_element_model.dart';
+import 'package:sentezel/analytics/barchart/models/barchart_model.dart';
+
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';

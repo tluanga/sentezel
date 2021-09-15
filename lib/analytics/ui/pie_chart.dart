@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'indicator.dart';
 
 class PieChartSample extends StatefulWidget {
+  const PieChartSample({Key? key}) : super(key: key);
+
   @override
   State<StatefulWidget> createState() => PieChart2State();
 }

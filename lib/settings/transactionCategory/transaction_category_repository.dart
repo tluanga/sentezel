@@ -94,12 +94,8 @@ class TransactionCategoryRepository
   }
 
   @override
-  void remove({required id}) {
-    // TODO: implement remove
-  }
+  void remove({required id}) {}
 
   @override
-  void update({required payload}) {
-    // TODO: implement update
-  }
+  void update({required payload}) {}
 }
