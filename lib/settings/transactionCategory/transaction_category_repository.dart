@@ -3,8 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/common/enums/transactionType_enum.dart';
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
-import 'package:sentezel/settings/transactionCategory/transactionCategory_config.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_config.dart';
 
 import 'package:sqflite_common/sqlite_api.dart';
 

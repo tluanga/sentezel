@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/books/balanceSheet/balance_sheet_report_screen.dart';
-import 'package:sentezel/books/journal/journalReport_screen.dart';
+import 'package:sentezel/books/journal/journal_report_screen.dart';
+
 import 'package:sentezel/books/ledger/ledger_report_screen.dart';
 import 'package:sentezel/books/profit_and_loss/profit_and_loss_report_screen.dart';
 import 'package:sentezel/books/trial_balance/trial_balance_report_screen.dart';

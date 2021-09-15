@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/books/periodType_enum.dart';
+import 'package:sentezel/books/period_type_enum.dart';
 
 class PeriodSelectionBarWidget extends HookConsumerWidget {
   const PeriodSelectionBarWidget({Key? key}) : super(key: key);

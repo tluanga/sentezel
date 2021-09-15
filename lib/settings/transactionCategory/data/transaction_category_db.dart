@@ -1,5 +1,6 @@
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_data.dart';
 import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_config.dart';
 import 'package:sqflite_common/sqlite_api.dart';
 
 import '../transactionCategory_config.dart';
