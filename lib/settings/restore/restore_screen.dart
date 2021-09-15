@@ -18,10 +18,10 @@ class RestoreScreen extends HookConsumerWidget {
               Navigator.pop(context);
             },
           ),
-          SizedBox(
+          const SizedBox(
             height: 250,
           ),
-          RestoreButton(),
+          const RestoreButton(),
         ],
       ),
     );

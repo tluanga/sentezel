@@ -10,69 +10,65 @@ class BusinessProfileSetup extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final _type = useState(BusinessType.mahniSiamZuar);
     return Material(
-      child: Container(
-        child: Column(
-          children: [
-            TextFormField(
-              decoration:
-                  InputDecoration(labelText: 'Please Enter Your Business Name'),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade300,
-                ),
+      child: Column(
+        children: [
+          TextFormField(
+            decoration: const InputDecoration(
+                labelText: 'Please Enter Your Business Name'),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.grey.shade300,
               ),
-              padding: EdgeInsets.symmetric(
-                vertical: 5,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: Text(
-                      'Business Type',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+            ),
+            padding: const EdgeInsets.symmetric(
+              vertical: 5,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  child: Text(
+                    'Business Type',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
-                  ListTile(
-                    leading: const Text('Image will be here'),
-                    title: const Text('Direct'),
+                ),
+                ListTile(
+                  leading: const Text('Image will be here'),
+                  title: const Text('Direct'),
+                  trailing: Radio(
+                    value: BusinessType.mahniSiamZuar,
+                    onChanged: (value) {
+                      _type.value = BusinessType.mahniSiamZuar;
+                    },
+                    groupValue: _type.value,
+                  ),
+                ),
+                Container(
+                  margin: const EdgeInsets.all(0),
+                  child: ListTile(
+                    title: const Text('Indirect'),
                     trailing: Radio(
-                      value: BusinessType.mahniSiamZuar,
+                      value: BusinessType.miSiamsaZuar,
                       onChanged: (value) {
-                        print('before change value ${_type.value}');
-                        _type.value = BusinessType.mahniSiamZuar;
-                        print('Change value ${_type.value}');
+                        _type.value = BusinessType.miSiamsaZuar;
                       },
                       groupValue: _type.value,
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(0),
-                    child: ListTile(
-                      title: const Text('Indirect'),
-                      trailing: Radio(
-                        value: BusinessType.miSiamsaZuar,
-                        onChanged: (value) {
-                          _type.value = BusinessType.miSiamsaZuar;
-                        },
-                        groupValue: _type.value,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            )
-          ],
-        ),
+                ),
+              ],
+            ),
+          )
+        ],
       ),
     );
   }

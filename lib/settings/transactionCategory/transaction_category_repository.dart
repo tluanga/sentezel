@@ -82,9 +82,9 @@ class TransactionCategoryRepository
       AND transactionType Like '$_type%'
       ''');
       List<TransactionCategory> list = [];
-      result.forEach((item) {
+      for (var item in result) {
         list.add(TransactionCategory.fromJson(item));
-      });
+      }
 
       return list;
     } catch (e) {

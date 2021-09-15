@@ -101,7 +101,7 @@ class PartySelectModal extends HookConsumerWidget {
         onSelect(item);
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
         height: MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
@@ -116,7 +116,7 @@ class PartySelectModal extends HookConsumerWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -146,45 +146,45 @@ class PartySelectModal extends HookConsumerWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Center(
                     child: Text(
                       item.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   height: MediaQuery.of(context).size.height * 0.03,
                   child: Center(
                     child: Text(
                       item.description != item.name ? item.description : '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                         child: item.status == Status.active
-                            ? Text(
+                            ? const Text(
                                 'Active',
                                 style: TextStyle(
                                   color: Colors.green,
                                 ),
                               )
-                            : Text(
+                            : const Text(
                                 'In-Active',
                                 style: TextStyle(
                                   color: Colors.red,

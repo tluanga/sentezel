@@ -16,13 +16,10 @@ class ResetButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(3.0),
         child: Row(
-          children: [
-            Container(
-              child: Icon(
-                Icons.restore,
-                size: 80,
-              ),
-              // child: Image.asset('assets/icons/pdf.png'),
+          children: const [
+            Icon(
+              Icons.restore,
+              size: 80,
             ),
             SizedBox(
               width: 10,

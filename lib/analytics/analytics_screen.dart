@@ -38,7 +38,7 @@ class AnalyticsScreen extends HookConsumerWidget {
                 height: MediaQuery.of(context).size.height * 0.65,
                 child: _chartMode.value == 0
                     ? const BarChartWidget()
-                    : PieChartSample2(),
+                    : PieChartSample(),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),

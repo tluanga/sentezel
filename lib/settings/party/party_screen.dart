@@ -164,7 +164,7 @@ class PartyScreen extends HookConsumerWidget {
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

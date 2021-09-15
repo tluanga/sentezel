@@ -28,8 +28,8 @@ class SplashScreen extends HookConsumerWidget {
     }
 
     startTime() async {
-      var _duration = new Duration(seconds: 5);
-      return new Timer(_duration, navigationPage);
+      var _duration = const Duration(seconds: 5);
+      return Timer(_duration, navigationPage);
     }
 
     useEffect(
@@ -41,22 +41,20 @@ class SplashScreen extends HookConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              SizedBox(
-                height: 200,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Image.asset('assets/images/sentezel_logo.png'),
-              ),
-              // Padding(
-              //   padding: const EdgeInsets.all(8.0),
-              //   child: Image.asset('-assets/images/mzu_inc_logo.png'),
-              // ),
-            ],
-          ),
+        child: Column(
+          children: [
+            const SizedBox(
+              height: 200,
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Image.asset('assets/images/sentezel_logo.png'),
+            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(8.0),
+            //   child: Image.asset('-assets/images/mzu_inc_logo.png'),
+            // ),
+          ],
         ),
       ),
     );
