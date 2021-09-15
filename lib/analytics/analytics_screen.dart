@@ -7,7 +7,7 @@ import 'package:sentezel/analytics/barChart/bar_chart_widget.dart';
 import 'package:sentezel/analytics/ui/pie_chart.dart';
 
 import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/analytics_time_frame_selection_widget.dart';
-import 'package:sentezel/common/ui/widget/topBar_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 
 class AnalyticsScreen extends HookConsumerWidget {
   const AnalyticsScreen({Key? key}) : super(key: key);
@@ -91,7 +91,7 @@ class AnalyticsScreen extends HookConsumerWidget {
                         child: Center(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
+                            children: const [
                               Icon(Icons.pie_chart),
                               Text(
                                 'Pie Chart',

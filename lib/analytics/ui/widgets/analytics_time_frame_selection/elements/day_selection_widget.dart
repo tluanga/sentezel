@@ -9,29 +9,25 @@ daySelection({
   required Function(DateTime) onStartDateSelect,
   required Function(DateTime) onEndDateSelect,
 }) {
-  return Container(
+  return SizedBox(
     width: MediaQuery.of(context).size.width * 0.97,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Row(
           children: [
-            Container(
-              child: Text(
-                'Start Date',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Text(
+              'Start Date',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
             ),
-            Container(
-              child: Text(
-                '-',
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Text(
+              '-',
+              style: TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.bold,
               ),
             ),
             GestureDetector(
@@ -43,7 +39,7 @@ daySelection({
                   initialDate: DateTime.now(),
                   firstDate: DateTime(DateTime.now().year),
                   lastDate: DateTime.now().add(
-                    Duration(
+                    const Duration(
                       days: 100,
                     ),
                   ),

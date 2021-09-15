@@ -33,7 +33,7 @@ weekSelection({
     'March',
   ];
 
-  return Container(
+  return SizedBox(
     width: MediaQuery.of(context).size.width * 0.97,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -45,53 +45,49 @@ weekSelection({
               context: context,
               backgroundColor: Colors.transparent,
               builder: (context) => Material(
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
                   child: Column(
                     children: [
-                      Container(
-                        child: ListTile(
-                          title: Text(
-                            _startingYear.toString(),
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          trailing: Radio(
-                            value: _startingYear,
-                            activeColor: Colors.green.shade500,
-                            onChanged: (value) {
-                              _year = _startingYear;
-                              onStartDateSelect(DateTime(_year));
-                              Navigator.pop(context);
-                            },
-                            groupValue: startDate.value.year,
+                      ListTile(
+                        title: Text(
+                          _startingYear.toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
+                        trailing: Radio(
+                          value: _startingYear,
+                          activeColor: Colors.green.shade500,
+                          onChanged: (value) {
+                            _year = _startingYear;
+                            onStartDateSelect(DateTime(_year));
+                            Navigator.pop(context);
+                          },
+                          groupValue: startDate.value.year,
+                        ),
                       ),
-                      Container(
-                        child: ListTile(
-                          title: Text(
-                            _endingYear.toString(),
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      ListTile(
+                        title: Text(
+                          _endingYear.toString(),
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
-                          trailing: Radio(
-                            value: _endingYear,
-                            activeColor: Colors.green.shade500,
-                            onChanged: (value) {
-                              _year = _endingYear;
-                              onStartDateSelect(DateTime(_year));
+                        ),
+                        trailing: Radio(
+                          value: _endingYear,
+                          activeColor: Colors.green.shade500,
+                          onChanged: (value) {
+                            _year = _endingYear;
+                            onStartDateSelect(DateTime(_year));
 
-                              Navigator.pop(context);
-                            },
-                            groupValue: startDate.value.year,
-                          ),
+                            Navigator.pop(context);
+                          },
+                          groupValue: startDate.value.year,
                         ),
                       ),
                     ],
@@ -100,23 +96,23 @@ weekSelection({
               ),
             );
           },
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.26,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Icon(
+                const Icon(
                   Icons.calendar_today,
                   size: 20,
                 ),
                 Text(
                   startDate.value.year.toString(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                Icon(
+                const Icon(
                   CupertinoIcons.chevron_down,
                   size: 16,
                 )
@@ -136,32 +132,30 @@ weekSelection({
               context: context,
               backgroundColor: Colors.transparent,
               builder: (context) => Material(
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.2,
                   child: ListView.builder(
                     itemCount: _selectedList.length,
                     itemBuilder: (BuildContext context, index) {
-                      return Container(
-                        child: ListTile(
-                          title: Text(
-                            _selectedList[index],
-                            style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
+                      return ListTile(
+                        title: Text(
+                          _selectedList[index],
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
                           ),
-                          trailing: Radio(
-                            value: _endingYear,
-                            activeColor: Colors.green.shade500,
-                            onChanged: (value) {
-                              onStartDateSelect(DateTime(
-                                _year,
-                              ));
-                              Navigator.pop(context);
-                            },
-                            groupValue: _year,
-                          ),
+                        ),
+                        trailing: Radio(
+                          value: _endingYear,
+                          activeColor: Colors.green.shade500,
+                          onChanged: (value) {
+                            onStartDateSelect(DateTime(
+                              _year,
+                            ));
+                            Navigator.pop(context);
+                          },
+                          groupValue: _year,
                         ),
                       );
                     },
@@ -170,12 +164,12 @@ weekSelection({
               ),
             );
           },
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.3,
             // color: Colors.red,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Icon(
                   Icons.calendar_today,
                   size: 20,

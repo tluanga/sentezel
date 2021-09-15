@@ -11,9 +11,9 @@ class BarChartWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final Color leftBarColor = const Color(0xff53fdd7);
-    final Color rightBarColor = const Color(0xffff5182);
-    final double width = 7;
+    const Color leftBarColor = const Color(0xff53fdd7);
+    const Color rightBarColor = const Color(0xffff5182);
+    const double width = 7;
 
     late List<BarChartGroupData> rawBarGroups;
     late List<BarChartGroupData> showingBarGroups;

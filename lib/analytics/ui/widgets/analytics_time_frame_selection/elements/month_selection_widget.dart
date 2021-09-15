@@ -9,7 +9,7 @@ monthSelection({
   required Function(DateTime) onStartDateSelect,
   required Function(DateTime) onEndDateSelect,
 }) {
-  return Container(
+  return SizedBox(
     width: MediaQuery.of(context).size.width * 0.6,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -26,26 +26,24 @@ monthSelection({
 
             // model.startDate = date!;
           },
-          child: Container(
-            child: Row(
-              children: [
-                Icon(
-                  Icons.calendar_today,
-                  size: 20,
+          child: Row(
+            children: const [
+              Icon(
+                Icons.calendar_today,
+                size: 20,
+              ),
+              Text(
+                'Select Year',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  'Select Year',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Icon(
-                  CupertinoIcons.chevron_down,
-                  size: 16,
-                )
-              ],
-            ),
+              ),
+              Icon(
+                CupertinoIcons.chevron_down,
+                size: 16,
+              )
+            ],
           ),
         ),
         GestureDetector(
@@ -60,26 +58,24 @@ monthSelection({
             // Provider.of<AnalyticsProvider>(context, listen: false).endDate =
             //     date!;
           },
-          child: Container(
-            child: Row(
-              children: [
-                Icon(
-                  Icons.calendar_today,
-                  size: 20,
+          child: Row(
+            children: const [
+              Icon(
+                Icons.calendar_today,
+                size: 20,
+              ),
+              Text(
+                'Select Month',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
-                Text(
-                  'Select Month',
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                Icon(
-                  CupertinoIcons.chevron_down,
-                  size: 18,
-                )
-              ],
-            ),
+              ),
+              Icon(
+                CupertinoIcons.chevron_down,
+                size: 18,
+              )
+            ],
           ),
         )
       ],

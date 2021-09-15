@@ -17,7 +17,7 @@ final profitAndLossControllerProvider = StateNotifierProvider<
 
 class ProfitAndLossController
     extends StateNotifier<AsyncValue<List<ProfitAndLoss>>> {
-  Reader _read;
+  final Reader _read;
   ProfitAndLossController(this._read) : super(AsyncValue.loading());
   loadData() async {
     try {

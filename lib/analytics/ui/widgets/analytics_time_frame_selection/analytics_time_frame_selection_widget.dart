@@ -19,12 +19,12 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final mode = useState(AnalyticsPeriod.daily);
-    final startDate = useState(DateTime.now().subtract(Duration(days: 7)));
+    final startDate =
+        useState(DateTime.now().subtract(const Duration(days: 7)));
     final endDate = useState(DateTime.now());
 
     useEffect(() {
       if (mode.value == AnalyticsPeriod.financialYear) {
-        print('set days');
         startDate.value = DateHelper.getStartDateOfAccountingYear();
         endDate.value = DateHelper.getEndDateOfAccountingYear();
       }
@@ -51,7 +51,6 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                     builder: (context) => timeFrame(
                       context: context,
                       onSelect: (period) {
-                        print(period);
                         mode.value = period;
                       },
                       period: mode,
@@ -68,7 +67,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 4),
                     child: Row(
-                      children: [
+                      children: const [
                         Text(
                           'Select Period',
                           style: TextStyle(
@@ -85,13 +84,13 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
 
               //---Current Selected Period
               Row(
-                children: [
+                children: const [
                   Text(
                     'Current Selected -',
                     style: TextStyle(

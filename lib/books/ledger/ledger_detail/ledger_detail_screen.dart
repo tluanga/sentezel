@@ -11,6 +11,7 @@ import 'package:sentezel/common/ui/widget/pdf_export_button_widget.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
 import 'package:sentezel/common/helpers/CurrrencySeperatorStringFormatter_helper.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_widget.dart';
 
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -25,24 +26,22 @@ class LedgerDetailScreen extends HookConsumerWidget {
     final state = ref.watch(ledgerDetailControllerProvider);
     return Material(
       child: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              TopBarWidget(
-                title: 'Ledger-${state.name}',
-                onClose: () {
-                  Navigator.pop(context);
-                },
-              ),
-              TimeFrameSelection(),
-              SizedBox(
-                height: 10,
-              ),
-              _listHeader(context),
-              _list(context: context, ledgerReportData: state),
-              _report(data: state, context: context),
-            ],
-          ),
+        child: Column(
+          children: [
+            TopBarWidget(
+              title: 'Ledger-${state.name}',
+              onClose: () {
+                Navigator.pop(context);
+              },
+            ),
+            const TimeFrameSelection(),
+            const SizedBox(
+              height: 10,
+            ),
+            _listHeader(context),
+            _list(context: context, ledgerReportData: state),
+            _report(data: state, context: context),
+          ],
         ),
       ),
     );
@@ -54,32 +53,32 @@ class LedgerDetailScreen extends HookConsumerWidget {
       children: [
         Container(
             width: size.width * 0.50,
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             color: Colors.cyan[50],
-            child: Text(
+            child: const Text(
               'Particulars',
               style: TextStyle(fontWeight: FontWeight.w500),
             )),
-        VerticalDivider(
+        const VerticalDivider(
           width: 2,
         ),
         Container(
             width: size.width * 0.24,
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             color: Colors.cyan[50],
-            child: Text(
+            child: const Text(
               'Debit',
               textAlign: TextAlign.center,
               style: TextStyle(fontWeight: FontWeight.w500),
             )),
-        VerticalDivider(
+        const VerticalDivider(
           width: 2,
         ),
         Container(
           width: size.width * 0.24,
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           color: Colors.cyan[50],
-          child: Text(
+          child: const Text(
             'Credit',
             textAlign: TextAlign.center,
             style: TextStyle(fontWeight: FontWeight.w500),
@@ -92,7 +91,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
   _list(
       {required BuildContext context, required LedgerReport ledgerReportData}) {
     Size size = MediaQuery.of(context).size;
-    return Container(
+    return SizedBox(
       height: size.height * 0.575,
       child: ListView.builder(
         itemCount: ledgerReportData.ledgerTransaction != null
@@ -113,7 +112,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
   _listItem(BuildContext context, LedgerTransaction data) {
     Size size = MediaQuery.of(context).size;
     return Slidable(
-      actionPane: SlidableDrawerActionPane(),
+      actionPane: const SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
       secondaryActions: [
         IconSlideAction(
@@ -169,7 +168,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                   child: Row(
                     children: [
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: 8),
+                        padding: const EdgeInsets.symmetric(horizontal: 8),
                         width: size.width * 0.50,
                         child: Text(
                           data.transaction!.particular,
@@ -197,7 +196,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                       ),
                     ],
                   )),
-              Divider(),
+              const Divider(),
             ],
           )
         ],
@@ -224,8 +223,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
                 decoration: BoxDecoration(color: Colors.green.shade200),
                 child: Row(
                   children: [
-                    Text('Debit:'),
-                    SizedBox(
+                    const Text('Debit:'),
+                    const SizedBox(
                       width: 5,
                     ),
                     Container(
@@ -242,8 +241,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
                 decoration: BoxDecoration(color: Colors.red.shade200),
                 child: Row(
                   children: [
-                    Text('Credit:'),
-                    SizedBox(
+                    const Text('Credit:'),
+                    const SizedBox(
                       width: 5,
                     ),
                     Container(
@@ -255,45 +254,43 @@ class LedgerDetailScreen extends HookConsumerWidget {
                   ],
                 ),
               ),
-              Container(
-                child: Row(
-                  children: [
-                    Text('Balance:'),
-                    SizedBox(
-                      width: 5,
-                    ),
-                    Container(
-                        width: MediaQuery.of(context).size.width * 0.25,
-                        height: 20,
-                        decoration: BoxDecoration(
-                          color: (data.debitAmount - data.creditAmount >= 0)
-                              ? Colors.green.shade200
-                              : Colors.red.shade200,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                        child: Center(
-                          child: Text(
-                            currencySeperatorStringFormatterHelper(
-                                data.debitAmount - data.creditAmount),
-                            // (model.debit - model.credit).toString(),
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+              Row(
+                children: [
+                  const Text('Balance:'),
+                  const SizedBox(
+                    width: 5,
+                  ),
+                  Container(
+                      width: MediaQuery.of(context).size.width * 0.25,
+                      height: 20,
+                      decoration: BoxDecoration(
+                        color: (data.debitAmount - data.creditAmount >= 0)
+                            ? Colors.green.shade200
+                            : Colors.red.shade200,
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      child: Center(
+                        child: Text(
+                          currencySeperatorStringFormatterHelper(
+                              data.debitAmount - data.creditAmount),
+                          // (model.debit - model.credit).toString(),
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
-                        alignment: Alignment.centerRight),
-                  ],
-                ),
+                      ),
+                      alignment: Alignment.centerRight),
+                ],
               ),
             ],
           ),
           Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 20,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 PDFExportButton(),
                 ExcelExportButton(),
               ],

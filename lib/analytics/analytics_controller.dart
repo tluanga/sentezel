@@ -9,13 +9,13 @@ final analyticsControllerProvider =
 
 class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
   final Reader _read;
-  AnalyticsController(this._read) : super(AsyncLoading());
+  AnalyticsController(this._read) : super(const AsyncLoading());
 
   loadData() async {
     //----Read all transaction---
     final data = await _read(transactionRepositoryProvider).getList(
       startDate: DateTime.now().subtract(
-        Duration(days: 7),
+        const Duration(days: 7),
       ),
     );
     data.sort((a, b) => a.date.compareTo(b.date));
