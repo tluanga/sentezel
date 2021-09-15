@@ -13,18 +13,16 @@ class TransactionDeleteConfirmBottomSheet extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Material(
-      child: Container(
+      child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.15,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Container(
-              child: Text(
-                'Please Confirm Delete',
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.bold,
-                ),
+            const Text(
+              'Please Confirm Delete',
+              style: TextStyle(
+                fontSize: 17,
+                fontWeight: FontWeight.bold,
               ),
             ),
             GestureDetector(
@@ -44,14 +42,14 @@ class TransactionDeleteConfirmBottomSheet extends HookConsumerWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Delete',
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 20,
                     ),
                     Icon(

@@ -38,7 +38,7 @@ class ControlCenterScreen extends StatelessWidget {
                         expand: true,
                         context: context,
                         backgroundColor: Colors.transparent,
-                        builder: (context) => BooksScreen(),
+                        builder: (context) => const BooksScreen(),
                       );
                     },
                   ),
@@ -58,7 +58,7 @@ class ControlCenterScreen extends StatelessWidget {
                       expand: true,
                       context: context,
                       backgroundColor: Colors.transparent,
-                      builder: (context) => NewTranscationCenterScreen(),
+                      builder: (context) => const NewTranscationCenterScreen(),
                     );
                   },
                 ),
@@ -146,7 +146,7 @@ class ControlCenterScreen extends StatelessWidget {
                       expand: true,
                       context: context,
                       backgroundColor: Colors.transparent,
-                      builder: (context) => BackupScreen(),
+                      builder: (context) => const BackupScreen(),
                     );
                   },
                 ),
@@ -159,7 +159,7 @@ class ControlCenterScreen extends StatelessWidget {
                       expand: true,
                       context: context,
                       backgroundColor: Colors.transparent,
-                      builder: (context) => RestoreScreen(),
+                      builder: (context) => const RestoreScreen(),
                     );
                   },
                 ),
@@ -172,7 +172,7 @@ class ControlCenterScreen extends StatelessWidget {
                       expand: true,
                       context: context,
                       backgroundColor: Colors.transparent,
-                      builder: (context) => ResetScreen(),
+                      builder: (context) => const ResetScreen(),
                     );
                   },
                 ),
@@ -221,12 +221,12 @@ class ControlCenterScreen extends StatelessWidget {
         onTap();
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 10, right: 10, bottom: 0),
         height: height,
         width: width,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -243,12 +243,12 @@ class ControlCenterScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Align(
               alignment: Alignment.center,
               child: Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,
@@ -276,12 +276,12 @@ class ControlCenterScreen extends StatelessWidget {
         onTap();
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
         height: height,
         width: width,
         decoration: BoxDecoration(
           color: Colors.red,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -291,19 +291,19 @@ class ControlCenterScreen extends StatelessWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Align(
               alignment: Alignment.center,
               child: Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),

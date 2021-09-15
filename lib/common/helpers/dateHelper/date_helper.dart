@@ -1,28 +1,28 @@
 class DateHelper {
-  static const String DateOne = 'DateOne';
-  static const String DateTwo = 'DateTwo';
-  static const String Equal = 'Equal';
+  static const String dateOne = 'DateOne';
+  static const String dateTwo = 'DateTwo';
+  static const String equal = 'Equal';
 
   static String compareTwoDateWithoutTime(DateTime date1, DateTime date2) {
     //if date 1 is greater it will return true, otherwise false
     if (date1.year == date2.year) {
       if (date1.month == date2.month) {
         if (date1.day == date2.day) {
-          return Equal;
+          return equal;
         } else if (date1.day > date2.day) {
-          return DateOne;
+          return dateOne;
         } else if (date1.day < date2.day) {
-          return DateTwo;
+          return dateTwo;
         }
       } else if (date1.month > date2.month) {
-        return DateOne;
+        return dateOne;
       } else if (date1.month < date2.month) {
-        return DateTwo;
+        return dateTwo;
       }
     } else if (date1.year > date2.year) {
-      return DateOne;
+      return dateOne;
     }
-    return DateTwo;
+    return dateTwo;
   }
 
   static bool checkDateForNewFinancialYearStart() {
@@ -35,10 +35,9 @@ class DateHelper {
     if (DateHelper.compareTwoDateWithoutTime(
             DateTime.now(), DateTime(year + 1, DateTime.april, 29)) ==
         'Equal') {
-      print('Inside helper-NEw financial year');
       return true;
     }
-    print('Inside Helper--not a new financial year');
+
     return false;
   }
 
@@ -136,14 +135,6 @@ class DateHelper {
   static DateTime getEndDateOfAccountingYear() {
     DateTime now = DateTime.now();
 
-    // End Date is the month of April of every Year
-    // void printEndDate(DateTime endDate) {
-    //   print('--Inside getEndDateOfAccountingYear function-- ');
-    //   print('End Date ${endDate.toString()}');
-    //   print('current month is ${now.month}');
-    //   print('--End-------');
-    // }
-
     switch (now.month) {
       case 1: // January
         DateTime endDate = DateTime(now.year, 3, 31, 23, 59, 99, 99);
@@ -214,7 +205,7 @@ class DateHelper {
 
 //Get the start date of the month
   DateTime getMonthStartDate() {
-    DateTime _date = new DateTime(DateTime.now().year, DateTime.now().month, 1);
+    DateTime _date = DateTime(DateTime.now().year, DateTime.now().month, 1);
     return _date;
   }
 }

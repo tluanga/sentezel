@@ -41,64 +41,62 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
                 left: 10,
                 right: 10,
               ),
-              child: Container(
-                child: Column(
-                  children: [
-                    _field(
-                      context: context,
-                      label: 'Particular',
-                      value: data.particular,
-                    ),
-                    _field(
-                      context: context,
-                      label: 'Date',
-                      value: DateFormat('dd-MM-yyyy hh:mm a').format(data.date),
-                    ),
-                    _field(
-                      context: context,
-                      label: 'Amount',
-                      value: data.amount.toString(),
-                    ),
-                    _field(
-                      context: context,
-                      label: 'Transaction Type',
-                      value: data.transactionCategory,
-                    ),
-                    _field(
-                      context: context,
-                      label: 'Mode',
-                      value: data.mode,
-                    ),
-                    data.partyLedgerName!.isNotEmpty
-                        ? _field(
-                            context: context,
-                            label: 'Party',
-                            value: data.partyLedgerName!,
-                          )
-                        : Container(),
-                    data.assetLedgerName!.isNotEmpty
-                        ? _field(
-                            context: context,
-                            label: 'Asset',
-                            value: data.assetLedgerName!,
-                          )
-                        : Container(),
-                    data.creditSideLedgerName!.isNotEmpty
-                        ? _field(
-                            context: context,
-                            label: 'Credit Side',
-                            value: data.creditSideLedgerName!,
-                          )
-                        : Container(),
-                    data.debitSideLedgerName!.isNotEmpty
-                        ? _field(
-                            context: context,
-                            label: 'Debit Side',
-                            value: data.debitSideLedgerName!,
-                          )
-                        : Container()
-                  ],
-                ),
+              child: Column(
+                children: [
+                  _field(
+                    context: context,
+                    label: 'Particular',
+                    value: data.particular,
+                  ),
+                  _field(
+                    context: context,
+                    label: 'Date',
+                    value: DateFormat('dd-MM-yyyy hh:mm a').format(data.date),
+                  ),
+                  _field(
+                    context: context,
+                    label: 'Amount',
+                    value: data.amount.toString(),
+                  ),
+                  _field(
+                    context: context,
+                    label: 'Transaction Type',
+                    value: data.transactionCategory,
+                  ),
+                  _field(
+                    context: context,
+                    label: 'Mode',
+                    value: data.mode,
+                  ),
+                  data.partyLedgerName!.isNotEmpty
+                      ? _field(
+                          context: context,
+                          label: 'Party',
+                          value: data.partyLedgerName!,
+                        )
+                      : Container(),
+                  data.assetLedgerName!.isNotEmpty
+                      ? _field(
+                          context: context,
+                          label: 'Asset',
+                          value: data.assetLedgerName!,
+                        )
+                      : Container(),
+                  data.creditSideLedgerName!.isNotEmpty
+                      ? _field(
+                          context: context,
+                          label: 'Credit Side',
+                          value: data.creditSideLedgerName!,
+                        )
+                      : Container(),
+                  data.debitSideLedgerName!.isNotEmpty
+                      ? _field(
+                          context: context,
+                          label: 'Debit Side',
+                          value: data.debitSideLedgerName!,
+                        )
+                      : Container()
+                ],
               ),
             )
           ],
@@ -111,43 +109,41 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
       {required BuildContext context,
       required String label,
       required String value}) {
-    return Container(
-      child: Row(
-        children: [
-          Container(
-            width: MediaQuery.of(context).size.width * 0.25,
-            height: MediaQuery.of(context).size.height * 0.05,
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+    return Row(
+      children: [
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.25,
+          height: MediaQuery.of(context).size.height * 0.05,
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.05,
-            height: MediaQuery.of(context).size.height * 0.05,
-            child: Text(
-              ':',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.05,
+          height: MediaQuery.of(context).size.height * 0.05,
+          child: const Text(
+            ':',
+            style: TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          Container(
-            width: MediaQuery.of(context).size.width * 0.63,
-            height: MediaQuery.of(context).size.height * 0.05,
-            child: Text(
-              value,
-              style: TextStyle(
-                fontSize: 16,
-              ),
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.63,
+          height: MediaQuery.of(context).size.height * 0.05,
+          child: Text(
+            value,
+            style: const TextStyle(
+              fontSize: 16,
             ),
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

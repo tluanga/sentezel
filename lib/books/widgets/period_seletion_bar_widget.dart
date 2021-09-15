@@ -11,20 +11,18 @@ class PeriodSelectionBarWidget extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _period = useState(PeriodType.month);
-    return Container(
-      child: Row(
-        children: [
-          Row(children: [
-            Text(
-              EnumToString.convertToString(_period.value),
-            ),
-            Icon(CupertinoIcons.down_arrow)
-          ]),
-          Container(
-            child: _periodSelection(_period.value),
+    return Row(
+      children: [
+        Row(children: [
+          Text(
+            EnumToString.convertToString(_period.value),
           ),
-        ],
-      ),
+          Icon(CupertinoIcons.down_arrow)
+        ]),
+        Container(
+          child: _periodSelection(_period.value),
+        ),
+      ],
     );
   }
 
@@ -32,64 +30,28 @@ class PeriodSelectionBarWidget extends HookConsumerWidget {
     switch (_period) {
       case PeriodType.year:
         //Month Selection
-        return Container(
-          child: Row(
-            children: [
-              Container(
-                child: Row(
-                  children: [
-                    Container(
-                      child: Text('Current Financial Year'),
-                    )
-                  ],
-                ),
-              )
-            ],
-          ),
+        return Row(
+          children: [
+            Row(
+              children: const [Text('Current Financial Year')],
+            )
+          ],
         );
       case PeriodType.month:
         //To Display Weeks of the month
-        return Container(
-          child: Row(
-            children: [
-              Container(
-                child: Text('Available year of the Current Financial Year'),
-              ),
-              Container(
-                child: Text('Available month of the selected year'),
-              ),
-            ],
-          ),
+        return Row(
+          children: const [
+            Text('Available year of the Current Financial Year'),
+            Text('Available month of the selected year'),
+          ],
         );
       case PeriodType.week:
-        return Container(
-          child: Row(
-            children: [
-              Container(
-                child: Text('Available year of the Current Financial Year'),
-              ),
-              Container(
-                child: Text('Available month of the selected year'),
-              ),
-              Container(
-                child:
-                    Text('Display Available week with start date and end date'),
-              ),
-            ],
-          ),
-        );
-      case PeriodType.month:
-        return Container(
-          child: Row(
-            children: [
-              Container(
-                child: Text('Display current start Date'),
-              ),
-              Container(
-                child: Text('Display Current End date'),
-              )
-            ],
-          ),
+        return Row(
+          children: const [
+            Text('Available year of the Current Financial Year'),
+            Text('Available month of the selected year'),
+            Text('Display Available week with start date and end date'),
+          ],
         );
     }
   }

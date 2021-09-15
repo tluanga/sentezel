@@ -18,7 +18,7 @@ final profitAndLossControllerProvider = StateNotifierProvider<
 class ProfitAndLossController
     extends StateNotifier<AsyncValue<List<ProfitAndLoss>>> {
   final Reader _read;
-  ProfitAndLossController(this._read) : super(AsyncValue.loading());
+  ProfitAndLossController(this._read) : super(const AsyncValue.loading());
   loadData() async {
     try {
       List<ProfitAndLoss> _profitAndLossList = [];
@@ -98,12 +98,9 @@ class ProfitAndLossController
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
-          print('Ledgermaster is ${_directLedgerMasterDataList[i].id}');
-          print('index is ${LedgerMasterIndex.Cash}');
           // filter cash and bank account
           if (_directLedgerMasterDataList[i].id != LedgerMasterIndex.Cash ||
               _directLedgerMasterDataList[i].id != LedgerMasterIndex.Bank) {
-            print('inside if statement');
             _directExpenseList.add(_directExpense);
           }
         }
@@ -180,12 +177,9 @@ class ProfitAndLossController
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
-          print('Ledgermaster is ${_indirectLedgerMasterDataList[i].id}');
-          print('index is ${LedgerMasterIndex.Cash}');
           // filter cash and bank account
           if (_indirectLedgerMasterDataList[i].id != LedgerMasterIndex.Cash ||
               _indirectLedgerMasterDataList[i].id != LedgerMasterIndex.Bank) {
-            print('inside if statement');
             _indirectExpenseList.add(_indirectExpense);
           }
         }
