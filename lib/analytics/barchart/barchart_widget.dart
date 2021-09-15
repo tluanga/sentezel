@@ -85,20 +85,20 @@ class BarChartWidget extends HookConsumerWidget {
                       const SizedBox(
                         height: 38,
                       ),
-                      Expanded(
-                        child: BarChart(
-                          BarChartData(
-                            maxY: 20,
-                            titlesData: FlTitlesData(
-                              show: true,
-                              bottomTitles: _bottomTitles(
-                                generateLeftTitle(highestValue: 1000),
-                              ),
-                            ),
-                            barGroups: showingBarGroups,
-                          ),
-                        ),
-                      ),
+                      // Expanded(
+                      //   child: BarChart(
+                      //     BarChartData(
+                      //       maxY: 20,
+                      //       titlesData: FlTitlesData(
+                      //         show: true,
+                      //         bottomTitles: _bottomTitles(
+                      //           generateLeftTitle(highestValue: 1000),
+                      //         ),
+                      //       ),
+                      //       barGroups: showingBarGroups,
+                      //     ),
+                      //   ),
+                      // ),
                       // Expanded(
                       //   child: BarChart(
                       //     BarChartData(
