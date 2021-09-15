@@ -11,15 +11,37 @@ final trialBalanceControllerProvider = StateNotifierProvider<
 class TrialBalanceController
     extends StateNotifier<AsyncValue<List<TrialBalance>>> {
   final Reader _read;
-  TrialBalanceController(this._read) : super(AsyncValue.loading());
+  TrialBalanceController(this._read) : super(const AsyncValue.loading());
   loadData() async {
-    final _ledgerMasterList =
-        await _read(ledgerMasterRepositoryProvider).getList();
-
-    for (int i = 0; i < _ledgerMasterList.length; i++) {
-      final _transactionList = await _read(transactionRepositoryProvider)
-          .getTransactionByLedgerMaster(
-              ledgerMasterId: _ledgerMasterList[i].id);
+    try {
+      final _ledgerMasterList =
+          await _read(ledgerMasterRepositoryProvider).getList();
+      List<TrialBalance> _trialBalanceList = [];
+      for (int i = 0; i < _ledgerMasterList.length; i++) {
+        int _totalDebit = 0;
+        int _totalCredit = 0;
+        String _ledgerName = _ledgerMasterList[i].name;
+        final _transactionList = await _read(transactionRepositoryProvider)
+            .getTransactionByLedgerMaster(
+                ledgerMasterId: _ledgerMasterList[i].id);
+        for (int j = 0; j < _transactionList.length; j++) {
+          if (_transactionList[j].debitSideLedger == _ledgerMasterList[i].id) {
+            _totalDebit += _transactionList[j].debitAmount;
+          } else if (_transactionList[j].creditSideLedger ==
+              _ledgerMasterList[i].id) {
+            _totalCredit += _transactionList[j].creditAmount;
+          }
+        }
+        TrialBalance _trialBalance = TrialBalance(
+            ledgerName: _ledgerName,
+            totalCredit: _totalCredit,
+            totalDebit: _totalDebit,
+            balance: (_totalCredit - _totalDebit).abs());
+        _trialBalanceList.add(_trialBalance);
+      }
+      state = AsyncData(_trialBalanceList);
+    } catch (e) {
+      throw (e.toString());
     }
   }
 }

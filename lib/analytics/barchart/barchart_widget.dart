@@ -5,6 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/barChart/barchart_scale_yvalue_helper.dart';
 import 'package:sentezel/analytics/barchart/bar_chart_controller.dart';
 
+import 'bar_chart_controller.dart';
+
 class BarChartWidget extends HookConsumerWidget {
   const BarChartWidget({Key? key}) : super(key: key);
 

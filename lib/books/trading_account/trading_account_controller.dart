@@ -122,7 +122,7 @@ class TradingAccountController
       _tradingAccountList.add(_tradingAccount);
       state = AsyncData(_tradingAccountList);
     } catch (e) {
-      print("error on traiding account controller ${e.toString()}");
+      throw (e.toString());
     }
   }
 }
