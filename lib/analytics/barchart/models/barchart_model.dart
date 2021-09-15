@@ -1,4 +1,4 @@
-import 'package:sentezel/analytics/barchart/barchart_element_model.dart';
+import 'package:sentezel/analytics/barchart/models/barchart_element_model.dart';
 
 class BarChart {
   List<String> leftTitle;

@@ -9,7 +9,7 @@ import 'package:sentezel/settings/transactionCategory/transaction_category_repos
 
 final barChartControllerProvider =
     StateNotifierProvider<BarChartController, AsyncValue<BarChart>>(
-        (ref) => BarChartController(ref.read));
+        (ref) => BarChartController(ref.read)..loadData());
 
 class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
   final Reader _read;
