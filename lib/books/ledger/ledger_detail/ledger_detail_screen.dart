@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledger_detail/ledger_detail_controller.dart';
-import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_detail_bottomSheet.dart';
+import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_detail_bottomsheet.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/transaction_delete_confirm_bottomSheet.dart';
 import 'package:sentezel/common/ui/widget/excel_export_button_widget.dart';

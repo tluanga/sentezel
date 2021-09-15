@@ -24,35 +24,33 @@ class _LedgerMasterTypeSelectWidgetState
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Column(
-        children: [
-          ListTile(
-            title: Text('Direct'),
-            trailing: Radio(
-              value: LedgerMasterType.direct,
-              onChanged: (value) {
-                setState(() {
-                  _type = LedgerMasterType.direct;
-                });
-              },
-              groupValue: _type,
-            ),
+    return Column(
+      children: [
+        ListTile(
+          title: const Text('Direct'),
+          trailing: Radio(
+            value: LedgerMasterType.direct,
+            onChanged: (value) {
+              setState(() {
+                _type = LedgerMasterType.direct;
+              });
+            },
+            groupValue: _type,
           ),
-          ListTile(
-            title: Text('Indirect'),
-            trailing: Radio(
-              value: LedgerMasterType.indirect,
-              onChanged: (value) {
-                setState(() {
-                  _type = LedgerMasterType.indirect;
-                });
-              },
-              groupValue: _type,
-            ),
+        ),
+        ListTile(
+          title: const Text('Indirect'),
+          trailing: Radio(
+            value: LedgerMasterType.indirect,
+            onChanged: (value) {
+              setState(() {
+                _type = LedgerMasterType.indirect;
+              });
+            },
+            groupValue: _type,
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

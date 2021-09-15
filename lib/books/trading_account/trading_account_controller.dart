@@ -91,12 +91,9 @@ class TradingAccountController
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
-          print('Ledgermaster is ${_ledgerMasterDataList[i].id}');
-          print('index is ${LedgerMasterIndex.Cash}');
           // filter cash and bank account
           if (_ledgerMasterDataList[i].id != LedgerMasterIndex.Cash ||
               _ledgerMasterDataList[i].id != LedgerMasterIndex.Bank) {
-            print('inside if statement');
             _directExpenseList.add(_expense);
           }
         }

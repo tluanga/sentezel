@@ -92,7 +92,7 @@ class CapitalInjectionController
         ),
       );
     } catch (e) {
-      print(e);
+      throw (e.toString());
     }
   }
 }

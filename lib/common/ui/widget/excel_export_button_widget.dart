@@ -16,14 +16,14 @@ class ExcelExportButton extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.07,
               child: Image.asset('assets/icons/excel.png'),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
-            Text('Export to Excel File')
+            const Text('Export to Excel File')
           ],
         ),
       ),

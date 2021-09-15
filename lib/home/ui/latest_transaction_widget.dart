@@ -16,22 +16,19 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
     AsyncValue<List<Journal>> state = ref.watch(journalControllerProvider);
     return state.when(
       data: (data) {
-        print(data);
         return _list(context, data);
       },
-      loading: () => Center(
+      loading: () => const Center(
         child: CircularProgressIndicator(),
       ),
-      error: (error, stack) => Container(
-        child: Text(error.toString()),
-      ),
+      error: (error, stack) => Text(error.toString()),
     );
   }
 
   _list(BuildContext context, List<Journal> list) {
     list.sort((a, b) => a.date.compareTo(b.date));
 
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.4,
       width: MediaQuery.of(context).size.width,
       child: ListView.builder(
@@ -55,12 +52,12 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
     _color = Palette.color1;
 
     return Container(
-      margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+      margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
       height: MediaQuery.of(context).size.height * 0.1,
       width: MediaQuery.of(context).size.width * 0.9,
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
             bottomLeft: Radius.circular(10),
@@ -70,7 +67,7 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
             color: Colors.grey.withOpacity(0.3),
             spreadRadius: 2,
             blurRadius: 7,
-            offset: Offset(0, 3), // changes position of shadow
+            offset: const Offset(0, 3), // changes position of shadow
           ),
         ],
       ),
@@ -81,12 +78,12 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
             width: MediaQuery.of(context).size.width * 0.2,
             decoration: BoxDecoration(
               color: _color,
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(10),
                 bottomLeft: Radius.circular(10),
               ),
             ),
-            child: Center(
+            child: const Center(
               child: Text(
                 'B',
                 style: TextStyle(
@@ -100,12 +97,12 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.74,
                 child: Center(
                   child: Text(
                     item.particular,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),

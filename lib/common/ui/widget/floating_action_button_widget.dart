@@ -12,7 +12,7 @@ class SentezelFloatingActionButton extends StatelessWidget {
       child: Container(
         height: 70,
         width: 70,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           color: Colors.white,
           shape: BoxShape.circle,
         ),

@@ -12,41 +12,39 @@ class TopBarForBottomSheetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 8),
-            child: Text(
-              label,
-              style: TextStyle(
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: Text(
+            label,
+            style: const TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.13,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    onExit();
-                    // Navigator.pushReplacementNamed(context, RouteConstant.home);
-                  },
-                  child: Icon(
-                    CupertinoIcons.xmark_circle,
-                    size: 45,
-                    color: Colors.red.shade400,
-                  ),
+        ),
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.13,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GestureDetector(
+                onTap: () {
+                  onExit();
+                  // Navigator.pushReplacementNamed(context, RouteConstant.home);
+                },
+                child: Icon(
+                  CupertinoIcons.xmark_circle,
+                  size: 45,
+                  color: Colors.red.shade400,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
