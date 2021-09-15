@@ -27,7 +27,7 @@ class BusinessProfileSceen extends HookWidget {
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Address',
               ),
             ),
@@ -37,14 +37,14 @@ class BusinessProfileSceen extends HookWidget {
                   color: Colors.grey.shade300,
                 ),
               ),
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 vertical: 5,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
                     child: Text(
                       'Ledger Master Type',
                       style: TextStyle(
@@ -54,7 +54,7 @@ class BusinessProfileSceen extends HookWidget {
                     ),
                   ),
                   ListTile(
-                    title: Text('Mahni Siam Zuar'),
+                    title: const Text('Mahni Siam Zuar'),
                     trailing: Radio(
                       value: BusinessType.mahniSiamZuar,
                       onChanged: (value) {
@@ -65,9 +65,9 @@ class BusinessProfileSceen extends HookWidget {
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(0),
+                    margin: const EdgeInsets.all(0),
                     child: ListTile(
-                      title: Text('Mi Siam Sa Zuar'),
+                      title: const Text('Mi Siam Sa Zuar'),
                       trailing: Radio(
                         value: BusinessType.midangSiamZuar,
                         onChanged: (value) {

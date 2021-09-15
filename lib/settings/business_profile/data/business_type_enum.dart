@@ -1,4 +1,4 @@
 enum BusinessType {
-  MahniSiamZuar,
-  MiSiamsaZuar,
+  mahniSiamZuar,
+  miSiamsaZuar,
 }

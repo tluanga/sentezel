@@ -16,14 +16,14 @@ class PDFExportButton extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.07,
               child: Image.asset('assets/icons/pdf.png'),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
-            Text('Export to Pdf File')
+            const Text('Export to Pdf File')
           ],
         ),
       ),

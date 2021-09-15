@@ -16,15 +16,15 @@ class STLIconButton extends StatelessWidget {
         padding: const EdgeInsets.all(3.0),
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: MediaQuery.of(context).size.width * 0.07,
-              child: Icon(Icons.restore),
+              child: const Icon(Icons.restore),
               // child: Image.asset('assets/icons/pdf.png'),
             ),
-            SizedBox(
+            const SizedBox(
               width: 5,
             ),
-            Text('Backup Data')
+            const Text('Backup Data')
           ],
         ),
       ),

@@ -8,7 +8,7 @@ class BusinessProfileSetup extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _type = useState(BusinessType.MahniSiamZuar);
+    final _type = useState(BusinessType.mahniSiamZuar);
     return Material(
       child: Container(
         child: Column(
@@ -46,25 +46,23 @@ class BusinessProfileSetup extends HookConsumerWidget {
                     leading: const Text('Image will be here'),
                     title: const Text('Direct'),
                     trailing: Radio(
-                      value: BusinessType.MahniSiamZuar,
+                      value: BusinessType.mahniSiamZuar,
                       onChanged: (value) {
                         print('before change value ${_type.value}');
-                        _type.value = BusinessType.MahniSiamZuar;
+                        _type.value = BusinessType.mahniSiamZuar;
                         print('Change value ${_type.value}');
                       },
                       groupValue: _type.value,
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.all(0),
+                    margin: const EdgeInsets.all(0),
                     child: ListTile(
-                      title: Text('Indirect'),
+                      title: const Text('Indirect'),
                       trailing: Radio(
-                        value: BusinessType.MiSiamsaZuar,
+                        value: BusinessType.miSiamsaZuar,
                         onChanged: (value) {
-                          print('before change value ${_type.value}');
-                          _type.value = BusinessType.MiSiamsaZuar;
-                          print('Change value ${_type.value}');
+                          _type.value = BusinessType.miSiamsaZuar;
                         },
                         groupValue: _type.value,
                       ),

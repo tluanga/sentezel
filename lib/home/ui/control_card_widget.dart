@@ -13,137 +13,135 @@ class HomeControlCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Row(
-        children: [
-          //Books
-          GestureDetector(
-            onTap: () {
-              showCupertinoModalBottomSheet(
-                isDismissible: true,
-                expand: true,
-                context: context,
-                backgroundColor: Colors.transparent,
-                builder: (context) => BooksScreen(),
-              );
-            },
-            child: Stack(
-              children: [
-                ElevatedCard(
-                  height: height,
-                  width: width,
-                ),
-                Positioned(
-                  left: 50,
-                  bottom: 110,
-                  child: Text('Books',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                Positioned(
-                  left: 40,
-                  bottom: 20,
-                  child: Container(
-                    height: 70,
-                    width: 60,
-                    child: Image.asset(
-                      'assets/icons/accounting.png',
-                      fit: BoxFit.fill,
-                    ),
+    return Row(
+      children: [
+        //Books
+        GestureDetector(
+          onTap: () {
+            showCupertinoModalBottomSheet(
+              isDismissible: true,
+              expand: true,
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (context) => const BooksScreen(),
+            );
+          },
+          child: Stack(
+            children: [
+              ElevatedCard(
+                height: height,
+                width: width,
+              ),
+              const Positioned(
+                left: 50,
+                bottom: 110,
+                child: Text('Books',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              Positioned(
+                left: 40,
+                bottom: 20,
+                child: SizedBox(
+                  height: 70,
+                  width: 60,
+                  child: Image.asset(
+                    'assets/icons/accounting.png',
+                    fit: BoxFit.fill,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          //--------Analytics--------
-          GestureDetector(
-            onTap: () {
-              Navigator.pushNamed(context, RouteConstant.analytics);
-            },
-            child: Stack(
-              children: [
-                ElevatedCard(
-                  height: height,
-                  width: width,
-                ),
-                Positioned(
-                  left: 35,
-                  bottom: 110,
-                  child: Text('Analytics',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                Positioned(
-                  left: 40,
-                  bottom: 20,
-                  child: Container(
-                    height: 70,
-                    width: 60,
-                    child: Image.asset(
-                      'assets/icons/bar_chart.png',
-                      fit: BoxFit.fill,
-                    ),
+        ),
+        //--------Analytics--------
+        GestureDetector(
+          onTap: () {
+            Navigator.pushNamed(context, RouteConstant.analytics);
+          },
+          child: Stack(
+            children: [
+              ElevatedCard(
+                height: height,
+                width: width,
+              ),
+              const Positioned(
+                left: 35,
+                bottom: 110,
+                child: Text('Analytics',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              Positioned(
+                left: 40,
+                bottom: 20,
+                child: SizedBox(
+                  height: 70,
+                  width: 60,
+                  child: Image.asset(
+                    'assets/icons/bar_chart.png',
+                    fit: BoxFit.fill,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          //---New Transaction----------
+        ),
+        //---New Transaction----------
 
-          GestureDetector(
-            onTap: () {
-              showCupertinoModalBottomSheet(
-                expand: true,
-                context: context,
-                backgroundColor: Colors.transparent,
-                builder: (context) => NewTranscationCenterScreen(),
-              );
-            },
-            child: Stack(
-              children: [
-                ElevatedCard(
-                  height: height,
-                  width: width,
-                ),
-                Positioned(
-                  left: 55,
-                  bottom: 110,
-                  child: Text('New',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                Positioned(
-                  left: 28,
-                  bottom: 90,
-                  child: Text('Transaction',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                Positioned(
-                  left: 40,
-                  bottom: 20,
-                  child: Container(
-                    height: 60,
-                    width: 60,
-                    child: Image.asset(
-                      'assets/icons/add.png',
-                      fit: BoxFit.fill,
-                    ),
+        GestureDetector(
+          onTap: () {
+            showCupertinoModalBottomSheet(
+              expand: true,
+              context: context,
+              backgroundColor: Colors.transparent,
+              builder: (context) => const NewTranscationCenterScreen(),
+            );
+          },
+          child: Stack(
+            children: [
+              ElevatedCard(
+                height: height,
+                width: width,
+              ),
+              const Positioned(
+                left: 55,
+                bottom: 110,
+                child: Text('New',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              const Positioned(
+                left: 28,
+                bottom: 90,
+                child: Text('Transaction',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    )),
+              ),
+              Positioned(
+                left: 40,
+                bottom: 20,
+                child: SizedBox(
+                  height: 60,
+                  width: 60,
+                  child: Image.asset(
+                    'assets/icons/add.png',
+                    fit: BoxFit.fill,
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

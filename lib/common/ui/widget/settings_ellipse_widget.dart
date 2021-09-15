@@ -19,7 +19,7 @@ class SettingsEllipseWidget extends StatelessWidget {
               expand: true,
               context: context,
               backgroundColor: Colors.transparent,
-              builder: (context) => ControlCenterScreen(),
+              builder: (context) => const ControlCenterScreen(),
             );
           },
           child: const Icon(

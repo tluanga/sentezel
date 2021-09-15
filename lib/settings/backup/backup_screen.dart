@@ -10,7 +10,7 @@ class BackupScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Material(
       child: SafeArea(
-          child: Container(
+          child: SizedBox(
         height: MediaQuery.of(context).size.height * 0.2,
         child: Column(
           children: [
@@ -26,8 +26,8 @@ class BackupScreen extends HookConsumerWidget {
             //     fontWeight: FontWeight.bold,
             //   ),
             // ),
-            BackupButton(),
-            SizedBox(
+            const BackupButton(),
+            const SizedBox(
               height: 20,
             ),
             Container(
@@ -38,7 +38,7 @@ class BackupScreen extends HookConsumerWidget {
                   color: Colors.grey.shade500,
                 ),
               ),
-              child: Text(
+              child: const Text(
                 '''
               Backup all user generated data and save to local and cloud
               ''',

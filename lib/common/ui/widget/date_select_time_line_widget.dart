@@ -12,28 +12,25 @@ class DateSelectTimeLineWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: CalendarTimeline(
-        onDateSelected: (selectedDate) {
-          onDateSelected(selectedDate!);
-          print('Selected Date $selectedDate');
-        },
-        initialDate: initialDate,
-        firstDate: DateTime.now().subtract(
-          Duration(days: 365),
-        ),
-        lastDate: DateTime.now().add(Duration(days: 30)),
-        leftMargin: 20,
-        monthColor: Colors.blueGrey,
-        dayNameColor: Colors.white,
-        dayColor: Colors.black,
-        activeDayColor: Colors.white,
-        activeBackgroundDayColor: Colors.redAccent[100],
-
-        dotsColor: Color(0xFF333A47),
-        // selectableDayPredicate: (date) => date.day != 23,
-        locale: 'en_ISO',
+    return CalendarTimeline(
+      onDateSelected: (selectedDate) {
+        onDateSelected(selectedDate!);
+      },
+      initialDate: initialDate,
+      firstDate: DateTime.now().subtract(
+        const Duration(days: 365),
       ),
+      lastDate: DateTime.now().add(const Duration(days: 30)),
+      leftMargin: 20,
+      monthColor: Colors.blueGrey,
+      dayNameColor: Colors.white,
+      dayColor: Colors.black,
+      activeDayColor: Colors.white,
+      activeBackgroundDayColor: Colors.redAccent[100],
+
+      dotsColor: const Color(0xFF333A47),
+      // selectableDayPredicate: (date) => date.day != 23,
+      locale: 'en_ISO',
     );
   }
 }
