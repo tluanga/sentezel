@@ -20,9 +20,7 @@ class LedgerDetailController extends StateNotifier<LedgerReport> {
         );
 
   loadData({required int id}) async {
-    print('load Data');
-    state = await _read(ledgerControllerProvider.notifier).getLedgerDetail(id);
-    print(state);
+    state = _read(ledgerControllerProvider.notifier).getLedgerDetail(id);
   }
 
   removeItem({required int transactionId}) async {
