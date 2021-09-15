@@ -31,32 +31,30 @@ class PartyScreen extends HookConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              TopBarWidget(
-                title: 'Ledger Master',
-                onClose: () {
-                  Navigator.pop(context);
-                },
+        child: Column(
+          children: [
+            TopBarWidget(
+              title: 'Ledger Master',
+              onClose: () {
+                Navigator.pop(context);
+              },
+            ),
+            //------Searching Ledger Master and filtration will be done
+            // based in input
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextFormField(
+                decoration: const InputDecoration(labelText: 'Search'),
+                controller: _searchTextEditingController,
               ),
-              //------Searching Ledger Master and filtration will be done
-              // based in input
-              Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Search'),
-                  controller: _searchTextEditingController,
-                ),
-              ),
-              list.when(
-                  data: (data) => _list(context, data),
-                  loading: () => Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                  error: (error, stack) => Text(error.toString())),
-            ],
-          ),
+            ),
+            list.when(
+                data: (data) => _list(context, data),
+                loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                error: (error, stack) => Text(error.toString())),
+          ],
         ),
       ),
       floatingActionButton: SentezelFloatingActionButton(
@@ -96,7 +94,7 @@ class PartyScreen extends HookConsumerWidget {
         );
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
         height: MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
@@ -111,7 +109,7 @@ class PartyScreen extends HookConsumerWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -122,7 +120,7 @@ class PartyScreen extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
                 color: _color,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
@@ -130,7 +128,7 @@ class PartyScreen extends HookConsumerWidget {
               child: Center(
                 child: Text(
                   item.getInitialLetter(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -141,25 +139,25 @@ class PartyScreen extends HookConsumerWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Center(
                     child: Text(
                       item.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   height: MediaQuery.of(context).size.height * 0.03,
                   child: Center(
                     child: Text(
                       item.description != item.name ? item.description : '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                       ),
                       overflow: TextOverflow.ellipsis,
@@ -173,13 +171,13 @@ class PartyScreen extends HookConsumerWidget {
                     children: [
                       Container(
                         child: item.status == Status.active
-                            ? Text(
+                            ? const Text(
                                 'Active',
                                 style: TextStyle(
                                   color: Colors.green,
                                 ),
                               )
-                            : Text(
+                            : const Text(
                                 'In-Active',
                                 style: TextStyle(
                                   color: Colors.red,

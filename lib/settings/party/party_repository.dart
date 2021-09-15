@@ -30,10 +30,11 @@ class PartyRepository implements BaseRepository<Party> {
     try {
       final result = await db
           .query(PartyConfig.partyTable, where: 'id=?', whereArgs: [id]);
-      if (result.length != 0) {
+      if (result.isNotEmpty) {
         return Party.fromMap(result.first);
-      } else
+      } else {
         throw ('Error');
+      }
     } catch (e) {
       print(e);
       throw (e);

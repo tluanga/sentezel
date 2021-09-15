@@ -15,7 +15,6 @@ class PartyListController
   PartyListController(this._read) : super(const AsyncValue.loading());
 
   loadData({String searchString = ''}) async {
-    print('Loading Party List');
     try {
       final result = await _read(ledgerMasterRepositoryProvider).getList(
         searchString: searchString,

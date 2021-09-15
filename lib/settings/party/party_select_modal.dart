@@ -32,43 +32,41 @@ class PartySelectModal extends HookConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              TopBarWithNewForBottomSheetWidget(
-                label: 'Party Select Select',
-                onNew: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) => NewPartyModal(),
-                  );
-                },
-              ),
+        child: Column(
+          children: [
+            TopBarWithNewForBottomSheetWidget(
+              label: 'Party Select Select',
+              onNew: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => const NewPartyModal(),
+                );
+              },
+            ),
 
-              //------Searching Ledger Master and filtration will be done
-              // based in input
-              Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Search'),
-                  controller: _searchTextEditingController,
-                ),
+            //------Searching Ledger Master and filtration will be done
+            // based in input
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextFormField(
+                decoration: const InputDecoration(labelText: 'Search'),
+                controller: _searchTextEditingController,
               ),
-              list.when(
-                  data: (data) => _list(context, data),
-                  loading: () => const Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                  error: (error, stack) => Text(error.toString())),
-            ],
-          ),
+            ),
+            list.when(
+                data: (data) => _list(context, data),
+                loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                error: (error, stack) => Text(error.toString())),
+          ],
         ),
       ),
       floatingActionButton: SentezelFloatingActionButton(
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => NewPartyModal(),
+            builder: (context) => const NewPartyModal(),
           );
         },
       ),
