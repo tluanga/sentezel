@@ -16,7 +16,7 @@ class CapitalInjectionController
     extends StateNotifier<AsyncValue<CapitalInjection>> {
   final Reader _read;
 
-  CapitalInjectionController(this._read) : super(AsyncValue.loading());
+  CapitalInjectionController(this._read) : super(const AsyncValue.loading());
 
   loadData() async {
     final _category = await _read(transactionCategoryRepositoryProvider)
@@ -51,12 +51,11 @@ class CapitalInjectionController
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
 
-    print('length of error message ${_errorMessage}');
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
 
   setup() async {
-    final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
+    await _read(ledgerMasterRepositoryProvider)
         .getItem(id: state.data!.value.category!.debitSideLedger!);
 
     //---------------Updating the state-------
@@ -73,7 +72,7 @@ class CapitalInjectionController
   }
 
   reset() async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
   }
 
   submit() async {

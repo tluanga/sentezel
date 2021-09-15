@@ -23,14 +23,14 @@ class CapitalInjectionTransactionModeSelectModalBottomSheet
                 color: Colors.grey.shade300,
               ),
             ),
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 5,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
                   child: Text(
                     'Select Transaction Mode ',
                     style: TextStyle(
@@ -65,9 +65,9 @@ class CapitalInjectionTransactionModeSelectModalBottomSheet
                 ),
                 //----------Payment By Bank---------------
                 Container(
-                  margin: EdgeInsets.all(0),
+                  margin: const EdgeInsets.all(0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Payment by Bank',
                       style: TextStyle(
                         color: Colors.black,

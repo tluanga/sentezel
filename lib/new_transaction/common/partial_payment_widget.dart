@@ -14,7 +14,7 @@ class PartialPaymentWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       // decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
       height: MediaQuery.of(context).size.height * 0.08,
       width: MediaQuery.of(context).size.width * 0.38,
@@ -24,13 +24,13 @@ class PartialPaymentWidget extends HookWidget {
           var _value = value != '' ? int.parse(value) : 0;
           onChange(_value);
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Partial Payment Amount',
           labelStyle: TextStyle(
             fontSize: 14,
           ),
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),

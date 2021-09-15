@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 sideBar() {
   return Drawer(
     child: ListView(
-      children: [
+      children: const [
         Text('Analytics'),
       ],
     ),
