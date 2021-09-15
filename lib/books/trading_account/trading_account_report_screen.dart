@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/trading_account/trading_account_controller.dart';
-
-import 'package:sentezel/books/widgets/reportTopBar_widget.dart';
+import 'package:sentezel/books/widgets/report_top_bar_widget.dart';
 import 'trading_account_model.dart';
 
 class TradingAccountReportScreen extends HookConsumerWidget {
@@ -32,12 +31,11 @@ class TradingAccountReportScreen extends HookConsumerWidget {
                   state.when(data: (data) {
                     return _expenselist(context: context, data: data, ref: ref);
                   }, loading: () {
-                    print('inside loading');
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }, error: (error, stack) {
-                    return Center(
+                    return const Center(
                       child: Text('error'),
                     );
                   })
@@ -52,15 +50,13 @@ class TradingAccountReportScreen extends HookConsumerWidget {
                       onGeneratePdf: () {},
                       onClose: () {}),
                   state.when(data: (data) {
-                    print('when data');
                     return _incomeList(context: context, data: data, ref: ref);
                   }, loading: () {
-                    print('inside loading');
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }, error: (error, stack) {
-                    return Center(
+                    return const Center(
                       child: Text('error'),
                     );
                   })
@@ -96,7 +92,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Gross Profit'),
+              const Text('Gross Profit'),
               Text(data[0].grossProfit.toString())
             ],
           )
@@ -173,7 +169,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
     return Row(
       children: [
         Text(item.ledgerName),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         Text(balance.toString()),
