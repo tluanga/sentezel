@@ -3,8 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
-import 'package:sentezel/common/ui/widget/topBar_widget.dart';
+import 'package:sentezel/common/ui/widget/floating_action_button_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
+
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 
 import 'package:sentezel/settings/party/party_controller.dart';
@@ -62,7 +63,7 @@ class PartyScreen extends HookConsumerWidget {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => NewPartyModal(),
+            builder: (context) => const NewPartyModal(),
           );
         },
       ),
@@ -100,7 +101,7 @@ class PartyScreen extends HookConsumerWidget {
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),

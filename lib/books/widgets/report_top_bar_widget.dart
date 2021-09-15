@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sentezel/common/ui/widget/settingsEllipse_widget.dart';
+import 'package:sentezel/common/ui/widget/settings_ellipse_widget.dart';
 
 class ReportTopBarWidget extends StatelessWidget {
   final String title;
@@ -21,7 +21,7 @@ class ReportTopBarWidget extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        SettingsEllipseWidget(),
+        const SettingsEllipseWidget(),
         Text(
           title,
           style: TextStyle(

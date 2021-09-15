@@ -5,7 +5,8 @@ import 'package:sentezel/analytics/analytics_screen.dart';
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/common/ui/screens/controlCenter_screen.dart';
+import 'package:sentezel/common/ui/screens/control_center_screen.dart';
+
 import 'package:sentezel/home/ui/home_screen.dart';
 import 'package:sentezel/new_transaction/new_transaction_Center_screen.dart';
 import 'package:sentezel/new_transaction/purchase/purchase_of_asset/purchase_of_asset_screen.dart';

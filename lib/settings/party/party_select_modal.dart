@@ -3,8 +3,9 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
-import 'package:sentezel/common/ui/widget/floatingActionButton_widget.dart';
-import 'package:sentezel/common/ui/widget/topBarWithNewForBottomSheet_widget.dart';
+import 'package:sentezel/common/ui/widget/floating_action_button_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_with_new_for_bottom_sheet_widget.dart';
+
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/party/party_controller.dart';
 
@@ -55,7 +56,7 @@ class PartySelectModal extends HookConsumerWidget {
               ),
               list.when(
                   data: (data) => _list(context, data),
-                  loading: () => Center(
+                  loading: () => const Center(
                         child: CircularProgressIndicator(),
                       ),
                   error: (error, stack) => Text(error.toString())),
@@ -107,7 +108,7 @@ class PartySelectModal extends HookConsumerWidget {
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -128,7 +129,7 @@ class PartySelectModal extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
                 color: _color,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
@@ -136,7 +137,7 @@ class PartySelectModal extends HookConsumerWidget {
               child: Center(
                 child: Text(
                   item.getInitialLetter(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:sentezel/common/ui/widget/topBarWithSave_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
+
 import 'package:sentezel/settings/business_profile/business_type_enum.dart';
 
 class BusinessProfileSceen extends HookWidget {
@@ -13,75 +14,73 @@ class BusinessProfileSceen extends HookWidget {
     );
     return Material(
       child: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              TopBarWithSaveWidget(
-                title: 'Business Profile',
-                onSave: () {},
-                onCancel: () {},
+        child: Column(
+          children: [
+            TopBarWithSaveWidget(
+              title: 'Business Profile',
+              onSave: () {},
+              onCancel: () {},
+            ),
+            TextFormField(
+              decoration: const InputDecoration(
+                labelText: 'Business Name',
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Business Name',
+            ),
+            TextFormField(
+              decoration: InputDecoration(
+                labelText: 'Address',
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.grey.shade300,
                 ),
               ),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: 'Address',
-                ),
+              padding: EdgeInsets.symmetric(
+                vertical: 5,
               ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.shade300,
-                  ),
-                ),
-                padding: EdgeInsets.symmetric(
-                  vertical: 5,
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
-                      child: Text(
-                        'Ledger Master Type',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
+                    child: Text(
+                      'Ledger Master Type',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    ListTile(
-                      title: Text('Mahni Siam Zuar'),
+                  ),
+                  ListTile(
+                    title: Text('Mahni Siam Zuar'),
+                    trailing: Radio(
+                      value: BusinessType.mahniSiamZuar,
+                      onChanged: (value) {
+                        // _type.value = LedgerMasterType.direct;
+                        _businessType.value = BusinessType.mahniSiamZuar;
+                      },
+                      groupValue: _businessType.value,
+                    ),
+                  ),
+                  Container(
+                    margin: EdgeInsets.all(0),
+                    child: ListTile(
+                      title: Text('Mi Siam Sa Zuar'),
                       trailing: Radio(
-                        value: BusinessType.mahniSiamZuar,
+                        value: BusinessType.midangSiamZuar,
                         onChanged: (value) {
-                          // _type.value = LedgerMasterType.direct;
-                          _businessType.value = BusinessType.mahniSiamZuar;
+                          _businessType.value = BusinessType.midangSiamZuar;
                         },
                         groupValue: _businessType.value,
                       ),
                     ),
-                    Container(
-                      margin: EdgeInsets.all(0),
-                      child: ListTile(
-                        title: Text('Mi Siam Sa Zuar'),
-                        trailing: Radio(
-                          value: BusinessType.midangSiamZuar,
-                          onChanged: (value) {
-                            _businessType.value = BusinessType.midangSiamZuar;
-                          },
-                          groupValue: _businessType.value,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

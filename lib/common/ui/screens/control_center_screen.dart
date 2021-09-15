@@ -5,6 +5,8 @@ import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/new_transaction/new_transaction_center_screen.dart';
 import 'package:sentezel/settings/backup/backup_screen.dart';
+import 'package:sentezel/settings/business_profile/business_profile_screen.dart';
+import 'package:sentezel/settings/ledger_master/ledger_master_screen.dart';
 
 import 'package:sentezel/settings/party/party_screen.dart';
 import 'package:sentezel/settings/reset/reset_screen.dart';
@@ -75,7 +77,7 @@ class ControlCenterScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => LedgerMasterScreen(),
+                          builder: (context) => const LedgerMasterScreen(),
                         ),
                       );
                     },
@@ -95,7 +97,7 @@ class ControlCenterScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => BusinessProfileSceen(),
+                        builder: (context) => const BusinessProfileSceen(),
                       ),
                     );
                   },
