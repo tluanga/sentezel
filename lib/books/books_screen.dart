@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:sentezel/books/balanceSheet/balanceSheetReport_screen.dart';
+import 'package:sentezel/books/balanceSheet/balance_sheet_report_screen.dart';
 import 'package:sentezel/books/journal/journalReport_screen.dart';
 import 'package:sentezel/books/ledger/ledger_report_screen.dart';
 import 'package:sentezel/books/profit_and_loss/profit_and_loss_report_screen.dart';
@@ -174,19 +174,19 @@ class BooksScreen extends StatelessWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Align(
               alignment: Alignment.center,
               child: Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                 ),
                 textAlign: TextAlign.center,
@@ -214,12 +214,12 @@ class BooksScreen extends StatelessWidget {
         onTap();
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
         height: height,
         width: width,
         decoration: BoxDecoration(
           color: Colors.red,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -229,19 +229,19 @@ class BooksScreen extends StatelessWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Align(
               alignment: Alignment.center,
               child: Text(
                 label,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   color: Colors.white,
                 ),

@@ -209,11 +209,11 @@ weekSelection({
             // Provider.of<AnalyticsProvider>(context, listen: false).endDate =
             //     date!;
           },
-          child: Container(
+          child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.26,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Icon(
                   Icons.calendar_today,
                   size: 20,

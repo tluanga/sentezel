@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
-import 'package:sentezel/common/ui/widget/topBarForBottomSheet_widget.dart';
+import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 
 class JournalDetailModalBottomSheet extends StatelessWidget {
   final Journal data;
@@ -24,7 +24,7 @@ class JournalDetailModalBottomSheet extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: 30,
               decoration: BoxDecoration(color: Colors.redAccent[100]),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Transaction Detail',
                   style: TextStyle(

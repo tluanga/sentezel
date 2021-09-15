@@ -12,12 +12,12 @@ final journalControllerProvider =
         (ref) => JournalController(ref.read)..loadData());
 
 class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
-  Reader _read;
+  final Reader _read;
   DateTime startDate = DateTime.now();
   DateTime endDate = DateTime.now();
 
   //-----------Get Transcation List-----
-  JournalController(this._read) : super(AsyncValue.loading());
+  JournalController(this._read) : super(const AsyncValue.loading());
 
   loadData() async {
     try {
