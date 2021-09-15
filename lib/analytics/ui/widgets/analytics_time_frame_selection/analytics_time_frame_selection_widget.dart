@@ -90,15 +90,15 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
 
               //---Current Selected Period
               Row(
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     'Current Selected -',
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 10,
                   ),
                   Text(
@@ -106,7 +106,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                       mode.value,
                       camelCase: true,
                     ),
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
                     ),
@@ -114,7 +114,7 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
                 ],
               ),
             ]),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             if (mode.value == AnalyticsPeriod.daily)
