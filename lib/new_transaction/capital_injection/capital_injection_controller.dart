@@ -20,7 +20,7 @@ class CapitalInjectionController
 
   loadData() async {
     final _category = await _read(transactionCategoryRepositoryProvider)
-        .getItem(id: TransactionCategoryIndex.CapitalInjection);
+        .getItem(id: TransactionCategoryIndex.capitalInjection);
     final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: _category.creditSideLedger!);
     state = AsyncData(

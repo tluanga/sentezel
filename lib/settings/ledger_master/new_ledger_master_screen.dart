@@ -11,7 +11,7 @@ import 'package:sentezel/settings/ledger_master/ledger_master_list_controller.da
 
 class NewLedgerMasterScreen extends HookConsumerWidget {
   final LedgerMaster? ledgerMaster;
-  NewLedgerMasterScreen({Key? key, this.ledgerMaster}) : super(key: key);
+  const NewLedgerMasterScreen({Key? key, this.ledgerMaster}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -61,7 +61,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
                 onChanged: (value) {
@@ -70,7 +70,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                 initialValue: ledgerMaster != null ? ledgerMaster!.name : '',
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Description',
                 ),
                 initialValue:
@@ -78,7 +78,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                 maxLines: 3,
               ),
               //-----------LedgerMasterType
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Container(
@@ -87,14 +87,14 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     color: Colors.grey.shade300,
                   ),
                 ),
-                padding: EdgeInsets.symmetric(
+                padding: const EdgeInsets.symmetric(
                   vertical: 5,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 15),
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
                       child: Text(
                         'Ledger Master Type',
                         style: TextStyle(
@@ -104,13 +104,11 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                       ),
                     ),
                     ListTile(
-                      title: Text('Direct'),
+                      title: const Text('Direct'),
                       trailing: Radio(
                         value: LedgerMasterType.direct,
                         onChanged: (value) {
-                          print('before change value ${_type.value}');
                           _type.value = LedgerMasterType.direct;
-                          print('Change value ${_type.value}');
                         },
                         groupValue: _type.value,
                       ),
@@ -132,7 +130,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                 ),
               ),
               ListTile(
-                title: Text(
+                title: const Text(
                   'Active',
                   style: TextStyle(
                     fontSize: 16,

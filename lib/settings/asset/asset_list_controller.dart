@@ -18,7 +18,6 @@ class AssetListController
   AssetListController(this._read) : super(const AsyncValue.loading());
 
   loadData({String searchString = ''}) async {
-    print('load data');
     try {
       final result = await _read(ledgerMasterRepositoryProvider).getList(
         searchString: searchString,

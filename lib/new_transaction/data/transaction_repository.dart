@@ -24,7 +24,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     try {
       var b = await db.insert(dbName, payload.toJson());
       // final a = await getItem(id: b);
-      var c = await getItem(id: b);
+      await getItem(id: b);
     } catch (e) {
       e.toString();
     }

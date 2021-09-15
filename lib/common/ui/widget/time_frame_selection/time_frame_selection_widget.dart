@@ -114,7 +114,7 @@ class TimeFrameSelection extends HookConsumerWidget {
     return Material(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.6,
-        decoration: BoxDecoration(color: Colors.white),
+        decoration: const BoxDecoration(color: Colors.white),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: const [

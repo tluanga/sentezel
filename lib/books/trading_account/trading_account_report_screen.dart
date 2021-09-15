@@ -93,7 +93,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Gross Profit'),
+              const Text('Gross Profit'),
               Text(data[0].grossProfit.toString())
             ],
           )
@@ -118,7 +118,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(item.ledgerName),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         Text(balance.toString()),
@@ -130,7 +130,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
       {required BuildContext context,
       required List<TradingAccount> data,
       required WidgetRef ref}) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -148,7 +148,10 @@ class TradingAccountReportScreen extends HookConsumerWidget {
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [Text('Gross Loss'), Text(data[0].grossLoss.toString())],
+            children: [
+              const Text('Gross Loss'),
+              Text(data[0].grossLoss.toString())
+            ],
           )
         ],
       ),
@@ -170,7 +173,7 @@ class TradingAccountReportScreen extends HookConsumerWidget {
     return Row(
       children: [
         Text(item.ledgerName),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         Text(balance.toString()),

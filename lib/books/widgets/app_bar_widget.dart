@@ -15,11 +15,9 @@ sentezelBookAppBar({
         generateExcel();
         Navigator.pop(context);
       },
-      child: Container(
-        child: Image.asset(
-          'assets/icons/icon_back.png',
-          color: Colors.grey.shade500,
-        ),
+      child: Image.asset(
+        'assets/icons/icon_back.png',
+        color: Colors.grey.shade500,
       ),
     ),
     title: Container(
@@ -38,10 +36,10 @@ sentezelBookAppBar({
               tag: 'SentezelAnimationTag.transactionSell',
               child: Image.asset('assets/icons/shop_sell.png'),
             ),
-            SizedBox(width: 10),
+            const SizedBox(width: 10),
             Text(
               title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Palette.textColor,
               ),
             ),
@@ -56,7 +54,7 @@ sentezelBookAppBar({
           onTap: () {
             generatePdf();
           },
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.04,
             width: MediaQuery.of(context).size.width * 0.1,
             child: Center(
@@ -70,7 +68,7 @@ sentezelBookAppBar({
           onTap: () {
             generatePdf();
           },
-          child: Container(
+          child: SizedBox(
             height: MediaQuery.of(context).size.height * 0.04,
             width: MediaQuery.of(context).size.width * 0.1,
             child: Center(

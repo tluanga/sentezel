@@ -60,7 +60,9 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
         result.add(journal);
       }
       state = AsyncValue.data(result);
-    } catch (e) {}
+    } catch (e) {
+      rethrow;
+    }
   }
 
   clear() {

@@ -23,7 +23,6 @@ class _DateSelectionBarState extends State<DateSelectionBar> {
       case 1:
         {
           setState(() {
-            print('inside 1');
             startDate = DateTime.now().subtract(
               Duration(days: DateTime.now().weekday),
             );
@@ -34,7 +33,6 @@ class _DateSelectionBarState extends State<DateSelectionBar> {
       case 2:
         {
           setState(() {
-            print('inside 1');
             startDate = new DateTime(endDate.year, endDate.month, 1);
             endDate = DateTime.now();
           });
@@ -61,7 +59,7 @@ class _DateSelectionBarState extends State<DateSelectionBar> {
       children: [
         DropdownButton(
           value: valueSelected,
-          items: [
+          items: const [
             DropdownMenuItem(
               child: Text(
                 'Tun kar',
@@ -84,18 +82,19 @@ class _DateSelectionBarState extends State<DateSelectionBar> {
             widget.onTap!(startDate, endDate);
           },
         ),
-        Icon(Icons.calendar_today_outlined, size: 15, color: Colors.black),
+        const Icon(Icons.calendar_today_outlined,
+            size: 15, color: Colors.black),
         Text(
           DateFormat('dd/MM/yyyy').format(startDate),
-          style: TextStyle(fontSize: 15, color: Colors.black),
+          style: const TextStyle(fontSize: 15, color: Colors.black),
         ),
-        Text(
+        const Text(
           'to',
           style: TextStyle(fontSize: 15, color: Colors.black),
         ),
         Text(
           DateFormat('dd/MM/yyyy').format(endDate),
-          style: TextStyle(fontSize: 15, color: Colors.black),
+          style: const TextStyle(fontSize: 15, color: Colors.black),
         ),
       ],
     );

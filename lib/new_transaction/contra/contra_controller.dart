@@ -45,15 +45,15 @@ class ContraController extends StateNotifier<AsyncValue<Contra>> {
   setup() async {
     final _cashToBankCategory =
         await _read(transactionCategoryRepositoryProvider)
-            .getItem(id: TransactionCategoryIndex.CashToBank);
+            .getItem(id: TransactionCategoryIndex.cashToBank);
     final _bankToCashCategory =
         await _read(transactionCategoryRepositoryProvider)
-            .getItem(id: TransactionCategoryIndex.BankToCash);
+            .getItem(id: TransactionCategoryIndex.bankToCash);
 
     final _cashAc = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: LedgerMasterIndex.Cash);
+        .getItem(id: LedgerMasterIndex.cash);
     final _bankAc = await _read(ledgerMasterRepositoryProvider)
-        .getItem(id: LedgerMasterIndex.Bank);
+        .getItem(id: LedgerMasterIndex.bank);
 
     //---------------Updating the state-------
     final stateData = state.data!.value;

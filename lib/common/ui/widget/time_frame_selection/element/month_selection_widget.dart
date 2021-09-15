@@ -76,7 +76,7 @@ class MonthSelection extends HookConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Icon(
+            const Icon(
               Icons.calendar_today,
               size: 20,
             ),

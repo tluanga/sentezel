@@ -65,8 +65,8 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
             //----------If Party---
 
             //Checking for cash/bank or other ledger for correction of debit and credit
-            if (ledgerMasterDataList[i].id == LedgerMasterIndex.Bank ||
-                ledgerMasterDataList[i].id == LedgerMasterIndex.Cash) {
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
               _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
               _ledgerReport.debitAmount += _transactionList[j].debitAmount;
               _ledgerTransaction.amount = _transactionList[j].debitAmount;
@@ -85,8 +85,8 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
               //purcahse of Asset-----
 
               //Checking for cash/bank or other ledger for correction of debit and credit
-              if (ledgerMasterDataList[i].id == LedgerMasterIndex.Bank ||
-                  ledgerMasterDataList[i].id == LedgerMasterIndex.Cash) {
+              if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
+                  ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
                 _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
                 _ledgerReport.creditAmount += _transactionList[j].creditAmount;
                 _ledgerTransaction.amount = _transactionList[j].creditAmount;
@@ -99,8 +99,8 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
             }
 
             //Checking for cash/bank or other ledger for correction of debit and credit
-            if (ledgerMasterDataList[i].id == LedgerMasterIndex.Bank ||
-                ledgerMasterDataList[i].id == LedgerMasterIndex.Cash) {
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
               _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
               _ledgerReport.creditAmount += _transactionList[j].creditAmount;
               _ledgerTransaction.amount = _transactionList[j].creditAmount;

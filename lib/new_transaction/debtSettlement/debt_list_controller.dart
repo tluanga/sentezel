@@ -36,8 +36,8 @@ class DebtorListController extends StateNotifier<AsyncValue<List<Debtor>>> {
 
           //Party--
           //We have to check for debit or Credit
-          if (_transactionCategory.debitSideLedger == LedgerMasterIndex.Bank ||
-              _transactionCategory.debitSideLedger == LedgerMasterIndex.Cash) {
+          if (_transactionCategory.debitSideLedger == LedgerMasterIndex.bank ||
+              _transactionCategory.debitSideLedger == LedgerMasterIndex.cash) {
             //----Party is in the debit side-
             //Because BAnk/Cash when in credit replaced by party
             _debitAmount = _transactionList[j].debitAmount;

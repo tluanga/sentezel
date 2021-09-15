@@ -19,7 +19,7 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
   loadData() async {
     TransactionCategory _category =
         await _read(transactionCategoryRepositoryProvider)
-            .getItem(id: TransactionCategoryIndex.SaleOfGoods);
+            .getItem(id: TransactionCategoryIndex.saleOfGoods);
     final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: _category.creditSideLedger!);
 

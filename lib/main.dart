@@ -18,10 +18,12 @@ import 'package:sentezel/setup/splash_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   initializeApp();
-  runApp(ProviderScope(child: MyApp()));
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends HookConsumerWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context, WidgetRef ref) {

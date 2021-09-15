@@ -63,14 +63,14 @@ class NewPartyModal extends HookConsumerWidget {
                 children: [
                   TextFormField(
                     controller: _nameTextEditingController,
-                    decoration: InputDecoration(labelText: 'Name'),
+                    decoration: const InputDecoration(labelText: 'Name'),
                   ),
                   TextFormField(
                     controller: _descriptionTextEditingController,
-                    decoration: InputDecoration(labelText: 'Description'),
+                    decoration: const InputDecoration(labelText: 'Description'),
                   ),
                   ListTile(
-                    title: Text(
+                    title: const Text(
                       'Active',
                       style: TextStyle(
                         fontSize: 16,

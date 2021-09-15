@@ -21,7 +21,7 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
   loadData() async {
     TransactionCategory _category =
         await _read(transactionCategoryRepositoryProvider)
-            .getItem(id: TransactionCategoryIndex.SalesReturn);
+            .getItem(id: TransactionCategoryIndex.salesReturn);
     final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: _category.debitSideLedger!);
 

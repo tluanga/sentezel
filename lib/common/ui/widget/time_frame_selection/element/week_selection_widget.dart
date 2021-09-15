@@ -59,7 +59,7 @@ class WeekSelection extends HookConsumerWidget {
           initialDate: DateTime.now(),
           firstDate: DateTime(DateTime.now().year),
           lastDate: DateTime.now().add(
-            Duration(
+            const Duration(
               days: 100,
             ),
           ),
@@ -78,7 +78,7 @@ class WeekSelection extends HookConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Icon(
+            const Icon(
               Icons.calendar_today,
               size: 20,
             ),
@@ -89,12 +89,12 @@ class WeekSelection extends HookConsumerWidget {
               //   ),
               label,
 
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(
+            const Icon(
               CupertinoIcons.chevron_down,
               size: 16,
             )

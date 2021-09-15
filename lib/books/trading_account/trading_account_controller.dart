@@ -18,7 +18,7 @@ final tradingAccountControllerProvider = StateNotifierProvider<
 class TradingAccountController
     extends StateNotifier<AsyncValue<List<TradingAccount>>> {
   final Reader _read;
-  TradingAccountController(this._read) : super(AsyncValue.loading());
+  TradingAccountController(this._read) : super(const AsyncValue.loading());
   loadData() async {
     try {
       List<TradingAccount> _tradingAccountList = [];
@@ -85,15 +85,15 @@ class TradingAccountController
         // income a nih chuan incomelist ah a add ang
         if (_incomeOrExpense == 0) {
           // filter cash and bank account
-          if (_ledgerMasterDataList[i].id != LedgerMasterIndex.Cash ||
-              _ledgerMasterDataList[i].id != LedgerMasterIndex.Bank) {
+          if (_ledgerMasterDataList[i].id != LedgerMasterIndex.cash ||
+              _ledgerMasterDataList[i].id != LedgerMasterIndex.bank) {
             _directIncomeList.add(_income);
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
           // filter cash and bank account
-          if (_ledgerMasterDataList[i].id != LedgerMasterIndex.Cash ||
-              _ledgerMasterDataList[i].id != LedgerMasterIndex.Bank) {
+          if (_ledgerMasterDataList[i].id != LedgerMasterIndex.cash ||
+              _ledgerMasterDataList[i].id != LedgerMasterIndex.bank) {
             _directExpenseList.add(_expense);
           }
         }
@@ -103,12 +103,12 @@ class TradingAccountController
       int _directIncomeTotal = 0;
       int _grossProfit = 0;
       int _grossLoss = 0;
-      _directExpenseList.forEach((element) {
+      for (var element in _directExpenseList) {
         _directExpenseTotal += (element.totalCredit - element.totalDebit).abs();
-      });
-      _directIncomeList.forEach((element) {
+      }
+      for (var element in _directIncomeList) {
         _directIncomeTotal += (element.totalCredit - element.totalDebit).abs();
-      });
+      }
       if (_directIncomeTotal > _directExpenseTotal) {
         _grossProfit = _directIncomeTotal - _directExpenseTotal;
       } else if (_directExpenseTotal > _directIncomeTotal) {

@@ -14,6 +14,5 @@ class PartyDb {
             status TEXT
              )''',
     );
-    print('party table created');
   }
 }

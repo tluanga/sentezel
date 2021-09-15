@@ -10,9 +10,9 @@ final partyListControllerProvider =
 class PartyListController
     extends StateNotifier<AsyncValue<List<LedgerMaster>>> {
   final Reader _read;
-  LedgerMasterType _type = LedgerMasterType.party;
+  final LedgerMasterType _type = LedgerMasterType.party;
 
-  PartyListController(this._read) : super(AsyncValue.loading());
+  PartyListController(this._read) : super(const AsyncValue.loading());
 
   loadData({String searchString = ''}) async {
     print('Loading Party List');

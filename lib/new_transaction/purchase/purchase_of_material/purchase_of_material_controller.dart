@@ -74,7 +74,7 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
             )
           : null,
       debitSideLedger: await _read(ledgerMasterRepositoryProvider)
-          .getItem(id: LedgerMasterIndex.Purchase),
+          .getItem(id: LedgerMasterIndex.purchase),
     );
   }
 
@@ -96,7 +96,7 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
           particular: state.particular!,
           mode: state.mode!,
           date: state.date,
-          transactionCategoryId: TransactionCategoryIndex.PurchaseOfRawMaterial,
+          transactionCategoryId: TransactionCategoryIndex.purchaseOfRawMaterial,
           debitSideLedger: state.debitSideLedger!.id,
           creditSideLedger: state.creditSideLedger != null
               ? state.creditSideLedger!.id

@@ -43,9 +43,7 @@ class DatabaseService {
   String ledgerMasterStatus = 'status';
 
   Future<Database> get db async {
-    if (_db == null) {
-      _db = await _initDb();
-    }
+    _db ??= await _initDb();
 
     return _db!;
   }

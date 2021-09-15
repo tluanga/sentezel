@@ -24,7 +24,7 @@ class ReportTopBarWidget extends StatelessWidget {
         const SettingsEllipseWidget(),
         Text(
           title,
-          style: TextStyle(
+          style: const TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -36,7 +36,7 @@ class ReportTopBarWidget extends StatelessWidget {
                 onTap: () {
                   onGenerateExcel();
                 },
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.04,
                   width: MediaQuery.of(context).size.width * 0.1,
                   child: Center(
@@ -50,7 +50,7 @@ class ReportTopBarWidget extends StatelessWidget {
                 onTap: () {
                   onGeneratePdf();
                 },
-                child: Container(
+                child: SizedBox(
                   height: MediaQuery.of(context).size.height * 0.04,
                   width: MediaQuery.of(context).size.width * 0.1,
                   child: Center(
@@ -63,7 +63,7 @@ class ReportTopBarWidget extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-            this.onClose();
+            onClose();
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),

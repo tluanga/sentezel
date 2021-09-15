@@ -17,7 +17,7 @@ class PeriodSelectionBarWidget extends HookConsumerWidget {
           Text(
             EnumToString.convertToString(_period.value),
           ),
-          Icon(CupertinoIcons.down_arrow)
+          const Icon(CupertinoIcons.down_arrow)
         ]),
         Container(
           child: _periodSelection(_period.value),

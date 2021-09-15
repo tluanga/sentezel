@@ -42,7 +42,7 @@ class PurchaseReturnController extends StateNotifier<PurchaseReturn> {
   setup() async {
     //---------------Updating the state-------
     final _category = await _read(transactionCategoryRepositoryProvider)
-        .getItem(id: TransactionCategoryIndex.PurchaseReturn);
+        .getItem(id: TransactionCategoryIndex.purchaseReturn);
     state = state.copyWith(
       category: _category,
       creditAmount: state.amount,

@@ -8,7 +8,7 @@ final ledgerDetailControllerProvider =
         (ref) => LedgerDetailController(ref.read));
 
 class LedgerDetailController extends StateNotifier<LedgerReport> {
-  Reader _read;
+  final Reader _read;
   LedgerDetailController(this._read)
       : super(
           LedgerReport(

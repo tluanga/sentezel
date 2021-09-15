@@ -23,7 +23,7 @@ class DebtSettlementController
   loadData({required Debtor debtor}) async {
     TransactionCategory _category =
         await _read(transactionCategoryRepositoryProvider)
-            .getItem(id: TransactionCategoryIndex.CustomerDebtSettlement);
+            .getItem(id: TransactionCategoryIndex.customerDebtSettlement);
     final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: debtor.party!.id);
 

@@ -21,6 +21,5 @@ class TransactionDb {
             ${TransactionConfig.creditSideLedger} INT            
              )''',
     );
-    print('Transaction table creation completed');
   }
 }

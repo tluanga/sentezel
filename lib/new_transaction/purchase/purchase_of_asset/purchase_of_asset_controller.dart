@@ -87,7 +87,7 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
           particular: state.particular!,
           mode: state.mode!,
           date: state.date,
-          transactionCategoryId: TransactionCategoryIndex.PurchaseOfAssets,
+          transactionCategoryId: TransactionCategoryIndex.purchaseOfAssets,
           assetLedgerId: state.assetLedger!.id,
           creditSideLedger: state.creditSideLedger != null
               ? state.creditSideLedger!.id
