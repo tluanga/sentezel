@@ -24,7 +24,6 @@ class GeneralSalesScreen extends HookConsumerWidget {
     var state = ref.watch(generalSalesControllerProvider);
 
     onCancel() {
-      print('cancel is called');
       ref.read(generalSalesControllerProvider.notifier).reset();
     }
 
@@ -32,14 +31,13 @@ class GeneralSalesScreen extends HookConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 5,
             ),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: state.when(
                 data: (data) {
-                  print(data);
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
@@ -59,7 +57,6 @@ class GeneralSalesScreen extends HookConsumerWidget {
                               );
                         },
                       ),
-
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
@@ -73,7 +70,6 @@ class GeneralSalesScreen extends HookConsumerWidget {
                           _transactionMode(context: context, state: data),
                         ],
                       ),
-
                       //------------Party Selection and Partial Amount Entry----
                       data.mode == TransactionMode.credit ||
                               data.mode ==
@@ -94,21 +90,19 @@ class GeneralSalesScreen extends HookConsumerWidget {
                               ],
                             )
                           : Container(),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      //-----ASSET SELECTION----------------------
-
                       //----PARTICULAR SELECTION----------
                       _particular(context: context, ref: ref),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                     ],
                   );
                 },
                 loading: () {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 },
                 error: (error, stack) {}),
           ),
@@ -121,7 +115,7 @@ class GeneralSalesScreen extends HookConsumerWidget {
     ref.watch(generalSalesControllerProvider.notifier).validate();
     await ref.watch(generalSalesControllerProvider.notifier).setup();
     final state = ref.watch(generalSalesControllerProvider);
-    if (state.data!.value.errorMessages.length == 0) {
+    if (state.data!.value.errorMessages.isEmpty) {
       showModalBottomSheet(
         context: context,
         builder: (context) => GeneralSalesConfirmationBottomSheet(
@@ -132,7 +126,7 @@ class GeneralSalesScreen extends HookConsumerWidget {
               expand: true,
               context: context,
               backgroundColor: Colors.transparent,
-              builder: (context) => NewTranscationCenterScreen(),
+              builder: (context) => const NewTranscationCenterScreen(),
             );
           },
           onCancel: () {},
@@ -150,24 +144,22 @@ class GeneralSalesScreen extends HookConsumerWidget {
 
   _amount({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(generalSalesControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
-        //
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
-          print(value);
           ref.watch(generalSalesControllerProvider.notifier).setState(
                 state.data!.value.copyWith(
                   amount: _value,
                 ),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Amount',
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -190,7 +182,7 @@ class GeneralSalesScreen extends HookConsumerWidget {
       child: Container(
         width: MediaQuery.of(context).size.width * 0.55,
         height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(3),

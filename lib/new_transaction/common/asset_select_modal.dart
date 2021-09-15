@@ -33,49 +33,43 @@ class AssetSelectModal extends HookConsumerWidget {
 
     return Scaffold(
       body: SafeArea(
-        child: Container(
-          child: Column(
-            children: [
-              TopBarWithNewForBottomSheetWidget(
-                label: 'Asset Select',
-                onNew: () {
-                  showModalBottomSheet(
-                    context: context,
-                    builder: (context) => NewAssetModal(),
-                  );
-                },
-              ),
+        child: Column(
+          children: [
+            TopBarWithNewForBottomSheetWidget(
+              label: 'Asset Select',
+              onNew: () {
+                showModalBottomSheet(
+                  context: context,
+                  builder: (context) => const NewAssetModal(),
+                );
+              },
+            ),
 
-              //------Searching Ledger Master and filtration will be done
-              // based in input
-              Container(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: TextFormField(
-                  decoration: InputDecoration(labelText: 'Search'),
-                  controller: _searchTextEditingController,
-                ),
+            //------Searching Ledger Master and filtration will be done
+            // based in input
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.8,
+              child: TextFormField(
+                decoration: const InputDecoration(labelText: 'Search'),
+                controller: _searchTextEditingController,
               ),
-              list.when(
-                  data: (data) => _list(context, data),
-                  loading: () => Center(
-                        child: CircularProgressIndicator(),
-                      ),
-                  error: (error, statck) {
-                    return Container(
-                      child: Text(error.toString()),
-                    );
-                  })
-            ],
-          ),
+            ),
+            list.when(
+                data: (data) => _list(context, data),
+                loading: () => const Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                error: (error, statck) {
+                  return Text(error.toString());
+                })
+          ],
         ),
       ),
     );
   }
 
   _list(BuildContext context, List<LedgerMaster> list) {
-    print(list);
     list.sort((a, b) => a.name.compareTo(b.name));
-
     return Expanded(
       child: ListView.builder(
         itemCount: list.length,
@@ -101,12 +95,12 @@ class AssetSelectModal extends HookConsumerWidget {
         Navigator.pop(context);
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
         height: MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -116,7 +110,7 @@ class AssetSelectModal extends HookConsumerWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -127,7 +121,7 @@ class AssetSelectModal extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
                 color: _color,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
@@ -135,7 +129,7 @@ class AssetSelectModal extends HookConsumerWidget {
               child: Center(
                 child: Text(
                   item.getInitialLetter(),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -146,45 +140,45 @@ class AssetSelectModal extends HookConsumerWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Center(
                     child: Text(
                       item.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   height: MediaQuery.of(context).size.height * 0.03,
                   child: Center(
                     child: Text(
                       item.description != item.name ? item.description : '',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       Container(
                         child: item.status == Status.active
-                            ? Text(
+                            ? const Text(
                                 'Active',
                                 style: TextStyle(
                                   color: Colors.green,
                                 ),
                               )
-                            : Text(
+                            : const Text(
                                 'In-Active',
                                 style: TextStyle(
                                   color: Colors.red,

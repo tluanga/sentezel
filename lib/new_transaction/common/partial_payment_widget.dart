@@ -14,29 +14,29 @@ class PartialPaymentWidget extends HookWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       // decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
       height: MediaQuery.of(context).size.height * 0.08,
       width: MediaQuery.of(context).size.width * 0.38,
       child: TextFormField(
-        initialValue: this.defaultValue.toString(),
+        initialValue: defaultValue.toString(),
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
           onChange(_value);
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Partial Payment Amount',
           labelStyle: TextStyle(
             fontSize: 14,
           ),
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
         validator: (value) {
-          if (int.parse(value!) >= this.maxAmount) {
-            print('Cannot be large or equal to the max amount');
+          if (int.parse(value!) >= maxAmount) {
+            // print('Cannot be large or equal to the max amount');
           }
         },
       ),

@@ -29,11 +29,11 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
                   Navigator.pop(context);
                 }),
             Container(
-              padding: EdgeInsets.symmetric(
+              padding: const EdgeInsets.symmetric(
                 horizontal: 10,
               ),
               child: TextFormField(
-                decoration: InputDecoration(labelText: 'Search Ledger'),
+                decoration: const InputDecoration(labelText: 'Search Ledger'),
                 onChanged: (value) {
                   ref
                       .watch(receiptTypeSelectControllerProvider.notifier)
@@ -46,11 +46,11 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
             state.when(data: (data) {
               return _list(context, data);
             }, loading: () {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }, error: (error, stack) {
-              return Center(
+              return const Center(
                 child: Text('Error'),
               );
             }),
@@ -82,16 +82,16 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
 
     return GestureDetector(
       onTap: () {
-        this.onSelect(item);
+        onSelect(item);
         Navigator.pop(context);
       },
       child: Container(
-        margin: EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
+        margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
         height: MediaQuery.of(context).size.height * 0.1,
         width: MediaQuery.of(context).size.width * 0.9,
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.only(
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(10),
               topRight: Radius.circular(10),
               bottomLeft: Radius.circular(10),
@@ -101,7 +101,7 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),
@@ -112,7 +112,7 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
                 color: _color,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
@@ -120,7 +120,7 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
               child: Center(
                 child: Text(
                   getInitialLetter(item.name),
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 50,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
@@ -131,23 +131,21 @@ class ReceiptTypeSelectModal extends HookConsumerWidget {
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width * 0.74,
                   child: Center(
                     child: Text(
                       item.name,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
                 ),
-                Container(
-                  child: Text(
-                    item.description,
-                    overflow: TextOverflow.ellipsis,
-                  ),
+                Text(
+                  item.description,
+                  overflow: TextOverflow.ellipsis,
                 ),
               ],
             ),

@@ -21,7 +21,6 @@ class ReceiptScreen extends HookConsumerWidget {
     var state = ref.watch(receiptControllerProvider);
 
     onCancel() {
-      print('cancel is called');
       ref.read(receiptControllerProvider.notifier).reset();
     }
 
@@ -29,14 +28,13 @@ class ReceiptScreen extends HookConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 5,
             ),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: state.when(
                 data: (data) {
-                  print(data);
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
@@ -54,7 +52,6 @@ class ReceiptScreen extends HookConsumerWidget {
                               );
                         },
                       ),
-
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
@@ -68,22 +65,21 @@ class ReceiptScreen extends HookConsumerWidget {
                           _transactionMode(context: context, state: data),
                         ],
                       ),
-
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       //-----ASSET SELECTION----------------------
                       _receiptTypeSelect(context: context, ref: ref),
                       //----PARTICULAR SELECTION----------
                       _particular(context: context, ref: ref),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                     ],
                   );
                 },
                 loading: () {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 },
                 error: (error, stack) {}),
           ),
@@ -96,18 +92,17 @@ class ReceiptScreen extends HookConsumerWidget {
     ref.watch(receiptControllerProvider.notifier).validate();
     await ref.watch(receiptControllerProvider.notifier).setup();
     final state = ref.watch(receiptControllerProvider);
-    if (state.data!.value.errorMessages.length == 0) {
+    if (state.data!.value.errorMessages.isEmpty) {
       showModalBottomSheet(
         context: context,
         builder: (context) => ReceiptConfirmationBottomSheet(
           onConfirm: () {
             ref.watch(receiptControllerProvider.notifier).submit();
-
             showCupertinoModalBottomSheet(
               expand: true,
               context: context,
               backgroundColor: Colors.transparent,
-              builder: (context) => NewTranscationCenterScreen(),
+              builder: (context) => const NewTranscationCenterScreen(),
             );
           },
           onCancel: () {},
@@ -125,24 +120,23 @@ class ReceiptScreen extends HookConsumerWidget {
 
   _amount({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(receiptControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
         //
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
-          print(value);
           ref.watch(receiptControllerProvider.notifier).setState(
                 state.data!.value.copyWith(
                   amount: _value,
                 ),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Amount',
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -157,7 +151,8 @@ class ReceiptScreen extends HookConsumerWidget {
       onTap: () {
         showModalBottomSheet(
           context: context,
-          builder: (context) => ReceiptTransactionModeSelectModalBottomSheet(),
+          builder: (context) =>
+              const ReceiptTransactionModeSelectModalBottomSheet(),
         );
       },
       child: Container(
@@ -208,7 +203,7 @@ class ReceiptScreen extends HookConsumerWidget {
       child: Container(
         width: MediaQuery.of(context).size.width * 0.97,
         height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(3),
@@ -225,13 +220,13 @@ class ReceiptScreen extends HookConsumerWidget {
               state.category == null
                   ? 'Please Select Receipt Category'
                   : state.category!.name,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(
+            const Icon(
               CupertinoIcons.arrowtriangle_down,
               color: Colors.black,
               size: 20,
@@ -244,7 +239,7 @@ class ReceiptScreen extends HookConsumerWidget {
 
   _particular({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(receiptControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
@@ -254,7 +249,7 @@ class ReceiptScreen extends HookConsumerWidget {
                 state.data!.value.copyWith(particular: value),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'particular',
         ),
       ),

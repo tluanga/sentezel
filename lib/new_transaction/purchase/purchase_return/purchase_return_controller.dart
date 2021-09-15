@@ -31,14 +31,11 @@ class PurchaseReturnController extends StateNotifier<PurchaseReturn> {
   }
 
   validate() {
-    print(state.mode);
     //---------Validation Part-----------
     List<String> _errorMessage = [];
-
     if (state.amount <= 0) {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
-
     state = state.copyWith(errorMessages: _errorMessage);
   }
 
@@ -57,7 +54,6 @@ class PurchaseReturnController extends StateNotifier<PurchaseReturn> {
       creditSideLedger: await _read(ledgerMasterRepositoryProvider)
           .getItem(id: _category.creditSideLedger!),
     );
-    print(state);
   }
 
   reset() async {
@@ -86,7 +82,7 @@ class PurchaseReturnController extends StateNotifier<PurchaseReturn> {
         ),
       );
     } catch (e) {
-      print(e);
+      throw (e.toString());
     }
   }
 }

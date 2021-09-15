@@ -20,7 +20,6 @@ class PurchaseReturnScreen extends HookConsumerWidget {
     var state = ref.watch(purchaseReturnControllerProvider);
 
     onCancel() {
-      print('cancel is called');
       ref.read(purchaseReturnControllerProvider.notifier).reset();
     }
 
@@ -28,7 +27,7 @@ class PurchaseReturnScreen extends HookConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 5,
             ),
             width: MediaQuery.of(context).size.width,
@@ -61,15 +60,12 @@ class PurchaseReturnScreen extends HookConsumerWidget {
                     _transactionMode(context: context, state: state),
                   ],
                 ),
-
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
-                //-----ASSET SELECTION----------------------
-
                 //----PARTICULAR SELECTION----------
                 _particular(context: context, ref: ref),
-                SizedBox(
+                const SizedBox(
                   height: 6,
                 ),
               ],
@@ -84,7 +80,7 @@ class PurchaseReturnScreen extends HookConsumerWidget {
     ref.watch(purchaseReturnControllerProvider.notifier).validate();
     await ref.watch(purchaseReturnControllerProvider.notifier).setup();
     final state = ref.watch(purchaseReturnControllerProvider);
-    if (state.errorMessages.length == 0) {
+    if (state.errorMessages.isEmpty) {
       showModalBottomSheet(
         context: context,
         builder: (context) => PurchaseReturnConfirmationBottomSheet(
@@ -95,7 +91,7 @@ class PurchaseReturnScreen extends HookConsumerWidget {
               expand: true,
               context: context,
               backgroundColor: Colors.transparent,
-              builder: (context) => NewTranscationCenterScreen(),
+              builder: (context) => const NewTranscationCenterScreen(),
             );
           },
           onCancel: () {},
@@ -113,24 +109,22 @@ class PurchaseReturnScreen extends HookConsumerWidget {
 
   _amount({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(purchaseReturnControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
-        //
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
-          print(value);
           ref.watch(purchaseReturnControllerProvider.notifier).setState(
                 state.copyWith(
                   amount: _value,
                 ),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Amount',
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -147,13 +141,13 @@ class PurchaseReturnScreen extends HookConsumerWidget {
         showModalBottomSheet(
           context: context,
           builder: (context) =>
-              PurchaseReturnTransactionModeSelectModalBottomSheet(),
+              const PurchaseReturnTransactionModeSelectModalBottomSheet(),
         );
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.55,
         height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(3),
@@ -163,13 +157,13 @@ class PurchaseReturnScreen extends HookConsumerWidget {
           children: [
             Text(
               EnumToString.convertToString(state.mode, camelCase: true),
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(
+            const Icon(
               CupertinoIcons.arrowtriangle_down,
               color: Colors.black,
               size: 20,
@@ -182,7 +176,7 @@ class PurchaseReturnScreen extends HookConsumerWidget {
 
   _particular({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(purchaseReturnControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
@@ -192,7 +186,7 @@ class PurchaseReturnScreen extends HookConsumerWidget {
                 state.copyWith(particular: value),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'particular',
         ),
       ),

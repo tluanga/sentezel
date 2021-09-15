@@ -16,7 +16,7 @@ final saleReturnControllerProvider =
 class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
   final Reader _read;
 
-  SalesReturnController(this._read) : super(AsyncValue.loading());
+  SalesReturnController(this._read) : super(const AsyncValue.loading());
 
   loadData() async {
     TransactionCategory _category =
@@ -32,7 +32,6 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
       debitSideLedger: _debitSideLedger,
       particular: _category.name,
     ));
-    print(state);
   }
 
   //--------------SET STATE-------------
@@ -50,8 +49,6 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
     if (stateData.amount <= 0) {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
-
-    print('length of error message ${_errorMessage}');
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
 
@@ -70,7 +67,7 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
   }
 
   reset() async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
   }
 
   submit() async {
@@ -92,7 +89,7 @@ class SalesReturnController extends StateNotifier<AsyncValue<SalesReturn>> {
         ),
       );
     } catch (e) {
-      print(e);
+      throw (e.toString());
     }
   }
 }

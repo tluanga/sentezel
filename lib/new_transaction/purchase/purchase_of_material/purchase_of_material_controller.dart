@@ -33,7 +33,6 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
   }
 
   validate() {
-    print(state.mode);
     //---------Validation Part-----------
     List<String> _errorMessage = [];
 
@@ -53,15 +52,13 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
       if (state.partialPaymentAmount <= 0) {
         _errorMessage.add('Partial Amount cannot be Zero');
       }
-      if (state.particular!.length <= 0) {
+      if (state.particular!.isEmpty) {
         _errorMessage.add('Please Enter Particular');
       }
     }
     if (state.mode == TransactionMode.credit && state.partyLedger == null) {
       _errorMessage.add('Please Select Party');
     }
-
-    print('length of error message ${_errorMessage}');
     state = state.copyWith(errorMessages: _errorMessage);
   }
 
@@ -79,7 +76,6 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
       debitSideLedger: await _read(ledgerMasterRepositoryProvider)
           .getItem(id: LedgerMasterIndex.Purchase),
     );
-    print(state);
   }
 
   reset() async {
@@ -110,7 +106,7 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
         ),
       );
     } catch (e) {
-      print(e);
+      throw (e.toString());
     }
   }
 }

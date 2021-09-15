@@ -12,8 +12,7 @@ class CreditSettlementTransactionModeSelectModalBottomSheet
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.read(creditSettlementControllerProvider);
-
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.2,
       child: Column(
         children: [
@@ -23,14 +22,14 @@ class CreditSettlementTransactionModeSelectModalBottomSheet
                 color: Colors.grey.shade300,
               ),
             ),
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 5,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
                   child: Text(
                     'Select Transaction Mode ',
                     style: TextStyle(
@@ -41,7 +40,7 @@ class CreditSettlementTransactionModeSelectModalBottomSheet
                 ),
                 //--------------Payment by Cash----
                 ListTile(
-                  title: Text(
+                  title: const Text(
                     'Payment By Cash',
                     style: TextStyle(
                       color: Colors.black,

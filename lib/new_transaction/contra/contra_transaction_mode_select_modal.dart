@@ -13,7 +13,7 @@ class ContraTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.read(contraControllerProvider);
 
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.2,
       child: Column(
         children: [
@@ -23,14 +23,14 @@ class ContraTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
                 color: Colors.grey.shade300,
               ),
             ),
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 5,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
                   child: Text(
                     'Select Contra Mode ',
                     style: TextStyle(
@@ -41,7 +41,7 @@ class ContraTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
                 ),
                 //--------------Payment by Cash----
                 ListTile(
-                  title: Text(
+                  title: const Text(
                     'Cash to Bank',
                     style: TextStyle(
                       color: Colors.black,
@@ -65,9 +65,9 @@ class ContraTransactionModeSelectModalBottomSheet extends HookConsumerWidget {
                 ),
                 //----------Payment By Bank---------------
                 Container(
-                  margin: EdgeInsets.all(0),
+                  margin: const EdgeInsets.all(0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Bank to Cash',
                       style: TextStyle(
                         color: Colors.black,

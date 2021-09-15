@@ -30,7 +30,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width,
               height: 30,
               decoration: BoxDecoration(color: Colors.redAccent[100]),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Please Confirm Transaction Summary before Submit',
                   style: TextStyle(
@@ -39,7 +39,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
             Padding(
@@ -47,11 +47,11 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                     child: Row(
                       children: [
-                        Text(
+                        const Text(
                           'Comment :',
                           style: TextStyle(
                             color: Palette.blackGrey,
@@ -61,7 +61,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                         ),
                         Text(
                           state.particular!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Palette.blackGrey,
                             fontSize: 16,
                           ),
@@ -71,7 +71,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                   ),
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Date',
                         style: TextStyle(
                           color: Palette.textColor,
@@ -79,24 +79,23 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
-                      Text(
+                      const Text(
                         ':',
                         style: TextStyle(
                           color: Palette.textColor,
                           fontSize: 16,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Text(
                         DateFormat('dd-EE-yyyy').format(state.date),
-
                         // formatter.format(model.transaction.date),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Palette.textColor,
                           fontSize: 16,
                         ),
@@ -110,7 +109,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
               padding: const EdgeInsets.all(8.0),
               child: Table(
                 border: TableBorder.all(color: Palette.textColor),
-                columnWidths: {
+                columnWidths: const {
                   0: FractionColumnWidth(.6),
                   1: FractionColumnWidth(.2),
                   2: FractionColumnWidth(.2),
@@ -165,7 +164,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                   ],
                 ),
                 child: ListTile(
-                  title: Text(
+                  title: const Text(
                     'Confirm',
                     style: TextStyle(
                       fontSize: 16,
@@ -173,9 +172,9 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                       color: Palette.textColor,
                     ),
                   ),
-                  leading: Icon(CupertinoIcons.checkmark_alt),
+                  leading: const Icon(CupertinoIcons.checkmark_alt),
                   onTap: () {
-                    this.onConfirm();
+                    onConfirm();
                   },
                 ),
               ),
@@ -196,7 +195,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                   ],
                 ),
                 child: ListTile(
-                  title: Text(
+                  title: const Text(
                     'Cancel',
                     style: TextStyle(
                       fontSize: 16,
@@ -204,7 +203,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                       color: Palette.textColor,
                     ),
                   ),
-                  leading: Icon(CupertinoIcons.nosign),
+                  leading: const Icon(CupertinoIcons.nosign),
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -220,7 +219,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
   _tableHeader() {
     return TableRow(
       children: [
-        Container(
+        SizedBox(
           height: 25,
           child: Center(
             child: Text(
@@ -232,7 +231,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
             ),
           ),
         ),
-        Container(
+        const SizedBox(
           height: 25,
           child: Center(
             child: Text(
@@ -244,7 +243,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
             ),
           ),
         ),
-        Container(
+        const SizedBox(
           height: 28,
           child: Center(
             child: Text(
@@ -266,7 +265,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
+          child: SizedBox(
             height: 25,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -294,14 +293,12 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Container(
-            child: Center(
-              child: Text(
-                amount.toString(),
-                style: TextStyle(
-                  color: Palette.textColor,
-                  fontSize: itemFontSize,
-                ),
+          child: Center(
+            child: Text(
+              amount.toString(),
+              style: TextStyle(
+                color: Palette.textColor,
+                fontSize: itemFontSize,
               ),
             ),
           ),
@@ -316,7 +313,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
     return //-----------------Credit Side-----------------
         TableRow(
       children: [
-        Container(
+        SizedBox(
           height: 40,
           child: Row(
             children: [
@@ -330,7 +327,7 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
                   ),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(
@@ -344,16 +341,14 @@ class PurchaseOfMaterialConfirmationBottomSheet extends HookConsumerWidget {
           ),
         ),
         Container(),
-        Container(
-          child: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                amount.toString(),
-                style: TextStyle(
-                  color: Palette.textColor,
-                  fontSize: itemFontSize,
-                ),
+        Center(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              amount.toString(),
+              style: TextStyle(
+                color: Palette.textColor,
+                fontSize: itemFontSize,
               ),
             ),
           ),

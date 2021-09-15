@@ -1,3 +1,5 @@
+// ignore_for_file: file_names
+
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/transactionType_enum.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
@@ -10,12 +12,9 @@ final paymentTypeSelectControllerProvider = StateNotifierProvider<
 
 class PaymentTypeSelectController
     extends StateNotifier<AsyncValue<List<TransactionCategory>>> {
-  Reader _read;
-
-  PaymentTypeSelectController(this._read) : super(AsyncValue.loading());
-
+  final Reader _read;
+  PaymentTypeSelectController(this._read) : super(const AsyncValue.loading());
   loadData({String categoryName = ''}) async {
-    print('Load data');
     try {
       final result = await _read(transactionCategoryRepositoryProvider).getList(
         searchString: categoryName,
@@ -24,7 +23,7 @@ class PaymentTypeSelectController
 
       state = AsyncData(result);
     } catch (e) {
-      print(e.toString());
+      throw (e.toString());
     }
   }
 }

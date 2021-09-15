@@ -24,7 +24,6 @@ class ContraController extends StateNotifier<AsyncValue<Contra>> {
       errorMessages: [],
       date: DateTime.now(),
     ));
-    print(state);
   }
 
   //--------------SET STATE-------------
@@ -40,7 +39,6 @@ class ContraController extends StateNotifier<AsyncValue<Contra>> {
     if (stateData.amount <= 0) {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
-    print('length of error message ${_errorMessage}');
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
 
@@ -74,7 +72,7 @@ class ContraController extends StateNotifier<AsyncValue<Contra>> {
   }
 
   reset() async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
   }
 
   submit() async {
@@ -96,7 +94,7 @@ class ContraController extends StateNotifier<AsyncValue<Contra>> {
         ),
       );
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 }

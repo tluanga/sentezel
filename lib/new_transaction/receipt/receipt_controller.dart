@@ -12,14 +12,13 @@ final receiptControllerProvider =
 class ReceiptController extends StateNotifier<AsyncValue<Receipt>> {
   final Reader _read;
 
-  ReceiptController(this._read) : super(AsyncValue.loading());
+  ReceiptController(this._read) : super(const AsyncValue.loading());
 
   loadData() async {
     state = AsyncData(Receipt(
       errorMessages: [],
       date: DateTime.now(),
     ));
-    print(state);
   }
 
   //--------------SET STATE-------------
@@ -37,8 +36,6 @@ class ReceiptController extends StateNotifier<AsyncValue<Receipt>> {
     if (stateData.amount <= 0) {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
-
-    print('length of error message ${_errorMessage}');
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
 
@@ -61,7 +58,7 @@ class ReceiptController extends StateNotifier<AsyncValue<Receipt>> {
   }
 
   reset() async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
   }
 
   submit() async {
@@ -83,7 +80,7 @@ class ReceiptController extends StateNotifier<AsyncValue<Receipt>> {
         ),
       );
     } catch (e) {
-      print(e);
+      throw (e.toString());
     }
   }
 }

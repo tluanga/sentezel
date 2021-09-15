@@ -30,7 +30,6 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
   }
 
   validate() {
-    print(state.mode);
     //---------Validation Part-----------
     List<String> _errorMessage = [];
 
@@ -54,15 +53,13 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
       if (state.partialPaymentAmount <= 0) {
         _errorMessage.add('Partial Amount cannot be Zero');
       }
-      if (state.particular!.length <= 0) {
+      if (state.particular!.isEmpty) {
         _errorMessage.add('Please Enter Particular');
       }
     }
     if (state.mode == TransactionMode.credit && state.partyLedger == null) {
       _errorMessage.add('Please Select Party');
     }
-
-    print('length of error message ${_errorMessage}');
     state = state.copyWith(errorMessages: _errorMessage);
   }
 
@@ -78,7 +75,6 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
             )
           : null,
     );
-    print(state);
   }
 
   submit() async {
@@ -101,7 +97,7 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
         ),
       );
     } catch (e) {
-      print(e);
+      rethrow;
     }
   }
 

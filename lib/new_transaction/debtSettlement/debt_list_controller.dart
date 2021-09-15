@@ -13,19 +13,13 @@ final debtorListControllerProvider =
 
 class DebtorListController extends StateNotifier<AsyncValue<List<Debtor>>> {
   final Reader _read;
-
-  DebtorListController(this._read) : super(AsyncValue.loading());
-
+  DebtorListController(this._read) : super(const AsyncValue.loading());
   loadData({String ledgerName = ''}) async {
-    print('Load data');
     try {
       //--First get all party Ledger--
       final ledgerMasterDataList = await _read(ledgerMasterRepositoryProvider)
           .getList(searchString: ledgerName, type: LedgerMasterType.party);
-      print(ledgerMasterDataList.length);
-
       List<Debtor> debtorList = [];
-
       //---------Iterate Ledger Master List-------------
       for (int i = 0; i < ledgerMasterDataList.length; i++) {
         final _transactionList = await _read(transactionRepositoryProvider)
@@ -66,7 +60,7 @@ class DebtorListController extends StateNotifier<AsyncValue<List<Debtor>>> {
       //-----------Assign it to the state----------
       state = AsyncData(debtorList);
     } catch (e) {
-      print(e.toString());
+      throw (e.toString());
     }
   }
 }

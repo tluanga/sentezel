@@ -19,13 +19,10 @@ class CreditorListController extends StateNotifier<AsyncValue<List<Creditor>>> {
   CreditorListController(this._read) : super(const AsyncValue.loading());
 
   loadData({String ledgerName = ''}) async {
-    print('Load data');
     try {
       //--First get all party Ledger--
       final ledgerMasterDataList = await _read(ledgerMasterRepositoryProvider)
           .getList(searchString: ledgerName, type: LedgerMasterType.party);
-      print(ledgerMasterDataList.length);
-
       List<Creditor> creditorList = [];
 
       //---------Iterate Ledger Master List-------------
@@ -49,7 +46,6 @@ class CreditorListController extends StateNotifier<AsyncValue<List<Creditor>>> {
             //----Party is in the debit side-
             //Because BAnk/Cash when in credit replaced by party
             _debitAmount = _transactionList[j].debitAmount;
-            ;
           } else {
             _creditAmount += _transactionList[j].creditAmount;
           }
@@ -68,7 +64,7 @@ class CreditorListController extends StateNotifier<AsyncValue<List<Creditor>>> {
       //-----------Assign it to the state----------
       state = AsyncData(creditorList);
     } catch (e) {
-      print(e.toString());
+      e.toString();
     }
   }
 }

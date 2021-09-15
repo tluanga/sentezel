@@ -20,7 +20,7 @@ class DebtSettlementController
     extends StateNotifier<AsyncValue<CreditSettlement>> {
   final Reader _read;
 
-  DebtSettlementController(this._read) : super(AsyncValue.loading());
+  DebtSettlementController(this._read) : super(const AsyncValue.loading());
 
   loadData({required Creditor creditor}) async {
     TransactionCategory _category =
@@ -37,14 +37,12 @@ class DebtSettlementController
       particular: _category.name + '-' + creditor.party!.name,
       creditor: creditor,
     ));
-    print(state);
   }
 
   //--------------SET STATE-------------
   setState(payload) {
     CreditSettlement _newState = payload;
     state = AsyncData(_newState);
-    print(state.data!.value);
   }
 
   validate() {
@@ -64,8 +62,6 @@ class DebtSettlementController
         stateData.partyLedger == null) {
       _errorMessage.add('Please Select Party');
     }
-
-    print('length of error message ${_errorMessage}');
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
 
@@ -86,7 +82,7 @@ class DebtSettlementController
   }
 
   reset() async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
   }
 
   submit() async {
@@ -112,7 +108,7 @@ class DebtSettlementController
         ),
       );
     } catch (e) {
-      print(e);
+      e.toString();
     }
   }
 }

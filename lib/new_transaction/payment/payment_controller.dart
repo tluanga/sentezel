@@ -12,14 +12,13 @@ final paymentControllerProvider =
 class PaymentController extends StateNotifier<AsyncValue<Payment>> {
   final Reader _read;
 
-  PaymentController(this._read) : super(AsyncValue.loading());
+  PaymentController(this._read) : super(const AsyncValue.loading());
 
   loadData() async {
     state = AsyncData(Payment(
       errorMessages: [],
       date: DateTime.now(),
     ));
-    print(state);
   }
 
   //--------------SET STATE-------------
@@ -37,15 +36,12 @@ class PaymentController extends StateNotifier<AsyncValue<Payment>> {
     if (stateData.amount <= 0) {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
-
-    print('length of error message ${_errorMessage}');
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
 
   setup() async {
     final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: state.data!.value.category!.debitSideLedger!);
-
     //---------------Updating the state-------
     final stateData = state.data!.value;
     final finalData = stateData.copyWith(
@@ -61,7 +57,7 @@ class PaymentController extends StateNotifier<AsyncValue<Payment>> {
   }
 
   reset() async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
   }
 
   submit() async {
@@ -83,7 +79,7 @@ class PaymentController extends StateNotifier<AsyncValue<Payment>> {
         ),
       );
     } catch (e) {
-      print(e);
+      throw (e.toString());
     }
   }
 }

@@ -13,8 +13,7 @@ class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.read(purchaseOfMaterialControllerProvider);
-
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.4,
       child: Column(
         children: [
@@ -24,14 +23,14 @@ class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
                 color: Colors.grey.shade300,
               ),
             ),
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               vertical: 5,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
                   child: Text(
                     'Select Transaction Mode ',
                     style: TextStyle(
@@ -42,7 +41,7 @@ class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
                 ),
                 //--------------Payment by Cash----
                 ListTile(
-                  title: Text(
+                  title: const Text(
                     'Payment By Cash',
                     style: TextStyle(
                       color: Colors.black,
@@ -66,9 +65,9 @@ class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
                 ),
                 //----------Payment By Bank---------------
                 Container(
-                  margin: EdgeInsets.all(0),
+                  margin: const EdgeInsets.all(0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Payment by Bank',
                       style: TextStyle(
                         color: Colors.black,
@@ -94,9 +93,9 @@ class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
                 ),
                 //--------------
                 Container(
-                  margin: EdgeInsets.all(0),
+                  margin: const EdgeInsets.all(0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Full Credit',
                       style: TextStyle(
                         color: Colors.black,
@@ -121,9 +120,9 @@ class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(0),
+                  margin: const EdgeInsets.all(0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Credit with Partial Payment by Bank',
                       style: TextStyle(
                         color: Colors.black,
@@ -149,9 +148,9 @@ class PurchaseOfMaterialTransactionModeSelectModalBottomSheet
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.all(0),
+                  margin: const EdgeInsets.all(0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Credit with Partial Payment by Cash',
                       style: TextStyle(
                         color: Colors.black,

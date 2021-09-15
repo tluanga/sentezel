@@ -14,7 +14,7 @@ class GeneralSalesTransactionModeSelectModalBottomSheet
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.read(generalSalesControllerProvider);
 
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.4,
       child: Column(
         children: [

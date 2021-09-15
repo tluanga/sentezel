@@ -10,21 +10,17 @@ final receiptTypeSelectControllerProvider = StateNotifierProvider<
 
 class ReceiptTypeSelectController
     extends StateNotifier<AsyncValue<List<TransactionCategory>>> {
-  Reader _read;
-
-  ReceiptTypeSelectController(this._read) : super(AsyncValue.loading());
-
+  final Reader _read;
+  ReceiptTypeSelectController(this._read) : super(const AsyncValue.loading());
   loadData({String categoryName = ''}) async {
-    print('Load data');
     try {
       final result = await _read(transactionCategoryRepositoryProvider).getList(
         searchString: categoryName,
         type: TransactionType.lakluh,
       );
-
       state = AsyncData(result);
     } catch (e) {
-      print(e.toString());
+      throw(e.toString());
     }
   }
 }

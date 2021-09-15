@@ -15,9 +15,7 @@ final generalSalesControllerProvider =
 
 class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
   final Reader _read;
-
-  GeneralSalesController(this._read) : super(AsyncValue.loading());
-
+  GeneralSalesController(this._read) : super(const AsyncValue.loading());
   loadData() async {
     TransactionCategory _category =
         await _read(transactionCategoryRepositoryProvider)
@@ -32,7 +30,6 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
       creditSideLedger: _creditSideLedger,
       particular: _category.name,
     ));
-    print(state);
   }
 
   //--------------SET STATE-------------
@@ -43,7 +40,6 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
 
   validate() {
     final stateData = state.data!.value;
-
     //---------Validation Part-----------
     List<String> _errorMessage = [];
 
@@ -63,7 +59,7 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
       if (stateData.partialPaymentAmount <= 0) {
         _errorMessage.add('Partial Amount cannot be Zero');
       }
-      if (stateData.particular!.length <= 0) {
+      if (stateData.particular!.isEmpty) {
         _errorMessage.add('Please Enter Particular');
       }
     }
@@ -71,8 +67,6 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
         stateData.partyLedger == null) {
       _errorMessage.add('Please Select Party');
     }
-
-    print('length of error message ${_errorMessage}');
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
 
@@ -93,7 +87,7 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
   }
 
   reset() async {
-    state = AsyncLoading();
+    state = const AsyncLoading();
   }
 
   submit() async {
@@ -119,7 +113,7 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
         ),
       );
     } catch (e) {
-      print(e);
+      throw (e.toString());
     }
   }
 }

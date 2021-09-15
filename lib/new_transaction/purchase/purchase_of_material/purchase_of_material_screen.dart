@@ -22,9 +22,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var state = ref.watch(purchaseOfMaterialControllerProvider);
-
     onCancel() {
-      print('cancel is called');
       ref.read(purchaseOfMaterialControllerProvider.notifier).reset();
     }
 
@@ -32,7 +30,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 5,
             ),
             width: MediaQuery.of(context).size.width,
@@ -85,14 +83,14 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                         ],
                       )
                     : Container(),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 //-----ASSET SELECTION----------------------
 
                 //----PARTICULAR SELECTION----------
                 _particular(context: context, ref: ref),
-                SizedBox(
+                const SizedBox(
                   height: 6,
                 ),
               ],
@@ -107,7 +105,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
     ref.watch(purchaseOfMaterialControllerProvider.notifier).validate();
     await ref.watch(purchaseOfMaterialControllerProvider.notifier).setup();
     final state = ref.watch(purchaseOfMaterialControllerProvider);
-    if (state.errorMessages.length == 0) {
+    if (state.errorMessages.isEmpty) {
       showModalBottomSheet(
         context: context,
         builder: (context) => PurchaseOfMaterialConfirmationBottomSheet(
@@ -118,7 +116,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
               expand: true,
               context: context,
               backgroundColor: Colors.transparent,
-              builder: (context) => NewTranscationCenterScreen(),
+              builder: (context) => const NewTranscationCenterScreen(),
             );
           },
           onCancel: () {},
@@ -136,24 +134,23 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
 
   _amount({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(purchaseOfMaterialControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
         //
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
-          print(value);
           ref.watch(purchaseOfMaterialControllerProvider.notifier).setState(
                 state.copyWith(
                   amount: _value,
                 ),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Amount',
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -170,13 +167,13 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
         showModalBottomSheet(
           context: context,
           builder: (context) =>
-              PurchaseOfMaterialTransactionModeSelectModalBottomSheet(),
+              const PurchaseOfMaterialTransactionModeSelectModalBottomSheet(),
         );
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.55,
         height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(3),
@@ -186,13 +183,13 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
           children: [
             Text(
               EnumToString.convertToString(state.mode, camelCase: true),
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(
+            const Icon(
               CupertinoIcons.arrowtriangle_down,
               color: Colors.black,
               size: 20,
@@ -223,7 +220,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
             ? MediaQuery.of(context).size.width * 0.97
             : MediaQuery.of(context).size.width * 0.55,
         height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
             color: Colors.grey.shade300,
             borderRadius: BorderRadius.circular(3),
@@ -239,13 +236,13 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
               state.partyLedger == null
                   ? 'Please Select Party'
                   : state.partyLedger!.name,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(
+            const Icon(
               CupertinoIcons.arrowtriangle_down,
               color: Colors.black,
               size: 20,
@@ -271,7 +268,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
 
   _particular({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(purchaseOfMaterialControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
@@ -281,7 +278,7 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                 state.copyWith(particular: value),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'particular',
         ),
       ),

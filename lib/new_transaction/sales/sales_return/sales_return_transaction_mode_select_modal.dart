@@ -30,9 +30,9 @@ class SalesReturnTransactionModeSelectModalBottomSheet
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 5),
-                  child: const Text(
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  child: Text(
                     'Select Transaction Mode ',
                     style: TextStyle(
                       fontSize: 16,
@@ -58,7 +58,6 @@ class SalesReturnTransactionModeSelectModalBottomSheet
                             state.data!.value
                                 .copyWith(mode: TransactionMode.paymentByCash),
                           );
-
                       Navigator.pop(context);
                     },
                     groupValue: state.data!.value.mode,
@@ -66,9 +65,9 @@ class SalesReturnTransactionModeSelectModalBottomSheet
                 ),
                 //----------Payment By Bank---------------
                 Container(
-                  margin: EdgeInsets.all(0),
+                  margin: const EdgeInsets.all(0),
                   child: ListTile(
-                    title: Text(
+                    title: const Text(
                       'Payment by Bank',
                       style: TextStyle(
                         color: Colors.black,
@@ -85,14 +84,12 @@ class SalesReturnTransactionModeSelectModalBottomSheet
                             .setState(state.data!.value.copyWith(
                               mode: TransactionMode.paymentByBank,
                             ));
-
                         Navigator.pop(context);
                       },
                       groupValue: state.data!.value.mode,
                     ),
                   ),
                 ),
-                //--------------
               ],
             ),
           ),

@@ -25,10 +25,8 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       var b = await db.insert(dbName, payload.toJson());
       // final a = await getItem(id: b);
       var c = await getItem(id: b);
-      print(c);
-      print('the value return is $b');
     } catch (e) {
-      print(e);
+      e.toString();
     }
     // final userId = _read(authControllerProvider)!.uid;
   }
@@ -38,13 +36,13 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     Database db = await DatabaseService.instance.db;
     try {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
-      if (result.length != 0) {
+      if (result.isNotEmpty) {
         return trans.Transaction.fromJson(result.first);
-      } else
+      } else {
         throw ('Error');
+      }
     } catch (e) {
-      print(e);
-      throw (e);
+      rethrow;
     }
   }
 
@@ -52,13 +50,13 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     Database db = await DatabaseService.instance.db;
     try {
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
-      if (result.length != 0) {
+      if (result.isNotEmpty) {
         return trans.Transaction.fromJson(result.first);
-      } else
+      } else {
         throw ('Error');
+      }
     } catch (e) {
-      print(e);
-      throw (e);
+      rethrow;
     }
   }
 
@@ -93,14 +91,13 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       ''');
 
       List<trans.Transaction> list = [];
-      final result1 = await db.query(dbName);
-      result.forEach((item) {
+      // final result1 = await db.query(dbName);
+      for (var item in result) {
         list.add(trans.Transaction.fromJson(item));
-      });
+      }
 
       return list;
     } catch (e) {
-      print(e);
       return [];
     }
   }
@@ -113,8 +110,8 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     DateTime? startDate,
     DateTime? endDate,
   }) async {
-    if (startDate == null) startDate = DateTime.now();
-    if (endDate == null) endDate = DateTime.now();
+    startDate ??= DateTime.now();
+    endDate ??= DateTime.now();
     DateTime paramStartDate =
         DateTime(startDate.year, startDate.month, startDate.day);
     // print('StartDate $startDate');
@@ -142,13 +139,12 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       ''');
       List<trans.Transaction> list = [];
 
-      result.forEach((item) {
+      for (var item in result) {
         list.add(trans.Transaction.fromJson(item));
-      });
+      }
 
       return list;
     } catch (e) {
-      print(e);
       return [];
     }
   }
@@ -174,7 +170,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
         whereArgs: [payload.id],
       );
     } catch (e) {
-      print(e);
+      e.toString();
     }
   }
 }

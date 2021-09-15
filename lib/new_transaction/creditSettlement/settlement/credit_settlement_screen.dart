@@ -30,23 +30,18 @@ class CreditSettlementScreen extends HookConsumerWidget {
           .read(creditSettlementControllerProvider.notifier)
           .loadData(creditor: creditor);
     }, []);
-
-    onCancel() {
-      print('cancel is called');
-    }
-
+    onCancel() {}
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Container(
-            padding: EdgeInsets.symmetric(
+            padding: const EdgeInsets.symmetric(
               horizontal: 5,
             ),
             width: MediaQuery.of(context).size.width,
             height: MediaQuery.of(context).size.height,
             child: state.when(
                 data: (data) {
-                  print(data);
                   return Column(
                     children: [
                       TopBarWithSaveWidget(
@@ -66,12 +61,12 @@ class CreditSettlementScreen extends HookConsumerWidget {
                               );
                         },
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
                       Container(
                         height: MediaQuery.of(context).size.height * 0.07,
-                        decoration: BoxDecoration(color: Colors.white),
+                        decoration: const BoxDecoration(color: Colors.white),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 16,
@@ -82,7 +77,7 @@ class CreditSettlementScreen extends HookConsumerWidget {
                             children: [
                               Column(
                                 children: [
-                                  Text(
+                                  const Text(
                                     'Current Credit to',
                                     style: TextStyle(
                                       fontSize: 14,
@@ -91,7 +86,7 @@ class CreditSettlementScreen extends HookConsumerWidget {
                                   ),
                                   Text(
                                     data.creditor!.party!.name,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 18,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -101,7 +96,7 @@ class CreditSettlementScreen extends HookConsumerWidget {
                               Text(
                                 currencySeperatorStringFormatterHelper(
                                     data.creditor!.amount),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
@@ -124,22 +119,19 @@ class CreditSettlementScreen extends HookConsumerWidget {
                           _transactionMode(context: context, state: data),
                         ],
                       ),
-
-                      SizedBox(
+                      const SizedBox(
                         height: 10,
                       ),
-                      //-----ASSET SELECTION----------------------
-
                       //----PARTICULAR SELECTION----------
                       _particular(context: context, ref: ref),
-                      SizedBox(
+                      const SizedBox(
                         height: 6,
                       ),
                     ],
                   );
                 },
                 loading: () {
-                  return Center(child: Text('Loading debtor list'));
+                  return const Center(child: Text('Loading debtor list'));
                 },
                 error: (error, stack) {}),
           ),
@@ -152,7 +144,7 @@ class CreditSettlementScreen extends HookConsumerWidget {
     ref.watch(creditSettlementControllerProvider.notifier).validate();
     await ref.watch(creditSettlementControllerProvider.notifier).setup();
     final state = ref.watch(creditSettlementControllerProvider);
-    if (state.data!.value.errorMessages.length == 0) {
+    if (state.data!.value.errorMessages.isEmpty) {
       showModalBottomSheet(
         context: context,
         builder: (context) => CreditSettlementConfirmationBottomSheet(
@@ -163,7 +155,7 @@ class CreditSettlementScreen extends HookConsumerWidget {
               expand: true,
               context: context,
               backgroundColor: Colors.transparent,
-              builder: (context) => NewTranscationCenterScreen(),
+              builder: (context) => const NewTranscationCenterScreen(),
             );
           },
           onCancel: () {},
@@ -181,24 +173,23 @@ class CreditSettlementScreen extends HookConsumerWidget {
 
   _amount({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(creditSettlementControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.38,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
         //
         onChanged: (value) {
           var _value = value != '' ? int.parse(value) : 0;
-          print(value);
           ref.watch(creditSettlementControllerProvider.notifier).setState(
                 state.data!.value.copyWith(
                   amount: _value,
                 ),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'Amount',
         ),
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
         ),
@@ -215,13 +206,13 @@ class CreditSettlementScreen extends HookConsumerWidget {
         showModalBottomSheet(
           context: context,
           builder: (context) =>
-              CreditSettlementTransactionModeSelectModalBottomSheet(),
+              const CreditSettlementTransactionModeSelectModalBottomSheet(),
         );
       },
       child: Container(
         width: MediaQuery.of(context).size.width * 0.55,
         height: MediaQuery.of(context).size.height * 0.05,
-        padding: EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10),
         decoration: BoxDecoration(
           color: Colors.grey.shade300,
           borderRadius: BorderRadius.circular(3),
@@ -231,13 +222,13 @@ class CreditSettlementScreen extends HookConsumerWidget {
           children: [
             Text(
               EnumToString.convertToString(state.mode, camelCase: true),
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.black,
                 fontSize: 15,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Icon(
+            const Icon(
               CupertinoIcons.arrowtriangle_down,
               color: Colors.black,
               size: 20,
@@ -250,7 +241,7 @@ class CreditSettlementScreen extends HookConsumerWidget {
 
   _particular({required BuildContext context, required WidgetRef ref}) {
     final state = ref.watch(creditSettlementControllerProvider);
-    return Container(
+    return SizedBox(
       width: MediaQuery.of(context).size.width * 0.95,
       height: MediaQuery.of(context).size.height * 0.1,
       child: TextFormField(
@@ -260,7 +251,7 @@ class CreditSettlementScreen extends HookConsumerWidget {
                 state.data!.value.copyWith(particular: value),
               );
         },
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           labelText: 'particular',
         ),
       ),
