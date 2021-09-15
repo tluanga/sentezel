@@ -121,7 +121,9 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
 
       //-----------Assign it to the state----------
       state = AsyncData(_ledgerReportList);
-    } catch (e) {}
+    } on Exception catch (e) {
+      throw Exception(e.toString());
+    }
   }
 
   LedgerReport getLedgerDetail(int ledgerid) {

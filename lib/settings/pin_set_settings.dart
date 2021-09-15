@@ -12,7 +12,7 @@ class PinSetScreen extends StatelessWidget {
           const Text('Please Enter Four Digit Pin'),
           OtpTextField(
             numberOfFields: 5,
-            borderColor: Color(0xFF512DA8),
+            borderColor: const Color(0xFF512DA8),
             //set to true to show as box or false to show as dash
             showFieldAsBox: true,
             //runs when a code is typed in
@@ -25,7 +25,7 @@ class PinSetScreen extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text("Verification Code"),
+                      title: const Text("Verification Code"),
                       content: Text('Code entered is $verificationCode'),
                     );
                   });
@@ -33,7 +33,7 @@ class PinSetScreen extends StatelessWidget {
           ),
           OtpTextField(
             numberOfFields: 5,
-            borderColor: Color(0xFF512DA8),
+            borderColor: const Color(0xFF512DA8),
             //set to true to show as box or false to show as dash
             showFieldAsBox: true,
             //runs when a code is typed in
@@ -46,7 +46,7 @@ class PinSetScreen extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text("Verification Code"),
+                      title: const Text("Verification Code"),
                       content: Text('Code entered is $verificationCode'),
                     );
                   });
@@ -56,9 +56,7 @@ class PinSetScreen extends StatelessWidget {
             children: [
               GestureDetector(
                 onTap: () {},
-                child: Container(
-                  child: Text('Forward'),
-                ),
+                child: const Text('Forward'),
               )
             ],
           ),
