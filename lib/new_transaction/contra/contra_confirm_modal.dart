@@ -29,7 +29,7 @@ class ContraConfirmationBottomSheet extends HookConsumerWidget {
               width: MediaQuery.of(context).size.width,
               height: 30,
               decoration: BoxDecoration(color: Colors.redAccent[100]),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Please Confirm Transaction Summary before Submit',
                   style: TextStyle(
@@ -38,7 +38,7 @@ class ContraConfirmationBottomSheet extends HookConsumerWidget {
                 ),
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 3,
             ),
             Padding(
@@ -46,11 +46,11 @@ class ContraConfirmationBottomSheet extends HookConsumerWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Container(
+                  SizedBox(
                     height: MediaQuery.of(context).size.height * 0.05,
                     child: Row(
                       children: [
-                        Text(
+                        const Text(
                           'Comment :',
                           style: TextStyle(
                             color: Palette.blackGrey,
@@ -60,7 +60,7 @@ class ContraConfirmationBottomSheet extends HookConsumerWidget {
                         ),
                         Text(
                           state.particular!,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Palette.blackGrey,
                             fontSize: 16,
                           ),
@@ -70,7 +70,7 @@ class ContraConfirmationBottomSheet extends HookConsumerWidget {
                   ),
                   Row(
                     children: [
-                      Text(
+                      const Text(
                         'Date',
                         style: TextStyle(
                           color: Palette.textColor,
@@ -78,24 +78,24 @@ class ContraConfirmationBottomSheet extends HookConsumerWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
-                      Text(
+                      const Text(
                         ':',
                         style: TextStyle(
                           color: Palette.textColor,
                           fontSize: 16,
                         ),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Text(
                         DateFormat('dd-EE-yyyy').format(state.date),
 
                         // formatter.format(model.transaction.date),
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Palette.textColor,
                           fontSize: 16,
                         ),
@@ -109,7 +109,7 @@ class ContraConfirmationBottomSheet extends HookConsumerWidget {
               padding: const EdgeInsets.all(8.0),
               child: Table(
                 border: TableBorder.all(color: Palette.textColor),
-                columnWidths: {
+                columnWidths: const {
                   0: FractionColumnWidth(.6),
                   1: FractionColumnWidth(.2),
                   2: FractionColumnWidth(.2),
