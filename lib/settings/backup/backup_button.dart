@@ -17,13 +17,10 @@ class BackupButton extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(3.0),
         child: Row(
-          children: [
-            Container(
-              child: Icon(
-                CupertinoIcons.tray_arrow_up,
-                size: 80,
-              ),
-              // child: Image.asset('assets/icons/pdf.png'),
+          children: const [
+            Icon(
+              CupertinoIcons.tray_arrow_up,
+              size: 80,
             ),
             SizedBox(
               width: 10,

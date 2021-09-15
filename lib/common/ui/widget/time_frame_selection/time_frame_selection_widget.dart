@@ -40,7 +40,6 @@ class TimeFrameSelection extends HookConsumerWidget {
                       builder: (context) => _timeFrame(
                           context: context,
                           onSelect: (period) {
-                            print(period);
                             mode = period;
                           }),
                     );
@@ -55,7 +54,7 @@ class TimeFrameSelection extends HookConsumerWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 4),
                       child: Row(
-                        children: [
+                        children: const [
                           Text(
                             'Select Period',
                             style: TextStyle(
@@ -72,20 +71,20 @@ class TimeFrameSelection extends HookConsumerWidget {
                     ),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 //---Current Selected Period
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Current Selected -',
                       style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       width: 10,
                     ),
                     Text(
@@ -93,7 +92,7 @@ class TimeFrameSelection extends HookConsumerWidget {
                         mode,
                         camelCase: true,
                       ),
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),

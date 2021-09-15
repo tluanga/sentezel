@@ -34,8 +34,6 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
       child: ListView.builder(
         itemCount: list.length,
         itemBuilder: (context, index) {
-          print('index');
-
           return _listItem(
               context: context, item: list[index], onSelect: (item) {});
         },

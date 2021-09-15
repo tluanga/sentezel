@@ -13,67 +13,62 @@ class BusinessProfileSetup extends HookConsumerWidget {
     return Scaffold(
       body: Column(
         children: [
-          Container(
-            child: Column(
-              children: [
-                TextFormField(
-                  decoration: InputDecoration(labelText: 'Business Name'),
+          Column(
+            children: [
+              TextFormField(
+                decoration: const InputDecoration(labelText: 'Business Name'),
+              ),
+              Container(
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: Colors.grey.shade300,
+                  ),
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      color: Colors.grey.shade300,
-                    ),
-                  ),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 5,
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 15),
-                        child: Text(
-                          'Ledger Master Type',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                          ),
+                padding: const EdgeInsets.symmetric(
+                  vertical: 5,
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      child: Text(
+                        'Ledger Master Type',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                      ListTile(
-                        title: Text('Direct'),
+                    ),
+                    ListTile(
+                      title: const Text('Direct'),
+                      trailing: Radio(
+                        value: BusinessType.midangSiamZuar,
+                        onChanged: (value) {
+                          print('before change value ${_businessType.value}');
+                          _businessType.value = BusinessType.midangSiamZuar;
+                          print('Change value ${_businessType.value}');
+                        },
+                        groupValue: _businessType.value,
+                      ),
+                    ),
+                    Container(
+                      margin: const EdgeInsets.all(0),
+                      child: ListTile(
+                        title: const Text('Indirect'),
                         trailing: Radio(
-                          value: BusinessType.midangSiamZuar,
+                          value: BusinessType.mahniSiamZuar,
                           onChanged: (value) {
-                            print('before change value ${_businessType.value}');
-                            _businessType.value = BusinessType.midangSiamZuar;
-                            print('Change value ${_businessType.value}');
+                            _businessType.value = BusinessType.mahniSiamZuar;
                           },
                           groupValue: _businessType.value,
                         ),
                       ),
-                      Container(
-                        margin: EdgeInsets.all(0),
-                        child: ListTile(
-                          title: Text('Indirect'),
-                          trailing: Radio(
-                            value: BusinessType.mahniSiamZuar,
-                            onChanged: (value) {
-                              print(
-                                  'before change value ${_businessType.value}');
-                              _businessType.value = BusinessType.mahniSiamZuar;
-                              print('Change value ${_businessType.value}');
-                            },
-                            groupValue: _businessType.value,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
-            ),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
         ],
       ),

@@ -19,14 +19,14 @@ class DaySelectionWidget extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Column(
           children: [
-            Text(
+            const Text(
               'Day',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 8,
             ),
             Row(
@@ -52,7 +52,7 @@ class DaySelectionWidget extends HookConsumerWidget {
           initialDate: DateTime.now(),
           firstDate: DateTime(DateTime.now().year),
           lastDate: DateTime.now().add(
-            Duration(
+            const Duration(
               days: 100,
             ),
           ),
@@ -71,14 +71,14 @@ class DaySelectionWidget extends HookConsumerWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Icon(
+            const Icon(
               Icons.calendar_today,
               size: 20,
             ),
             Text(
               DateFormat('d-MM-y ').format(
                 DateTime.now().subtract(
-                  Duration(days: 1),
+                  const Duration(days: 1),
                 ),
               ),
               style: TextStyle(

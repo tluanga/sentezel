@@ -18,14 +18,14 @@ class WeekSelection extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
         child: Column(
           children: [
-            Text(
+            const Text(
               'Week',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(

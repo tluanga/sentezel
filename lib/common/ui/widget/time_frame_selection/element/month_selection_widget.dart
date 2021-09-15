@@ -18,14 +18,14 @@ class MonthSelection extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
         child: Column(
           children: [
-            Text(
+            const Text(
               'Month',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
@@ -57,7 +57,7 @@ class MonthSelection extends HookConsumerWidget {
           initialDate: DateTime.now(),
           firstDate: DateTime(DateTime.now().year),
           lastDate: DateTime.now().add(
-            Duration(
+            const Duration(
               days: 100,
             ),
           ),

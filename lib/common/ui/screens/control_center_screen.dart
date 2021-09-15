@@ -121,7 +121,7 @@ class ControlCenterScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => PartyScreen(),
+                        builder: (context) => const PartyScreen(),
                       ),
                     );
                   },
@@ -236,7 +236,7 @@ class ControlCenterScreen extends StatelessWidget {
               color: Colors.grey.withOpacity(0.3),
               spreadRadius: 2,
               blurRadius: 7,
-              offset: Offset(0, 3), // changes position of shadow
+              offset: const Offset(0, 3), // changes position of shadow
             ),
           ],
         ),

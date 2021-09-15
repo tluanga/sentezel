@@ -18,19 +18,19 @@ class CurrentFinancialYearSelection extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 4),
         child: Column(
           children: [
-            Text(
+            const Text(
               'Current Financial Year',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
+              children: const [
                 Text(
                   '1st April 2020',
                   style: TextStyle(
