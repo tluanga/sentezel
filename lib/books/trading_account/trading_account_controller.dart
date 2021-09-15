@@ -17,7 +17,7 @@ final tradingAccountControllerProvider = StateNotifierProvider<
 
 class TradingAccountController
     extends StateNotifier<AsyncValue<List<TradingAccount>>> {
-  Reader _read;
+  final Reader _read;
   TradingAccountController(this._read) : super(AsyncValue.loading());
   loadData() async {
     try {

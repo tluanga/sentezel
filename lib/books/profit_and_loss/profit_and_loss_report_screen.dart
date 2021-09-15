@@ -33,11 +33,11 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
                     return _expenselist(context: context, data: data, ref: ref);
                   }, loading: () {
                     print('inside loading');
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   }, error: (error, stack) {
-                    return Center(
+                    return const Center(
                       child: Text('error'),
                     );
                   })
@@ -126,7 +126,7 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(item.ledgerName),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         Text(balance.toString()),
@@ -138,7 +138,7 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
       {required BuildContext context,
       required List<ProfitAndLoss> data,
       required WidgetRef ref}) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.8,
       width: MediaQuery.of(context).size.width,
       child: Column(
@@ -146,7 +146,7 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text('Gross Profit'),
+              const Text('Gross Profit'),
               Text(data[0].grossProfit.toString())
             ],
           ),
@@ -185,7 +185,7 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
     return Row(
       children: [
         Text(item.ledgerName),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         Text(balance.toString()),
