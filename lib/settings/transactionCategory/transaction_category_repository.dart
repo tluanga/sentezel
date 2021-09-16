@@ -30,9 +30,8 @@ class TransactionCategoryRepository
         return TransactionCategory.fromJson(result.first);
       }
       throw Exception('Transaction Type Not Present');
-    } catch (e) {
-      print(e);
-      throw e;
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -42,9 +41,8 @@ class TransactionCategoryRepository
 
       final result = await db.query(dbName, where: 'id=?', whereArgs: [id]);
       return TransactionCategory.fromJson(result.first).name;
-    } catch (e) {
-      print(e);
-      return 'Error';
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -58,9 +56,8 @@ class TransactionCategoryRepository
           .query(dbName, where: 'transactionType=?', whereArgs: [_type]);
 
       return result.map((e) => TransactionCategory.fromJson(e)).toList();
-    } catch (e) {
-      print(e);
-      throw e;
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -87,9 +84,8 @@ class TransactionCategoryRepository
       }
 
       return list;
-    } catch (e) {
-      print(e);
-      return [];
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 

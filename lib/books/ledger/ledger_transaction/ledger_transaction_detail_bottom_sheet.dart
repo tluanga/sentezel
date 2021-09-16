@@ -15,7 +15,7 @@ class LedgerTransactionDetailBottomSheet extends HookConsumerWidget {
     return Material(
       child: Column(
         children: [
-          Text(
+          const Text(
             'Ledger Transaction Detail',
             style: TextStyle(
               fontSize: 16,
@@ -24,40 +24,36 @@ class LedgerTransactionDetailBottomSheet extends HookConsumerWidget {
           ),
           Row(
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3,
-                child: Text('Date'),
+                child: const Text('Date'),
               ),
-              Container(
-                child: Text(
-                  DateFormat(
-                    'dd MMMM yyyy hh:mm',
-                  ).format(ledgerTransaction.transaction!.date),
-                  style: TextStyle(
-                    fontSize: 14,
-                  ),
+              Text(
+                DateFormat(
+                  'dd MMMM yyyy hh:mm',
+                ).format(ledgerTransaction.transaction!.date),
+                style: const TextStyle(
+                  fontSize: 14,
                 ),
               ),
             ],
           ),
           Row(
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3,
-                child: Text('Amount'),
+                child: const Text('Amount'),
               ),
-              Container(
-                child: Text(
-                  ledgerTransaction.amount.toString(),
-                ),
+              Text(
+                ledgerTransaction.amount.toString(),
               ),
             ],
           ),
           Row(
             children: [
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width * 0.3,
-                child: Text('Amount'),
+                child: const Text('Amount'),
               ),
               Text(
                 ledgerTransaction.amount.toString(),

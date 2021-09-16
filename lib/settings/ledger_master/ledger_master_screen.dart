@@ -47,7 +47,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
             expand: true,
             context: context,
             backgroundColor: Colors.transparent,
-            builder: (context) => NewLedgerMasterScreen(),
+            builder: (context) => const NewLedgerMasterScreen(),
           );
         },
       ),
