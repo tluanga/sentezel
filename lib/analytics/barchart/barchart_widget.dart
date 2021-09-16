@@ -22,10 +22,12 @@ class BarChartWidget extends HookConsumerWidget {
     int touchedGroupIndex = -1;
     final state = ref.watch(barChartControllerProvider);
 
-    useEffect(() {
-      ref.watch(barChartControllerProvider.notifier).loadData();
-      generateBarchartGroupDataList(state.data!.value.barchartElement);
-    }, []);
+    useEffect(
+      () {
+        generateBarChart(ref, state);
+      },
+    );
+
     return Material(
       child: Container(
         child: state.when(
@@ -139,6 +141,12 @@ class BarChartWidget extends HookConsumerWidget {
   }
 }
 
+generateBarChart(WidgetRef ref, state) async {
+  await ref.watch(barChartControllerProvider.notifier).loadData();
+  final data =
+      ref.read(barChartControllerProvider).data!.value.barchartElementList;
+  if (data.isNotEmpty) generateBarchartGroupDataList(data);
+}
 // class BarChartSample2 extends StatefulWidget {
 //   @override
 //   State<StatefulWidget> createState() => BarChartSample2State();
