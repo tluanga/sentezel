@@ -88,19 +88,23 @@ class BarChartWidget extends HookConsumerWidget {
                       Expanded(
                         child: BarChart(
                           BarChartData(
-                            maxY: 20,
+                            maxY: 5,
                             titlesData: FlTitlesData(
-                                show: true,
-                                bottomTitles: _bottomTitles(
-                                  generateLeftTitle(highestValue: 1000),
-                                ),
-                                leftTitles:
-                                    _leftTitles(leftTitles: data.leftTitle)),
+                              show: true,
+                              rightTitles: SideTitles(showTitles: false),
+                              topTitles: SideTitles(showTitles: false),
+                              bottomTitles: _bottomTitles(data.bottomTitle),
+                              leftTitles:
+                                  _leftTitles(leftTitles: data.leftTitle),
+                            ),
                             barGroups: data.barGroupList,
+                            gridData: FlGridData(show: false),
+                            borderData: FlBorderData(
+                              show: false,
+                            ),
                           ),
                         ),
                       ),
-                      Text(data.barchartElementList[0].date.toString()),
                       const SizedBox(
                         height: 12,
                       ),
@@ -119,132 +123,6 @@ class BarChartWidget extends HookConsumerWidget {
     );
   }
 }
-
-// class BarChartSample2 extends StatefulWidget {
-//   @override
-//   State<StatefulWidget> createState() => BarChartSample2State();
-// }
-
-// class BarChartSample2State extends State<BarChartSample2> {
-//   final Color leftBarColor = const Color(0xff53fdd7);
-//   final Color rightBarColor = const Color(0xffff5182);
-//   final double width = 7;
-
-//   late List<BarChartGroupData> rawBarGroups;
-//   late List<BarChartGroupData> showingBarGroups;
-
-//   int touchedGroupIndex = -1;
-
-//   @override
-//   void initState() {
-//     super.initState();
-//     final barGroup1 = makeGroupData(0, 5, 12);
-//     final barGroup2 = makeGroupData(1, 16, 12);
-//     final barGroup3 = makeGroupData(2, 18, 5);
-//     final barGroup4 = makeGroupData(3, 20, 16);
-//     final barGroup5 = makeGroupData(4, 17, 6);
-//     final barGroup6 = makeGroupData(5, 19, 1.5);
-//     final barGroup7 = makeGroupData(6, 10, 1.5);
-
-//     final items = [
-//       barGroup1,
-//       barGroup2,
-//       barGroup3,
-//       barGroup4,
-//       barGroup5,
-//       barGroup6,
-//       barGroup7,
-//     ];
-
-//     rawBarGroups = items;
-
-//     showingBarGroups = rawBarGroups;
-//   }
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return AspectRatio(
-//       aspectRatio: 1,
-//       child: Card(
-//         elevation: 0,
-//         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-//         color: const Color(0xff2c4260),
-//         child: Padding(
-//           padding: const EdgeInsets.all(16),
-//           child: Column(
-//             crossAxisAlignment: CrossAxisAlignment.stretch,
-//             mainAxisAlignment: MainAxisAlignment.start,
-//             mainAxisSize: MainAxisSize.max,
-//             children: <Widget>[
-//               Row(
-//                 crossAxisAlignment: CrossAxisAlignment.center,
-//                 mainAxisSize: MainAxisSize.min,
-//                 mainAxisAlignment: MainAxisAlignment.start,
-//                 children: <Widget>[
-//                   makeTransactionsIcon(),
-//                   const SizedBox(
-//                     width: 38,
-//                   ),
-//                   const Text(
-//                     'Transactions',
-//                     style: TextStyle(color: Colors.white, fontSize: 22),
-//                   ),
-//                   const SizedBox(
-//                     width: 50,
-//                   ),
-//                   Row(
-//                     children: [
-//                       GestureDetector(
-//                         onTap: () {},
-//                         child: Icon(
-//                           Icons.arrow_left,
-//                           color: Colors.white,
-//                           size: 50,
-//                         ),
-//                       ),
-//                       GestureDetector(
-//                         onTap: () {},
-//                         child: Icon(
-//                           Icons.arrow_right,
-//                           color: Colors.white,
-//                           size: 50,
-//                         ),
-//                       ),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//               const SizedBox(
-//                 height: 38,
-//               ),
-//               Expanded(
-//                 child: BarChart(
-//                   BarChartData(
-//                     maxY: 20,
-//                     titlesData: FlTitlesData(
-//                       show: true,
-//                       rightTitles: SideTitles(showTitles: true),
-//                       topTitles: SideTitles(showTitles: false),
-//                       bottomTitles: _bottomTitles(),
-//                       leftTitles: _leftTitles(),
-//                     ),
-//                     borderData: FlBorderData(
-//                       show: false,
-//                     ),
-//                     barGroups: showingBarGroups,
-//                     gridData: FlGridData(show: false),
-//                   ),
-//                 ),
-//               ),
-//               const SizedBox(
-//                 height: 12,
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
 
 _bottomTitles(List<String> bottomTitles) {
   return SideTitles(
