@@ -76,15 +76,15 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
         }
       }
     }
-    for (var element in _barChartElementList) {
-      // ignore: avoid_print
-      print('--------------------------');
-      print(element.date);
-      print(element.expense);
-      print(element.income);
-      print(element.total);
-      print('#############################');
-    }
+    // for (var element in _barChartElementList) {
+    //   // ignore: avoid_print
+    //   print('--------------------------');
+    //   print(element.date);
+    //   print(element.expense);
+    //   print(element.income);
+    //   print(element.total);
+    //   print('#############################');
+    // }
     state = AsyncValue.data(BarChart(
         leftTitle: [], bottomTitle: [], barchartElement: _barChartElementList));
   }

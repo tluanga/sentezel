@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/barChart/barchart_scale_yvalue_helper.dart';
 import 'package:sentezel/analytics/barchart/bar_chart_controller.dart';
 import 'package:sentezel/analytics/barchart/barchar_generate_left_titile_helper.dart';
+import 'package:sentezel/analytics/barchart/barchart_make_groupdata_helper.dart';
 
 class BarChartWidget extends HookConsumerWidget {
   const BarChartWidget({Key? key}) : super(key: key);
@@ -23,8 +24,7 @@ class BarChartWidget extends HookConsumerWidget {
 
     useEffect(() {
       ref.watch(barChartControllerProvider.notifier).loadData();
-      final barGroup1 = makeGroupData(0, 5, 12);
-      showingBarGroups = [barGroup1];
+      generateBarchartGroupDataList(state.data!.value.barchartElement);
     }, []);
     return Material(
       child: Container(
