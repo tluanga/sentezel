@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:sentezel/new_transaction/data/transaction_db.dart';
+import 'package:sentezel/settings/business_profile/data/business_profile_db.dart';
 import 'package:sentezel/settings/ledger_master/data/Ledger_master_db.dart';
 
 import 'package:sentezel/settings/party/data/party_db.dart';
@@ -25,14 +26,6 @@ class DatabaseService {
   String userFullName = 'fullName';
   String userEmail = 'email';
   String userPin = 'pin';
-
-  //-------TABLE -2---BUSINESS PROFILE--
-  static const String businessProfileTable = 'businessProfile_table';
-  String businessProfileId = 'id';
-  String businessName = 'name';
-  String businessAddress = 'address';
-  String businessContactNo = 'contactNo';
-  String businessType = 'type';
 
   Future<Database> get db async {
     _db ??= await _initDb();
@@ -65,21 +58,9 @@ class DatabaseService {
             $userPin INT
              )''',
     );
-    // Table 2- BUSINESS PROFILE TABLE
-    await db.execute(
-      '''
-      CREATE TABLE 
-        $businessProfileTable(
-            $businessProfileId INTEGER PRIMARY KEY AUTOINCREMENT,
-            $businessName TEXT,
-            $businessAddress TEXT,           
-            $businessContactNo INT,
-            $businessType String
-             )''',
-    );
 
     // Table 3- Ledger Master Table
-
+    injectBusinessProfile(db);
     injectLedgerMaster(db);
     injectTransactionCategory(db);
     PartyDb.execute(db);

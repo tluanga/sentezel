@@ -35,15 +35,13 @@ class BackupRestoreService {
     // }
 
     //LedgerMaster data restore
-    ledgerMasterList.forEach(
-      (element) {
-        try {
-          db.insert(LedgerMasterConfig.dbName, element.toMap());
-        } catch (e) {
-          print(e);
-        }
-      },
-    );
+    for (var element in ledgerMasterList) {
+      try {
+        db.insert(LedgerMasterConfig.dbName, element.toMap());
+      } catch (e) {
+        print(e);
+      }
+    }
     //Transaction category data restore
     for (var element in transactionCategoryList) {
       try {
