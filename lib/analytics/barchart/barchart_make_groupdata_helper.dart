@@ -23,9 +23,15 @@ List<BarChartGroupData> generateBarchartGroupDataList(
         value: barchartElementList[i].income,
         highestValue: highestIncome.income);
 
+    print('scaled income value--$scaledIncomeValue');
+    print('---------Expense---------------------');
+    print('Expense value --${barchartElementList[i].expense}');
+    print('Highest Expense value is ${highestExpense.expense}');
     final scaledExpenseValue = scaleYValue(
         value: barchartElementList[i].expense,
-        highestValue: highestExpense.income);
+        highestValue: highestExpense.expense);
+    print('scaled expense value--$scaledExpenseValue');
+    print('--##############--');
 
     final data = makeGroupData(
         i, scaledIncomeValue.toDouble(), scaledExpenseValue.toDouble());
