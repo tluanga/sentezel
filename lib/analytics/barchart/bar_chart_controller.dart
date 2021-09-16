@@ -1,4 +1,5 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/analytics/barchart/barchart_make_groupdata_helper.dart';
 import 'package:sentezel/analytics/barchart/models/barchart_element_model.dart';
 import 'package:sentezel/analytics/barchart/models/barchart_model.dart';
 
@@ -8,10 +9,10 @@ import 'package:sentezel/settings/transactionCategory/data/transaction_category_
 import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
 final barChartControllerProvider =
-    StateNotifierProvider<BarChartController, AsyncValue<BarChart>>(
+    StateNotifierProvider<BarChartController, AsyncValue<BarChartState>>(
         (ref) => BarChartController(ref.read)..loadData());
 
-class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
+class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
   final Reader _read;
 
   BarChartController(this._read) : super(const AsyncLoading());
@@ -76,6 +77,7 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
         }
       }
     }
+
     // for (var element in _barChartElementList) {
     //   // ignore: avoid_print
     //   print('--------------------------');
@@ -86,10 +88,11 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
     //   print('#############################');
     // }
     state = AsyncValue.data(
-      BarChart(
+      BarChartState(
         leftTitle: [],
         bottomTitle: [],
         barchartElementList: _barChartElementList,
+        barGroupList: generateBarchartGroupDataList(_barChartElementList),
       ),
     );
   }

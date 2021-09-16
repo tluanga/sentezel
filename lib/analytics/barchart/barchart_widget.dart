@@ -22,11 +22,9 @@ class BarChartWidget extends HookConsumerWidget {
     int touchedGroupIndex = -1;
     final state = ref.watch(barChartControllerProvider);
 
-    useEffect(
-      () {
-        generateBarChart(ref, state);
-      },
-    );
+    useEffect(() {
+      ref.read(barChartControllerProvider.notifier).loadData();
+    }, []);
 
     return Material(
       child: Container(
@@ -92,36 +90,17 @@ class BarChartWidget extends HookConsumerWidget {
                           BarChartData(
                             maxY: 20,
                             titlesData: FlTitlesData(
-                              show: true,
-                              bottomTitles: _bottomTitles(
-                                generateLeftTitle(highestValue: 1000),
-                              ),
-                            ),
-                            // barGroups: showingBarGroups,
+                                show: true,
+                                bottomTitles: _bottomTitles(
+                                  generateLeftTitle(highestValue: 1000),
+                                ),
+                                leftTitles:
+                                    _leftTitles(leftTitles: data.leftTitle)),
+                            barGroups: data.barGroupList,
                           ),
                         ),
                       ),
-                      // Expanded(
-                      //   child: BarChart(
-                      //     BarChartData(
-                      //       maxY: 20,
-                      //       // titlesData: FlTitlesData(
-                      //       //   show: true,
-                      //       //   rightTitles: SideTitles(showTitles: false),
-                      //       //   topTitles: SideTitles(showTitles: false),
-                      //       //   bottomTitles: _bottomTitles(),
-                      //       //   leftTitles: _leftTitles(
-                      //       //       leftTitles:
-                      //       //           generateLeftTitle(highestValue: 12)),
-                      //       // ),
-                      //       // borderData: FlBorderData(
-                      //       //   show: false,
-                      //       // ),
-                      //       barGroups: showingBarGroups,
-                      //       gridData: FlGridData(show: false),
-                      //     ),
-                      //   ),
-                      // ),
+                      Text(data.barchartElementList[0].date.toString()),
                       const SizedBox(
                         height: 12,
                       ),
@@ -141,12 +120,6 @@ class BarChartWidget extends HookConsumerWidget {
   }
 }
 
-generateBarChart(WidgetRef ref, state) async {
-  await ref.watch(barChartControllerProvider.notifier).loadData();
-  final data =
-      ref.read(barChartControllerProvider).data!.value.barchartElementList;
-  if (data.isNotEmpty) generateBarchartGroupDataList(data);
-}
 // class BarChartSample2 extends StatefulWidget {
 //   @override
 //   State<StatefulWidget> createState() => BarChartSample2State();
