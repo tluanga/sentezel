@@ -34,14 +34,6 @@ class DatabaseService {
   String businessContactNo = 'contactNo';
   String businessType = 'type';
 
-  //-------TABLE -3---LEDGER MASTER TABLE--
-  static const String ledgerMasterTable = 'ledgerMaster_table';
-  String ledgerMasterId = 'id';
-  String ledgerMasterName = 'name';
-  String ledgerMasterDescription = 'description';
-  String ledgerMasterType = 'type';
-  String ledgerMasterStatus = 'status';
-
   Future<Database> get db async {
     _db ??= await _initDb();
 
@@ -63,7 +55,6 @@ class DatabaseService {
 
   void _createDb(Database db, int version) async {
     // Table 1- PROFILE TABLE
-
     await db.execute(
       '''
       CREATE TABLE 

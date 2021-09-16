@@ -40,16 +40,19 @@ dependencies:
   flutter_otp_text_field: ^1.0.0
   flutter_slidable: ^0.6.0
   fl_chart: ^0.40.0
+  
 
   # ---RiverPod-------------
   flutter_riverpod: 1.0.0-dev.6
   hooks_riverpod: 1.0.0-dev.6
 
-  # --uitilities---
+  # --utilities---
   enum_to_string: ^2.0.1
   json_serializable: ^4.1.4
   sqflite: ^2.0.0+3
   path_provider:
+  permission_handler:
+  flutter_archive:
 
 
   # The following adds the Cupertino Icons font to your application.

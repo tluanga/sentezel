@@ -1,67 +1,69 @@
+import 'dart:io';
+
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:sentezel/setup/request_permission_helper.dart';
 
 class SystemConfig {
-  static const appName = 'Sentezel';
   static late final String appDirectory;
   static late final String appDocumentDirectory;
+  static late final String appUserProfileDirectory;
   static late final String appBackupDirectory;
   static late final String appBackupFile;
-  static late final String appRestoreDirectory;
+  static const maximumShiftDuration = 24; //24 hrs
 
   static Future<bool> setCustomDirectory() async {
-    // await requestPermissionHelper(Permission.camera);
-    // await requestPermissionHelper(Permission.accessMediaLocation);
+    bool permission =
+        await requestPermissionHelper(Permission.manageExternalStorage);
 
     bool _setupCompleted = false;
+    if (permission) {
+      var externalStorageDirectory = await getExternalStorageDirectory();
+      String newPath = "";
 
-    var externalStorageDirectory = await getExternalStorageDirectory();
-    var app = await getApplicationDocumentsDirectory();
-    var data = await getTemporaryDirectory();
-    print('DATA PATH IS $data');
-    appDirectory = app.path;
-    // var libraryDirectory = await getLibraryDirectory();
-    // var downloadDirectory = await getDownloadsDirectory();
+      Directory directory = externalStorageDirectory!;
 
-    // print('Library Directory-${libraryDirectory.path}');
-    // print('Download Directory-${downloadDirectory!.path}');
+      List<String> paths = directory.path.split("/");
+      for (int x = 1; x < paths.length; x++) {
+        String folder = paths[x];
+        if (folder != "Android") {
+          newPath += "/" + folder;
+        } else {
+          break;
+        }
+      }
+      try {
+        appDirectory = newPath + "/lytworkshift/";
 
-    // Directory directory = externalStorageDirectory!;
+        //---------Document Directory---------
+        String documentPath = newPath + "/lytworkshift/" + 'document';
+        directory = Directory(documentPath);
+        await directory.create(recursive: true);
+        appDocumentDirectory = directory.path;
 
-    try {
-      //---------Document Directory---------
-      String documentPath = appDirectory + "/" + 'document';
-      Directory directory = Directory(documentPath);
-      await directory.create(recursive: true);
-      appDocumentDirectory = directory.path;
+        //---------User Profile Directory---------
+        String appUserProfilePath = newPath + "/lytworkshift/" + 'userProfile';
+        directory = Directory(appUserProfilePath);
+        await directory.create(recursive: true);
+        appUserProfileDirectory = directory.path;
 
-      //---------User Profile Directory---------
-      String appUserProfilePath = appDirectory + "/" + 'userProfile';
-      directory = Directory(appUserProfilePath);
-      await directory.create(recursive: true);
-      appUserProfileDirectory = directory.path;
+        //---------User Profile Directory---------
+        String appBackupPath = newPath + "/lytworkshift/" + 'backup';
+        directory = Directory(appBackupPath);
+        await directory.create(recursive: true);
+        appBackupDirectory = directory.path;
+        print('User Backup path-$appUserProfilePath');
 
-      //---------User Profile Directory---------
-      String appBackupPath = appDirectory + "/" + 'backup';
-      directory = Directory(appBackupPath);
-      await directory.create(recursive: true);
-      appBackupDirectory = directory.path;
-      print('User Backup path-$appUserProfilePath');
+        appBackupFile = newPath + "/lytworkshift/" + 'lytWorkShiftBackup.zip';
 
-      //---------System Restore Directory---------
-      String appRestorePath = appDirectory + "/" + 'restore';
-      directory = Directory(appRestorePath);
-      await directory.create(recursive: true);
-      appRestoreDirectory = directory.path;
-      print('App Restore path-$appUserProfilePath');
+        _setupCompleted = true;
+      } catch (err) {
+        print('Error $err');
+      }
 
-      appBackupFile = appDirectory + "/" + 'lytWorkShiftBackup.zip';
+      //---------------App Backup File Path----------
 
-      _setupCompleted = true;
-    } catch (err) {
-      print('Error $err');
     }
-
-    //---------------App Backup File Path----------
 
     return _setupCompleted;
   }
@@ -69,9 +71,8 @@ class SystemConfig {
   static setup() async {
     await setCustomDirectory();
     print('--------SETTING UP GLOBAL APP CONFIGURATION---------');
-    print('appDirectory-$appDirectory');
     print('appDocumentDirectory-$appDocumentDirectory');
-
+    print('appDbDirectory--$appUserProfileDirectory');
     print('appBackup-$appBackupDirectory');
   }
 }
