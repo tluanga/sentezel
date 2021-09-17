@@ -18,11 +18,10 @@ void injectBusinessProfile(Database db) async {
   );
 
   final mapData = BusinessProfile(
-          name: '', description: '', type: BusinessType.mahniSiamZuar)
-      .toMap();
+      name: '', description: '', type: BusinessType.mahniSiamZuar);
 
   await db.insert(
     BusinessProfileConfig.dbName,
-    mapData,
+    mapData.toMap(),
   );
 }

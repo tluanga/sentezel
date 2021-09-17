@@ -12,20 +12,25 @@ class BusinessProfileRepository {
 
   const BusinessProfileRepository();
 
-  void add(BusinessProfile payload) async {
+  Future<void> add(BusinessProfile payload) async {
     Database db = await DatabaseService.instance.db;
     //check there is any entry
     final result = await db.query(dbName);
     if (result.isEmpty) {
-      db.insert(dbName, payload.toMap());
+      final result = await db.insert(dbName, payload.toMap());
+      print(result);
     } else {
       try {
+        final a = await db.query(dbName);
+        print(a);
         await db.update(
           dbName,
           payload.toMap(),
           where: 'id=?',
           whereArgs: [payload.id],
         );
+        final result1 = await db.query(dbName);
+        print(result1);
       } catch (e) {
         e.toString();
       }

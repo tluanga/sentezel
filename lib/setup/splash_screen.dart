@@ -38,12 +38,13 @@ class SplashScreen extends HookConsumerWidget {
     }
 
     startTime() async {
-      var _duration = const Duration(seconds: 5);
+      var _duration = const Duration(seconds: 2);
       return Timer(_duration, navigationPage);
     }
 
     useEffect(
       () {
+        ref.read(appControllerProvider.notifier).checkSetup();
         startTime();
       },
       [],
