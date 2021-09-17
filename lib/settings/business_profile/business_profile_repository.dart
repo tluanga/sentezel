@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/settings/business_profile/business_profile_config.db.dart';
 import 'package:sentezel/settings/business_profile/business_profile_model.dart';
+import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
 import 'package:sqflite/sqlite_api.dart';
 
 final businessProfileRepository =
@@ -43,5 +44,17 @@ class BusinessProfileRepository {
     Database db = await DatabaseService.instance.db;
     final result = await db.query(dbName);
     return BusinessProfile.fromMap(result.first);
+  }
+
+  Future<void> reset() async {
+    Database db = await DatabaseService.instance.db;
+    await db.delete(dbName);
+    final mapData = BusinessProfile(
+        name: '', description: '', type: BusinessType.mahniSiamZuar);
+
+    await db.insert(
+      BusinessProfileConfig.dbName,
+      mapData.toMap(),
+    );
   }
 }

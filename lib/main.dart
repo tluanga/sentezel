@@ -48,6 +48,7 @@ class MyApp extends HookConsumerWidget {
         RouteConstant.businessProfileSetup: (context) =>
             const BusinessProfileSetupScreen(),
         RouteConstant.pinSetup: (context) => const PinSetupScreen(),
+        RouteConstant.splashScreen: (context) => const SplashScreen(),
       },
       home: const SplashScreen(),
     );

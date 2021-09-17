@@ -173,4 +173,13 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       e.toString();
     }
   }
+
+  Future<void> reset() async {
+    try {
+      Database db = await DatabaseService.instance.db;
+      await db.delete(dbName);
+    } catch (e) {
+      e.toString();
+    }
+  }
 }

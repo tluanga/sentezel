@@ -3,6 +3,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_data.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_config.dart';
 
@@ -87,6 +88,29 @@ class TransactionCategoryRepository
     } on Exception catch (e) {
       throw Exception(e.toString());
     }
+  }
+
+  Future<void> reset() async {
+    Database db = await DatabaseService.instance.db;
+    //----------delete all rows---------
+    await db.delete(dbName);
+    //----------Restore all row---
+    transactionTypeData.asMap().forEach((key, value) async {
+      final mapData = TransactionCategory(
+        id: value.id,
+        name: value.name,
+        description: value.description,
+        transactionType: value.transactionType,
+        debitSideLedger: value.debitSideLedger,
+        creditSideLedger: value.creditSideLedger,
+        status: value.status,
+      ).toJson();
+
+      await db.insert(
+        TransactionCategoryConfig.dbName,
+        mapData,
+      );
+    });
   }
 
   @override

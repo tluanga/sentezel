@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:riverpod/riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_data.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_config.dart';
@@ -107,6 +108,33 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
         payload.toMap(),
         where: 'id=?',
         whereArgs: [payload.id],
+      );
+    } on Exception catch (e) {
+      throw Exception(e.toString());
+    }
+  }
+
+  Future<void> reset() async {
+    try {
+      Database db = await DatabaseService.instance.db;
+      //will delete all rows.
+      await db.delete(dbName);
+      //restore original row.
+      ledgerMasterData.asMap().forEach(
+        (key, value) async {
+          final mapData = LedgerMaster.withId(
+            id: value.id,
+            name: value.name,
+            description: value.description,
+            type: value.type,
+            status: value.status,
+          ).toMap();
+
+          await db.insert(
+            LedgerMasterConfig.dbName,
+            mapData,
+          );
+        },
       );
     } on Exception catch (e) {
       throw Exception(e.toString());

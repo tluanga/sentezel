@@ -43,4 +43,19 @@ class PinRepository {
       throw Exception(e.toString());
     }
   }
+
+  Future<void> reset() async {
+    try {
+      Database db = await DatabaseService.instance.db;
+      await db.delete(dbName);
+      final mapData = PIN(pin: 0, passPhrase: '').toMap();
+
+      await db.insert(
+        PinConfig.dbName,
+        mapData,
+      );
+    } on Exception catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }
