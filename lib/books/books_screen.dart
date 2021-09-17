@@ -9,6 +9,8 @@ import 'package:sentezel/books/trial_balance/trial_balance_report_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 
+import 'trading_account/trading_account_report_screen.dart';
+
 class BooksScreen extends StatelessWidget {
   const BooksScreen({Key? key}) : super(key: key);
 
@@ -81,12 +83,13 @@ class BooksScreen extends StatelessWidget {
                     label: 'Trading Account',
                     icon: CupertinoIcons.layers,
                     onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => TradingAccountReportScreen(),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              const TradingAccountReportScreen(),
+                        ),
+                      );
                     },
                   ),
                 ],

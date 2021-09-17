@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
 import 'package:sentezel/books/trial_balance/trial_balance_controller.dart';
 import 'package:sentezel/books/widgets/report_top_bar_widget.dart';
-
 import 'trial_balance_model.dart';
 
 class TrialBalanceReportScreen extends HookConsumerWidget {
@@ -78,6 +76,9 @@ class TrialBalanceReportScreen extends HookConsumerWidget {
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.w500))),
             ],
+          ),
+          const SizedBox(
+            height: 10,
           ),
           Expanded(
               child: ListView.builder(

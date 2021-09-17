@@ -94,7 +94,7 @@ class ContraController extends StateNotifier<AsyncValue<Contra>> {
         ),
       );
     } catch (e) {
-      // print(e);
+      throw (e.toString());
     }
   }
 }

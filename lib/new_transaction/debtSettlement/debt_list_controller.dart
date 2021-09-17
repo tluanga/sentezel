@@ -4,8 +4,7 @@ import 'package:sentezel/new_transaction/debtSettlement/model/debtor_model.dart'
 import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
-import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
-import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_index.dart';
 
 final debtorListControllerProvider =
     StateNotifierProvider<DebtorListController, AsyncValue<List<Debtor>>>(
@@ -25,31 +24,28 @@ class DebtorListController extends StateNotifier<AsyncValue<List<Debtor>>> {
         final _transactionList = await _read(transactionRepositoryProvider)
             .getTransactionByLedgerMaster(
                 ledgerMasterId: ledgerMasterDataList[i].id);
-        int _creditAmount = 0;
-        int _debitAmount = 0;
+        int _amount = 0;
 
         for (int j = 0; j < _transactionList.length; j++) {
-          //--get Transaction Category----------
-          TransactionCategory _transactionCategory =
-              await _read(transactionCategoryRepositoryProvider)
-                  .getItem(id: _transactionList[j].transactionCategoryId);
-
-          //Party--
-          //We have to check for debit or Credit
-          if (_transactionCategory.debitSideLedger == LedgerMasterIndex.bank ||
-              _transactionCategory.debitSideLedger == LedgerMasterIndex.cash) {
-            //----Party is in the debit side-
-            //Because BAnk/Cash when in credit replaced by party
-            _debitAmount = _transactionList[j].debitAmount;
-          } else {
-            _creditAmount += _transactionList[j].creditAmount;
+          // debit side ledger null means that it is a full credit by party
+          if (_transactionList[j].debitSideLedger == null) {
+            _amount += _transactionList[j].debitAmount;
+            // if debit side ledger is cash/bank, its a partial credit by party
+          } else if (_transactionList[j].debitSideLedger ==
+                  LedgerMasterIndex.cash ||
+              _transactionList[j].debitSideLedger == LedgerMasterIndex.bank) {
+            if (_transactionList[j].transactionCategoryId ==
+                TransactionCategoryIndex.customerDebtSettlement) {
+              _amount -= _transactionList[j].debitAmount;
+            } else {
+              _amount += _transactionList[j].debitAmount;
+            }
           }
         }
-        if ((_debitAmount - _creditAmount) > 0) {
-          //The party has a debt in business
+        if (_amount != 0) {
           debtorList.add(
             Debtor(
-              amount: (_debitAmount - _creditAmount).abs(),
+              amount: _amount,
               party: ledgerMasterDataList[i],
             ),
           );
