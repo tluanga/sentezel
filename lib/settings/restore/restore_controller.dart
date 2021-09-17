@@ -8,6 +8,7 @@ import 'package:sentezel/new_transaction/common/transaction_config.dart';
 import 'package:sentezel/new_transaction/data/transaction_model.dart' as trans;
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/business_profile/business_profile_config.db.dart';
+import 'package:sentezel/settings/business_profile/business_profile_model.dart';
 import 'package:sentezel/settings/business_profile/business_profile_repository.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_config.dart';
@@ -140,7 +141,8 @@ class RestoreController extends StateNotifier<Restore> {
       final _businessProfileDataConverted = json.decode(_businessProfileData);
 
       //--Insert into database
-      _read(businessProfileRepository).add(_businessProfileDataConverted);
+      _read(businessProfileRepository)
+          .add(BusinessProfile.fromJson(_businessProfileDataConverted));
     } catch (e) {
       print(e);
     }
