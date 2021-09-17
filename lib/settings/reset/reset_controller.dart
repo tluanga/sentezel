@@ -7,5 +7,11 @@ class ResetController extends StateNotifier<int> {
 
   reset() {
     //--------Reset Ledger Master----------
+
+    //--------Reset Transaction Type-------------
+
+    //--------Reset Transaction------------
+
+    //--------Reset Setup-----------
   }
 }
