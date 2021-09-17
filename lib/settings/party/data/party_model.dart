@@ -30,7 +30,7 @@ class Party {
   }
 
   String getInitialLetter() {
-    return this.name[0].toUpperCase();
+    return name[0].toUpperCase();
   }
 
   Map<String, dynamic> toMap() {

@@ -1,13 +1,14 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/books/ledger/ledgerTransaction/ledgerTransaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
-import 'package:sentezel/common/enums/debitOrCredit_enum.dart';
-import 'package:sentezel/common/enums/transactionType_enum.dart';
-import 'package:sentezel/newTransaction/data/transaction_repository.dart';
+import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
+import 'package:sentezel/common/enums/debit_or_credit_enum.dart';
+import 'package:sentezel/common/enums/transaction_type_enum.dart';
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
+import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
-import 'package:sentezel/settings/transactionCategory/data/transactionCategory_model.dart';
-import 'package:sentezel/settings/transactionCategory/transactionCategory_repository.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
 final ledgerControllerProvider =
     StateNotifierProvider<LedgerController, AsyncValue<List<LedgerReport>>>(
@@ -15,19 +16,17 @@ final ledgerControllerProvider =
 );
 
 class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
-  Reader _read;
+  final Reader _read;
 
-  LedgerController(this._read) : super(AsyncValue.loading());
+  LedgerController(this._read) : super(const AsyncValue.loading());
 
   loadData({String ledgerName = ''}) async {
-    print('Load data');
     try {
       List<LedgerReport> _ledgerReportList = [];
       final ledgerMasterDataList =
           await _read(ledgerMasterRepositoryProvider).getList(
         searchString: ledgerName,
       );
-      print(ledgerMasterDataList.length);
 
       //---------Iterate Ledger Master List-------------
       for (int i = 0; i < ledgerMasterDataList.length; i++) {
@@ -64,22 +63,53 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
           if (_transactionCategory.transactionType == TransactionType.hralh ||
               _transactionCategory.transactionType == TransactionType.lakluh) {
             //----------If Party---
-            _ledgerReport.debitAmount += _transactionList[j].debitAmount;
-            _ledgerTransaction.amount = _transactionList[j].debitAmount;
-            _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+
+            //Checking for cash/bank or other ledger for correction of debit and credit
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
+            } else {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+            }
+
+            // _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
           } else if (_transactionCategory.transactionType ==
                   TransactionType.lei ||
               _transactionCategory.transactionType ==
                   TransactionType.pekchhuah) {
             if (_transactionList[j].assetLedgerId == _ledgerReport.ledgerId) {
               //purcahse of Asset-----
+
+              //Checking for cash/bank or other ledger for correction of debit and credit
+              if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
+                  ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
+                _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+                _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+                _ledgerTransaction.amount = _transactionList[j].creditAmount;
+              } else {
+                _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+                _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+                _ledgerTransaction.amount = _transactionList[j].debitAmount;
+              }
+              // _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+            }
+
+            //Checking for cash/bank or other ledger for correction of debit and credit
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
               _ledgerReport.creditAmount += _transactionList[j].creditAmount;
               _ledgerTransaction.amount = _transactionList[j].creditAmount;
-              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+            } else {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
             }
-            _ledgerReport.creditAmount += _transactionList[j].creditAmount;
-            _ledgerTransaction.amount = _transactionList[j].creditAmount;
-            _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+            // _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
           }
 
           //-----------Contra---------------
@@ -89,11 +119,10 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
         _ledgerReportList.add(_ledgerReport);
       }
 
-      print(_ledgerReportList.length);
       //-----------Assign it to the state----------
       state = AsyncData(_ledgerReportList);
-    } catch (e) {
-      print(e.toString());
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 

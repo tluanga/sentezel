@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sentezel/common/ui/widget/settingsEllipse_widget.dart';
-import 'package:sentezel/home/ui/controlCard_widget.dart';
-import 'package:sentezel/home/ui/headerCard_widget.dart';
-import 'package:sentezel/home/ui/latestTransaction_widget.dart';
+import 'package:sentezel/common/ui/widget/settings_ellipse_widget.dart';
+import 'package:sentezel/home/ui/control_card_widget.dart';
+import 'package:sentezel/home/ui/header_card_widget.dart';
+import 'package:sentezel/home/ui/latest_transaction_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,18 +12,16 @@ class HomeScreen extends StatelessWidget {
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
-          child: Container(
-            child: Column(
-              children: [
-                SettingsEllipseWidget(),
-                HomeHeaderCard(),
-                HomeControlCard(),
-                SizedBox(
-                  height: 10,
-                ),
-                HomeLatestTransactionWidget(),
-              ],
-            ),
+          child: Column(
+            children: const [
+              SettingsEllipseWidget(),
+              HomeHeaderCard(),
+              HomeControlCard(),
+              SizedBox(
+                height: 10,
+              ),
+              HomeLatestTransactionWidget(),
+            ],
           ),
         ),
       ),

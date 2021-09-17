@@ -10,25 +10,25 @@ class SignupScreen extends HookConsumerWidget {
       children: [
         //Business name
         TextFormField(
-          decoration: InputDecoration(labelText: 'Business Name'),
+          decoration: const InputDecoration(labelText: 'Business Name'),
         ),
 
         //Business Address
         TextFormField(
-          decoration: InputDecoration(labelText: 'Business Address'),
+          decoration: const InputDecoration(labelText: 'Business Address'),
         ),
         //User Name
         TextFormField(
-          decoration: InputDecoration(labelText: 'User Name'),
+          decoration: const InputDecoration(labelText: 'User Name'),
         ),
 
         //-----Passwords-----
         TextFormField(
-          decoration: InputDecoration(labelText: 'Business Name'),
+          decoration: const InputDecoration(labelText: 'Business Name'),
         ),
         //-----RetypePasswords-----
         TextFormField(
-          decoration: InputDecoration(labelText: 'Business Name'),
+          decoration: const InputDecoration(labelText: 'Business Name'),
         ),
       ],
     );
