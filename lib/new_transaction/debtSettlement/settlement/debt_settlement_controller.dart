@@ -110,3 +110,16 @@ class DebtSettlementController
     }
   }
 }
+      // print('''
+      //     debitAmount: ${stateData.debitAmount},
+      //     creditAmount: ${stateData.creditAmount},
+      //     partialPaymentAmount: 0,
+      //     particular: ${stateData.particular!},
+      //     mode: ${stateData.mode!},
+      //     date: ${stateData.date},
+      //     transactionCategoryId: ${stateData.category!.id!},
+      //     debitSideLedger: ${stateData.debitSideLedger != null ? stateData.debitSideLedger!.id : null},
+      //     creditSideLedger: ${stateData.creditSideLedger != null ? stateData.creditSideLedger!.id : null},
+      //     partyLedgerId:
+      //         ${stateData.partyLedger != null ? stateData.partyLedger!.id : null},
+      // ''');

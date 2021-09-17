@@ -24,7 +24,7 @@ class BarChartWidget extends HookConsumerWidget {
 
     useEffect(() {
       ref.watch(barChartControllerProvider.notifier).loadData();
-      generateBarchartGroupDataList(state.data!.value.barchartElement);
+      // generateBarchartGroupDataList(state.data!.value.barchartElement);
     }, []);
     return Material(
       child: Container(
