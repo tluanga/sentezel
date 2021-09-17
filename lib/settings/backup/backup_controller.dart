@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter_archive/flutter_archive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/backup/backup_model.dart';
@@ -103,13 +104,29 @@ class BackupController extends StateNotifier<Backup> {
       _businessProfileConverted.toString(),
     );
 
-    //#----------BACKUP-Transaction Category----
-    //--read
-    //--write
+    //______________Create Zip File___________________
+    bool isZipFileAvailable = false;
 
-    //----------BACKUP-Transaction----
-    //--read
-    //--write
+    final zipFile = File(SystemConfig.appBackupFile);
+    var zipFileStatus = await zipFile.exists();
+    if (zipFileStatus) isZipFileAvailable = true;
+
+    final appBackupDirectory = Directory(SystemConfig.appBackupDirectory);
+
+    try {
+      //----------------
+      final zipFile = File(SystemConfig.appBackupFile);
+      print('zipfile path ${zipFile.path}');
+      await ZipFile.createFromDirectory(
+          sourceDir: appBackupDirectory,
+          zipFile: zipFile,
+          recurseSubDirs: true);
+    } catch (e) {
+      print(e);
+    }
+    //Step 7-Remove all data in backup folder
+    await appBackupDirectory.delete(recursive: true);
+    await appBackupDirectory.create();
   }
 }
 
