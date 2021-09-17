@@ -6,11 +6,15 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/new_transaction/common/transaction_config.dart';
 import 'package:sentezel/new_transaction/data/transaction_model.dart' as trans;
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/business_profile/business_profile_config.db.dart';
+import 'package:sentezel/settings/business_profile/business_profile_repository.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_config.dart';
+import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 import 'package:sentezel/settings/restore/restore_model.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 import 'package:sentezel/setup/system_config.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -29,6 +33,11 @@ class RestoreController extends StateNotifier<Restore> {
         );
 
   restore() async {
+    //----------Clear the database-------------
+    await _read(ledgerMasterRepositoryProvider).clear();
+    await _read(transactionRepositoryProvider).reset();
+    await _read(transactionCategoryRepositoryProvider).clear();
+
     Database db = await DatabaseService.instance.db;
     final restoreDirectory = Directory(SystemConfig.appDirectory + 'restore');
     final zipFile = await File(state.backupFilePath)
@@ -126,9 +135,7 @@ class RestoreController extends StateNotifier<Restore> {
       final _businessProfileDataConverted = json.decode(_businessProfileData);
 
       //--Insert into database
-
-      db.insert(
-          BusinessProfileConfig.dbName, _businessProfileDataConverted.toJson());
+      _read(businessProfileRepository).add(_businessProfileDataConverted);
     } catch (e) {
       print(e);
     }

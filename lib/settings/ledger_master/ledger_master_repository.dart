@@ -140,4 +140,14 @@ class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
       throw Exception(e.toString());
     }
   }
+
+  Future<void> clear() async {
+    try {
+      Database db = await DatabaseService.instance.db;
+      //will delete all rows.
+      await db.delete(dbName);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
+    }
+  }
 }

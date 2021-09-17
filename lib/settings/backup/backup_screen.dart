@@ -31,7 +31,7 @@ class BackupScreen extends HookConsumerWidget {
             // ),
             GestureDetector(
               onTap: () async {
-                ref.read(backupControllerProvider.notifier).backup();
+                await ref.read(backupControllerProvider.notifier).backup();
 
                 await Share.shareFiles([SystemConfig.appBackupFile],
                     text: 'Sentezel Backup @ ${DateTime.now()}');

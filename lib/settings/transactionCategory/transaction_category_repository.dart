@@ -113,6 +113,12 @@ class TransactionCategoryRepository
     });
   }
 
+  Future<void> clear() async {
+    Database db = await DatabaseService.instance.db;
+    //----------delete all rows---------
+    await db.delete(dbName);
+  }
+
   @override
   void remove({required id}) {}
 
