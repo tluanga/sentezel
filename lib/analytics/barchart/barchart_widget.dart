@@ -9,9 +9,10 @@ class BarChartWidget extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    const Color incomeColor = Color(0xff53fdd7);
+    const Color expenseColor = Color(0xffff5182);
     useEffect(() {
       ref.read(barChartControllerProvider.notifier).loadData();
-      print('use Effect is called');
     }, []);
 
     return Material(
@@ -41,10 +42,73 @@ class BarChartWidget extends HookConsumerWidget {
                               const SizedBox(
                                 width: 38,
                               ),
-                              const Text(
-                                'Transactions',
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 22),
+                              Column(
+                                children: [
+                                  const Text(
+                                    'Transactions',
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 22),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          'Income',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14),
+                                        ),
+                                        const SizedBox(
+                                          width: 5,
+                                        ),
+                                        Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.01,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
+                                          decoration: const BoxDecoration(
+                                              color: incomeColor),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.2,
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text(
+                                          'Expense',
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14),
+                                        ),
+                                        Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.01,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.05,
+                                          decoration: const BoxDecoration(
+                                              color: expenseColor),
+                                        ),
+                                      ],
+                                    ),
+                                  )
+                                ],
                               ),
                               const SizedBox(
                                 width: 50,

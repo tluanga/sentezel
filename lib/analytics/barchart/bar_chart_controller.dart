@@ -44,12 +44,8 @@ class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
       } else if (DateHelper.compareTwoDateWithoutTime(
               _transactionList[i].date, _transactionList[i - 1].date) !=
           DateHelper.equal) {
-        print(
-            'Not same day ${_transactionList[i].date}-${_transactionList[i - 1].date}');
-
         _sameDay = false;
       } else {
-        print('Same Day ${_transactionList[i].date}');
         _sameDay = true;
       }
 
