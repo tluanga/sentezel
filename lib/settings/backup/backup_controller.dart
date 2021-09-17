@@ -1,14 +1,17 @@
 import 'dart:convert';
 import 'dart:io';
-
-import 'package:flutter_archive/flutter_archive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/books/ledger/ledger_detail/ledger_detail_controller.dart';
-import 'package:sentezel/common/helpers/dateHelper/financial_year_helper.dart';
+import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/backup/backup_model.dart';
 import 'package:sentezel/settings/backup/operation_status_enum.dart';
+import 'package:sentezel/settings/business_profile/business_profile_repository.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 import 'package:sentezel/setup/system_config.dart';
+
+final backupControllerProvider =
+    StateNotifierProvider<BackupController, Backup>(
+        (ref) => BackupController(ref.read));
 
 class BackupController extends StateNotifier<Backup> {
   final Reader _read;
@@ -27,12 +30,80 @@ class BackupController extends StateNotifier<Backup> {
     //Step 2- Recreate the backup directory
     dir.createSync(recursive: true);
 
-    //----------BACKUP-Ledger Master----
+    //_____________BACKUP-LEDGER MASTER_____________
     //--read
+    final _ledgerMaterList =
+        await _read(ledgerMasterRepositoryProvider).getList();
 
-    //--write
+    //------------setup-backup-path---------
+    final _ledgerMasterDataBackupPath =
+        SystemConfig.appBackupDirectory + '/db/ledgerMasterDataBackup.txt';
+    //--prepare backup File---
+    var _ledgerMasterConverted = '';
+    for (var element in _ledgerMaterList) {
+      var a = json.encode(element.toMap());
+      _ledgerMasterConverted += '/' + a;
+    }
+    //--write file
+    await File(_ledgerMasterDataBackupPath).writeAsString(
+      _ledgerMasterConverted.toString(),
+    );
 
-    //----------BACKUP-Transaction Category----
+    //_____________BACKUP-TRANSACTION _____________
+    //--read
+    final _transactionList =
+        await _read(transactionRepositoryProvider).getList();
+
+    //--setup-backup-path
+    final _transactionDataBackupPath =
+        SystemConfig.appBackupDirectory + '/db/transactionDataBackup.txt';
+    //--prepare backup File
+    var _transactionListConverted = '';
+    for (var element in _transactionList) {
+      var a = json.encode(element.toJson());
+      _transactionListConverted += '/' + a;
+    }
+    //--write file
+    await File(_transactionDataBackupPath).writeAsString(
+      _transactionListConverted.toString(),
+    );
+
+    //_____________BACKUP-TRANSACTION CATEGORY_____________
+    //--read
+    final _transactionCategoryList =
+        await _read(transactionCategoryRepositoryProvider).getList();
+
+    //--setup-backup-path
+    final _transactionCategoryDataBackupPath = SystemConfig.appBackupDirectory +
+        '/db/transactionCategoryDataBackup.txt';
+    //--prepare backup File---
+    var _transactionCategoryConverted = '';
+    for (var element in _transactionCategoryList) {
+      var a = json.encode(element.toJson());
+      _transactionCategoryConverted += '/' + a;
+    }
+    //--write file
+    await File(_transactionCategoryDataBackupPath).writeAsString(
+      _transactionCategoryConverted.toString(),
+    );
+
+    //_____________BACKUP-BUSINESS PROFILE_____________
+    //--read
+    final _businessProfile = await _read(businessProfileRepository).get();
+
+    //---setup-backup-path--
+    final _businessProfileDataBackupPath =
+        SystemConfig.appBackupDirectory + '/db/businessProfileDataBackup.txt';
+    //--prepare backup File---
+
+    var _businessProfileConverted = json.encode(_businessProfile.toJson());
+
+    //--write file
+    await File(_businessProfileDataBackupPath).writeAsString(
+      _businessProfileConverted.toString(),
+    );
+
+    //#----------BACKUP-Transaction Category----
     //--read
     //--write
 

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/settings/backup/backup_button.dart';
+import 'package:sentezel/settings/backup/backup_controller.dart';
 
 class BackupScreen extends HookConsumerWidget {
   const BackupScreen({Key? key}) : super(key: key);
@@ -26,7 +27,12 @@ class BackupScreen extends HookConsumerWidget {
             //     fontWeight: FontWeight.bold,
             //   ),
             // ),
-            const BackupButton(),
+            GestureDetector(
+              onTap: () {
+                ref.read(backupControllerProvider.notifier).backup();
+              },
+              child: const BackupButton(),
+            ),
             const SizedBox(
               height: 20,
             ),

@@ -2,6 +2,7 @@ import 'package:enum_to_string/enum_to_string.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/baseClasses/base_repository.dart';
 import 'package:sentezel/common/database/db_service.dart';
+import 'package:sentezel/common/helpers/dateHelper/financial_year_helper.dart';
 import 'package:sentezel/new_transaction/common/transaction_config.dart';
 import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
 import 'package:sentezel/new_transaction/data/transaction_model.dart' as trans;
@@ -71,7 +72,7 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     DateTime? endDate,
   }) async {
     //if no date is supplied it will return current date transactions
-    startDate ??= DateTime.now();
+    startDate ??= getStartDateOfAccountingYear();
     endDate ??= DateTime.now();
     DateTime paramStartDate =
         DateTime(startDate.year, startDate.month, startDate.day);
