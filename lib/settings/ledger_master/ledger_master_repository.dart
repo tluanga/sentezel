@@ -17,7 +17,7 @@ final ledgerMasterRepositoryProvider = Provider<LedgerMasterRepository>(
 class LedgerMasterRepository extends BaseRepository<LedgerMaster> {
   // ignore: unused_field
   final Reader _read;
-  final String dbName = LedgerMasterConfig.ledgerMasterTable;
+  final String dbName = LedgerMasterConfig.dbName;
 
   LedgerMasterRepository(this._read) : super();
 

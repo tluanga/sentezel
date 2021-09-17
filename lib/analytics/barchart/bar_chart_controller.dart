@@ -1,17 +1,21 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:intl/intl.dart';
+import 'package:sentezel/analytics/barchart/barchar_generate_left_titile_helper.dart';
+import 'package:sentezel/analytics/barchart/barchart_make_groupdata_helper.dart';
 import 'package:sentezel/analytics/barchart/models/barchart_element_model.dart';
 import 'package:sentezel/analytics/barchart/models/barchart_model.dart';
 
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
+import 'package:sentezel/common/helpers/dateHelper/date_helper.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
 final barChartControllerProvider =
-    StateNotifierProvider<BarChartController, AsyncValue<BarChart>>(
+    StateNotifierProvider<BarChartController, AsyncValue<BarChartState>>(
         (ref) => BarChartController(ref.read)..loadData());
 
-class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
+class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
   final Reader _read;
 
   BarChartController(this._read) : super(const AsyncLoading());
@@ -19,6 +23,8 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
   //----Loading an processing data---------
   loadData() async {
     List<BarChartElement> _barChartElementList = [];
+    List<String> _bottomTitles = [];
+
     // ----get all transaction----
     final _transactionList = await _read(transactionRepositoryProvider)
         .getList(startDate: DateTime.now().subtract(const Duration(days: 7)));
@@ -35,7 +41,9 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
       bool _sameDay = false;
       if (i == 0) {
         _sameDay = false;
-      } else if (_transactionList[i].date != _transactionList[i - 1].date) {
+      } else if (DateHelper.compareTwoDateWithoutTime(
+              _transactionList[i].date, _transactionList[i - 1].date) !=
+          DateHelper.equal) {
         _sameDay = false;
       } else {
         _sameDay = true;
@@ -57,6 +65,7 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
               total: _transactionList[i].debitAmount,
             ),
           );
+          _bottomTitles.add(DateFormat('dd').format(_transactionList[i].date));
         }
         // * check if the transaction is expense
       } else if (_transactionCategory.transactionType == TransactionType.lei ||
@@ -73,19 +82,27 @@ class BarChartController extends StateNotifier<AsyncValue<BarChart>> {
               total: _transactionList[i].creditAmount,
             ),
           );
+
+          _bottomTitles.add(DateFormat('dd').format(_transactionList[i].date));
         }
       }
     }
-    // for (var element in _barChartElementList) {
-    //   // ignore: avoid_print
-    //   print('--------------------------');
-    //   print(element.date);
-    //   print(element.expense);
-    //   print(element.income);
-    //   print(element.total);
-    //   print('#############################');
-    // }
-    state = AsyncValue.data(BarChart(
-        leftTitle: [], bottomTitle: [], barchartElement: _barChartElementList));
+    final _max = _barChartElementList.reduce((value, element) =>
+        (value.expense > value.income ? value.expense : value.income) >
+                (element.expense > element.income
+                    ? element.expense
+                    : element.income)
+            ? value
+            : element);
+    final _maxAmount = _max.expense > _max.income ? _max.expense : _max.income;
+
+    state = AsyncValue.data(
+      BarChartState(
+        leftTitle: generateLeftTitle(highestValue: _maxAmount),
+        bottomTitle: _bottomTitles,
+        barchartElementList: _barChartElementList,
+        barGroupList: generateBarchartGroupDataList(_barChartElementList),
+      ),
+    );
   }
 }

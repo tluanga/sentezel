@@ -10,40 +10,30 @@ List<BarChartGroupData> generateBarchartGroupDataList(
   //--------Find the the highes income in the list
   final highestIncome = barchartElementList.reduce(
       (value, element) => value.income > element.income ? value : element);
-  print(highestIncome);
 
   //----------- find the highest expense in the list
   final highestExpense = barchartElementList.reduce(
       (value, element) => value.expense > element.expense ? value : element);
-  print(highestExpense);
+
+  final _highestValue = highestIncome.income > highestExpense.expense
+      ? highestIncome.income
+      : highestExpense.expense;
 
   for (int i = 0; i < barchartElementList.length; i++) {
     //----scale the value--------
     final scaledIncomeValue = scaleYValue(
-        value: barchartElementList[i].income,
-        highestValue: highestIncome.income);
+      value: barchartElementList[i].income,
+      highestValue: _highestValue,
+    );
 
-    print('scaled income value--$scaledIncomeValue');
-    print('---------Expense---------------------');
-    print('Expense value --${barchartElementList[i].expense}');
-    print('Highest Expense value is ${highestExpense.expense}');
     final scaledExpenseValue = scaleYValue(
-        value: barchartElementList[i].expense,
-        highestValue: highestExpense.expense);
-    print('scaled expense value--$scaledExpenseValue');
-    print('--##############--');
+        value: barchartElementList[i].expense, highestValue: _highestValue);
 
     final data = makeGroupData(
         i, scaledIncomeValue.toDouble(), scaledExpenseValue.toDouble());
     _listBarChartGroupData.add(data);
   }
-  for (var element in _listBarChartGroupData) {
-    print('------------------------');
-    for (var element1 in element.barRods) {
-      print(element1.y);
-    }
-    print('-#####################----');
-  }
+
   return _listBarChartGroupData;
 }
 

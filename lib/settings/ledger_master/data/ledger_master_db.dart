@@ -8,7 +8,7 @@ void injectLedgerMaster(Database db) async {
   await db.execute(
     '''
       CREATE TABLE 
-        ${LedgerMasterConfig.ledgerMasterTable}(
+        ${LedgerMasterConfig.dbName}(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             description TEXT,           
@@ -28,7 +28,7 @@ void injectLedgerMaster(Database db) async {
       ).toMap();
 
       await db.insert(
-        LedgerMasterConfig.ledgerMasterTable,
+        LedgerMasterConfig.dbName,
         mapData,
       );
     },

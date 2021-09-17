@@ -1,12 +1,16 @@
+import 'package:fl_chart/fl_chart.dart';
 import 'package:sentezel/analytics/barchart/models/barchart_element_model.dart';
 
-class BarChart {
+class BarChartState {
   List<String> leftTitle;
   List<String> bottomTitle;
-  List<BarChartElement> barchartElement;
-  BarChart({
+  List<BarChartElement> barchartElementList;
+  List<BarChartGroupData> barGroupList;
+
+  BarChartState({
     required this.leftTitle,
     required this.bottomTitle,
-    required this.barchartElement,
+    required this.barchartElementList,
+    required this.barGroupList,
   });
 }
