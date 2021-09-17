@@ -8,7 +8,8 @@ void injectPin(Database db) async {
       CREATE TABLE 
         ${PinConfig.dbName}(
             id INTEGER PRIMARY KEY AUTOINCREMENT,            
-            pin INT,                     
+            pin INT,
+            passPhrase STRING,                     
              )''',
   );
 }
