@@ -19,7 +19,7 @@ import 'package:sentezel/setup/splash_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  initializeApp();
+  await initializeApp();
   runApp(const ProviderScope(child: MyApp()));
 }
 

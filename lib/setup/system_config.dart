@@ -33,28 +33,21 @@ class SystemConfig {
         }
       }
       try {
-        appDirectory = newPath + "/lytworkshift/";
+        appDirectory = newPath + "/sentezel/";
 
         //---------Document Directory---------
-        String documentPath = newPath + "/lytworkshift/" + 'document';
+        String documentPath = newPath + "/sentezel/" + 'document';
         directory = Directory(documentPath);
         await directory.create(recursive: true);
         appDocumentDirectory = directory.path;
 
         //---------User Profile Directory---------
-        String appUserProfilePath = newPath + "/lytworkshift/" + 'userProfile';
-        directory = Directory(appUserProfilePath);
-        await directory.create(recursive: true);
-        appUserProfileDirectory = directory.path;
-
-        //---------User Profile Directory---------
-        String appBackupPath = newPath + "/lytworkshift/" + 'backup';
+        String appBackupPath = newPath + "/sentezel/" + 'backup';
         directory = Directory(appBackupPath);
         await directory.create(recursive: true);
         appBackupDirectory = directory.path;
-        print('User Backup path-$appUserProfilePath');
 
-        appBackupFile = newPath + "/lytworkshift/" + 'lytWorkShiftBackup.zip';
+        appBackupFile = newPath + "/sentezel/" + 'lytWorkShiftBackup.zip';
 
         _setupCompleted = true;
       } catch (err) {
@@ -72,7 +65,6 @@ class SystemConfig {
     await setCustomDirectory();
     print('--------SETTING UP GLOBAL APP CONFIGURATION---------');
     print('appDocumentDirectory-$appDocumentDirectory');
-    print('appDbDirectory--$appUserProfileDirectory');
     print('appBackup-$appBackupDirectory');
   }
 }
