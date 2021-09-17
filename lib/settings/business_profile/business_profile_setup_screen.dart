@@ -83,7 +83,9 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                           ),
                         ),
                       ),
-                      Text('Submit Button'),
+                      GestureDetector(
+                        child: Text('Submit Button'),
+                      ),
                     ],
                   ),
                 ),

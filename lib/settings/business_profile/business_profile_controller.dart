@@ -36,7 +36,7 @@ class BusinessProfileController
     );
   }
 
-  set(BusinessProfile payload) async {
-    _read(businessProfileRepository).add(payload);
+  set() async {
+    _read(businessProfileRepository).add(state.data!.value);
   }
 }
