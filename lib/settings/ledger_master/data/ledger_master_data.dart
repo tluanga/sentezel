@@ -299,8 +299,8 @@ List<LedgerMaster> ledgerMasterData = [
   //35-Charity/Donation
   LedgerMaster.withId(
     id: LedgerMasterIndex.charityDonation,
-    name: 'Charity/Donation',
-    description: 'Transactions made for Charity and/or Donations',
+    name: 'CharityAndDonation',
+    description: 'Transactions made for Charity and or Donations',
     type: LedgerMasterType.indirect,
     status: Status.active,
   ),
@@ -379,7 +379,7 @@ List<LedgerMaster> ledgerMasterData = [
   //45-Loss by Fire/Theft
   LedgerMaster.withId(
     id: LedgerMasterIndex.lossByFireOrTheft,
-    name: 'Loss by Fire/Theft',
+    name: 'Loss by FireOrTheft',
     description: '',
     type: LedgerMasterType.indirect,
     status: Status.active,
@@ -387,7 +387,7 @@ List<LedgerMaster> ledgerMasterData = [
   //46-Repair/Renewal/Maintenance
   LedgerMaster.withId(
     id: LedgerMasterIndex.repairRenewalMaintenance,
-    name: 'Repair/Renewal/Maintenance',
+    name: 'RepairOrRenewalOrMaintenance',
     description: 'Account for repair, renewal and maintenance',
     type: LedgerMasterType.indirect,
     status: Status.active,
