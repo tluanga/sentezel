@@ -13,7 +13,7 @@ final journalControllerProvider =
 
 class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
   final Reader _read;
-  DateTime startDate = DateTime.now();
+  DateTime startDate = DateTime.now().subtract(const Duration(days: 30));
   DateTime endDate = DateTime.now();
 
   //-----------Get Transcation List-----
