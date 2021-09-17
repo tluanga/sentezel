@@ -9,4 +9,5 @@ class RouteConstant {
   static const String controlCenter = '/controlCenter';
   static const String settingsLedgerMaster = '/settings/ledgerMaster';
   static const String businessProfileSetup = 'setup/businessProfile';
+  static const String pinSetup = '/setup/pin';
 }

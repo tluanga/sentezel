@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/settings/business_profile/business_profile_controller.dart';
 
 import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
@@ -84,7 +85,14 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                         ),
                       ),
                       GestureDetector(
-                        child: Text('Submit Button'),
+                        onTap: () {
+                          ref
+                              .read(businessProfileControllerProvider.notifier)
+                              .set();
+                          Navigator.of(context)
+                              .pushReplacementNamed(RouteConstant.pinSetup);
+                        },
+                        child: const Text('Submit Button'),
                       ),
                     ],
                   ),
