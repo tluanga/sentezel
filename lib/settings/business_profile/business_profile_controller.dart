@@ -4,8 +4,8 @@ import 'package:sentezel/settings/business_profile/business_profile_repository.d
 import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
 
 final businessProfileControllerProvider = StateNotifierProvider<
-    BusinessProfileController,
-    AsyncValue<BusinessProfile>>((ref) => BusinessProfileController(ref.read));
+        BusinessProfileController, AsyncValue<BusinessProfile>>(
+    (ref) => BusinessProfileController(ref.read)..loadData());
 
 class BusinessProfileController
     extends StateNotifier<AsyncValue<BusinessProfile>> {
