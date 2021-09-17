@@ -26,9 +26,8 @@ class SplashScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.read(appControllerProvider);
-
     void navigationPage() async {
+      final state = ref.watch(appControllerProvider);
       if (state.businessProfileIsSetup) {
         Navigator.of(context).pushReplacementNamed(RouteConstant.home);
       } else {
