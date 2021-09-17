@@ -3,6 +3,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/settings/backup/backup_button.dart';
 import 'package:sentezel/settings/backup/backup_controller.dart';
+import 'package:sentezel/setup/system_config.dart';
+import 'package:share/share.dart';
 
 class BackupScreen extends HookConsumerWidget {
   const BackupScreen({Key? key}) : super(key: key);
@@ -28,8 +30,11 @@ class BackupScreen extends HookConsumerWidget {
             //   ),
             // ),
             GestureDetector(
-              onTap: () {
+              onTap: () async {
                 ref.read(backupControllerProvider.notifier).backup();
+
+                await Share.shareFiles([SystemConfig.appBackupFile],
+                    text: 'Sentezel Backup @ ${DateTime.now()}');
               },
               child: const BackupButton(),
             ),
