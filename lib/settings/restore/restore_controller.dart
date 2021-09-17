@@ -14,6 +14,7 @@ import 'package:sentezel/settings/ledger_master/ledger_master_config.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 import 'package:sentezel/settings/restore/restore_model.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_config.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 import 'package:sentezel/setup/system_config.dart';
 import 'package:sqflite/sqflite.dart';
@@ -128,7 +129,7 @@ class RestoreController extends StateNotifier<Restore> {
       }
       //--Insert into database
       for (var element in _transactionCategoryDataList) {
-        db.insert(TransactionConfig.dbName, element.toJson());
+        db.insert(TransactionCategoryConfig.dbName, element.toJson());
       }
       print('Restore of Transaction Category Completed');
 
