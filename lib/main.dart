@@ -10,6 +10,7 @@ import 'package:sentezel/common/ui/screens/control_center_screen.dart';
 import 'package:sentezel/home/ui/home_screen.dart';
 import 'package:sentezel/new_transaction/new_transaction_Center_screen.dart';
 import 'package:sentezel/new_transaction/purchase/purchase_of_asset/purchase_of_asset_screen.dart';
+import 'package:sentezel/settings/business_profile/business_profile_setup.dart';
 
 import 'package:sentezel/setup/intialize_app.dart';
 
@@ -43,6 +44,8 @@ class MyApp extends HookConsumerWidget {
             const NewTranscationCenterScreen(),
         RouteConstant.purchaseOfAsset: (context) =>
             const PurchaseOfAssetScreen(),
+        RouteConstant.businessProfileSetup: (context) =>
+            const BusinessProfileSetupScreen(),
       },
       home: const SplashScreen(),
     );

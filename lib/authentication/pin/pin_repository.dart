@@ -19,6 +19,7 @@ class PinRepository {
     Database db = await DatabaseService.instance.db;
 
     final result = await db.query(dbName);
+
     return PIN.fromMap(result.first);
   }
 

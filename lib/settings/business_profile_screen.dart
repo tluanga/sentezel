@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-import 'package:sentezel/settings/business_profile/business_type_enum.dart';
+import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
 
 class BusinessProfileSetup extends HookConsumerWidget {
   const BusinessProfileSetup({Key? key}) : super(key: key);
@@ -43,9 +42,9 @@ class BusinessProfileSetup extends HookConsumerWidget {
                     ListTile(
                       title: const Text('Direct'),
                       trailing: Radio(
-                        value: BusinessType.midangSiamZuar,
+                        value: BusinessType.miSiamsaZuar,
                         onChanged: (value) {
-                          _businessType.value = BusinessType.midangSiamZuar;
+                          _businessType.value = BusinessType.miSiamsaZuar;
                         },
                         groupValue: _businessType.value,
                       ),

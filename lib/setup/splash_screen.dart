@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
+import 'package:sentezel/setup/app_controller.dart';
 
 class SplashScreen extends HookConsumerWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -25,8 +26,15 @@ class SplashScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.read(appControllerProvider);
+
     void navigationPage() async {
-      Navigator.of(context).pushReplacementNamed(RouteConstant.home);
+      if (state.businessProfileIsSetup) {
+        Navigator.of(context).pushReplacementNamed(RouteConstant.home);
+      } else {
+        Navigator.of(context)
+            .pushReplacementNamed(RouteConstant.businessProfileSetup);
+      }
     }
 
     startTime() async {

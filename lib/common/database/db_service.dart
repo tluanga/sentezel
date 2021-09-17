@@ -1,11 +1,11 @@
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
+import 'package:sentezel/authentication/pin/pin_db.dart';
 import 'package:sentezel/new_transaction/data/transaction_db.dart';
 import 'package:sentezel/settings/business_profile/data/business_profile_db.dart';
 import 'package:sentezel/settings/ledger_master/data/Ledger_master_db.dart';
 
-import 'package:sentezel/settings/party/data/party_db.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_db.dart';
 
 import 'package:sqflite/sqflite.dart';
@@ -47,23 +47,11 @@ class DatabaseService {
   }
 
   void _createDb(Database db, int version) async {
-    // Table 1- PROFILE TABLE
-    await db.execute(
-      '''
-      CREATE TABLE 
-        $userTable(
-            $userId INTEGER PRIMARY KEY AUTOINCREMENT,
-            $userFullName TEXT,
-            $userEmail TEXT,           
-            $userPin INT
-             )''',
-    );
-
-    // Table 3- Ledger Master Table
     injectBusinessProfile(db);
+    injectPin(db);
     injectLedgerMaster(db);
     injectTransactionCategory(db);
-    PartyDb.execute(db);
+
     TransactionDb.execute(db);
   }
 }
