@@ -41,7 +41,7 @@ class SplashScreen extends HookConsumerWidget {
     }
 
     startTime() async {
-      var _duration = const Duration(seconds: 2);
+      var _duration = const Duration(seconds: 5);
       return Timer(_duration, navigationPage);
     }
 
@@ -59,51 +59,51 @@ class SplashScreen extends HookConsumerWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const Spacer(),
-            // widgetTitle(),
-            // const Spacer(),
-            // widgetSpinkit(),
+            widgetTitle(),
+            const Spacer(),
+            widgetSpinkit(),
           ],
         ),
       ),
     );
   }
 
-  // widgetTitle() => Container(
-  //       alignment: Alignment.center,
-  //       width: double.infinity,
-  //       height: 200,
-  //       child: Shimmer.fromColors(
-  //           child: Center(
-  //             child: DefaultTextStyle(
-  //               style: const TextStyle(
-  //                   fontSize: 45.0,
-  //                   fontWeight: FontWeight.bold,
-  //                   color: Colors.black87),
-  //               child: AnimatedTextKit(
-  //                 totalRepeatCount: 1,
-  //                 pause: const Duration(microseconds: 0),
-  //                 animatedTexts: [
-  //                   WavyAnimatedText(
-  //                     'Sentezel',
-  //                     textStyle: GoogleFonts.aBeeZee(
-  //                         fontSize: 45, fontWeight: FontWeight.bold),
-  //                     speed: const Duration(milliseconds: 250),
-  //                   ),
-  //                 ],
-  //               ),
-  //             ),
-  //           ),
-  //           baseColor: const Color(
-  //               0xff0d47a1), //Color( 0xff1565c0), // Color(0xff0d47a1), // Color(0xff193566), //Color(0xff263238),
-  //           highlightColor: const Color(0xffd90368)),
-  //     );
-  // widgetSpinkit() => const Padding(
-  //       padding: EdgeInsets.only(bottom: 8.0),
-  //       child: SpinKitThreeBounce(
-  //         size: 20,
-  //         color: Color(0xff0d47a1),
-  //       ),
-  //     );
+  widgetTitle() => Container(
+        alignment: Alignment.center,
+        width: double.infinity,
+        height: 200,
+        child: Shimmer.fromColors(
+            child: Center(
+              child: DefaultTextStyle(
+                style: const TextStyle(
+                    fontSize: 45.0,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black87),
+                child: AnimatedTextKit(
+                  totalRepeatCount: 1,
+                  pause: const Duration(microseconds: 0),
+                  animatedTexts: [
+                    WavyAnimatedText(
+                      'Sentezel',
+                      textStyle: GoogleFonts.aBeeZee(
+                          fontSize: 45, fontWeight: FontWeight.bold),
+                      speed: const Duration(milliseconds: 250),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            baseColor: const Color(
+                0xff0d47a1), //Color( 0xff1565c0), // Color(0xff0d47a1), // Color(0xff193566), //Color(0xff263238),
+            highlightColor: const Color(0xffd90368)),
+      );
+  widgetSpinkit() => const Padding(
+        padding: EdgeInsets.only(bottom: 8.0),
+        child: SpinKitThreeBounce(
+          size: 20,
+          color: Color(0xff0d47a1),
+        ),
+      );
 }
 
 
