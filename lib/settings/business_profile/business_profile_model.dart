@@ -41,4 +41,18 @@ class BusinessProfile {
 
   factory BusinessProfile.fromJson(String source) =>
       BusinessProfile.fromMap(json.decode(source));
+
+  BusinessProfile copyWith({
+    int? id,
+    String? name,
+    String? description,
+    BusinessType? type,
+  }) {
+    return BusinessProfile(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      description: description ?? this.description,
+      type: type ?? this.type,
+    );
+  }
 }

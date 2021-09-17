@@ -11,10 +11,9 @@ void injectBusinessProfile(Database db) async {
         ${BusinessProfileConfig.dbName}(
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
-            address TEXT, 
-            contactNo INT,          
-            type TEXT,
-            status TEXT
+            description TEXT, 
+            type TEXT
+            
              )''',
   );
 
