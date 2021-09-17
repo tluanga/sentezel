@@ -228,7 +228,7 @@ List<TransactionCategory> transactionTypeData = [
   TransactionCategory(
     id: TransactionCategoryIndex.rentReceived,
     name: 'Rent recieved',
-    description: 'Kan in/dawr luahman atanga sum dawn',
+    description: 'Kan in leh dawr luahman atanga sum dawn',
     transactionType: TransactionType.lakluh,
     debitSideLedger: LedgerMasterIndex.cash,
     creditSideLedger: LedgerMasterIndex.rentReceived,

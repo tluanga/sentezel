@@ -86,26 +86,29 @@ class RestoreController extends StateNotifier<Restore> {
           print(e);
         }
       }
-
+      print('Restore of Ledger Master Completed');
       //____________RESTORE TRANSACTION___________________
       final _transactionData = await File(SystemConfig.appDirectory +
               '/restore/db/transactionDataBackup.txt')
           .readAsString();
+      if (_transactionData.isNotEmpty) {
+        List<String> _transactionDataStringType = _transactionData.split('/');
+        _ledgerMasterDataStringType.removeAt(0);
+        List<trans.Transaction> _transactionDataList = [];
+        for (var element in _transactionDataStringType) {
+          _transactionDataList.add(
+            trans.Transaction.fromJson(
+              json.decode(element),
+            ),
+          );
+        }
+        //--Insert into database
+        for (var element in _transactionDataList) {
+          db.insert(TransactionConfig.dbName, element.toJson());
+        }
+      }
 
-      List<String> _transactionDataStringType = _transactionData.split('/');
-      _ledgerMasterDataStringType.removeAt(0);
-      List<trans.Transaction> _transactionDataList = [];
-      for (var element in _transactionDataStringType) {
-        _transactionDataList.add(
-          trans.Transaction.fromJson(
-            json.decode(element),
-          ),
-        );
-      }
-      //--Insert into database
-      for (var element in _transactionDataList) {
-        db.insert(TransactionConfig.dbName, element.toJson());
-      }
+      print('Restore of Transaction Completed');
 
       //____________ TRANSACTION CATEGORY___________________
       final _transactionCategoryData = await File(SystemConfig.appDirectory +
@@ -127,6 +130,7 @@ class RestoreController extends StateNotifier<Restore> {
       for (var element in _transactionCategoryDataList) {
         db.insert(TransactionConfig.dbName, element.toJson());
       }
+      print('Restore of Transaction Category Completed');
 
       //____________ BUSINESS PROFILE___________________
       final _businessProfileData = await File(SystemConfig.appDirectory +
