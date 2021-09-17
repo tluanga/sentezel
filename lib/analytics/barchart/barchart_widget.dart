@@ -2,123 +2,112 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/analytics/barChart/barchart_scale_yvalue_helper.dart';
 import 'package:sentezel/analytics/barchart/bar_chart_controller.dart';
-import 'package:sentezel/analytics/barchart/barchar_generate_left_titile_helper.dart';
-import 'package:sentezel/analytics/barchart/barchart_make_groupdata_helper.dart';
 
 class BarChartWidget extends HookConsumerWidget {
   const BarChartWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    const Color leftBarColor = Color(0xff53fdd7);
-    const Color rightBarColor = Color(0xffff5182);
-    const double width = 7;
-
-    late List<BarChartGroupData> rawBarGroups;
-    late List<BarChartGroupData> showingBarGroups;
-
-    int touchedGroupIndex = -1;
-    final state = ref.watch(barChartControllerProvider);
-
     useEffect(() {
       ref.read(barChartControllerProvider.notifier).loadData();
+      print('use Effect is called');
     }, []);
 
     return Material(
       child: Container(
-        child: state.when(
-          data: (data) {
-            return AspectRatio(
-              aspectRatio: 1,
-              child: Card(
-                elevation: 0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4)),
-                color: const Color(0xff2c4260),
-                child: Padding(
-                  padding: const EdgeInsets.all(16),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
+        child: ref.watch(barChartControllerProvider).when(
+              data: (data) {
+                return AspectRatio(
+                  aspectRatio: 1,
+                  child: Card(
+                    elevation: 0,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(4)),
+                    color: const Color(0xff2c4260),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
-                          makeTransactionsIcon(),
-                          const SizedBox(
-                            width: 38,
-                          ),
-                          const Text(
-                            'Transactions',
-                            style: TextStyle(color: Colors.white, fontSize: 22),
-                          ),
-                          const SizedBox(
-                            width: 50,
-                          ),
                           Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.arrow_left,
-                                  color: Colors.white,
-                                  size: 50,
-                                ),
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: <Widget>[
+                              makeTransactionsIcon(),
+                              const SizedBox(
+                                width: 38,
                               ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: const Icon(
-                                  Icons.arrow_right,
-                                  color: Colors.white,
-                                  size: 50,
-                                ),
+                              const Text(
+                                'Transactions',
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 22),
+                              ),
+                              const SizedBox(
+                                width: 50,
+                              ),
+                              Row(
+                                children: [
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: const Icon(
+                                      Icons.arrow_left,
+                                      color: Colors.white,
+                                      size: 50,
+                                    ),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: const Icon(
+                                      Icons.arrow_right,
+                                      color: Colors.white,
+                                      size: 50,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 38,
-                      ),
-                      Expanded(
-                        child: BarChart(
-                          BarChartData(
-                            maxY: 5,
-                            titlesData: FlTitlesData(
-                              show: true,
-                              rightTitles: SideTitles(showTitles: false),
-                              topTitles: SideTitles(showTitles: false),
-                              bottomTitles: _bottomTitles(data.bottomTitle),
-                              leftTitles:
-                                  _leftTitles(leftTitles: data.leftTitle),
-                            ),
-                            barGroups: data.barGroupList,
-                            gridData: FlGridData(show: false),
-                            borderData: FlBorderData(
-                              show: false,
+                          const SizedBox(
+                            height: 38,
+                          ),
+                          Expanded(
+                            child: BarChart(
+                              BarChartData(
+                                maxY: 5,
+                                titlesData: FlTitlesData(
+                                  show: true,
+                                  rightTitles: SideTitles(showTitles: false),
+                                  topTitles: SideTitles(showTitles: false),
+                                  bottomTitles: _bottomTitles(data.bottomTitle),
+                                  leftTitles:
+                                      _leftTitles(leftTitles: data.leftTitle),
+                                ),
+                                barGroups: data.barGroupList,
+                                gridData: FlGridData(show: false),
+                                borderData: FlBorderData(
+                                  show: false,
+                                ),
+                              ),
                             ),
                           ),
-                        ),
+                          const SizedBox(
+                            height: 12,
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                    ],
+                    ),
                   ),
-                ),
-              ),
-            );
-          },
-          loading: () {
-            return const CircularProgressIndicator();
-          },
-          error: (error, stack) {},
-        ),
+                );
+              },
+              loading: () {
+                return const CircularProgressIndicator();
+              },
+              error: (error, stack) {},
+            ),
       ),
     );
   }

@@ -6,6 +6,7 @@ import 'package:sentezel/analytics/barchart/models/barchart_element_model.dart';
 import 'package:sentezel/analytics/barchart/models/barchart_model.dart';
 
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
+import 'package:sentezel/common/helpers/dateHelper/date_helper.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
@@ -40,9 +41,15 @@ class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
       bool _sameDay = false;
       if (i == 0) {
         _sameDay = false;
-      } else if (_transactionList[i].date != _transactionList[i - 1].date) {
+      } else if (DateHelper.compareTwoDateWithoutTime(
+              _transactionList[i].date, _transactionList[i - 1].date) !=
+          DateHelper.equal) {
+        print(
+            'Not same day ${_transactionList[i].date}-${_transactionList[i - 1].date}');
+
         _sameDay = false;
       } else {
+        print('Same Day ${_transactionList[i].date}');
         _sameDay = true;
       }
 
@@ -62,8 +69,7 @@ class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
               total: _transactionList[i].debitAmount,
             ),
           );
-          _bottomTitles
-              .add(DateFormat('dd-MM-yy').format(_transactionList[i].date));
+          _bottomTitles.add(DateFormat('dd').format(_transactionList[i].date));
         }
         // * check if the transaction is expense
       } else if (_transactionCategory.transactionType == TransactionType.lei ||
@@ -81,8 +87,7 @@ class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
             ),
           );
 
-          _bottomTitles
-              .add(DateFormat('dd-MM-yy').format(_transactionList[i].date));
+          _bottomTitles.add(DateFormat('dd').format(_transactionList[i].date));
         }
       }
     }
