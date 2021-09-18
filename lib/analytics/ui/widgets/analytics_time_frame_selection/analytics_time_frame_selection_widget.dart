@@ -6,7 +6,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/analytics/ui/analytics_period_enum.dart';
-import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/day_selection_widget.dart';
+import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/day_selection/day_selection_widget.dart';
 import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/month_selection_widget.dart';
 import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/time_frame_selection_dialog.dart';
 import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/week_selection_widget.dart';
@@ -123,8 +123,14 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
             if (mode.value == AnalyticsPeriod.daily)
               daySelection(
                 context: context,
-                onStartDateSelect: (date) => startDate.value = date,
-                onEndDateSelect: (date) => endDate.value = date,
+                onStartDateSelect: (date) {
+                  startDate.value = date;
+                  onTimeSelect(startDate.value, endDate.value);
+                },
+                onEndDateSelect: (date) {
+                  endDate.value = date;
+                  onTimeSelect(startDate.value, endDate.value);
+                },
                 startDate: startDate,
                 endDate: endDate,
               ),

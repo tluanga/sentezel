@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/day_selection/day_selection_model.dart';
 
-daySelection({
+DaySelected daySelection({
   required BuildContext context,
   required var startDate,
   required var endDate,
