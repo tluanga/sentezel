@@ -4,25 +4,21 @@ class PIN {
   int? id;
   int pin;
   String passPhrase;
-  String? error;
   PIN({
     this.id,
     required this.pin,
     required this.passPhrase,
-    this.error,
   });
 
   PIN copyWith({
     int? id,
     int? pin,
     String? passPhrase,
-    String? error,
   }) {
     return PIN(
       id: id ?? this.id,
       pin: pin ?? this.pin,
       passPhrase: passPhrase ?? this.passPhrase,
-      error: error ?? this.error,
     );
   }
 
@@ -31,7 +27,6 @@ class PIN {
       'id': id,
       'pin': pin,
       'passPhrase': passPhrase,
-      'error': error,
     };
   }
 
@@ -40,7 +35,6 @@ class PIN {
       id: map['id'],
       pin: map['pin'],
       passPhrase: map['passPhrase'],
-      error: map['error'],
     );
   }
 
@@ -49,9 +43,7 @@ class PIN {
   factory PIN.fromJson(String source) => PIN.fromMap(json.decode(source));
 
   @override
-  String toString() {
-    return 'PIN(id: $id, pin: $pin, passPhrase: $passPhrase, error: $error)';
-  }
+  String toString() => 'PIN(id: $id, pin: $pin, passPhrase: $passPhrase)';
 
   @override
   bool operator ==(Object other) {
@@ -60,12 +52,9 @@ class PIN {
     return other is PIN &&
         other.id == id &&
         other.pin == pin &&
-        other.passPhrase == passPhrase &&
-        other.error == error;
+        other.passPhrase == passPhrase;
   }
 
   @override
-  int get hashCode {
-    return id.hashCode ^ pin.hashCode ^ passPhrase.hashCode ^ error.hashCode;
-  }
+  int get hashCode => id.hashCode ^ pin.hashCode ^ passPhrase.hashCode;
 }
