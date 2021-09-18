@@ -60,20 +60,12 @@ class BalanceSheetReportScreen extends HookConsumerWidget {
                                 Text(data[0].netProfit.toString())
                               ],
                             ),
-                            Expanded(
-                                child: ListView.builder(
-                                    itemCount: data[0].asset.length,
-                                    itemBuilder: (context, index) {
-                                      return Row(
-                                        children: [
-                                          Text(data[0].asset[index].name),
-                                          Text(data[0]
-                                              .asset[index]
-                                              .amount
-                                              .toString())
-                                        ],
-                                      );
-                                    }))
+                            Row(
+                              children: [
+                                const Text('Less: Net Loss'),
+                                Text(data[0].netLoss.toString())
+                              ],
+                            ),
                           ],
                         );
                       }, loading: () {
@@ -104,7 +96,21 @@ class BalanceSheetReportScreen extends HookConsumerWidget {
                                 const Text('Debtors'),
                                 Text(data[0].debtors.toString())
                               ],
-                            )
+                            ),
+                            Expanded(
+                                child: ListView.builder(
+                                    itemCount: data[0].asset.length,
+                                    itemBuilder: (context, index) {
+                                      return Row(
+                                        children: [
+                                          Text(data[0].asset[index].name),
+                                          Text(data[0]
+                                              .asset[index]
+                                              .amount
+                                              .toString())
+                                        ],
+                                      );
+                                    }))
                           ],
                         );
                       }, loading: () {

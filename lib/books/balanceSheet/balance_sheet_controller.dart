@@ -76,6 +76,8 @@ class BalanceSheetController
           // -------------Cash & Bank-------------
           // Direct accounts
         } else if (_ledgerMasterList[i].type == LedgerMasterType.direct) {
+          print(
+              'id ${_ledgerMasterList[i].id} name ${_ledgerMasterList[i].name}');
           if (_ledgerMasterList[i].id != LedgerMasterIndex.cash ||
               _ledgerMasterList[i].id != LedgerMasterIndex.bank ||
               _ledgerMasterList[i].id != LedgerMasterIndex.capital) {
@@ -147,7 +149,8 @@ class BalanceSheetController
             }
 
             //  -----exceptional case for cash and bank account-----
-          } else if (_ledgerMasterList[i].id == LedgerMasterIndex.cash ||
+          }
+          if (_ledgerMasterList[i].id == LedgerMasterIndex.cash ||
               _ledgerMasterList[i].id == LedgerMasterIndex.bank) {
             int _totalCredit = 0;
             int _totalDebit = 0;
