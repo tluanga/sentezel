@@ -99,6 +99,8 @@ class ProfitAndLossController
           // filter cash and bank account
           if (_directLedgerMasterDataList[i].id != LedgerMasterIndex.cash ||
               _directLedgerMasterDataList[i].id != LedgerMasterIndex.bank) {
+            print(
+                'id ${_directLedgerMasterDataList[i].id} ledgerName ${_directLedgerMasterDataList[i].name}');
             _directExpenseList.add(_directExpense);
           }
         }
