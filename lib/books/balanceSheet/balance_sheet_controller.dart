@@ -78,8 +78,8 @@ class BalanceSheetController
         } else if (_ledgerMasterList[i].type == LedgerMasterType.direct) {
           print(
               'id ${_ledgerMasterList[i].id} name ${_ledgerMasterList[i].name}');
-          if (_ledgerMasterList[i].id != LedgerMasterIndex.cash ||
-              _ledgerMasterList[i].id != LedgerMasterIndex.bank ||
+          if (_ledgerMasterList[i].id != LedgerMasterIndex.cash &&
+              _ledgerMasterList[i].id != LedgerMasterIndex.bank &&
               _ledgerMasterList[i].id != LedgerMasterIndex.capital) {
             int _incomeOrExpense =
                 0; // variable for determining income or expense, 0 for income, 1 for expense,
@@ -275,14 +275,14 @@ class BalanceSheetController
           // income a nih chuan incomelist ah a add ang
           if (_incomeOrExpense == 0) {
             // filter cash and bank account
-            if (_ledgerMasterList[i].id != LedgerMasterIndex.cash ||
+            if (_ledgerMasterList[i].id != LedgerMasterIndex.cash &&
                 _ledgerMasterList[i].id != LedgerMasterIndex.bank) {
               _indirectIncomeList.add(_indirectIncome);
             }
             //expense a nih chuan expenselist ah a add ang
           } else if (_incomeOrExpense == 1) {
             // filter cash and bank account
-            if (_ledgerMasterList[i].id != LedgerMasterIndex.cash ||
+            if (_ledgerMasterList[i].id != LedgerMasterIndex.cash &&
                 _ledgerMasterList[i].id != LedgerMasterIndex.bank) {
               _indirectExpenseList.add(_indirectExpense);
             }
