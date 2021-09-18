@@ -90,14 +90,14 @@ class ProfitAndLossController
         // income a nih chuan incomelist ah a add ang
         if (_incomeOrExpense == 0) {
           // filter cash and bank account
-          if (_directLedgerMasterDataList[i].id != LedgerMasterIndex.cash ||
+          if (_directLedgerMasterDataList[i].id != LedgerMasterIndex.cash &&
               _directLedgerMasterDataList[i].id != LedgerMasterIndex.bank) {
             _directIncomeList.add(_directIncome);
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
           // filter cash and bank account
-          if (_directLedgerMasterDataList[i].id != LedgerMasterIndex.cash ||
+          if (_directLedgerMasterDataList[i].id != LedgerMasterIndex.cash &&
               _directLedgerMasterDataList[i].id != LedgerMasterIndex.bank) {
             print(
                 'id ${_directLedgerMasterDataList[i].id} ledgerName ${_directLedgerMasterDataList[i].name}');

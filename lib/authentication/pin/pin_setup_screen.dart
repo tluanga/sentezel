@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/authentication/pin/custom_button.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+
+// --Note for rca-pin_code_fields 7.3.0   heihi hmanga mai ang aw..
 
 class PinSetupScreen extends HookConsumerWidget {
   const PinSetupScreen({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class PinSetupScreen extends HookConsumerWidget {
               decoration: const InputDecoration(
                 labelText: 'Pin',
               ),
+              onChanged: (value) {},
             ),
             TextFormField(
               decoration: const InputDecoration(

@@ -63,6 +63,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   share: ^2.0.4
   file_picker: ^4.0.3
+  pin_code_fields: ^7.3.0
 
 dev_dependencies:
   flutter_test:
