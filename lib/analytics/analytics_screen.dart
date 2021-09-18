@@ -49,9 +49,9 @@ class AnalyticsScreen extends HookConsumerWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        ref
-                            .read(analyticsControllerProvider.notifier)
-                            .changeChartMode(ChartMode.barChart);
+                        // ref
+                        //     .read(analyticsControllerProvider.notifier)
+                        //     .changeChartMode(ChartMode.barChart);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.30,
@@ -81,9 +81,9 @@ class AnalyticsScreen extends HookConsumerWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        ref
-                            .read(analyticsControllerProvider.notifier)
-                            .changeChartMode(ChartMode.pieChart);
+                        // ref
+                        //     .read(analyticsControllerProvider.notifier)
+                        //     .changeChartMode(ChartMode.pieChart);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.30,

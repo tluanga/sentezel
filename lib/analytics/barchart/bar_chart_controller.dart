@@ -26,7 +26,7 @@ class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
     List<BarChartElement> _barChartElementList = [];
     List<String> _bottomTitles = [];
 
-    print('start date $startDate endDate $endDate');
+    print('Inside barchart controller start date $startDate endDate $endDate');
     // ----get all transaction----
     final _transactionList = await _read(transactionRepositoryProvider)
         .getList(startDate: startDate, endDate: endDate);

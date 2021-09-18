@@ -14,10 +14,11 @@ class BarChartWidget extends HookConsumerWidget {
     const Color expenseColor = Color(0xffff5182);
     final analyticsState = ref.watch(analyticsControllerProvider);
     useEffect(() {
+      final analyticsState = ref.watch(analyticsControllerProvider);
       ref
           .read(barChartControllerProvider.notifier)
           .loadData(analyticsState.startDate, analyticsState.endDate);
-    }, []);
+    }, [analyticsState]);
     print(analyticsState);
     return Material(
       child: Container(
