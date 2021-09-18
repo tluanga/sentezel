@@ -14,7 +14,10 @@ import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/ele
 import 'package:sentezel/common/helpers/dateHelper/date_helper.dart';
 
 class AnalyticsTimeFrameSelection extends HookConsumerWidget {
-  const AnalyticsTimeFrameSelection({Key? key}) : super(key: key);
+  final Function(DateTime, DateTime) onTimeSelect;
+  const AnalyticsTimeFrameSelection(
+      {Key? key, required final this.onTimeSelect})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

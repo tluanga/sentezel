@@ -30,7 +30,9 @@ class JournalReportScreen extends HookConsumerWidget {
                 onClose: () {
                   Navigator.pop(context);
                 }),
-            const AnalyticsTimeFrameSelection(),
+            AnalyticsTimeFrameSelection(
+              onTimeSelect: (startDate, endDate) {},
+            ),
             data.isNotEmpty ? _list(context, data) : Container(),
           ],
         )),

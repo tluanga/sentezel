@@ -1,5 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:sentezel/analytics/analytics_controller.dart';
 import 'package:sentezel/analytics/barchart/barchar_generate_left_titile_helper.dart';
 import 'package:sentezel/analytics/barchart/barchart_make_groupdata_helper.dart';
 import 'package:sentezel/analytics/barchart/models/barchart_element_model.dart';
