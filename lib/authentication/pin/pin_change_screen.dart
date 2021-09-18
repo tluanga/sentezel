@@ -29,7 +29,7 @@ class PinChangeScreen extends HookConsumerWidget {
             TextFormField(
               decoration: const InputDecoration(labelText: 'Re Enter Pin'),
               onChanged: (value) {
-                ref.read(pinControllerProvider.notifier).checkPassPhrase(value);
+                // ref.read(pinControllerProvider.notifier).checkPassPhrase(value);
               },
             ),
             TextFormField(
@@ -53,7 +53,6 @@ class PinChangeScreen extends HookConsumerWidget {
             const SizedBox(
               height: 20,
             ),
-            if (state.error!.isNotEmpty) Text(state.error!),
             const Icon(
               CupertinoIcons.smallcircle_circle,
               size: 300,
