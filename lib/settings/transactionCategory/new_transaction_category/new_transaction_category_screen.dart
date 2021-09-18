@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
@@ -12,6 +13,7 @@ import 'package:sentezel/settings/transactionCategory/data/transaction_category_
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_type_enum.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_category_controller.dart';
+import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_ledger_select_widget.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_list_controller.dart';
 
 class NewTransactionCategoryScreen extends HookConsumerWidget {
@@ -94,33 +96,43 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
               const SizedBox(
                 height: 10,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.05,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: const [
-                      Center(
-                        child: Text(
-                          'Please Select Ledger',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold,
+              GestureDetector(
+                onTap: () {
+                  showCupertinoModalBottomSheet(
+                      expand: true,
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) =>
+                          const NewTransactionLedgerSelectWidget());
+                },
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  height: MediaQuery.of(context).size.height * 0.05,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: Colors.grey),
+                      borderRadius: BorderRadius.circular(8)),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: const [
+                        Center(
+                          child: Text(
+                            'Please Select Ledger',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        child: Icon(
-                          CupertinoIcons.chevron_down,
-                          size: 20,
-                        ),
-                      )
-                    ],
+                        SizedBox(
+                          child: Icon(
+                            CupertinoIcons.chevron_down,
+                            size: 20,
+                          ),
+                        )
+                      ],
+                    ),
                   ),
                 ),
               ),
