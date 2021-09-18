@@ -485,7 +485,7 @@ List<LedgerMaster> ledgerMasterData = [
     id: LedgerMasterIndex.capital,
     name: 'Capital',
     description: 'Capital',
-    type: LedgerMasterType.indirect,
+    type: LedgerMasterType.direct,
     status: Status.active,
   ),
 ];

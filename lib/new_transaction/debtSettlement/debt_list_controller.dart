@@ -25,7 +25,6 @@ class DebtorListController extends StateNotifier<AsyncValue<List<Debtor>>> {
             .getTransactionByLedgerMaster(
                 ledgerMasterId: ledgerMasterDataList[i].id);
         int _amount = 0;
-
         for (int j = 0; j < _transactionList.length; j++) {
           // debit side ledger null means that it is a full credit by party
           if (_transactionList[j].debitSideLedger == null) {

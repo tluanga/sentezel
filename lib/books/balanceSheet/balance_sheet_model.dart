@@ -6,6 +6,7 @@ class BalanceSheet {
   int netLoss;
   int cash;
   int bank;
+  List<Asset> asset;
   BalanceSheet({
     required this.creditors,
     required this.debtors,
@@ -14,5 +15,15 @@ class BalanceSheet {
     required this.netLoss,
     required this.cash,
     required this.bank,
+    required this.asset,
+  });
+}
+
+class Asset {
+  String name;
+  int amount;
+  Asset({
+    required this.name,
+    required this.amount,
   });
 }
