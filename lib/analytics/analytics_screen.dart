@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_controller.dart';
 import 'package:sentezel/analytics/barChart/barchart_widget.dart';
+import 'package:sentezel/analytics/chart_mode_enum.dart';
 
 import 'package:sentezel/analytics/ui/pie_chart.dart';
 
@@ -14,11 +14,8 @@ class AnalyticsScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    ref.read(analyticsControllerProvider.notifier).loadData();
-    useEffect(() {
-      ref.read(analyticsControllerProvider);
-    }, []);
-    final _chartMode = useState(0);
+    final state = ref.read(analyticsControllerProvider);
+
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -30,15 +27,16 @@ class AnalyticsScreen extends HookConsumerWidget {
                   Navigator.pop(context);
                 },
               ),
-              const AnalyticsTimeFrameSelection(),
+              AnalyticsTimeFrameSelection(
+                  onTimeSelect: (DateTime startDate, DateTime endDate) {}),
               const SizedBox(
                 height: 10,
               ),
               SizedBox(
                 height: MediaQuery.of(context).size.height * 0.65,
-                child: _chartMode.value == 0
+                child: state.chartMode == ChartMode.barChart
                     ? const BarChartWidget()
-                    : PieChartSample(),
+                    : const PieChartSample(),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -47,7 +45,9 @@ class AnalyticsScreen extends HookConsumerWidget {
                   children: [
                     GestureDetector(
                       onTap: () {
-                        _chartMode.value = 0;
+                        ref
+                            .read(analyticsControllerProvider.notifier)
+                            .changeChartMode(ChartMode.barChart);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.30,
@@ -77,7 +77,9 @@ class AnalyticsScreen extends HookConsumerWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        _chartMode.value = 1;
+                        ref
+                            .read(analyticsControllerProvider.notifier)
+                            .changeChartMode(ChartMode.pieChart);
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width * 0.30,
