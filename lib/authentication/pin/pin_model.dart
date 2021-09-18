@@ -10,6 +10,18 @@ class PIN {
     required this.passPhrase,
   });
 
+  PIN copyWith({
+    int? id,
+    int? pin,
+    String? passPhrase,
+  }) {
+    return PIN(
+      id: id ?? this.id,
+      pin: pin ?? this.pin,
+      passPhrase: passPhrase ?? this.passPhrase,
+    );
+  }
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -29,4 +41,20 @@ class PIN {
   String toJson() => json.encode(toMap());
 
   factory PIN.fromJson(String source) => PIN.fromMap(json.decode(source));
+
+  @override
+  String toString() => 'PIN(id: $id, pin: $pin, passPhrase: $passPhrase)';
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) return true;
+
+    return other is PIN &&
+        other.id == id &&
+        other.pin == pin &&
+        other.passPhrase == passPhrase;
+  }
+
+  @override
+  int get hashCode => id.hashCode ^ pin.hashCode ^ passPhrase.hashCode;
 }
