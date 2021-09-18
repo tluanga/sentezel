@@ -2,8 +2,10 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
-final transactionCategoryListProvider =
-    StateNotifierProvider((ref) => TransactionCategoryListController(ref.read));
+final transactionCategoryListProvider = StateNotifierProvider<
+        TransactionCategoryListController,
+        AsyncValue<List<TransactionCategory>>>(
+    (ref) => TransactionCategoryListController(ref.read));
 
 class TransactionCategoryListController
     extends StateNotifier<AsyncValue<List<TransactionCategory>>> {

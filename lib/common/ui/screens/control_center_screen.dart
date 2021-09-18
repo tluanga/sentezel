@@ -12,7 +12,7 @@ import 'package:sentezel/settings/ledger_master/ledger_master_screen.dart';
 import 'package:sentezel/settings/party/party_screen.dart';
 import 'package:sentezel/settings/reset/reset_screen.dart';
 import 'package:sentezel/settings/restore/restore_screen.dart';
-import 'package:sentezel/settings/transactionCategory/transaction_category_screen.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_list_screen.dart';
 
 class ControlCenterScreen extends StatelessWidget {
   const ControlCenterScreen({Key? key}) : super(key: key);
@@ -93,7 +93,8 @@ class ControlCenterScreen extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const TransactionCategoryScreen(),
+                        builder: (context) =>
+                            const TransactionCategoryListScreen(),
                       ),
                     );
                   },
