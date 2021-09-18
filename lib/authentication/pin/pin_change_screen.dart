@@ -9,6 +9,7 @@ class PinChangeScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(pinControllerProvider);
     return Material(
       child: SafeArea(
         child: Column(
@@ -22,16 +23,20 @@ class PinChangeScreen extends HookConsumerWidget {
             TextFormField(
               decoration: const InputDecoration(labelText: ' Enter Pin'),
               onChanged: (value) {
-                ref.read(pinControllerProvider.notifier).pin = int.parse(value);
+                state.pin = int.parse(value);
               },
             ),
             TextFormField(
               decoration: const InputDecoration(labelText: 'Re Enter Pin'),
-              onChanged: (value) {},
+              onChanged: (value) {
+                ref.read(pinControllerProvider.notifier).checkPassPhrase(value);
+              },
             ),
             TextFormField(
               decoration: const InputDecoration(labelText: 'Pass Phrase'),
-              onChanged: (value) {},
+              onChanged: (value) {
+                state.passPhrase = value;
+              },
             ),
             const SizedBox(
               height: 20,
@@ -48,6 +53,7 @@ class PinChangeScreen extends HookConsumerWidget {
             const SizedBox(
               height: 20,
             ),
+            if (state.error!.isNotEmpty) Text(state.error!),
             const Icon(
               CupertinoIcons.smallcircle_circle,
               size: 300,

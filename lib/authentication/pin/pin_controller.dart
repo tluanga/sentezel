@@ -10,7 +10,7 @@ class PinController extends StateNotifier<PIN> {
 
   PinController(this._read)
       : super(
-          PIN(pin: 0, passPhrase: ''),
+          PIN(pin: 0, passPhrase: '', error: ''),
         );
 
   setup(PIN payload) async {
@@ -25,7 +25,10 @@ class PinController extends StateNotifier<PIN> {
     state = state.copyWith(pin: pin);
   }
 
-  set passPhrase(String passphrase) {
-    state = state.copyWith(passPhrase: passphrase);
+  checkPassPhrase(String passphrase) async {
+    final data = await _read(pinRepositoryProvider).get();
+    if (passphrase != data.passPhrase) {
+      state = state.copyWith(error: 'passphrase is not correct');
+    }
   }
 }
