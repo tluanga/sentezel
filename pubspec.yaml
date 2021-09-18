@@ -54,7 +54,7 @@ dependencies:
   json_serializable: ^4.1.4
   sqflite: ^2.0.0+3
   path_provider:
-  permission_handler:
+  permission_handler: ^8.1.6
   flutter_archive:
   intl:
 
