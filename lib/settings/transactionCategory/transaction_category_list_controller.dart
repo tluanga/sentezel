@@ -2,14 +2,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
-class TransactionCategoryController
+final transactionCategoryListProvider =
+    StateNotifierProvider((ref) => TransactionCategoryListController(ref.read));
+
+class TransactionCategoryListController
     extends StateNotifier<AsyncValue<List<TransactionCategory>>> {
   final Reader _read;
 
-  TransactionCategoryController(this._read) : super(const AsyncLoading());
+  TransactionCategoryListController(this._read) : super(const AsyncLoading());
 
-  loadData() async {
-    final data = await _read(transactionCategoryRepositoryProvider).getList();
+  loadData({String? searchParam = ''}) async {
+    final data = await _read(transactionCategoryRepositoryProvider)
+        .getList(searchString: searchParam!);
     if (data.isEmpty) {
       state = const AsyncData([]);
       return;
