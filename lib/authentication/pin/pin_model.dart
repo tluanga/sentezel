@@ -29,4 +29,16 @@ class PIN {
   String toJson() => json.encode(toMap());
 
   factory PIN.fromJson(String source) => PIN.fromMap(json.decode(source));
+
+  PIN copyWith({
+    int? id,
+    int? pin,
+    String? passPhrase,
+  }) {
+    return PIN(
+      id: id ?? this.id,
+      pin: pin ?? this.pin,
+      passPhrase: passPhrase ?? this.passPhrase,
+    );
+  }
 }
