@@ -30,6 +30,7 @@ class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
     // ----get all transaction----
     final _transactionList = await _read(transactionRepositoryProvider)
         .getList(startDate: startDate, endDate: endDate);
+
     //-----Sort that transaction by date---
     _transactionList.sort((x, y) => x.date.compareTo(y.date));
 

@@ -12,6 +12,7 @@ import 'package:sentezel/settings/ledger_master/ledger_master_screen.dart';
 import 'package:sentezel/settings/party/party_screen.dart';
 import 'package:sentezel/settings/reset/reset_screen.dart';
 import 'package:sentezel/settings/restore/restore_screen.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_screen.dart';
 
 class ControlCenterScreen extends StatelessWidget {
   const ControlCenterScreen({Key? key}) : super(key: key);
@@ -88,7 +89,14 @@ class ControlCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Transaction Type',
                   icon: CupertinoIcons.app_badge,
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TransactionCategoryScreen(),
+                      ),
+                    );
+                  },
                 ),
                 _item(
                   context: context,
@@ -132,11 +140,11 @@ class ControlCenterScreen extends StatelessWidget {
                   label: 'Change Pin',
                   icon: CupertinoIcons.smallcircle_circle,
                   onTap: () {
-                    showCupertinoModalBottomSheet(
-                      expand: true,
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => const PinChangeScreen(),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const PinChangeScreen(),
+                      ),
                     );
                   },
                 ),
@@ -257,7 +265,8 @@ class ControlCenterScreen extends StatelessWidget {
               child: Text(
                 label,
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -265,6 +274,7 @@ class ControlCenterScreen extends StatelessWidget {
             Icon(
               icon,
               size: 40,
+              color: Colors.grey,
             )
           ],
         ),

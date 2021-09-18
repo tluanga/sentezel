@@ -8,26 +8,57 @@ class SettingsEllipseWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        const SizedBox(
-          width: 10,
-        ),
-        GestureDetector(
-          onTap: () {
-            showCupertinoModalBottomSheet(
-              expand: true,
-              context: context,
-              backgroundColor: Colors.transparent,
-              builder: (context) => const ControlCenterScreen(),
-            );
-          },
-          child: const Icon(
-            CupertinoIcons.ellipsis,
-            size: 30,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Row(
+        children: [
+          const SizedBox(
+            width: 10,
           ),
-        ),
-      ],
+          GestureDetector(
+            onTap: () {
+              showCupertinoModalBottomSheet(
+                expand: true,
+                context: context,
+                backgroundColor: Colors.transparent,
+                builder: (context) => const ControlCenterScreen(),
+              );
+            },
+            child: SizedBox(
+              width: MediaQuery.of(context).size.width * 0.1,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  Container(
+                    width: 10.0,
+                    height: 10.0,
+                    decoration: const BoxDecoration(
+                      color: Colors.orange,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  Container(
+                    width: 10.0,
+                    height: 10.0,
+                    decoration: const BoxDecoration(
+                      color: Colors.blue,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                  Container(
+                    width: 10.0,
+                    height: 10.0,
+                    decoration: const BoxDecoration(
+                      color: Colors.green,
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
