@@ -14,7 +14,7 @@ import 'package:sentezel/settings/transactionCategory/transaction_category_repos
 
 final barChartControllerProvider =
     StateNotifierProvider<BarChartController, AsyncValue<BarChartState>>(
-        (ref) => BarChartController(ref.read)..loadData());
+        (ref) => BarChartController(ref.read));
 
 class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
   final Reader _read;
@@ -22,13 +22,14 @@ class BarChartController extends StateNotifier<AsyncValue<BarChartState>> {
   BarChartController(this._read) : super(const AsyncLoading());
 
   //----Loading an processing data---------
-  loadData() async {
+  loadData(DateTime startDate, DateTime endDate) async {
     List<BarChartElement> _barChartElementList = [];
     List<String> _bottomTitles = [];
 
+    print('start date $startDate endDate $endDate');
     // ----get all transaction----
     final _transactionList = await _read(transactionRepositoryProvider)
-        .getList(startDate: DateTime.now().subtract(const Duration(days: 7)));
+        .getList(startDate: startDate, endDate: endDate);
     //-----Sort that transaction by date---
     _transactionList.sort((x, y) => x.date.compareTo(y.date));
 

@@ -2,6 +2,7 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/analytics/analytics_controller.dart';
 import 'package:sentezel/analytics/barchart/bar_chart_controller.dart';
 
 class BarChartWidget extends HookConsumerWidget {
@@ -11,10 +12,13 @@ class BarChartWidget extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     const Color incomeColor = Color(0xff53fdd7);
     const Color expenseColor = Color(0xffff5182);
+    final analyticsState = ref.watch(analyticsControllerProvider);
     useEffect(() {
-      ref.read(barChartControllerProvider.notifier).loadData();
+      ref
+          .read(barChartControllerProvider.notifier)
+          .loadData(analyticsState.startDate, analyticsState.endDate);
     }, []);
-
+    print(analyticsState);
     return Material(
       child: Container(
         child: ref.watch(barChartControllerProvider).when(

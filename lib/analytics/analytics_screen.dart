@@ -28,7 +28,11 @@ class AnalyticsScreen extends HookConsumerWidget {
                 },
               ),
               AnalyticsTimeFrameSelection(
-                  onTimeSelect: (DateTime startDate, DateTime endDate) {}),
+                  onTimeSelect: (DateTime startDate, DateTime endDate) {
+                ref.read(analyticsControllerProvider.notifier).setState(
+                      state.copyWith(startDate: startDate, endDate: endDate),
+                    );
+              }),
               const SizedBox(
                 height: 10,
               ),

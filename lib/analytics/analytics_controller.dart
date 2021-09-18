@@ -22,4 +22,12 @@ class AnalyticsController extends StateNotifier<Analytics> {
   changeChartMode(ChartMode chartMode) {
     state = state.copyWith(chartMode: chartMode);
   }
+
+  setState(Analytics data) {
+    state = state.copyWith(
+        startDate: data.startDate,
+        endDate: data.endDate,
+        chartMode: data.chartMode);
+    print(state);
+  }
 }
