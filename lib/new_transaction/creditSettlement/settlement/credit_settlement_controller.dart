@@ -65,6 +65,7 @@ class DebtSettlementController
     state = AsyncData(stateData.copyWith(errorMessages: _errorMessage));
   }
 
+//  credit side is bank/cash in credit settlement
   setup() async {
     //---------------Updating the state-------
     final stateData = state.data!.value;
