@@ -10,7 +10,7 @@ daySelection({
   required Function(DateTime) onEndDateSelect,
 }) {
   return SizedBox(
-    width: MediaQuery.of(context).size.width * 0.97,
+    width: MediaQuery.of(context).size.width * 0.92,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
