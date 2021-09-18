@@ -85,18 +85,16 @@ class TradingAccountController
         // income a nih chuan incomelist ah a add ang
         if (_incomeOrExpense == 0) {
           // filter cash and bank account
-          if (_ledgerMasterDataList[i].id != LedgerMasterIndex.cash) {
-            if (_ledgerMasterDataList[i].id != LedgerMasterIndex.bank) {
-              _directIncomeList.add(_income);
-            }
+          if (_ledgerMasterDataList[i].id != LedgerMasterIndex.cash &&
+              _ledgerMasterDataList[i].id != LedgerMasterIndex.bank) {
+            _directIncomeList.add(_income);
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
           // filter cash and bank account
-          if (_ledgerMasterDataList[i].id != LedgerMasterIndex.cash) {
-            if (_ledgerMasterDataList[i].id != LedgerMasterIndex.bank) {
-              _directExpenseList.add(_expense);
-            }
+          if (_ledgerMasterDataList[i].id != LedgerMasterIndex.cash &&
+              _ledgerMasterDataList[i].id != LedgerMasterIndex.bank) {
+            _directExpenseList.add(_expense);
           }
         }
       }
