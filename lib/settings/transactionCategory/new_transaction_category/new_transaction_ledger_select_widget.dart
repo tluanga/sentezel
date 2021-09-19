@@ -81,6 +81,7 @@ class NewTransactionLedgerSelectWidget extends HookConsumerWidget {
       onTap: () {
         ref.read(newTransactionCategoryControllerProvider.notifier).ledger =
             ledgerMaster;
+        Navigator.of(context).pop();
       },
       child: Container(
         margin: const EdgeInsets.only(left: 10, top: 20, right: 10, bottom: 0),
