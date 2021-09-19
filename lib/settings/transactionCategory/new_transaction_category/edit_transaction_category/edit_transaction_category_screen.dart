@@ -120,7 +120,7 @@ class EditTransactionCategoryScreen extends HookConsumerWidget {
                                 children: [
                                   Center(
                                     child: Text(
-                                      data.ledger!.name,
+                                      data.ledger.name,
                                       style: const TextStyle(
                                         fontSize: 14,
                                         fontWeight: FontWeight.bold,
