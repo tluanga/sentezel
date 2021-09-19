@@ -3,6 +3,7 @@ import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_index.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
+import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_ledger_select_controller.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
 final newTransactionCategoryControllerProvider = StateNotifierProvider<
@@ -24,6 +25,7 @@ class NewTransactionCategoryController
 
   setState(TransactionCategory transactionCategory) {
     state = transactionCategory;
+    _read(newTransactionLedgerSelectControllerProvider.notifier).loadData();
     setledgerName();
   }
 
@@ -75,6 +77,9 @@ class NewTransactionCategoryController
   }
 
   setledgerName() async {
+    if (state.creditSideLedger == null || state.debitSideLedger == null) {
+      return;
+    }
     if (state.transactionType == TransactionType.lei ||
         state.transactionType == TransactionType.pekchhuah) {
       ledgerName = await _read(ledgerMasterRepositoryProvider)
