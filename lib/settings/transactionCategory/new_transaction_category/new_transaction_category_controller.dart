@@ -13,7 +13,7 @@ final newTransactionCategoryControllerProvider = StateNotifierProvider<
 class NewTransactionCategoryController
     extends StateNotifier<TransactionCategory> {
   final Reader _read;
-  String ledgerName = 'Please Select Ledger';
+  String ledgerName = '';
   NewTransactionCategoryController(this._read)
       : super(
           TransactionCategory(
