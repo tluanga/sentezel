@@ -13,6 +13,7 @@ import 'package:sentezel/settings/transactionCategory/data/transaction_category_
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_type_enum.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_category_controller.dart';
+import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_ledger_select_controller.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_ledger_select_widget.dart';
 import 'package:sentezel/settings/transactionCategory/transaction_category_list_controller.dart';
 
@@ -37,6 +38,14 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
     final _status = useState<Status>(transactionCategory != null
         ? transactionCategory!.status
         : Status.active);
+
+    useEffect(() {
+      if (transactionCategory != null) {
+        ref
+            .read(newTransactionCategoryControllerProvider.notifier)
+            .setState(transactionCategory!);
+      }
+    }, []);
 
     return Scaffold(
       body: SafeArea(
@@ -115,17 +124,20 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
+                      children: [
                         Center(
                           child: Text(
-                            'Please Select Ledger',
-                            style: TextStyle(
+                            ref
+                                .read(newTransactionCategoryControllerProvider
+                                    .notifier)
+                                .getLedgerName(),
+                            style: const TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           child: Icon(
                             CupertinoIcons.chevron_down,
                             size: 20,

@@ -25,30 +25,30 @@ class SettingsEllipseWidget extends StatelessWidget {
               );
             },
             child: SizedBox(
-              width: MediaQuery.of(context).size.width * 0.1,
+              width: MediaQuery.of(context).size.width * 0.12,
               height: MediaQuery.of(context).size.height * 0.03,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   Container(
-                    width: 10.0,
-                    height: 10.0,
+                    width: 12.0,
+                    height: 12.0,
                     decoration: const BoxDecoration(
                       color: Colors.orange,
                       shape: BoxShape.circle,
                     ),
                   ),
                   Container(
-                    width: 10.0,
-                    height: 10.0,
+                    width: 12.0,
+                    height: 12.0,
                     decoration: const BoxDecoration(
                       color: Colors.blue,
                       shape: BoxShape.circle,
                     ),
                   ),
                   Container(
-                    width: 10.0,
-                    height: 10.0,
+                    width: 12.0,
+                    height: 12.0,
                     decoration: const BoxDecoration(
                       color: Colors.green,
                       shape: BoxShape.circle,

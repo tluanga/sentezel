@@ -87,7 +87,7 @@ class ControlCenterScreen extends StatelessWidget {
                 ),
                 _item(
                   context: context,
-                  label: 'Transaction Type',
+                  label: 'Transaction Category',
                   icon: CupertinoIcons.app_badge,
                   onTap: () {
                     Navigator.push(
