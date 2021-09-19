@@ -5,6 +5,7 @@ import 'package:sentezel/authentication/pin/pin_change_screen.dart';
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/new_transaction/new_transaction_center_screen.dart';
+import 'package:sentezel/settings/asset/asset_list_screen.dart';
 import 'package:sentezel/settings/backup/backup_screen.dart';
 import 'package:sentezel/settings/business_profile/business_profile_screen.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_screen.dart';
@@ -121,7 +122,14 @@ class ControlCenterScreen extends StatelessWidget {
                   context: context,
                   label: 'Assets',
                   icon: CupertinoIcons.doc_append,
-                  onTap: () {},
+                  onTap: () {
+                    showCupertinoModalBottomSheet(
+                      expand: true,
+                      context: context,
+                      backgroundColor: Colors.transparent,
+                      builder: (context) => const AssetListScreen(),
+                    );
+                  },
                 ),
                 _item(
                   context: context,
