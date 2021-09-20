@@ -15,7 +15,6 @@ class PinTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 250,
       child: Column(
         children: [
           Row(
@@ -23,9 +22,8 @@ class PinTextField extends StatelessWidget {
             children: [
               Text(
                 title, // ṭext,
-                style: GoogleFonts.aBeeZee(
+                style: TextStyle(
                   color: Colors.black87,
-                  fontSize: 13,
                 ),
               ),
             ],

@@ -49,7 +49,9 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.badge_rounded,
-                            color: Color(0xff757575),
+                            color: Color(0xff0d47a1),
+
+                            /// Color(0xff757575),
                             size: 27,
                           ),
                           filled: true,
@@ -88,7 +90,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.description_rounded,
-                            color: Color(0xff757575),
+                            color: Color(0xff0d47a1), // Color(0xff757575),
                             size: 27,
                           ),
                           filled: true,
@@ -135,7 +137,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                               children: const [
                                 Icon(
                                   Icons.account_box_rounded,
-                                  color: Color(0xff757575),
+                                  color: Color(0xff0d47a1), //Color(0xff757575),
                                   size: 27,
                                 ),
                                 SizedBox(width: 8),
@@ -150,8 +152,16 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                             ),
                           ),
                           ListTile(
-                            title: const Text('Mahni Siam Zuar'),
+                            minLeadingWidth: 8,
+                            leading: const Icon(
+                              CupertinoIcons.chevron_compact_right,
+                              color: Color(0xff0d47a1),
+                            ),
+                            title: const Text(
+                              'Mahni Siam Zuar',
+                            ),
                             trailing: Radio(
+                                activeColor: const Color(0xff0d47a1),
                                 value: BusinessType.mahniSiamZuar,
                                 onChanged: (value) {
                                   ref
@@ -162,8 +172,14 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                                 groupValue: data.type),
                           ),
                           ListTile(
+                            minLeadingWidth: 8,
+                            leading: const Icon(
+                              CupertinoIcons.chevron_compact_right,
+                              color: Color(0xff0d47a1),
+                            ),
                             title: const Text('Mi Siam Sa Zuar'),
                             trailing: Radio(
+                              activeColor: const Color(0xff0d47a1),
                               value: BusinessType.miSiamsaZuar,
                               onChanged: (value) {
                                 ref
@@ -182,7 +198,8 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                     ),
                     Container(
                       decoration: BoxDecoration(
-                          color: Colors.white, // Colors.grey.shade200,
+                          color:
+                              const Color(0xff0d47a1), // Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(15),
                           boxShadow: [
                             BoxShadow(
@@ -197,7 +214,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                         elevation: 50,
                         height: 50,
                         minWidth: 180,
-                        color: Colors.grey[900], // Colors.grey[300],
+                        color: Color(0xff0d47a1), // Colors.grey[300],
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -242,6 +259,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
             const Icon(
               CupertinoIcons.book_circle,
               size: 50,
+              color: Color(0xff0d47a1),
             ),
             const SizedBox(
               height: 5,
@@ -249,7 +267,9 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
             Text(
               "Business Profile Setup",
               style: GoogleFonts.aBeeZee(
-                  fontSize: 27, fontWeight: FontWeight.bold),
+                  color: Color(0xff0d47a1),
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold),
             ),
           ],
         ),
