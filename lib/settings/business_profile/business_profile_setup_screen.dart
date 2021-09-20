@@ -136,7 +136,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                             child: Row(
                               children: const [
                                 Icon(
-                                  Icons.account_box_rounded,
+                                  Icons.label_important_rounded,
                                   color: Color(0xff0d47a1), //Color(0xff757575),
                                   size: 27,
                                 ),
@@ -155,6 +155,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                             minLeadingWidth: 8,
                             leading: const Icon(
                               CupertinoIcons.chevron_compact_right,
+                              size: 23,
                               color: Color(0xff0d47a1),
                             ),
                             title: const Text(
@@ -175,6 +176,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                             minLeadingWidth: 8,
                             leading: const Icon(
                               CupertinoIcons.chevron_compact_right,
+                              size: 23,
                               color: Color(0xff0d47a1),
                             ),
                             title: const Text('Mi Siam Sa Zuar'),
@@ -257,8 +259,8 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
         child: Column(
           children: [
             const Icon(
-              CupertinoIcons.book_circle,
-              size: 50,
+              Icons.account_circle_sharp,
+              size: 60,
               color: Color(0xff0d47a1),
             ),
             const SizedBox(
