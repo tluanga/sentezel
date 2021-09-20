@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 class CustomButton extends HookConsumerWidget {
@@ -16,9 +17,9 @@ class CustomButton extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
-          color: Colors.grey[300], borderRadius: BorderRadius.circular(20)),
+          color: Color(0xff0d47a1), borderRadius: BorderRadius.circular(20)),
       alignment: Alignment.center,
-      width: 130,
+      width: 150,
       height: 50,
       child: MaterialButton(
         shape: RoundedRectangleBorder(
@@ -31,10 +32,8 @@ class CustomButton extends HookConsumerWidget {
         child: Text(
           title,
           textAlign: TextAlign.center,
-          style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey[800],
-              fontWeight: FontWeight.bold),
+          style: GoogleFonts.aBeeZee(
+              fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
         ),
         // On Pressed
         onPressed: () {

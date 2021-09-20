@@ -29,39 +29,91 @@ class PinSetupScreen extends HookConsumerWidget {
         print('not equal');
       }
     });
-    return Material(
-      child: SafeArea(
-        child: Column(
-          children: [
-            const Spacer(
-              flex: 1,
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).unfocus();
+      },
+      child: Material(
+        child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                const Spacer(
+                  flex: 1,
+                ),
+                widgetTitle(),
+                const Spacer(
+                  flex: 2,
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(horizontal: 14),
+                  decoration: BoxDecoration(
+                      color: Colors.white, // Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 2,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ]),
+                  child: TextFormField(
+                    decoration: const InputDecoration(
+                        border: InputBorder.none, labelText: 'Pass Phrase'),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white, // Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.3),
+                          spreadRadius: 2,
+                          blurRadius: 7,
+                          offset:
+                              const Offset(0, 3), // changes position of shadow
+                        ),
+                      ]),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+                  child: Column(
+                    children: [
+                      PinTextField(
+                        title: "Enter Four Digit PIN",
+                        textEditingController: pinController,
+                      ),
+                      const SizedBox(
+                        height: 25,
+                      ),
+                      PinTextField(
+                        title: "Confirm PIN",
+                        textEditingController: confirmPinController,
+                      ),
+                    ],
+                  ),
+                ),
+                const Spacer(
+                  flex: 6,
+                ),
+                CustomButton(
+                    title: 'Continue',
+                    onPressed: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed(RouteConstant.home);
+                    }),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
-            widgetTitle(),
-            const Spacer(
-              flex: 2,
-            ),
-            PinTextField(
-              title: "Enter Four Digit PIN",
-              textEditingController: pinController,
-            ),
-            const SizedBox(
-              height: 25,
-            ),
-            PinTextField(
-              title: "Confirm PIN",
-              textEditingController: confirmPinController,
-            ),
-            const Spacer(flex: 6),
-            TextFormField(
-              decoration: const InputDecoration(labelText: 'Pass Phrase'),
-            ),
-            CustomButton(
-                title: 'Continue',
-                onPressed: () {
-                  Navigator.of(context)
-                      .pushReplacementNamed(RouteConstant.home);
-                })
-          ],
+          ),
         ),
       ),
     );

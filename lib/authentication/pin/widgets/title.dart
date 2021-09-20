@@ -14,8 +14,8 @@ class PinTitle extends StatelessWidget {
         //  Icon(CupertinoIcons.lock_fill),
         Icon(
           icon,
-          size: 37,
-          color: Colors.grey[800],
+          size: 50,
+          color: Color(0xff0d47a1),
         ),
         SizedBox(
           height: 10,
@@ -23,8 +23,8 @@ class PinTitle extends StatelessWidget {
         Text(
           text,
           style: GoogleFonts.aBeeZee(
-            color: Colors.grey[900],
-            fontSize: 18,
+            color: Color(0xff0d47a1),
+            fontSize: 27,
             fontWeight: FontWeight.bold,
           ),
         ),
