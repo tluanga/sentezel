@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
+import 'package:sentezel/settings/business_profile/business_profile_controller.dart';
 import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
 
-class BusinessProfileSceen extends HookWidget {
+class BusinessProfileSceen extends HookConsumerWidget {
   const BusinessProfileSceen({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final _businessType = useState<BusinessType>(
       BusinessType.mahniSiamZuar,
     );
@@ -20,7 +22,10 @@ class BusinessProfileSceen extends HookWidget {
               onSave: () {},
               onCancel: () {},
             ),
-            TextFormField(
+            ref.read(businessProfileControllerProvider).when(
+              data: (data) {
+                return Column(children: [
+ TextFormField(
               decoration: const InputDecoration(
                 labelText: 'Business Name',
               ),
@@ -76,8 +81,16 @@ class BusinessProfileSceen extends HookWidget {
                       ),
                     ),
                   ),
-                ],
-              ),
+
+                ],)
+                
+              },
+              loading: () {
+                return Center(child: CircularProgressIndicator());
+              },
+              error: (error, statck) {
+                return Text(error.toString());
+              },
             ),
           ],
         ),
