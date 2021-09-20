@@ -15,12 +15,12 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(businessProfileControllerProvider);
 
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Material(
-        child: SafeArea(
+    return SafeArea(
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Material(
           child: SizedBox(
             child: state.when(data: (data) {
               return Padding(

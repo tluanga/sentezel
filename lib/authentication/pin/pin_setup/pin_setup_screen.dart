@@ -30,12 +30,12 @@ class PinSetupScreen extends HookConsumerWidget {
         print('not equal');
       }
     });
-    return GestureDetector(
-      onTap: () {
-        FocusScope.of(context).unfocus();
-      },
-      child: Material(
-        child: SafeArea(
+    return SafeArea(
+      child: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).unfocus();
+        },
+        child: Material(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Column(
