@@ -212,12 +212,12 @@ class ControlCenterScreen extends StatelessWidget {
                   icon: CupertinoIcons.signature,
                   onTap: () {},
                 ),
-                _item(
-                  context: context,
-                  label: 'Logout',
-                  icon: CupertinoIcons.eject,
-                  onTap: () {},
-                ),
+                // _item(
+                //   context: context,
+                //   label: 'Logout',
+                //   icon: CupertinoIcons.eject,
+                //   onTap: () {},
+                // ),
                 _close(
                   context: context,
                   label: 'Close ',
