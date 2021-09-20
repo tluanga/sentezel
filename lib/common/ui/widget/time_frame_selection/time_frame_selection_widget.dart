@@ -11,9 +11,7 @@ import 'package:sentezel/common/ui/widget/time_frame_selection/element/month_sel
 import 'package:sentezel/common/ui/widget/time_frame_selection/element/week_selection_widget.dart';
 
 class TimeFrameSelection extends HookConsumerWidget {
-  final Function(DateTime, DateTime) onDateSelected;
-  const TimeFrameSelection({Key? key, required this.onDateSelected})
-      : super(key: key);
+  const TimeFrameSelection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -44,9 +42,7 @@ class TimeFrameSelection extends HookConsumerWidget {
                             onSelect: (period) {
                               mode = period;
                             },
-                            onDateSelected: (startDate, endDate) {
-                              onDateSelected(startDate, endDate);
-                            }));
+                            onDateSelected: (startDate, endDate) {}));
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.04,
@@ -116,16 +112,15 @@ class TimeFrameSelection extends HookConsumerWidget {
     required Function(AnalyticsPeriod) onSelect,
     required Function(DateTime, DateTime) onDateSelected,
   }) {
-    AnalyticsPeriod _period = AnalyticsPeriod.daily;
     return Material(
       child: Container(
         height: MediaQuery.of(context).size.height * 0.6,
         decoration: const BoxDecoration(color: Colors.white),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+          children: const [
             //----DAILY REPORT-----------
-            const Text(
+            Text(
               'Select Period',
               style: TextStyle(
                 fontSize: 14,
@@ -133,15 +128,10 @@ class TimeFrameSelection extends HookConsumerWidget {
               ),
             ),
 
-            DaySelectionWidget(
-              onDateSelected: (startDay, endDay) {
-                onDateSelected(startDay, endDay);
-              },
-            ),
-
-            const WeekSelection(),
-            const MonthSelection(),
-            const CurrentFinancialYearSelection(),
+            DaySelectionWidget(),
+            WeekSelection(),
+            MonthSelection(),
+            CurrentFinancialYearSelection(),
           ],
         ),
       ),

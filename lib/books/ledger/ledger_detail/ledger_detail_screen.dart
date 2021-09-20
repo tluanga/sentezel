@@ -35,9 +35,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                 Navigator.pop(context);
               },
             ),
-            TimeFrameSelection(
-              onDateSelected: (startDate, endDate) {},
-            ),
+            const TimeFrameSelection(),
             const SizedBox(
               height: 10,
             ),
@@ -222,7 +220,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               Container(
-                width: MediaQuery.of(context).size.width * 0.25,
+                width: MediaQuery.of(context).size.width * 0.30,
                 decoration: BoxDecoration(color: Colors.green.shade200),
                 child: Row(
                   children: [
@@ -240,7 +238,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                 ),
               ),
               Container(
-                width: MediaQuery.of(context).size.width * 0.25,
+                width: MediaQuery.of(context).size.width * 0.30,
                 decoration: BoxDecoration(color: Colors.red.shade200),
                 child: Row(
                   children: [
@@ -259,7 +257,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
               ),
               Row(
                 children: [
-                  const Text('Balance:'),
+                  const Text('Bal:'),
                   const SizedBox(
                     width: 5,
                   ),
