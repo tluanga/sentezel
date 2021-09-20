@@ -27,7 +27,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                 child: Column(
                   children: [
                     const SizedBox(
-                      height: 20,
+                      height: 15,
                     ),
                     setupIcon(),
                     const Spacer(),
@@ -240,17 +240,17 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
         child: Column(
           children: [
             const Icon(
-              CupertinoIcons.bag_fill,
-              size: 45,
+              CupertinoIcons.book_circle,
+              size: 50,
             ),
             const SizedBox(
-              height: 1,
+              height: 5,
             ),
             Text(
               "Business Profile Setup",
               style: GoogleFonts.aBeeZee(
-                  fontSize: 20, fontWeight: FontWeight.bold),
-            )
+                  fontSize: 27, fontWeight: FontWeight.bold),
+            ),
           ],
         ),
       );
