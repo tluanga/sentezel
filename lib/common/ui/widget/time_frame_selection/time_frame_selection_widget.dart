@@ -11,7 +11,9 @@ import 'package:sentezel/common/ui/widget/time_frame_selection/element/month_sel
 import 'package:sentezel/common/ui/widget/time_frame_selection/element/week_selection_widget.dart';
 
 class TimeFrameSelection extends HookConsumerWidget {
-  const TimeFrameSelection({Key? key}) : super(key: key);
+  final Function(DateTime, DateTime) onDateSelected;
+  const TimeFrameSelection({Key? key, required this.onDateSelected})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -34,15 +36,17 @@ class TimeFrameSelection extends HookConsumerWidget {
                 GestureDetector(
                   onTap: () async {
                     showCupertinoModalBottomSheet(
-                      expand: false,
-                      context: context,
-                      backgroundColor: Colors.transparent,
-                      builder: (context) => _timeFrame(
-                          context: context,
-                          onSelect: (period) {
-                            mode = period;
-                          }),
-                    );
+                        expand: false,
+                        context: context,
+                        backgroundColor: Colors.transparent,
+                        builder: (context) => _timeFrame(
+                            context: context,
+                            onSelect: (period) {
+                              mode = period;
+                            },
+                            onDateSelected: (startDate, endDate) {
+                              onDateSelected(startDate, endDate);
+                            }));
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.04,
@@ -107,9 +111,11 @@ class TimeFrameSelection extends HookConsumerWidget {
     );
   }
 
-  _timeFrame(
-      {required BuildContext context,
-      required Function(AnalyticsPeriod) onSelect}) {
+  _timeFrame({
+    required BuildContext context,
+    required Function(AnalyticsPeriod) onSelect,
+    required Function(DateTime, DateTime) onDateSelected,
+  }) {
     AnalyticsPeriod _period = AnalyticsPeriod.daily;
     return Material(
       child: Container(
@@ -117,9 +123,9 @@ class TimeFrameSelection extends HookConsumerWidget {
         decoration: const BoxDecoration(color: Colors.white),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: const [
+          children: [
             //----DAILY REPORT-----------
-            Text(
+            const Text(
               'Select Period',
               style: TextStyle(
                 fontSize: 14,
@@ -127,11 +133,15 @@ class TimeFrameSelection extends HookConsumerWidget {
               ),
             ),
 
-            DaySelectionWidget(),
+            DaySelectionWidget(
+              onDateSelected: (startDay, endDay) {
+                onDateSelected(startDay, endDay);
+              },
+            ),
 
-            WeekSelection(),
-            MonthSelection(),
-            CurrentFinancialYearSelection(),
+            const WeekSelection(),
+            const MonthSelection(),
+            const CurrentFinancialYearSelection(),
           ],
         ),
       ),

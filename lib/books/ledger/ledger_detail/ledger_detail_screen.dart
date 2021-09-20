@@ -35,7 +35,9 @@ class LedgerDetailScreen extends HookConsumerWidget {
                 Navigator.pop(context);
               },
             ),
-            const TimeFrameSelection(),
+            TimeFrameSelection(
+              onDateSelected: (startDate, endDate) {},
+            ),
             const SizedBox(
               height: 10,
             ),

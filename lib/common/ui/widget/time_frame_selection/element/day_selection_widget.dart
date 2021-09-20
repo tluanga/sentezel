@@ -2,9 +2,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection.controller.dart';
 
 class DaySelectionWidget extends HookConsumerWidget {
-  const DaySelectionWidget({Key? key}) : super(key: key);
+  final Function(DateTime, DateTime) onDateSelected;
+  const DaySelectionWidget({
+    Key? key,
+    required this.onDateSelected,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -32,8 +37,25 @@ class DaySelectionWidget extends HookConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _dateSelection(context),
-                _dateSelection(context),
+                //StartDate-
+                _dateSelection(
+                    context: context,
+                    onDateSelected: (date) {
+                      final state =
+                          ref.read(timeFrameSelectionControllerProvider);
+                      ref
+                          .read(timeFrameSelectionControllerProvider.notifier)
+                          .setDate(state.copyWith(startDate: date));
+                    }),
+                _dateSelection(
+                    context: context,
+                    onDateSelected: (date) {
+                      final state =
+                          ref.read(timeFrameSelectionControllerProvider);
+                      ref
+                          .read(timeFrameSelectionControllerProvider.notifier)
+                          .setDate(state.copyWith(startDate: date));
+                    }),
               ],
             ),
           ],
@@ -42,7 +64,9 @@ class DaySelectionWidget extends HookConsumerWidget {
     );
   }
 
-  _dateSelection(BuildContext context) {
+  _dateSelection(
+      {required BuildContext context,
+      required Function(DateTime) onDateSelected}) {
     return GestureDetector(
       onTap: () async {
         //open Date Seletor
@@ -57,8 +81,6 @@ class DaySelectionWidget extends HookConsumerWidget {
             ),
           ),
         );
-
-        // model.startDate = date!;
       },
       child: Container(
         height: MediaQuery.of(context).size.height * 0.04,
