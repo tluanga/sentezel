@@ -1,6 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-import 'package:google_fonts/google_fonts.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PinTextField extends StatelessWidget {
@@ -18,28 +17,41 @@ class PinTextField extends StatelessWidget {
       child: Column(
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              const Icon(
+                Icons.pin,
+                color: Colors.blue,
+              ),
+              const SizedBox(
+                width: 8,
+              ),
               Text(
                 title, // ṭext,
-                style: TextStyle(
+                style: const TextStyle(
                   color: Colors.black87,
                 ),
               ),
             ],
           ),
-          PinCodeTextField(
-            controller: textEditingController,
-            obscureText: true,
-            keyboardType: TextInputType.number,
-            appContext: context,
-            length: 4,
-            onChanged: (String value) {},
-            pinTheme: PinTheme(
-              fieldHeight: 32,
-              fieldWidth: 32,
-              inactiveColor: Colors.grey,
-              activeColor: Colors.grey[800],
+          const SizedBox(
+            height: 5,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: PinCodeTextField(
+              controller: textEditingController,
+              obscureText: true,
+              keyboardType: TextInputType.number,
+              appContext: context,
+              length: 4,
+              onChanged: (String value) {},
+              pinTheme: PinTheme(
+                fieldHeight: 32,
+                fieldWidth: 32,
+                inactiveColor: Colors.grey,
+                //activeColor: Colors.grey[800],
+              ),
             ),
           ),
         ],

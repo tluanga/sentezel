@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 
 class ElevatedContainer extends StatelessWidget {
-  final double bottomPadding;
+  final double outerBottomPadding;
+  final double innerHorzPadding;
   final Widget child;
   const ElevatedContainer({
     Key? key,
     required this.child,
-    required this.bottomPadding,
+    required this.outerBottomPadding,
+    required this.innerHorzPadding,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: EdgeInsets.only(bottom: outerBottomPadding),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: innerHorzPadding),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: const BorderRadius.only(

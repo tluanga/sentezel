@@ -17,7 +17,8 @@ class CustomButton extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       decoration: BoxDecoration(
-          color: Color(0xff0d47a1), borderRadius: BorderRadius.circular(20)),
+          color: Colors.blue, //const Color(0xff0d47a1),
+          borderRadius: BorderRadius.circular(20)),
       alignment: Alignment.center,
       width: 150,
       height: 50,

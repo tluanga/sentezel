@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
+import 'package:sentezel/common/ui/widget/elevated_container.dart';
 import 'package:sentezel/settings/business_profile/business_profile_controller.dart';
 
 import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
@@ -31,27 +32,14 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                     ),
                     setupIcon(),
                     const Spacer(),
-                    Container(
-                      height: 53,
-                      decoration: BoxDecoration(
-                          color: Colors.white, // Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ]),
+                    ElevatedContainer(
+                      outerBottomPadding: 10,
+                      innerHorzPadding: 0,
                       child: TextFormField(
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.badge_rounded,
-                            color: Color(0xff0d47a1),
-
-                            /// Color(0xff757575),
+                            color: Colors.blue, // Color(0xff0d47a1),
                             size: 27,
                           ),
                           filled: true,
@@ -69,28 +57,14 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                         },
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      height: 53,
-                      decoration: BoxDecoration(
-                          color: Colors.white, // Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ]),
+                    ElevatedContainer(
+                      outerBottomPadding: 10,
+                      innerHorzPadding: 0,
                       child: TextFormField(
                         decoration: InputDecoration(
                           prefixIcon: const Icon(
                             Icons.description_rounded,
-                            color: Color(0xff0d47a1), // Color(0xff757575),
+                            color: Colors.blue,
                             size: 27,
                           ),
                           filled: true,
@@ -108,58 +82,45 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                         },
                       ),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      decoration: BoxDecoration(
-                          color: Colors.white, // Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ]),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 5,
-                      ),
+                    ElevatedContainer(
+                      outerBottomPadding: 10,
+                      innerHorzPadding: 0,
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(
-                                left: 12, right: 8, top: 5),
+                                left: 12, right: 8, top: 8, bottom: 4),
                             child: Row(
                               children: const [
                                 Icon(
-                                  Icons.label_important_rounded,
-                                  color: Color(0xff0d47a1), //Color(0xff757575),
+                                  Icons.manage_accounts_rounded,
+                                  color: Colors.blue, //Color(0xff757575),
                                   size: 27,
                                 ),
                                 SizedBox(width: 8),
                                 Text(
                                   'Ledger Master Type',
                                   style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xff424242)),
                                 ),
                               ],
                             ),
                           ),
                           ListTile(
+                            horizontalTitleGap: 8,
                             minLeadingWidth: 8,
                             leading: const Icon(
-                              CupertinoIcons.chevron_compact_right,
+                              Icons.account_tree_rounded,
                               size: 23,
-                              color: Color(0xff0d47a1),
+                              color: Colors.blue,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Mahni Siam Zuar',
+                              style: GoogleFonts.aBeeZee(
+                                  fontSize: 15, color: const Color(0xff424242)),
                             ),
                             trailing: Radio(
                                 activeColor: const Color(0xff0d47a1),
@@ -173,13 +134,18 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                                 groupValue: data.type),
                           ),
                           ListTile(
+                            horizontalTitleGap: 8,
                             minLeadingWidth: 8,
                             leading: const Icon(
-                              CupertinoIcons.chevron_compact_right,
+                              Icons.account_tree_rounded,
                               size: 23,
-                              color: Color(0xff0d47a1),
+                              color: Colors.blue,
                             ),
-                            title: const Text('Mi Siam Sa Zuar'),
+                            title: Text(
+                              'Mi Siam Sa Zuar',
+                              style: GoogleFonts.aBeeZee(
+                                  fontSize: 15, color: const Color(0xff424242)),
+                            ),
                             trailing: Radio(
                               activeColor: const Color(0xff0d47a1),
                               value: BusinessType.miSiamsaZuar,
@@ -216,7 +182,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                         elevation: 50,
                         height: 50,
                         minWidth: 180,
-                        color: Color(0xff0d47a1), // Colors.grey[300],
+                        color: Colors.blue, // Color(0xff0d47a1),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -261,7 +227,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
             const Icon(
               Icons.account_circle_sharp,
               size: 60,
-              color: Color(0xff0d47a1),
+              color: Colors.blue, //(0xff0d47a1),
             ),
             const SizedBox(
               height: 5,
@@ -269,7 +235,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
             Text(
               "Business Profile Setup",
               style: GoogleFonts.aBeeZee(
-                  color: Color(0xff0d47a1),
+                  color: Colors.blue, //Color(0xff0d47a1),
                   fontSize: 27,
                   fontWeight: FontWeight.bold),
             ),

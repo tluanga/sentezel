@@ -8,6 +8,7 @@ import 'package:sentezel/authentication/pin/widgets/pin_text_field.dart';
 import 'package:sentezel/authentication/pin/widgets/title.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:sentezel/common/ui/widget/elevated_container.dart';
 
 // --Note for rca-pin_code_fields 7.3.0   heihi hmanga mai ang aw..
 
@@ -46,57 +47,39 @@ class PinSetupScreen extends HookConsumerWidget {
                 const Spacer(
                   flex: 2,
                 ),
-                Container(
-                  padding: EdgeInsets.symmetric(horizontal: 14),
-                  decoration: BoxDecoration(
-                      color: Colors.white, // Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 2,
-                          blurRadius: 7,
-                          offset:
-                              const Offset(0, 3), // changes position of shadow
-                        ),
-                      ]),
+                ElevatedContainer(
+                  outerBottomPadding: 10,
+                  innerHorzPadding: 0,
                   child: TextFormField(
                     decoration: const InputDecoration(
-                        border: InputBorder.none, labelText: 'Pass Phrase'),
+                        prefixIcon: Icon(
+                          Icons.code,
+                          color: Colors.blue,
+                        ),
+                        border: InputBorder.none,
+                        labelText: 'Pass Phrase'),
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                      color: Colors.white, // Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          spreadRadius: 2,
-                          blurRadius: 7,
-                          offset:
-                              const Offset(0, 3), // changes position of shadow
+                ElevatedContainer(
+                  outerBottomPadding: 0,
+                  innerHorzPadding: 12,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 12, bottom: 12),
+                    child: Column(
+                      children: [
+                        PinTextField(
+                          title: "Enter Four Digit PIN",
+                          textEditingController: pinController,
                         ),
-                      ]),
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-                  child: Column(
-                    children: [
-                      PinTextField(
-                        title: "Enter Four Digit PIN",
-                        textEditingController: pinController,
-                      ),
-                      const SizedBox(
-                        height: 25,
-                      ),
-                      PinTextField(
-                        title: "Confirm PIN",
-                        textEditingController: confirmPinController,
-                      ),
-                    ],
+                        const SizedBox(
+                          height: 25,
+                        ),
+                        PinTextField(
+                          title: "Confirm PIN",
+                          textEditingController: confirmPinController,
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 const Spacer(

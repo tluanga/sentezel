@@ -15,15 +15,15 @@ class PinTitle extends StatelessWidget {
         Icon(
           icon,
           size: 50,
-          color: Color(0xff0d47a1),
+          color: Colors.blue, //Color(0xff0d47a1),
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         Text(
           text,
           style: GoogleFonts.aBeeZee(
-            color: Color(0xff0d47a1),
+            color: Colors.blue, // Color(0xff0d47a1),
             fontSize: 27,
             fontWeight: FontWeight.bold,
           ),

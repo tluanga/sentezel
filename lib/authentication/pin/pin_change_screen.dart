@@ -26,14 +26,15 @@ class PinChangeScreen extends HookConsumerWidget {
               const Spacer(flex: 1),
               const Text('Change Your Pin'),
               const SizedBox(
-                height: 10,
+                height: 20,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
                     ElevatedContainer(
-                      bottomPadding: 10,
+                      outerBottomPadding: 10,
+                      innerHorzPadding: 15,
                       child: TextFormField(
                         decoration: const InputDecoration(
                             labelText: ' Enter Pin', border: InputBorder.none),
@@ -43,7 +44,8 @@ class PinChangeScreen extends HookConsumerWidget {
                       ),
                     ),
                     ElevatedContainer(
-                      bottomPadding: 10,
+                      outerBottomPadding: 10,
+                      innerHorzPadding: 15,
                       child: TextFormField(
                         decoration: const InputDecoration(
                             labelText: 'Re Enter Pin',
@@ -54,7 +56,8 @@ class PinChangeScreen extends HookConsumerWidget {
                       ),
                     ),
                     ElevatedContainer(
-                      bottomPadding: 10,
+                      outerBottomPadding: 10,
+                      innerHorzPadding: 15,
                       child: TextFormField(
                         decoration: const InputDecoration(
                             labelText: 'Pass Phrase', border: InputBorder.none),
