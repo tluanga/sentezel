@@ -25,65 +25,67 @@ class BusinessProfileSceen extends HookConsumerWidget {
             ref.read(businessProfileControllerProvider).when(
               data: (data) {
                 return Column(children: [
- TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Business Name',
-              ),
-            ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Address',
-              ),
-            ),
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade300,
-                ),
-              ),
-              padding: const EdgeInsets.symmetric(
-                vertical: 5,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
-                    child: Text(
-                      'Ledger Master Type',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Business Name',
                     ),
                   ),
-                  ListTile(
-                    title: const Text('Mahni Siam Zuar'),
-                    trailing: Radio(
-                      value: BusinessType.mahniSiamZuar,
-                      onChanged: (value) {
-                        // _type.value = LedgerMasterType.direct;
-                        _businessType.value = BusinessType.mahniSiamZuar;
-                      },
-                      groupValue: _businessType.value,
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      labelText: 'Address',
                     ),
                   ),
                   Container(
-                    margin: const EdgeInsets.all(0),
-                    child: ListTile(
-                      title: const Text('Mi Siam Sa Zuar'),
-                      trailing: Radio(
-                        value: BusinessType.miSiamsaZuar,
-                        onChanged: (value) {
-                          _businessType.value = BusinessType.miSiamsaZuar;
-                        },
-                        groupValue: _businessType.value,
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          color: Colors.grey.shade300,
+                        ),
                       ),
-                    ),
-                  ),
-
-                ],)
-                
+                      padding: const EdgeInsets.symmetric(
+                        vertical: 5,
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 15),
+                            child: Text(
+                              'Ledger Master Type',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          ListTile(
+                            title: const Text('Mahni Siam Zuar'),
+                            trailing: Radio(
+                              value: BusinessType.mahniSiamZuar,
+                              onChanged: (value) {
+                                // _type.value = LedgerMasterType.direct;
+                                _businessType.value =
+                                    BusinessType.mahniSiamZuar;
+                              },
+                              groupValue: _businessType.value,
+                            ),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.all(0),
+                            child: ListTile(
+                              title: const Text('Mi Siam Sa Zuar'),
+                              trailing: Radio(
+                                value: BusinessType.miSiamsaZuar,
+                                onChanged: (value) {
+                                  _businessType.value =
+                                      BusinessType.miSiamsaZuar;
+                                },
+                                groupValue: _businessType.value,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ))
+                ]);
               },
               loading: () {
                 return Center(child: CircularProgressIndicator());
