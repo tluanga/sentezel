@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/authentication/pin/pin_controller.dart';
+import 'package:sentezel/common/ui/widget/elevated_container.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 
 class PinChangeScreen extends HookConsumerWidget {
@@ -21,29 +23,17 @@ class PinChangeScreen extends HookConsumerWidget {
                   onClose: () {
                     Navigator.pop(context);
                   }),
-              Spacer(flex: 1),
+              const Spacer(flex: 1),
               const Text('Change Your Pin'),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
                 child: Column(
                   children: [
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: Colors.white, // Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ]),
+                    ElevatedContainer(
+                      bottomPadding: 10,
                       child: TextFormField(
                         decoration: const InputDecoration(
                             labelText: ' Enter Pin', border: InputBorder.none),
@@ -52,23 +42,8 @@ class PinChangeScreen extends HookConsumerWidget {
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: Colors.white, // Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ]),
+                    ElevatedContainer(
+                      bottomPadding: 10,
                       child: TextFormField(
                         decoration: const InputDecoration(
                             labelText: 'Re Enter Pin',
@@ -78,23 +53,8 @@ class PinChangeScreen extends HookConsumerWidget {
                         },
                       ),
                     ),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Container(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      decoration: BoxDecoration(
-                          color: Colors.white, // Colors.grey.shade200,
-                          borderRadius: BorderRadius.circular(10),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.grey.withOpacity(0.3),
-                              spreadRadius: 2,
-                              blurRadius: 7,
-                              offset: const Offset(
-                                  0, 3), // changes position of shadow
-                            ),
-                          ]),
+                    ElevatedContainer(
+                      bottomPadding: 10,
                       child: TextFormField(
                         decoration: const InputDecoration(
                             labelText: 'Pass Phrase', border: InputBorder.none),
@@ -109,33 +69,28 @@ class PinChangeScreen extends HookConsumerWidget {
               const SizedBox(
                 height: 20,
               ),
-              Spacer(
+              const Spacer(
                 flex: 3,
               ),
-              Container(
-                width: MediaQuery.of(context).size.width * 0.5,
-                height: MediaQuery.of(context).size.height * 0.06,
-                decoration: BoxDecoration(
-                    color: Color(0xff0d47a1),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.3),
-                        spreadRadius: 2,
-                        blurRadius: 7,
-                        offset:
-                            const Offset(0, 3), // changes position of shadow
-                      ),
-                    ]),
-                child: const Center(
-                    child: Text(
-                  'Submit',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )),
+              SizedBox(
+                width: 200,
+                height: 50,
+                child: MaterialButton(
+                  elevation: 50,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  color: Colors.blue,
+                  // ONPRESSED
+                  onPressed: () {},
+                  child: Center(
+                      child: Text(
+                    'Submit',
+                    style: GoogleFonts.aBeeZee(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
+                  )),
+                ),
               ),
               const SizedBox(
                 height: 20,
