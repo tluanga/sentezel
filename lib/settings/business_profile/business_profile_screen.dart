@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
 import 'package:sentezel/settings/business_profile/business_profile_controller.dart';
 import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
@@ -13,14 +14,22 @@ class BusinessProfileSceen extends HookConsumerWidget {
     final _businessType = useState<BusinessType>(
       BusinessType.mahniSiamZuar,
     );
+    useEffect(() {
+      ref.read(businessProfileControllerProvider.notifier).loadData();
+    }, []);
     return Material(
       child: SafeArea(
         child: Column(
           children: [
             TopBarWithSaveWidget(
               title: 'Business Profile',
-              onSave: () {},
-              onCancel: () {},
+              onSave: () {
+                ref.read(businessProfileControllerProvider.notifier).save();
+                Navigator.pop(context);
+              },
+              onCancel: () {
+                Navigator.pop(context);
+              },
             ),
             ref.read(businessProfileControllerProvider).when(
               data: (data) {
@@ -29,11 +38,23 @@ class BusinessProfileSceen extends HookConsumerWidget {
                     decoration: const InputDecoration(
                       labelText: 'Business Name',
                     ),
+                    initialValue: data.name,
+                    onChanged: (value) {
+                      ref
+                          .read(businessProfileControllerProvider.notifier)
+                          .name = value;
+                    },
                   ),
                   TextFormField(
                     decoration: const InputDecoration(
-                      labelText: 'Address',
+                      labelText: 'Description',
                     ),
+                    initialValue: data.description,
+                    onChanged: (value) {
+                      ref
+                          .read(businessProfileControllerProvider.notifier)
+                          .description = value;
+                    },
                   ),
                   Container(
                       decoration: BoxDecoration(
@@ -63,10 +84,12 @@ class BusinessProfileSceen extends HookConsumerWidget {
                               value: BusinessType.mahniSiamZuar,
                               onChanged: (value) {
                                 // _type.value = LedgerMasterType.direct;
-                                _businessType.value =
-                                    BusinessType.mahniSiamZuar;
+                                ref
+                                    .read(businessProfileControllerProvider
+                                        .notifier)
+                                    .type = BusinessType.mahniSiamZuar;
                               },
-                              groupValue: _businessType.value,
+                              groupValue: data.type,
                             ),
                           ),
                           Container(
@@ -76,10 +99,12 @@ class BusinessProfileSceen extends HookConsumerWidget {
                               trailing: Radio(
                                 value: BusinessType.miSiamsaZuar,
                                 onChanged: (value) {
-                                  _businessType.value =
-                                      BusinessType.miSiamsaZuar;
+                                  ref
+                                      .read(businessProfileControllerProvider
+                                          .notifier)
+                                      .type = BusinessType.miSiamsaZuar;
                                 },
-                                groupValue: _businessType.value,
+                                groupValue: data.type,
                               ),
                             ),
                           ),
