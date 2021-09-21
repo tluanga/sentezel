@@ -47,8 +47,9 @@ class PinSetupController extends StateNotifier<PinSetupState> {
   }
 
   save() {
-    _read(pinRepositoryProvider).pinSetup(
+    _read(pinRepositoryProvider).pinChange(
       PIN(
+        id: 1,
         pin: int.parse(state.pin),
         passPhrase: state.passPhrase,
       ),

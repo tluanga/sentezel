@@ -32,7 +32,7 @@ class SplashScreen extends HookConsumerWidget {
     void navigationPage() async {
       final state = ref.watch(appControllerProvider);
       if (state.businessProfileIsSetup) {
-        Navigator.of(context).pushReplacementNamed(RouteConstant.home);
+        Navigator.of(context).pushReplacementNamed(RouteConstant.pinAuth);
       } else {
         Navigator.of(context)
             .pushReplacementNamed(RouteConstant.businessProfileSetup);

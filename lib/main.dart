@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_screen.dart';
+import 'package:sentezel/authentication/pin/pin_auth/pin_auth_screen.dart';
 import 'package:sentezel/authentication/pin/pin_setup/pin_setup_screen.dart';
+
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
@@ -44,6 +46,7 @@ class MyApp extends HookConsumerWidget {
         RouteConstant.businessProfileSetup: (context) =>
             const BusinessProfileSetupScreen(),
         RouteConstant.pinSetup: (context) => const PinSetupScreen(),
+        RouteConstant.pinAuth: (context) => const PinAuthenticationScreen(),
         RouteConstant.splashScreen: (context) => const SplashScreen(),
       },
       home: const SplashScreen(),

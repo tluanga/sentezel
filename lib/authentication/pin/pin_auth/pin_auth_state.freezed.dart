@@ -16,9 +16,15 @@ final _privateConstructorUsedError = UnsupportedError(
 class _$PinAuthStateTearOff {
   const _$PinAuthStateTearOff();
 
-  _PinAuthState call({required String pin, required String error}) {
+  _PinAuthState call(
+      {required String pin,
+      required String enteredPin,
+      bool authenticate = false,
+      required String error}) {
     return _PinAuthState(
       pin: pin,
+      enteredPin: enteredPin,
+      authenticate: authenticate,
       error: error,
     );
   }
@@ -30,6 +36,8 @@ const $PinAuthState = _$PinAuthStateTearOff();
 /// @nodoc
 mixin _$PinAuthState {
   String get pin => throw _privateConstructorUsedError;
+  String get enteredPin => throw _privateConstructorUsedError;
+  bool get authenticate => throw _privateConstructorUsedError;
   String get error => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
@@ -42,7 +50,7 @@ abstract class $PinAuthStateCopyWith<$Res> {
   factory $PinAuthStateCopyWith(
           PinAuthState value, $Res Function(PinAuthState) then) =
       _$PinAuthStateCopyWithImpl<$Res>;
-  $Res call({String pin, String error});
+  $Res call({String pin, String enteredPin, bool authenticate, String error});
 }
 
 /// @nodoc
@@ -56,6 +64,8 @@ class _$PinAuthStateCopyWithImpl<$Res> implements $PinAuthStateCopyWith<$Res> {
   @override
   $Res call({
     Object? pin = freezed,
+    Object? enteredPin = freezed,
+    Object? authenticate = freezed,
     Object? error = freezed,
   }) {
     return _then(_value.copyWith(
@@ -63,6 +73,14 @@ class _$PinAuthStateCopyWithImpl<$Res> implements $PinAuthStateCopyWith<$Res> {
           ? _value.pin
           : pin // ignore: cast_nullable_to_non_nullable
               as String,
+      enteredPin: enteredPin == freezed
+          ? _value.enteredPin
+          : enteredPin // ignore: cast_nullable_to_non_nullable
+              as String,
+      authenticate: authenticate == freezed
+          ? _value.authenticate
+          : authenticate // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -78,7 +96,7 @@ abstract class _$PinAuthStateCopyWith<$Res>
           _PinAuthState value, $Res Function(_PinAuthState) then) =
       __$PinAuthStateCopyWithImpl<$Res>;
   @override
-  $Res call({String pin, String error});
+  $Res call({String pin, String enteredPin, bool authenticate, String error});
 }
 
 /// @nodoc
@@ -94,6 +112,8 @@ class __$PinAuthStateCopyWithImpl<$Res> extends _$PinAuthStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? pin = freezed,
+    Object? enteredPin = freezed,
+    Object? authenticate = freezed,
     Object? error = freezed,
   }) {
     return _then(_PinAuthState(
@@ -101,6 +121,14 @@ class __$PinAuthStateCopyWithImpl<$Res> extends _$PinAuthStateCopyWithImpl<$Res>
           ? _value.pin
           : pin // ignore: cast_nullable_to_non_nullable
               as String,
+      enteredPin: enteredPin == freezed
+          ? _value.enteredPin
+          : enteredPin // ignore: cast_nullable_to_non_nullable
+              as String,
+      authenticate: authenticate == freezed
+          ? _value.authenticate
+          : authenticate // ignore: cast_nullable_to_non_nullable
+              as bool,
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -112,16 +140,25 @@ class __$PinAuthStateCopyWithImpl<$Res> extends _$PinAuthStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PinAuthState implements _PinAuthState {
-  _$_PinAuthState({required this.pin, required this.error});
+  _$_PinAuthState(
+      {required this.pin,
+      required this.enteredPin,
+      this.authenticate = false,
+      required this.error});
 
   @override
   final String pin;
+  @override
+  final String enteredPin;
+  @JsonKey(defaultValue: false)
+  @override
+  final bool authenticate;
   @override
   final String error;
 
   @override
   String toString() {
-    return 'PinAuthState(pin: $pin, error: $error)';
+    return 'PinAuthState(pin: $pin, enteredPin: $enteredPin, authenticate: $authenticate, error: $error)';
   }
 
   @override
@@ -130,6 +167,12 @@ class _$_PinAuthState implements _PinAuthState {
         (other is _PinAuthState &&
             (identical(other.pin, pin) ||
                 const DeepCollectionEquality().equals(other.pin, pin)) &&
+            (identical(other.enteredPin, enteredPin) ||
+                const DeepCollectionEquality()
+                    .equals(other.enteredPin, enteredPin)) &&
+            (identical(other.authenticate, authenticate) ||
+                const DeepCollectionEquality()
+                    .equals(other.authenticate, authenticate)) &&
             (identical(other.error, error) ||
                 const DeepCollectionEquality().equals(other.error, error)));
   }
@@ -138,6 +181,8 @@ class _$_PinAuthState implements _PinAuthState {
   int get hashCode =>
       runtimeType.hashCode ^
       const DeepCollectionEquality().hash(pin) ^
+      const DeepCollectionEquality().hash(enteredPin) ^
+      const DeepCollectionEquality().hash(authenticate) ^
       const DeepCollectionEquality().hash(error);
 
   @JsonKey(ignore: true)
@@ -147,11 +192,18 @@ class _$_PinAuthState implements _PinAuthState {
 }
 
 abstract class _PinAuthState implements PinAuthState {
-  factory _PinAuthState({required String pin, required String error}) =
-      _$_PinAuthState;
+  factory _PinAuthState(
+      {required String pin,
+      required String enteredPin,
+      bool authenticate,
+      required String error}) = _$_PinAuthState;
 
   @override
   String get pin => throw _privateConstructorUsedError;
+  @override
+  String get enteredPin => throw _privateConstructorUsedError;
+  @override
+  bool get authenticate => throw _privateConstructorUsedError;
   @override
   String get error => throw _privateConstructorUsedError;
   @override

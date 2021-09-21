@@ -1,7 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:sentezel/authentication/pin/pin_change_screen.dart';
+import 'package:sentezel/authentication/pin/pin_change/pin_change_screen.dart';
+
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/new_transaction/new_transaction_center_screen.dart';
