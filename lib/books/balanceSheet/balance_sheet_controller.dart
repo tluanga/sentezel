@@ -304,7 +304,9 @@ class BalanceSheetController
             _amount += _transactionList[j].debitAmount;
           }
           Asset asset = Asset(name: _ledgerMasterList[i].name, amount: _amount);
-          _assetList.add(asset);
+          if (_amount != 0) {
+            _assetList.add(asset);
+          }
         }
       }
 

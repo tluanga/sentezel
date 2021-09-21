@@ -249,24 +249,30 @@ class BalanceSheetReportScreen extends HookConsumerWidget {
                       state.when(data: (data) {
                         return Column(
                           children: [
-                            Row(
-                              children: [
-                                const Text('Cash in hand'),
-                                Text(data[0].cash.toString())
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Text('Cash at Bank'),
-                                Text(data[0].bank.toString())
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                const Text('Debtors'),
-                                Text(data[0].debtors.toString())
-                              ],
-                            ),
+                            data[0].cash != 0
+                                ? Row(
+                                    children: [
+                                      const Text('Cash in hand'),
+                                      Text(data[0].cash.toString())
+                                    ],
+                                  )
+                                : Container(),
+                            data[0].bank != 0
+                                ? Row(
+                                    children: [
+                                      const Text('Cash at Bank'),
+                                      Text(data[0].bank.toString())
+                                    ],
+                                  )
+                                : Container(),
+                            data[0].debtors != 0
+                                ? Row(
+                                    children: [
+                                      const Text('Debtors'),
+                                      Text(data[0].debtors.toString())
+                                    ],
+                                  )
+                                : Container(),
                             Expanded(
                                 child: ListView.builder(
                                     itemCount: data[0].asset.length,
