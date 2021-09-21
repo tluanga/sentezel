@@ -4,6 +4,7 @@ import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_mode
 import 'package:sentezel/common/enums/debit_or_credit_enum.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection.controller.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
@@ -76,18 +77,23 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
 
           if (_transactionCategory.transactionType == TransactionType.hralh ||
               _transactionCategory.transactionType == TransactionType.lakluh) {
-            //----------If Party---
-
-            //Checking for cash/bank or other ledger for correction of debit and credit
-            if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
-                ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
-              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
-              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
-              _ledgerTransaction.amount = _transactionList[j].debitAmount;
-            } else {
-              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
-              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
-              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+            //----------CheckFor Partial Payment---
+            if (_transactionList[j].mode ==
+                    TransactionMode.partialPaymentByBank ||
+                _transactionList[j].mode ==
+                    TransactionMode.partialPaymentByCash) {
+              if (ledgerMasterDataList[i].id == LedgerMasterIndex.goods) {
+                {
+                  _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+                  _ledgerReport.creditAmount +=
+                      _transactionList[j].creditAmount;
+                  _ledgerTransaction.amount = _transactionList[j].creditAmount;
+                }
+              } else {
+                _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+                _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+                _ledgerTransaction.amount = _transactionList[j].debitAmount;
+              }
             }
 
             // _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
