@@ -92,14 +92,24 @@ class ProfitAndLossController
           // filter cash and bank account
           if (_directLedgerMasterDataList[i].id != LedgerMasterIndex.cash &&
               _directLedgerMasterDataList[i].id != LedgerMasterIndex.bank) {
-            _directIncomeList.add(_directIncome);
+            int _balance = 0;
+            _balance =
+                (_directIncome.totalCredit - _directIncome.totalDebit).abs();
+            if (_balance != 0) {
+              _directIncomeList.add(_directIncome);
+            }
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
           // filter cash and bank account
           if (_directLedgerMasterDataList[i].id != LedgerMasterIndex.cash &&
               _directLedgerMasterDataList[i].id != LedgerMasterIndex.bank) {
-            _directExpenseList.add(_directExpense);
+            int _balance = 0;
+            _balance =
+                (_directExpense.totalCredit - _directExpense.totalDebit).abs();
+            if (_balance != 0) {
+              _directExpenseList.add(_directExpense);
+            }
           }
         }
       }
@@ -166,19 +176,32 @@ class ProfitAndLossController
             }
           }
         }
+
         // income a nih chuan incomelist ah a add ang
         if (_incomeOrExpense == 0) {
           // filter cash and bank account
           if (_indirectLedgerMasterDataList[i].id != LedgerMasterIndex.cash &&
               _indirectLedgerMasterDataList[i].id != LedgerMasterIndex.bank) {
-            _indirectIncomeList.add(_indirectIncome);
+            int _balance = 0;
+            _balance =
+                (_indirectIncome.totalCredit - _indirectIncome.totalDebit)
+                    .abs();
+            if (_balance != 0) {
+              _indirectIncomeList.add(_indirectIncome);
+            }
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
           // filter cash and bank account
           if (_indirectLedgerMasterDataList[i].id != LedgerMasterIndex.cash &&
               _indirectLedgerMasterDataList[i].id != LedgerMasterIndex.bank) {
-            _indirectExpenseList.add(_indirectExpense);
+            int _balance = 0;
+            _balance =
+                (_indirectExpense.totalCredit - _indirectExpense.totalDebit)
+                    .abs();
+            if (_balance != 0) {
+              _indirectExpenseList.add(_indirectExpense);
+            }
           }
         }
       }
@@ -221,6 +244,10 @@ class ProfitAndLossController
         _netProfit = (_grossProfit + _indirectIncomeTotal) -
             (_grossLoss + _indirectExpenseTotal);
       }
+      int _finalExpenseTotal = 0;
+      int _finalIncomeTotal = 0;
+      _finalExpenseTotal = _grossLoss + _netProfit + _indirectExpenseTotal;
+      _finalIncomeTotal = _grossProfit + _netLoss + _indirectIncomeTotal;
 
       ProfitAndLoss _profitAndLoss = ProfitAndLoss(
           grossLoss: _grossLoss,
@@ -228,7 +255,9 @@ class ProfitAndLossController
           netLoss: _netLoss,
           netProfit: _netProfit,
           indirectExpense: _indirectExpenseList,
-          indirectIncome: _indirectIncomeList);
+          indirectIncome: _indirectIncomeList,
+          finalExpenseTotal: _finalExpenseTotal,
+          finalIncomeTotal: _finalIncomeTotal);
       _profitAndLossList.add(_profitAndLoss);
 
       state = AsyncData(_profitAndLossList);

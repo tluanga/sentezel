@@ -1,11 +1,15 @@
 class TradingAccount {
   int grossProfit;
   int grossLoss;
+  int finalExpenseTotal;
+  int finalIncomeTotal;
   List<DirectExpense> directExpense;
   List<DirectIncome> directIncome;
   TradingAccount({
     required this.grossProfit,
     required this.grossLoss,
+    required this.finalExpenseTotal,
+    required this.finalIncomeTotal,
     required this.directExpense,
     required this.directIncome,
   });

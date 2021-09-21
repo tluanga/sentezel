@@ -488,4 +488,12 @@ List<LedgerMaster> ledgerMasterData = [
     type: LedgerMasterType.direct,
     status: Status.active,
   ),
+  // 59 Office Expenses
+  LedgerMaster.withId(
+    id: LedgerMasterIndex.officeExpense,
+    name: 'Office Expenses',
+    description: 'Office thil a sum hmanna',
+    type: LedgerMasterType.direct,
+    status: Status.active,
+  ),
 ];

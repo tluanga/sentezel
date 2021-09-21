@@ -65,6 +65,8 @@ dependencies:
   file_picker: ^4.0.3
   pin_code_fields: ^7.3.0
   pdf: ^3.6.0
+  syncfusion_flutter_pdf: ^19.2.62-beta
+  open_file: ^3.2.1
 
 dev_dependencies:
   flutter_test:
