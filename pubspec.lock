@@ -770,6 +770,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "19.2.62-beta"
+  syncfusion_flutter_xlsio:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_xlsio
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "19.2.62-beta"
+  syncfusion_officecore:
+    dependency: transitive
+    description:
+      name: syncfusion_officecore
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "19.2.62-beta"
   synchronized:
     dependency: transitive
     description:

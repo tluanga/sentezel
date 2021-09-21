@@ -9,6 +9,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:sentezel/books/trial_balance/trial_balance_controller.dart';
 import 'package:sentezel/books/widgets/report_top_bar_widget.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
+import 'trial_balance_excel.dart';
 import 'trial_balance_model.dart';
 
 class TrialBalanceReportScreen extends HookConsumerWidget {
@@ -119,7 +120,17 @@ class TrialBalanceReportScreen extends HookConsumerWidget {
         children: [
           ReportTopBarWidget(
               title: 'Trial Balance',
-              onGenerateExcel: () {},
+              onGenerateExcel: () {
+                state.when(data: (data) {
+                  return createTrialBLExl(data);
+                }, loading: () {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                }, error: (e, stack) {
+                  throw (e.toString());
+                });
+              },
               onGeneratePdf: () {
                 state.when(data: (data) {
                   return _createPdf(data: data);
