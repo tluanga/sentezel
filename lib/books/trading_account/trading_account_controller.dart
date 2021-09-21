@@ -87,14 +87,22 @@ class TradingAccountController
           // filter cash and bank account
           if (_ledgerMasterDataList[i].id != LedgerMasterIndex.cash &&
               _ledgerMasterDataList[i].id != LedgerMasterIndex.bank) {
-            _directIncomeList.add(_income);
+            int _balance = 0;
+            _balance = (_income.totalCredit - _income.totalDebit).abs();
+            if (_balance != 0) {
+              _directIncomeList.add(_income);
+            }
           }
           //expense a nih chuan expenselist ah a add ang
         } else if (_incomeOrExpense == 1) {
           // filter cash and bank account
           if (_ledgerMasterDataList[i].id != LedgerMasterIndex.cash &&
               _ledgerMasterDataList[i].id != LedgerMasterIndex.bank) {
-            _directExpenseList.add(_expense);
+            int _balance = 0;
+            _balance = (_expense.totalCredit - _expense.totalDebit).abs();
+            if (_balance != 0) {
+              _directExpenseList.add(_expense);
+            }
           }
         }
       }
@@ -114,11 +122,20 @@ class TradingAccountController
       } else if (_directExpenseTotal > _directIncomeTotal) {
         _grossLoss = _directExpenseTotal - _directIncomeTotal;
       }
+
+      int _finalExpenseTotal = 0;
+      int _finalIncomeTotal = 0;
+
+      _finalExpenseTotal = _grossProfit + _directExpenseTotal;
+      _finalIncomeTotal = _grossLoss + _directIncomeTotal;
+
       TradingAccount _tradingAccount = TradingAccount(
           directExpense: _directExpenseList,
           directIncome: _directIncomeList,
           grossLoss: _grossLoss,
-          grossProfit: _grossProfit);
+          grossProfit: _grossProfit,
+          finalExpenseTotal: _finalExpenseTotal,
+          finalIncomeTotal: _finalIncomeTotal);
       _tradingAccountList.add(_tradingAccount);
       state = AsyncData(_tradingAccountList);
     } catch (e) {

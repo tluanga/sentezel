@@ -3,6 +3,8 @@ class ProfitAndLoss {
   int grossLoss;
   int netProfit;
   int netLoss;
+  int finalExpenseTotal;
+  int finalIncomeTotal;
   List<IndirectIncome> indirectIncome;
   List<IndirectExpense> indirectExpense;
   ProfitAndLoss({
@@ -10,6 +12,8 @@ class ProfitAndLoss {
     required this.grossLoss,
     required this.netProfit,
     required this.netLoss,
+    required this.finalExpenseTotal,
+    required this.finalIncomeTotal,
     required this.indirectIncome,
     required this.indirectExpense,
   });
