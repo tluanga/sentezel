@@ -102,7 +102,7 @@ class GeneralSalesScreen extends HookConsumerWidget {
                   );
                 },
                 loading: () {
-                  return const CircularProgressIndicator();
+                  return Center(child: const CircularProgressIndicator());
                 },
                 error: (error, stack) {}),
           ),
