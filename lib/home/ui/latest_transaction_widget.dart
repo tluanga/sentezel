@@ -127,11 +127,14 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          Text(
-                            item.particular,
-                            style: const TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
+                          SizedBox(
+                            width: MediaQuery.of(context).size.width * 0.45,
+                            child: Text(
+                              item.particular,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ],
