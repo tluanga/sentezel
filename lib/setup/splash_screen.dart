@@ -40,7 +40,7 @@ class SplashScreen extends HookConsumerWidget {
     }
 
     startTime() async {
-      var _duration = const Duration(seconds: 5);
+      var _duration = const Duration(seconds: 4);
       return Timer(_duration, navigationPage);
     }
 

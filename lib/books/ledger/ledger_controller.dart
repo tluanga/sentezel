@@ -3,6 +3,8 @@ import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
 import 'package:sentezel/common/enums/debit_or_credit_enum.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection.controller.dart';
+import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
@@ -12,15 +14,21 @@ import 'package:sentezel/settings/transactionCategory/transaction_category_repos
 
 final ledgerControllerProvider =
     StateNotifierProvider<LedgerController, AsyncValue<List<LedgerReport>>>(
-  (ref) => LedgerController(ref.read)..loadData(ledgerName: ''),
-);
+        (ref) {
+  return LedgerController(ref.read, ref)
+    ..loadData(
+      ledgerName: '',
+    );
+});
 
 class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
   final Reader _read;
+  final ProviderRefBase ref;
 
-  LedgerController(this._read) : super(const AsyncValue.loading());
+  LedgerController(this._read, this.ref) : super(const AsyncValue.loading());
 
   loadData({String ledgerName = ''}) async {
+    final dates = ref.watch(timeFrameSelectionControllerProvider);
     try {
       List<LedgerReport> _ledgerReportList = [];
       final ledgerMasterDataList =
@@ -30,9 +38,16 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
 
       //---------Iterate Ledger Master List-------------
       for (int i = 0; i < ledgerMasterDataList.length; i++) {
+        //
+
         final _transactionList = await _read(transactionRepositoryProvider)
             .getTransactionByLedgerMaster(
-                ledgerMasterId: ledgerMasterDataList[i].id);
+          ledgerMasterId: ledgerMasterDataList[i].id,
+          startDate: dates.startDate,
+          endDate: dates.endDate,
+        );
+        print(_transactionList.length);
+        //s
         int _creditAmount = 0;
         int _debitAmount = 0;
         List<LedgerTransaction> _ledgerTransactionList = [];
@@ -62,18 +77,23 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
 
           if (_transactionCategory.transactionType == TransactionType.hralh ||
               _transactionCategory.transactionType == TransactionType.lakluh) {
-            //----------If Party---
-
-            //Checking for cash/bank or other ledger for correction of debit and credit
-            if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
-                ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
-              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
-              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
-              _ledgerTransaction.amount = _transactionList[j].debitAmount;
-            } else {
-              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
-              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
-              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+            //----------CheckFor Partial Payment---
+            if (_transactionList[j].mode ==
+                    TransactionMode.partialPaymentByBank ||
+                _transactionList[j].mode ==
+                    TransactionMode.partialPaymentByCash) {
+              if (ledgerMasterDataList[i].id == LedgerMasterIndex.goods) {
+                {
+                  _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+                  _ledgerReport.creditAmount +=
+                      _transactionList[j].creditAmount;
+                  _ledgerTransaction.amount = _transactionList[j].creditAmount;
+                }
+              } else {
+                _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+                _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+                _ledgerTransaction.amount = _transactionList[j].debitAmount;
+              }
             }
 
             // _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;

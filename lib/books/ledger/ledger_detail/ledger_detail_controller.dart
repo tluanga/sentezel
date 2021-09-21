@@ -1,15 +1,17 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection.controller.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 
 final ledgerDetailControllerProvider =
     StateNotifierProvider<LedgerDetailController, LedgerReport>(
-        (ref) => LedgerDetailController(ref.read));
+        (ref) => LedgerDetailController(ref.read, ref));
 
 class LedgerDetailController extends StateNotifier<LedgerReport> {
   final Reader _read;
-  LedgerDetailController(this._read)
+  final ProviderRefBase ref;
+  LedgerDetailController(this._read, this.ref)
       : super(
           LedgerReport(
               ledgerId: 0,
@@ -19,8 +21,11 @@ class LedgerDetailController extends StateNotifier<LedgerReport> {
               debitAmount: 0),
         );
 
-  loadData({required int id}) async {
-    state = _read(ledgerControllerProvider.notifier).getLedgerDetail(id);
+  loadData({required int id, DateTime? startDate, DateTime? endDate}) async {
+    ref.watch(timeFrameSelectionControllerProvider);
+    state = _read(ledgerControllerProvider.notifier).getLedgerDetail(
+      id,
+    );
   }
 
   removeItem({required int transactionId}) async {

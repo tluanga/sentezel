@@ -10,121 +10,124 @@ daySelection({
   required Function(DateTime) onEndDateSelect,
 }) {
   return SizedBox(
-    width: MediaQuery.of(context).size.width * 0.97,
+    width: MediaQuery.of(context).size.width * 0.98,
     child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            const Text(
-              'Start Date',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            const Text(
-              '-',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            GestureDetector(
-              onTap: () async {
-                //open Date Seletor
-                DateTime? date = DateTime.now();
-                date = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(DateTime.now().year),
-                  lastDate: DateTime.now().add(
-                    const Duration(
-                      days: 100,
-                    ),
-                  ),
-                );
-                onStartDateSelect(date!);
+        // Row(
+        //   children: [
+        //     const Text(
+        //       'Start Date',
+        //       style: TextStyle(
+        //         fontSize: 14,
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        //     ),
+        //     const Text(
+        //       '-',
+        //       style: TextStyle(
+        //         fontSize: 14,
+        //         fontWeight: FontWeight.bold,
+        //       ),
+        //     ),
+        //     GestureDetector(
+        //       onTap: () async {
+        //         //open Date Seletor
+        //         DateTime? date = DateTime.now();
+        //         date = await showDatePicker(
+        //           context: context,
+        //           initialDate: DateTime.now(),
+        //           firstDate: DateTime(DateTime.now().year),
+        //           lastDate: DateTime.now().add(
+        //             const Duration(
+        //               days: 100,
+        //             ),
+        //           ),
+        //         );
+        //         onStartDateSelect(date!);
 
-                // model.startDate = date!;
-              },
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.calendar_today,
-                    size: 20,
-                  ),
-                  Text(
-                    DateFormat('d-MM-yyyy').format(startDate.value),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const Icon(
-                    CupertinoIcons.chevron_down,
-                    size: 16,
-                  )
-                ],
-              ),
-            ),
-          ],
-        ),
+        //         // model.startDate = date!;
+        //       },
+        //       child: Row(
+        //         children: [
+        //           const Icon(
+        //             Icons.calendar_today,
+        //             size: 20,
+        //           ),
+        //           Text(
+        //             DateFormat('d-MM-yy').format(startDate.value),
+        //             style: const TextStyle(
+        //               fontSize: 14,
+        //               fontWeight: FontWeight.bold,
+        //             ),
+        //           ),
+        //           const Icon(
+        //             CupertinoIcons.chevron_down,
+        //             size: 16,
+        //           )
+        //         ],
+        //       ),
+        //     ),
+        //   ],
+        // ),
 
         //--------------------------------------
-        Row(
-          children: [
-            const Text(
-              'End Date',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.45,
+          child: Row(
+            children: [
+              const Text(
+                'End Date',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const Text(
-              '-',
-              style: TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.bold,
+              const Text(
+                '-',
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            GestureDetector(
-              onTap: () async {
-                //open Date Seletor
-                DateTime? date = DateTime.now();
-                date = await showDatePicker(
-                  context: context,
-                  initialDate: DateTime.now(),
-                  firstDate: DateTime(DateTime.now().year),
-                  lastDate: DateTime.now().add(
-                    const Duration(
-                      days: 100,
+              GestureDetector(
+                onTap: () async {
+                  //open Date Seletor
+                  DateTime? date = DateTime.now();
+                  date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(DateTime.now().year),
+                    lastDate: DateTime.now().add(
+                      const Duration(
+                        days: 100,
+                      ),
                     ),
-                  ),
-                );
-                onEndDateSelect(date!);
-              },
-              child: Row(
-                children: [
-                  const Icon(
-                    Icons.calendar_today,
-                    size: 20,
-                  ),
-                  Text(
-                    DateFormat('d-MM-yyyy').format(endDate.value),
-                    style: const TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
+                  );
+                  onEndDateSelect(date!);
+                },
+                child: Row(
+                  children: [
+                    const Icon(
+                      Icons.calendar_today,
+                      size: 20,
                     ),
-                  ),
-                  const Icon(
-                    CupertinoIcons.chevron_down,
-                    size: 16,
-                  )
-                ],
+                    Text(
+                      DateFormat('d-MM-yy').format(endDate.value),
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const Icon(
+                      CupertinoIcons.chevron_down,
+                      size: 16,
+                    )
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     ),
