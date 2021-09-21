@@ -42,123 +42,131 @@ class AnalyticsTimeFrameSelection extends HookConsumerWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                // GestureDetector(
-                //   onTap: () async {
-                //     showCupertinoModalBottomSheet(
-                //       expand: false,
-                //       context: context,
-                //       backgroundColor: Colors.transparent,
-                //       builder: (context) => timeFrame(
-                //         context: context,
-                //         onSelect: (period) {
-                //           mode.value = period;
-                //         },
-                //         period: mode,
-                //       ),
-                //     );
-                //   },
-                //   child: Container(
-                //     height: MediaQuery.of(context).size.height * 0.04,
-                //     width: MediaQuery.of(context).size.width * 0.29,
-                //     decoration: BoxDecoration(
-                //       border: Border.all(color: Colors.grey.shade700),
-                //       borderRadius: BorderRadius.circular(5),
-                //     ),
-                //     child: Padding(
-                //       padding: const EdgeInsets.symmetric(horizontal: 4),
-                //       child: Row(
-                //         children: const [
-                //           Text(
-                //             'Select Period',
-                //             style: TextStyle(
-                //               fontSize: 14,
-                //               fontWeight: FontWeight.bold,
-                //             ),
-                //           ),
-                //           Icon(
-                //             CupertinoIcons.chevron_down,
-                //             size: 18,
-                //           )
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(
-                //   width: 20,
-                // ),
-
-                //   //---Current Selected Period
-                //   Row(
-                //     children: [
-                //       const Text(
-                //         'Current Selected -',
-                //         style: TextStyle(
-                //           fontSize: 14,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       ),
-                //       const SizedBox(
-                //         width: 10,
-                //       ),
-                //       Text(
-                //         EnumToString.convertToString(
-                //           mode.value,
-                //           camelCase: true,
-                //         ),
-                //         style: const TextStyle(
-                //           fontSize: 14,
-                //           fontWeight: FontWeight.bold,
-                //         ),
-                //       )
-                //     ],
-                //   ),
-                // ]),
-                // const SizedBox(
-                //   height: 10,
-                // ),
-
-                daySelection(
-                  context: context,
-                  onStartDateSelect: (date) {
-                    startDate.value = date;
-                    onTimeSelect(startDate.value, endDate.value);
-                  },
-                  onEndDateSelect: (date) {
-                    endDate.value = date;
-                    onTimeSelect(startDate.value, endDate.value);
-                  },
-                  startDate: startDate,
-                  endDate: endDate,
-                ),
-                // if (mode.value == AnalyticsPeriod.weekly)
-                //   weekSelection(
-                //     context: context,
-                //     onStartDateSelect: (date) => startDate.value = date,
-                //     onEndDateSelect: (date) => endDate.value = date,
-                //     startDate: startDate,
-                //     endDate: endDate,
-                //   ),
-                // if (mode.value == AnalyticsPeriod.monthly)
-                //   monthSelection(
-                //     context: context,
-                //     onStartDateSelect: (date) => startDate.value = date,
-                //     onEndDateSelect: (date) => endDate.value = date,
-                //     startDate: startDate,
-                //     endDate: endDate,
-                //   ),
-                // if (mode.value == AnalyticsPeriod.financialYear)
-                //   yearSelection(context: context),
-                // // _yearSelection(context: context),
-              ],
-            ),
-          ],
+        child: Center(
+          child: daySelection(
+            context: context,
+            onStartDateSelect: (date) {
+              startDate.value = date;
+              onTimeSelect(startDate.value, endDate.value);
+            },
+            onEndDateSelect: (date) {
+              endDate.value = date;
+              onTimeSelect(startDate.value, endDate.value);
+            },
+            startDate: startDate,
+            endDate: endDate,
+          ),
         ),
       ),
     );
   }
 }
+
+// // GestureDetector(
+//                 //   onTap: () async {
+//                 //     showCupertinoModalBottomSheet(
+//                 //       expand: false,
+//                 //       context: context,
+//                 //       backgroundColor: Colors.transparent,
+//                 //       builder: (context) => timeFrame(
+//                 //         context: context,
+//                 //         onSelect: (period) {
+//                 //           mode.value = period;
+//                 //         },
+//                 //         period: mode,
+//                 //       ),
+//                 //     );
+//                 //   },
+//                 //   child: Container(
+//                 //     height: MediaQuery.of(context).size.height * 0.04,
+//                 //     width: MediaQuery.of(context).size.width * 0.29,
+//                 //     decoration: BoxDecoration(
+//                 //       border: Border.all(color: Colors.grey.shade700),
+//                 //       borderRadius: BorderRadius.circular(5),
+//                 //     ),
+//                 //     child: Padding(
+//                 //       padding: const EdgeInsets.symmetric(horizontal: 4),
+//                 //       child: Row(
+//                 //         children: const [
+//                 //           Text(
+//                 //             'Select Period',
+//                 //             style: TextStyle(
+//                 //               fontSize: 14,
+//                 //               fontWeight: FontWeight.bold,
+//                 //             ),
+//                 //           ),
+//                 //           Icon(
+//                 //             CupertinoIcons.chevron_down,
+//                 //             size: 18,
+//                 //           )
+//                 //         ],
+//                 //       ),
+//                 //     ),
+//                 //   ),
+//                 // ),
+//                 // const SizedBox(
+//                 //   width: 20,
+//                 // ),
+
+//                 //   //---Current Selected Period
+//                 //   Row(
+//                 //     children: [
+//                 //       const Text(
+//                 //         'Current Selected -',
+//                 //         style: TextStyle(
+//                 //           fontSize: 14,
+//                 //           fontWeight: FontWeight.bold,
+//                 //         ),
+//                 //       ),
+//                 //       const SizedBox(
+//                 //         width: 10,
+//                 //       ),
+//                 //       Text(
+//                 //         EnumToString.convertToString(
+//                 //           mode.value,
+//                 //           camelCase: true,
+//                 //         ),
+//                 //         style: const TextStyle(
+//                 //           fontSize: 14,
+//                 //           fontWeight: FontWeight.bold,
+//                 //         ),
+//                 //       )
+//                 //     ],
+//                 //   ),
+//                 // ]),
+//                 // const SizedBox(
+//                 //   height: 10,
+//                 // ),
+
+//                 daySelection(
+//                   context: context,
+//                   onStartDateSelect: (date) {
+//                     startDate.value = date;
+//                     onTimeSelect(startDate.value, endDate.value);
+//                   },
+//                   onEndDateSelect: (date) {
+//                     endDate.value = date;
+//                     onTimeSelect(startDate.value, endDate.value);
+//                   },
+//                   startDate: startDate,
+//                   endDate: endDate,
+//                 ),
+//                 // if (mode.value == AnalyticsPeriod.weekly)
+//                 //   weekSelection(
+//                 //     context: context,
+//                 //     onStartDateSelect: (date) => startDate.value = date,
+//                 //     onEndDateSelect: (date) => endDate.value = date,
+//                 //     startDate: startDate,
+//                 //     endDate: endDate,
+//                 //   ),
+//                 // if (mode.value == AnalyticsPeriod.monthly)
+//                 //   monthSelection(
+//                 //     context: context,
+//                 //     onStartDateSelect: (date) => startDate.value = date,
+//                 //     onEndDateSelect: (date) => endDate.value = date,
+//                 //     startDate: startDate,
+//                 //     endDate: endDate,
+//                 //   ),
+//                 // if (mode.value == AnalyticsPeriod.financialYear)
+//                 //   yearSelection(context: context),
+//                 // // _yearSelection(context: context),

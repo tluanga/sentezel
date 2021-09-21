@@ -50,7 +50,7 @@ class PinTextField extends StatelessWidget {
                 fieldHeight: 32,
                 fieldWidth: 32,
                 inactiveColor: Colors.grey,
-                //activeColor: Colors.grey[800],
+                activeColor: Colors.white,
               ),
             ),
           ),
