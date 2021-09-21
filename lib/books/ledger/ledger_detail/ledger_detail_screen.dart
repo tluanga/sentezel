@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/analytics_time_frame_selection_widget.dart';
 import 'package:sentezel/books/ledger/ledger_detail/ledger_detail_controller.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_detail_bottom_sheet.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
@@ -11,6 +13,7 @@ import 'package:sentezel/common/ui/widget/pdf_export_button_widget.dart';
 
 import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/common/enums/debit_or_credit_enum.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/element/day_selection_widget.dart';
 
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_widget.dart';
 
@@ -25,6 +28,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(ledgerDetailControllerProvider);
+
     return Material(
       child: SafeArea(
         child: Column(
@@ -35,7 +39,13 @@ class LedgerDetailScreen extends HookConsumerWidget {
                 Navigator.pop(context);
               },
             ),
-            const TimeFrameSelection(),
+            DaySelectionWidget(
+              onDateSelected: (startDate, endDate) {
+                ref
+                    .read(ledgerDetailControllerProvider.notifier)
+                    .loadData(id: state.ledgerId);
+              },
+            ),
             const SizedBox(
               height: 10,
             ),
