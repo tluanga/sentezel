@@ -24,27 +24,32 @@ class DebtorListController extends StateNotifier<AsyncValue<List<Debtor>>> {
         final _transactionList = await _read(transactionRepositoryProvider)
             .getTransactionByLedgerMaster(
                 ledgerMasterId: ledgerMasterDataList[i].id);
-        int _amount = 0;
+        int _credit = 0;
+        int _debit = 0;
         for (int j = 0; j < _transactionList.length; j++) {
           // debit side ledger null means that it is a full credit by party
           if (_transactionList[j].debitSideLedger == null) {
-            _amount += _transactionList[j].debitAmount;
+            _debit += _transactionList[j].debitAmount;
             // if debit side ledger is cash/bank, its a partial credit by party
           } else if (_transactionList[j].debitSideLedger ==
                   LedgerMasterIndex.cash ||
               _transactionList[j].debitSideLedger == LedgerMasterIndex.bank) {
             if (_transactionList[j].transactionCategoryId ==
                 TransactionCategoryIndex.customerDebtSettlement) {
-              _amount -= _transactionList[j].debitAmount;
+              _credit += _transactionList[j].creditAmount;
             } else {
-              _amount += _transactionList[j].debitAmount;
+              _debit += _transactionList[j].debitAmount;
             }
           }
         }
-        if (_amount != 0) {
+        int _balance = 0;
+        if (_debit > _credit) {
+          _balance = _debit - _credit;
+        }
+        if (_balance > 0) {
           debtorList.add(
             Debtor(
-              amount: _amount,
+              amount: _balance,
               party: ledgerMasterDataList[i],
             ),
           );

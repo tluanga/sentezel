@@ -22,49 +22,65 @@ class TrialBalanceController
       final _ledgerMasterList =
           await _read(ledgerMasterRepositoryProvider).getList();
       List<TrialBalance> _trialBalanceList = [];
-      int _totalCreditorsAmount = 0;
-      int _totalDebtorsAmount = 0;
+      int _creditorsBalance = 0;
+      int _debtorsBalance = 0;
       for (int i = 0; i < _ledgerMasterList.length; i++) {
         // For party Ledgers
         if (_ledgerMasterList[i].type == LedgerMasterType.party) {
+          int _totalCredit = 0;
+          int _totalDebit = 0;
           final _transactionList = await _read(transactionRepositoryProvider)
               .getTransactionByLedgerMaster(
                   ledgerMasterId: _ledgerMasterList[i].id);
           for (int j = 0; j < _transactionList.length; j++) {
-            // for full credit
-            if (_transactionList[j].mode == TransactionMode.credit) {
-              if (_transactionList[j].creditSideLedger == null) {
-                _totalCreditorsAmount += _transactionList[j].creditAmount;
-              } else if (_transactionList[j].debitSideLedger == null) {
-                _totalDebtorsAmount += _transactionList[j].debitAmount;
-              }
-              // partial payments
-            } else if (_transactionList[j].mode ==
-                    TransactionMode.partialPaymentByCash ||
-                _transactionList[j].mode ==
-                    TransactionMode.partialPaymentByBank) {
-              if (_transactionList[j].creditSideLedger ==
-                      LedgerMasterIndex.cash ||
-                  _transactionList[j].creditSideLedger ==
-                      LedgerMasterIndex.bank) {
-                _totalCreditorsAmount += _transactionList[j].creditAmount;
-              } else if (_transactionList[j].debitSideLedger ==
-                      LedgerMasterIndex.cash ||
-                  _transactionList[j].debitSideLedger ==
-                      LedgerMasterIndex.bank) {
-                _totalDebtorsAmount += _transactionList[j].debitAmount;
+            //  settlements
+            if (_transactionList[j].transactionCategoryId ==
+                TransactionCategoryIndex.customerDebtSettlement) {
+              _totalCredit += _transactionList[j].creditAmount;
+            } else if (_transactionList[j].transactionCategoryId ==
+                TransactionCategoryIndex.businessDebtSettlement) {
+              _totalDebit += _transactionList[j].debitAmount;
+            } else {
+              // for full credit
+              if (_transactionList[j].mode == TransactionMode.credit) {
+                if (_transactionList[j].creditSideLedger == null) {
+                  _totalCredit += _transactionList[j].creditAmount;
+                } else if (_transactionList[j].debitSideLedger == null) {
+                  _totalDebit += _transactionList[j].debitAmount;
+                }
+                // partial payments
+              } else if (_transactionList[j].mode ==
+                      TransactionMode.partialPaymentByCash ||
+                  _transactionList[j].mode ==
+                      TransactionMode.partialPaymentByBank) {
+                if (_transactionList[j].creditSideLedger ==
+                        LedgerMasterIndex.cash ||
+                    _transactionList[j].creditSideLedger ==
+                        LedgerMasterIndex.bank) {
+                  _totalCredit += _transactionList[j].creditAmount;
+                } else if (_transactionList[j].debitSideLedger ==
+                        LedgerMasterIndex.cash ||
+                    _transactionList[j].debitSideLedger ==
+                        LedgerMasterIndex.bank) {
+                  _totalDebit += _transactionList[j].debitAmount;
+                }
               }
             }
             // For settlements
             // if there is settlement, debtors or creditors amount is reduced
-            if (_transactionList[j].transactionCategoryId ==
-                TransactionCategoryIndex.customerDebtSettlement) {
-              _totalDebtorsAmount -= _transactionList[j].creditAmount;
-            }
-            if (_transactionList[j].transactionCategoryId ==
-                TransactionCategoryIndex.businessDebtSettlement) {
-              _totalCreditorsAmount -= _transactionList[j].debitAmount;
-            }
+            // if (_transactionList[j].transactionCategoryId ==
+            //     TransactionCategoryIndex.customerDebtSettlement) {
+            //   _totalDebitForAPartyLedger -= _transactionList[j].creditAmount;
+            // }
+            // if (_transactionList[j].transactionCategoryId ==
+            //     TransactionCategoryIndex.businessDebtSettlement) {
+            //   _totalCreditForAPartyLedger -= _transactionList[j].debitAmount;
+            // }
+          }
+          if (_totalCredit > _totalDebit) {
+            _creditorsBalance += _totalCredit - _totalDebit;
+          } else if (_totalCredit < _totalDebit) {
+            _debtorsBalance += _totalDebit - _totalCredit;
           }
         }
         // for non party Ledgers
@@ -170,9 +186,9 @@ class TrialBalanceController
       // add creditors to trial balance list if the balance is not zero
       TrialBalance _creditors = TrialBalance(
           ledgerName: 'Creditors',
-          totalCredit: _totalCreditorsAmount,
+          totalCredit: _creditorsBalance,
           totalDebit: 0,
-          balance: _totalCreditorsAmount);
+          balance: _creditorsBalance);
       if (_creditors.balance != 0) {
         _trialBalanceList.add(_creditors);
       }
@@ -180,8 +196,8 @@ class TrialBalanceController
       TrialBalance _debtors = TrialBalance(
           ledgerName: 'Debtors',
           totalCredit: 0,
-          totalDebit: _totalDebtorsAmount,
-          balance: _totalDebtorsAmount);
+          totalDebit: _debtorsBalance,
+          balance: _debtorsBalance);
       if (_debtors.balance != 0) {
         _trialBalanceList.add(_debtors);
       }

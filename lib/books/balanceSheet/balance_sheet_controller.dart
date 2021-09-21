@@ -39,27 +39,31 @@ class BalanceSheetController
       for (int i = 0; i < _ledgerMasterList.length; i++) {
         // ------------------For Creditors and Debtors-------------------
         if (_ledgerMasterList[i].type == LedgerMasterType.party) {
+          int _credit = 0;
+          int _debit = 0;
           final _transactionList = await _read(transactionRepositoryProvider)
               .getTransactionByLedgerMaster(
                   ledgerMasterId: _ledgerMasterList[i].id);
           for (int j = 0; j < _transactionList.length; j++) {
             // debit side ledger null means that it is a full credit by party
-            if (_transactionList[j].debitSideLedger == null) {
-              _debtors += _transactionList[j].debitAmount;
+            if (_transactionList[j].debitSideLedger == null &&
+                _transactionList[j].assetLedgerId == null) {
+              _debit += _transactionList[j].debitAmount;
               // if debit side ledger is cash/bank, its a partial credit by party
             } else if (_transactionList[j].debitSideLedger ==
                     LedgerMasterIndex.cash ||
                 _transactionList[j].debitSideLedger == LedgerMasterIndex.bank) {
               if (_transactionList[j].transactionCategoryId ==
                   TransactionCategoryIndex.customerDebtSettlement) {
-                _debtors -= _transactionList[j].debitAmount;
-              } else {
-                _debtors += _transactionList[j].debitAmount;
+                _credit += _transactionList[j].debitAmount;
+              } else if (_transactionList[j].transactionCategoryId ==
+                  TransactionCategoryIndex.saleOfGoods) {
+                _debit += _transactionList[j].debitAmount;
               }
             }
             //  credit side ledger null means that it is a full credit to party
             if (_transactionList[j].creditSideLedger == null) {
-              _creditors += _transactionList[j].creditAmount;
+              _credit += _transactionList[j].creditAmount;
               // if credit side ledger is cash/bank, its a partial credit to party
             } else if (_transactionList[j].creditSideLedger ==
                     LedgerMasterIndex.cash ||
@@ -67,17 +71,20 @@ class BalanceSheetController
                     LedgerMasterIndex.bank) {
               if (_transactionList[j].transactionCategoryId ==
                   TransactionCategoryIndex.businessDebtSettlement) {
-                _creditors -= _transactionList[j].creditAmount;
+                _debit -= _transactionList[j].creditAmount;
               } else {
-                _creditors += _transactionList[j].creditAmount;
+                _credit += _transactionList[j].creditAmount;
               }
             }
+          }
+          if (_debit > _credit) {
+            _debtors += _debit - _credit;
+          } else if (_credit > _debit) {
+            _creditors += _credit - _debit;
           }
           // -------------Cash & Bank-------------
           // Direct accounts
         } else if (_ledgerMasterList[i].type == LedgerMasterType.direct) {
-          print(
-              'id ${_ledgerMasterList[i].id} name ${_ledgerMasterList[i].name}');
           if (_ledgerMasterList[i].id != LedgerMasterIndex.cash &&
               _ledgerMasterList[i].id != LedgerMasterIndex.bank &&
               _ledgerMasterList[i].id != LedgerMasterIndex.capital) {
@@ -187,9 +194,9 @@ class BalanceSheetController
               }
             }
             if (_ledgerMasterList[i].id == LedgerMasterIndex.cash) {
-              _cash = (_totalCredit - _totalDebit).abs();
+              _cash = _totalDebit - _totalCredit;
             } else if (_ledgerMasterList[i].id == LedgerMasterIndex.bank) {
-              _bank = (_totalCredit - _totalDebit).abs();
+              _bank = _totalDebit - _totalCredit;
             }
 
             // ----------------Capital Account-----------------
