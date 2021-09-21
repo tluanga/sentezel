@@ -113,7 +113,7 @@ class BusinessProfileSceen extends HookConsumerWidget {
                 ]);
               },
               loading: () {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               },
               error: (error, statck) {
                 return Text(error.toString());
