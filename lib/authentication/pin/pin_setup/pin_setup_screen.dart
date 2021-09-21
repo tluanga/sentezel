@@ -1,13 +1,17 @@
+import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+
+import 'package:sentezel/authentication/pin/pin_setup/pin_setup_controller.dart';
 
 import 'package:sentezel/authentication/pin/widgets/custom_button.dart';
 import 'package:sentezel/authentication/pin/widgets/pin_text_field.dart';
 import 'package:sentezel/authentication/pin/widgets/title.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
+
 import 'package:sentezel/common/ui/widget/elevated_container.dart';
 
 // --Note for rca-pin_code_fields 7.3.0   heihi hmanga mai ang aw..
@@ -17,19 +21,11 @@ class PinSetupScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final pinController = useTextEditingController();
-    final confirmPinController = useTextEditingController();
+    final state = ref.watch(pinSetupControllerProvider);
     useEffect(() {
-      // guard clause
-      if (confirmPinController.value.text.isEmpty &&
-          pinController.value.text.isEmpty) {
-        return;
-      }
+      ref.read(pinSetupControllerProvider.notifier).validate();
+    }, [state]);
 
-      if (pinController.value.text != confirmPinController.value.text) {
-        print('not equal');
-      }
-    });
     return SafeArea(
       child: GestureDetector(
         onTap: () {
@@ -58,6 +54,11 @@ class PinSetupScreen extends HookConsumerWidget {
                         ),
                         border: InputBorder.none,
                         labelText: 'Pass Phrase'),
+                    onChanged: (value) {
+                      ref.read(pinSetupControllerProvider.notifier).setState(
+                            state.copyWith(passPhrase: value),
+                          );
+                    },
                   ),
                 ),
                 ElevatedContainer(
@@ -69,28 +70,59 @@ class PinSetupScreen extends HookConsumerWidget {
                       children: [
                         PinTextField(
                           title: "Enter Four Digit PIN",
-                          textEditingController: pinController,
+                          onChanged: (value) {
+                            ref
+                                .read(pinSetupControllerProvider.notifier)
+                                .setState(
+                                  state.copyWith(
+                                    pin: value,
+                                  ),
+                                );
+                          },
                         ),
                         const SizedBox(
                           height: 25,
                         ),
                         PinTextField(
                           title: "Confirm PIN",
-                          textEditingController: confirmPinController,
+                          onChanged: (value) {
+                            ref
+                                .read(pinSetupControllerProvider.notifier)
+                                .setState(
+                                  state.copyWith(
+                                    pinReEnter: value,
+                                  ),
+                                );
+                          },
                         ),
                       ],
                     ),
                   ),
                 ),
+                state.error.isNotEmpty
+                    ? SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.2,
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        child: ListView.builder(
+                          itemCount: state.error.length,
+                          itemBuilder: (context, index) {
+                            return Text(EnumToString.convertToString(
+                                state.error[index],
+                                camelCase: true));
+                          },
+                        ),
+                      )
+                    : Container(),
                 const Spacer(
                   flex: 6,
                 ),
-                CustomButton(
-                    title: 'Continue',
-                    onPressed: () {
-                      Navigator.of(context)
-                          .pushReplacementNamed(RouteConstant.home);
-                    }),
+                if (state.error.isEmpty && state.passPhrase.isNotEmpty)
+                  CustomButton(
+                      title: 'Continue',
+                      onPressed: () {
+                        Navigator.of(context)
+                            .pushReplacementNamed(RouteConstant.home);
+                      }),
                 const SizedBox(
                   height: 10,
                 ),

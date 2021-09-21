@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class PinTextField extends StatelessWidget {
-  final TextEditingController textEditingController;
+  final Function(String) onChanged;
   final String title;
   const PinTextField({
     Key? key,
-    required this.textEditingController,
     required this.title,
+    required this.onChanged,
   }) : super(key: key);
 
   @override
@@ -40,12 +40,13 @@ class PinTextField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 12.0),
             child: PinCodeTextField(
-              controller: textEditingController,
               obscureText: true,
               keyboardType: TextInputType.number,
               appContext: context,
               length: 4,
-              onChanged: (String value) {},
+              onChanged: (String value) {
+                onChanged(value);
+              },
               pinTheme: PinTheme(
                 fieldHeight: 32,
                 fieldWidth: 32,
