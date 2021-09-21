@@ -177,7 +177,9 @@ class TradingAccountReportScreen extends HookConsumerWidget {
                       throw (e.toString());
                     });
                   },
-                  onClose: () {}),
+                  onClose: () {
+                    Navigator.pop(context);
+                  }),
               const TabBar(tabs: [
                 Text(
                   'Expenses',

@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
 
-import 'package:sentezel/settings/transactionCategory/data/transaction_type_enum.dart';
+// import 'package:sentezel/settings/transactionCategory/data/transaction_type_enum.dart';
 
 class Journal {
   String particular;
@@ -37,7 +37,7 @@ class Journal {
 //     required int amount,
 //     required DateTime date,
 //     required String transactionCategory,
-//     required TransactionCategoryType transactionCategoryType,
+//     required TransactionType transactionType,
 //     String? creditSideLedgerName,
 //     String? debitSideLedgerName,
 //     String? partyLedgerName,

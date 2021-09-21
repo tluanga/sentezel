@@ -6,14 +6,12 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sentezel/books/ledger/ledger_model.dart';
+
 import 'package:sentezel/books/profit_and_loss/profit_and_loss_controller.dart';
 import 'package:sentezel/books/profit_and_loss/profit_and_loss_model.dart';
 
 import 'package:sentezel/books/widgets/report_top_bar_widget.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
-import 'package:sentezel/common/ui/widget/excel_export_button_widget.dart';
-import 'package:sentezel/common/ui/widget/pdf_export_button_widget.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
 class ProfitAndLossReportScreen extends HookConsumerWidget {
@@ -156,7 +154,9 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
                       throw (e.toString());
                     });
                   },
-                  onClose: () {}),
+                  onClose: () {
+                    Navigator.pop(context);
+                  }),
               const TabBar(tabs: [
                 Text(
                   'Expenses',

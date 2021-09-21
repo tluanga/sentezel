@@ -171,7 +171,7 @@ class TrialBalanceReportScreen extends HookConsumerWidget {
               Container(
                   padding: const EdgeInsets.all(15),
                   color: Colors.cyan[50],
-                  width: MediaQuery.of(context).size.width * 0.45,
+                  width: MediaQuery.of(context).size.width * 0.43,
                   child: const Text('Particulars',
                       textAlign: TextAlign.center,
                       style: TextStyle(fontWeight: FontWeight.w500))),
