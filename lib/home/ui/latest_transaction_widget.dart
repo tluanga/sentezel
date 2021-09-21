@@ -6,7 +6,10 @@ import 'package:intl/intl.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
+import 'package:sentezel/common/helpers/get_transaction_icon_helper.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
+import 'package:sentezel/settings/transactionCategory/transaction_category_repository.dart';
 
 class HomeLatestTransactionWidget extends HookConsumerWidget {
   const HomeLatestTransactionWidget({Key? key}) : super(key: key);
@@ -19,7 +22,7 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
     AsyncValue<List<Journal>> state = ref.watch(journalControllerProvider);
     return state.when(
       data: (data) {
-        return _list(context, data);
+        return _list(context, data, ref);
       },
       loading: () => const Center(
         child: CircularProgressIndicator(),
@@ -28,7 +31,7 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
     );
   }
 
-  _list(BuildContext context, List<Journal> list) {
+  _list(BuildContext context, List<Journal> list, WidgetRef ref) {
     list.sort((a, b) => a.date.compareTo(b.date));
 
     return SizedBox(
@@ -38,16 +41,20 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
         itemCount: list.length,
         itemBuilder: (context, index) {
           return _listItem(
-              context: context, item: list[index], onSelect: (item) {});
+            context: context,
+            item: list[index],
+            onSelect: (item) {},
+          );
         },
       ),
     );
   }
 
-  _listItem(
-      {required BuildContext context,
-      required Journal item,
-      required Function(Journal) onSelect}) {
+  _listItem({
+    required BuildContext context,
+    required Journal item,
+    required Function(Journal) onSelect,
+  }) async {
     Color _color = Palette.color3;
 
     _color = Palette.color1;
@@ -76,6 +83,7 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
         padding: const EdgeInsets.all(2.0),
         child: Column(
           children: [
+            // Icon(getTransactionIcon(item.transactionType)),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -88,7 +96,7 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
                 ),
                 Text(
                   currencySeperatorStringFormatterHelper(item.amount),
-                  style:const TextStyle(
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),

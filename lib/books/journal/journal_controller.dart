@@ -33,9 +33,9 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
         String _creditSideLedgerName = '';
         String _debitSideLedgerName = '';
 
-        String _transactionType =
+        final _transactionCategory =
             await _read(transactionCategoryRepositoryProvider)
-                .getTransactionCategoryName(element.transactionCategoryId);
+                .getItem(id: element.transactionCategoryId);
 
         String _partyLedgerName = element.partyLedgerId != null
             ? await _read(ledgerMasterRepositoryProvider)
@@ -50,11 +50,12 @@ class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
           date: element.date,
           amount: element.debitAmount,
           particular: element.particular,
-          transactionCategory: _transactionType,
+          transactionCategory: _transactionCategory.name,
           creditSideLedgerName: _creditSideLedgerName,
           debitSideLedgerName: _debitSideLedgerName,
           partyLedgerName: _partyLedgerName,
           assetLedgerName: _assetLedgerName,
+          transactionType: _transactionCategory.transactionType,
           mode: EnumToString.convertToString(element.mode, camelCase: true),
         );
         result.add(journal);

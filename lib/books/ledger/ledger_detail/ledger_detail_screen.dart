@@ -51,7 +51,12 @@ class LedgerDetailScreen extends HookConsumerWidget {
             ),
             _listHeader(context),
             _list(context: context, ledgerReportData: state),
-            _report(data: state, context: context),
+            _report(
+              data: state,
+              context: context,
+              onPdfExport: () {},
+              onExcelExport: () {},
+            ),
           ],
         ),
       ),
@@ -215,7 +220,12 @@ class LedgerDetailScreen extends HookConsumerWidget {
     );
   }
 
-  _report({required LedgerReport data, required BuildContext context}) {
+  _report({
+    required LedgerReport data,
+    required BuildContext context,
+    required Function onPdfExport,
+    required Function onExcelExport,
+  }) {
     return Container(
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
@@ -301,9 +311,19 @@ class LedgerDetailScreen extends HookConsumerWidget {
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: const [
-                PDFExportButton(),
-                ExcelExportButton(),
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    onExcelExport();
+                  },
+                  child: const PDFExportButton(),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    onExcelExport();
+                  },
+                  child: const ExcelExportButton(),
+                ),
               ],
             ),
           ),
