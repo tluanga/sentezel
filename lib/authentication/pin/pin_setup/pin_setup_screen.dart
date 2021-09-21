@@ -47,6 +47,7 @@ class PinSetupScreen extends HookConsumerWidget {
                   outerBottomPadding: 10,
                   innerHorzPadding: 0,
                   child: TextFormField(
+                    //keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         prefixIcon: Icon(
                           Icons.code,
