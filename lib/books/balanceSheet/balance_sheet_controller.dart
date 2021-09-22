@@ -348,6 +348,15 @@ class BalanceSheetController
         _netProfit = (_grossProfit + _indirectIncomeTotal) -
             (_grossLoss + _indirectExpenseTotal);
       }
+      int _assetListTotal = 0;
+      for (var element in _assetList) {
+        _assetListTotal += element.amount;
+      }
+      int _totalLiabilities = 0;
+      int _totalAssets = 0;
+
+      _totalLiabilities = _creditors + _capital + _netProfit - _netLoss;
+      _totalAssets = _cash + _bank + _debtors + _assetListTotal;
       // add to the Balance Sheet List
       BalanceSheet _balanceSheet = BalanceSheet(
           creditors: _creditors,
@@ -357,7 +366,9 @@ class BalanceSheetController
           netLoss: _netLoss,
           cash: _cash,
           bank: _bank,
-          asset: _assetList);
+          asset: _assetList,
+          totalAssets: _totalAssets,
+          totalLiabilities: _totalLiabilities);
       _balanceSheetList.add(_balanceSheet);
       state = AsyncData(_balanceSheetList);
     } catch (e) {

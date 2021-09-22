@@ -112,9 +112,11 @@ class BalanceSheetReportScreen extends HookConsumerWidget {
     row.cells[1].stringFormat.alignment = PdfTextAlignment.center;
     row.cells[3].stringFormat.alignment = PdfTextAlignment.center;
     row.cells[0].value = 'Total';
-    row.cells[1].value = currencySeperatorStringFormatterHelperWithoutSymbol(0);
+    row.cells[1].value = currencySeperatorStringFormatterHelperWithoutSymbol(
+        data[0].totalLiabilities);
     row.cells[2].value = 'Total';
-    row.cells[3].value = currencySeperatorStringFormatterHelperWithoutSymbol(0);
+    row.cells[3].value = currencySeperatorStringFormatterHelperWithoutSymbol(
+        data[0].totalAssets);
 
     //Set the grid style
     grid.applyBuiltInStyle(PdfGridBuiltInStyle.listTable4Accent5);
@@ -235,6 +237,12 @@ class BalanceSheetReportScreen extends HookConsumerWidget {
                                   Text(data[0].netLoss.toString())
                                 ],
                               ),
+                              Row(
+                                children: [
+                                  const Text('Total'),
+                                  Text(data[0].totalLiabilities.toString())
+                                ],
+                              )
                             ],
                           ),
                         );
@@ -286,7 +294,13 @@ class BalanceSheetReportScreen extends HookConsumerWidget {
                                               .toString())
                                         ],
                                       );
-                                    }))
+                                    })),
+                            Row(
+                              children: [
+                                const Text('Total'),
+                                Text(data[0].totalAssets.toString())
+                              ],
+                            )
                           ],
                         );
                       }, loading: () {

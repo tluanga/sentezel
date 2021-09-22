@@ -6,6 +6,8 @@ class BalanceSheet {
   int netLoss;
   int cash;
   int bank;
+  int totalLiabilities;
+  int totalAssets;
   List<Asset> asset;
   BalanceSheet({
     required this.creditors,
@@ -15,6 +17,8 @@ class BalanceSheet {
     required this.netLoss,
     required this.cash,
     required this.bank,
+    required this.totalLiabilities,
+    required this.totalAssets,
     required this.asset,
   });
 }

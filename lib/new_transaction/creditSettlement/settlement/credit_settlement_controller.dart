@@ -25,15 +25,15 @@ class DebtSettlementController
   loadData({required Creditor creditor}) async {
     TransactionCategory _category =
         await _read(transactionCategoryRepositoryProvider)
-            .getItem(id: TransactionCategoryIndex.customerDebtSettlement);
-    final _creditSideLedger = await _read(ledgerMasterRepositoryProvider)
+            .getItem(id: TransactionCategoryIndex.businessDebtSettlement);
+    final _debitSideLedger = await _read(ledgerMasterRepositoryProvider)
         .getItem(id: creditor.party!.id);
 
     state = AsyncData(CreditSettlement(
       category: _category,
       errorMessages: [],
       date: DateTime.now(),
-      creditSideLedger: _creditSideLedger,
+      debitSideLedger: _debitSideLedger,
       particular: _category.name + '-' + creditor.party!.name,
       creditor: creditor,
     ));
@@ -72,7 +72,7 @@ class DebtSettlementController
     final finalData = stateData.copyWith(
       creditAmount: stateData.amount,
       debitAmount: stateData.amount,
-      debitSideLedger: stateData.mode != TransactionMode.credit
+      creditSideLedger: stateData.mode != TransactionMode.credit
           ? await getTransactionModeLedgerHelper(
               stateData.mode!,
               _read,
@@ -88,6 +88,18 @@ class DebtSettlementController
 
   submit() async {
     final stateData = state.data!.value;
+    print('''
+    debitAmount: ${stateData.debitAmount},
+    creditAmount: ${stateData.creditAmount},
+    partialPaymentAmount: 0,
+    particular: ${stateData.particular!},
+    mode: ${stateData.mode!},
+    date: ${stateData.date},
+    transactionCategoryId: ${stateData.category!.id!},
+    debitSideLedger: ${stateData.debitSideLedger != null ? stateData.debitSideLedger!.id : null},
+    creditSideLedger: ${stateData.creditSideLedger != null ? stateData.creditSideLedger!.id : null},
+    partyLedgerId:
+        ${stateData.partyLedger != null ? stateData.partyLedger!.id : null},''');
     try {
       _read(transactionRepositoryProvider).add(
         payload: Transaction(
