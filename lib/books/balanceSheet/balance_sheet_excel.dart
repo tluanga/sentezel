@@ -38,7 +38,7 @@ Future<void> createBLAcExl(List<BalanceSheet> data) async {
   sheet.getRangeByName('A1:D1').merge();
   sheet.getRangeByName('A1:D1').cellStyle = headingStyle;
   //-------------------HEADING------------
-  sheet.getRangeByName('A1').setText("Profit And Loss Account as on $date");
+  sheet.getRangeByName('A1').setText("Balance Sheet for the year ending $date");
   //---Column Head implement
   for (int i = 1; i <= columnHeader.length; i++) {
     sheet.getRangeByIndex(2, i).setText(columnHeader[i - 1]);
@@ -88,11 +88,12 @@ Future<void> createBLAcExl(List<BalanceSheet> data) async {
   int dataLength = data[0].asset.length;
 
   sheet.getRangeByIndex(dataLength + 7, 1).value = 'Total';
-  sheet.getRangeByIndex(dataLength + 7, 2).number =
-      double.parse(currencySeperatorStringFormatterHelperWithoutSymbol(0));
+  sheet.getRangeByIndex(dataLength + 7, 2).number = double.parse(
+      currencySeperatorStringFormatterHelperWithoutSymbol(
+          data[0].totalLiabilities));
   sheet.getRangeByIndex(dataLength + 7, 3).value = 'Total';
-  sheet.getRangeByIndex(dataLength + 7, 4).value =
-      double.parse(currencySeperatorStringFormatterHelperWithoutSymbol(0));
+  sheet.getRangeByIndex(dataLength + 7, 4).value = double.parse(
+      currencySeperatorStringFormatterHelperWithoutSymbol(data[0].totalAssets));
   // row = grid.rows.add();
   // row.cells[1].stringFormat.alignment = PdfTextAlignment.center;
   // row.cells[3].stringFormat.alignment = PdfTextAlignment.center;

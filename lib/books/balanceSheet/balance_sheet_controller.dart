@@ -71,7 +71,7 @@ class BalanceSheetController
                     LedgerMasterIndex.bank) {
               if (_transactionList[j].transactionCategoryId ==
                   TransactionCategoryIndex.businessDebtSettlement) {
-                _debit -= _transactionList[j].creditAmount;
+                _debit += _transactionList[j].creditAmount;
               } else {
                 _credit += _transactionList[j].creditAmount;
               }

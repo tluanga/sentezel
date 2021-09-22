@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
 
 import 'trading_account_model.dart';
@@ -38,7 +37,9 @@ Future<void> createTradingAcExl(List<TradingAccount> data) async {
   sheet.getRangeByName('A1:D1').merge();
   sheet.getRangeByName('A1:D1').cellStyle = headingStyle;
   //-------------------HEADING------------
-  sheet.getRangeByName('A1').setText("Trading Account as on $date");
+  sheet
+      .getRangeByName('A1')
+      .setText("Trading Account for the year ending  $date");
   //---Column Head implement
   for (int i = 1; i <= columnHeader.length; i++) {
     sheet.getRangeByIndex(2, i).setText(columnHeader[i - 1]);
@@ -61,22 +62,20 @@ Future<void> createTradingAcExl(List<TradingAccount> data) async {
       // row.cells[0].value = data[0].directExpense[i].ledgerName;
       sheet.getRangeByIndex(i + 3, 1).value =
           data[0].directExpense[i].ledgerName;
-      sheet.getRangeByIndex(i + 3, 2).number = double.parse(
+      sheet.getRangeByIndex(i + 3, 2).value =
           (data[0].directExpense[i].totalCredit -
-                  data[0].directExpense[i].totalCredit)
-              .abs()
-              .toString());
+                  data[0].directExpense[i].totalDebit)
+              .abs();
     }
     //-------income
     if (data[0].directIncome.length > i) {
       // row.cells[3].stringFormat.alignment = PdfTextAlignment.center;
       sheet.getRangeByIndex(i + 3, 3).value =
           data[0].directIncome[i].ledgerName;
-      sheet.getRangeByIndex(i + 3, 4).number = double.parse(
+      sheet.getRangeByIndex(i + 3, 4).value =
           (data[0].directIncome[i].totalCredit -
                   data[0].directIncome[i].totalCredit)
-              .abs()
-              .toString());
+              .abs();
     }
   }
   int dataLength = 0;
@@ -89,28 +88,27 @@ Future<void> createTradingAcExl(List<TradingAccount> data) async {
   //   PdfGridRow row = grid.rows.add();
   // row.cells[1].stringFormat.alignment = PdfTextAlignment.center;
   // row.cells[3].stringFormat.alignment = PdfTextAlignment.center;
-  sheet.getRangeByIndex(dataLength, 1).value =
-      'To Gross Profit transaferred to \nP&L a/c';
-  sheet.getRangeByIndex(dataLength, 2).value = double.parse(
-      currencySeperatorStringFormatterHelperWithoutSymbol(data[0].grossProfit));
-  sheet.getRangeByIndex(dataLength, 3).value =
-      'To Gross Loss transaferred to \nP&L a/c';
-  sheet.getRangeByIndex(dataLength, 4).number = double.parse(
-      currencySeperatorStringFormatterHelperWithoutSymbol(data[0].grossLoss));
-
+  if (data[0].grossProfit != 0) {
+    sheet.getRangeByIndex(dataLength, 1).value =
+        'To Gross Profit transaferred to \nP&L a/c';
+    sheet.getRangeByIndex(dataLength, 2).value = data[0].grossProfit;
+  }
+  if (data[0].grossLoss != 0) {
+    sheet.getRangeByIndex(dataLength, 3).value =
+        'To Gross Loss transaferred to \nP&L a/c';
+    sheet.getRangeByIndex(dataLength, 4).value = data[0].grossLoss;
+  }
   // Total still needs to be fixed
   // row.cells[1].stringFormat.alignment = PdfTextAlignment.center;
   // row.cells[3].stringFormat.alignment = PdfTextAlignment.center;
   // row.cells[0].value = 'Total';
   sheet.getRangeByIndex(dataLength + 1, 1).value = 'Total';
   // row.cells[1].value = currencySeperatorStringFormatterHelperWithoutSymbol(0);
-  sheet.getRangeByIndex(dataLength + 1, 2).value =
-      double.parse(currencySeperatorStringFormatterHelperWithoutSymbol(0));
+  sheet.getRangeByIndex(dataLength + 1, 2).value = data[0].finalExpenseTotal;
   // row.cells[2].value = 'Total';
   sheet.getRangeByIndex(dataLength + 1, 3).value = 'Total';
   // row.cells[3].value = currencySeperatorStringFormatterHelperWithoutSymbol(0);
-  sheet.getRangeByIndex(dataLength + 1, 4).value =
-      double.parse(currencySeperatorStringFormatterHelperWithoutSymbol(0));
+  sheet.getRangeByIndex(dataLength + 1, 4).value = data[0].finalIncomeTotal;
 //---
   // for (var i = 0; i < data.length + 2; i++) {
   //   if (i.isEven) {

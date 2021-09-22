@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 import 'dart:ui';
 import 'package:flutter/material.dart';
@@ -38,20 +37,27 @@ Future<void> createPLAcExl(List<ProfitAndLoss> data) async {
   sheet.getRangeByName('A1:D1').merge();
   sheet.getRangeByName('A1:D1').cellStyle = headingStyle;
   //-------------------HEADING------------
-  sheet.getRangeByName('A1').setText("Profit And Loss Account as on $date");
+  sheet
+      .getRangeByName('A1')
+      .setText("Profit And Loss for the year ending $date");
   //---Column Head implement
   for (int i = 1; i <= columnHeader.length; i++) {
     sheet.getRangeByIndex(2, i).setText(columnHeader[i - 1]);
     sheet.getRangeByIndex(2, i).cellStyle = columnHeadStyle;
   }
 
-  sheet.getRangeByName('A3').value =
-      'To Gross Profit transaferred to \nP&L a/c';
-  sheet.getRangeByName('B3').number =
-      double.parse(data[0].grossProfit.toString());
-  sheet.getRangeByName('C3').value = 'To Gross Loss transaferred to \nP&L a/c';
-  sheet.getRangeByName('D3').number =
-      double.parse(data[0].grossLoss.toString());
+  if (data[0].grossLoss != 0) {
+    sheet.getRangeByName('A3').value =
+        'To Gross Loss transaferred to \nP&L a/c';
+    sheet.getRangeByName('B3').number =
+        double.parse(data[0].grossLoss.toString());
+  }
+  if (data[0].grossProfit != 0) {
+    sheet.getRangeByName('C3').value =
+        'To Gross Profit transaferred to \nP&L a/c';
+    sheet.getRangeByName('D3').number =
+        double.parse(data[0].grossProfit.toString());
+  }
   // EXPENSE
   for (int i = 0; i < data[0].indirectExpense.length; i++) {
     sheet.getRangeByIndex(i + 4, 1).value =
@@ -79,20 +85,25 @@ Future<void> createPLAcExl(List<ProfitAndLoss> data) async {
   } else {
     dataLength = data[0].indirectIncome.length;
   }
-  print(dataLength);
-  sheet.getRangeByIndex(dataLength + 4, 1).value =
-      'To Net Profit Transferred to \nCapital ac';
-  sheet.getRangeByIndex(dataLength + 4, 2).number =
-      double.parse(data[0].netProfit.toString());
-  sheet.getRangeByIndex(dataLength + 4, 3).value =
-      'To Net Loss Transferred to \nCapital ac';
-  sheet.getRangeByIndex(dataLength + 4, 4).number =
-      double.parse(data[0].netLoss.toString());
+  if (data[0].netProfit != 0) {
+    sheet.getRangeByIndex(dataLength + 4, 1).value =
+        'To Net Profit Transferred to \nCapital ac';
+    sheet.getRangeByIndex(dataLength + 4, 2).number =
+        double.parse(data[0].netProfit.toString());
+  }
+  if (data[0].netLoss != 0) {
+    sheet.getRangeByIndex(dataLength + 4, 3).value =
+        'To Net Loss Transferred to \nCapital ac';
+    sheet.getRangeByIndex(dataLength + 4, 4).number =
+        double.parse(data[0].netLoss.toString());
+  }
 
   sheet.getRangeByIndex(dataLength + 5, 1).value = 'Total';
-  sheet.getRangeByIndex(dataLength + 5, 2).number = double.parse(0.toString());
+  sheet.getRangeByIndex(dataLength + 5, 2).number =
+      double.parse(data[0].finalExpenseTotal.toString());
   sheet.getRangeByIndex(dataLength + 5, 3).value = 'Total';
-  sheet.getRangeByIndex(dataLength + 5, 4).value = double.parse(0.toString());
+  sheet.getRangeByIndex(dataLength + 5, 4).value =
+      double.parse(data[0].finalIncomeTotal.toString());
 
   ///Save
   final List<int> bytes = workbook.saveAsStream();

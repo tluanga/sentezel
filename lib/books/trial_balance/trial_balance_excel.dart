@@ -69,6 +69,24 @@ Future<void> createTrialBLExl(List<TrialBalance> data) async {
       sheet.getRangeByIndex(i + 3, 3).cellStyle = rowStyleWhite;
     }
   }
+  //  For total calculation
+  int _finalCreditTotal = 0;
+  int _finalDebitTotal = 0;
+  for (var element in data) {
+    if (element.totalCredit > element.totalDebit) {
+      _finalCreditTotal += element.balance;
+    } else if (element.totalCredit < element.totalDebit) {
+      _finalDebitTotal += element.balance;
+    }
+  }
+
+  sheet.getRangeByIndex(data.length + 4, 1).setText('Total');
+  sheet
+      .getRangeByIndex(data.length + 4, 2)
+      .setText(_finalDebitTotal.toString());
+  sheet
+      .getRangeByIndex(data.length + 4, 3)
+      .setText(_finalCreditTotal.toString());
 
   ///Save
   final List<int> bytes = workbook.saveAsStream();
