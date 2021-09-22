@@ -3,7 +3,6 @@ import 'package:sentezel/books/ledger/ledger_model.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
 import 'package:sentezel/common/enums/debit_or_credit_enum.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
-import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection.controller.dart';
 import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart';
@@ -28,7 +27,6 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
   LedgerController(this._read, this.ref) : super(const AsyncValue.loading());
 
   loadData({String ledgerName = ''}) async {
-    final dates = ref.watch(timeFrameSelectionControllerProvider);
     try {
       List<LedgerReport> _ledgerReportList = [];
       final ledgerMasterDataList =
@@ -43,8 +41,8 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
         final _transactionList = await _read(transactionRepositoryProvider)
             .getTransactionByLedgerMaster(
           ledgerMasterId: ledgerMasterDataList[i].id,
-          startDate: dates.startDate,
-          endDate: dates.endDate,
+          // startDate: dates.startDate,
+          // endDate: dates.endDate,
         );
         print(_transactionList.length);
         //s
