@@ -8,9 +8,12 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sentezel/books/balanceSheet/balance_sheet_controller.dart';
 import 'package:sentezel/books/balanceSheet/balance_sheet_model.dart';
+import 'package:sentezel/books/trial_balance/trial_balance_excel.dart';
 import 'package:sentezel/books/widgets/report_top_bar_widget.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
+
+import 'balance_sheet_excel.dart';
 
 class BalanceSheetReportScreen extends HookConsumerWidget {
   const BalanceSheetReportScreen({Key? key}) : super(key: key);
@@ -166,7 +169,17 @@ class BalanceSheetReportScreen extends HookConsumerWidget {
                 children: [
                   ReportTopBarWidget(
                       title: 'BalanceSheet',
-                      onGenerateExcel: () {},
+                      onGenerateExcel: () {
+                        state.when(data: (data) {
+                          return createBLAcExl(data);
+                        }, loading: () {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }, error: (e, stack) {
+                          throw (e.toString());
+                        });
+                      },
                       onGeneratePdf: () {
                         state.when(data: (data) {
                           return _createPdf(data: data);

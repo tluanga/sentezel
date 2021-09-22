@@ -14,6 +14,8 @@ import 'package:sentezel/books/widgets/report_top_bar_widget.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:syncfusion_flutter_pdf/pdf.dart';
 
+import 'profit_and_loss_excel.dart';
+
 class ProfitAndLossReportScreen extends HookConsumerWidget {
   const ProfitAndLossReportScreen({Key? key}) : super(key: key);
 
@@ -142,7 +144,17 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
             children: [
               ReportTopBarWidget(
                   title: 'Profit & Loss',
-                  onGenerateExcel: () {},
+                  onGenerateExcel: () {
+                    state.when(data: (data) {
+                      return createPLAcExl(data);
+                    }, loading: () {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }, error: (e, stack) {
+                      throw (e.toString());
+                    });
+                  },
                   onGeneratePdf: () {
                     state.when(data: (data) {
                       return _createPdf(data: data);
