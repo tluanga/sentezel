@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
+import 'package:sentezel/common/enums/debit_or_credit_enum.dart';
 import 'package:syncfusion_flutter_xlsio/xlsio.dart';
+import '../ledger_model.dart';
 
-import 'trial_balance_model.dart';
-
-Future<void> createTrialBLExl(List<TrialBalance> data) async {
+Future<void> createLedgerAcExl(LedgerReport data) async {
   String date = DateFormat('dd_MM_yyyy').format(DateTime.now());
+  String name = data.name;
   List columnHeader = ['Particulars', 'Debit', 'Credit'];
 
   final Workbook workbook = Workbook();
@@ -20,14 +20,11 @@ Future<void> createTrialBLExl(List<TrialBalance> data) async {
   Style amountStyle = workbook.styles.add('amstyle');
   Style rowStyleBlue = workbook.styles.add('rowstyleblue');
   Style rowStyleWhite = workbook.styles.add('rowstylewhite');
-  Style totalStyle = workbook.styles.add('totalstyle');
-  totalStyle.fontColor = '#ffffff';
-  totalStyle.backColorRgb = const Color.fromRGBO(0, 117, 221, 1);
+
   headingStyle.vAlign = VAlignType.center;
   headingStyle.hAlign = HAlignType.center;
   headingStyle.fontSize = 13;
   columnHeadStyle.backColorRgb = const Color.fromRGBO(0, 117, 221, 1);
-  columnHeadStyle.hAlign = HAlignType.center;
   columnHeadStyle.fontColor = '#ffffff';
   amountStyle.hAlign = HAlignType.right;
 
@@ -40,29 +37,26 @@ Future<void> createTrialBLExl(List<TrialBalance> data) async {
   sheet.getRangeByName('A1:C1').merge();
   sheet.getRangeByName('A1:C1').cellStyle = headingStyle;
   //-------------------HEADING------------
-  sheet.getRangeByName('A1').setText('Trial Balance as on $date');
+  sheet.getRangeByName('A1').setText('$name Account');
 
   for (int i = 1; i <= 3; i++) {
     sheet.getRangeByIndex(2, i).setText(columnHeader[i - 1]);
     sheet.getRangeByIndex(2, i).cellStyle = columnHeadStyle;
   }
-// ---Data import
-  for (int i = 0; i < data.length; i++) {
-    sheet.getRangeByIndex(i + 3, 1).setText(data[i].ledgerName);
-
+  // --Data insert
+  for (int i = 0; i < data.ledgerTransaction!.length; i++) {
+    sheet.getRangeByIndex(i + 3, 1).value =
+        data.ledgerTransaction![i].transaction!.particular;
+    sheet.getRangeByIndex(i + 3, 2).cellStyle = amountStyle;
     sheet.getRangeByIndex(i + 3, 2).value =
-        data[i].totalCredit < data[i].totalDebit
-            ? data[i].balance.toString()
+        data.ledgerTransaction![i].debitOrCredit == DebitOrCredit.debit
+            ? data.ledgerTransaction![i].amount.toString()
             : '';
-
     sheet.getRangeByIndex(i + 3, 3).value =
-        data[i].totalCredit > data[i].totalDebit
-            ? data[i].balance.toString()
+        data.ledgerTransaction![i].debitOrCredit == DebitOrCredit.credit
+            ? data.ledgerTransaction![i].amount.toString()
             : '';
-    //  sheet.getRangeByIndex(i + 3, 2).cellStyle = amountStyle;
-    // sheet.getRangeByIndex(i + 3, 3).cellStyle = amountStyle;
-
-    //
+    // -- Cell background
     if (i.isEven) {
       sheet.getRangeByIndex(i + 3, 1).cellStyle = rowStyleBlue;
       sheet.getRangeByIndex(i + 3, 2).cellStyle = rowStyleBlue;
@@ -73,29 +67,11 @@ Future<void> createTrialBLExl(List<TrialBalance> data) async {
       sheet.getRangeByIndex(i + 3, 3).cellStyle = rowStyleWhite;
     }
   }
-  //-- Total
-  int _finalDebitTotal = 0;
-  int _finalCreditTotal = 0;
-  for (var element in data) {
-    if (element.totalCredit > element.totalDebit) {
-      _finalCreditTotal += element.balance;
-    } else if (element.totalCredit < element.totalDebit) {
-      _finalDebitTotal += element.balance;
-    }
-  }
-  int datalength = data.length;
-  sheet.getRangeByIndex(datalength + 3, 1).value = 'Total';
-  sheet.getRangeByIndex(datalength + 3, 2).value = _finalDebitTotal.toString();
-  sheet.getRangeByIndex(datalength + 3, 3).value = _finalCreditTotal.toString();
-  //--Cell bg
-  sheet.getRangeByIndex(datalength + 3, 1).cellStyle = totalStyle;
-  sheet.getRangeByIndex(datalength + 3, 2).cellStyle = totalStyle;
-  sheet.getRangeByIndex(datalength + 3, 3).cellStyle = totalStyle;
-//---
+
   ///Save
   final List<int> bytes = workbook.saveAsStream();
   workbook.dispose();
-  String filename = "trial_balance_$date";
+  String filename = "name_$date";
   final String path = (await getApplicationSupportDirectory()).path;
   final String fileName = '$path/$filename.xlsx';
   final File file = File(fileName);
