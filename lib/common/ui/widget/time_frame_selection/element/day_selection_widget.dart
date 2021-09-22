@@ -5,10 +5,8 @@ import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection.controller.dart';
 
 class DaySelectionWidget extends HookConsumerWidget {
-  final Function(DateTime, DateTime) onDateSelected;
   const DaySelectionWidget({
     Key? key,
-    required this.onDateSelected,
   }) : super(key: key);
 
   @override
