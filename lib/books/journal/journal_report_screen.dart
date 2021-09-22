@@ -7,12 +7,13 @@ import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/ana
 import 'package:sentezel/books/journal/journal_detail_bottomsheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
-import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:sentezel/common/helpers/get_transaction_color_helper.dart';
 import 'package:sentezel/common/helpers/get_transaction_icon_helper.dart';
 
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_controller.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 
 class JournalReportScreen extends HookConsumerWidget {
@@ -20,9 +21,13 @@ class JournalReportScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final periodSelected = ref.watch(timeFrameSelectionControllerProvider);
     useEffect(() {
-      ref.read(journalControllerProvider.notifier).loadData();
-    }, []);
+      ref.read(journalControllerProvider.notifier).loadData(
+            startDate: periodSelected.startDate,
+            endDate: periodSelected.endDate,
+          );
+    }, [periodSelected]);
     AsyncValue<List<Journal>> list = ref.watch(journalControllerProvider);
     return list.when(data: (data) {
       return Material(
@@ -34,9 +39,7 @@ class JournalReportScreen extends HookConsumerWidget {
                 onClose: () {
                   Navigator.pop(context);
                 }),
-            AnalyticsTimeFrameSelection(
-              onTimeSelect: (startDate, endDate) {},
-            ),
+            const TimeFrameSelection(),
             data.isNotEmpty ? _list(context, data) : Container(),
           ],
         )),

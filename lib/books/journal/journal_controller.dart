@@ -13,14 +13,16 @@ final journalControllerProvider =
 
 class JournalController extends StateNotifier<AsyncValue<List<Journal>>> {
   final Reader _read;
-  DateTime startDate = DateTime.now().subtract(const Duration(days: 30));
-  DateTime endDate = DateTime.now();
+  // DateTime startDate = DateTime.now().subtract(const Duration(days: 30));
+  // DateTime endDate = DateTime.now();
 
   //-----------Get Transcation List-----
   JournalController(this._read) : super(const AsyncValue.loading());
 
-  loadData() async {
+  loadData({DateTime? startDate, DateTime? endDate}) async {
     try {
+      if (startDate == null) DateTime.now().subtract(const Duration(days: 30));
+      if (endDate == null) DateTime.now();
       final data = await _read(transactionRepositoryProvider).getList(
         startDate: startDate,
         endDate: endDate,

@@ -1,13 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_controller.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_state.dart';
 
 class DaySelectionWidget extends HookConsumerWidget {
   const DaySelectionWidget({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.read(timeFrameSelectionControllerProvider);
+    final startDate = useState(state.startDate);
+    final endDate = useState(state.endDate);
     return Container(
       height: MediaQuery.of(context).size.height * 0.09,
       width: MediaQuery.of(context).size.width * 0.97,
@@ -19,11 +26,45 @@ class DaySelectionWidget extends HookConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
         child: Column(
           children: [
-            const Text(
-              'Day',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.symmetric(
+                horizontal: 10,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'Day',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 20,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      ref
+                          .read(timeFrameSelectionControllerProvider.notifier)
+                          .setState(
+                            TimeFrameSelectionState(
+                              startDate: startDate.value,
+                              endDate: endDate.value,
+                            ),
+                          );
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width * 0.2,
+                      height: MediaQuery.of(context).size.height * 0.02,
+                      decoration: const BoxDecoration(color: Palette.color4),
+                      child: const Center(
+                        child: Text('Submit'),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(
@@ -32,8 +73,22 @@ class DaySelectionWidget extends HookConsumerWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                _dateSelection(context),
-                _dateSelection(context),
+                //Start Date--
+                _dateSelection(
+                  context: context,
+                  onDateSelected: (date) {
+                    startDate.value = date;
+                  },
+                  initialDate: startDate.value,
+                ),
+                //End Date---
+                _dateSelection(
+                  context: context,
+                  onDateSelected: (date) {
+                    endDate.value = date;
+                  },
+                  initialDate: endDate.value,
+                )
               ],
             ),
           ],
@@ -42,14 +97,16 @@ class DaySelectionWidget extends HookConsumerWidget {
     );
   }
 
-  _dateSelection(BuildContext context) {
+  _dateSelection(
+      {required BuildContext context,
+      required Function(DateTime) onDateSelected,
+      required DateTime initialDate}) {
     return GestureDetector(
       onTap: () async {
         //open Date Seletor
-        DateTime? date = DateTime.now();
-        date = await showDatePicker(
+        DateTime? date = await showDatePicker(
           context: context,
-          initialDate: DateTime.now(),
+          initialDate: initialDate,
           firstDate: DateTime(DateTime.now().year),
           lastDate: DateTime.now().add(
             const Duration(
@@ -57,7 +114,7 @@ class DaySelectionWidget extends HookConsumerWidget {
             ),
           ),
         );
-
+        onDateSelected(date!);
         // model.startDate = date!;
       },
       child: Container(
@@ -76,11 +133,7 @@ class DaySelectionWidget extends HookConsumerWidget {
               size: 20,
             ),
             Text(
-              DateFormat('d-MM-y ').format(
-                DateTime.now().subtract(
-                  const Duration(days: 1),
-                ),
-              ),
+              DateFormat('d-MM-y ').format(initialDate),
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.bold,
