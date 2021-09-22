@@ -3,9 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-
-import 'package:sentezel/authentication/pin/pin_setup/pin_setup_controller.dart';
+import 'package:sentezel/authentication/pin/pin_change/pin_change_controller.dart';
 
 import 'package:sentezel/authentication/pin/widgets/custom_button.dart';
 import 'package:sentezel/authentication/pin/widgets/pin_text_field.dart';
@@ -16,14 +14,15 @@ import 'package:sentezel/common/ui/widget/elevated_container.dart';
 
 // --Note for rca-pin_code_fields 7.3.0   heihi hmanga mai ang aw..
 
-class PinSetupScreen extends HookConsumerWidget {
-  const PinSetupScreen({Key? key}) : super(key: key);
+class PinChangeScreen extends HookConsumerWidget {
+  const PinChangeScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final state = ref.watch(pinSetupControllerProvider);
+    final state = ref.watch(pinChangeStateControllerProvider);
     useEffect(() {
-      ref.read(pinSetupControllerProvider.notifier).validate();
+      ref.read(pinChangeStateControllerProvider.notifier).loadData();
+      ref.read(pinChangeStateControllerProvider.notifier).validate();
     }, [state]);
 
     return SafeArea(
@@ -47,7 +46,6 @@ class PinSetupScreen extends HookConsumerWidget {
                   outerBottomPadding: 10,
                   innerHorzPadding: 0,
                   child: TextFormField(
-                    //keyboardType: TextInputType.number,
                     decoration: const InputDecoration(
                         prefixIcon: Icon(
                           Icons.code,
@@ -56,7 +54,9 @@ class PinSetupScreen extends HookConsumerWidget {
                         border: InputBorder.none,
                         labelText: 'Pass Phrase'),
                     onChanged: (value) {
-                      ref.read(pinSetupControllerProvider.notifier).setState(
+                      ref
+                          .read(pinChangeStateControllerProvider.notifier)
+                          .setState(
                             state.copyWith(passPhrase: value),
                           );
                     },
@@ -73,10 +73,10 @@ class PinSetupScreen extends HookConsumerWidget {
                           title: "Enter Four Digit PIN",
                           onChanged: (value) {
                             ref
-                                .read(pinSetupControllerProvider.notifier)
+                                .read(pinChangeStateControllerProvider.notifier)
                                 .setState(
                                   state.copyWith(
-                                    pin: value,
+                                    enteredPin: value,
                                   ),
                                 );
                           },
@@ -88,10 +88,10 @@ class PinSetupScreen extends HookConsumerWidget {
                           title: "Confirm PIN",
                           onChanged: (value) {
                             ref
-                                .read(pinSetupControllerProvider.notifier)
+                                .read(pinChangeStateControllerProvider.notifier)
                                 .setState(
                                   state.copyWith(
-                                    pinReEnter: value,
+                                    reEnteredPin: value,
                                   ),
                                 );
                           },
@@ -121,7 +121,6 @@ class PinSetupScreen extends HookConsumerWidget {
                   CustomButton(
                       title: 'Continue',
                       onPressed: () {
-                        ref.read(pinSetupControllerProvider.notifier).save();
                         Navigator.of(context)
                             .pushReplacementNamed(RouteConstant.home);
                       }),

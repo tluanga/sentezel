@@ -37,7 +37,7 @@ class PinRepository {
         dbName,
         payload.toMap(),
         where: 'id=?',
-        whereArgs: [payload.id],
+        whereArgs: [1],
       );
     } on Exception catch (e) {
       throw Exception(e.toString());

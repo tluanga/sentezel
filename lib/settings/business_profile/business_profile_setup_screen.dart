@@ -190,7 +190,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                           FocusScope.of(context).unfocus();
                           ref
                               .read(businessProfileControllerProvider.notifier)
-                              .set();
+                              .save();
                           Navigator.of(context)
                               .pushReplacementNamed(RouteConstant.pinSetup);
                         },

@@ -36,7 +36,7 @@ class BusinessProfileController
     );
   }
 
-  set() async {
+  save() async {
     await _read(businessProfileRepository).add(state.data!.value);
   }
 }

@@ -42,78 +42,78 @@ class AnalyticsScreen extends HookConsumerWidget {
                     ? const BarChartWidget()
                     : const PieChartSample(),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        // ref
-                        //     .read(analyticsControllerProvider.notifier)
-                        //     .changeChartMode(ChartMode.barChart);
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.30,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey.shade500,
-                              width: 1.5,
-                            ),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const [
-                              Icon(Icons.bar_chart),
-                              Text(
-                                'Bar Chart',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        // ref
-                        //     .read(analyticsControllerProvider.notifier)
-                        //     .changeChartMode(ChartMode.pieChart);
-                      },
-                      child: Container(
-                        width: MediaQuery.of(context).size.width * 0.30,
-                        height: MediaQuery.of(context).size.height * 0.05,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.grey.shade500,
-                              width: 1.5,
-                            ),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: Center(
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: const [
-                              Icon(Icons.pie_chart),
-                              Text(
-                                'Pie Chart',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              ),
+              // Padding(
+              //   padding: const EdgeInsets.all(8.0),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //     children: [
+              //       GestureDetector(
+              //         onTap: () {
+              //           // ref
+              //           //     .read(analyticsControllerProvider.notifier)
+              //           //     .changeChartMode(ChartMode.barChart);
+              //         },
+              //         child: Container(
+              //           width: MediaQuery.of(context).size.width * 0.30,
+              //           height: MediaQuery.of(context).size.height * 0.05,
+              //           decoration: BoxDecoration(
+              //               border: Border.all(
+              //                 color: Colors.grey.shade500,
+              //                 width: 1.5,
+              //               ),
+              //               borderRadius: BorderRadius.circular(5)),
+              //           child: Center(
+              //             child: Row(
+              //               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //               children: const [
+              //                 Icon(Icons.bar_chart),
+              //                 Text(
+              //                   'Bar Chart',
+              //                   style: TextStyle(
+              //                     fontSize: 16,
+              //                     fontWeight: FontWeight.bold,
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //       GestureDetector(
+              //         onTap: () {
+              //           // ref
+              //           //     .read(analyticsControllerProvider.notifier)
+              //           //     .changeChartMode(ChartMode.pieChart);
+              //         },
+              //         child: Container(
+              //           width: MediaQuery.of(context).size.width * 0.30,
+              //           height: MediaQuery.of(context).size.height * 0.05,
+              //           decoration: BoxDecoration(
+              //               border: Border.all(
+              //                 color: Colors.grey.shade500,
+              //                 width: 1.5,
+              //               ),
+              //               borderRadius: BorderRadius.circular(5)),
+              //           child: Center(
+              //             child: Row(
+              //               mainAxisAlignment: MainAxisAlignment.spaceAround,
+              //               children: const [
+              //                 Icon(Icons.pie_chart),
+              //                 Text(
+              //                   'Pie Chart',
+              //                   style: TextStyle(
+              //                     fontSize: 16,
+              //                     fontWeight: FontWeight.bold,
+              //                   ),
+              //                 ),
+              //               ],
+              //             ),
+              //           ),
+              //         ),
+              //       )
+              //     ],
+              //   ),
+              // ),
             ],
           ),
         ),

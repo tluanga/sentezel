@@ -79,7 +79,7 @@ class ReceiptScreen extends HookConsumerWidget {
                   );
                 },
                 loading: () {
-                  return const CircularProgressIndicator();
+                  return const Center(child: CircularProgressIndicator());
                 },
                 error: (error, stack) {}),
           ),

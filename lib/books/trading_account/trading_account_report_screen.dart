@@ -6,6 +6,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:sentezel/books/trading_account/trading_ac_excel.dart';
 import 'package:sentezel/books/trading_account/trading_account_controller.dart';
 
 import 'package:sentezel/books/widgets/report_top_bar_widget.dart';
@@ -165,7 +166,17 @@ class TradingAccountReportScreen extends HookConsumerWidget {
             children: [
               ReportTopBarWidget(
                   title: 'Trading Account',
-                  onGenerateExcel: () {},
+                  onGenerateExcel: () {
+                    state.when(data: (data) {
+                      return createTradingAcExl(data);
+                    }, loading: () {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }, error: (e, stack) {
+                      throw (e.toString());
+                    });
+                  },
                   onGeneratePdf: () {
                     state.when(data: (data) {
                       return _createPdf(data: data);
@@ -177,7 +188,9 @@ class TradingAccountReportScreen extends HookConsumerWidget {
                       throw (e.toString());
                     });
                   },
-                  onClose: () {}),
+                  onClose: () {
+                    Navigator.pop(context);
+                  }),
               const TabBar(tabs: [
                 Text(
                   'Expenses',

@@ -1,0 +1,4 @@
+enum PinSetupError {
+  pinNotMatched,
+  passPhraseCannotBeEmpty,
+}

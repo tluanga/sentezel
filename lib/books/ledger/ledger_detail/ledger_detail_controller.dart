@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/books/ledger/ledger_controller.dart';
 import 'package:sentezel/books/ledger/ledger_model.dart';
-import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection.controller.dart';
+
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 
 final ledgerDetailControllerProvider =
@@ -22,7 +22,6 @@ class LedgerDetailController extends StateNotifier<LedgerReport> {
         );
 
   loadData({required int id, DateTime? startDate, DateTime? endDate}) async {
-    ref.watch(timeFrameSelectionControllerProvider);
     state = _read(ledgerControllerProvider.notifier).getLedgerDetail(
       id,
     );

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -6,7 +7,10 @@ import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/ana
 import 'package:sentezel/books/journal/journal_detail_bottomsheet.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
 import 'package:sentezel/books/journal/journal_model.dart';
+import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
+import 'package:sentezel/common/helpers/get_transaction_color_helper.dart';
+import 'package:sentezel/common/helpers/get_transaction_icon_helper.dart';
 
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
@@ -73,7 +77,7 @@ class JournalReportScreen extends HookConsumerWidget {
       required Journal item,
       required Function(Journal) onSelect}) {
     Color _color = Palette.color3;
-
+    final _icon = getTransactionIcon(item.transactionType);
     _color = Palette.color1;
 
     return GestureDetector(
@@ -111,23 +115,18 @@ class JournalReportScreen extends HookConsumerWidget {
               height: MediaQuery.of(context).size.height * 0.1,
               width: MediaQuery.of(context).size.width * 0.2,
               decoration: BoxDecoration(
-                color: _color,
+                color: getTransactionColor(item.transactionType),
                 borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(10),
                   bottomLeft: Radius.circular(10),
                 ),
               ),
-              child: const Center(
-                child: Text(
-                  'A',
-                  style: TextStyle(
-                    fontSize: 50,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
+              child: Icon(
+                _icon,
+                size: 52,
               ),
             ),
+            // Icon(getTransactionIcon(item.transactionType)),
             const SizedBox(
               width: 10,
             ),

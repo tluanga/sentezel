@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/settings/business_profile/business_profile_controller.dart';
 import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
 
 class BusinessProfileSetup extends HookConsumerWidget {
@@ -15,6 +16,9 @@ class BusinessProfileSetup extends HookConsumerWidget {
           TextFormField(
             decoration: const InputDecoration(
                 labelText: 'Please Enter Your Business Name'),
+            onChanged: (value) {
+              ref.read(businessProfileControllerProvider.notifier).name = value;
+            },
           ),
           const SizedBox(
             height: 10,
