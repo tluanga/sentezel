@@ -14,25 +14,24 @@ Color getTransactionColor(TransactionType type) {
     case TransactionType.saleReturn:
       return Palette.color4;
     case TransactionType.lakluh:
-      return Palette.color1;
-      ;
+      return Palette.color4;
+
     case TransactionType.pekchhuah:
-      return Palette.color2;
+      return Palette.color5;
 
     case TransactionType.debtRepaymentByDebtor:
-      return Palette.color3;
+      return Palette.color6;
 
     case TransactionType.debtRepaymentToCreditor:
-      return Palette.color4;
+      return Palette.color7;
     case TransactionType.cashToBank:
-      return Palette.color1;
+      return Palette.color8;
       ;
     case TransactionType.bankToCash:
-      return Palette.color2;
+      return Palette.color8;
     case TransactionType.capitalInjection:
-      return Palette.color1;
+      return Palette.color9;
     default:
-      return Palette.color2;
-      ;
+      return Palette.color10;
   }
 }
