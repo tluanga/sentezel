@@ -1,12 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_controller.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_mode_enum.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_state.dart';
 
 class MonthSelection extends HookConsumerWidget {
   const MonthSelection({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.read(timeFrameSelectionControllerProvider);
+    final startDate = useState(state.startDate);
+    final endDate = useState(state.endDate);
     return Container(
       height: MediaQuery.of(context).size.height * 0.09,
       width: MediaQuery.of(context).size.width * 0.97,
@@ -32,7 +39,39 @@ class MonthSelection extends HookConsumerWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 _periodSelection(
-                    context: context, label: 'Select Year', width: 30),
+                  context: context,
+                  label: 'Select Year',
+                  width: 30,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    ref
+                        .read(timeFrameSelectionControllerProvider.notifier)
+                        .setState(
+                          TimeFrameSelectionState(
+                              startDate: startDate.value,
+                              endDate: endDate.value,
+                              mode: TimeFrameSelectionMode.year),
+                        );
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.04,
+                    decoration: const BoxDecoration(
+                      color: Colors.amberAccent,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
                 _periodSelection(
                     context: context, label: 'Select Month', width: 32),
               ],

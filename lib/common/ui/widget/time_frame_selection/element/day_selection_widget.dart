@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_controller.dart';
+import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_mode_enum.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_state.dart';
 
 class DaySelectionWidget extends HookConsumerWidget {
@@ -32,37 +33,16 @@ class DaySelectionWidget extends HookConsumerWidget {
               ),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
+                children: const [
+                  Text(
                     'Day',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 20,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      ref
-                          .read(timeFrameSelectionControllerProvider.notifier)
-                          .setState(
-                            TimeFrameSelectionState(
-                              startDate: startDate.value,
-                              endDate: endDate.value,
-                            ),
-                          );
-                      Navigator.pop(context);
-                    },
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.2,
-                      height: MediaQuery.of(context).size.height * 0.02,
-                      decoration: const BoxDecoration(color: Palette.color4),
-                      child: const Center(
-                        child: Text('Submit'),
-                      ),
-                    ),
                   ),
                 ],
               ),
@@ -80,6 +60,35 @@ class DaySelectionWidget extends HookConsumerWidget {
                     startDate.value = date;
                   },
                   initialDate: startDate.value,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    ref
+                        .read(timeFrameSelectionControllerProvider.notifier)
+                        .setState(
+                          TimeFrameSelectionState(
+                              startDate: startDate.value,
+                              endDate: endDate.value,
+                              mode: TimeFrameSelectionMode.days),
+                        );
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.2,
+                    height: MediaQuery.of(context).size.height * 0.04,
+                    decoration: const BoxDecoration(
+                      color: Colors.amberAccent,
+                    ),
+                    child: const Center(
+                      child: Text(
+                        'Submit',
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
                 //End Date---
                 _dateSelection(

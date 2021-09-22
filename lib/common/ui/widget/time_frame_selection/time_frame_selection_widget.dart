@@ -149,13 +149,13 @@ class TimeFrameSelection extends HookConsumerWidget {
                 Navigator.pop(context);
               },
               child: SizedBox(
-                height: MediaQuery.of(context).size.height * 0.04,
+                height: MediaQuery.of(context).size.height * 0.02,
                 width: MediaQuery.of(context).size.width * 0.6,
                 child: const Center(
                   child: Text(
                     'Confirm Period Selected',
                     style: TextStyle(
-                      fontSize: 18,
+                      fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -166,7 +166,6 @@ class TimeFrameSelection extends HookConsumerWidget {
             //
 
             DaySelectionWidget(),
-
             WeekSelection(),
             MonthSelection(),
             CurrentFinancialYearSelection(),
