@@ -94,43 +94,10 @@ Future<void> createBLAcExl(List<BalanceSheet> data) async {
   sheet.getRangeByIndex(dataLength + 7, 3).value = 'Total';
   sheet.getRangeByIndex(dataLength + 7, 4).value = double.parse(
       currencySeperatorStringFormatterHelperWithoutSymbol(data[0].totalAssets));
-  // row = grid.rows.add();
-  // row.cells[1].stringFormat.alignment = PdfTextAlignment.center;
-  // row.cells[3].stringFormat.alignment = PdfTextAlignment.center;
-  // row.cells[0].value = 'Total';
-  // row.cells[1].value = currencySeperatorStringFormatterHelperWithoutSymbol(0);
-  // row.cells[2].value = 'Total';
-  // row.cells[3].value = currencySeperatorStringFormatterHelperWithoutSymbol(0);
-  //INCOME
-  // for (int i = 0; i < data[0].indirectIncome.length; i++) {
-  //   sheet.getRangeByIndex(i + 4, 3).value =
-  //       data[0].indirectIncome[i].ledgerName;
-  //   sheet.getRangeByIndex(i + 4, 4).number = double.parse(
-  //       currencySeperatorStringFormatterHelperWithoutSymbol(
-  //           (data[0].indirectIncome[i].totalCredit -
-  //                   data[0].indirectIncome[i].totalDebit)
-  //               .abs()));
-  // }
-  // int dataLength = 0;
-  // if (data[0].indirectExpense.length > data[0].indirectIncome.length) {
-  //   dataLength = data[0].indirectExpense.length;
-  // } else {
-  //   dataLength = data[0].indirectIncome.length;
-  // }
-//  print(dataLength);
-  // sheet.getRangeByIndex(dataLength + 4, 1).value =
-  //     'To Net Profit Transferred to \nCapital ac';
-  // sheet.getRangeByIndex(dataLength + 4, 2).number =
-  //     double.parse(data[0].netProfit.toString());
-  // sheet.getRangeByIndex(dataLength + 4, 3).value =
-  //     'To Net Loss Transferred to \nCapital ac';
-  // sheet.getRangeByIndex(dataLength + 4, 4).number =
-  //     double.parse(data[0].netLoss.toString());
 
-  // sheet.getRangeByIndex(dataLength + 5, 1).value = 'Total';
-  // sheet.getRangeByIndex(dataLength + 5, 2).number = double.parse(0.toString());
-  // sheet.getRangeByIndex(dataLength + 5, 3).value = 'Total';
-  // sheet.getRangeByIndex(dataLength + 5, 4).value = double.parse(0.toString());
+  sheet.getRangeByIndex(dataLength + 7, 3).value = 'Total';
+  sheet.getRangeByIndex(dataLength + 7, 4).value = double.parse(
+      currencySeperatorStringFormatterHelperWithoutSymbol(data[0].totalAssets));
 
   ///Save
   final List<int> bytes = workbook.saveAsStream();

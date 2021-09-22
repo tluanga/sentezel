@@ -9,9 +9,11 @@ import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/analytics_time_frame_selection_widget.dart';
 import 'package:sentezel/books/ledger/ledger_detail/ledger_detail_controller.dart';
+import 'package:sentezel/books/ledger/ledger_detail/ledger_detail_excel.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_detail_bottom_sheet.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/ledger_transaction_model.dart';
 import 'package:sentezel/books/ledger/ledger_transaction/transaction_delete_confirm_bottomSheet.dart';
+import 'package:sentezel/books/trial_balance/trial_balance_excel.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:sentezel/common/ui/widget/excel_export_button_widget.dart';
 import 'package:sentezel/common/ui/widget/pdf_export_button_widget.dart';
@@ -163,7 +165,9 @@ class LedgerDetailScreen extends HookConsumerWidget {
               onPdfExport: () {
                 _createPdf(data: state);
               },
-              onExcelExport: () {},
+              onExcelExport: () {
+                createLedgerAcExl(state);
+              },
             ),
           ],
         ),
