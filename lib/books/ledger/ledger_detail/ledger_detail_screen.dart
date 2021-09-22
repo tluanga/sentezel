@@ -39,13 +39,7 @@ class LedgerDetailScreen extends HookConsumerWidget {
                 Navigator.pop(context);
               },
             ),
-            DaySelectionWidget(
-              onDateSelected: (startDate, endDate) {
-                ref
-                    .read(ledgerDetailControllerProvider.notifier)
-                    .loadData(id: state.ledgerId);
-              },
-            ),
+            DaySelectionWidget(),
             const SizedBox(
               height: 10,
             ),
