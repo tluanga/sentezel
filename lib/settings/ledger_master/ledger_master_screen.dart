@@ -24,7 +24,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
         child: Column(
           children: [
             TopBarWidget(
-              title: 'Party',
+              title: 'Ledger Master',
               onClose: () {
                 Navigator.pop(context);
               },

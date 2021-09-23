@@ -16,11 +16,12 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final _name = useState(ledgerMaster != null ? ledgerMaster!.name : '');
+    final _description =
+        useState(ledgerMaster != null ? ledgerMaster!.description : '');
     final _type = useState(
         ledgerMaster != null ? ledgerMaster!.type : LedgerMasterType.direct);
     final _status = useState<Status>(
         ledgerMaster != null ? ledgerMaster!.status : Status.active);
-
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -38,9 +39,9 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                         .read(ledgerMasterListControllerProvider.notifier)
                         .updateLedgerMaster(
                           LedgerMaster.withId(
-                            id: 1,
+                            id: ledgerMaster!.id,
                             name: _name.value,
-                            description: '',
+                            description: _description.value,
                             type: _type.value,
                             status: _status.value,
                           ),
@@ -49,12 +50,10 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     ref
                         .read(ledgerMasterListControllerProvider.notifier)
                         .addLedgerMaster(
-                          LedgerMaster.withId(
-                            id: 1,
+                          LedgerMaster(
                             name: _name.value,
-                            description: '',
+                            description: _description.value,
                             type: _type.value,
-                            status: _status.value,
                           ),
                         );
                   }
@@ -76,6 +75,9 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                 initialValue:
                     ledgerMaster != null ? ledgerMaster!.description : '',
                 maxLines: 3,
+                onChanged: (value) {
+                  _description.value = value;
+                },
               ),
               //-----------LedgerMasterType
               const SizedBox(

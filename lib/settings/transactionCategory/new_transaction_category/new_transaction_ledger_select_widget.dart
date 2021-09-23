@@ -37,9 +37,9 @@ class NewTransactionLedgerSelectWidget extends HookConsumerWidget {
               data: (data) {
             return _list(context, data, ref);
           }, loading: () {
-            return CircularProgressIndicator();
+            return const CircularProgressIndicator();
           }, error: (error, stack) {
-            return Text('Error');
+            return const Text('Error');
           })
         ],
       ),

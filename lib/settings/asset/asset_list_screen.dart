@@ -44,7 +44,7 @@ class AssetListScreen extends HookConsumerWidget {
               child: CircularProgressIndicator(),
             );
           }, error: (error, stack) {
-            return Container(child: Text(error.toString()));
+            return Text(error.toString());
           }),
         ],
       ),

@@ -10,7 +10,6 @@ import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 import 'package:sentezel/settings/ledger_master/new_ledger_master_screen.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/edit_transaction_category/edit_transaction_category_screen.dart';
-import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_category_screen.dart';
 
 import 'package:sentezel/settings/transactionCategory/transaction_category_list_controller.dart';
 

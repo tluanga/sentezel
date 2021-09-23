@@ -45,7 +45,7 @@ class TimeFrameSelection extends HookConsumerWidget {
                   },
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.04,
-                    width: MediaQuery.of(context).size.width * 0.29,
+                    width: MediaQuery.of(context).size.width * 0.30,
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey.shade700),
                       borderRadius: BorderRadius.circular(5),

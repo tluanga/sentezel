@@ -1,4 +1,3 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
 
 // import 'package:sentezel/settings/transactionCategory/data/transaction_type_enum.dart';

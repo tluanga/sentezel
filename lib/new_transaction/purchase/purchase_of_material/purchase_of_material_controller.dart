@@ -37,7 +37,7 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
     List<String> _errorMessage = [];
 
     if (state.amount <= 0) {
-      _errorMessage.add('Amount can not be less than equalto Zero');
+      _errorMessage.add('Amount cannot be less than or equal to zero');
     }
 
     if (state.mode == TransactionMode.partialPaymentByBank ||
@@ -47,10 +47,10 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
       }
       if (state.amount <= state.partialPaymentAmount) {
         _errorMessage
-            .add('Partial Payment Amount cannot be Larger  than Amount');
+            .add('Partial Payment Amount cannot be larger than Amount');
       }
       if (state.partialPaymentAmount <= 0) {
-        _errorMessage.add('Partial Amount cannot be Zero');
+        _errorMessage.add('Partial Amount cannot be zero');
       }
       if (state.particular!.isEmpty) {
         _errorMessage.add('Please Enter Particular');

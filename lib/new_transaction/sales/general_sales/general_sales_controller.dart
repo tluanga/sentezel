@@ -92,18 +92,6 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
 
   submit() async {
     final stateData = state.data!.value;
-    print('''
-    debitAmount: ${stateData.debitAmount},
-          creditAmount: ${stateData.creditAmount},
-          partialPaymentAmount: ${stateData.partialPaymentAmount},
-          particular: ${stateData.particular!},
-          mode: ${stateData.mode!},
-          date: ${stateData.date},
-          transactionCategoryId: ${stateData.category!.id!},
-          debitSideLedger: ${stateData.debitSideLedger != null ? stateData.debitSideLedger!.id : null},
-          creditSideLedger: ${stateData.creditSideLedger != null ? stateData.creditSideLedger!.id : null},
-          partyLedgerId:
-              ${stateData.partyLedger != null ? stateData.partyLedger!.id : null},''');
     try {
       _read(transactionRepositoryProvider).add(
         payload: Transaction(

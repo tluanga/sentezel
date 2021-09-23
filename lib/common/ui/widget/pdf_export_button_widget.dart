@@ -6,7 +6,7 @@ class PDFExportButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width * 0.41,
+      width: MediaQuery.of(context).size.width * 0.43,
       decoration: BoxDecoration(
           border: Border.all(
             color: Colors.grey.shade500,

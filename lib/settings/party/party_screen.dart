@@ -34,7 +34,7 @@ class PartyScreen extends HookConsumerWidget {
         child: Column(
           children: [
             TopBarWidget(
-              title: 'Ledger Master',
+              title: 'Party',
               onClose: () {
                 Navigator.pop(context);
               },
