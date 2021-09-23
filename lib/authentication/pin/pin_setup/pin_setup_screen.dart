@@ -101,15 +101,22 @@ class PinSetupScreen extends HookConsumerWidget {
                   ),
                 ),
                 state.error.isNotEmpty
-                    ? SizedBox(
+                    ? Container(
+                        padding: EdgeInsets.only(top: 20),
+                        alignment: Alignment.center,
                         height: MediaQuery.of(context).size.height * 0.2,
                         width: MediaQuery.of(context).size.width * 0.8,
                         child: ListView.builder(
                           itemCount: state.error.length,
                           itemBuilder: (context, index) {
-                            return Text(EnumToString.convertToString(
-                                state.error[index],
-                                camelCase: true));
+                            return Text(
+                              EnumToString.convertToString(state.error[index],
+                                  camelCase: true),
+                              textAlign: TextAlign.center,
+                              style: const TextStyle(
+                                color: Color(0xff616161),
+                              ),
+                            );
                           },
                         ),
                       )
@@ -125,9 +132,10 @@ class PinSetupScreen extends HookConsumerWidget {
                         Navigator.of(context)
                             .pushReplacementNamed(RouteConstant.home);
                       }),
-                const SizedBox(
-                  height: 10,
-                ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                Spacer(),
               ],
             ),
           ),
