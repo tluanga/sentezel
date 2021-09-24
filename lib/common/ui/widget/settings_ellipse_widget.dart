@@ -9,7 +9,7 @@ class SettingsEllipseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         children: [
           const SizedBox(
@@ -17,17 +17,17 @@ class SettingsEllipseWidget extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              showModalBottomSheet(
-                isScrollControlled: true,
-                // expand: true,
+              showCupertinoModalBottomSheet(
+                expand: true,
                 context: context,
                 backgroundColor: Colors.transparent,
                 builder: (context) => const ControlCenterScreen(),
               );
             },
-            child: SizedBox(
+            child: Container(
+              color: Colors.transparent,
               width: MediaQuery.of(context).size.width * 0.12,
-              height: MediaQuery.of(context).size.height * 0.03,
+              height: MediaQuery.of(context).size.height * 0.03 + 10,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [

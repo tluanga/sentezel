@@ -11,24 +11,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        body: Column(
-          children: [
-            const SettingsEllipseWidget(),
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: const [
-                    HomeHeaderCard(),
-                    HomeControlCard(),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    HomeLatestTransactionWidget(),
-                  ],
-                ),
+        body: SingleChildScrollView(
+          child: Column(
+            children: const [
+              SettingsEllipseWidget(),
+              HomeHeaderCard(),
+              HomeControlCard(),
+              SizedBox(
+                height: 10,
               ),
-            ),
-          ],
+              HomeLatestTransactionWidget(),
+            ],
+          ),
         ),
       ),
     );
