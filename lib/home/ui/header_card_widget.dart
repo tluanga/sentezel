@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/settings/business_profile/business_profile_controller.dart';
 
-class HomeHeaderCard extends StatelessWidget {
+class HomeHeaderCard extends HookConsumerWidget {
   const HomeHeaderCard({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final state = ref.watch(businessProfileControllerProvider);
+    useEffect(() {
+      ref.read(businessProfileControllerProvider.notifier).loadData();
+    }, []);
     return Stack(
       children: [
         Container(
@@ -45,17 +52,24 @@ class HomeHeaderCard extends StatelessWidget {
             ],
           ),
         ),
-        const Positioned(
-          left: 20,
-          top: 20,
-          child: Text(
-            'Sentezel',
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 25,
+        state.when(data: (data) {
+          return Positioned(
+            left: 20,
+            top: 20,
+            child: Text(
+              data.name,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+              ),
             ),
-          ),
-        ),
+          );
+        }, loading: () {
+          return const Positioned(
+              left: 20, top: 20, child: CircularProgressIndicator());
+        }, error: (error, stack) {
+          throw (error.toString());
+        })
       ],
     );
   }
