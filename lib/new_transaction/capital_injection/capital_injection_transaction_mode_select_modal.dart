@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
-import 'package:sentezel/new_transaction/payment/payment_controller.dart';
+import 'capital_injection_controller.dart';
 
 class CapitalInjectionTransactionModeSelectModalBottomSheet
     extends HookConsumerWidget {
@@ -11,7 +11,7 @@ class CapitalInjectionTransactionModeSelectModalBottomSheet
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.read(paymentControllerProvider);
+    var state = ref.read(capitalInjectionControllerProvider);
 
     return SizedBox(
       height: MediaQuery.of(context).size.height * 0.2,
@@ -53,7 +53,9 @@ class CapitalInjectionTransactionModeSelectModalBottomSheet
                     value: TransactionMode.paymentByCash,
                     activeColor: Colors.green.shade500,
                     onChanged: (value) {
-                      ref.watch(paymentControllerProvider.notifier).setState(
+                      ref
+                          .watch(capitalInjectionControllerProvider.notifier)
+                          .setState(
                             state.data!.value
                                 .copyWith(mode: TransactionMode.paymentByCash),
                           );
@@ -80,7 +82,7 @@ class CapitalInjectionTransactionModeSelectModalBottomSheet
                       activeColor: Colors.green.shade500,
                       onChanged: (value) {
                         ref
-                            .watch(paymentControllerProvider.notifier)
+                            .watch(capitalInjectionControllerProvider.notifier)
                             .setState(state.data!.value.copyWith(
                               mode: TransactionMode.paymentByBank,
                             ));
