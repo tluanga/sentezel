@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 
 import 'package:sentezel/common/enums/status_enum.dart';
+import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
 
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
@@ -31,32 +33,175 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
           child: Column(
             children: [
               TopBarWithSaveWidget(
-                title: 'New Ledger Master',
+                title: ledgerMaster != null
+                    ? 'Update Ledger'
+                    : 'New Ledger Master',
                 onCancel: () {},
                 onSave: () {
-                  if (ledgerMaster != null) {
-                    ref
-                        .read(ledgerMasterListControllerProvider.notifier)
-                        .updateLedgerMaster(
-                          LedgerMaster.withId(
-                            id: ledgerMaster!.id,
-                            name: _name.value,
-                            description: _description.value,
-                            type: _type.value,
-                            status: _status.value,
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return Material(
+                          child: SafeArea(
+                            top: false,
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Container(
+                                  width: MediaQuery.of(context).size.width,
+                                  height: 30,
+                                  decoration: BoxDecoration(
+                                      color: Colors.redAccent[100]),
+                                  child: Center(
+                                    child: Text(
+                                      ledgerMaster != null
+                                          ? 'Confirm update'
+                                          : 'Confirm new Ledger',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  child: Row(
+                                    children: [
+                                      const Text('Ledger Name : '),
+                                      Text(_name.value)
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  child: Row(
+                                    children: [
+                                      const Text('Description : '),
+                                      Text(_description.value)
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  child: Row(
+                                    children: [
+                                      const Text('Type : '),
+                                      Text(_type.value.toString())
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8, vertical: 4),
+                                  child: Row(
+                                    children: [
+                                      const Text('Status : '),
+                                      Text(_status.value.toString())
+                                    ],
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: Colors.blue.shade400),
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: Offset(0, 2),
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+                                    child: ListTile(
+                                      title: const Text(
+                                        'Confirm',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Palette.textColor,
+                                        ),
+                                      ),
+                                      leading: const Icon(
+                                          CupertinoIcons.checkmark_alt),
+                                      onTap: () {
+                                        if (ledgerMaster != null) {
+                                          ref
+                                              .read(
+                                                  ledgerMasterListControllerProvider
+                                                      .notifier)
+                                              .updateLedgerMaster(
+                                                LedgerMaster.withId(
+                                                  id: ledgerMaster!.id,
+                                                  name: _name.value,
+                                                  description:
+                                                      _description.value,
+                                                  type: _type.value,
+                                                  status: _status.value,
+                                                ),
+                                              );
+                                        } else {
+                                          ref
+                                              .read(
+                                                  ledgerMasterListControllerProvider
+                                                      .notifier)
+                                              .addLedgerMaster(
+                                                LedgerMaster(
+                                                  name: _name.value,
+                                                  description:
+                                                      _description.value,
+                                                  type: _type.value,
+                                                ),
+                                              );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      border: Border.all(
+                                          color: Colors.red.shade400),
+                                      borderRadius: BorderRadius.circular(10),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          offset: Offset(0, 2),
+                                          blurRadius: 6.0,
+                                        ),
+                                      ],
+                                    ),
+                                    child: ListTile(
+                                      title: const Text(
+                                        'Cancel',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          color: Palette.textColor,
+                                        ),
+                                      ),
+                                      leading:
+                                          const Icon(CupertinoIcons.nosign),
+                                      onTap: () {
+                                        Navigator.pop(context);
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
-                  } else {
-                    ref
-                        .read(ledgerMasterListControllerProvider.notifier)
-                        .addLedgerMaster(
-                          LedgerMaster(
-                            name: _name.value,
-                            description: _description.value,
-                            type: _type.value,
-                          ),
-                        );
-                  }
+                      });
                 },
               ),
               TextFormField(

@@ -3,15 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
-
 import 'package:sentezel/authentication/pin/pin_setup/pin_setup_controller.dart';
-
 import 'package:sentezel/authentication/pin/widgets/custom_button.dart';
 import 'package:sentezel/authentication/pin/widgets/pin_text_field.dart';
 import 'package:sentezel/authentication/pin/widgets/title.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
-
 import 'package:sentezel/common/ui/widget/elevated_container.dart';
 
 // --Note for rca-pin_code_fields 7.3.0   heihi hmanga mai ang aw..
@@ -102,7 +98,7 @@ class PinSetupScreen extends HookConsumerWidget {
                 ),
                 state.error.isNotEmpty
                     ? Container(
-                        padding: EdgeInsets.only(top: 20),
+                        padding: const EdgeInsets.only(top: 20),
                         alignment: Alignment.center,
                         height: MediaQuery.of(context).size.height * 0.2,
                         width: MediaQuery.of(context).size.width * 0.8,
@@ -135,7 +131,7 @@ class PinSetupScreen extends HookConsumerWidget {
                 // const SizedBox(
                 //   height: 10,
                 // ),
-                Spacer(),
+                const Spacer(),
               ],
             ),
           ),
