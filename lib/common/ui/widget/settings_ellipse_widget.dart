@@ -17,8 +17,9 @@ class SettingsEllipseWidget extends StatelessWidget {
           ),
           GestureDetector(
             onTap: () {
-              showCupertinoModalBottomSheet(
-                expand: true,
+              showModalBottomSheet(
+                isScrollControlled: true,
+                // expand: true,
                 context: context,
                 backgroundColor: Colors.transparent,
                 builder: (context) => const ControlCenterScreen(),

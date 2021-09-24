@@ -21,11 +21,15 @@ class ControlCenterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
+    return SafeArea(
       child: Container(
-        height: MediaQuery.of(context).size.height * 0.7,
-        color: Palette.background,
+        decoration: const BoxDecoration(
+            color: Palette.background,
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+        height: MediaQuery.of(context).size.height * 0.95,
         child: Column(
+          // mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             Row(
