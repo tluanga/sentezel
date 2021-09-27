@@ -44,8 +44,6 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
           // startDate: dates.startDate,
           // endDate: dates.endDate,
         );
-        print(_transactionList.length);
-        //s
         int _creditAmount = 0;
         int _debitAmount = 0;
         List<LedgerTransaction> _ledgerTransactionList = [];
@@ -75,50 +73,107 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
 
           if (_transactionCategory.transactionType == TransactionType.hralh ||
               _transactionCategory.transactionType == TransactionType.lakluh) {
-            //----------CheckFor Partial Payment---
-            if (_transactionList[j].mode ==
-                    TransactionMode.partialPaymentByBank ||
-                _transactionList[j].mode ==
-                    TransactionMode.partialPaymentByCash) {
-              if (ledgerMasterDataList[i].id == LedgerMasterIndex.goods) {
-                {
-                  _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
-                  _ledgerReport.creditAmount +=
-                      _transactionList[j].creditAmount;
-                  _ledgerTransaction.amount = _transactionList[j].creditAmount;
-                }
-              } else {
+            // cash and bank ledgers
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.cash ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.bank) {
+              if (_transactionList[j].mode ==
+                      TransactionMode.partialPaymentByBank ||
+                  _transactionList[j].mode ==
+                      TransactionMode.partialPaymentByCash) {
+                _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+                _ledgerReport.debitAmount +=
+                    _transactionList[j].partialPaymentAmount;
+                _ledgerTransaction.amount =
+                    _transactionList[j].partialPaymentAmount;
+              } else if (_transactionList[j].mode ==
+                      TransactionMode.paymentByBank ||
+                  _transactionList[j].mode == TransactionMode.paymentByCash) {
                 _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
                 _ledgerReport.debitAmount += _transactionList[j].debitAmount;
                 _ledgerTransaction.amount = _transactionList[j].debitAmount;
               }
+              // for party ledgers
+            } else if (ledgerMasterDataList[i].id ==
+                _transactionList[j].partyLedgerId) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
+              //  for other ledgers
+            } else {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
             }
-
-            // _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
           } else if (_transactionCategory.transactionType ==
                   TransactionType.lei ||
               _transactionCategory.transactionType ==
                   TransactionType.pekchhuah) {
-            if (_transactionList[j].assetLedgerId == _ledgerReport.ledgerId) {
-              //purcahse of Asset-----
-
-              //Checking for cash/bank or other ledger for correction of debit and credit
-              if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
-                  ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
+            //----------------for asset ledgers----------
+            if (_transactionList[j].assetLedgerId ==
+                ledgerMasterDataList[i].id) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
+              //  for party ledgers
+            } else if (_transactionList[j].partyLedgerId ==
+                ledgerMasterDataList[i].id) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+              //  for cash and bank ledgers
+            } else if (ledgerMasterDataList[i].id == LedgerMasterIndex.cash ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.bank) {
+              if (_transactionList[j].mode ==
+                      TransactionMode.partialPaymentByBank ||
+                  _transactionList[j].mode ==
+                      TransactionMode.partialPaymentByCash) {
+                _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+                _ledgerReport.creditAmount +=
+                    _transactionList[j].partialPaymentAmount;
+                _ledgerTransaction.amount =
+                    _transactionList[j].partialPaymentAmount;
+              } else if (_transactionList[j].mode ==
+                      TransactionMode.paymentByBank ||
+                  _transactionList[j].mode == TransactionMode.paymentByCash) {
                 _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
                 _ledgerReport.creditAmount += _transactionList[j].creditAmount;
                 _ledgerTransaction.amount = _transactionList[j].creditAmount;
-              } else {
-                _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
-                _ledgerReport.debitAmount += _transactionList[j].debitAmount;
-                _ledgerTransaction.amount = _transactionList[j].debitAmount;
               }
-              // _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+              // other ledgers
+            } else {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
             }
-
-            //Checking for cash/bank or other ledger for correction of debit and credit
-            if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank ||
-                ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
+            // other transaction types which are not lei/pekchhuah or lakluh/hralh
+          } else if (_transactionCategory.transactionType ==
+                  TransactionType.debtRepaymentByDebtor ||
+              _transactionCategory.transactionType ==
+                  TransactionType.purchaseReturn ||
+              _transactionCategory.transactionType ==
+                  TransactionType.capitalInjection ||
+              _transactionCategory.transactionType ==
+                  TransactionType.openingBalanceBank ||
+              _transactionCategory.transactionType ==
+                  TransactionType.openingBalanceCash) {
+            // transaction types where cash/ bank are debited
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.cash ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.bank) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
+            } else {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+            }
+            //  transaction types where cash/bank are credited
+          } else if (_transactionCategory.transactionType ==
+                  TransactionType.debtRepaymentToCreditor ||
+              _transactionCategory.transactionType ==
+                  TransactionType.saleReturn) {
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.cash ||
+                ledgerMasterDataList[i].id == LedgerMasterIndex.bank) {
               _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
               _ledgerReport.creditAmount += _transactionList[j].creditAmount;
               _ledgerTransaction.amount = _transactionList[j].creditAmount;
@@ -127,11 +182,30 @@ class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
               _ledgerReport.debitAmount += _transactionList[j].debitAmount;
               _ledgerTransaction.amount = _transactionList[j].debitAmount;
             }
-            // _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+            //-----------Contra---------------
+          } else if (_transactionCategory.transactionType ==
+              TransactionType.cashToBank) {
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+            } else if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
+            }
+          } else if (_transactionCategory.transactionType ==
+              TransactionType.bankToCash) {
+            if (ledgerMasterDataList[i].id == LedgerMasterIndex.cash) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.debit;
+              _ledgerReport.debitAmount += _transactionList[j].debitAmount;
+              _ledgerTransaction.amount = _transactionList[j].debitAmount;
+            } else if (ledgerMasterDataList[i].id == LedgerMasterIndex.bank) {
+              _ledgerTransaction.debitOrCredit = DebitOrCredit.credit;
+              _ledgerReport.creditAmount += _transactionList[j].creditAmount;
+              _ledgerTransaction.amount = _transactionList[j].creditAmount;
+            }
           }
-
-          //-----------Contra---------------
-
           _ledgerTransactionList.add(_ledgerTransaction);
         }
         _ledgerReportList.add(_ledgerReport);
