@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:sentezel/books/balanceSheet/balance_sheet_report_screen.dart';
@@ -16,135 +17,138 @@ class BooksScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: SafeArea(
-        child: Container(
-          height: MediaQuery.of(context).size.height * 0.7,
-          color: Palette.background,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: _item(
+    return FadeInUp(
+      duration: Duration(milliseconds: 500),
+      child: Material(
+        child: SafeArea(
+          child: Container(
+            height: MediaQuery.of(context).size.height * 0.7,
+            color: Palette.background,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: _item(
+                        context: context,
+                        label: 'Journal',
+                        icon: CupertinoIcons.grid,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const JournalReportScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    _item(
                       context: context,
-                      label: 'Journal',
-                      icon: CupertinoIcons.grid,
+                      label: 'Ledger',
+                      icon: CupertinoIcons.circle_grid_3x3,
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => const JournalReportScreen(),
+                            builder: (context) => const LedgerReportScreen(),
                           ),
                         );
                       },
                     ),
-                  ),
-                  _item(
-                    context: context,
-                    label: 'Ledger',
-                    icon: CupertinoIcons.circle_grid_3x3,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const LedgerReportScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: _item(
-                      context: context,
-                      label: 'Trial Balance',
-                      icon: CupertinoIcons.equal_square,
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                const TrialBalanceReportScreen(),
-                          ),
-                        );
-                      },
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: _item(
+                        context: context,
+                        label: 'Trial Balance',
+                        icon: CupertinoIcons.equal_square,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const TrialBalanceReportScreen(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
-                  ),
-                  _item(
-                    context: context,
-                    label: 'Trading Account',
-                    icon: CupertinoIcons.layers,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const TradingAccountReportScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  GestureDetector(
-                    onTap: () {},
-                    child: _item(
+                    _item(
                       context: context,
-                      label: 'Profit & Loss',
-                      icon: CupertinoIcons.rectangle_3_offgrid,
+                      label: 'Trading Account',
+                      icon: CupertinoIcons.layers,
                       onTap: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) =>
-                                const ProfitAndLossReportScreen(),
+                                const TradingAccountReportScreen(),
                           ),
                         );
                       },
                     ),
-                  ),
-                  _item(
-                    context: context,
-                    label: 'Balance Sheet',
-                    icon: CupertinoIcons.layers_alt,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              const BalanceSheetReportScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _close(
-                    context: context,
-                    label: 'Close ',
-                    icon: CupertinoIcons.xmark,
-                    onTap: () {
-                      Navigator.pushNamedAndRemoveUntil(context,
-                          RouteConstant.home, ModalRoute.withName('/'));
-                    },
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: _item(
+                        context: context,
+                        label: 'Profit & Loss',
+                        icon: CupertinoIcons.rectangle_3_offgrid,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  const ProfitAndLossReportScreen(),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    _item(
+                      context: context,
+                      label: 'Balance Sheet',
+                      icon: CupertinoIcons.layers_alt,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const BalanceSheetReportScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _close(
+                      context: context,
+                      label: 'Close ',
+                      icon: CupertinoIcons.xmark,
+                      onTap: () {
+                        Navigator.pushNamedAndRemoveUntil(context,
+                            RouteConstant.home, ModalRoute.withName('/'));
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

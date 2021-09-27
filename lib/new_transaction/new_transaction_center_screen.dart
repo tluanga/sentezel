@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
@@ -22,188 +23,205 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Material(
-      child: Container(
-        height: MediaQuery.of(context).size.height * 0.7,
-        color: Palette.background,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: _item(
-                    context: context,
-                    label: 'Purchase of Asset',
-                    icon: CupertinoIcons.cube,
-                    onTap: () {
-                      Navigator.pushNamed(
-                          context, RouteConstant.purchaseOfAsset);
-                    },
-                  ),
-                ),
-                _item(
-                  context: context,
-                  label: 'Purchase of Material',
-                  icon: CupertinoIcons.cube_box,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PurchaseOfMaterialScreen(),
+    return SlideInUp(
+      duration: const Duration(milliseconds: 500),
+      child: Material(
+        child: Container(
+          height: MediaQuery.of(context).size.height * 0.7,
+          color: Palette.background,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              FadeInUp(
+                delay: const Duration(milliseconds: 90),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: _item(
+                        context: context,
+                        label: 'Purchase of Asset',
+                        icon: CupertinoIcons.cube,
+                        onTap: () {
+                          Navigator.pushNamed(
+                              context, RouteConstant.purchaseOfAsset);
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    _item(
+                      context: context,
+                      label: 'Purchase of Material',
+                      icon: CupertinoIcons.cube_box,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const PurchaseOfMaterialScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _item(
+                      context: context,
+                      label: 'Purchase Return',
+                      icon: CupertinoIcons.selection_pin_in_out,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PurchaseReturnScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                _item(
-                  context: context,
-                  label: 'Purchase Return',
-                  icon: CupertinoIcons.selection_pin_in_out,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PurchaseReturnScreen(),
+              ),
+              FadeInUp(
+                delay: Duration(milliseconds: 100),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GestureDetector(
+                      onTap: () {},
+                      child: _item(
+                        context: context,
+                        label: 'Sell of Products',
+                        icon: CupertinoIcons.dot_square,
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const GeneralSalesScreen(),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
+                    ),
+                    _item(
+                      context: context,
+                      label: 'Sales Return',
+                      icon: CupertinoIcons.hurricane,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SalesReturnScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _item(
+                      context: context,
+                      label: 'Receipt',
+                      icon: CupertinoIcons.list_bullet_below_rectangle,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ReceiptScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                GestureDetector(
-                  onTap: () {},
-                  child: _item(
-                    context: context,
-                    label: 'Sell of Products',
-                    icon: CupertinoIcons.dot_square,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const GeneralSalesScreen(),
-                        ),
-                      );
-                    },
-                  ),
+              ),
+              FadeInUp(
+                delay: Duration(milliseconds: 120),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _item(
+                      context: context,
+                      label: 'Payment',
+                      icon: CupertinoIcons.square_arrow_down_on_square,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const PaymentScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _item(
+                      context: context,
+                      label: 'Debt Settlement',
+                      icon: CupertinoIcons.square_on_circle,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DebtorListScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _item(
+                      context: context,
+                      label: 'Credit Settlement',
+                      icon: CupertinoIcons.square_stack,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CreditorListScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
                 ),
-                _item(
-                  context: context,
-                  label: 'Sales Return',
-                  icon: CupertinoIcons.hurricane,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const SalesReturnScreen(),
-                      ),
-                    );
-                  },
+              ),
+              FadeInUp(
+                delay: Duration(milliseconds: 130),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _item(
+                      context: context,
+                      label: 'Contra',
+                      icon: CupertinoIcons.square_line_vertical_square_fill,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ContraScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _item(
+                      context: context,
+                      label: 'Capital Injection',
+                      icon: CupertinoIcons.square_stack_3d_down_dottedline,
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const CapitalInjectionScreen(),
+                          ),
+                        );
+                      },
+                    ),
+                    _close(
+                      context: context,
+                      label: 'Close ',
+                      icon: CupertinoIcons.xmark,
+                      onTap: () {
+                        Navigator.pushNamedAndRemoveUntil(context,
+                            RouteConstant.home, ModalRoute.withName('/'));
+                      },
+                    ),
+                  ],
                 ),
-                _item(
-                  context: context,
-                  label: 'Receipt',
-                  icon: CupertinoIcons.list_bullet_below_rectangle,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ReceiptScreen(),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _item(
-                  context: context,
-                  label: 'Payment',
-                  icon: CupertinoIcons.square_arrow_down_on_square,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const PaymentScreen(),
-                      ),
-                    );
-                  },
-                ),
-                _item(
-                  context: context,
-                  label: 'Debt Settlement',
-                  icon: CupertinoIcons.square_on_circle,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const DebtorListScreen(),
-                      ),
-                    );
-                  },
-                ),
-                _item(
-                  context: context,
-                  label: 'Credit Settlement',
-                  icon: CupertinoIcons.square_stack,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CreditorListScreen(),
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                _item(
-                  context: context,
-                  label: 'Contra',
-                  icon: CupertinoIcons.square_line_vertical_square_fill,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const ContraScreen(),
-                      ),
-                    );
-                  },
-                ),
-                _item(
-                  context: context,
-                  label: 'Capital Injection',
-                  icon: CupertinoIcons.square_stack_3d_down_dottedline,
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const CapitalInjectionScreen(),
-                      ),
-                    );
-                  },
-                ),
-                _close(
-                  context: context,
-                  label: 'Close ',
-                  icon: CupertinoIcons.xmark,
-                  onTap: () {
-                    Navigator.pushNamedAndRemoveUntil(
-                        context, RouteConstant.home, ModalRoute.withName('/'));
-                  },
-                ),
-              ],
-            ),
-          ],
+              ),
+            ],
+          ),
         ),
       ),
     );

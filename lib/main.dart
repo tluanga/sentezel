@@ -3,11 +3,11 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_screen.dart';
 import 'package:sentezel/authentication/pin/pin_auth/pin_auth_screen.dart';
 import 'package:sentezel/authentication/pin/pin_setup/pin_setup_screen.dart';
-
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/screens/control_center_screen.dart';
+import 'package:sentezel/home/animated_home/animated_home.dart';
 import 'package:sentezel/home/ui/home_screen.dart';
 import 'package:sentezel/new_transaction/new_transaction_Center_screen.dart';
 import 'package:sentezel/new_transaction/purchase/purchase_of_asset/purchase_of_asset_screen.dart';
@@ -35,7 +35,8 @@ class MyApp extends HookConsumerWidget {
         primarySwatch: Colors.grey,
       ),
       routes: {
-        RouteConstant.home: (context) => const HomeScreen(),
+        // RouteConstant.home: (context) => const HomeScreen(),
+        RouteConstant.home: (context) => const AnimatedHome(),
         RouteConstant.analytics: (context) => const AnalyticsScreen(),
         RouteConstant.books: (context) => const BooksScreen(),
         RouteConstant.controlCenter: (context) => const ControlCenterScreen(),

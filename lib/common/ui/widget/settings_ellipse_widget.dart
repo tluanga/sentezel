@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -29,30 +30,64 @@ class SettingsEllipseWidget extends StatelessWidget {
               width: MediaQuery.of(context).size.width * 0.12,
               height: MediaQuery.of(context).size.height * 0.03 + 10,
               child: Row(
+                //  crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    width: 12.0,
-                    height: 12.0,
-                    decoration: const BoxDecoration(
-                      color: Colors.orange,
-                      shape: BoxShape.circle,
+                  // Container(
+                  //   width: 12.0,
+                  //   height: 12.0,
+                  //   decoration: const BoxDecoration(
+                  //     color: Colors.orange,
+                  //     shape: BoxShape.circle,
+                  //   ),
+                  // ),
+                  // Container(
+                  //   width: 12.0,
+                  //   height: 12.0,
+                  //   decoration: const BoxDecoration(
+                  //     color: Colors.blue,
+                  //     shape: BoxShape.circle,
+                  //   ),
+                  // ),
+                  // Container(
+                  //   width: 12.0,
+                  //   height: 12.0,
+                  //   decoration: const BoxDecoration(
+                  //     color: Colors.green,
+                  //     shape: BoxShape.circle,
+                  //   ),
+                  // ),
+                  JelloIn(
+                    delay: const Duration(milliseconds: 100),
+                    child: Container(
+                      width: 12.0,
+                      height: 12.0,
+                      decoration: const BoxDecoration(
+                        color: Colors.orange,
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
-                  Container(
-                    width: 12.0,
-                    height: 12.0,
-                    decoration: const BoxDecoration(
-                      color: Colors.blue,
-                      shape: BoxShape.circle,
+                  JelloIn(
+                    delay: const Duration(milliseconds: 200),
+                    child: Container(
+                      width: 12.0,
+                      height: 12.0,
+                      decoration: const BoxDecoration(
+                        color: Colors.blue,
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
-                  Container(
-                    width: 12.0,
-                    height: 12.0,
-                    decoration: const BoxDecoration(
-                      color: Colors.green,
-                      shape: BoxShape.circle,
+                  JelloIn(
+                    delay: const Duration(milliseconds: 300),
+                    child: Container(
+                      width: 12.0,
+                      height: 12.0,
+                      decoration: const BoxDecoration(
+                        color: Colors.green,
+                        shape: BoxShape.circle,
+                      ),
                     ),
                   ),
                 ],
