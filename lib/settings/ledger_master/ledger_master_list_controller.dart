@@ -24,19 +24,19 @@ class LedgerMasterListController extends StateNotifier<List<LedgerMaster>> {
 
   //
 
-  addLedgerMaster(LedgerMaster payload) {
-    try {
-      _read(ledgerMasterRepositoryProvider).add(payload: payload);
-    } on Exception catch (e) {
-      throw Exception(e.toString());
-    }
-  }
+  // addLedgerMaster(LedgerMaster payload) {
+  //   try {
+  //     _read(ledgerMasterRepositoryProvider).add(payload: payload);
+  //   } on Exception catch (e) {
+  //     throw Exception(e.toString());
+  //   }
+  // }
 
-  updateLedgerMaster(LedgerMaster payload) {
-    try {
-      _read(ledgerMasterRepositoryProvider).update(payload: payload);
-    } on Exception catch (e) {
-      throw Exception(e.toString());
-    }
-  }
+  // updateLedgerMaster(LedgerMaster payload) {
+  //   try {
+  //     _read(ledgerMasterRepositoryProvider).update(payload: payload);
+  //   } on Exception catch (e) {
+  //     throw Exception(e.toString());
+  //   }
+  // }
 }

@@ -189,7 +189,8 @@ class LedgerDetailScreen extends HookConsumerWidget {
                         width: size.width * 0.24,
                         child: Text(
                           data.debitOrCredit == DebitOrCredit.debit
-                              ? data.amount.toString()
+                              ? currencySeperatorStringFormatterHelper(
+                                  data.amount)
                               : '',
                         ),
                       ),

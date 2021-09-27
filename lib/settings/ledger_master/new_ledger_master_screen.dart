@@ -2,14 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
-
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
-import 'package:sentezel/settings/ledger_master/ledger_master_list_controller.dart';
+import 'package:sentezel/settings/ledger_master/new_ledger_master_controller.dart';
 
 class NewLedgerMasterScreen extends HookConsumerWidget {
   final LedgerMaster? ledgerMaster;
@@ -17,11 +15,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _name = useState(ledgerMaster != null ? ledgerMaster!.name : '');
-    final _description =
-        useState(ledgerMaster != null ? ledgerMaster!.description : '');
-    final _type = useState(
-        ledgerMaster != null ? ledgerMaster!.type : LedgerMasterType.direct);
+    var state = ref.watch(newLedgerMasterControllerProvider);
     final _status = useState<Status>(
         ledgerMaster != null ? ledgerMaster!.status : Status.active);
     return Scaffold(
@@ -33,183 +27,22 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
           child: Column(
             children: [
               TopBarWithSaveWidget(
-                title: ledgerMaster != null
-                    ? 'Update Ledger'
-                    : 'New Ledger Master',
-                onCancel: () {},
-                onSave: () {
-                  showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return Material(
-                          child: SafeArea(
-                            top: false,
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Container(
-                                  width: MediaQuery.of(context).size.width,
-                                  height: 30,
-                                  decoration: BoxDecoration(
-                                      color: Colors.redAccent[100]),
-                                  child: Center(
-                                    child: Text(
-                                      ledgerMaster != null
-                                          ? 'Confirm update'
-                                          : 'Confirm new Ledger',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  child: Row(
-                                    children: [
-                                      const Text('Ledger Name : '),
-                                      Text(_name.value)
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  child: Row(
-                                    children: [
-                                      const Text('Description : '),
-                                      Text(_description.value)
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  child: Row(
-                                    children: [
-                                      const Text('Type : '),
-                                      Text(_type.value.toString())
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  child: Row(
-                                    children: [
-                                      const Text('Status : '),
-                                      Text(_status.value.toString())
-                                    ],
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.blue.shade400),
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          offset: Offset(0, 2),
-                                          blurRadius: 6.0,
-                                        ),
-                                      ],
-                                    ),
-                                    child: ListTile(
-                                      title: const Text(
-                                        'Confirm',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Palette.textColor,
-                                        ),
-                                      ),
-                                      leading: const Icon(
-                                          CupertinoIcons.checkmark_alt),
-                                      onTap: () {
-                                        if (ledgerMaster != null) {
-                                          ref
-                                              .read(
-                                                  ledgerMasterListControllerProvider
-                                                      .notifier)
-                                              .updateLedgerMaster(
-                                                LedgerMaster.withId(
-                                                  id: ledgerMaster!.id,
-                                                  name: _name.value,
-                                                  description:
-                                                      _description.value,
-                                                  type: _type.value,
-                                                  status: _status.value,
-                                                ),
-                                              );
-                                        } else {
-                                          ref
-                                              .read(
-                                                  ledgerMasterListControllerProvider
-                                                      .notifier)
-                                              .addLedgerMaster(
-                                                LedgerMaster(
-                                                  name: _name.value,
-                                                  description:
-                                                      _description.value,
-                                                  type: _type.value,
-                                                ),
-                                              );
-                                        }
-                                      },
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      border: Border.all(
-                                          color: Colors.red.shade400),
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: const [
-                                        BoxShadow(
-                                          color: Colors.black26,
-                                          offset: Offset(0, 2),
-                                          blurRadius: 6.0,
-                                        ),
-                                      ],
-                                    ),
-                                    child: ListTile(
-                                      title: const Text(
-                                        'Cancel',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Palette.textColor,
-                                        ),
-                                      ),
-                                      leading:
-                                          const Icon(CupertinoIcons.nosign),
-                                      onTap: () {
-                                        Navigator.pop(context);
-                                      },
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      });
-                },
-              ),
+                  title: ledgerMaster != null
+                      ? 'Update Ledger'
+                      : 'New Ledger Master',
+                  onCancel: () {},
+                  onSave: () {
+                    _confirmSheet(
+                        context: context, ledgerMaster: ledgerMaster, ref: ref);
+                  }),
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
                 onChanged: (value) {
-                  _name.value = value;
+                  ref
+                      .watch(newLedgerMasterControllerProvider.notifier)
+                      .setState(state.name = value);
                 },
                 initialValue: ledgerMaster != null ? ledgerMaster!.name : '',
               ),
@@ -221,7 +54,9 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     ledgerMaster != null ? ledgerMaster!.description : '',
                 maxLines: 3,
                 onChanged: (value) {
-                  _description.value = value;
+                  ref
+                      .watch(newLedgerMasterControllerProvider.notifier)
+                      .setState(state.description = value);
                 },
               ),
               //-----------LedgerMasterType
@@ -255,9 +90,13 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                       trailing: Radio(
                         value: LedgerMasterType.direct,
                         onChanged: (value) {
-                          _type.value = LedgerMasterType.direct;
+                          ref
+                              .watch(newLedgerMasterControllerProvider.notifier)
+                              .setState(state.type = LedgerMasterType.direct);
                         },
-                        groupValue: _type.value,
+                        groupValue: ledgerMaster != null
+                            ? ledgerMaster!.type
+                            : LedgerMasterType.direct,
                       ),
                     ),
                     Container(
@@ -267,9 +106,15 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                         trailing: Radio(
                           value: LedgerMasterType.indirect,
                           onChanged: (value) {
-                            _type.value = LedgerMasterType.indirect;
+                            ref
+                                .watch(
+                                    newLedgerMasterControllerProvider.notifier)
+                                .setState(
+                                    state.type = LedgerMasterType.indirect);
                           },
-                          groupValue: _type.value,
+                          groupValue: ledgerMaster != null
+                              ? ledgerMaster!.type
+                              : LedgerMasterType.direct,
                         ),
                       ),
                     ),
@@ -291,8 +136,12 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     inactiveThumbColor: Colors.white,
                     value: _status.value == Status.active ? true : false,
                     onChanged: (value) {
-                      _status.value =
-                          value == true ? Status.active : Status.inActive;
+                      ref
+                          .watch(newLedgerMasterControllerProvider.notifier)
+                          .setState(state.status =
+                              value == true ? Status.active : Status.inActive);
+                      // _status.value =
+                      //     value == true ? Status.active : Status.inActive;
                     },
                   ),
                 ),
@@ -305,4 +154,163 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
       ),
     );
   }
+}
+
+_confirmSheet(
+    {required BuildContext context,
+    required LedgerMaster? ledgerMaster,
+    required WidgetRef ref}) {
+  List<String> _errorMessages =
+      ref.watch(newLedgerMasterControllerProvider.notifier).validate();
+  var state = ref.watch(newLedgerMasterControllerProvider);
+  return showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return _errorMessages.isEmpty
+            ? Material(
+                child: SafeArea(
+                  top: false,
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 30,
+                        decoration: BoxDecoration(color: Colors.redAccent[100]),
+                        child: Center(
+                          child: Text(
+                            ledgerMaster != null
+                                ? 'Confirm update'
+                                : 'Confirm new Ledger',
+                            style: const TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        child: Row(
+                          children: [
+                            const Text('Ledger Name : '),
+                            Text(state.name)
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        child: Row(
+                          children: [
+                            const Text('Description : '),
+                            Text(state.description)
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        child: Row(
+                          children: [
+                            const Text('Type : '),
+                            Text(state.type.toString())
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 8, vertical: 4),
+                        child: Row(
+                          children: [
+                            const Text('Status : '),
+                            Text(state.status.toString())
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.blue.shade400),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset(0, 2),
+                                blurRadius: 6.0,
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            title: const Text(
+                              'Confirm',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Palette.textColor,
+                              ),
+                            ),
+                            leading: const Icon(CupertinoIcons.checkmark_alt),
+                            onTap: () {
+                              if (ledgerMaster != null) {
+                                ref
+                                    .read(newLedgerMasterControllerProvider
+                                        .notifier)
+                                    .updateLedgerMaster(id: ledgerMaster.id);
+                              } else {
+                                ref
+                                    .read(newLedgerMasterControllerProvider
+                                        .notifier)
+                                    .addLedgerMaster();
+                              }
+                            },
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            border: Border.all(color: Colors.red.shade400),
+                            borderRadius: BorderRadius.circular(10),
+                            boxShadow: const [
+                              BoxShadow(
+                                color: Colors.black26,
+                                offset: Offset(0, 2),
+                                blurRadius: 6.0,
+                              ),
+                            ],
+                          ),
+                          child: ListTile(
+                            title: const Text(
+                              'Cancel',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Palette.textColor,
+                              ),
+                            ),
+                            leading: const Icon(CupertinoIcons.nosign),
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            : Material(
+                child: SafeArea(
+                    child: ListView.builder(
+                        itemCount: _errorMessages.length,
+                        itemBuilder: (context, index) {
+                          return Text(_errorMessages[index]);
+                        })),
+              );
+      });
 }
