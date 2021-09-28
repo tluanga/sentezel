@@ -3,13 +3,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
-import 'package:sentezel/common/helpers/get_Initial_letter_helper.dart';
+import 'package:sentezel/common/helpers/get_initial_letter_helper.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/floating_action_button_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 import 'package:sentezel/settings/ledger_master/new_ledger_master_screen.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/edit_transaction_category/edit_transaction_category_screen.dart';
+import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_category_screen.dart';
 
 import 'package:sentezel/settings/transactionCategory/transaction_category_list_controller.dart';
 
@@ -68,7 +69,7 @@ class TransactionCategoryListScreen extends HookConsumerWidget {
             expand: true,
             context: context,
             backgroundColor: Colors.transparent,
-            builder: (context) => const NewLedgerMasterScreen(),
+            builder: (context) => const NewTransactionCategoryScreen(),
           );
         },
       ),

@@ -80,7 +80,7 @@ class PaymentScreen extends HookConsumerWidget {
                   );
                 },
                 loading: () {
-                  return Center(child: const CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 },
                 error: (error, stack) {}),
           ),

@@ -80,7 +80,7 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                 ),
               ),
               FadeInUp(
-                delay: Duration(milliseconds: 100),
+                delay: const Duration(milliseconds: 100),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -130,7 +130,7 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                 ),
               ),
               FadeInUp(
-                delay: Duration(milliseconds: 120),
+                delay: const Duration(milliseconds: 120),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -177,7 +177,7 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                 ),
               ),
               FadeInUp(
-                delay: Duration(milliseconds: 130),
+                delay: const Duration(milliseconds: 130),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [

@@ -7,7 +7,7 @@ import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
-import 'package:sentezel/settings/ledger_master/new_ledger_master_controller.dart';
+import 'package:sentezel/settings/ledger_master/ledger_master_list_controller.dart';
 
 class NewLedgerMasterScreen extends HookConsumerWidget {
   final LedgerMaster? ledgerMaster;
@@ -15,7 +15,13 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var state = ref.watch(newLedgerMasterControllerProvider);
+    final _nameTextEditingController = useTextEditingController(
+        text: ledgerMaster != null ? ledgerMaster!.name : '');
+    final _descriptionTextEditingController = useTextEditingController(
+      text: ledgerMaster != null ? ledgerMaster!.description : '',
+    );
+    final _type = useState<LedgerMasterType>(
+        ledgerMaster != null ? ledgerMaster!.type : LedgerMasterType.direct);
     final _status = useState<Status>(
         ledgerMaster != null ? ledgerMaster!.status : Status.active);
     return Scaffold(
@@ -30,34 +36,32 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                   title: ledgerMaster != null
                       ? 'Update Ledger'
                       : 'New Ledger Master',
-                  onCancel: () {},
+                  onCancel: () {
+                    Navigator.pop(context);
+                  },
                   onSave: () {
                     _confirmSheet(
-                        context: context, ledgerMaster: ledgerMaster, ref: ref);
+                        context: context,
+                        ledgerMaster: ledgerMaster,
+                        nameTextEditingController: _nameTextEditingController,
+                        descriptionTextEditingController:
+                            _descriptionTextEditingController,
+                        type: _type.value,
+                        status: _status.value,
+                        ref: ref);
                   }),
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Name',
                 ),
-                onChanged: (value) {
-                  ref
-                      .watch(newLedgerMasterControllerProvider.notifier)
-                      .setState(state.name = value);
-                },
-                initialValue: ledgerMaster != null ? ledgerMaster!.name : '',
+                controller: _nameTextEditingController,
               ),
               TextFormField(
                 decoration: const InputDecoration(
                   labelText: 'Description',
                 ),
-                initialValue:
-                    ledgerMaster != null ? ledgerMaster!.description : '',
                 maxLines: 3,
-                onChanged: (value) {
-                  ref
-                      .watch(newLedgerMasterControllerProvider.notifier)
-                      .setState(state.description = value);
-                },
+                controller: _descriptionTextEditingController,
               ),
               //-----------LedgerMasterType
               const SizedBox(
@@ -90,13 +94,9 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                       trailing: Radio(
                         value: LedgerMasterType.direct,
                         onChanged: (value) {
-                          ref
-                              .watch(newLedgerMasterControllerProvider.notifier)
-                              .setState(state.type = LedgerMasterType.direct);
+                          _type.value = LedgerMasterType.direct;
                         },
-                        groupValue: ledgerMaster != null
-                            ? ledgerMaster!.type
-                            : LedgerMasterType.direct,
+                        groupValue: _type.value,
                       ),
                     ),
                     Container(
@@ -106,15 +106,9 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                         trailing: Radio(
                           value: LedgerMasterType.indirect,
                           onChanged: (value) {
-                            ref
-                                .watch(
-                                    newLedgerMasterControllerProvider.notifier)
-                                .setState(
-                                    state.type = LedgerMasterType.indirect);
+                            _type.value = LedgerMasterType.indirect;
                           },
-                          groupValue: ledgerMaster != null
-                              ? ledgerMaster!.type
-                              : LedgerMasterType.direct,
+                          groupValue: _type.value,
                         ),
                       ),
                     ),
@@ -136,12 +130,8 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     inactiveThumbColor: Colors.white,
                     value: _status.value == Status.active ? true : false,
                     onChanged: (value) {
-                      ref
-                          .watch(newLedgerMasterControllerProvider.notifier)
-                          .setState(state.status =
-                              value == true ? Status.active : Status.inActive);
-                      // _status.value =
-                      //     value == true ? Status.active : Status.inActive;
+                      _status.value =
+                          value == true ? Status.active : Status.inActive;
                     },
                   ),
                 ),
@@ -159,10 +149,18 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
 _confirmSheet(
     {required BuildContext context,
     required LedgerMaster? ledgerMaster,
+    required TextEditingController nameTextEditingController,
+    required TextEditingController descriptionTextEditingController,
+    required LedgerMasterType type,
+    required Status status,
     required WidgetRef ref}) {
-  List<String> _errorMessages =
-      ref.watch(newLedgerMasterControllerProvider.notifier).validate();
-  var state = ref.watch(newLedgerMasterControllerProvider);
+  List<String> _errorMessages = [];
+  if (nameTextEditingController.text.isEmpty) {
+    _errorMessages.add('Khawngaihin Ledger hming dah rawh');
+  }
+  if (descriptionTextEditingController.text.isEmpty) {
+    _errorMessages.add('Khawngaihin description dah rawh');
+  }
   return showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
@@ -194,7 +192,7 @@ _confirmSheet(
                         child: Row(
                           children: [
                             const Text('Ledger Name : '),
-                            Text(state.name)
+                            Text(nameTextEditingController.text)
                           ],
                         ),
                       ),
@@ -204,7 +202,7 @@ _confirmSheet(
                         child: Row(
                           children: [
                             const Text('Description : '),
-                            Text(state.description)
+                            Text(descriptionTextEditingController.text)
                           ],
                         ),
                       ),
@@ -214,7 +212,7 @@ _confirmSheet(
                         child: Row(
                           children: [
                             const Text('Type : '),
-                            Text(state.type.toString())
+                            Text(type.toString())
                           ],
                         ),
                       ),
@@ -224,7 +222,7 @@ _confirmSheet(
                         child: Row(
                           children: [
                             const Text('Status : '),
-                            Text(state.status.toString())
+                            Text(status.toString())
                           ],
                         ),
                       ),
@@ -254,17 +252,28 @@ _confirmSheet(
                             ),
                             leading: const Icon(CupertinoIcons.checkmark_alt),
                             onTap: () {
-                              if (ledgerMaster != null) {
-                                ref
-                                    .read(newLedgerMasterControllerProvider
-                                        .notifier)
-                                    .updateLedgerMaster(id: ledgerMaster.id);
-                              } else {
-                                ref
-                                    .read(newLedgerMasterControllerProvider
-                                        .notifier)
-                                    .addLedgerMaster();
-                              }
+                              ledgerMaster == null
+                                  ? ref
+                                      .read(ledgerMasterListControllerProvider
+                                          .notifier)
+                                      .addLedgerMaster(LedgerMaster(
+                                          name: nameTextEditingController.text,
+                                          description:
+                                              descriptionTextEditingController
+                                                  .text,
+                                          type: type))
+                                  : ref
+                                      .read(ledgerMasterListControllerProvider
+                                          .notifier)
+                                      .updateLedgerMaster(LedgerMaster.withId(
+                                          id: ledgerMaster.id,
+                                          name: nameTextEditingController.text,
+                                          description:
+                                              descriptionTextEditingController
+                                                  .text,
+                                          type: type,
+                                          status: status));
+                              Navigator.pop(context);
                             },
                           ),
                         ),

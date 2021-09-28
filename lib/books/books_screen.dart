@@ -18,7 +18,7 @@ class BooksScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return FadeInUp(
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
       child: Material(
         child: SafeArea(
           child: Container(

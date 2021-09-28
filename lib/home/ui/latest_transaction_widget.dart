@@ -2,7 +2,6 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/books/journal/journal_controller.dart';
@@ -11,7 +10,6 @@ import 'package:sentezel/books/journal/journal_model.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:sentezel/common/helpers/get_transaction_color_helper.dart';
 import 'package:sentezel/common/helpers/get_transaction_icon_helper.dart';
-import 'package:sentezel/common/ui/pallete.dart';
 
 class HomeLatestTransactionWidget extends HookConsumerWidget {
   const HomeLatestTransactionWidget({Key? key}) : super(key: key);
@@ -58,9 +56,9 @@ class HomeLatestTransactionWidget extends HookConsumerWidget {
       required int index,
       required Journal item,
       required Function(Journal) onSelect}) {
-    Color _color = Palette.color3;
+    // Color _color = Palette.color3;
     final _icon = getTransactionIcon(item.transactionType);
-    _color = Palette.color1;
+    // _color = Palette.color1;
 
     return GestureDetector(
       onTap: () {

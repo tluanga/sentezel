@@ -9,8 +9,6 @@ import 'package:sentezel/books/journal/journal_model.dart';
 import 'package:sentezel/common/helpers/currrency_seperator_string_formatter_helper.dart';
 import 'package:sentezel/common/helpers/get_transaction_color_helper.dart';
 import 'package:sentezel/common/helpers/get_transaction_icon_helper.dart';
-
-import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_controller.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
@@ -78,9 +76,9 @@ class JournalReportScreen extends HookConsumerWidget {
       {required BuildContext context,
       required Journal item,
       required Function(Journal) onSelect}) {
-    Color _color = Palette.color3;
+    // Color _color = Palette.color3;
     final _icon = getTransactionIcon(item.transactionType);
-    _color = Palette.color1;
+    // _color = Palette.color1;
 
     return GestureDetector(
       onTap: () {

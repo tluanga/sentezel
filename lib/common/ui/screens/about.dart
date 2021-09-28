@@ -42,19 +42,19 @@ class About extends StatelessWidget {
               // Spacer(),
               title(),
 
-              Spacer(
+              const Spacer(
                 flex: 1,
               ),
               developBy(),
-              Spacer(
+              const Spacer(
                 flex: 2,
               ),
               publishby(),
-              Spacer(
+              const Spacer(
                 flex: 2,
               ),
               description(),
-              Spacer(
+              const Spacer(
                 flex: 2,
               )
             ],
@@ -66,10 +66,10 @@ class About extends StatelessWidget {
 
   Widget title() {
     return Container(
-      padding: EdgeInsets.only(
+      padding: const EdgeInsets.only(
         top: 20,
       ),
-      color: Color.fromRGBO(244, 239, 241, 1),
+      color: const Color.fromRGBO(244, 239, 241, 1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -98,7 +98,7 @@ class About extends StatelessWidget {
             ),
           ),
           version(),
-          SizedBox(
+          const SizedBox(
             height: 10,
           )
         ],

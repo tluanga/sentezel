@@ -26,7 +26,6 @@ Color getTransactionColor(TransactionType type) {
       return Palette.color7;
     case TransactionType.cashToBank:
       return Palette.color8;
-      ;
     case TransactionType.bankToCash:
       return Palette.color8;
     case TransactionType.capitalInjection:
