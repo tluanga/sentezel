@@ -80,7 +80,7 @@ class NewTransactionLedgerSelectWidget extends HookConsumerWidget {
     return GestureDetector(
       onTap: () {
         ref.read(newTransactionCategoryControllerProvider.notifier).ledger =
-            ledgerMaster;
+            ledgerMaster.id;
         Navigator.of(context).pop();
       },
       child: Container(

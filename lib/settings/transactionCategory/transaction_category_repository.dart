@@ -19,7 +19,14 @@ class TransactionCategoryRepository
   const TransactionCategoryRepository();
 
   @override
-  void add({required payload}) {}
+  void add({required TransactionCategory payload}) async {
+    Database db = await DatabaseService.instance.db;
+    try {
+      await db.insert(dbName, payload.toJson());
+    } catch (e) {
+      e.toString();
+    }
+  }
 
   @override
   Future<TransactionCategory> getItem({required int id}) async {
@@ -123,5 +130,13 @@ class TransactionCategoryRepository
   void remove({required id}) {}
 
   @override
-  void update({required payload}) {}
+  void update({required payload}) async {
+    try {
+      Database db = await DatabaseService.instance.db;
+      await db.update(dbName, payload.toJson(),
+          where: 'id=?', whereArgs: [payload.id]);
+    } catch (e) {
+      e.toString();
+    }
+  }
 }
