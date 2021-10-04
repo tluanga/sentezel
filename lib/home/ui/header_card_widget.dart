@@ -73,8 +73,8 @@ class HomeHeaderCard extends HookConsumerWidget {
             child: Text(
               data.name,
               style: GoogleFonts.titilliumWeb(
-                color: Colors.white70,
-                fontSize: 25,
+                color: Colors.white,
+                fontSize: 23,
               ),
             ),
           );
