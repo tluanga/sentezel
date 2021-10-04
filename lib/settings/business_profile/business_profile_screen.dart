@@ -32,84 +32,93 @@ class BusinessProfileSceen extends HookConsumerWidget {
             ),
             ref.read(businessProfileControllerProvider).when(
               data: (data) {
-                return Column(children: [
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Business Name',
+                return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(children: [
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Business Name',
+                      ),
+                      initialValue: data.name,
+                      onChanged: (value) {
+                        ref
+                            .read(businessProfileControllerProvider.notifier)
+                            .name = value;
+                      },
                     ),
-                    initialValue: data.name,
-                    onChanged: (value) {
-                      ref
-                          .read(businessProfileControllerProvider.notifier)
-                          .name = value;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                      labelText: 'Description',
+                    SizedBox(
+                      height: 10,
                     ),
-                    initialValue: data.description,
-                    onChanged: (value) {
-                      ref
-                          .read(businessProfileControllerProvider.notifier)
-                          .description = value;
-                    },
-                  ),
-                  Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: Colors.grey.shade300,
+                    TextFormField(
+                      decoration: const InputDecoration(
+                        labelText: 'Description',
+                      ),
+                      initialValue: data.description,
+                      onChanged: (value) {
+                        ref
+                            .read(businessProfileControllerProvider.notifier)
+                            .description = value;
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: Colors.grey.shade300,
+                          ),
                         ),
-                      ),
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 5,
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 15),
-                            child: Text(
-                              'Ledger Master Type',
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 5,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 15),
+                              child: Text(
+                                'Ledger Master Type',
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
                             ),
-                          ),
-                          ListTile(
-                            title: const Text('Mahni Siam Zuar'),
-                            trailing: Radio(
-                              value: BusinessType.mahniSiamZuar,
-                              onChanged: (value) {
-                                // _type.value = LedgerMasterType.direct;
-                                ref
-                                    .read(businessProfileControllerProvider
-                                        .notifier)
-                                    .type = BusinessType.mahniSiamZuar;
-                              },
-                              groupValue: data.type,
-                            ),
-                          ),
-                          Container(
-                            margin: const EdgeInsets.all(0),
-                            child: ListTile(
-                              title: const Text('Mi Siam Sa Zuar'),
+                            ListTile(
+                              title: const Text('Mahni Siam Zuar'),
                               trailing: Radio(
-                                value: BusinessType.miSiamsaZuar,
+                                value: BusinessType.mahniSiamZuar,
                                 onChanged: (value) {
+                                  // _type.value = LedgerMasterType.direct;
                                   ref
                                       .read(businessProfileControllerProvider
                                           .notifier)
-                                      .type = BusinessType.miSiamsaZuar;
+                                      .type = BusinessType.mahniSiamZuar;
                                 },
                                 groupValue: data.type,
                               ),
                             ),
-                          ),
-                        ],
-                      ))
-                ]);
+                            Container(
+                              margin: const EdgeInsets.all(0),
+                              child: ListTile(
+                                title: const Text('Mi Siam Sa Zuar'),
+                                trailing: Radio(
+                                  value: BusinessType.miSiamsaZuar,
+                                  onChanged: (value) {
+                                    ref
+                                        .read(businessProfileControllerProvider
+                                            .notifier)
+                                        .type = BusinessType.miSiamsaZuar;
+                                  },
+                                  groupValue: data.type,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ))
+                  ]),
+                );
               },
               loading: () {
                 return const Center(child: CircularProgressIndicator());
