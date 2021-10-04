@@ -69,7 +69,7 @@ class EditTransactionCategoryScreen extends HookConsumerWidget {
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                  labelText: 'Name',
+                  labelText: 'Name...',
                 ),
                 onChanged: (value) {
                   ref

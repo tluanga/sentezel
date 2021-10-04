@@ -37,11 +37,16 @@ class TransactionCategoryListScreen extends HookConsumerWidget {
               },
             ),
             Container(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 10,
-              ),
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(10)),
+              width: MediaQuery.of(context).size.width * 0.95,
               child: TextFormField(
-                decoration: const InputDecoration(labelText: 'Search Ledger'),
+                decoration: const InputDecoration(
+                  hintText: 'Search Ledger',
+                  border: InputBorder.none,
+                  prefixIcon: Icon(Icons.search),
+                ),
                 onChanged: (value) {
                   ref.watch(transactionCategoryListProvider.notifier).loadData(
                         searchParam: value,

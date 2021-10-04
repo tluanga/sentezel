@@ -5,6 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:intl/intl.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/common/ui/widget/container_ledger.dart';
 import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
@@ -28,14 +29,23 @@ class NewTransactionLedgerSelectWidget extends HookConsumerWidget {
     return Material(
       child: Column(
         children: [
-          TopBarForBottomSheetWidget(
-            label: 'Select Ledger',
-            onExit: () {
-              Navigator.pop(context);
-            },
+          Padding(
+            padding: const EdgeInsets.only(left: 8.0, top: 2),
+            child: TopBarForBottomSheetWidget(
+              label: 'Select Ledger',
+              onExit: () {
+                Navigator.pop(context);
+              },
+            ),
           ),
-          TextFormField(
-            decoration: const InputDecoration(labelText: 'Select Ledger'),
+          ContainerLedger(
+            child: TextFormField(
+              decoration: const InputDecoration(
+                hintText: 'Search',
+                border: InputBorder.none,
+                prefixIcon: Icon(Icons.search),
+              ),
+            ),
           ),
           ref.read(newTransactionLedgerSelectControllerProvider).when(
               data: (data) {

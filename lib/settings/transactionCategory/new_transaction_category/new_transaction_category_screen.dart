@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
@@ -8,6 +9,7 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/common/ui/widget/container_ledger.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_category_controller.dart';
 
@@ -34,7 +36,7 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
     final state = ref.watch(newTransactionCategoryControllerProvider);
     return Scaffold(
       body: SafeArea(
-        child: Column(
+        child: ListView(
           children: [
             TopBarWithSaveWidget(
                 title: 'New Transaction Category',
@@ -47,34 +49,39 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                   //     .watch(newTransactionCategoryControllerProvider.notifier)
                   //     .save();
                 }),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Name',
+            ContainerLedger(
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  labelText: 'Name',
+                ),
+                onChanged: (value) {
+                  _name.value = value;
+                  ref
+                      .watch(newTransactionCategoryControllerProvider.notifier)
+                      .name = value;
+                },
+                initialValue: _name.value,
               ),
-              onChanged: (value) {
-                _name.value = value;
-                ref
-                    .watch(newTransactionCategoryControllerProvider.notifier)
-                    .name = value;
-              },
-              initialValue: _name.value,
             ),
-            TextFormField(
-              decoration: const InputDecoration(
-                labelText: 'Description',
+            ContainerLedger(
+              child: TextFormField(
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  labelText: 'Description',
+                ),
+                onChanged: (value) {
+                  ref
+                      .watch(newTransactionCategoryControllerProvider.notifier)
+                      .description = value;
+                },
+                initialValue: _description.value,
+                minLines: 1,
+                maxLines: 4,
               ),
-              onChanged: (value) {
-                ref
-                    .watch(newTransactionCategoryControllerProvider.notifier)
-                    .description = value;
-              },
-              initialValue: _description.value,
-              maxLines: 2,
             ),
             //---------------Ledger Select----------
-            const SizedBox(
-              height: 10,
-            ),
+
             GestureDetector(
               onTap: () {
                 showCupertinoModalBottomSheet(
@@ -86,14 +93,9 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                           hastransactionCategoryData: false,
                         ));
               },
-              child: Container(
-                width: MediaQuery.of(context).size.width * 0.9,
-                height: MediaQuery.of(context).size.height * 0.05,
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey),
-                    borderRadius: BorderRadius.circular(8)),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+              child: ContainerLedger(
+                child: SizedBox(
+                  height: 55,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -127,24 +129,13 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
               ),
             ),
             //-----------transactionCategoryType
-            const SizedBox(
-              height: 10,
-            ),
 
-            Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade300,
-                ),
-              ),
-              padding: const EdgeInsets.symmetric(
-                vertical: 5,
-              ),
+            ContainerLedger(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    padding: EdgeInsets.only(top: 12),
                     child: Text(
                       'Transaction Type',
                       style: TextStyle(
@@ -153,9 +144,10 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
                     child: ListTile(
+                      contentPadding: const EdgeInsets.all(0),
                       title: const Text('Lei'),
                       trailing: Radio(
                         value: TransactionType.lei,
@@ -171,9 +163,10 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
                     child: ListTile(
+                      contentPadding: const EdgeInsets.all(0),
                       title: const Text('Lakluh'),
                       trailing: Radio(
                         value: TransactionType.lakluh,
@@ -189,9 +182,10 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
                     child: ListTile(
+                      contentPadding: const EdgeInsets.all(0),
                       title: const Text('Hralh'),
                       trailing: Radio(
                         value: TransactionType.hralh,
@@ -207,9 +201,10 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                       ),
                     ),
                   ),
-                  Container(
-                    margin: const EdgeInsets.all(0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16),
                     child: ListTile(
+                      contentPadding: const EdgeInsets.all(0),
                       title: const Text('Pekchhuah'),
                       trailing: Radio(
                         value: TransactionType.pekchhuah,
@@ -228,24 +223,28 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                 ],
               ),
             ),
-            ListTile(
-              title: const Text(
-                'Active',
-                style: TextStyle(
-                  fontSize: 16,
-                ),
-              ),
-              trailing: Transform.scale(
-                scale: 1.2,
-                child: Switch(
-                  activeTrackColor: Colors.green.shade400,
-                  activeColor: Colors.white,
-                  inactiveThumbColor: Colors.white,
-                  value: _status.value == Status.active ? true : false,
-                  onChanged: (value) {
-                    _status.value =
-                        value == true ? Status.active : Status.inActive;
-                  },
+            ContainerLedger(
+              child: Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  title: const Text(
+                    'Active',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                  ),
+                  trailing: Transform.scale(
+                    scale: 1.2,
+                    child: Switch(
+                      activeTrackColor: Colors.green.shade400,
+                      activeColor: Colors.white,
+                      inactiveThumbColor: Colors.white,
+                      value: _status.value == Status.active ? true : false,
+                      onChanged: (value) {
+                        _status.value =
+                            value == true ? Status.active : Status.inActive;
+                      },
+                    ),
+                  ),
                 ),
               ),
             ),

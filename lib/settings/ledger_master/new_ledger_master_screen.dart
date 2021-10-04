@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
@@ -8,6 +9,8 @@ import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
 import 'package:sentezel/settings/ledger_master/ledger_master_list_controller.dart';
+
+import '../../common/ui/widget/container_ledger.dart';
 
 class NewLedgerMasterScreen extends HookConsumerWidget {
   final LedgerMaster? ledgerMaster;
@@ -24,63 +27,65 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
         ledgerMaster != null ? ledgerMaster!.type : LedgerMasterType.direct);
     final _status = useState<Status>(
         ledgerMaster != null ? ledgerMaster!.status : Status.active);
-    return Scaffold(
-      body: SafeArea(
-        child: Container(
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
           padding: const EdgeInsets.symmetric(
-            horizontal: 20,
+            horizontal: 0,
           ),
-          child: Column(
+          child: ListView(
             children: [
-              TopBarWithSaveWidget(
-                  title: ledgerMaster != null
-                      ? 'Update Ledger'
-                      : 'New Ledger Master',
-                  onCancel: () {
-                    Navigator.pop(context);
-                  },
-                  onSave: () {
-                    _confirmSheet(
-                        context: context,
-                        ledgerMaster: ledgerMaster,
-                        nameTextEditingController: _nameTextEditingController,
-                        descriptionTextEditingController:
-                            _descriptionTextEditingController,
-                        type: _type.value,
-                        status: _status.value,
-                        ref: ref);
-                  }),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Name',
-                ),
-                controller: _nameTextEditingController,
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 2),
+                child: TopBarWithSaveWidget(
+                    title: ledgerMaster != null
+                        ? 'Update Ledger'
+                        : 'New Ledger Master',
+                    onCancel: () {
+                      Navigator.pop(context);
+                    },
+                    onSave: () {
+                      _confirmSheet(
+                          context: context,
+                          ledgerMaster: ledgerMaster,
+                          nameTextEditingController: _nameTextEditingController,
+                          descriptionTextEditingController:
+                              _descriptionTextEditingController,
+                          type: _type.value,
+                          status: _status.value,
+                          ref: ref);
+                    }),
               ),
-              TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Description',
-                ),
-                maxLines: 3,
-                controller: _descriptionTextEditingController,
-              ),
-              //-----------LedgerMasterType
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.grey.shade300,
+              ContainerLedger(
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    labelText: 'Name',
                   ),
+                  controller: _nameTextEditingController,
                 ),
-                padding: const EdgeInsets.symmetric(
-                  vertical: 5,
+              ),
+
+              ContainerLedger(
+                child: TextFormField(
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    labelText: 'Description',
+                  ),
+                  minLines: 1,
+                  maxLines: 4,
+                  controller: _descriptionTextEditingController,
                 ),
+              ),
+
+              //-----------LedgerMasterType
+
+              ContainerLedger(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
+                      padding: EdgeInsets.only(top: 10),
                       child: Text(
                         'Ledger Master Type',
                         style: TextStyle(
@@ -90,6 +95,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                       ),
                     ),
                     ListTile(
+                      contentPadding: const EdgeInsets.all(0),
                       title: const Text('Direct'),
                       trailing: Radio(
                         value: LedgerMasterType.direct,
@@ -102,6 +108,7 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                     Container(
                       margin: const EdgeInsets.all(0),
                       child: ListTile(
+                        contentPadding: const EdgeInsets.all(0),
                         title: const Text('Indirect'),
                         trailing: Radio(
                           value: LedgerMasterType.indirect,
@@ -115,28 +122,28 @@ class NewLedgerMasterScreen extends HookConsumerWidget {
                   ],
                 ),
               ),
-              ListTile(
-                title: const Text(
-                  'Active',
-                  style: TextStyle(
-                    fontSize: 16,
+              ContainerLedger(
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(0),
+                  title: const Text(
+                    'Active',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
-                ),
-                trailing: Transform.scale(
-                  scale: 1.2,
-                  child: Switch(
-                    activeTrackColor: Colors.green.shade400,
-                    activeColor: Colors.white,
-                    inactiveThumbColor: Colors.white,
-                    value: _status.value == Status.active ? true : false,
-                    onChanged: (value) {
-                      _status.value =
-                          value == true ? Status.active : Status.inActive;
-                    },
+                  trailing: Transform.scale(
+                    scale: 1.2,
+                    child: Switch(
+                      activeTrackColor: Colors.green.shade400,
+                      activeColor: Colors.white,
+                      inactiveThumbColor: Colors.white,
+                      value: _status.value == Status.active ? true : false,
+                      onChanged: (value) {
+                        _status.value =
+                            value == true ? Status.active : Status.inActive;
+                      },
+                    ),
                   ),
                 ),
               ),
-
               //---------Active in Active state
             ],
           ),

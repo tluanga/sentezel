@@ -21,24 +21,34 @@ class LedgerMasterScreen extends HookConsumerWidget {
     final list = ref.watch(ledgerMasterListControllerProvider);
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            TopBarWidget(
-              title: 'Ledger Master',
-              onClose: () {
-                Navigator.pop(context);
-              },
-            ),
-            //------Searching Ledger Master and filtration will be done
-            // based in input
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
-              child: const TextField(
-                decoration: InputDecoration(labelText: 'Search'),
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: [
+              TopBarWidget(
+                title: 'Ledger Master',
+                onClose: () {
+                  Navigator.pop(context);
+                },
               ),
-            ),
-            _list(context, list),
-          ],
+              //------Searching Ledger Master and filtration will be done
+              // based in input
+              Container(
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.grey),
+                    borderRadius: BorderRadius.circular(10)),
+                width: MediaQuery.of(context).size.width * 0.95,
+                child: const TextField(
+                  decoration: InputDecoration(
+                      border: InputBorder.none,
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Search'),
+                ),
+              ),
+
+              _list(context, list)
+            ],
+          ),
         ),
       ),
       floatingActionButton: SentezelFloatingActionButton(
@@ -59,6 +69,7 @@ class LedgerMasterScreen extends HookConsumerWidget {
 
     return Expanded(
       child: ListView.builder(
+        physics: const BouncingScrollPhysics(),
         itemCount: list.length,
         itemBuilder: (context, index) {
           return _listItem(context, list[index]);
