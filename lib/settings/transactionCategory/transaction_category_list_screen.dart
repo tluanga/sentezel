@@ -11,6 +11,8 @@ import 'package:sentezel/settings/ledger_master/new_ledger_master_screen.dart';
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/edit_transaction_category/edit_transaction_category_screen.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_category_screen.dart';
+import 'package:sentezel/settings/transactionCategory/new_transaction_category/update_transaction_category/update_transaction_category_controller.dart';
+import 'package:sentezel/settings/transactionCategory/new_transaction_category/update_transaction_category/update_transaction_category_screen.dart';
 
 import 'package:sentezel/settings/transactionCategory/transaction_category_list_controller.dart';
 
@@ -104,11 +106,21 @@ class TransactionCategoryListScreen extends HookConsumerWidget {
 
     return GestureDetector(
       onTap: () {
+        ref
+            .watch(updateTransactionCategoryControllerProvider.notifier)
+            .setState(ref
+                .watch(updateTransactionCategoryControllerProvider)
+                .copyWith(
+                    id: item.id,
+                    name: item.name,
+                    description: item.description,
+                    creditSideLedger: item.creditSideLedger,
+                    debitSideLedger: item.debitSideLedger));
         showCupertinoModalBottomSheet(
           expand: true,
           context: context,
           backgroundColor: Colors.transparent,
-          builder: (context) => EditTransactionCategoryScreen(
+          builder: (context) => UpdateTransactionCategoryScreen(
             transactionCategory: item,
           ),
         );

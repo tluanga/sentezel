@@ -10,9 +10,13 @@ import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_category_controller.dart';
 import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_ledger_select_controller.dart';
+import 'package:sentezel/settings/transactionCategory/new_transaction_category/update_transaction_category/update_transaction_category_controller.dart';
 
 class NewTransactionLedgerSelectWidget extends HookConsumerWidget {
-  const NewTransactionLedgerSelectWidget({Key? key}) : super(key: key);
+  final bool hastransactionCategoryData;
+  const NewTransactionLedgerSelectWidget(
+      {Key? key, required this.hastransactionCategoryData})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -79,8 +83,17 @@ class NewTransactionLedgerSelectWidget extends HookConsumerWidget {
     }
     return GestureDetector(
       onTap: () {
-        ref.read(newTransactionCategoryControllerProvider.notifier).ledger =
-            ledgerMaster.id;
+        // has transactionCategory data = true means it is update
+        if (hastransactionCategoryData == true) {
+          ref
+              .read(updateTransactionCategoryControllerProvider.notifier)
+              .ledger = ledgerMaster.id;
+        }
+        // has transactionCategory data = false means it is new transaction category
+        if (hastransactionCategoryData == false) {
+          ref.read(newTransactionCategoryControllerProvider.notifier).ledger =
+              ledgerMaster.id;
+        }
         Navigator.of(context).pop();
       },
       child: Container(

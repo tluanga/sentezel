@@ -11,7 +11,8 @@ class TransactionCategory with _$TransactionCategory {
     int? id,
     required String name,
     required String description,
-    required TransactionType transactionType, // 0--for buy 1-- sell
+    @Default(TransactionType.lei)
+        required TransactionType transactionType, // 0--for buy 1-- sell
     int? debitSideLedger,
     int? creditSideLedger,
     @Default(Status.active) Status status,

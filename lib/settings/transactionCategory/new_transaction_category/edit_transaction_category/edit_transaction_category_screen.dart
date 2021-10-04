@@ -96,7 +96,9 @@ class EditTransactionCategoryScreen extends HookConsumerWidget {
                       context: context,
                       backgroundColor: Colors.transparent,
                       builder: (context) =>
-                          const NewTransactionLedgerSelectWidget(),
+                          const NewTransactionLedgerSelectWidget(
+                        hastransactionCategoryData: true,
+                      ),
                     );
                   },
                   child: data.ledger != null

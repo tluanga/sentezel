@@ -1,43 +1,36 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
-import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_category_controller.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
+import 'package:sentezel/settings/transactionCategory/new_transaction_category/update_transaction_category/update_transaction_category_controller.dart';
 
-import 'package:sentezel/settings/transactionCategory/new_transaction_category/new_transaction_ledger_select_widget.dart';
+import '../new_transaction_ledger_select_controller.dart';
+import '../new_transaction_ledger_select_widget.dart';
 
-import 'new_transaction_ledger_select_controller.dart';
-
-class NewTransactionCategoryScreen extends HookConsumerWidget {
-  const NewTransactionCategoryScreen({
-    Key? key,
-  }) : super(key: key);
+class UpdateTransactionCategoryScreen extends HookConsumerWidget {
+  final TransactionCategory? transactionCategory;
+  const UpdateTransactionCategoryScreen(
+      {Key? key, required this.transactionCategory})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _name = useState('');
-
-    final _description = useState('');
-
     final _transactionType = useState(TransactionType.lei);
-
-    // final _type = useState(transactionCategory!.transactionType);
     final _status = useState<Status>(Status.active);
     ref.watch(newTransactionLedgerSelectControllerProvider.notifier).loadData();
-    final state = ref.watch(newTransactionCategoryControllerProvider);
+    final state = ref.watch(updateTransactionCategoryControllerProvider);
     return Scaffold(
       body: SafeArea(
         child: Column(
           children: [
             TopBarWithSaveWidget(
-                title: 'New Transaction Category',
+                title: 'Update Transaction Category',
                 onCancel: () {
                   Navigator.pop(context);
                 },
@@ -52,12 +45,11 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                 labelText: 'Name',
               ),
               onChanged: (value) {
-                _name.value = value;
                 ref
-                    .watch(newTransactionCategoryControllerProvider.notifier)
+                    .watch(updateTransactionCategoryControllerProvider.notifier)
                     .name = value;
               },
-              initialValue: _name.value,
+              initialValue: transactionCategory!.name,
             ),
             TextFormField(
               decoration: const InputDecoration(
@@ -65,10 +57,10 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
               ),
               onChanged: (value) {
                 ref
-                    .watch(newTransactionCategoryControllerProvider.notifier)
+                    .watch(updateTransactionCategoryControllerProvider.notifier)
                     .description = value;
               },
-              initialValue: _description.value,
+              initialValue: transactionCategory!.description,
               maxLines: 2,
             ),
             //---------------Ledger Select----------
@@ -83,7 +75,7 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                     backgroundColor: Colors.transparent,
                     builder: (context) =>
                         const NewTransactionLedgerSelectWidget(
-                          hastransactionCategoryData: false,
+                          hastransactionCategoryData: true,
                         ));
               },
               child: Container(
@@ -100,14 +92,16 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                       Center(
                         child: Text(
                           ref
-                                  .read(newTransactionCategoryControllerProvider
-                                      .notifier)
+                                  .read(
+                                      updateTransactionCategoryControllerProvider
+                                          .notifier)
                                   .getLedgerName()
                                   .isEmpty
                               ? 'Please Select Ledger'
                               : ref
-                                  .read(newTransactionCategoryControllerProvider
-                                      .notifier)
+                                  .read(
+                                      updateTransactionCategoryControllerProvider
+                                          .notifier)
                                   .getLedgerName(),
                           style: const TextStyle(
                             fontSize: 14,
@@ -161,7 +155,7 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                         value: TransactionType.lei,
                         onChanged: (value) {
                           ref
-                              .watch(newTransactionCategoryControllerProvider
+                              .watch(updateTransactionCategoryControllerProvider
                                   .notifier)
                               .setState(state.copyWith(
                                   transactionType: TransactionType.lei));
@@ -179,7 +173,7 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                         value: TransactionType.lakluh,
                         onChanged: (value) {
                           ref
-                              .watch(newTransactionCategoryControllerProvider
+                              .watch(updateTransactionCategoryControllerProvider
                                   .notifier)
                               .setState(state.copyWith(
                                   transactionType: TransactionType.lakluh));
@@ -197,7 +191,7 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                         value: TransactionType.hralh,
                         onChanged: (value) {
                           ref
-                              .watch(newTransactionCategoryControllerProvider
+                              .watch(updateTransactionCategoryControllerProvider
                                   .notifier)
                               .setState(state.copyWith(
                                   transactionType: TransactionType.hralh));
@@ -215,7 +209,7 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
                         value: TransactionType.pekchhuah,
                         onChanged: (value) {
                           ref
-                              .watch(newTransactionCategoryControllerProvider
+                              .watch(updateTransactionCategoryControllerProvider
                                   .notifier)
                               .setState(state.copyWith(
                                   transactionType: TransactionType.pekchhuah));
@@ -259,7 +253,7 @@ class NewTransactionCategoryScreen extends HookConsumerWidget {
 }
 
 _confirmSheet({required BuildContext context, required WidgetRef ref}) {
-  final state = ref.watch(newTransactionCategoryControllerProvider);
+  final state = ref.watch(updateTransactionCategoryControllerProvider);
   List<String> _errorMessages = [];
   if (state.name.isEmpty) {
     _errorMessages.add('Khawngaihin Transaction Category hming dah rawh');
@@ -345,7 +339,7 @@ _confirmSheet({required BuildContext context, required WidgetRef ref}) {
                             onTap: () {
                               ref
                                   .watch(
-                                      newTransactionCategoryControllerProvider
+                                      updateTransactionCategoryControllerProvider
                                           .notifier)
                                   .save();
                               Navigator.pop(context);
