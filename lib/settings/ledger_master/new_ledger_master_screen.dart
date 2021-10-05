@@ -5,6 +5,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
@@ -169,6 +170,7 @@ _confirmSheet(
     _errorMessages.add('Khawngaihin description dah rawh');
   }
   return showModalBottomSheet(
+      backgroundColor: Colors.transparent,
       context: context,
       builder: (BuildContext context) {
         return _errorMessages.isEmpty
@@ -320,13 +322,77 @@ _confirmSheet(
                   ),
                 ),
               )
-            : Material(
-                child: SafeArea(
-                    child: ListView.builder(
-                        itemCount: _errorMessages.length,
-                        itemBuilder: (context, index) {
-                          return Text(_errorMessages[index]);
-                        })),
+            : Container(
+                height: MediaQuery.of(context).size.height * 0.35,
+                child: Material(
+                  child: SafeArea(
+                      child: Column(
+                    children: [
+                      TopBarForBottomSheetWidget(
+                          label: 'Validation Error',
+                          onExit: () {
+                            Navigator.pop(context);
+                          }),
+                      Expanded(
+                        child: ListView.builder(
+                            itemCount: _errorMessages.length,
+                            itemBuilder: (context, index) {
+                              return Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.06,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.grey.shade300,
+                                          width: 3,
+                                        ),
+                                        borderRadius: BorderRadius.circular(7),
+                                      ),
+                                      child: Row(
+                                        children: [
+                                          const Icon(
+                                            CupertinoIcons.xmark_octagon,
+                                            color: Colors.red,
+                                            size: 40,
+                                          ),
+                                          const SizedBox(
+                                            width: 5,
+                                          ),
+                                          SizedBox(
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.8,
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height *
+                                                0.05,
+                                            child: Center(
+                                              child: Text(
+                                                _errorMessages[index],
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              );
+                              // Text(_errorMessages[index]);
+                            }),
+                      ),
+                    ],
+                  )),
+                ),
               );
       });
 }
