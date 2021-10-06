@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
+import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_for_bottom_sheet_widget.dart';
 
 import 'package:sentezel/settings/asset/asset_list_controller.dart';
@@ -49,18 +51,100 @@ class NewAssetModal extends HookConsumerWidget {
                       isScrollControlled: true,
                       context: context,
                       builder: (context) {
-                        return Material(
-                          child: SafeArea(
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.25,
-                              child: ListView.builder(
-                                  itemCount: _errorMessages.length,
-                                  itemBuilder: (context, index) {
-                                    return Text(_errorMessages[index]);
-                                  }),
-                            ),
+                        return
+                            // );
+                            Container(
+                          height: MediaQuery.of(context).size.height * 0.35,
+                          child: Material(
+                            child: SafeArea(
+                                child: Column(
+                              children: [
+                                TopBarForBottomSheetWidget(
+                                    label: 'Validation Error',
+                                    onExit: () {
+                                      Navigator.pop(context);
+                                    }),
+                                Expanded(
+                                  child: ListView.builder(
+                                      itemCount: _errorMessages.length,
+                                      itemBuilder: (context, index) {
+                                        return Row(
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.all(8.0),
+                                              child: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.06,
+                                                decoration: BoxDecoration(
+                                                  border: Border.all(
+                                                    color: Colors.grey.shade300,
+                                                    width: 3,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(7),
+                                                ),
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(
+                                                      CupertinoIcons
+                                                          .xmark_octagon,
+                                                      color: Colors.red,
+                                                      size: 40,
+                                                    ),
+                                                    const SizedBox(
+                                                      width: 5,
+                                                    ),
+                                                    SizedBox(
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.8,
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.05,
+                                                      child: Center(
+                                                        child: Text(
+                                                          _errorMessages[index],
+                                                          style:
+                                                              const TextStyle(
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.bold,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        );
+                                      }),
+                                ),
+                              ],
+                            )),
                           ),
                         );
+
+                        // Material(
+                        //   child: SafeArea(
+                        //     child: SizedBox(
+                        //       height: MediaQuery.of(context).size.height * 0.25,
+                        //       child: ListView.builder(
+                        //           itemCount: _errorMessages.length,
+                        //           itemBuilder: (context, index) {
+                        //             return Text(_errorMessages[index]);
+                        //           }),
+                        //     ),
+                        //   ),
+                        // );
                       });
                 } else {
                   payload == null

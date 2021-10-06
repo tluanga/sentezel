@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/widget/elevated_container.dart';
+import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/settings/business_profile/business_profile_controller.dart';
 
 import 'package:sentezel/settings/business_profile/data/business_type_enum.dart';
@@ -263,13 +264,83 @@ _validationErrorSheet(BuildContext context, List<String> errorMessages) {
   return showModalBottomSheet(
       context: context,
       builder: (context) {
-        return Material(
-          child: SafeArea(
-              child: ListView.builder(
-                  itemCount: errorMessages.length,
-                  itemBuilder: (context, index) {
-                    return Text(errorMessages[index]);
-                  })),
+        return
+
+            //  Material(
+            //   child: SafeArea(
+            //       child: ListView.builder(
+            //           itemCount: errorMessages.length,
+            //           itemBuilder: (context, index) {
+            //             return Text(errorMessages[index]);
+            //           })),
+            // );
+            Container(
+          height: MediaQuery.of(context).size.height * 0.35,
+          child: Material(
+            child: SafeArea(
+                child: Column(
+              children: [
+                TopBarForBottomSheetWidget(
+                    label: 'Validation Error',
+                    onExit: () {
+                      Navigator.pop(context);
+                    }),
+                Expanded(
+                  child: ListView.builder(
+                      itemCount: errorMessages.length,
+                      itemBuilder: (context, index) {
+                        return Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.06,
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: Colors.grey.shade300,
+                                    width: 3,
+                                  ),
+                                  borderRadius: BorderRadius.circular(7),
+                                ),
+                                child: Row(
+                                  children: [
+                                    const Icon(
+                                      CupertinoIcons.xmark_octagon,
+                                      color: Colors.red,
+                                      size: 40,
+                                    ),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    SizedBox(
+                                      width: MediaQuery.of(context).size.width *
+                                          0.8,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.05,
+                                      child: Center(
+                                        child: Text(
+                                          errorMessages[index],
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            )
+                          ],
+                        );
+                        // Text(_errorMessages[index]);
+                      }),
+                ),
+              ],
+            )),
+          ),
         );
       });
 }
