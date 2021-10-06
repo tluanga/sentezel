@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_for_bottom_sheet_widget.dart';
 
@@ -22,7 +23,6 @@ class NewAssetModal extends HookConsumerWidget {
     );
     final _status =
         useState<Status>(payload != null ? payload!.status : Status.active);
-
     return Material(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -34,26 +34,58 @@ class NewAssetModal extends HookConsumerWidget {
             TopBarWithSaveForBottomSheetWidget(
               label: 'New Asset',
               onSave: () {
-                payload == null
-                    ? ref.read(assetListControllerProvider.notifier).addAsset(
-                          LedgerMaster(
-                            name: _nameTextEditingController.text,
-                            description: _descriptionTextEditingController.text,
-                            type: LedgerMasterType.asset,
-                          ),
-                        )
-                    : ref
-                        .read(assetListControllerProvider.notifier)
-                        .updateAsset(
-                          LedgerMaster.withId(
-                            id: payload!.id,
-                            name: _nameTextEditingController.text,
-                            description: _descriptionTextEditingController.text,
-                            type: LedgerMasterType.asset,
-                            status: _status.value,
+                List<String> _errorMessages = [];
+                if (_nameTextEditingController.text.isEmpty) {
+                  _errorMessages.add('Khawngaihin Asset Hming dah rawh');
+                }
+                if (_descriptionTextEditingController.text.isEmpty) {
+                  _errorMessages.add('Khawngaihin description dah rawh');
+                }
+
+                if (_nameTextEditingController.text.isEmpty ||
+                    _descriptionTextEditingController.text.isEmpty) {
+                  //  error Messages Sheet
+                  showModalBottomSheet(
+                      isScrollControlled: true,
+                      context: context,
+                      builder: (context) {
+                        return Material(
+                          child: SafeArea(
+                            child: SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.25,
+                              child: ListView.builder(
+                                  itemCount: _errorMessages.length,
+                                  itemBuilder: (context, index) {
+                                    return Text(_errorMessages[index]);
+                                  }),
+                            ),
                           ),
                         );
-                Navigator.pop(context);
+                      });
+                } else {
+                  payload == null
+                      ? ref.read(assetListControllerProvider.notifier).addAsset(
+                            LedgerMaster(
+                              name: _nameTextEditingController.text,
+                              description:
+                                  _descriptionTextEditingController.text,
+                              type: LedgerMasterType.asset,
+                            ),
+                          )
+                      : ref
+                          .read(assetListControllerProvider.notifier)
+                          .updateAsset(
+                            LedgerMaster.withId(
+                              id: payload!.id,
+                              name: _nameTextEditingController.text,
+                              description:
+                                  _descriptionTextEditingController.text,
+                              type: LedgerMasterType.asset,
+                              status: _status.value,
+                            ),
+                          );
+                  Navigator.pop(context);
+                }
               },
             ),
             Form(

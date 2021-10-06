@@ -44,7 +44,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                           ),
                           filled: true,
                           fillColor: Colors.white, // Colors.grey.shade200,
-                          labelText: 'name',
+                          labelText: 'Name',
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0),
@@ -69,7 +69,7 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                           ),
                           filled: true,
                           fillColor: Colors.white,
-                          labelText: 'descriptiption',
+                          labelText: 'Description',
                           border: OutlineInputBorder(
                             borderSide: BorderSide.none,
                             borderRadius: BorderRadius.circular(10.0),
@@ -187,12 +187,27 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
                           borderRadius: BorderRadius.circular(15),
                         ),
                         onPressed: () {
-                          FocusScope.of(context).unfocus();
-                          ref
-                              .read(businessProfileControllerProvider.notifier)
-                              .save();
-                          Navigator.of(context)
-                              .pushReplacementNamed(RouteConstant.pinSetup);
+                          List<String> _errorMessages = [];
+                          if (state.data!.value.name.isEmpty) {
+                            _errorMessages
+                                .add('Khawngaihin Sumdawnna hming dah rawh');
+                          }
+                          if (state.data!.value.description.isEmpty) {
+                            _errorMessages
+                                .add('Khawngaihin description dah rawh');
+                          }
+                          // validation error Sheet
+                          if (_errorMessages.isEmpty) {
+                            FocusScope.of(context).unfocus();
+                            ref
+                                .read(
+                                    businessProfileControllerProvider.notifier)
+                                .save();
+                            Navigator.of(context)
+                                .pushReplacementNamed(RouteConstant.pinSetup);
+                          } else {
+                            _validationErrorSheet(context, _errorMessages);
+                          }
                         },
                         child: Text(
                           'Submit',
@@ -242,4 +257,19 @@ class BusinessProfileSetupScreen extends HookConsumerWidget {
           ],
         ),
       );
+}
+
+_validationErrorSheet(BuildContext context, List<String> errorMessages) {
+  return showModalBottomSheet(
+      context: context,
+      builder: (context) {
+        return Material(
+          child: SafeArea(
+              child: ListView.builder(
+                  itemCount: errorMessages.length,
+                  itemBuilder: (context, index) {
+                    return Text(errorMessages[index]);
+                  })),
+        );
+      });
 }

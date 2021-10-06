@@ -23,7 +23,6 @@ class NewPartyModal extends HookConsumerWidget {
     );
     final _status =
         useState<Status>(payload != null ? payload!.status : Status.active);
-
     return Material(
       child: Padding(
         padding: const EdgeInsets.symmetric(
@@ -35,27 +34,56 @@ class NewPartyModal extends HookConsumerWidget {
             TopBarWithSaveForBottomSheetWidget(
               label: 'New Party',
               onSave: () {
-                payload == null
-                    ? ref.read(partyListControllerProvider.notifier).addParty(
-                          LedgerMaster(
-                            name: _nameTextEditingController.text,
-                            description: _descriptionTextEditingController.text,
-                            type: LedgerMasterType.party,
-                          ),
-                        )
-                    : ref
-                        .read(partyListControllerProvider.notifier)
-                        .updateParty(
-                          LedgerMaster.withId(
-                            id: payload!.id,
-                            name: _nameTextEditingController.text,
-                            description: _descriptionTextEditingController.text,
-                            type: payload!.type,
-                            status: _status.value,
+                List<String> _errorMessages = [];
+                if (_nameTextEditingController.text.isEmpty) {
+                  _errorMessages.add('Khawngaihin Asset Hming dah rawh');
+                }
+                if (_descriptionTextEditingController.text.isEmpty) {
+                  _errorMessages.add('Khawngaihin description dah rawh');
+                }
+
+                if (_errorMessages.isEmpty) {
+                  payload == null
+                      ? ref.read(partyListControllerProvider.notifier).addParty(
+                            LedgerMaster(
+                              name: _nameTextEditingController.text,
+                              description:
+                                  _descriptionTextEditingController.text,
+                              type: LedgerMasterType.party,
+                            ),
+                          )
+                      : ref
+                          .read(partyListControllerProvider.notifier)
+                          .updateParty(
+                            LedgerMaster.withId(
+                              id: payload!.id,
+                              name: _nameTextEditingController.text,
+                              description:
+                                  _descriptionTextEditingController.text,
+                              type: payload!.type,
+                              status: _status.value,
+                            ),
+                          );
+                  Navigator.pop(context);
+                } else {
+                  showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Material(
+                          child: SafeArea(
+                            child: SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.25,
+                                child: ListView.builder(
+                                  itemCount: _errorMessages.length,
+                                  itemBuilder: (context, index) {
+                                    return Text(_errorMessages[index]);
+                                  },
+                                )),
                           ),
                         );
-
-                Navigator.pop(context);
+                      });
+                }
               },
             ),
             Form(

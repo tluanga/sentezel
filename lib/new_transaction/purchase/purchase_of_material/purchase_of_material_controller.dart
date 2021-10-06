@@ -40,6 +40,10 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
       _errorMessage.add('Amount cannot be less than or equal to zero');
     }
 
+    if (state.particular!.isEmpty) {
+      _errorMessage.add('Please Enter Particular');
+    }
+
     if (state.mode == TransactionMode.partialPaymentByBank ||
         state.mode == TransactionMode.partialPaymentByCash) {
       if (state.partyLedger == null) {
@@ -51,9 +55,6 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
       }
       if (state.partialPaymentAmount <= 0) {
         _errorMessage.add('Partial Amount cannot be zero');
-      }
-      if (state.particular!.isEmpty) {
-        _errorMessage.add('Please Enter Particular');
       }
     }
     if (state.mode == TransactionMode.credit && state.partyLedger == null) {

@@ -37,6 +37,10 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
 
+    if (state.particular!.isEmpty) {
+      _errorMessage.add('Please Enter Particular');
+    }
+
     if (state.assetLedger == null) {
       _errorMessage.add('Please select asset');
     }
@@ -52,9 +56,6 @@ class PurchaseOfAssetController extends StateNotifier<PurchaseOfAsset> {
       }
       if (state.partialPaymentAmount <= 0) {
         _errorMessage.add('Partial Amount cannot be Zero');
-      }
-      if (state.particular!.isEmpty) {
-        _errorMessage.add('Please Enter Particular');
       }
     }
     if (state.mode == TransactionMode.credit && state.partyLedger == null) {

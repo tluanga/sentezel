@@ -241,6 +241,7 @@ class ProfitAndLossReportScreen extends HookConsumerWidget {
       balance = 0;
     }
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(item.ledgerName),
         const SizedBox(

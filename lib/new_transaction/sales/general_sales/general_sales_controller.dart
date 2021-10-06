@@ -47,6 +47,10 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
       _errorMessage.add('Amount can not be less than equalto Zero');
     }
 
+    if (stateData.particular!.isEmpty) {
+      _errorMessage.add('Please Enter Particular');
+    }
+
     if (stateData.mode == TransactionMode.partialPaymentByBank ||
         stateData.mode == TransactionMode.partialPaymentByCash) {
       if (stateData.partyLedger == null) {
@@ -58,9 +62,6 @@ class GeneralSalesController extends StateNotifier<AsyncValue<GeneralSales>> {
       }
       if (stateData.partialPaymentAmount <= 0) {
         _errorMessage.add('Partial Amount cannot be Zero');
-      }
-      if (stateData.particular!.isEmpty) {
-        _errorMessage.add('Please Enter Particular');
       }
     }
     if (stateData.mode == TransactionMode.credit &&

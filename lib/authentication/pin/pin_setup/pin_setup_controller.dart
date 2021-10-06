@@ -34,9 +34,7 @@ class PinSetupController extends StateNotifier<PinSetupState> {
           (element) => element == PinSetupError.passPhraseCannotBeEmpty);
     }
 
-    if (state.pin != state.pinReEnter &&
-        state.pinReEnter.isNotEmpty &&
-        state.pinReEnter.length == 4) {
+    if (state.pin != state.pinReEnter || state.pinReEnter.isEmpty) {
       state.error
           .removeWhere((element) => element == PinSetupError.pinNotMatched);
       state.error.add(PinSetupError.pinNotMatched);
