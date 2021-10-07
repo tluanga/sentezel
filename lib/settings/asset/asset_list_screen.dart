@@ -6,6 +6,8 @@ import 'package:intl/intl.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/common/ui/widget/container_assets.dart';
+import 'package:sentezel/common/ui/widget/container_ledger.dart';
 import 'package:sentezel/common/ui/widget/floating_action_button_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 import 'package:sentezel/settings/asset/asset_list_controller.dart';
@@ -31,10 +33,12 @@ class AssetListScreen extends HookConsumerWidget {
               Navigator.pop(context);
             },
           ),
-          SizedBox(
-            width: MediaQuery.of(context).size.width * 0.8,
-            child: const TextField(
-              decoration: InputDecoration(labelText: 'Search'),
+          ContainerAssets(
+            child: TextField(
+              decoration: InputDecoration(
+                  prefixIcon: Icon(Icons.search),
+                  labelText: 'Search',
+                  border: InputBorder.none),
             ),
           ),
           ref.watch(assetListControllerProvider).when(data: (data) {

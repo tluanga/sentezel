@@ -107,12 +107,7 @@ class About extends StatelessWidget {
   }
 
   Widget version() => Container(
-        //  height: 50,
-        // width: 250,
         padding: const EdgeInsets.only(left: 8),
-        // decoration: BoxDecoration(
-        //     // color: Color.fromRGBO(244, 239, 241, 1),
-        //     borderRadius: BorderRadius.circular(10)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -131,32 +126,17 @@ class About extends StatelessWidget {
                   Text(
                     "Version : 0.0.0",
                     style: GoogleFonts.aBeeZee(
-                        fontSize: 14,
-                        //fontWeight: FontWeight.bold,
-                        color: Colors.grey[700]),
+                        fontSize: 14, color: Colors.grey[700]),
                   ),
                 ],
               ),
             ),
-            // Padding(
-            //   padding: const EdgeInsets.only(left: 30.0),
-            //   child: Text(
-            //     "0.0.0",
-            //     style:
-            //         GoogleFonts.aBeeZee(fontSize: 14, color: Colors.grey[700]),
-            //   ),
-            // ),
           ],
         ),
       );
 
   Widget developBy() => Container(
-        //   height: 120,
-        // width: 250,
         padding: const EdgeInsets.only(left: 12),
-        // decoration: BoxDecoration(
-        //     // color: Color.fromRGBO(244, 239, 241, 1),
-        //     borderRadius: BorderRadius.circular(10)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -298,9 +278,7 @@ class About extends StatelessWidget {
         //height: 120,
         // width: 250,
         padding: const EdgeInsets.only(left: 12),
-        // decoration: BoxDecoration(
-        //     // color: Color.fromRGBO(244, 239, 241, 1),
-        //     borderRadius: BorderRadius.circular(10)),
+
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
