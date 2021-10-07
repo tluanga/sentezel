@@ -8,7 +8,6 @@ import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_index.dart';
-import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 
 final purchaseOfMaterialControllerProvider =
     StateNotifierProvider<PurchaseOfMaterialController, PurchaseOfMaterial>(
