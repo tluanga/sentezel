@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 
 class About extends StatelessWidget {
   const About({Key? key}) : super(key: key);
@@ -20,23 +21,11 @@ class About extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.only(left: 14, right: 8),
                 color: const Color.fromRGBO(244, 239, 241, 1),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "About Us",
-                      style: GoogleFonts.aBeeZee(
-                          fontSize: 23, color: Colors.grey[800]),
-                    ),
-                    GestureDetector(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: const Icon(
-                        CupertinoIcons.xmark_circle,
-                        color: Colors.orange,
-                        size: 40,
-                      ),
-                    )
-                  ],
+                child: TopBarWidget(
+                  title: 'Reset',
+                  onClose: () {
+                    Navigator.pop(context);
+                  },
                 ),
               ),
               // Spacer(),

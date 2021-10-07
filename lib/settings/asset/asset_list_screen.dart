@@ -33,7 +33,7 @@ class AssetListScreen extends HookConsumerWidget {
               Navigator.pop(context);
             },
           ),
-          ContainerAssets(
+          const ContainerAssets(
             child: TextField(
               decoration: InputDecoration(
                   prefixIcon: Icon(Icons.search),

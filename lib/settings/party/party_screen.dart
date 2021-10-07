@@ -3,6 +3,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
+import 'package:sentezel/common/ui/widget/container_assets.dart';
 import 'package:sentezel/common/ui/widget/floating_action_button_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 
@@ -41,10 +42,12 @@ class PartyScreen extends HookConsumerWidget {
             ),
             //------Searching Ledger Master and filtration will be done
             // based in input
-            SizedBox(
-              width: MediaQuery.of(context).size.width * 0.8,
+            ContainerAssets(
               child: TextFormField(
-                decoration: const InputDecoration(labelText: 'Search'),
+                decoration: const InputDecoration(
+                    labelText: 'Search',
+                    border: InputBorder.none,
+                    prefixIcon: Icon(Icons.search)),
                 controller: _searchTextEditingController,
               ),
             ),

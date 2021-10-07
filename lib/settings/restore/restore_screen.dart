@@ -1,4 +1,5 @@
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
@@ -21,9 +22,16 @@ class RestoreScreen extends HookConsumerWidget {
               Navigator.pop(context);
             },
           ),
-          const SizedBox(
-            height: 250,
+          const Spacer(),
+          const Icon(
+            CupertinoIcons.tray_arrow_down,
+            size: 80,
+            color: Colors.blue,
           ),
+          const SizedBox(
+            height: 20,
+          ),
+          const Spacer(),
           GestureDetector(
             onTap: () async {
               FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -40,6 +48,9 @@ class RestoreScreen extends HookConsumerWidget {
               }
             },
             child: const RestoreButton(),
+          ),
+          const SizedBox(
+            height: 20,
           ),
         ],
       ),

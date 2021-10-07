@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
+import 'package:sentezel/common/ui/widget/container_assets.dart';
 import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_for_bottom_sheet_widget.dart';
 
@@ -73,7 +74,7 @@ class NewPartyModal extends HookConsumerWidget {
                       builder: (context) {
                         return
                             // );
-                            Container(
+                            SizedBox(
                           height: MediaQuery.of(context).size.height * 0.35,
                           child: Material(
                             child: SafeArea(
@@ -152,20 +153,6 @@ class NewPartyModal extends HookConsumerWidget {
                             )),
                           ),
                         );
-
-                        //  Material(
-                        //   child: SafeArea(
-                        //     child: SizedBox(
-                        //         height:
-                        //             MediaQuery.of(context).size.height * 0.25,
-                        //         child: ListView.builder(
-                        //           itemCount: _errorMessages.length,
-                        //           itemBuilder: (context, index) {
-                        //             return Text(_errorMessages[index]);
-                        //           },
-                        //         )),
-                        //   ),
-                        // );
                       });
                 }
               },
@@ -173,32 +160,45 @@ class NewPartyModal extends HookConsumerWidget {
             Form(
               child: Column(
                 children: [
-                  TextFormField(
-                    controller: _nameTextEditingController,
-                    decoration: const InputDecoration(labelText: 'Name'),
-                  ),
-                  TextFormField(
-                    controller: _descriptionTextEditingController,
-                    decoration: const InputDecoration(labelText: 'Description'),
-                  ),
-                  ListTile(
-                    title: const Text(
-                      'Active',
-                      style: TextStyle(
-                        fontSize: 16,
+                  ContainerAssets(
+                    child: TextFormField(
+                      controller: _nameTextEditingController,
+                      decoration: const InputDecoration(
+                        labelText: 'Name',
+                        border: InputBorder.none,
                       ),
                     ),
-                    trailing: Transform.scale(
-                      scale: 1.2,
-                      child: Switch(
-                        activeTrackColor: Colors.green.shade400,
-                        activeColor: Colors.white,
-                        inactiveThumbColor: Colors.white,
-                        value: _status.value == Status.active ? true : false,
-                        onChanged: (value) {
-                          _status.value =
-                              value == true ? Status.active : Status.inActive;
-                        },
+                  ),
+                  ContainerAssets(
+                    child: TextFormField(
+                      controller: _descriptionTextEditingController,
+                      decoration: const InputDecoration(
+                        labelText: 'Description',
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                  ContainerAssets(
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.all(0),
+                      title: const Text(
+                        'Active',
+                        style: TextStyle(
+                          fontSize: 16,
+                        ),
+                      ),
+                      trailing: Transform.scale(
+                        scale: 1.2,
+                        child: Switch(
+                          activeTrackColor: Colors.green.shade400,
+                          activeColor: Colors.white,
+                          inactiveThumbColor: Colors.white,
+                          value: _status.value == Status.active ? true : false,
+                          onChanged: (value) {
+                            _status.value =
+                                value == true ? Status.active : Status.inActive;
+                          },
+                        ),
                       ),
                     ),
                   ),

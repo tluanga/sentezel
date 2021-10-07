@@ -25,14 +25,22 @@ class ResetScreen extends HookConsumerWidget {
                           Navigator.pop(context);
                         },
                       ),
-                      const SizedBox(
-                        height: 250,
+                      const Spacer(),
+                      const Icon(
+                        Icons.restore,
+                        color: Colors.blue,
+                        size: 80,
                       ),
+                      const Spacer(),
+                      const Spacer(),
                       GestureDetector(
                         onTap: () {
                           ref.read(resetControllerProvider.notifier).reset();
                         },
                         child: const ResetButton(),
+                      ),
+                      const SizedBox(
+                        height: 20,
                       ),
                     ],
                   )
@@ -42,8 +50,10 @@ class ResetScreen extends HookConsumerWidget {
                       Navigator.of(context)
                           .pushReplacementNamed(RouteConstant.splashScreen);
                     },
-                    child: const Text(
-                        'Reset Completed, you have to restart the app'),
+                    child: const Center(
+                      child:
+                          Text('Reset Completed, you have to restart the app'),
+                    ),
                   ));
   }
 }

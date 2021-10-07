@@ -1,6 +1,7 @@
 import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:sentezel/authentication/pin/pin_change/pin_change_controller.dart';
@@ -101,15 +102,25 @@ class PinChangeScreen extends HookConsumerWidget {
                   ),
                 ),
                 state.error.isNotEmpty
-                    ? SizedBox(
+                    ? Container(
+                        padding: const EdgeInsets.only(top: 20),
+                        alignment: Alignment.center,
                         height: MediaQuery.of(context).size.height * 0.2,
                         width: MediaQuery.of(context).size.width * 0.8,
                         child: ListView.builder(
                           itemCount: state.error.length,
                           itemBuilder: (context, index) {
-                            return Text(EnumToString.convertToString(
-                                state.error[index],
-                                camelCase: true));
+                            return Padding(
+                                padding: const EdgeInsets.only(top: 4),
+                                child: Text(
+                                  EnumToString.convertToString(
+                                      state.error[index],
+                                      camelCase: true),
+                                  textAlign: TextAlign.center,
+                                  style: const TextStyle(
+                                    color: Color(0xff616161),
+                                  ),
+                                ));
                           },
                         ),
                       )
@@ -137,6 +148,6 @@ class PinChangeScreen extends HookConsumerWidget {
 
   widgetTitle() => const PinTitle(
         icon: CupertinoIcons.pencil_ellipsis_rectangle,
-        text: 'Set PIN',
+        text: 'PIN Setup',
       );
 }
