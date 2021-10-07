@@ -8,6 +8,7 @@ import 'package:sentezel/settings/ledger_master/data/ledger_master_id_index.dart
 import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 
 import 'package:sentezel/settings/transactionCategory/data/transaction_category_index.dart';
+import 'package:sentezel/settings/transactionCategory/data/transaction_category_model.dart';
 
 final purchaseOfMaterialControllerProvider =
     StateNotifierProvider<PurchaseOfMaterialController, PurchaseOfMaterial>(
@@ -82,6 +83,9 @@ class PurchaseOfMaterialController extends StateNotifier<PurchaseOfMaterial> {
   reset() async {
     state = PurchaseOfMaterial(
       date: DateTime.now(),
+      amount: 0,
+      debitAmount: 0,
+      creditAmount: 0,
       particular: 'Purchase of Material',
       errorMessages: [],
     );

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/widget/date_select_time_line_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
 import 'package:sentezel/new_transaction/common/partial_payment_widget.dart';
@@ -112,12 +113,16 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
           onConfirm: () {
             ref.watch(purchaseOfMaterialControllerProvider.notifier).submit();
 
-            showCupertinoModalBottomSheet(
-              expand: true,
-              context: context,
-              backgroundColor: Colors.transparent,
-              builder: (context) => const NewTranscationCenterScreen(),
-            );
+            // showCupertinoModalBottomSheet(
+            //   expand: true,
+            //   context: context,
+            //   backgroundColor: Colors.transparent,
+            //   builder: (context) => const NewTranscationCenterScreen(),
+            // );
+            Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pop(context);
+            FocusScope.of(context).unfocus();
           },
           onCancel: () {},
         ),

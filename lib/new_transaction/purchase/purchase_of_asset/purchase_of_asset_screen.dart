@@ -119,12 +119,16 @@ class PurchaseOfAssetScreen extends HookConsumerWidget {
           onConfirm: () {
             ref.watch(purchaseOfAssetControllerProvider.notifier).submit();
 
-            showCupertinoModalBottomSheet(
-              expand: true,
-              context: context,
-              backgroundColor: Colors.transparent,
-              builder: (context) => const NewTranscationCenterScreen(),
-            );
+            // showCupertinoModalBottomSheet(
+            //   expand: true,
+            //   context: context,
+            //   backgroundColor: Colors.transparent,
+            //   builder: (context) => const NewTranscationCenterScreen(),
+            // );
+            Navigator.pop(context);
+            Navigator.pop(context);
+            Navigator.pop(context);
+            FocusScope.of(context).unfocus();
           },
           onCancel: () {},
         ),
