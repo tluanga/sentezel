@@ -82,7 +82,6 @@ class BalanceSheetController
           } else if (_credit > _debit) {
             _creditors += _credit - _debit;
           }
-          // -------------Cash & Bank-------------
           // Direct accounts
         } else if (_ledgerMasterList[i].type == LedgerMasterType.direct) {
           if (_ledgerMasterList[i].id != LedgerMasterIndex.cash &&
@@ -190,6 +189,28 @@ class BalanceSheetController
                     _transactionList[j].mode ==
                         TransactionMode.partialPaymentByBank) {
                   _totalCredit += _transactionList[j].partialPaymentAmount;
+                }
+              }
+              //  Contra
+              if (_transactionList[j].mode == TransactionMode.contra) {
+                // for cash ledger
+                if (_ledgerMasterList[i].id == LedgerMasterIndex.cash) {
+                  if (_transactionList[j].transactionCategoryId ==
+                      TransactionCategoryIndex.bankToCash) {
+                    _totalDebit += _transactionList[j].debitAmount;
+                  } else if (_transactionList[j].transactionCategoryId ==
+                      TransactionCategoryIndex.cashToBank) {
+                    _totalCredit += _transactionList[j].creditAmount;
+                  }
+                  // for bank ledger
+                } else if (_ledgerMasterList[i].id == LedgerMasterIndex.bank) {
+                  if (_transactionList[j].transactionCategoryId ==
+                      TransactionCategoryIndex.cashToBank) {
+                    _totalDebit += _transactionList[j].debitAmount;
+                  } else if (_transactionList[j].transactionCategoryId ==
+                      TransactionCategoryIndex.bankToCash) {
+                    _totalCredit += _transactionList[j].creditAmount;
+                  }
                 }
               }
             }

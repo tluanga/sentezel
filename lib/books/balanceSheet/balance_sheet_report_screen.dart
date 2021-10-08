@@ -88,22 +88,26 @@ class BalanceSheetReportScreen extends HookConsumerWidget {
                                       ],
                                     )
                                   : Container(),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text('Add: Net Profit'),
-                                  Text(data[0].netProfit.toString())
-                                ],
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text('Less: Net Loss'),
-                                  Text('- ${data[0].netLoss.toString()}')
-                                ],
-                              ),
+                              data[0].netProfit != 0
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text('Add: Net Profit'),
+                                        Text(data[0].netProfit.toString())
+                                      ],
+                                    )
+                                  : Container(),
+                              data[0].netLoss != 0
+                                  ? Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        const Text('Less: Net Loss'),
+                                        Text('- ${data[0].netLoss.toString()}')
+                                      ],
+                                    )
+                                  : Container(),
                               const Spacer(),
                               Row(
                                 mainAxisAlignment:
