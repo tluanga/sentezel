@@ -1,4 +1,0 @@
-enum BusinessType {
-  mahniSiamZuar,
-  midangSiamZuar,
-}

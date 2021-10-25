@@ -6,7 +6,7 @@ import 'package:sqflite_common/sqlite_api.dart';
 
 import 'data/party_model.dart';
 
-final partyRepositoryProvider = Provider((ref) => PartyRepository());
+final partyRepositoryProvider = Provider((ref) => const PartyRepository());
 
 class PartyRepository implements BaseRepository<Party> {
   // final Reader _read;
@@ -18,8 +18,8 @@ class PartyRepository implements BaseRepository<Party> {
     Database db = await DatabaseService.instance.db;
     try {
       db.insert(PartyConfig.partyTable, payload.toMap());
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -30,13 +30,13 @@ class PartyRepository implements BaseRepository<Party> {
     try {
       final result = await db
           .query(PartyConfig.partyTable, where: 'id=?', whereArgs: [id]);
-      if (result.length != 0) {
+      if (result.isNotEmpty) {
         return Party.fromMap(result.first);
-      } else
+      } else {
         throw ('Error');
-    } catch (e) {
-      print(e);
-      throw (e);
+      }
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -55,13 +55,12 @@ class PartyRepository implements BaseRepository<Party> {
       WHERE name LIKE '$searchString%'
       ''');
       List<Party> partyList = [];
-      result.forEach((party) {
+      for (var party in result) {
         partyList.add(Party.fromMap(party));
-      });
+      }
       return partyList;
-    } catch (e) {
-      print(e);
-      return [];
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -85,8 +84,8 @@ class PartyRepository implements BaseRepository<Party> {
         where: 'id=?',
         whereArgs: [payload.id],
       );
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 }

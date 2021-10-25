@@ -1,4 +1,4 @@
-package com.rics.sentezel
+package com.example.sentezel
 
 import io.flutter.embedding.android.FlutterActivity
 

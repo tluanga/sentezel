@@ -1,7 +1,7 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMasterType_enum.dart';
-import 'package:sentezel/settings/ledgerMaster/data/ledgerMaster_model.dart';
-import 'package:sentezel/settings/ledgerMaster/ledgerMaster_repository.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';
+import 'package:sentezel/settings/ledger_master/data/ledger_master_type_enum.dart';
+import 'package:sentezel/settings/ledger_master/ledger_master_repository.dart';
 
 final partyListControllerProvider =
     StateNotifierProvider<PartyListController, AsyncValue<List<LedgerMaster>>>(
@@ -10,12 +10,11 @@ final partyListControllerProvider =
 class PartyListController
     extends StateNotifier<AsyncValue<List<LedgerMaster>>> {
   final Reader _read;
-  LedgerMasterType _type = LedgerMasterType.party;
+  final LedgerMasterType _type = LedgerMasterType.party;
 
-  PartyListController(this._read) : super(AsyncValue.loading());
+  PartyListController(this._read) : super(const AsyncValue.loading());
 
   loadData({String searchString = ''}) async {
-    print('Loading Party List');
     try {
       final result = await _read(ledgerMasterRepositoryProvider).getList(
         searchString: searchString,
@@ -31,16 +30,16 @@ class PartyListController
     try {
       _read(ledgerMasterRepositoryProvider).add(payload: payload);
       loadData();
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
   getParty(int id) {
     try {
       _read(ledgerMasterRepositoryProvider).getItem(id: id);
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -48,8 +47,8 @@ class PartyListController
     try {
       _read(ledgerMasterRepositoryProvider).remove(id: id);
       loadData();
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 
@@ -57,8 +56,8 @@ class PartyListController
     try {
       _read(ledgerMasterRepositoryProvider).update(payload: payload);
       loadData();
-    } catch (e) {
-      print(e);
+    } on Exception catch (e) {
+      throw Exception(e.toString());
     }
   }
 }
