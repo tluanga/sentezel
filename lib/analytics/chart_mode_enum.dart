@@ -1,4 +1,0 @@
-enum ChartMode{
-    barChart,
-    pieChart,
-}

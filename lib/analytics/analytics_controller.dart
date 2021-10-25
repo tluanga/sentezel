@@ -1,6 +1,6 @@
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:sentezel/analytics/analytics_model.dart';
-import 'package:sentezel/analytics/chart_mode_enum.dart';
+import 'package:sentezel/analytics/enum.dart';
 import 'package:sentezel/common/enums/transaction_type_enum.dart';
 import 'package:sentezel/new_transaction/data/transaction_mode_enum.dart';
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
@@ -23,18 +23,25 @@ class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
   //   print(state);
   // }
 
+  setState(payload) {
+    Analytics _newState = payload;
+    state = AsyncData(_newState);
+  }
+
   loadData() async {
     try {
       // daily Transactions
-      List<double> salesAmountList = [];
-      List<double> expenseAmountList = [];
+      List<double> salesPerDayList = [];
+      List<double> expensePerDayList = [];
+      List<double> salesPerMonthList = [];
+      List<double> expensePerMonthList = [];
       for (int i = 1; i < 8; i++) {
         double totalSalesPerDay = 0;
         double totalExpensePerDay = 0;
-        final startDate = DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day - i); //20
+        final startDate = DateTime(
+            DateTime.now().year, DateTime.now().month, DateTime.now().day - i);
         final endDate = DateTime(DateTime.now().year, DateTime.now().month,
-            DateTime.now().day - (i - 1)); //21
+            DateTime.now().day - (i - 1));
         final _transactionList = await _read(transactionRepositoryProvider)
             .getList(startDate: startDate, endDate: endDate);
         print('------------');
@@ -80,15 +87,68 @@ class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
             }
           }
         }
-        salesAmountList.add(totalSalesPerDay);
-        expenseAmountList.add(totalExpensePerDay);
+        salesPerDayList.add(totalSalesPerDay);
+        expensePerDayList.add(totalExpensePerDay);
+      }
+      // monthly Transactions
+      for (int i = 0; i < 6; i++) {
+        double totalSalesPerMonth = 0;
+        double totalExpensePerMonth = 0;
+        final startDate =
+            DateTime(DateTime.now().year, DateTime.now().month - i);
+        final endDate =
+            DateTime(DateTime.now().year, DateTime.now().month - (i - 1));
+        final _transactionList = await _read(transactionRepositoryProvider)
+            .getList(startDate: startDate, endDate: endDate);
+        for (int j = 0; j < _transactionList.length; j++) {
+          final TransactionCategory _transactionCategory =
+              await _read(transactionCategoryRepositoryProvider)
+                  .getItem(id: _transactionList[j].transactionCategoryId);
+          // check for sales
+          if (_transactionCategory.transactionType == TransactionType.lakluh ||
+              _transactionCategory.transactionType == TransactionType.hralh ||
+              _transactionCategory.transactionType ==
+                  TransactionType.debtRepaymentByDebtor) {
+            // check for payment type
+            if (_transactionList[j].mode ==
+                    TransactionMode.partialPaymentByBank ||
+                _transactionList[j].mode ==
+                    TransactionMode.partialPaymentByCash) {
+              totalSalesPerMonth +=
+                  _transactionList[j].partialPaymentAmount.toDouble();
+            } else {
+              totalSalesPerMonth += _transactionList[j].creditAmount.toDouble();
+            }
+          } else if (_transactionCategory.transactionType ==
+                  TransactionType.lei ||
+              _transactionCategory.transactionType ==
+                  TransactionType.pekchhuah ||
+              _transactionCategory.transactionType ==
+                  TransactionType.debtRepaymentToCreditor) {
+            if (_transactionList[j].mode ==
+                    TransactionMode.partialPaymentByBank ||
+                _transactionList[j].mode ==
+                    TransactionMode.partialPaymentByCash) {
+              totalExpensePerMonth +=
+                  _transactionList[j].partialPaymentAmount.toDouble();
+            } else {
+              totalExpensePerMonth +=
+                  _transactionList[j].debitAmount.toDouble();
+            }
+          }
+        }
+        salesPerMonthList.add(totalSalesPerMonth);
+        expensePerMonthList.add(totalExpensePerMonth);
       }
       Analytics _analytics = Analytics(
           startDate: DateTime.now(),
           endDate: DateTime.now(),
           chartMode: ChartMode.barChart,
-          salesPerDay: salesAmountList,
-          expensePerDay: expenseAmountList);
+          timePeriod: TimePeriod.daily,
+          salesPerDay: salesPerDayList,
+          expensePerDay: expensePerDayList,
+          salesPerMonth: salesPerMonthList,
+          expensePerMonth: expensePerMonthList);
       state = AsyncData(_analytics);
     } catch (e) {
       throw e.toString();
