@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:sentezel/analytics/analytics_new_screen.dart';
 import 'package:sentezel/analytics/analytics_screen.dart';
 import 'package:sentezel/authentication/pin/pin_auth/pin_auth_screen.dart';
 import 'package:sentezel/authentication/pin/pin_setup/pin_setup_screen.dart';
@@ -36,7 +37,7 @@ class MyApp extends HookConsumerWidget {
       routes: {
         // RouteConstant.home: (context) => const HomeScreen(),
         RouteConstant.home: (context) => const AnimatedHome(),
-        RouteConstant.analytics: (context) => const AnalyticsScreen(),
+        RouteConstant.analytics: (context) => const AnalyticsNewScreen(),
         RouteConstant.books: (context) => const BooksScreen(),
         RouteConstant.controlCenter: (context) => const ControlCenterScreen(),
         RouteConstant.newTransaction: (context) =>

@@ -88,10 +88,10 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
       Select * from $dbName
       WHERE particular LIKE '$searchString%'
       AND mode LIKE '$_mode%'
-      AND date>=${paramStartDate.microsecondsSinceEpoch}
+      AND date>${paramStartDate.microsecondsSinceEpoch}
       AND date<=${paramEndDate.microsecondsSinceEpoch}
       ''');
-
+      // print(result);
       List<trans.Transaction> list = [];
       // final result1 = await db.query(dbName);
       for (var item in result) {

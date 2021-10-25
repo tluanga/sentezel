@@ -13,12 +13,12 @@ class BarChartWidget extends HookConsumerWidget {
     const Color incomeColor = Color(0xff53fdd7);
     const Color expenseColor = Color(0xffff5182);
     final analyticsState = ref.watch(analyticsControllerProvider);
-    useEffect(() {
-      final analyticsState = ref.watch(analyticsControllerProvider);
-      ref
-          .read(barChartControllerProvider.notifier)
-          .loadData(analyticsState.startDate, analyticsState.endDate);
-    }, [analyticsState]);
+    // useEffect(() {
+    //   final analyticsState = ref.watch(analyticsControllerProvider);
+    //   ref
+    //       .read(barChartControllerProvider.notifier)
+    //       .loadData(analyticsState.startDate, analyticsState.endDate);
+    // }, [analyticsState]);
     print(analyticsState);
     return Material(
       child: Container(

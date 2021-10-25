@@ -4,10 +4,14 @@ class Analytics {
   DateTime startDate;
   DateTime endDate;
   ChartMode chartMode;
+  List<double> salesPerDay;
+  List<double> expensePerDay;
   Analytics({
     required this.startDate,
     required this.endDate,
     required this.chartMode,
+    required this.salesPerDay,
+    required this.expensePerDay,
   });
 
   Analytics copyWith({
@@ -19,6 +23,8 @@ class Analytics {
       startDate: startDate ?? this.startDate,
       endDate: endDate ?? this.endDate,
       chartMode: chartMode ?? this.chartMode,
+      salesPerDay: [],
+      expensePerDay: [],
     );
   }
 }

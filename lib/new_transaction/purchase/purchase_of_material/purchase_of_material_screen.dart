@@ -45,7 +45,13 @@ class PurchaseOfMaterialScreen extends HookConsumerWidget {
                 DateSelectTimeLineWidget(
                   initialDate: state.date,
                   onDateSelected: (selectedDate) {
-                    state = state.copyWith(date: selectedDate);
+                    ref
+                        .watch(purchaseOfMaterialControllerProvider.notifier)
+                        .setState(
+                          state.copyWith(
+                            date: selectedDate,
+                          ),
+                        );
                   },
                 ),
 
