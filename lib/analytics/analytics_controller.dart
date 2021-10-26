@@ -91,7 +91,7 @@ class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
         expensePerDayList.add(totalExpensePerDay);
       }
       // monthly Transactions
-      for (int i = 0; i < 6; i++) {
+      for (int i = 0; i < 7; i++) {
         double totalSalesPerMonth = 0;
         double totalExpensePerMonth = 0;
         final startDate =
@@ -140,11 +140,8 @@ class AnalyticsController extends StateNotifier<AsyncValue<Analytics>> {
         salesPerMonthList.add(totalSalesPerMonth);
         expensePerMonthList.add(totalExpensePerMonth);
       }
+      print(salesPerMonthList);
       Analytics _analytics = Analytics(
-          startDate: DateTime.now(),
-          endDate: DateTime.now(),
-          chartMode: ChartMode.barChart,
-          timePeriod: TimePeriod.daily,
           salesPerDay: salesPerDayList,
           expensePerDay: expensePerDayList,
           salesPerMonth: salesPerMonthList,

@@ -1,7 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_mode_enum.dart';
 import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_state.dart';
-import 'package:sentezel/common/ui/widget/time_frame_selection/time_frame_selection_widget.dart';
 
 final timeFrameSelectionControllerProvider = StateNotifierProvider<
     TimeFrameSelectionController,
