@@ -30,8 +30,6 @@ class PinAuthController extends StateNotifier<PinAuthState> {
   }
 
   validate() {
-    print('EnteredPin :${state.enteredPin} pin:${state.pin}');
-
     if (state.pin == state.enteredPin) {
       state = state.copyWith(authenticate: true);
     } else if (state.enteredPin.length == 4) {

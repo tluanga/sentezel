@@ -7,7 +7,6 @@ import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/common/enums/status_enum.dart';
 import 'package:sentezel/common/ui/pallete.dart';
 import 'package:sentezel/common/ui/widget/container_assets.dart';
-import 'package:sentezel/common/ui/widget/container_ledger.dart';
 import 'package:sentezel/common/ui/widget/floating_action_button_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 import 'package:sentezel/settings/asset/asset_list_controller.dart';

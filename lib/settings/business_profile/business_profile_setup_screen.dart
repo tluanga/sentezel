@@ -274,7 +274,7 @@ _validationErrorSheet(BuildContext context, List<String> errorMessages) {
             //             return Text(errorMessages[index]);
             //           })),
             // );
-            Container(
+            SizedBox(
           height: MediaQuery.of(context).size.height * 0.35,
           child: Material(
             child: SafeArea(

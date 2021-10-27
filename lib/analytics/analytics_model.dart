@@ -11,5 +11,7 @@ class Analytics with _$Analytics {
     required List<double> expensePerDay,
     required List<double> salesPerMonth,
     required List<double> expensePerMonth,
+    required int totalAccountingYearSales,
+    required int totalAccountingYearExpense,
   }) = _Analytics;
 }

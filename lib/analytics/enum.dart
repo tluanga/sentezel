@@ -3,4 +3,4 @@ enum ChartMode {
   pieChart,
 }
 
-enum TimePeriod { daily, monthly }
+enum TimePeriod { daily, monthly, financialYear }

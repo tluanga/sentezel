@@ -90,8 +90,7 @@ class MonthSelection extends HookConsumerWidget {
     return GestureDetector(
       onTap: () async {
         //open Date Seletor
-        DateTime? date = DateTime.now();
-        date = await showDatePicker(
+        await showDatePicker(
           context: context,
           initialDate: DateTime.now(),
           firstDate: DateTime(DateTime.now().year),

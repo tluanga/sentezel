@@ -165,10 +165,10 @@ class TimeFrameSelection extends HookConsumerWidget {
 
             //
 
-            DaySelectionWidget(),
-            WeekSelection(),
-            MonthSelection(),
-            CurrentFinancialYearSelection(),
+            const DaySelectionWidget(),
+            const WeekSelection(),
+            const MonthSelection(),
+            const CurrentFinancialYearSelection(),
           ],
         ),
       ),

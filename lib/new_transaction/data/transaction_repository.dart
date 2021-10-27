@@ -71,7 +71,6 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     DateTime? startDate,
     DateTime? endDate,
   }) async {
-    print('get transaction list');
     //if no date is supplied it will return current date transactions
     startDate ??= getStartDateOfAccountingYear();
     endDate ??= DateTime.now();
@@ -112,7 +111,6 @@ class TransactionRepository extends BaseRepository<trans.Transaction> {
     DateTime? startDate,
     DateTime? endDate,
   }) async {
-    print(startDate);
     startDate ??= DateTime.now();
     endDate ??= DateTime.now();
     DateTime paramStartDate =

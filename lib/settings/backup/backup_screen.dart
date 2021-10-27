@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/ui/widget/top_bar_for_bottom_sheet_widget.dart';
 import 'package:sentezel/common/ui/widget/top_bar_widget.dart';
 import 'package:sentezel/settings/backup/backup_button.dart';
 import 'package:sentezel/settings/backup/backup_controller.dart';

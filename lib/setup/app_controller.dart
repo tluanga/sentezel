@@ -43,6 +43,5 @@ class AppController extends StateNotifier<App> {
     state = state.copyWith(
         businessProfileIsSetup: _businessProfileIsSetup,
         pinIsSetup: _pinIsSetup);
-    print(state);
   }
 }

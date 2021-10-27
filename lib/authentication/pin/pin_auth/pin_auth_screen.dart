@@ -64,10 +64,7 @@ class PinAuthenticationScreen extends HookConsumerWidget {
                     ),
                   ),
                 ),
-                if (state.error.isNotEmpty)
-                  Container(
-                    child: Text(state.error),
-                  ),
+                if (state.error.isNotEmpty) Text(state.error),
                 const Spacer(
                   flex: 6,
                 ),

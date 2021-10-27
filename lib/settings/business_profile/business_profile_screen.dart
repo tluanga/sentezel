@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/common/ui/widget/container_assets.dart';
 import 'package:sentezel/common/ui/widget/container_business.dart';
 import 'package:sentezel/common/ui/widget/top_bar_with_save_widget.dart';
 import 'package:sentezel/settings/business_profile/business_profile_controller.dart';
@@ -12,7 +11,7 @@ class BusinessProfileSceen extends HookConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final _businessType = useState<BusinessType>(
+    useState<BusinessType>(
       BusinessType.mahniSiamZuar,
     );
     useEffect(() {

@@ -1,16 +1,10 @@
-import 'package:enum_to_string/enum_to_string.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:sentezel/analytics/ui/analytics_period_enum.dart';
 import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/day_selection/day_selection_widget.dart';
-import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/month_selection_widget.dart';
-import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/time_frame_selection_dialog.dart';
-import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/week_selection_widget.dart';
-import 'package:sentezel/analytics/ui/widgets/analytics_time_frame_selection/elements/year_selection_widget.dart';
 import 'package:sentezel/common/helpers/dateHelper/date_helper.dart';
 
 class AnalyticsTimeFrameSelection extends HookConsumerWidget {

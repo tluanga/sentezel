@@ -70,14 +70,14 @@ class DateHelper {
     //get number of weeks of a month
     if (month == 2) {
       switch (day) {
-        case 1 - 7:
-          return 1;
-        case 8 - 14:
-          return 2;
-        case 15 - 21:
-          return 3;
-        case 22 - 28:
-          return 4;
+        // case 1 - 7:
+        //   return 1;
+        // case 8 - 14:
+        //   return 2;
+        // case 15 - 21:
+        //   return 3;
+        // case 22 - 28:
+        //   return 4;
       }
     } else {
       switch (day) {

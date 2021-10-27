@@ -322,7 +322,7 @@ _confirmSheet(
                   ),
                 ),
               )
-            : Container(
+            : SizedBox(
                 height: MediaQuery.of(context).size.height * 0.35,
                 child: Material(
                   child: SafeArea(

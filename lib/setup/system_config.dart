@@ -51,7 +51,7 @@ class SystemConfig {
 
         _setupCompleted = true;
       } catch (err) {
-        print('Error $err');
+        throw err.toString();
       }
 
       //---------------App Backup File Path----------

@@ -7,7 +7,6 @@ import 'package:sentezel/common/database/db_service.dart';
 import 'package:sentezel/new_transaction/common/transaction_config.dart';
 import 'package:sentezel/new_transaction/data/transaction_model.dart' as trans;
 import 'package:sentezel/new_transaction/data/transaction_repository.dart';
-import 'package:sentezel/settings/business_profile/business_profile_config.db.dart';
 import 'package:sentezel/settings/business_profile/business_profile_model.dart';
 import 'package:sentezel/settings/business_profile/business_profile_repository.dart';
 import 'package:sentezel/settings/ledger_master/data/ledger_master_model.dart';

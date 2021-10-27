@@ -21,13 +21,17 @@ class _$AnalyticsTearOff {
       required List<double> salesPerDay,
       required List<double> expensePerDay,
       required List<double> salesPerMonth,
-      required List<double> expensePerMonth}) {
+      required List<double> expensePerMonth,
+      required int totalAccountingYearSales,
+      required int totalAccountingYearExpense}) {
     return _Analytics(
       timePeriod: timePeriod,
       salesPerDay: salesPerDay,
       expensePerDay: expensePerDay,
       salesPerMonth: salesPerMonth,
       expensePerMonth: expensePerMonth,
+      totalAccountingYearSales: totalAccountingYearSales,
+      totalAccountingYearExpense: totalAccountingYearExpense,
     );
   }
 }
@@ -42,6 +46,8 @@ mixin _$Analytics {
   List<double> get expensePerDay => throw _privateConstructorUsedError;
   List<double> get salesPerMonth => throw _privateConstructorUsedError;
   List<double> get expensePerMonth => throw _privateConstructorUsedError;
+  int get totalAccountingYearSales => throw _privateConstructorUsedError;
+  int get totalAccountingYearExpense => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $AnalyticsCopyWith<Analytics> get copyWith =>
@@ -57,7 +63,9 @@ abstract class $AnalyticsCopyWith<$Res> {
       List<double> salesPerDay,
       List<double> expensePerDay,
       List<double> salesPerMonth,
-      List<double> expensePerMonth});
+      List<double> expensePerMonth,
+      int totalAccountingYearSales,
+      int totalAccountingYearExpense});
 }
 
 /// @nodoc
@@ -75,6 +83,8 @@ class _$AnalyticsCopyWithImpl<$Res> implements $AnalyticsCopyWith<$Res> {
     Object? expensePerDay = freezed,
     Object? salesPerMonth = freezed,
     Object? expensePerMonth = freezed,
+    Object? totalAccountingYearSales = freezed,
+    Object? totalAccountingYearExpense = freezed,
   }) {
     return _then(_value.copyWith(
       timePeriod: timePeriod == freezed
@@ -97,6 +107,14 @@ class _$AnalyticsCopyWithImpl<$Res> implements $AnalyticsCopyWith<$Res> {
           ? _value.expensePerMonth
           : expensePerMonth // ignore: cast_nullable_to_non_nullable
               as List<double>,
+      totalAccountingYearSales: totalAccountingYearSales == freezed
+          ? _value.totalAccountingYearSales
+          : totalAccountingYearSales // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalAccountingYearExpense: totalAccountingYearExpense == freezed
+          ? _value.totalAccountingYearExpense
+          : totalAccountingYearExpense // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -112,7 +130,9 @@ abstract class _$AnalyticsCopyWith<$Res> implements $AnalyticsCopyWith<$Res> {
       List<double> salesPerDay,
       List<double> expensePerDay,
       List<double> salesPerMonth,
-      List<double> expensePerMonth});
+      List<double> expensePerMonth,
+      int totalAccountingYearSales,
+      int totalAccountingYearExpense});
 }
 
 /// @nodoc
@@ -131,6 +151,8 @@ class __$AnalyticsCopyWithImpl<$Res> extends _$AnalyticsCopyWithImpl<$Res>
     Object? expensePerDay = freezed,
     Object? salesPerMonth = freezed,
     Object? expensePerMonth = freezed,
+    Object? totalAccountingYearSales = freezed,
+    Object? totalAccountingYearExpense = freezed,
   }) {
     return _then(_Analytics(
       timePeriod: timePeriod == freezed
@@ -153,6 +175,14 @@ class __$AnalyticsCopyWithImpl<$Res> extends _$AnalyticsCopyWithImpl<$Res>
           ? _value.expensePerMonth
           : expensePerMonth // ignore: cast_nullable_to_non_nullable
               as List<double>,
+      totalAccountingYearSales: totalAccountingYearSales == freezed
+          ? _value.totalAccountingYearSales
+          : totalAccountingYearSales // ignore: cast_nullable_to_non_nullable
+              as int,
+      totalAccountingYearExpense: totalAccountingYearExpense == freezed
+          ? _value.totalAccountingYearExpense
+          : totalAccountingYearExpense // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -165,7 +195,9 @@ class _$_Analytics implements _Analytics {
       required this.salesPerDay,
       required this.expensePerDay,
       required this.salesPerMonth,
-      required this.expensePerMonth});
+      required this.expensePerMonth,
+      required this.totalAccountingYearSales,
+      required this.totalAccountingYearExpense});
 
   @JsonKey(defaultValue: TimePeriod.daily)
   @override
@@ -178,10 +210,14 @@ class _$_Analytics implements _Analytics {
   final List<double> salesPerMonth;
   @override
   final List<double> expensePerMonth;
+  @override
+  final int totalAccountingYearSales;
+  @override
+  final int totalAccountingYearExpense;
 
   @override
   String toString() {
-    return 'Analytics(timePeriod: $timePeriod, salesPerDay: $salesPerDay, expensePerDay: $expensePerDay, salesPerMonth: $salesPerMonth, expensePerMonth: $expensePerMonth)';
+    return 'Analytics(timePeriod: $timePeriod, salesPerDay: $salesPerDay, expensePerDay: $expensePerDay, salesPerMonth: $salesPerMonth, expensePerMonth: $expensePerMonth, totalAccountingYearSales: $totalAccountingYearSales, totalAccountingYearExpense: $totalAccountingYearExpense)';
   }
 
   @override
@@ -202,7 +238,17 @@ class _$_Analytics implements _Analytics {
                     .equals(other.salesPerMonth, salesPerMonth)) &&
             (identical(other.expensePerMonth, expensePerMonth) ||
                 const DeepCollectionEquality()
-                    .equals(other.expensePerMonth, expensePerMonth)));
+                    .equals(other.expensePerMonth, expensePerMonth)) &&
+            (identical(
+                    other.totalAccountingYearSales, totalAccountingYearSales) ||
+                const DeepCollectionEquality().equals(
+                    other.totalAccountingYearSales,
+                    totalAccountingYearSales)) &&
+            (identical(other.totalAccountingYearExpense,
+                    totalAccountingYearExpense) ||
+                const DeepCollectionEquality().equals(
+                    other.totalAccountingYearExpense,
+                    totalAccountingYearExpense)));
   }
 
   @override
@@ -212,7 +258,9 @@ class _$_Analytics implements _Analytics {
       const DeepCollectionEquality().hash(salesPerDay) ^
       const DeepCollectionEquality().hash(expensePerDay) ^
       const DeepCollectionEquality().hash(salesPerMonth) ^
-      const DeepCollectionEquality().hash(expensePerMonth);
+      const DeepCollectionEquality().hash(expensePerMonth) ^
+      const DeepCollectionEquality().hash(totalAccountingYearSales) ^
+      const DeepCollectionEquality().hash(totalAccountingYearExpense);
 
   @JsonKey(ignore: true)
   @override
@@ -226,7 +274,9 @@ abstract class _Analytics implements Analytics {
       required List<double> salesPerDay,
       required List<double> expensePerDay,
       required List<double> salesPerMonth,
-      required List<double> expensePerMonth}) = _$_Analytics;
+      required List<double> expensePerMonth,
+      required int totalAccountingYearSales,
+      required int totalAccountingYearExpense}) = _$_Analytics;
 
   @override
   TimePeriod get timePeriod => throw _privateConstructorUsedError;
@@ -238,6 +288,10 @@ abstract class _Analytics implements Analytics {
   List<double> get salesPerMonth => throw _privateConstructorUsedError;
   @override
   List<double> get expensePerMonth => throw _privateConstructorUsedError;
+  @override
+  int get totalAccountingYearSales => throw _privateConstructorUsedError;
+  @override
+  int get totalAccountingYearExpense => throw _privateConstructorUsedError;
   @override
   @JsonKey(ignore: true)
   _$AnalyticsCopyWith<_Analytics> get copyWith =>

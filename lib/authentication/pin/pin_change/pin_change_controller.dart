@@ -22,8 +22,6 @@ class PinChangeStateController extends StateNotifier<PinChangeState> {
 
   loadData() async {
     final pinData = await _read(pinRepositoryProvider).get();
-
-    print(pinData);
     state = state.copyWith(passPhrase: pinData.passPhrase);
   }
 

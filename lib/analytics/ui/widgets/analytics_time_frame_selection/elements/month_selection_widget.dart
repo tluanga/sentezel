@@ -17,7 +17,7 @@ monthSelection({
         GestureDetector(
           onTap: () async {
             //open Date Seletor
-            var date = await showDatePicker(
+            await showDatePicker(
               context: context,
               initialDate: DateTime.now(),
               firstDate: DateTime(DateTime.now().year),
@@ -49,7 +49,7 @@ monthSelection({
         GestureDetector(
           onTap: () async {
             //open Date Seletor
-            var date = await showDatePicker(
+            await showDatePicker(
               context: context,
               initialDate: DateTime.now(),
               firstDate: DateTime(DateTime.now().year),
