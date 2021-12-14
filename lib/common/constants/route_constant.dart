@@ -11,5 +11,6 @@ class RouteConstant {
   static const String businessProfileSetup = 'setup/businessProfile';
   static const String pinAuth = '/pinAuth';
   static const String pinSetup = '/setup/pin';
+  static const String pinReset = '/pinReset';
   static const String splashScreen = '/splash';
 }

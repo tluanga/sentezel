@@ -57,7 +57,7 @@ class PinChangeScreen extends HookConsumerWidget {
                       ref
                           .read(pinChangeStateControllerProvider.notifier)
                           .setState(
-                            state.copyWith(passPhrase: value),
+                            state.copyWith(enteredPassPhrase: value),
                           );
                     },
                   ),

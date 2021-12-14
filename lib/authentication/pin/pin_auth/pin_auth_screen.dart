@@ -60,6 +60,13 @@ class PinAuthenticationScreen extends HookConsumerWidget {
                         const SizedBox(
                           height: 25,
                         ),
+                        GestureDetector(
+                          onTap: () {
+                            Navigator.of(context)
+                                .pushReplacementNamed(RouteConstant.pinReset);
+                          },
+                          child: const Text('Forgot Pin'),
+                        ),
                       ],
                     ),
                   ),
