@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:sentezel/authentication/pin/pin_change/pin_change_error.dart';
 import 'package:sentezel/authentication/pin/pin_change/pin_change_state.dart';
+import 'package:sentezel/authentication/pin/pin_model.dart';
 import 'package:sentezel/authentication/pin/pin_repository.dart';
 
 final pinChangeStateControllerProvider =
@@ -34,6 +35,7 @@ class PinChangeStateController extends StateNotifier<PinChangeState> {
       state.error.removeWhere(
           (element) => element == PinChangeError.inCorrectPassPhrase);
       state.error.add(PinChangeError.inCorrectPassPhrase);
+      return;
     } else {
       state.error.removeWhere(
           (element) => element == PinChangeError.inCorrectPassPhrase);
@@ -43,6 +45,7 @@ class PinChangeStateController extends StateNotifier<PinChangeState> {
       state.error.removeWhere(
           (element) => element == PinChangeError.passPhraseCannotBeEmpty);
       state.error.add(PinChangeError.passPhraseCannotBeEmpty);
+      return;
     } else {
       state.error.removeWhere(
           (element) => element == PinChangeError.passPhraseCannotBeEmpty);
@@ -52,9 +55,19 @@ class PinChangeStateController extends StateNotifier<PinChangeState> {
       state.error
           .removeWhere((element) => element == PinChangeError.pinNotMatched);
       state.error.add(PinChangeError.pinNotMatched);
+      return;
     } else {
       state.error
           .removeWhere((element) => element == PinChangeError.pinNotMatched);
+    }
+    if (state.enteredPin.isNotEmpty && state.enteredPin.isNotEmpty) {
+      _read(pinRepositoryProvider).pinChange(
+        PIN(
+          id: 1,
+          pin: int.parse(state.enteredPin),
+          passPhrase: state.passPhrase,
+        ),
+      );
     }
   }
 }
