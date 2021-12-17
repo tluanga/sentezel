@@ -43,33 +43,39 @@ class PinAuthenticationScreen extends HookConsumerWidget {
                     padding: const EdgeInsets.only(top: 12, bottom: 12),
                     child: Column(
                       children: [
-                        PinTextField(
-                          title: "Enter Four Digit PIN",
-                          onChanged: (value) {
-                            ref
-                                .read(pinAuthControllerProvider.notifier)
-                                .setEnterPin(value);
-                            value;
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: PinTextField(
+                            title: "Enter Four Digit PIN",
+                            onChanged: (value) {
+                              ref
+                                  .read(pinAuthControllerProvider.notifier)
+                                  .setEnterPin(value);
+                              value;
 
-                            if (state.pin == value) {
-                              Navigator.of(context)
-                                  .pushReplacementNamed(RouteConstant.home);
-                            }
-                          },
+                              if (state.pin == value) {
+                                Navigator.of(context)
+                                    .pushReplacementNamed(RouteConstant.home);
+                              }
+                            },
+                          ),
                         ),
-                        const SizedBox(
-                          height: 25,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.of(context)
-                                .pushReplacementNamed(RouteConstant.pinReset);
-                          },
-                          child: const Text('Forgot Pin'),
-                        ),
+                        // const SizedBox(
+                        //   height: 25,
+                        // ),
                       ],
                     ),
                   ),
+                ),
+                // GestureDetector(
+                //   onTap: () {
+                //     Navigator.of(context)
+                //         .pushReplacementNamed(RouteConstant.pinReset);
+                //   },
+                //   child: const Text('Forgot Pin'),
+                // ),
+                SizedBox(
+                  height: 20,
                 ),
                 if (state.error.isNotEmpty) Text(state.error),
                 const Spacer(
@@ -85,6 +91,19 @@ class PinAuthenticationScreen extends HookConsumerWidget {
                 // const SizedBox(
                 //   height: 10,
                 // ),
+                Padding(
+                  padding: const EdgeInsets.all(12.0),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context)
+                          .pushReplacementNamed(RouteConstant.pinReset);
+                    },
+                    child: const Text(
+                      'Forgot Pin',
+                      style: TextStyle(color: Colors.blue, fontSize: 15),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
