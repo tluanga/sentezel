@@ -21,64 +21,56 @@ class _PieChartWidgetState extends State<PieChartWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return AspectRatio(
-      aspectRatio: 1.3,
-      child: Card(
-        color: Colors.white,
-        child: Row(
-          children: <Widget>[
-            const SizedBox(
-              height: 18,
+    return Column(
+      children: [
+        Expanded(
+          child: AspectRatio(
+            aspectRatio: 2,
+            child: PieChart(
+              PieChartData(
+                  pieTouchData: PieTouchData(
+                      touchCallback: (FlTouchEvent event, pieTouchResponse) {
+                    setState(() {
+                      if (!event.isInterestedForInteractions ||
+                          pieTouchResponse == null ||
+                          pieTouchResponse.touchedSection == null) {
+                        touchedIndex = -1;
+                        return;
+                      }
+                      touchedIndex =
+                          pieTouchResponse.touchedSection!.touchedSectionIndex;
+                    });
+                  }),
+                  borderData: FlBorderData(
+                    show: false,
+                  ),
+                  sectionsSpace: 0,
+                  centerSpaceRadius: 60,
+                  sections: showingSections(
+                      expenseTotal: widget.totalAccountingYearExpense,
+                      salesTotal: widget.totalAccountingYearSales)),
             ),
-            Expanded(
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: PieChart(
-                  PieChartData(
-                      pieTouchData: PieTouchData(touchCallback:
-                          (FlTouchEvent event, pieTouchResponse) {
-                        setState(() {
-                          if (!event.isInterestedForInteractions ||
-                              pieTouchResponse == null ||
-                              pieTouchResponse.touchedSection == null) {
-                            touchedIndex = -1;
-                            return;
-                          }
-                          touchedIndex = pieTouchResponse
-                              .touchedSection!.touchedSectionIndex;
-                        });
-                      }),
-                      borderData: FlBorderData(
-                        show: false,
-                      ),
-                      sectionsSpace: 0,
-                      centerSpaceRadius: 40,
-                      sections: showingSections(
-                          expenseTotal: widget.totalAccountingYearExpense,
-                          salesTotal: widget.totalAccountingYearSales)),
-                ),
-              ),
-            ),
-            Column(
-              mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: const <Widget>[
-                Indicator(
-                    color: Color(0xff0293ee), text: 'Sales', isSquare: true),
-                SizedBox(
-                  height: 4,
-                ),
-                Indicator(
-                    color: Color(0xfff8b250), text: 'Expense', isSquare: true)
-              ],
-            ),
-            const SizedBox(
-              width: 28,
-            ),
-          ],
+          ),
         ),
-      ),
+        const SizedBox(
+          height: 18,
+        ),
+        // Column(
+        //   mainAxisSize: MainAxisSize.max,
+        //   mainAxisAlignment: MainAxisAlignment.end,
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   children: const <Widget>[
+        //     Indicator(color: Color(0xff0293ee), text: 'Sales', isSquare: true),
+        //     SizedBox(
+        //       height: 4,
+        //     ),
+        //     Indicator(color: Color(0xfff8b250), text: 'Expense', isSquare: true)
+        //   ],
+        // ),
+        // const SizedBox(
+        //   width: 28,
+        // ),
+      ],
     );
   }
 
@@ -92,7 +84,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
       switch (i) {
         case 0:
           return PieChartSectionData(
-            color: const Color(0xff0293ee),
+            color: Colors.green,
             value: ((salesTotal / total) * 100).toDouble(),
             title: salesTotal.toString(),
             radius: radius,
@@ -103,7 +95,7 @@ class _PieChartWidgetState extends State<PieChartWidget> {
           );
         case 1:
           return PieChartSectionData(
-            color: const Color(0xfff8b250),
+            color: Colors.blue.shade400,
             value: ((expenseTotal / total) * 100).toDouble(),
             title: expenseTotal.toString(),
             radius: radius,
