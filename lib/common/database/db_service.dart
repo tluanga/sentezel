@@ -36,6 +36,7 @@ class DatabaseService {
   Future<Database> _initDb() async {
     //-------Using application-Directory-----------
     Directory dir = await getApplicationDocumentsDirectory();
+
     String path = dir.path + '/sentezel.db';
 
     final dbManager = await openDatabase(
