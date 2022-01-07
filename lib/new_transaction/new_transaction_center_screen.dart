@@ -41,7 +41,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                       onTap: () {},
                       child: _item(
                         context: context,
-                        label: 'Purchase of Asset',
+                        // label: 'Purchase of Asset',
+                        label: 'Bungrua Leina',
                         icon: CupertinoIcons.cube,
                         onTap: () {
                           Navigator.pushNamed(
@@ -51,7 +52,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                     ),
                     _item(
                       context: context,
-                      label: 'Purchase of Material',
+                      // label: 'Purchase of Material',
+                      label: 'Hmanrua Leina',
                       icon: CupertinoIcons.cube_box,
                       onTap: () {
                         Navigator.push(
@@ -65,7 +67,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                     ),
                     _item(
                       context: context,
-                      label: 'Purchase Return',
+                      // label: 'Purchase Return',
+                      label: 'Lei Thleng Letna',
                       icon: CupertinoIcons.selection_pin_in_out,
                       onTap: () {
                         Navigator.push(
@@ -88,7 +91,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                       onTap: () {},
                       child: _item(
                         context: context,
-                        label: 'Sell of Products',
+                        // label: 'Sell of Products',
+                        label: 'Siamsa Hralhna',
                         icon: CupertinoIcons.dot_square,
                         onTap: () {
                           Navigator.push(
@@ -102,7 +106,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                     ),
                     _item(
                       context: context,
-                      label: 'Sales Return',
+                      // label: 'Sales Return',
+                      label: 'Hralh Tawh Thleng Tirna',
                       icon: CupertinoIcons.hurricane,
                       onTap: () {
                         Navigator.push(
@@ -115,7 +120,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                     ),
                     _item(
                       context: context,
-                      label: 'Receipt',
+                      // label: 'Receipt',
+                      label: 'Dawnna',
                       icon: CupertinoIcons.list_bullet_below_rectangle,
                       onTap: () {
                         Navigator.push(
@@ -136,7 +142,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                   children: [
                     _item(
                       context: context,
-                      label: 'Payment',
+                      //label: 'Payment',
+                      label: 'Pekna',
                       icon: CupertinoIcons.square_arrow_down_on_square,
                       onTap: () {
                         Navigator.push(
@@ -149,7 +156,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                     ),
                     _item(
                       context: context,
-                      label: 'Debt Settlement',
+                      // label: 'Debt Settlement',
+                      label: 'Ba Dawnna',
                       icon: CupertinoIcons.square_on_circle,
                       onTap: () {
                         Navigator.push(
@@ -196,7 +204,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                     ),
                     _item(
                       context: context,
-                      label: 'Capital Injection',
+                      //label: 'Capital Injection',
+                      label: 'Capital Dahna',
                       icon: CupertinoIcons.square_stack_3d_down_dottedline,
                       onTap: () {
                         Navigator.push(
@@ -267,7 +276,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
               child: Text(
                 label,
                 style: const TextStyle(
-                  fontSize: 16,
+                  //fontSize: 16,
+                  fontSize: 15,
                 ),
                 textAlign: TextAlign.center,
               ),
