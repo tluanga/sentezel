@@ -170,7 +170,8 @@ class NewTranscationCenterScreen extends HookConsumerWidget {
                     ),
                     _item(
                       context: context,
-                      label: 'Credit Settlement',
+                      //  label: 'Credit Settlement',
+                      label: 'Pekna',
                       icon: CupertinoIcons.square_stack,
                       onTap: () {
                         Navigator.push(
