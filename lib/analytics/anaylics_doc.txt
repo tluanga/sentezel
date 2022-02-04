@@ -1,0 +1,11 @@
+Analytics behaviour - The chart will display the data for the last seven days without the user input
+-Depending on the date selection the data fetch will be processed accordingly
+    - if the no of days is more than 
+    - calculate the maximum expense value   - maxExpenseValue in a day
+    - calculate the maximum income  value   - maxIncomeValue in a day
+    
+    -calculate the highest Expense Value for the period
+    -Calculate the highest Income value for the period
+
+
+    --Depending on the highest value the data on each day will be scalled

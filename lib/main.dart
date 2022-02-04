@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:sentezel/analytics/screens/analytics_screen.dart';
+import 'package:sentezel/analytics/ui/screens/analytics_screen.dart';
+
 import 'package:sentezel/authentication/pin/pin_auth/pin_auth_screen.dart';
 import 'package:sentezel/authentication/pin/pin_change/pin_change_screen.dart';
 import 'package:sentezel/authentication/pin/pin_setup/pin_setup_screen.dart';
