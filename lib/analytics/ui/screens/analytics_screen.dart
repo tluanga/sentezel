@@ -10,9 +10,20 @@ class AnalyticsScreen extends HookConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(analyticsControllerProvider);
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Text('text'),
-    );
+    return state.when(data: (data) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Text(data.transactionList.length.toString()),
+      );
+      ;
+    }, error: (error, stackTrace) {
+      return Scaffold(
+        appBar: AppBar(),
+        body: Text('error'),
+      );
+      ;
+    }, loading: () {
+      return Text('loading');
+    });
   }
 }

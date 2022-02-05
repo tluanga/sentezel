@@ -17,7 +17,7 @@ Future<TransactionTypeWithAmount> getIncomeOrExpenseByTransactionCategory(
   Database db = await DatabaseService.instance.db;
 
   final result = await db.query(TransactionCategoryConfig.dbName,
-      where: 'id=?', whereArgs: [transaction.id]);
+      where: 'id=?', whereArgs: [transaction.transactionCategoryId]);
   final parsed = TransactionCategory.fromJson(result.first);
 
   switch (parsed.transactionType) {

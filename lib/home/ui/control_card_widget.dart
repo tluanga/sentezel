@@ -1,18 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:sentezel/analytics/controller/analytics_controller.dart';
 import 'package:sentezel/books/books_screen.dart';
 import 'package:sentezel/common/constants/route_constant.dart';
 import 'package:sentezel/common/ui/widget/elevated_card_widget.dart';
 import 'package:sentezel/new_transaction/new_transaction_Center_screen.dart';
 
-class HomeControlCard extends StatelessWidget {
+class HomeControlCard extends HookConsumerWidget {
   final double width = 0.28;
   final double height = 0.2;
   const HomeControlCard({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Row(
       children: [
         //Books
@@ -59,6 +61,7 @@ class HomeControlCard extends StatelessWidget {
         //--------Analytics--------
         GestureDetector(
           onTap: () {
+            ref.read(analyticsControllerProvider.notifier).loadData();
             Navigator.pushNamed(context, RouteConstant.analytics);
           },
           child: Stack(
