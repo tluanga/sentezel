@@ -6,7 +6,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 final fourdigitPinProvider = StateProvider<bool>((ref) => true);
 final confirmPinProvider = StateProvider<bool>((ref) => false);
 
-class PinTextField extends StatelessWidget {
+class PinTextField extends HookConsumerWidget {
   final Function(String) onChanged;
   final String title;
 
@@ -17,17 +17,17 @@ class PinTextField extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final fourDigitPinState = ref.watch(fourdigitPinProvider);
     return Consumer(
         builder: (BuildContext context, WidgetRef ref, Widget? child) {
-      print(ref.watch(fourdigitPinProvider).state);
       return SizedBox(
         child: Column(
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                ref.watch(fourdigitPinProvider).state
+                fourDigitPinState
                     ? GestureDetector(
                         onTap: () {
                           ref.read(fourdigitPinProvider.notifier).state = false;
@@ -75,7 +75,7 @@ class PinTextField extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 12.0),
               child: PinCodeTextField(
-                obscureText: ref.watch(fourdigitPinProvider).state,
+                obscureText: fourDigitPinState,
                 keyboardType: TextInputType.number,
                 appContext: context,
                 length: 4,

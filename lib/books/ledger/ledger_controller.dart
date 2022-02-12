@@ -14,7 +14,7 @@ import 'package:sentezel/settings/transactionCategory/transaction_category_repos
 final ledgerControllerProvider =
     StateNotifierProvider<LedgerController, AsyncValue<List<LedgerReport>>>(
         (ref) {
-  return LedgerController(ref.read, ref)
+  return LedgerController(ref.read)
     ..loadData(
       ledgerName: '',
     );
@@ -22,9 +22,8 @@ final ledgerControllerProvider =
 
 class LedgerController extends StateNotifier<AsyncValue<List<LedgerReport>>> {
   final Reader _read;
-  final ProviderRefBase ref;
 
-  LedgerController(this._read, this.ref) : super(const AsyncValue.loading());
+  LedgerController(this._read) : super(const AsyncValue.loading());
 
   loadData({String ledgerName = ''}) async {
     try {

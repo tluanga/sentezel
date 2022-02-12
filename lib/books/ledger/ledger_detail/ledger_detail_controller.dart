@@ -6,12 +6,12 @@ import 'package:sentezel/new_transaction/data/transaction_repository.dart';
 
 final ledgerDetailControllerProvider =
     StateNotifierProvider<LedgerDetailController, LedgerReport>(
-        (ref) => LedgerDetailController(ref.read, ref));
+        (ref) => LedgerDetailController(ref.read));
 
 class LedgerDetailController extends StateNotifier<LedgerReport> {
   final Reader _read;
-  final ProviderRefBase ref;
-  LedgerDetailController(this._read, this.ref)
+
+  LedgerDetailController(this._read)
       : super(
           LedgerReport(
               ledgerId: 0,
